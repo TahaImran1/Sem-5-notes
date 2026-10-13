@@ -6,7 +6,7 @@
     <title>Data Warehousing &amp; BI &#8212; Query Processing, Join Techniques &amp; ETL</title>
     <meta
       name="description"
-      content="Comprehensive, exam-focused course notes for Data Warehousing &amp; Business Intelligence: Query Execution Engine Architecture, Join Techniques in DSS vs OLTP, Sort-Merge vs Hash Joins, Query Optimization, and ETL Architecture (Ponniah Ch. 12 &amp; Graefe/Winter Survey Papers)."
+      content="Concise, visual study notes for Query Execution, Join Algorithms (DSS vs OLTP, Winter Case Study), Sort-Merge vs Hash Joins (Graefe Duality), Query Optimization, and ETL Architecture (Ponniah Ch. 12)."
     />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
@@ -14,138 +14,259 @@
     />
     <link rel="stylesheet" href="../notes.css" />
     <style>
-      /* Enhanced Visual Styles for Query Execution & Architecture */
+      /* ── Source Citation ─────────────────────────────────────────── */
       .source-citation {
         background: rgba(217, 119, 87, 0.08);
         border-left: 3px solid var(--ac);
-        padding: 10px 16px;
-        border-radius: 0 8px 8px 0;
-        font-size: 0.84rem;
+        padding: 8px 14px;
+        border-radius: 0 6px 6px 0;
+        font-size: 0.8rem;
         color: var(--mt);
-        margin-bottom: 22px;
-        line-height: 1.6;
+        margin-bottom: 18px;
+        line-height: 1.5;
       }
-      .source-citation strong {
-        color: var(--ac);
-      }
-      .diagram-box {
+      .source-citation strong { color: var(--ac); }
+
+      /* ── Visual Layouts & Cards ─────────────────────────────────── */
+      .visual-box {
         background: #111114;
         border: 1px solid var(--bd);
-        border-radius: 12px;
-        padding: 24px;
-        margin: 22px 0;
-        overflow-x: auto;
+        border-radius: 10px;
+        padding: 16px 20px;
+        margin: 16px 0;
       }
-      .diagram-title {
-        font-size: 0.85rem;
-        font-weight: 600;
+      .visual-header {
+        font-size: 0.78rem;
+        font-weight: 700;
         text-transform: uppercase;
-        letter-spacing: 1px;
+        letter-spacing: 0.8px;
         color: var(--ac);
-        margin-bottom: 16px;
+        margin-bottom: 12px;
         display: flex;
         align-items: center;
-        gap: 8px;
+        gap: 6px;
       }
-      .pipeline-flow {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
+      .card-grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
         gap: 12px;
-        flex-wrap: wrap;
+        margin: 14px 0;
       }
-      .flow-node {
-        background: #18181b;
-        border: 1px solid #3f3f46;
+      .card-grid-3 {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+        gap: 12px;
+        margin: 14px 0;
+      }
+      .vcard {
+        background: #16161a;
+        border: 1px solid #2d2d32;
         border-radius: 8px;
-        padding: 14px 18px;
-        text-align: center;
-        flex: 1;
-        min-width: 130px;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-        transition: transform 0.2s ease, border-color 0.2s ease;
+        padding: 14px;
+        transition: transform 0.15s ease, border-color 0.15s ease;
       }
-      .flow-node:hover {
+      .vcard:hover {
         transform: translateY(-2px);
         border-color: var(--ac);
       }
-      .flow-node .node-step {
-        font-size: 0.7rem;
-        font-weight: 700;
-        text-transform: uppercase;
-        color: var(--ac);
-        letter-spacing: 0.5px;
+      .vcard h4 {
+        font-size: 0.88rem;
+        margin-bottom: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
       }
-      .flow-node .node-name {
-        font-size: 0.92rem;
+      .vcard p, .vcard ul {
+        font-size: 0.82rem;
+        line-height: 1.5;
+        color: var(--tx);
+      }
+      .vcard ul { padding-left: 16px; margin: 0; }
+
+      /* ── Pipeline Flows ─────────────────────────────────────────── */
+      .flow-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .flow-step {
+        background: #1a1a1f;
+        border: 1px solid #333338;
+        border-radius: 6px;
+        padding: 10px 12px;
+        text-align: center;
+        flex: 1;
+        min-width: 105px;
+      }
+      .flow-step .num {
+        font-size: 0.65rem;
+        font-weight: 700;
+        color: var(--ac);
+        text-transform: uppercase;
+      }
+      .flow-step .title {
+        font-size: 0.82rem;
         font-weight: 600;
         color: var(--tx);
-        margin-top: 4px;
+        margin: 2px 0;
       }
-      .flow-node .node-desc {
-        font-size: 0.76rem;
+      .flow-step .desc {
+        font-size: 0.7rem;
         color: var(--mt);
-        margin-top: 4px;
       }
       .flow-arrow {
         color: var(--ac);
-        font-size: 1.25rem;
         font-weight: bold;
+        font-size: 1.1rem;
       }
-      .grid-2col {
+
+      /* ── Query Tree Shapes Visualizer ───────────────────────────── */
+      .tree-showcase {
         display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-        margin: 20px 0;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        margin: 14px 0;
       }
-      @media (max-width: 768px) {
-        .grid-2col {
-          grid-template-columns: 1fr;
-        }
-        .pipeline-flow {
-          flex-direction: column;
-          align-items: stretch;
-        }
-        .flow-arrow {
-          text-align: center;
-          transform: rotate(90deg);
-          margin: 4px 0;
-        }
+      .tree-card {
+        background: #131316;
+        border: 1px solid #2f2f35;
+        border-radius: 8px;
+        padding: 12px;
+        text-align: center;
       }
-      .stat-highlight {
-        display: flex;
-        align-items: baseline;
-        gap: 10px;
-        background: rgba(217, 119, 87, 0.12);
-        border: 1px solid rgba(217, 119, 87, 0.3);
+      .tree-title {
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: var(--tx);
+        margin-bottom: 8px;
+      }
+      .tree-art {
+        font-family: monospace;
+        font-size: 0.72rem;
+        line-height: 1.35;
+        background: #09090b;
+        border: 1px dashed #27272a;
+        padding: 8px;
+        border-radius: 6px;
+        color: #38bdf8;
+        white-space: pre;
+        margin-bottom: 8px;
+      }
+      .tree-note {
+        font-size: 0.72rem;
+        color: var(--mt);
+        text-align: left;
+      }
+
+      /* ── Boustrophedonism Visual ─────────────────────────────────── */
+      .boustro-diagram {
+        background: #141418;
+        border: 1px solid #2d2d33;
         border-radius: 8px;
         padding: 12px 16px;
-        margin: 16px 0;
+        margin: 12px 0;
       }
-      .stat-number {
-        font-size: 1.7rem;
-        font-weight: 700;
-        color: var(--ac);
+      .boustro-track {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin: 8px 0;
+        font-size: 0.76rem;
+      }
+      .boustro-label {
+        width: 90px;
+        font-weight: 600;
+        color: var(--mt);
+      }
+      .boustro-blocks {
+        display: flex;
+        gap: 4px;
+        flex: 1;
+      }
+      .bblock {
+        flex: 1;
+        padding: 4px;
+        text-align: center;
+        background: #202026;
+        border: 1px solid #3a3a42;
+        border-radius: 4px;
+        color: var(--tx);
         font-family: monospace;
       }
-      .stat-label {
-        font-size: 0.86rem;
-        color: var(--tx);
+      .bblock.hit {
+        background: rgba(79, 191, 139, 0.25);
+        border-color: #4fbf8b;
+        color: #86efac;
+        font-weight: bold;
       }
+
+      /* ── Richard Winter Metric Meters ────────────────────────────── */
+      .scale-meter {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin: 14px 0;
+      }
+      .meter-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .meter-name {
+        width: 140px;
+        font-size: 0.8rem;
+        font-weight: 600;
+      }
+      .meter-bar-wrap {
+        flex: 1;
+        background: #1c1c22;
+        height: 20px;
+        border-radius: 4px;
+        overflow: hidden;
+        border: 1px solid #2c2c34;
+        position: relative;
+      }
+      .meter-fill {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        padding-left: 8px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        color: #fff;
+      }
+      .meter-time {
+        width: 95px;
+        text-align: right;
+        font-family: monospace;
+        font-size: 0.8rem;
+        font-weight: 700;
+      }
+
+      /* ── Badges & Tags ──────────────────────────────────────────── */
       .badge-tag {
         display: inline-block;
-        font-size: 0.72rem;
-        font-weight: 600;
-        padding: 2px 8px;
+        font-size: 0.65rem;
+        font-weight: 700;
+        padding: 2px 6px;
         border-radius: 4px;
         text-transform: uppercase;
-        letter-spacing: 0.5px;
-        margin-right: 6px;
+        letter-spacing: 0.4px;
       }
-      .tag-fast { background: rgba(79, 191, 139, 0.2); color: #86efac; border: 1px solid #4fbf8b; }
-      .tag-warn { background: rgba(240, 169, 78, 0.2); color: #fde68a; border: 1px solid #f0a94e; }
-      .tag-slow { background: rgba(240, 82, 79, 0.2); color: #fca5a5; border: 1px solid #f0524f; }
-      .tag-info { background: rgba(79, 163, 227, 0.2); color: #93c5fd; border: 1px solid #4fa3e3; }
+      .tag-fast { background: rgba(79, 191, 139, 0.18); color: #86efac; border: 1px solid #4fbf8b; }
+      .tag-warn { background: rgba(240, 169, 78, 0.18); color: #fde68a; border: 1px solid #f0a94e; }
+      .tag-slow { background: rgba(240, 82, 79, 0.18); color: #fca5a5; border: 1px solid #f0524f; }
+      .tag-info { background: rgba(79, 163, 227, 0.18); color: #93c5fd; border: 1px solid #4fa3e3; }
+
+      @media (max-width: 768px) {
+        .card-grid-2, .tree-showcase { grid-template-columns: 1fr; }
+        .flow-row { flex-direction: column; align-items: stretch; }
+        .flow-arrow { text-align: center; transform: rotate(90deg); margin: 2px 0; }
+        .meter-row { flex-direction: column; align-items: flex-start; gap: 4px; }
+        .meter-bar-wrap { width: 100%; }
+      }
     </style>
   </head>
   <body>
@@ -180,12 +301,12 @@
             <span>Query Processing, Joins &amp; ETL</span><span class="chevron">&#9660;</span>
           </div>
           <ul class="nav-sublist">
-            <li><a href="javascript:void(0)" onclick="showTopic('topic-1')"><span class="nav-num">01</span>Query Execution Architecture</a></li>
-            <li><a href="javascript:void(0)" onclick="showTopic('topic-2')"><span class="nav-num">02</span>Join Techniques: DSS vs. OLTP</a></li>
-            <li><a href="javascript:void(0)" onclick="showTopic('topic-3')"><span class="nav-num">03</span>Sort-Merge vs. Hash Joins &amp; Duality</a></li>
-            <li><a href="javascript:void(0)" onclick="showTopic('topic-4')"><span class="nav-num">04</span>Query Optimization &amp; Cost Estimation</a></li>
+            <li><a href="javascript:void(0)" onclick="showTopic('topic-1')"><span class="nav-num">01</span>Query Engine Architecture</a></li>
+            <li><a href="javascript:void(0)" onclick="showTopic('topic-2')"><span class="nav-num">02</span>Join Techniques: DSS vs OLTP</a></li>
+            <li><a href="javascript:void(0)" onclick="showTopic('topic-3')"><span class="nav-num">03</span>Sort-Merge vs Hash &amp; Duality</a></li>
+            <li><a href="javascript:void(0)" onclick="showTopic('topic-4')"><span class="nav-num">04</span>Optimization &amp; Cost Estimation</a></li>
             <li><a href="javascript:void(0)" onclick="showTopic('topic-5')"><span class="nav-num">05</span>ETL Architecture (Ponniah Ch. 12)</a></li>
-            <li><a href="javascript:void(0)" onclick="showTopic('topic-6')"><span class="nav-num">06</span>Summary Matrix &amp; Master Quiz</a></li>
+            <li><a href="javascript:void(0)" onclick="showTopic('topic-6')"><span class="nav-num">06</span>Master Matrix &amp; Practice Quiz</a></li>
           </ul>
         </li>
       </ul>
@@ -199,8 +320,8 @@
         <div class="module-header">
           <div class="module-eyebrow">Data Warehousing &amp; Business Intelligence &#8212; Module 10</div>
           <h1 class="module-title">Query Processing, Join Techniques &amp; ETL</h1>
-          <div class="source-citation" style="margin-top: 14px;">
-            <strong>Primary Authoritative References:</strong> Paulraj Ponniah, <em>Data Warehousing Fundamentals for IT Professionals</em>, 2nd Edition &#8212; Chapter 12 ("Data Extraction, Transformation, and Loading"); Goetz Graefe, <em>Query Evaluation Techniques for Large Databases</em> (ACM Computing Surveys); Richard Winter, <em>Join, Defray</em> (Intelligent Enterprise); Stonebraker &amp; Hellerstein, <em>Readings in Database Systems</em>; and Prof. Ishaq Raza's DSS Join Evaluation lecture slides.
+          <div class="source-citation">
+            <strong>Sources:</strong> Paulraj Ponniah, <em>DW Fundamentals</em> (Ch. 12: ETL) &bull; Goetz Graefe (ACM Survey) &bull; Richard Winter (<em>Join, Defray</em>) &bull; Stonebraker &amp; Hellerstein &bull; Prof. Ishaq Raza's DSS Joins Deck.
           </div>
         </div>
 
@@ -209,166 +330,129 @@
              ────────────────────────────────────────────────────────── -->
         <div class="topic-card" id="topic-1">
           <h2><span class="topic-num">1</span>Query Execution Engine Architecture</h2>
-          <p class="topic-subtitle">The Volcano iterator model, algebraic operators, execution plan trees, and buffer management</p>
+          <p class="topic-subtitle">Volcano Iterator Model, Plan Trees &amp; Scan-Resistant Buffer Management</p>
 
-          <p>
-            When an analyst or BI tool executes a declarative SQL query, the database management system (DBMS) cannot simply run the SQL text directly. It must translate human-readable relational calculus into a machine-executable procedural plan made of low-level algorithms that manipulate disk pages and memory buffers.
-          </p>
-
-          <div class="diagram-box">
-            <div class="diagram-title">&#9654; End-to-End Query Processing Lifecycle</div>
-            <div class="pipeline-flow">
-              <div class="flow-node">
-                <div class="node-step">Stage 1</div>
-                <div class="node-name">Parser</div>
-                <div class="node-desc">Syntax verification &amp; tokenization</div>
+          <div class="visual-box">
+            <div class="visual-header">&#9654; 5-Step Query Execution Pipeline</div>
+            <div class="flow-row">
+              <div class="flow-step">
+                <div class="num">Step 1</div>
+                <div class="title">Parser</div>
+                <div class="desc">Syntax check &amp; token tree</div>
               </div>
               <div class="flow-arrow">&rarr;</div>
-              <div class="flow-node">
-                <div class="node-step">Stage 2</div>
-                <div class="node-name">Catalog Validation</div>
-                <div class="node-desc">Tables, schema &amp; permissions resolution</div>
+              <div class="flow-step">
+                <div class="num">Step 2</div>
+                <div class="title">Catalog Resolver</div>
+                <div class="desc">Verify schemas, types &amp; auth</div>
               </div>
               <div class="flow-arrow">&rarr;</div>
-              <div class="flow-node">
-                <div class="node-step">Stage 3</div>
-                <div class="node-name">Algebra Translator</div>
-                <div class="node-desc">Creates initial Logical Query Tree</div>
+              <div class="flow-step">
+                <div class="num">Step 3</div>
+                <div class="title">Algebra Tree</div>
+                <div class="desc">Logical operators (&sigma;, &pi;, &bowtie;)</div>
               </div>
               <div class="flow-arrow">&rarr;</div>
-              <div class="flow-node">
-                <div class="node-step">Stage 4</div>
-                <div class="node-name">Query Optimizer</div>
-                <div class="node-desc">Cost estimation &amp; Physical plan selection</div>
+              <div class="flow-step">
+                <div class="num">Step 4</div>
+                <div class="title">Optimizer</div>
+                <div class="desc">Cost-based physical plan</div>
               </div>
               <div class="flow-arrow">&rarr;</div>
-              <div class="flow-node">
-                <div class="node-step">Stage 5</div>
-                <div class="node-name">Execution Engine</div>
-                <div class="node-desc">Iterator scheduling &amp; buffer I/O</div>
+              <div class="flow-step">
+                <div class="num">Step 5</div>
+                <div class="title">Execution Engine</div>
+                <div class="desc">Iterator calls &amp; buffer I/O</div>
               </div>
             </div>
           </div>
 
-          <h3>1. Logical vs. Physical Relational Algebra</h3>
-          <p>Database architectures maintain a strict boundary between declarative logic and physical execution:</p>
-          <ul>
-            <li><strong>Logical Algebra:</strong> Represents <em>what</em> data is required based on the relational data model. Operators include Selection (&sigma;), Projection (&pi;), Cartesian Product (&times;), Equijoin (&bowtie;), Semijoin (&ltimes;), and Group-By/Aggregate (&gamma;).</li>
-            <li><strong>Physical Algebra:</strong> Represents <em>how</em> the operation is computed on hardware. Includes concrete algorithms (e.g., Block Nested Loops Join, Hash Join, Index Scan, External Merge Sort) accompanied by explicit cost functions and hardware resource allocations (memory pages, scratch space).</li>
-          </ul>
-
-          <div class="definition">
-            <div class="callout-label">Definition</div>
-            <strong>Volcano / Iterator Model:</strong> An execution architecture proposed by Goetz Graefe where all relational operators implement a unified procedural interface: <code>open()</code>, <code>next()</code>, and <code>close()</code>.
-            <br /><em>[Intuition: A pull-based pipeline where the top operator asks its child for a tuple, which asks its child, cascading down to disk scans without creating temporary intermediate files.]</em>
-          </div>
-
-          <h3>2. Operator Synchronization: Iterators vs. Materialization</h3>
-          <p>How do operators pass tuples to one another?</p>
-          <div class="grid-2col">
-            <div style="background: rgba(240, 82, 79, 0.05); border: 1px solid rgba(240, 82, 79, 0.25); border-radius: 8px; padding: 16px;">
-              <h4 style="color: #fca5a5; margin-bottom: 8px;"><span class="badge-tag tag-slow">Naive</span> Materialization &amp; IPC</h4>
-              <p style="font-size: 0.85rem; color: var(--tx);">Each operator writes its full output to a temporary disk file or uses separate OS processes communicating via Inter-Process Communication (IPC). High context-switching overhead and massive disk write/read penalties.</p>
+          <div class="card-grid-2">
+            <div class="vcard" style="border-left: 3px solid var(--def-bd);">
+              <h4>Volcano / Iterator Model <span class="badge-tag tag-fast">Goetz Graefe</span></h4>
+              <p>Every operator implements three standardized procedural methods:</p>
+              <ul>
+                <li><code>open()</code>: Allocates buffers and initializes child streams.</li>
+                <li><code>next()</code>: Pulls one data tuple (granule) on-demand.</li>
+                <li><code>close()</code>: Cleans up state and deallocates memory.</li>
+              </ul>
+              <p style="margin-top:6px; color:var(--mt); font-size:0.75rem;"><strong>Win:</strong> Demand-driven pipelining in a single OS process&#8212;avoids writing intermediate results to temporary disk files.</p>
             </div>
-            <div style="background: rgba(79, 191, 139, 0.05); border: 1px solid rgba(79, 191, 139, 0.25); border-radius: 8px; padding: 16px;">
-              <h4 style="color: #86efac; margin-bottom: 8px;"><span class="badge-tag tag-fast">Modern</span> Pipelined Iterators</h4>
-              <p style="font-size: 0.85rem; color: var(--tx);">Operators execute in a single OS process. Each call to <code>next()</code> returns one data granule (tuple). Operators schedule each other via lightweight function calls. Pipelined tuples stay in CPU cache or RAM without ever touching disk.</p>
+            <div class="vcard" style="border-left: 3px solid var(--crit-bd);">
+              <h4>Buffer Management in DSS <span class="badge-tag tag-slow">LRU Fails</span></h4>
+              <p><strong>Buffer Thrashing:</strong> A 50 GB table scanned through a 4 GB RAM pool under standard OS LRU will continuously evict pages without a single cache hit.</p>
+              <ul>
+                <li><strong>Fix/Unfix Semantics:</strong> Pin hot pages (e.g. hash tables) in RAM.</li>
+                <li><strong>Read-Ahead (Track-at-a-Crack):</strong> Asynchronous prefetching matches disk bus speed with CPU execution.</li>
+              </ul>
             </div>
           </div>
 
-          <div class="example">
-            <div class="callout-label">Pseudocode</div>
-            <h4>Volcano Iterator Interface in Action</h4>
-            <pre><code>// Filter Operator implementing Iterator Interface
-class SelectionIterator implements Operator {
-    Operator child;
-    Predicate condition;
+          <h3>Execution Tree Topologies</h3>
+          <div class="tree-showcase">
+            <div class="tree-card">
+              <div class="tree-title">Left-Deep Tree</div>
+              <div class="tree-art">    (&bowtie;)
+    /   \
+  (&bowtie;)  (R3)
+  /   \
+(R1) (R2)</div>
+              <div class="tree-note">
+                <strong>Rule:</strong> Right child is always a base leaf.<br />
+                <strong>Pros:</strong> Minimal memory footprint; outer relation streams through. Standard in OLTP.
+              </div>
+            </div>
 
-    void open() { child.open(); }
-    
-    Tuple next() {
-        Tuple t;
-        while ((t = child.next()) != null) {
-            if (condition.eval(t)) {
-                return t; // Pipellined immediately to parent operator!
-            }
-        }
-        return null; // End of stream
-    }
+            <div class="tree-card">
+              <div class="tree-title">Right-Deep Tree</div>
+              <div class="tree-art">  (&bowtie;)
+  /   \
+(R1)  (&bowtie;)
+      /   \
+    (R2)  (R3)</div>
+              <div class="tree-note">
+                <strong>Rule:</strong> Left child is always a base leaf.<br />
+                <strong>Pros:</strong> Builds multiple hash tables in parallel memory across dimension tables.
+              </div>
+            </div>
 
-    void close() { child.close(); }
-}</code></pre>
+            <div class="tree-card">
+              <div class="tree-title">Bushy Tree</div>
+              <div class="tree-art">    (&bowtie;)
+   /     \
+ (&bowtie;)    (&bowtie;)
+ /  \     /  \
+(R1)(R2) (R3)(R4)</div>
+              <div class="tree-note">
+                <strong>Rule:</strong> Joins combine results of other joins.<br />
+                <strong>Pros:</strong> Maximum inter-operator parallelism; critical for complex snowflake queries.
+              </div>
+            </div>
           </div>
-
-          <h3>3. Query Tree Topologies</h3>
-          <p>Query plans are expressions of algebra represented as trees. Their geometric structure governs memory utilization and concurrency:</p>
-          <table>
-            <thead>
-              <tr>
-                <th>Tree Shape</th>
-                <th>Structural Rule</th>
-                <th>Execution Characteristic</th>
-                <th>DSS / DW Suitability</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>Left-Deep Tree</strong></td>
-                <td>Every right child must be a leaf (base relation)</td>
-                <td>Pipelining outer stream while scanning inner base relations. Limits optimizer search space.</td>
-                <td>Standard in traditional OLTP engines (System R) and simple DW star-queries.</td>
-              </tr>
-              <tr>
-                <td><strong>Right-Deep Tree</strong></td>
-                <td>Every left child must be a leaf (base relation)</td>
-                <td>Allows building multiple in-memory hash tables simultaneously across parallel threads.</td>
-                <td>Frequently used in parallel DSS multi-join star queries (dimensions built in parallel).</td>
-              </tr>
-              <tr>
-                <td><strong>Bushy Tree</strong></td>
-                <td>Arbitrary tree (joins can combine results of other joins)</td>
-                <td>Intermediate results join other intermediate results. High parallelism potential.</td>
-                <td>Crucial for complex DSS snowflake joins and multi-fact value chain queries.</td>
-              </tr>
-            </tbody>
-          </table>
 
           <div class="note-box">
-            <div class="callout-label">Theoretical Rule</div>
-            <strong>The "Guy Lohman Test":</strong> A benchmark test for join operators: <em>Does the join operator work for joining 3 inputs without having to materialize and store the output of 2 of the inputs?</em> True pipelined joins (like indexed nested loops or streaming merge) pass this test, whereas partition-and-sort operators fail because they must stage full runs to disk.
+            <div class="callout-label">Benchmark Test</div>
+            <strong>The "Guy Lohman Test":</strong> <em>Can the operator join 3 inputs without materializing and storing the output of 2 of them?</em> Pipelined iterators pass; blocking sort-partition passes fail.
           </div>
-
-          <h3>4. Buffer Management: Why Standard LRU Fails in DSS</h3>
-          <p>
-            Operating systems use <strong>Least Recently Used (LRU)</strong> page replacement. However, in analytical data warehouses, LRU is disastrous. When an analytical query sequentially scans a 50GB table through a 4GB buffer pool, LRU repeatedly evicts pages that might be needed immediately while caching pages that will never be referenced again. This phenomenon is called <strong>Buffer Pool Thrashing</strong>.
-          </p>
-          <p>
-            DSS database engines employ specialized buffer managers with <strong>Fix/Unfix semantics</strong> (pinning hot pages such as hash tables in RAM) and <strong>Read-Ahead / Track-at-a-Crack</strong> asynchronous I/O forecasting to saturate disk controllers and CPU simultaneously.
-          </p>
 
           <div class="summary-box">
             <h4>Key Takeaways</h4>
             <ul>
-              <li>Query execution translates declarative SQL into physical algebra plans via the Volcano iterator model (<code>open</code>, <code>next</code>, <code>close</code>).</li>
-              <li>Iterators eliminate temporary disk files by streaming tuples between operators in a single process.</li>
-              <li>Left-deep trees minimize memory footprint; Bushy trees enable parallel multi-join execution.</li>
-              <li>Standard OS LRU paging causes buffer thrashing on large sequential DSS scans; enterprise DW engines use page pinning and read-ahead forecasting.</li>
+              <li>Volcano iterators stream data tuple-by-tuple in a single process via <code>open()</code>, <code>next()</code>, and <code>close()</code>.</li>
+              <li>Left-deep trees minimize memory; Right-deep trees enable parallel hash table building; Bushy trees maximize cluster parallelism.</li>
+              <li>Standard OS LRU causes buffer thrashing on bulk scans; DSS engines use page pinning and read-ahead forecasting.</li>
             </ul>
           </div>
 
           <div class="practice-section">
-            <div class="practice-section-label">Practice Questions</div>
+            <div class="practice-section-label">Quick Quiz</div>
             <details>
-              <summary>Easy: What are the three core functions of the Volcano iterator model and what role do they play?</summary>
-              <p><strong>Answer:</strong> The three methods are <code>open()</code> (initializes the operator and allocates necessary buffers), <code>next()</code> (retrieves the next qualifying tuple on demand and pipelines it upward), and <code>close()</code> (cleans up state, closes child streams, and deallocates memory). This pull-based mechanism allows demand-driven pipelining.</p>
+              <summary>Easy: What is the main performance benefit of the Volcano iterator model?</summary>
+              <p><strong>Answer:</strong> It provides demand-driven pipelining within a single process. Operators pass tuples via fast function calls, eliminating disk I/O for intermediate query results and avoiding heavy OS process-switching (IPC).</p>
             </details>
             <details>
-              <summary>Medium: Why do Right-Deep trees offer a unique advantage over Left-Deep trees in parallel data warehouse hash joins?</summary>
-              <p><strong>Answer:</strong> In a right-deep tree, the inner children (which serve as the "build" inputs in hash joins) are all base relations. This allows a parallel database engine to scan all dimension tables and populate all in-memory hash tables concurrently in parallel memory partitions before streaming the single large outer fact table through the pipeline.</p>
-            </details>
-            <details>
-              <summary>Hard: Explain how buffer thrashing happens under LRU during a large sequential table scan in DSS, and how database engines fix it.</summary>
-              <p><strong>Answer:</strong> If a table of size $S$ is larger than buffer cache $B$ ($S > B$), a sequential scan will load page after page, evicting the oldest page under LRU. By the time the scan finishes, every page previously cached has been evicted, and no cached page was ever reused. If another scan starts, it gets zero cache hits. Engines fix this using <em>scan-resistant buffer algorithms</em> (e.g., 2Q, LRU-K, MRU for table scans, or allocating a small circular buffer of just a few pages for the scan while pinning hot index pages elsewhere).</p>
+              <summary>Medium: Why do Right-Deep trees suit parallel data warehouse joins?</summary>
+              <p><strong>Answer:</strong> Because every inner child is an independent base relation leaf (typically dimension tables). The engine can scan and build all in-memory hash tables concurrently before streaming the fact table through.</p>
             </details>
           </div>
         </div>
@@ -377,154 +461,125 @@ class SelectionIterator implements Operator {
              TOPIC 2: Join Techniques: DSS vs. OLTP
              ────────────────────────────────────────────────────────── -->
         <div class="topic-card" id="topic-2">
-          <h2><span class="topic-num">2</span>Join Techniques: DSS vs. OLTP &amp; The Scalability Crisis</h2>
-          <p class="topic-subtitle">Nested loops, block/index variants, boustrophedonism, and Richard Winter's 3,800-year join analysis</p>
+          <h2><span class="topic-num">2</span>Join Techniques: DSS vs. OLTP &amp; Scalability</h2>
+          <p class="topic-subtitle">Nested loops, Boustrophedonism &amp; Richard Winter's 3,800-Year Join Analysis</p>
 
-          <p>
-            A join operation combines two relations on a related attribute. While OLTP and DSS databases run the exact same SQL <code>JOIN</code> syntax, the underlying data volume and selectivity characteristics produce fundamentally different performance profiles.
-          </p>
-
-          <div class="grid-2col">
-            <div style="background: rgba(79, 163, 227, 0.05); border: 1px solid rgba(79, 163, 227, 0.25); border-radius: 8px; padding: 18px;">
-              <h4 style="color: #93c5fd; margin-bottom: 8px;">OLTP Join Dynamics</h4>
-              <ul style="font-size: 0.85rem; color: var(--tx); padding-left: 18px;">
-                <li><strong>High Selectivity:</strong> Targets a tiny fraction of data (e.g., finding the orders for <code>customer_id = 94812</code>).</li>
-                <li><strong>Point Index Seeks:</strong> Traverses B-tree root-to-leaf in 2–3 disk reads.</li>
-                <li><strong>Tiny Working Sets:</strong> Result sets are small (1–10 rows); execution finishes in milliseconds.</li>
+          <div class="card-grid-2">
+            <div class="vcard" style="border-top: 3px solid var(--exp-bd);">
+              <h4>OLTP Joins: Point Seeks</h4>
+              <ul>
+                <li><strong>High Selectivity:</strong> Fetches 1–10 rows (e.g. <code>WHERE id = 42</code>).</li>
+                <li><strong>Access:</strong> Traverses B-tree root-to-leaf in 2–3 disk reads.</li>
+                <li><strong>Resource:</strong> Kilobytes of memory; milliseconds to finish.</li>
               </ul>
             </div>
-            <div style="background: rgba(217, 119, 87, 0.05); border: 1px solid rgba(217, 119, 87, 0.25); border-radius: 8px; padding: 18px;">
-              <h4 style="color: #fca5a5; margin-bottom: 8px;">DSS / DW Join Dynamics</h4>
-              <ul style="font-size: 0.85rem; color: var(--tx); padding-left: 18px;">
-                <li><strong>Low Selectivity / Bulk Scans:</strong> Joins hundreds of millions of fact rows with wide dimension tables across multi-year historical periods.</li>
-                <li><strong>Massive Data Volumes:</strong> Gigabytes or terabytes of intermediate data.</li>
-                <li><strong>Heavy Resource Demand:</strong> Requires massive primary memory and temporary disk scratch space.</li>
+            <div class="vcard" style="border-top: 3px solid var(--ac);">
+              <h4>DSS Joins: Analytical Scans</h4>
+              <ul>
+                <li><strong>Low Selectivity:</strong> Joins millions of rows across multi-year facts.</li>
+                <li><strong>Access:</strong> Bulk sequential sweeps and large partition buckets.</li>
+                <li><strong>Resource:</strong> Gigabytes of buffer cache and disk scratch space.</li>
               </ul>
             </div>
           </div>
 
-          <h3>1. The Nested Loop Join Family</h3>
-          <p>The simplest join algorithm compares every row in the outer table against the inner table:</p>
-          <div class="definition">
-            <div class="callout-label">Definition</div>
-            <strong>Naive Nested Loop Join (NLJ):</strong> For every qualifying row $r$ in outer relation $R$, scan the entire inner relation $S$ to find matching join keys.
-            <br /><em>[Intuition: Two nested <code>for</code> loops. Total I/O cost = $\text{Pages}(R) + |R| \times \text{Pages}(S)$.]</em>
+          <h3>Nested Loop Join Family &amp; Boustrophedonism</h3>
+          <div class="card-grid-3">
+            <div class="vcard">
+              <h4>Naive NLJ <span class="badge-tag tag-slow">O(R &times; S)</span></h4>
+              <p>For each tuple in $R$, scans entire inner $S$. Disastrous on large tables without memory caching.</p>
+            </div>
+            <div class="vcard">
+              <h4>Block NLJ <span class="badge-tag tag-warn">O(R&times;S / M)</span></h4>
+              <p>Loads $M - K$ pages of $R$ into memory at once, scanning $S$ once per block. Cuts disk reads of $S$ by memory capacity factor.</p>
+            </div>
+            <div class="vcard">
+              <h4>Index NLJ <span class="badge-tag tag-fast">Fast if R &lt;&lt; S</span></h4>
+              <p>Uses pre-existing index on inner table $S$. Fast only when outer table $R$ is small and index is memory-resident.</p>
+            </div>
           </div>
 
-          <h4>Key Variants &amp; Algorithmic Refinements:</h4>
-          <ul>
-            <li><strong>Block Nested Loop Join (BNLJ):</strong> Instead of scanning $S$ for every single <em>tuple</em> of $R$, the engine reads a chunk of $M - K$ pages of outer relation $R$ into memory at once, and scans $S$ once per block. Reduces disk scans of $S$ by a factor equal to the memory block capacity.</li>
-            <li>
-              <strong>Boustrophedonism (Alternating Scan Directions):</strong> 
-              When scanning the inner relation repeatedly in BNLJ, normal scans read from page $1 \to N$, then restart at page $1$, throwing away the pages at the end. Boustrophedonism scans $1 \to N$ on run 1, then scans <em>backwards</em> $N \to 1$ on run 2. This immediately reuses the hot pages sitting in the buffer pool from the previous scan without incurring any disk I/O!
-            </li>
-            <li><strong>Index Nested Loop Join (INLJ):</strong> Uses a pre-existing B-tree or hash index on the inner relation $S$. For each outer row in $R$, the engine executes an index lookup on $S$. Highly effective if $R$ is small and the index depth is shallow.</li>
-            <li><strong>Zig-Zag Join:</strong> When both relations have sorted clustered indexes on the join key, the engine alternates scanning for a join value in one index and probing the other, hopping back and forth to skip non-matching key ranges.</li>
-          </ul>
+          <div class="boustro-diagram">
+            <div style="font-size:0.75rem; font-weight:700; color:var(--ac); text-transform:uppercase; margin-bottom:4px;">
+              &#9654; Boustrophedonism: Alternating Scan Directions
+            </div>
+            <p style="font-size:0.78rem; color:var(--mt); margin-bottom:8px;">
+              Eliminates buffer pool waste by alternating scan order so the last read pages in RAM are immediately reused:
+            </p>
+            <div class="boustro-track">
+              <span class="boustro-label">Outer Block 1:</span>
+              <div class="boustro-blocks">
+                <span class="bblock">Page 1 &rarr;</span>
+                <span class="bblock">Page 2 &rarr;</span>
+                <span class="bblock">Page 3 &rarr;</span>
+                <span class="bblock hit">Page 4 (In RAM)</span>
+              </div>
+            </div>
+            <div class="boustro-track">
+              <span class="boustro-label">Outer Block 2:</span>
+              <div class="boustro-blocks">
+                <span class="bblock hit">Page 4 (Cache Hit!)</span>
+                <span class="bblock">&larr; Page 3</span>
+                <span class="bblock">&larr; Page 2</span>
+                <span class="bblock">&larr; Page 1</span>
+              </div>
+            </div>
+          </div>
 
-          <h3>2. Richard Winter's Real-World Case Study: The 3,800-Year Join</h3>
-          <p>
-            In the classic study <em>Join, Defray</em>, Richard Winter demonstrated why naive database assumptions cause catastrophic failure when applied to data warehouse scale.
+          <h3>Richard Winter's Case Study: 10M Customers &times; 100M Transactions</h3>
+          <p style="font-size:0.84rem;">
+            Database: <strong>125 GB</strong> (Customer = 25 GB, Txns = 100 GB). Query finds transactions &gt; $1,000 in 1999 (4M rows qualify). Assumes 50 reads/sec:
           </p>
 
-          <div class="stat-highlight">
-            <div class="stat-number">3,800 Years</div>
-            <div class="stat-label">Serial disk I/O time required if a naive Nested Loop Join is applied to a 10M customer &times; 100M transaction data warehouse!</div>
-          </div>
-
-          <div class="example">
-            <div class="callout-label">Concrete Case Study Mathematics</div>
-            <h4>Winter's Scale Calculation: Joining 10M Customers &amp; 100M Transactions</h4>
-            <p><strong>Parameters:</strong></p>
-            <ul>
-              <li><strong>Customer Table ($R$):</strong> 10,000,000 rows &times; 2,500 bytes = 25 GB ($3,000,000$ disk blocks).</li>
-              <li><strong>Transaction Table ($S$):</strong> 100,000,000 rows &times; 1,000 bytes = 100 GB ($12,000,000$ disk blocks).</li>
-              <li><strong>Query:</strong> Find customers who made a transaction &gt; $1,000 in 1999 (4,000,000 transactions qualify).</li>
-              <li><strong>Disk Speed Assumption:</strong> 50 sequential reads / second.</li>
-            </ul>
-
-            <table style="margin-top: 14px;">
-              <thead>
-                <tr>
-                  <th>Join Algorithm</th>
-                  <th>Execution Strategy</th>
-                  <th>Disk Reads Required</th>
-                  <th>Serial Execution Time</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><span class="badge-tag tag-slow">Naive NLJ</span></td>
-                  <td>For each of 4M qualifying transactions, scan the full Customer table (3M blocks).</td>
-                  <td><strong>6 Trillion</strong> ($6 \times 10^{12}$) reads</td>
-                  <td><strong>~3,800 Years</strong> (120 billion seconds)</td>
-                </tr>
-                <tr>
-                  <td><span class="badge-tag tag-warn">Indexed NLJ</span></td>
-                  <td>Unique B-tree index on Customer ID (200MB leaf level fits in RAM). Scan 12M transaction blocks + 4M random reads on Customer.</td>
-                  <td><strong>16 Million</strong> reads</td>
-                  <td><strong>~3 Days</strong> (240,000 seconds)</td>
-                </tr>
-                <tr>
-                  <td><span class="badge-tag tag-fast">Sort-Merge Join</span></td>
-                  <td>Scan both tables sequentially once (15M reads). Project and sort only the participating data (40MB txns + 500MB customers = 540MB).</td>
-                  <td><strong>15 Million</strong> sequential reads</td>
-                  <td><strong>~3.5 Days</strong> (pure sequential I/O runs at full bus speed)</td>
-                </tr>
-              </tbody>
-            </table>
+          <div class="scale-meter">
+            <div class="meter-row">
+              <span class="meter-name" style="color:#fca5a5;">Naive NLJ</span>
+              <div class="meter-bar-wrap">
+                <div class="meter-fill" style="width: 100%; background: #dc2626;">6 Trillion Disk Reads</div>
+              </div>
+              <span class="meter-time" style="color:#fca5a5;">~3,800 Years</span>
+            </div>
+            <div class="meter-row">
+              <span class="meter-name" style="color:#fde68a;">Indexed NLJ</span>
+              <div class="meter-bar-wrap">
+                <div class="meter-fill" style="width: 25%; background: #d97706;">16M Reads (Random Seeks)</div>
+              </div>
+              <span class="meter-time" style="color:#fde68a;">~3 Days</span>
+            </div>
+            <div class="meter-row">
+              <span class="meter-name" style="color:#86efac;">Sort-Merge Join</span>
+              <div class="meter-bar-wrap">
+                <div class="meter-fill" style="width: 22%; background: #16a34a;">15M Reads (Pure Sequential)</div>
+              </div>
+              <span class="meter-time" style="color:#86efac;">~3.5 Days</span>
+            </div>
           </div>
 
           <div class="warning-box">
-            <div class="callout-label">Crucial Takeaway</div>
-            <strong>The Non-Linear Scalability Explosion:</strong> When moving from a 1,000-customer test database (12.5 MB) to a 10M-customer enterprise warehouse (125 GB), database size grew by a factor of $10,000\times$. However, naive Nested Loop Join I/O exploded by a factor of <strong>almost 4 Billion</strong> ($4 \times 10^9\times$)!
+            <div class="callout-label">Winter's Scalability Laws</div>
+            In the 125 GB dataset above, <strong>only 540 MB (&lt; 1%)</strong> of data actually participates in the join!
+            <br /><strong>Law 1:</strong> Filter &amp; project early to isolate the &lt; 1% participating data without scanning full tables.
+            <br /><strong>Law 2:</strong> Operate on that subset with set-oriented linear algorithms ($O(N)$ Hash or Sort-Merge).
           </div>
-
-          <h3>3. Winter's Golden Laws of DW Join Scalability</h3>
-          <p>In the 125 GB database above, only <strong>540 MB (&lt; 1%)</strong> of the data actually participated in the final join. Winter formulated two fundamental design imperatives for DSS scalability:</p>
-          <ol>
-            <li><strong>Minimize the Read Footprint:</strong> Provide architectural mechanisms (partition elimination, clustered indexes, projection pruning) to isolate the &lt; 1% participating data without scanning full multi-gigabyte tables.</li>
-            <li><strong>Operate Efficiently on Filtered Data:</strong> Process that participating subset using linear $O(N)$ or near-linear $O(N \log N)$ set-oriented algorithms (Hash or Sort-Merge) rather than row-by-row lookups.</li>
-          </ol>
-
-          <h3>4. Pointer-Based Joins</h3>
-          <p>
-            Used in Object-Relational and Graph-extended DWs. Instead of joining on matching foreign-key values, physical disk pointers/OIDs directly link records across relations.
-          </p>
-          <ul>
-            <li><strong>Pointer Nested Loops:</strong> Traverses pointer directly to memory/disk address. Fast navigation, but suffers from scattered random disk seeks.</li>
-            <li><strong>Pointer Merge Join:</strong> Outer relation sorted by pointer value; a single sweep across the disk reads all pointed tuples sequentially.</li>
-            <li><strong>Trade-off:</strong> Highly efficient when only a tiny fraction of outer data participates. However, maintenance cost during <code>INSERT</code>, <code>UPDATE</code>, and bulk loads is prohibitive because pointer graphs must be updated.</li>
-          </ul>
 
           <div class="summary-box">
             <h4>Key Takeaways</h4>
             <ul>
-              <li>OLTP queries rely on high selectivity and index seeks; DSS queries process millions of rows with low selectivity and massive memory demands.</li>
-              <li>Naive Nested Loop Joins scale quadratically $O(|R| \times |S|)$, leading to multi-thousand-year execution on multi-gigabyte analytical tables.</li>
-              <li>Boustrophedonism scans inner tables alternately forwards and backwards to reuse buffered memory pages without disk I/O.</li>
-              <li>Scalability requires isolating the small participating subset (&lt; 1%) and processing it with set-oriented linear algorithms.</li>
+              <li>Naive NLJ explodes non-linearly: a 10,000&times; database size jump caused a 4-billion-fold disk I/O explosion.</li>
+              <li>Boustrophedonism scans inner tables alternately forwards and backwards to reuse RAM pages.</li>
+              <li>Only &lt; 1% of analytical data typically participates in joins&#8212;scalability requires isolating this subset early.</li>
             </ul>
           </div>
 
           <div class="practice-section">
-            <div class="practice-section-label">Practice Questions</div>
+            <div class="practice-section-label">Quick Quiz</div>
             <details>
-              <summary>Easy: What is Boustrophedonism and what specific performance problem does it solve in Block Nested Loop joins?</summary>
-              <p><strong>Answer:</strong> Boustrophedonism alternates the scan direction of the inner relation (first forward $1 \to N$, then backward $N \to 1$). In normal scans, the end of the inner table is read into the buffer pool and immediately discarded when the next outer block begins at page 1. Alternating scan directions allows the next outer block to immediately reuse the final cached pages of the inner table sitting in RAM, eliminating redundant disk reads.</p>
+              <summary>Easy: How does Boustrophedonism save disk I/O in Block Nested Loop joins?</summary>
+              <p><strong>Answer:</strong> By alternating the scan direction (first $1 \to N$, next $N \to 1$), the next outer block immediately reuses the final pages of the inner table currently sitting in the buffer pool, avoiding a re-read from disk.</p>
             </details>
             <details>
-              <summary>Medium: In Richard Winter's study, why did Sort-Merge Join drastically outperform Index Nested Loop Join even though both performed ~15–16 million disk reads?</summary>
-              <p><strong>Answer:</strong> While INLJ required 16 million reads, 4 million of them were <em>random disk reads</em> (looking up individual customer rows by ID across disk blocks). Sort-Merge Join, in contrast, performed 15 million <em>pure sequential disk reads</em> (streaming the transaction and customer tables sequentially). Sequential disk access operates at maximum hardware bus throughput (tens to hundreds of MB/sec), whereas random disk seeks incur heavy mechanical head movement latencies (or random IOPS limits), making sequential reads orders of magnitude faster.</p>
-            </details>
-            <details>
-              <summary>Hard: Suppose Relation R has 5,000 pages and Relation S has 100,000 pages. Memory capacity is 102 pages. Calculate the I/O cost under (a) Naive NLJ, (b) Block Nested Loop Join with R as outer, and (c) BNLJ with S as outer.</summary>
-              <p><strong>Answer:</strong><br />
-                (a) Naive NLJ (tuple-based): If each page of R has 20 tuples (100,000 tuples), cost = $\text{Pages}(R) + |R| \times \text{Pages}(S) = 5,000 + 100,000 \times 100,000 = 10,000,005,000$ I/Os.<br />
-                (b) BNLJ with R outer: Chunk size $M - 2 = 100$ pages. Number of chunks of R = $\lceil 5,000 / 100 \rceil = 50$. Total I/O = $\text{Pages}(R) + (\text{Chunks of } R \times \text{Pages}(S)) = 5,000 + (50 \times 100,000) = 5,005,000$ I/Os.<br />
-                (c) BNLJ with S outer: Number of chunks of S = $\lceil 100,000 / 100 \rceil = 1,000$. Total I/O = $\text{Pages}(S) + (\text{Chunks of } S \times \text{Pages}(R)) = 100,000 + (1,000 \times 5,000) = 5,100,000$ I/Os.<br />
-                Rule: Placing the smaller relation as outer yields lower I/O cost in BNLJ!
-              </p>
+              <summary>Medium: Why did Sort-Merge Join beat Indexed NLJ in Winter's study even though both performed ~15–16M reads?</summary>
+              <p><strong>Answer:</strong> Indexed NLJ performed 4 million <em>random disk seeks</em> (slow head movement), whereas Sort-Merge performed 15 million <em>sequential reads</em> at maximum bus bandwidth.</p>
             </details>
           </div>
         </div>
@@ -533,87 +588,44 @@ class SelectionIterator implements Operator {
              TOPIC 3: Sort-Merge vs. Hash Joins & Duality
              ────────────────────────────────────────────────────────── -->
         <div class="topic-card" id="topic-3">
-          <h2><span class="topic-num">3</span>Sort-Merge vs. Hash Joins &amp; Algorithmic Duality</h2>
-          <p class="topic-subtitle">External merge sorting, Grace &amp; Hybrid hash joins, Graefe's duality, and Bloom filtering</p>
+          <h2><span class="topic-num">3</span>Sort-Merge vs. Hash Joins &amp; Graefe Duality</h2>
+          <p class="topic-subtitle">External 2-pass sorting, Hybrid hash partitions, recursive asymmetry &amp; Bloom filters</p>
 
-          <p>
-            When tables are too large to fit in main memory, database engines must choose between two dominant workhorse paradigms: <strong>Sort-Merge Join (SMJ)</strong> and <strong>Hash Join</strong>. Understanding their operational mechanics, memory appetites, and algorithmic dualities is essential for DSS database engineering.
-          </p>
-
-          <h3>1. Sort-Merge Join (SMJ) Architecture</h3>
-          <p>Sort-Merge Join operates in two distinct phases:</p>
-          <ol>
-            <li><strong>Sort Phase:</strong> Both relations $R$ and $S$ are sorted on the join attribute using an external sorting algorithm.</li>
-            <li><strong>Merge Phase:</strong> Two pointers scan through the sorted relations in lockstep, outputting matching pairs. If values contain duplicates, the engine rewinds to the first duplicate entry.</li>
-          </ol>
-
-          <div class="definition">
-            <div class="callout-label">Formula &amp; Cost</div>
-            <strong>Cost of Sort-Merge Join:</strong>
-            $$\text{Cost}_{\text{SMJ}} = \text{Cost}_{\text{Sort}}(R) + \text{Cost}_{\text{Sort}}(S) + \text{Cost}_{\text{Merge}}(R, S)$$
-            Sorting is $O(N \log N)$ and dominates execution. The merge phase itself is strictly linear: $O(\text{Pages}(R) + \text{Pages}(S))$.
+          <div class="card-grid-2">
+            <div class="vcard" style="border-top: 3px solid var(--qst-bd);">
+              <h4>Sort-Merge Join (SMJ)</h4>
+              <p><strong>1. Sort Phase ($O(N \log N)$):</strong> Both tables sorted on join key using external merge sort.</p>
+              <p><strong>2. Merge Phase ($O(R + S)$):</strong> Two pointers scan through in lockstep.</p>
+              <p style="color:var(--mt); font-size:0.75rem;"><strong>Sort Elimination:</strong> If inputs are already ordered (clustered index or Teradata hash ordering), SMJ runs in purely linear time $O(R + S)$!</p>
+            </div>
+            <div class="vcard" style="border-top: 3px solid var(--def-bd);">
+              <h4>Hash Join Family</h4>
+              <p><strong>Classic:</strong> Builds hash table of small $R$ in RAM; streams probe $S$. Pure $O(R + S)$, zero disk scratch.</p>
+              <p><strong>Grace:</strong> Partitions both tables to disk buckets $1..k$; joins bucket pairs in RAM.</p>
+              <p><strong>Hybrid:</strong> Keeps <strong>Partition 0 in RAM</strong>, joining immediately while Partitions $1..k-1$ spill to disk.</p>
+            </div>
           </div>
 
-          <h4>External Sorting: Quicksort vs. Replacement Selection</h4>
-          <p>When creating initial sorted runs (Level-0 runs) on disk from an input relation:</p>
-          <ul>
-            <li><strong>Quicksort:</strong> Fills available memory $M$, sorts in-place, and writes a run of length $M$ to disk. Produces bursty I/O patterns.</li>
-            <li><strong>Replacement Selection:</strong> Loads a priority min-heap into memory. The smallest key is continuously written to disk and replaced by the next input tuple. If the incoming tuple has a key $\ge$ the written tuple, it enters the current run. <strong>Mathematical Property:</strong> Replacement selection produces sorted runs that are, on average, <strong>$2M$ in length (twice the size of memory!)</strong>, cutting the subsequent merge passes in half!</li>
-          </ul>
+          <div class="definition">
+            <div class="callout-label">Replacement Selection Formula</div>
+            <strong>Quicksort vs. Replacement Selection (Run Generation):</strong>
+            <br />Quicksort generates sorted runs of length $= M$ (memory size).
+            <br /><strong>Replacement Selection</strong> uses a priority min-heap to produce runs averaging <strong>$2M$ (twice memory size!)</strong>, cutting the number of merge passes on disk in half.
+          </div>
 
           <div class="note-box">
-            <div class="callout-label">Pro Tip: Eliminating the Sort Phase</div>
-            The sort phase in SMJ can be completely eliminated if:
-            <ol>
-              <li>Inputs were already sorted by an upstream clustered index or a previous <code>ORDER BY</code> operator.</li>
-              <li>Underlying storage provides implicit physical order (e.g., Teradata's hash-based file system maintains row order matching AMP hash partitions).</li>
-            </ol>
-            When the sort is eliminated, Sort-Merge runs in purely linear time $O(R + S)$, providing unmatched performance!
-          </div>
-
-          <h3>2. The Hash Join Family</h3>
-          <p>
-            Hash joins avoid sorting entirely. They divide relations into hash buckets using a hash function applied to the join key:
-          </p>
-
-          <div class="grid-2col">
-            <div style="background: rgba(79, 191, 139, 0.05); border: 1px solid rgba(79, 191, 139, 0.25); border-radius: 8px; padding: 16px;">
-              <h4 style="color: #86efac; margin-bottom: 8px;">Classic In-Memory Hash Join</h4>
-              <p style="font-size: 0.85rem; color: var(--tx);">
-                <strong>Build Phase:</strong> The smaller table ($R$) is completely hashed into an in-memory hash table.<br />
-                <strong>Probe Phase:</strong> The larger table ($S$) streams through, probing the hash table.<br />
-                <em>No disk scratch space needed. Pure linear performance $O(R + S)$.</em>
-              </p>
-            </div>
-            <div style="background: rgba(240, 169, 78, 0.05); border: 1px solid rgba(240, 169, 78, 0.25); border-radius: 8px; padding: 16px;">
-              <h4 style="color: #fde68a; margin-bottom: 8px;">Grace Hash Join</h4>
-              <p style="font-size: 0.85rem; color: var(--tx);">
-                When $R$ exceeds memory: Both $R$ and $S$ are partitioned into $k$ disk buckets using hash function $h_1$. Then, matching bucket pairs $(R_i, S_i)$ are loaded and joined in memory one by one.
-              </p>
-            </div>
-          </div>
-
-          <h4>Hybrid Hash Join (DeWitt et al., SIGMOD '84)</h4>
-          <p>
-            Grace Hash Join writes all partitions of both relations to disk. <strong>Hybrid Hash Join</strong> improves on this: if memory is larger than the output buffer requirements, it retains <strong>Partition 0 of the build table in memory</strong> while writing Partitions $1 \dots k-1$ to disk. When the probe table is partitioned, rows hashing to Partition 0 are joined immediately in RAM without ever touching disk!
-          </p>
-
-          <div class="definition">
-            <div class="callout-label">Critical Theoretical Advantage</div>
-            <strong>Recursive Partitioning Asymmetry:</strong> If a partition overflows memory, it is partitioned recursively. 
-            <br /><strong>The Recursion Depth depends ONLY on the Build Relation $R$, not $S$!</strong>
+            <div class="callout-label">Critical Asymmetry</div>
+            <strong>Why Hash Join Crushes SMJ when $|R| \ll |S|$:</strong>
+            If partitions overflow, Hash Join partitions recursively. The recursion depth depends <strong>strictly on build table $R$</strong>:
             $$\text{Recursion Depth} \approx \log_K(R / K)$$
-            <em>[Where $K$ is memory size]. Because $R$ is the smaller relation, Hash Join has a decisive performance advantage over Sort-Merge when $|R| \ll |S|$, because Sort-Merge must sort the massive $S$ relation with cost proportional to $\log(S / K)$.</em>
+            The probe table $S$ never increases recursion depth! SMJ, in contrast, must sort massive table $S$ with cost proportional to $\log(S / K)$.
           </div>
 
-          <h3>3. Goetz Graefe's Divide-and-Conquer Duality</h3>
-          <p>
-            In his landmark survey, Goetz Graefe proved that sorting and hashing are theoretical duals of the exact same divide-and-conquer paradigm:
-          </p>
+          <h3>Graefe's Divide-and-Conquer Duality</h3>
           <table>
             <thead>
               <tr>
-                <th>Paradigm Aspect</th>
+                <th>Dimension</th>
                 <th>External Sorting</th>
                 <th>Hash Partitioning</th>
               </tr>
@@ -621,75 +633,57 @@ class SelectionIterator implements Operator {
             <tbody>
               <tr>
                 <td><strong>Divide Phase</strong></td>
-                <td><strong>Physical Division:</strong> Slices data into memory-sized chunks ($M$ pages) regardless of key values.</td>
-                <td><strong>Logical Division:</strong> Partitions data based on hash keys ($h(key) \pmod k$).</td>
+                <td><strong>Physical:</strong> Slices fixed $M$-page chunks.</td>
+                <td><strong>Logical:</strong> Partitions by hash key $h(k)$.</td>
               </tr>
               <tr>
                 <td><strong>Combine Phase</strong></td>
-                <td><strong>Logical Combination:</strong> Compares keys to perform an ordered merge.</td>
-                <td><strong>Physical Combination:</strong> Simply concatenates matching bucket output files.</td>
+                <td><strong>Logical:</strong> Compares keys to merge.</td>
+                <td><strong>Physical:</strong> Concatenates bucket files.</td>
               </tr>
               <tr>
                 <td><strong>I/O Pattern</strong></td>
-                <td>Sequential write during run creation; Random read during multi-way merge.</td>
-                <td>Random write during partition demuxing; Sequential read during bucket matching.</td>
-              </tr>
-              <tr>
-                <td><strong>Handling Very Large Data</strong></td>
-                <td>Multi-level external merge passes.</td>
-                <td>Recursive hierarchical hash partitioning.</td>
+                <td>Sequential write, Random read.</td>
+                <td>Random write, Sequential read.</td>
               </tr>
               <tr>
                 <td><strong>"Interesting Orderings"</strong></td>
-                <td><span class="badge-tag tag-fast">Preserved</span> Output is sorted. Subsequent joins or <code>GROUP BY</code> need no extra sort!</td>
-                <td><span class="badge-tag tag-slow">Destroyed</span> Output is in pseudo-random hash order; subsequent aggregations require re-sorting.</td>
+                <td><span class="badge-tag tag-fast">Preserved</span> Downstream <code>GROUP BY</code> needs no sort.</td>
+                <td><span class="badge-tag tag-slow">Destroyed</span> Unpredictable hash bucket order.</td>
               </tr>
             </tbody>
           </table>
 
-          <h3>4. Lossy Semijoins: Bloom Filters &amp; Babb Arrays</h3>
-          <p>
-            Before staging probe relation $S$ to disk during a partitioned hash join, database engines construct a <strong>Bloom Filter</strong> (bit array) over the build keys of $R$.
-          </p>
-          <div class="example">
-            <div class="callout-label">Mechanism</div>
-            <h4>Early Probe Rejection via Bloom Filter</h4>
-            <p>
-              As tuples of probe table $S$ stream from disk, their join key is hashed against the Bloom filter. If the bit is 0, the tuple <em>cannot possibly match any row in $R$</em> and is discarded immediately!
+          <div class="visual-box">
+            <div class="visual-header">&#9654; Bloom Filters: Early Probe Rejection</div>
+            <p style="font-size:0.8rem; margin-bottom:8px;">
+              A bit-vector filter is populated during the build phase of $R$. As probe rows from $S$ arrive, keys are checked before writing to disk partitions:
             </p>
-            <pre><code>// Probe tuple filtering
-for (Tuple s : Stream(S)) {
-    if (BloomFilter.contains(s.join_key)) {
-        WriteToPartitionBuffer(s); // Participates in join
-    } else {
-        // Discard immediately! Saves massive disk write I/O.
-    }
-}</code></pre>
+            <div style="font-family:monospace; font-size:0.75rem; background:#16161a; padding:10px; border-radius:6px; color:#a1a1aa;">
+              Probe Row Key &rarr; Hash($k$) &rarr; Bit = 0? &rarr; <span style="color:#f87171; font-weight:bold;">DISCARD IMMEDIATELY (Lossy Semijoin, saves disk I/O!)</span><br />
+              Probe Row Key &rarr; Hash($k$) &rarr; Bit = 1? &rarr; <span style="color:#4ade80; font-weight:bold;">Write to Partition Buffer for Join Match</span>
+            </div>
           </div>
 
           <div class="summary-box">
             <h4>Key Takeaways</h4>
             <ul>
-              <li>Sort-Merge Join combines an $O(N \log N)$ sort phase with a strictly linear $O(R + S)$ merge phase. If inputs are pre-sorted, it runs in linear time.</li>
-              <li>Replacement Selection creates initial runs that average $2M$ (twice memory size), halving merge overhead compared to standard Quicksort.</li>
-              <li>Hash Join recursive partitioning depth depends strictly on the smaller build table $R$ ($\log_K(R/K)$), making it drastically superior to SMJ when $|R| \ll |S|$.</li>
-              <li>Bloom filters act as lossy semijoins, filtering out non-participating probe tuples before writing to disk scratch partitions.</li>
+              <li>Replacement selection generates runs averaging $2M$ (twice memory size), halving external merge passes.</li>
+              <li>Hybrid Hash Join keeps Partition 0 in RAM, drastically reducing I/O compared to Grace Hash Join.</li>
+              <li>Hash Join recursion depth depends strictly on build table $R$ ($\log_K(R/K)$), giving it an immense edge when $|R| \ll |S|$.</li>
+              <li>Graefe Duality: Sorting divides physically and combines logically; Hashing divides logically and combines physically.</li>
             </ul>
           </div>
 
           <div class="practice-section">
-            <div class="practice-section-label">Practice Questions</div>
+            <div class="practice-section-label">Quick Quiz</div>
             <details>
-              <summary>Easy: Why is Hybrid Hash Join preferred over standard Grace Hash Join?</summary>
-              <p><strong>Answer:</strong> Grace Hash Join writes all partitions of both relations to disk before reading them back. Hybrid Hash Join keeps Partition 0 of the build relation in RAM. When the probe relation is partitioned, tuples matching Partition 0 are joined immediately in memory, completely saving the disk write and read I/O for that partition.</p>
+              <summary>Easy: What is an "Interesting Ordering" and which join algorithm preserves it?</summary>
+              <p><strong>Answer:</strong> An interesting ordering is output data that emerges pre-sorted by a key. Sort-Merge Join preserves interesting orderings, allowing subsequent joins, <code>ORDER BY</code>, or <code>GROUP BY</code> operations to execute without a fresh sort.</p>
             </details>
             <details>
-              <summary>Medium: What is an "Interesting Ordering" and why is it a major competitive advantage for Sort-Merge Join over Hash Join?</summary>
-              <p><strong>Answer:</strong> An "interesting ordering" occurs when an operator produces output sorted by a specific key. Sort-Merge Join produces its output in sorted order of the join key. If the query includes subsequent operations on that same key (e.g., another join, a <code>GROUP BY</code>, or an <code>ORDER BY</code>), the engine can execute them immediately without an additional expensive sort step. Hash joins destroy key ordering, forcing the engine to perform a fresh sort if downstream operators require ordered data.</p>
-            </details>
-            <details>
-              <summary>Hard: Explain Goetz Graefe's duality theorem between external sorting and hash partitioning.</summary>
-              <p><strong>Answer:</strong> Graefe showed that sorting and hashing are theoretical mirror images: Sorting performs <em>physical division</em> (arbitrary memory-sized blocks) and <em>logical combination</em> (key-comparison merge). Hashing performs <em>logical division</em> (key-based hash partitioning) and <em>physical combination</em> (concatenating bucket results). Furthermore, while sorting generates sequential writes and random reads, hashing generates random writes and sequential reads.</p>
+              <summary>Medium: Why does Hash Join outperform Sort-Merge Join when joining a 10 MB dimension with a 500 GB fact table?</summary>
+              <p><strong>Answer:</strong> The 10 MB dimension fits completely in RAM as the build table. The 500 GB fact table streams through once as the probe relation without ever being partitioned, sorted, or written to disk. Sort-Merge would be forced to sort the entire 500 GB fact table across multiple disk passes.</p>
             </details>
           </div>
         </div>
@@ -699,123 +693,78 @@ for (Tuple s : Stream(S)) {
              ────────────────────────────────────────────────────────── -->
         <div class="topic-card" id="topic-4">
           <h2><span class="topic-num">4</span>Query Optimization &amp; Cost Estimation</h2>
-          <p class="topic-subtitle">CBO vs. RBO, algebraic heuristic rewrites, cardinality formulas, and managing "ugly" BI SQL</p>
+          <p class="topic-subtitle">CBO vs. RBO, Algebraic Pushdowns, and Cardinality Estimation Formulas</p>
 
-          <p>
-            In data warehousing, executing an unoptimized query plan can take hours or days, whereas an optimal plan completes in seconds. The <strong>Query Optimizer</strong> is the intellectual center of the RDBMS, evaluating thousands of candidate plans to select the cheapest execution strategy.
-          </p>
-
-          <h3>1. Cost-Based Optimization (CBO) vs. Rule-Based Optimization (RBO)</h3>
-          <table>
-            <thead>
-              <tr>
-                <th>Feature</th>
-                <th>Rule-Based Optimizer (RBO)</th>
-                <th>Cost-Based Optimizer (CBO)</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>Decision Mechanism</strong></td>
-                <td>Rigid syntactic rules (e.g., "always use an index if one exists").</td>
-                <td>Mathematical cost formulas driven by physical catalog statistics.</td>
-              </tr>
-              <tr>
-                <td><strong>Data Awareness</strong></td>
-                <td>Blind to table size, data distribution, and hardware resources.</td>
-                <td>Leverages cardinalities, page counts, distinct values, and histograms.</td>
-              </tr>
-              <tr>
-                <td><strong>DSS Suitability</strong></td>
-                <td><span class="badge-tag tag-slow">Catastrophic in DW</span> Will pick an index scan even when scanning 80% of a table, causing millions of slow random disk seeks.</td>
-                <td><span class="badge-tag tag-fast">Mandatory in DW</span> Correctly chooses hash joins and sequential scans over index seeks for analytical bulk queries.</td>
-              </tr>
-              <tr>
-                <td><strong>Engine Heritage</strong></td>
-                <td>Early Oracle, Sybase, Informix.</td>
-                <td>Teradata, IBM DB2, modern PostgreSQL, SQL Server, Snowflake.</td>
-              </tr>
-            </tbody>
-          </table>
-
-          <div class="warning-box">
-            <div class="callout-label">Industry Fact</div>
-            <strong>The Problem of "Ugly" Machine-Generated SQL:</strong> In modern enterprises, over 90% of data warehouse queries are generated automatically by BI tools (Power BI, Tableau, Looker). This SQL is notoriously convoluted&#8212;containing deeply nested subqueries, redundant self-joins, unnecessary cartesian joins, and complex <code>CASE</code> statements. A weak optimizer forces DBAs to "dumb down" schemas. Enterprise DW engines must have powerful <strong>Query Rewrite Engines</strong> to unnest subqueries and eliminate redundant joins before plan generation.
+          <div class="card-grid-2">
+            <div class="vcard" style="border-left:3px solid var(--def-bd);">
+              <h4>Cost-Based Optimizer (CBO) <span class="badge-tag tag-fast">Mandatory in DW</span></h4>
+              <p>Calculates mathematical cost using catalog histograms, NDV (Number of Distinct Values), and page counts. Correctly chooses bulk sequential scans and hash joins over slow index seeks for analytical queries.</p>
+            </div>
+            <div class="vcard" style="border-left:3px solid var(--crit-bd);">
+              <h4>Rule-Based Optimizer (RBO) <span class="badge-tag tag-slow">Fails in DW</span></h4>
+              <p>Uses rigid syntax heuristics (e.g. "always use an index"). Disastrous in DW where scanning 70% of a table via index seek creates millions of slow random disk reads.</p>
+            </div>
           </div>
 
-          <h3>2. Heuristic Algebraic Equivalences (Rewrite Rules)</h3>
-          <p>Before evaluating cost models, optimizers apply equivalence transformations to prune search space:</p>
-          <ul>
-            <li><strong>Selection Pushdown:</strong> $\sigma_C(R \bowtie S) \equiv \sigma_C(R) \bowtie S$ (when condition $C$ references only $R$). <em>Pushing filters below joins drastically reduces intermediate row counts.</em></li>
-            <li><strong>Projection Pushdown:</strong> $\pi_A(R \bowtie S) \equiv \pi_A(\pi_{A \cup J}(R) \bowtie \pi_{A \cup J}(S))$. <em>Eliminating unneeded columns early shrinks memory tuple widths.</em></li>
-            <li><strong>Join Commutativity &amp; Associativity:</strong> $R \bowtie S \equiv S \bowtie R$ and $(R \bowtie S) \bowtie T \equiv R \bowtie (S \bowtie T)$. <em>Allows reordering joins to execute the most selective, size-reducing joins first.</em></li>
-          </ul>
-
-          <h3>3. Cardinality &amp; Size Estimation Formulas</h3>
-          <p>The optimizer estimates intermediate result sizes using statistics stored in the data dictionary:</p>
-          <div class="definition">
-            <div class="callout-label">Mathematical Formulas</div>
-            <strong>Standard Catalog Statistics &amp; Estimates:</strong>
-            <ul>
-              <li>$\text{Card}(R)$: Number of tuples in relation $R$.</li>
-              <li>$\text{NCARD}(R)$: Number of physical disk pages occupied by $R$.</li>
-              <li>$V(R, A)$: Number of distinct values of attribute $A$ in relation $R$.</li>
-              <li><strong>Cartesian Product Size:</strong> $\text{Card}(R \times S) = \text{Card}(R) \times \text{Card}(S)$</li>
-              <li>
-                <strong>Equijoin Size Estimation ($R \bowtie_{R.A = S.A} S$):</strong>
-                Assuming uniform value distribution and containment:
-                $$\text{Card}(R \bowtie S) = \frac{\text{Card}(R) \times \text{Card}(S)}{\max(V(R, A), V(S, A))}$$
-              </li>
-              <li><strong>Primary Key - Foreign Key Join:</strong> If $S.A$ is a foreign key referencing primary key $R.A$, then every tuple in $S$ joins with at most one tuple in $R$: $\text{Card}(R \bowtie S) = \text{Card}(S)$.</li>
-            </ul>
+          <div class="visual-box">
+            <div class="visual-header">&#9654; Heuristic Algebraic Rewrite: Selection Pushdown</div>
+            <div class="card-grid-2" style="margin:0;">
+              <div style="background:#16161a; padding:10px; border-radius:6px; font-family:monospace; font-size:0.75rem;">
+                <span style="color:#f87171; font-weight:bold;">BEFORE REWRITE (Naive):</span><br />
+                &sigma;<sub>date='2024'</sub> ( Customers &bowtie; Orders )<br />
+                <em>Joins 100M rows first, then filters! High memory and slow I/O.</em>
+              </div>
+              <div style="background:#16161a; padding:10px; border-radius:6px; font-family:monospace; font-size:0.75rem;">
+                <span style="color:#4ade80; font-weight:bold;">AFTER PUSHDOWN (&sigma; pushed to leaf):</span><br />
+                Customers &bowtie; ( &sigma;<sub>date='2024'</sub> (Orders) )<br />
+                <em>Filters down to 2M rows before joining! Massively faster.</em>
+              </div>
+            </div>
           </div>
 
-          <h3>4. External Sorting Cost Formulas</h3>
-          <p>
-            When sorting relation $R$ using $M$ memory buffer pages and total size $\text{NCARD}(R)$:
-          </p>
-          <div class="example">
-            <div class="callout-label">Formulas &amp; Bounds</div>
-            <h4>I/O Costs of External 2-Pass Sorting</h4>
-            <p><strong>Step 1 (Run Creation):</strong> The entire relation is read into memory and written back in sorted runs:</p>
-            $$\text{Cost}_{\text{Step 1}} = 2 \times \text{NCARD}(R)$$
-            <p><strong>Step 2 (Merge Passes):</strong> Number of initial runs is $N_{\text{runs}} = \lceil \text{NCARD}(R) / M \rceil$. In each merge pass with fan-in $F = M - 1$, the relation is read once and written once:</p>
-            $$\text{Total Cost} = 2 \times \text{NCARD}(R) \times \left(1 + \lceil \log_{M-1}(N_{\text{runs}}) \rceil\right)$$
-            <p><em>If $N_{\text{runs}} \le M - 1$, the entire relation is merged in a single pass, making total cost $= 3 \times \text{NCARD}(R)$ (read + write in Step 1, final read in Step 2).</em></p>
+          <h3>Essential Cardinality &amp; Cost Formulas</h3>
+          <div class="card-grid-3">
+            <div class="vcard">
+              <h4>Cartesian Product</h4>
+              <p style="font-family:monospace; color:var(--ac); font-weight:bold;">Card(R) &times; Card(S)</p>
+              <p style="font-size:0.75rem; color:var(--mt);">Upper bound on size if no join condition exists.</p>
+            </div>
+            <div class="vcard">
+              <h4>Equijoin Size Estimate</h4>
+              <p style="font-family:monospace; color:var(--ac); font-weight:bold;">Card(R) &times; Card(S) / max(V(R,A), V(S,A))</p>
+              <p style="font-size:0.75rem; color:var(--mt);">Assumes uniform distribution and containment.</p>
+            </div>
+            <div class="vcard">
+              <h4>PK-FK Join Size</h4>
+              <p style="font-family:monospace; color:var(--ac); font-weight:bold;">Card(Fact &bowtie; Dim) = Card(Fact)</p>
+              <p style="font-size:0.75rem; color:var(--mt);">Every foreign key matches at most 1 primary key.</p>
+            </div>
+          </div>
+
+          <div class="note-box">
+            <div class="callout-label">External Sort I/O Cost Formula</div>
+            $$\text{Cost} = 2 \times \text{NCARD}(R) \times \left(1 + \lceil \log_{M-1}(\lceil \text{NCARD}(R)/M \rceil) \rceil\right)$$
+            Step 1 (Run generation) reads and writes once ($2 \times \text{NCARD}$). Each merge pass with fan-in $M-1$ reads and writes once.
           </div>
 
           <div class="summary-box">
             <h4>Key Takeaways</h4>
             <ul>
-              <li>Cost-Based Optimization (CBO) is mandatory in DW to avoid disastrous index scans on non-selective queries.</li>
-              <li>Query rewrite engines unnest subqueries and apply algebraic equivalences (selection and projection pushdown).</li>
-              <li>Join size estimation relies on attribute distinct values: $\frac{\text{Card}(R) \times \text{Card}(S)}{\max(V(R,A), V(S,A))}$.</li>
-              <li>External sorting cost is bounded by $2 \times \text{NCARD}(R) \times (1 + \text{Merge Passes})$.</li>
+              <li>CBO uses catalog statistics ($V(R,A)$, histograms) to prevent disastrous index choices in analytical workloads.</li>
+              <li>Selection and projection pushdowns prune intermediate data volume before joins take place.</li>
+              <li>BI query tools generate complex "ugly" SQL; enterprise DW engines rely on query rewrites to unnest subqueries.</li>
             </ul>
           </div>
 
           <div class="practice-section">
-            <div class="practice-section-label">Practice Questions</div>
+            <div class="practice-section-label">Quick Quiz</div>
             <details>
-              <summary>Easy: Why is Selection Pushdown considered the most impactful heuristic optimization rule?</summary>
-              <p><strong>Answer:</strong> In relational algebra, joins are among the most computationally expensive operations ($O(N \log N)$ or disk-heavy partitioning). By applying selection conditions (filters) directly to base relations before the join, the optimizer dramatically shrinks the number of tuples entering the join, reducing both memory requirements and CPU/disk join execution time.</p>
+              <summary>Easy: Why is Selection Pushdown always prioritized during query optimization?</summary>
+              <p><strong>Answer:</strong> It filters rows directly on the base table before the join occurs, dramatically reducing intermediate row counts and memory consumption.</p>
             </details>
             <details>
-              <summary>Medium: Relation R has 100,000 tuples with V(R, A) = 5,000. Relation S has 200,000 tuples with V(S, A) = 20,000. Estimate the cardinality of the equijoin R.A = S.A.</summary>
-              <p><strong>Answer:</strong> Using the standard formula:
-                $$\text{Card}(R \bowtie S) = \frac{\text{Card}(R) \times \text{Card}(S)}{\max(V(R, A), V(S, A))} = \frac{100,000 \times 200,000}{\max(5,000, 20,000)} = \frac{2 \times 10^{10}}{20,000} = 1,000,000 \text{ tuples.}$$
-              </p>
-            </details>
-            <details>
-              <summary>Hard: A table R occupies 1,000 disk pages. You have 11 memory buffer pages available for sorting. Calculate the total I/O cost to sort R.</summary>
-              <p><strong>Answer:</strong><br />
-                - $M = 11$ pages, so merge fan-in $F = M - 1 = 10$.<br />
-                - Step 1 (Run Generation): Chunks of size $M = 11$ are sorted. Number of runs $= \lceil 1,000 / 11 \rceil = 91$ runs. I/O cost $= 2 \times 1,000 = 2,000$ reads/writes.<br />
-                - Step 2 (Merge Passes): Number of passes $= \lceil \log_{10}(91) \rceil = 2$ passes.<br />
-                - Pass 1 merges 91 runs down to $\lceil 91 / 10 \rceil = 10$ runs (reads 1,000 pages, writes 1,000 pages $= 2,000$ I/Os).<br />
-                - Pass 2 merges the 10 remaining runs into the final sorted output (reads 1,000 pages $= 1,000$ I/Os).<br />
-                - Total I/O Cost $= 2,000 + 2,000 + 1,000 = 5,000$ disk page operations.
-              </p>
+              <summary>Medium: Table R has 200,000 rows with V(R,A) = 10,000. Table S has 300,000 rows with V(S,A) = 30,000. Estimate the equijoin cardinality.</summary>
+              <p><strong>Answer:</strong> $\text{Card} = \frac{200,000 \times 300,000}{\max(10,000, 30,000)} = \frac{6 \times 10^{10}}{30,000} = 2,000,000 \text{ tuples.}$</p>
             </details>
           </div>
         </div>
@@ -825,375 +774,257 @@ for (Tuple s : Stream(S)) {
              ────────────────────────────────────────────────────────── -->
         <div class="topic-card" id="topic-5">
           <h2><span class="topic-num">5</span>Data Extraction, Transformation &amp; Loading (ETL)</h2>
-          <p class="topic-subtitle">Paulraj Ponniah Ch. 12: Data staging areas, CDC techniques, cleansing, surrogate keys, and bulk loading</p>
+          <p class="topic-subtitle">Paulraj Ponniah Ch. 12: Data Staging, CDC Techniques, Cleansing &amp; Bulk Loading</p>
 
-          <p>
-            No matter how sophisticated the dimensional model or query engine is, a data warehouse is only as good as the data flowing into it. <strong>Extraction, Transformation, and Loading (ETL)</strong> is the foundational backend pipeline responsible for extracting data from disparate operational systems, cleansing and restructuring it, and loading it into the dimensional warehouse.
-          </p>
-
-          <div class="stat-highlight">
-            <div class="stat-number">70% – 80%</div>
-            <div class="stat-label">Of total data warehouse project time, budget, and labor is consumed by the design, implementation, and maintenance of the ETL subsystem!</div>
+          <div class="stat-highlight" style="padding:10px 14px; margin:12px 0;">
+            <div class="stat-number" style="font-size:1.4rem;">70% – 80%</div>
+            <div class="stat-label">Of total data warehouse project time, budget, and labor is consumed by the ETL subsystem!</div>
           </div>
 
-          <div class="diagram-box">
-            <div class="diagram-title">&#9654; End-to-End ETL Architecture Flow</div>
-            <div class="pipeline-flow">
-              <div class="flow-node">
-                <div class="node-step">Sources</div>
-                <div class="node-name">Source Systems</div>
-                <div class="node-desc">OLTP, ERP, Flat Files, APIs, Web Logs</div>
+          <div class="visual-box">
+            <div class="visual-header">&#9654; 4-Stage ETL Architecture</div>
+            <div class="flow-row">
+              <div class="flow-step">
+                <div class="num">Sources</div>
+                <div class="title">Operational Systems</div>
+                <div class="desc">OLTP, ERP, Flat Files, APIs</div>
               </div>
               <div class="flow-arrow">&rarr;</div>
-              <div class="flow-node">
-                <div class="node-step">Extraction</div>
-                <div class="node-name">Data Staging Area</div>
-                <div class="node-desc">Static dumps &amp; Incremental CDC</div>
+              <div class="flow-step">
+                <div class="num">Staging</div>
+                <div class="title">Data Staging Area (DSA)</div>
+                <div class="desc">Isolated buffer outside OLTP/DW</div>
               </div>
               <div class="flow-arrow">&rarr;</div>
-              <div class="flow-node">
-                <div class="node-step">Transformation</div>
-                <div class="node-name">Transform &amp; Cleanse</div>
-                <div class="node-desc">Deduplication, Surrogate Keys, SCDs</div>
+              <div class="flow-step">
+                <div class="num">Transform</div>
+                <div class="title">Cleanse &amp; Conform</div>
+                <div class="desc">Surrogate keys, dedupe, SCD 1-3</div>
               </div>
               <div class="flow-arrow">&rarr;</div>
-              <div class="flow-node">
-                <div class="node-step">Loading</div>
-                <div class="node-name">Target Data Warehouse</div>
-                <div class="node-desc">Direct path bulk load &amp; index rebuilds</div>
+              <div class="flow-step">
+                <div class="num">Load</div>
+                <div class="title">Warehouse Target</div>
+                <div class="desc">Bulk append &amp; parallel index build</div>
               </div>
             </div>
           </div>
 
-          <h3>1. Data Extraction &amp; The Data Staging Area (DSA)</h3>
-          <p>
-            <strong>The Data Staging Area (DSA):</strong> A dedicated storage workspace situated strictly between operational source systems and the data warehouse repository. 
-          </p>
           <div class="note-box">
             <div class="callout-label">Architectural Rule</div>
-            <strong>Why We Never Transform Directly on OLTP or DW:</strong>
-            <ol>
-              <li>Transforming on source systems consumes CPU and memory, degrading mission-critical production OLTP transaction performance.</li>
-              <li>Transforming directly inside the production DW risks locking user-facing analytical tables and exposes business analysts to uncleaned, intermediate "garbage" data.</li>
-              <li>The DSA provides an isolated recovery point if an ETL job fails halfway through.</li>
-            </ol>
+            <strong>Why Use a Data Staging Area (DSA)?</strong> Transforming directly on OLTP slows production operations; transforming directly inside DW locks analytical queries. The DSA isolates intermediate processing.
           </div>
 
-          <h4>Extraction Techniques: Static vs. Incremental</h4>
-          <ul>
-            <li><strong>Static Extraction (Full Dump):</strong> Takes a complete image snapshot of the source relation at a specific point in time. Used exclusively during the <em>initial load</em> of the warehouse.</li>
-            <li><strong>Incremental Extraction (Change Data Capture - CDC):</strong> Captures only the deltas (records inserted, updated, or deleted) since the last extraction run. Essential for ongoing daily/hourly warehouse refreshes.</li>
-          </ul>
-
-          <table>
-            <thead>
-              <tr>
-                <th>CDC Technique</th>
-                <th>Implementation Mechanism</th>
-                <th>Advantages</th>
-                <th>Disadvantages</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>Audit Timestamps</strong></td>
-                <td>Queries source table where <code>last_modified_date &gt; :last_etl_run</code>.</td>
-                <td>Non-intrusive; easy to understand and query via standard SQL.</td>
-                <td>Cannot detect physical hard <code>DELETE</code> operations; relies on application software reliably setting timestamps.</td>
-              </tr>
-              <tr>
-                <td><strong>Database Triggers</strong></td>
-                <td><code>AFTER INSERT/UPDATE/DELETE</code> triggers write deltas to shadow change tables.</td>
-                <td>Captures all changes immediately, including deletions, with 100% accuracy.</td>
-                <td>Adds significant transactional overhead to every OLTP write transaction; slows production.</td>
-              </tr>
-              <tr>
-                <td><strong>Log-Based CDC</strong></td>
-                <td>Scrapes DBMS redo logs / transaction write-ahead logs (WAL).</td>
-                <td><span class="badge-tag tag-fast">Gold Standard</span> Zero overhead on OLTP application code; captures all changes including deletes.</td>
-                <td>Proprietary log formats; requires specialized CDC software (Debezium, Oracle GoldenGate).</td>
-              </tr>
-            </tbody>
-          </table>
-
-          <h3>2. Data Transformation: Tasks &amp; Challenges</h3>
-          <p>Transformation reshapes heterogeneous source data into unified dimensional structures:</p>
-          <div class="grid-2col">
-            <div style="background: rgba(24, 24, 27, 0.7); border: 1px solid var(--bd); border-radius: 8px; padding: 16px;">
-              <h4 style="color: var(--ac); margin-bottom: 8px;">1. Data Cleansing &amp; Scrubbing</h4>
-              <ul style="font-size: 0.85rem; color: var(--tx); padding-left: 18px;">
-                <li><strong>Format Standardization:</strong> Phone numbers, postal codes, date strings.</li>
-                <li><strong>Null Handling:</strong> Replacing ambiguous nulls with standard dimension keys (e.g., <code>-1 = 'Unknown'</code>).</li>
-                <li><strong>Deduplication:</strong> Resolving entity identity across systems (e.g., matching "Bob Smith" and "Robert Smith").</li>
+          <h3>Change Data Capture (CDC) Comparison</h3>
+          <div class="card-grid-3">
+            <div class="vcard" style="border-top: 3px solid var(--wrn-bd);">
+              <h4>Audit Timestamps</h4>
+              <p><code>WHERE updated_at &gt; :last_run</code></p>
+              <ul>
+                <li><span style="color:#86efac;">+</span> Simple; non-intrusive.</li>
+                <li><span style="color:#fca5a5;">-</span> Cannot capture physical hard deletes.</li>
               </ul>
             </div>
-            <div style="background: rgba(24, 24, 27, 0.7); border: 1px solid var(--bd); border-radius: 8px; padding: 16px;">
-              <h4 style="color: #4fa3e3; margin-bottom: 8px;">2. Integration &amp; Consolidation</h4>
-              <ul style="font-size: 0.85rem; color: var(--tx); padding-left: 18px;">
-                <li><strong>Resolving Synonyms:</strong> Different names for same concept (<code>cust_no</code> in ERP vs. <code>client_id</code> in CRM).</li>
-                <li><strong>Resolving Homonyms:</strong> Same name for different concepts (<code>revenue</code> before tax vs. after tax).</li>
-                <li><strong>Unit Unification:</strong> Converting currencies to base USD/PKR, kilograms to pounds.</li>
+            <div class="vcard" style="border-top: 3px solid var(--crit-bd);">
+              <h4>Database Triggers</h4>
+              <p><code>AFTER INSERT/UPDATE/DELETE</code></p>
+              <ul>
+                <li><span style="color:#86efac;">+</span> Captures 100% of deletes instantly.</li>
+                <li><span style="color:#fca5a5;">-</span> Slows down every production transaction.</li>
+              </ul>
+            </div>
+            <div class="vcard" style="border-top: 3px solid var(--def-bd);">
+              <h4>Log-Based CDC <span class="badge-tag tag-fast">Gold Standard</span></h4>
+              <p>Scrapes DBMS Redo Logs / WAL</p>
+              <ul>
+                <li><span style="color:#86efac;">+</span> Zero overhead on OLTP apps.</li>
+                <li><span style="color:#86efac;">+</span> Captures all deletes &amp; changes.</li>
               </ul>
             </div>
           </div>
 
-          <h4>Dimensional Transformations &amp; Surrogate Keys</h4>
-          <ul>
-            <li><strong>Surrogate Key Generation:</strong> Operational natural keys (e.g., Social Security Number, Account Number) must <em>never</em> serve as primary keys in warehouse dimension tables. The ETL pipeline assigns a synthetic integer surrogate key. This protects the warehouse from operational key reassignments and enables Slowly Changing Dimensions.</li>
-            <li><strong>SCD Management:</strong> Applying Type 1 (overwrite), Type 2 (insert new version row with effective dates and current flag), or Type 3 (previous/current column tracking).</li>
-          </ul>
-
-          <h3>3. Loading Techniques: Initial vs. Incremental &amp; Bulk Loading</h3>
-          <p>
-            Loading is the physical insertion of cleansed, transformed records into fact and dimension tables:
-          </p>
-          <ul>
-            <li><strong>Initial Load:</strong> Populating the empty warehouse with historical data (often years of history). Involves tens to hundreds of gigabytes at once.</li>
-            <li><strong>Incremental Load:</strong> Periodic scheduled batch (nightly, hourly) inserting new fact rows and updating dimensions.</li>
-          </ul>
-
-          <div class="note-box">
-            <div class="callout-label">High-Performance Bulk Load Strategy</div>
-            Standard row-by-row <code>INSERT</code> statements generate heavy logging, lock tables, and update B-tree indexes tuple by tuple&#8212;taking hours for millions of rows.
-            <br /><strong>The 4-Step Enterprise Bulk Loading Protocol:</strong>
-            <ol>
-              <li><strong>Drop or Disable Constraints &amp; Non-Clustered Indexes:</strong> Remove foreign keys and indexes from the target fact table.</li>
-              <li><strong>Direct-Path Append / Bulk Load:</strong> Use direct bulk-load utilities (e.g., PostgreSQL <code>COPY</code>, Oracle <code>SQL*Loader Direct Path</code>) with minimal/nologging mode.</li>
-              <li><strong>Rebuild Indexes in Parallel:</strong> Rebuild all B-tree and bitmap indexes in a single multi-threaded pass after all rows are written.</li>
-              <li><strong>Re-enable Constraints:</strong> Validate foreign keys against conformed dimensions using set-oriented SQL.</li>
-            </ol>
+          <h3>High-Performance Bulk Loading Protocol</h3>
+          <div class="visual-box">
+            <div class="flow-row">
+              <div class="flow-step">
+                <div class="num">Step 1</div>
+                <div class="title">Drop / Disable</div>
+                <div class="desc">Indexes &amp; FK constraints</div>
+              </div>
+              <div class="flow-arrow">&rarr;</div>
+              <div class="flow-step">
+                <div class="num">Step 2</div>
+                <div class="title">Direct Append</div>
+                <div class="desc">Fast bulk load (COPY / nologging)</div>
+              </div>
+              <div class="flow-arrow">&rarr;</div>
+              <div class="flow-step">
+                <div class="num">Step 3</div>
+                <div class="title">Rebuild Indexes</div>
+                <div class="desc">Parallelized single-pass build</div>
+              </div>
+              <div class="flow-arrow">&rarr;</div>
+              <div class="flow-step">
+                <div class="num">Step 4</div>
+                <div class="title">Re-enable FKs</div>
+                <div class="desc">Set-oriented validation</div>
+              </div>
+            </div>
           </div>
 
-          <h3>4. Modern Evolution: ETL vs. ELT</h3>
-          <p>
-            With the rise of massively parallel processing (MPP) cloud analytical data warehouses (Snowflake, BigQuery, Redshift), the paradigm has shifted from <strong>ETL</strong> to <strong>ELT</strong>:
-          </p>
-          <table>
-            <thead>
-              <tr>
-                <th>Dimension</th>
-                <th>Traditional ETL</th>
-                <th>Modern ELT</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>Transformation Engine</strong></td>
-                <td>Dedicated proprietary server (Informatica, DataStage).</td>
-                <td>The powerful data warehouse engine itself (SQL, dbt).</td>
-              </tr>
-              <tr>
-                <td><strong>Load Sequence</strong></td>
-                <td>Extract &rarr; Transform in ETL memory &rarr; Load to DW.</td>
-                <td>Extract &rarr; Load raw data to DW &rarr; Transform in-place.</td>
-              </tr>
-              <tr>
-                <td><strong>Raw Data Retention</strong></td>
-                <td>Raw data discarded; only transformed rows saved.</td>
-                <td>Raw data permanently preserved in data lake / bronze staging tables.</td>
-              </tr>
-              <tr>
-                <td><strong>Scalability</strong></td>
-                <td>Bottlenecked by ETL server CPU and memory.</td>
-                <td>Elastic; scales dynamically with cloud compute clusters.</td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="card-grid-2">
+            <div class="vcard">
+              <h4>Surrogate Keys vs. Natural Keys</h4>
+              <p>Natural operational keys change, get reused, or conflict across source mergers. ETL assigns synthetic integer <strong>Surrogate Keys</strong> to insulate the warehouse and support <strong>Slowly Changing Dimensions (SCD 1–3)</strong>.</p>
+            </div>
+            <div class="vcard">
+              <h4>Traditional ETL vs. Modern ELT</h4>
+              <p><strong>ETL:</strong> Transforms data in a dedicated external server before loading.<br />
+              <strong>ELT (Cloud DW):</strong> Loads raw data into the warehouse first; transforms in-place using MPP compute (Snowflake, BigQuery, dbt).</p>
+            </div>
+          </div>
 
           <div class="summary-box">
             <h4>Key Takeaways</h4>
             <ul>
-              <li>ETL accounts for 70%–80% of project effort and represents the critical backbone of data quality.</li>
-              <li>The Data Staging Area (DSA) isolates extraction and transformation workloads from both production OLTP and end-user warehouse queries.</li>
-              <li>Change Data Capture (CDC) via transaction log scraping is the gold standard for incremental extraction without impacting OLTP performance.</li>
-              <li>High-speed bulk loading drops indexes and constraints, streams data via direct-path append, and rebuilds indexes in parallel.</li>
-              <li>Modern cloud architectures favor ELT, leveraging warehouse compute to transform raw staged data in-engine.</li>
+              <li>ETL accounts for 70%–80% of data warehouse project time and labor.</li>
+              <li>Data Staging Areas (DSA) isolate extraction and cleaning from production OLTP and end-user DW queries.</li>
+              <li>Log-Based CDC is the enterprise gold standard: zero impact on OLTP and 100% accurate change/delete capture.</li>
+              <li>Bulk loading drops indexes, streams data via direct-path append, and rebuilds indexes in parallel.</li>
             </ul>
           </div>
 
           <div class="practice-section">
-            <div class="practice-section-label">Practice Questions</div>
+            <div class="practice-section-label">Quick Quiz</div>
             <details>
-              <summary>Easy: Why are operational natural keys never used as primary keys in data warehouse dimension tables?</summary>
-              <p><strong>Answer:</strong> Natural keys can change in operational source systems, be reused, or differ across multiple merged systems (e.g., two companies merging with overlapping account numbers). Furthermore, natural keys cannot support Slowly Changing Dimension (SCD) Type 2 tracking, where multiple historical versions of the same customer require distinct primary keys. ETL assigns synthetic integer surrogate keys to guarantee uniqueness and independence from source systems.</p>
+              <summary>Easy: Why are surrogate keys used instead of operational natural keys in warehouse dimension tables?</summary>
+              <p><strong>Answer:</strong> Natural keys can change, be reused, or conflict when consolidating multiple sources. Surrogate keys provide stable, integer primary keys independent of source systems and allow multiple historical versions of rows (SCD Type 2).</p>
             </details>
             <details>
-              <summary>Medium: What is the difference between a synonym and a homonym during data integration, and how does ETL resolve them?</summary>
-              <p><strong>Answer:</strong> A <em>synonym</em> occurs when the same business concept has different attribute names in different source systems (e.g., <code>client_id</code> in CRM vs. <code>cust_no</code> in ERP). ETL resolves this by mapping both to a unified conformed attribute name (<code>customer_id</code>). A <em>homonym</em> occurs when the exact same attribute name represents different concepts in different systems (e.g., <code>revenue</code> meaning gross revenue before tax in sales vs. net revenue after returns in finance). ETL resolves this by renaming them to explicit, unambiguous terms (e.g., <code>gross_sales_amt</code> and <code>net_revenue_amt</code>).</p>
-            </details>
-            <details>
-              <summary>Hard: Why does dropping and rebuilding indexes during a large incremental fact table load outperform leaving indexes enabled during load?</summary>
-              <p><strong>Answer:</strong> If indexes remain enabled during loading, every single inserted row causes an immediate search and modification of the B-tree or bitmap index structure. For 10 million rows, this causes millions of random disk page reads and writes, page splits, and locks. By dropping the index, rows are written via fast sequential appends. Rebuilding the index once at the end allows the engine to sort all keys in bulk and construct the entire B-tree leaf-to-root in a single sequential, parallelized pass, taking a tiny fraction of the time.</p>
+              <summary>Medium: Why is log-based CDC superior to trigger-based CDC in production environments?</summary>
+              <p><strong>Answer:</strong> Trigger-based CDC executes synchronously inside production write transactions, degrading OLTP application throughput. Log-based CDC asynchronously reads the database's write-ahead log (WAL) out-of-band with zero overhead on production transactions.</p>
             </details>
           </div>
         </div>
 
         <!-- ──────────────────────────────────────────────────────────
-             TOPIC 6: Summary Matrix & Master Quiz
+             TOPIC 6: Master Matrix & Practice Quiz
              ────────────────────────────────────────────────────────── -->
         <div class="topic-card" id="topic-6">
-          <h2><span class="topic-num">6</span>Summary Matrix &amp; Master Quiz</h2>
-          <p class="topic-subtitle">Comprehensive algorithm comparison matrix, exam takeaway checklist, and multi-tier interactive quiz</p>
+          <h2><span class="topic-num">6</span>Master Comparison Matrix &amp; Practice Quiz</h2>
+          <p class="topic-subtitle">Algorithm Matrix, Exam Takeaway Checklist &amp; 5 High-Yield Exam Problems</p>
 
-          <p>
-            This final section synthesizes the entire module into an authoritative reference matrix comparing all join algorithms and provides a comprehensive interactive quiz spanning query engines, optimization math, and ETL architecture.
-          </p>
-
-          <h3>1. Master Join Algorithm Comparison Matrix</h3>
+          <h3>Master Join Algorithm Comparison Matrix</h3>
           <table>
             <thead>
               <tr>
-                <th>Join Algorithm</th>
-                <th>Time Complexity</th>
-                <th>Memory Requirement</th>
-                <th>Requires Pre-Sorting?</th>
-                <th>Sensitivity to Skew</th>
-                <th>Primary Use Case in DW</th>
+                <th>Algorithm</th>
+                <th>Time Cost</th>
+                <th>Memory Needed</th>
+                <th>Pre-Sort?</th>
+                <th>Skew Sensitive?</th>
+                <th>Best DW Use Case</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td><strong>Naive Nested Loop</strong></td>
+                <td><strong>Naive NLJ</strong></td>
                 <td>$O(|R| \times |S|)$</td>
-                <td>Minimal (1 page)</td>
+                <td>1 page</td>
                 <td>No</td>
-                <td>None</td>
+                <td>No</td>
                 <td><span class="badge-tag tag-slow">Never in DW</span> Only tiny toy tables.</td>
               </tr>
               <tr>
-                <td><strong>Block Nested Loop (BNLJ)</strong></td>
+                <td><strong>Block NLJ (BNLJ)</strong></td>
                 <td>$O(|R| \times |S| / M)$</td>
-                <td>Moderate ($M$ pages)</td>
+                <td>$M$ pages</td>
                 <td>No</td>
-                <td>None</td>
-                <td>Fallback when no indexes exist and no equality predicate is present (theta-joins).</td>
+                <td>No</td>
+                <td>Fallback when no indexes exist and condition is non-equality.</td>
               </tr>
               <tr>
-                <td><strong>Index Nested Loop (INLJ)</strong></td>
-                <td>$O(|R| \times \log |S|)$</td>
-                <td>Small (index root)</td>
+                <td><strong>Index NLJ (INLJ)</strong></td>
+                <td>$O(|R| \log |S|)$</td>
+                <td>Index root</td>
                 <td>No</td>
                 <td>Low</td>
-                <td>Joining very small filtered dimension ($|R| &lt; 100$) with heavily indexed fact table.</td>
+                <td>Joining very small filtered dimension ($|R| &lt; 100$) with indexed fact.</td>
               </tr>
               <tr>
-                <td><strong>Sort-Merge Join (SMJ)</strong></td>
-                <td>$O(N \log N)$ (or $O(R+S)$ if sorted)</td>
-                <td>High (merge buffers)</td>
+                <td><strong>Sort-Merge (SMJ)</strong></td>
+                <td>$O(N \log N)$ or $O(R+S)$</td>
+                <td>Merge buffers</td>
                 <td>Yes</td>
-                <td>Low (handles non-uniform keys well)</td>
-                <td>Joining very large tables where inputs are already sorted or for range/band equijoins.</td>
+                <td>Low</td>
+                <td>Joining large tables already sorted or preserving key order for <code>GROUP BY</code>.</td>
               </tr>
               <tr>
-                <td><strong>Classic Hash Join</strong></td>
-                <td>$O(|R| + |S|)$</td>
-                <td>High ($R$ must fit in RAM)</td>
+                <td><strong>Hybrid Hash</strong></td>
+                <td>$O(R + S)$ linear</td>
+                <td>Partition buffer</td>
                 <td>No</td>
                 <td>High</td>
-                <td>Joining medium dimension table with massive streaming fact table in memory.</td>
+                <td><span class="badge-tag tag-fast">Gold Standard</span> General large analytical equijoins exceeding RAM.</td>
               </tr>
               <tr>
-                <td><strong>Hybrid Hash Join</strong></td>
-                <td>$O(R + S)$ to $O(R \log R + S)$</td>
-                <td>Medium ($K$ pages)</td>
-                <td>No</td>
-                <td>High (requires good hash function)</td>
-                <td><span class="badge-tag tag-fast">Gold Standard</span> General-purpose large equijoins when tables exceed RAM.</td>
-              </tr>
-              <tr>
-                <td><strong>Pointer-Based Join</strong></td>
+                <td><strong>Pointer Join</strong></td>
                 <td>$O(|R|)$ traversal</td>
                 <td>Low</td>
                 <td>No</td>
                 <td>Low</td>
-                <td>Object-relational navigation when only &lt; 1% of outer records participate.</td>
+                <td>Object-relational navigation when &lt; 1% of outer data participates.</td>
               </tr>
             </tbody>
           </table>
 
-          <h3>2. Master Exam Takeaway Checklist</h3>
-          <div class="grid-2col">
-            <div style="background: rgba(24, 24, 27, 0.7); border: 1px solid var(--bd); border-radius: 8px; padding: 16px;">
-              <h4 style="color: var(--ac); margin-bottom: 8px;">Query Execution &amp; Joins</h4>
-              <ul style="font-size: 0.85rem; color: var(--tx); padding-left: 18px;">
-                <li><strong>Volcano Model:</strong> <code>open()</code>, <code>next()</code>, <code>close()</code> pull-based iterator execution.</li>
-                <li><strong>Tree Shapes:</strong> Left-deep minimizes memory; Right-deep builds parallel hash tables; Bushy maximizes concurrency.</li>
-                <li><strong>Winter's Law:</strong> Isolate participating &lt; 1% data and process with linear set algorithms.</li>
-                <li><strong>Graefe Duality:</strong> Sorting = physical divide + logical combine; Hashing = logical divide + physical combine.</li>
-                <li><strong>Recursion Depth:</strong> Hash join recursion depends strictly on build relation $R$, giving it massive advantage when $|R| \ll |S|$.</li>
+          <div class="card-grid-2">
+            <div class="vcard" style="border-left:3px solid var(--ac);">
+              <h4>Query &amp; Join Cheat-Sheet</h4>
+              <ul>
+                <li><strong>Volcano:</strong> <code>open</code>, <code>next</code>, <code>close</code> pull pipeline.</li>
+                <li><strong>Tree Shapes:</strong> Left-deep (memory), Right-deep (parallel hash), Bushy (cluster).</li>
+                <li><strong>Graefe Duality:</strong> Sort = physical divide + logical merge; Hash = logical divide + physical concat.</li>
+                <li><strong>Winter's Law:</strong> Isolate participating &lt; 1% data; process with linear algorithms.</li>
               </ul>
             </div>
-            <div style="background: rgba(24, 24, 27, 0.7); border: 1px solid var(--bd); border-radius: 8px; padding: 16px;">
-              <h4 style="color: #4fa3e3; margin-bottom: 8px;">Optimization &amp; ETL</h4>
-              <ul style="font-size: 0.85rem; color: var(--tx); padding-left: 18px;">
-                <li><strong>CBO Mandatory:</strong> RBO fails in DW because it picks index scans over fast sequential scans on bulk data.</li>
-                <li><strong>Pushdown Heuristics:</strong> Selection &amp; projection pushdown reduce tuple volumes before expensive joins.</li>
-                <li><strong>DSA Isolation:</strong> Staging area prevents ETL jobs from degrading production OLTP or locking user DW tables.</li>
-                <li><strong>Log-Based CDC:</strong> Scrapes redo logs with zero application overhead and 100% delete capture.</li>
-                <li><strong>Bulk Load:</strong> Drop indexes &rarr; Direct append &rarr; Rebuild indexes in parallel &rarr; Validate constraints.</li>
+            <div class="vcard" style="border-left:3px solid var(--def-bd);">
+              <h4>Optimization &amp; ETL Cheat-Sheet</h4>
+              <ul>
+                <li><strong>CBO:</strong> Relies on catalog distinct values $V(R,A)$ and histograms.</li>
+                <li><strong>Pushdown:</strong> Filter (&sigma;) before join (&bowtie;) to shrink intermediate data.</li>
+                <li><strong>DSA:</strong> Isolates heavy ETL transforms from production OLTP and DW.</li>
+                <li><strong>Bulk Load:</strong> Drop indexes &rarr; Direct append &rarr; Rebuild in parallel.</li>
               </ul>
             </div>
-          </div>
-
-          <div class="summary-box">
-            <h4>Key Takeaways</h4>
-            <ul>
-              <li>Hybrid Hash Join is the industry workhorse for large analytical equijoins due to linear scaling and memory tuning.</li>
-              <li>Sort-Merge Join remains uniquely dominant when data is pre-sorted or when interesting orderings must be preserved for downstream operations.</li>
-              <li>Cost-based optimizers rely on distinct value statistics ($V(R,A)$) to estimate equijoin intermediate cardinalities.</li>
-              <li>ETL pipelines rely on Change Data Capture (CDC), surrogate key assignment, and direct-path bulk loading to manage high-throughput refreshes.</li>
-            </ul>
           </div>
 
           <div class="practice-section">
-            <div class="practice-section-label">Master Practice Quiz (8 In-Depth Exam Scenarios)</div>
+            <div class="practice-section-label">Master Exam Practice Quiz (5 High-Yield Problems)</div>
 
             <details>
-              <summary>Question 1 (Easy): In the Volcano iterator model, what happens when an operator's next() function is called?</summary>
-              <p><strong>Answer:</strong> When an operator's <code>next()</code> function is called, it computes and returns the next single tuple (granule) satisfying its operation by calling <code>next()</code> on its own child operator(s). If no more tuples remain in the stream, it returns <code>null</code>. This allows demand-driven pipelining without writing intermediate results to temporary disk files.</p>
+              <summary>Question 1: Explain Goetz Graefe's Divide-and-Conquer Duality between sorting and hashing.</summary>
+              <p><strong>Answer:</strong> Sorting performs <em>physical division</em> (arbitrary memory-sized runs) and <em>logical combination</em> (key-comparison merge). Hashing performs <em>logical division</em> (key-based hash partitioning) and <em>physical combination</em> (concatenating bucket results). Sorting preserves sorted key order for downstream aggregations, while hashing destroys it.</p>
             </details>
 
             <details>
-              <summary>Question 2 (Easy): What is the primary difference between Static Extraction and Incremental Extraction in an ETL pipeline?</summary>
-              <p><strong>Answer:</strong> Static extraction takes a complete snapshot dump of the entire source database table at a specific point in time, typically used for initial warehouse population. Incremental extraction captures only the net changes (deltas: inserts, updates, deletes) made since the last extraction run, used for ongoing scheduled warehouse maintenance.</p>
+              <summary>Question 2: In Richard Winter's case study, why did a 10,000&times; database scale jump cause a 4-billion-fold disk I/O explosion under Naive NLJ?</summary>
+              <p><strong>Answer:</strong> In the small test database, the entire inner customer table fit inside the RAM buffer pool (0 disk I/O during inner scans). In the enterprise warehouse, neither table fit in memory. For each qualifying transaction (4M rows), the engine performed a full 25 GB disk scan of the customer table, turning cached lookups into 6 Trillion physical disk reads.</p>
             </details>
 
             <details>
-              <summary>Question 3 (Medium): Why does a Hash Join have a significant structural advantage over a Sort-Merge Join when joining a small dimension table (10 MB) with a massive fact table (500 GB)?</summary>
-              <p><strong>Answer:</strong> In a Hash Join, the small table serves as the "build" relation $R$ and is loaded completely into main memory. The massive fact table $S$ simply streams through once as the "probe" relation without ever being partitioned, sorted, or written to temporary disk space ($O(|R| + |S|)$ I/O cost). In contrast, Sort-Merge Join must sort <em>both</em> relations; sorting a 500 GB fact table requires multiple external merge passes and massive disk I/O proportional to $O(|S| \log |S|)$.</p>
+              <summary>Question 3: Why does Hash Join have a structural advantage over Sort-Merge when joining a small build table R with a massive probe table S?</summary>
+              <p><strong>Answer:</strong> Because the recursive partitioning depth in Hash Join depends strictly on the build table $R$ ($\log_K(R/K)$). Massive table $S$ simply streams through as the probe input. In contrast, Sort-Merge Join must sort both tables, incurring heavy $O(S \log S)$ external merge overhead on the massive relation.</p>
             </details>
 
             <details>
-              <summary>Question 4 (Medium): How do Bloom filters act as "lossy semijoins" during large hash joins?</summary>
-              <p><strong>Answer:</strong> A Bloom filter is a compact bit array built over the join keys of the build relation $R$. When tuples of probe relation $S$ are read from disk, their keys are checked against the Bloom filter. Because Bloom filters have zero false negatives, any tuple of $S$ whose key evaluates to 0 is guaranteed not to match any row in $R$ and can be discarded immediately. This eliminates non-participating tuples early, saving massive amounts of disk write and read I/O during partitioning.</p>
+              <summary>Question 4: What are the trade-offs between Trigger-Based CDC and Log-Based CDC?</summary>
+              <p><strong>Answer:</strong> Trigger-based CDC runs synchronously inside application write transactions, degrading production OLTP performance and requiring maintenance when schemas change. Log-based CDC asynchronously scrapes the database's write-ahead log (WAL) with zero overhead on production applications while still capturing 100% of hard deletes.</p>
             </details>
 
             <details>
-              <summary>Question 5 (Medium): Explain why database engines disable non-clustered indexes prior to executing a large bulk load into a fact table.</summary>
-              <p><strong>Answer:</strong> If indexes remain active during a bulk load of millions of rows, the database must update the B-tree or bitmap index structure for every single inserted row. This converts a fast sequential write into millions of scattered random disk page reads and writes, buffer pool evictions, and B-tree page splits. Dropping the indexes allows the data to be written sequentially at raw disk bus speed; rebuilding the index at the end allows the engine to sort the keys and construct the B-tree in a single, fast, parallelized pass.</p>
-            </details>
-
-            <details>
-              <summary>Question 6 (Hard): A query optimizer must join Relation R (400,000 tuples, V(R, A) = 20,000) with Relation S (600,000 tuples, V(S, A) = 50,000) on R.A = S.A. Calculate the estimated output cardinality. What does this estimate assume?</summary>
-              <p><strong>Answer:</strong><br />
-                Using the standard equijoin size estimation formula:
-                $$\text{Estimated Cardinality} = \frac{\text{Card}(R) \times \text{Card}(S)}{\max(V(R, A), V(S, A))} = \frac{400,000 \times 600,000}{\max(20,000, 50,000)} = \frac{2.4 \times 10^{11}}{50,000} = 4,800,000 \text{ tuples.}$$
-                This formula assumes two critical properties: (1) <em>Uniform distribution</em> of attribute values across tuples, and (2) <em>Containment of value domains</em> (the set of distinct values in the smaller domain is a subset of the larger domain).
-              </p>
-            </details>
-
-            <details>
-              <summary>Question 7 (Hard): In Richard Winter's study, why did a $10,000\times$ increase in database size cause a $4,000,000,000\times$ increase in Nested Loop Join I/O time?</summary>
-              <p><strong>Answer:</strong> Naive Nested Loop Join has quadratic complexity $O(|R| \times |S|)$. In the small database (1,000 customers, 100,000 transactions), the customer table (2.5 MB) fit entirely inside the RAM buffer pool, so the inner scan involved zero disk I/O after initial load. In the large database (10M customers, 100M transactions), neither table fit in memory. For each qualifying transaction (4M rows), the engine had to perform a full disk scan of the 25 GB customer table (3M blocks), turning a cached memory lookup into $4 \times 10^6 \times 3 \times 10^6 = 12 \text{ Trillion}$ disk block operations. The transition from memory-resident data to thrashing disk I/O multiplied the quadratic theoretical scaling, causing the 4 billion-fold explosion.</p>
-            </details>
-
-            <details>
-              <summary>Question 8 (Tricky Exam Problem): Compare Trigger-Based CDC with Log-Based CDC across (a) production OLTP performance impact, (b) schema evolution maintenance, and (c) capture of hard deletes.</summary>
-              <p><strong>Answer:</strong><br />
-                - <strong>(a) OLTP Performance Impact:</strong> Trigger-based CDC executes synchronously inside the application's write transaction, adding CPU and lock overhead to every <code>INSERT/UPDATE/DELETE</code> in production. Log-based CDC asynchronously reads the database's write-ahead log (WAL/redo log) out-of-band, imposing essentially zero performance penalty on production OLTP transactions.<br />
-                - <strong>(b) Schema Evolution Maintenance:</strong> Triggers must be manually altered or recreated whenever table columns are added or changed, creating a maintenance hazard. Log-based CDC decodes log streams and can automatically adapt to schema migrations or alert the pipeline.<br />
-                - <strong>(c) Capture of Hard Deletes:</strong> Both trigger-based and log-based CDC capture physical hard deletes with 100% accuracy (unlike timestamp-based CDC, which cannot detect when a row is physically removed from the source table).
-              </p>
+              <summary>Question 5: Why do database engineers drop non-clustered indexes before bulk loading a large fact table?</summary>
+              <p><strong>Answer:</strong> Loading rows with indexes active causes each inserted row to search, lock, and modify B-tree index structures, creating millions of random I/O operations and page splits. Dropping indexes allows fast sequential data appending; rebuilding the index at the end allows the engine to sort keys and construct the entire B-tree in a single, parallelized pass.</p>
             </details>
           </div>
         </div>
