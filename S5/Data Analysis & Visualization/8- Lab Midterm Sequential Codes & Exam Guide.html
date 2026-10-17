@@ -1,0 +1,1949 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>DAV Lab Midterm — Sequential Code &amp; Exam Cheatsheet</title>
+    <meta
+      name="description"
+      content="Comprehensive, sequential exam preparation notes for FAST-NU Data Analysis & Visualization (DAV) Lab Midterm. Covers REST APIs, Nested JSON, Databricks PySpark Medallion Architecture, Delta Lake Upserts, Schema Drift, Advanced Pandas MultiIndexing, and Power BI Star Schema Modeling & DAX."
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../notes.css" />
+    <style>
+      /* ── Custom UI Enhancements for Fast Exam Review ── */
+      .seq-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        background: rgba(217, 119, 87, 0.15);
+        color: var(--ac);
+        border: 1px solid rgba(217, 119, 87, 0.4);
+        padding: 3px 10px;
+        border-radius: 6px;
+        font-size: 0.75rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.6px;
+        margin-bottom: 8px;
+      }
+      .query-pill {
+        display: inline-block;
+        font-size: 0.72rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        padding: 2px 8px;
+        border-radius: 4px;
+        margin-left: 8px;
+        vertical-align: middle;
+      }
+      .pill-api { background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); }
+      .pill-spark { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4); }
+      .pill-pandas { background: rgba(52, 211, 153, 0.2); color: #34d399; border: 1px solid rgba(52, 211, 153, 0.4); }
+      .pill-pbi { background: rgba(167, 139, 250, 0.2); color: #c084fc; border: 1px solid rgba(167, 139, 250, 0.4); }
+      .pill-dax { background: rgba(244, 114, 182, 0.2); color: #f472b6; border: 1px solid rgba(244, 114, 182, 0.4); }
+      .pill-crit { background: rgba(248, 113, 113, 0.2); color: #f87171; border: 1px solid rgba(248, 113, 113, 0.4); }
+
+      .flow-card {
+        background: #141418;
+        border: 1px solid #27272a;
+        border-radius: 8px;
+        padding: 16px;
+        margin: 16px 0;
+      }
+      .flow-title {
+        font-size: 0.85rem;
+        font-weight: 700;
+        color: var(--tx);
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .flow-steps {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        gap: 8px;
+      }
+      .step-item {
+        background: #1c1c21;
+        border: 1px solid #333339;
+        border-radius: 6px;
+        padding: 10px 8px;
+        font-size: 0.78rem;
+        text-align: center;
+      }
+      .step-item.active-step {
+        border-color: var(--ac);
+        background: rgba(217, 119, 87, 0.12);
+        font-weight: 600;
+      }
+      .step-num {
+        font-size: 0.65rem;
+        font-weight: 700;
+        color: var(--ac);
+        display: block;
+        margin-bottom: 3px;
+      }
+
+      .why-box {
+        background: #12171f;
+        border-left: 4px solid #38bdf8;
+        padding: 12px 16px;
+        border-radius: 0 8px 8px 0;
+        margin: 12px 0 16px;
+        font-size: 0.88rem;
+        line-height: 1.6;
+      }
+      .why-box strong { color: #38bdf8; }
+
+      .result-preview {
+        background: #09090b;
+        border: 1px solid #27272a;
+        border-radius: 6px;
+        padding: 10px 14px;
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        font-size: 0.78rem;
+        color: #a1a1aa;
+        margin-top: 8px;
+        overflow-x: auto;
+      }
+      .result-preview .tag-match { color: #4ade80; font-weight: bold; }
+      .result-preview .tag-zero { color: #38bdf8; font-weight: bold; }
+      .result-preview .tag-err { color: #f87171; font-weight: bold; }
+
+      .exam-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 14px;
+        margin: 16px 0;
+      }
+      .exam-card {
+        background: #16161a;
+        border: 1px solid #2d2d32;
+        border-radius: 8px;
+        padding: 14px 16px;
+      }
+      .exam-card h4 {
+        font-size: 0.9rem;
+        color: var(--ac);
+        margin-bottom: 8px;
+        display: flex;
+        justify-content: space-between;
+      }
+      .exam-card p {
+        font-size: 0.82rem;
+        line-height: 1.5;
+        color: var(--tx);
+        margin-bottom: 6px;
+      }
+      .quick-copy {
+        font-size: 0.75rem;
+        background: #0e0e11;
+        padding: 6px 10px;
+        border-radius: 4px;
+        font-family: monospace;
+        color: #e2e8f0;
+        display: block;
+        margin-top: 6px;
+        word-break: break-all;
+      }
+
+      /* ── Interactive Quiz Styles ── */
+      .mcq-card {
+        background: #141418;
+        border: 1px solid #27272a;
+        border-radius: 8px;
+        padding: 16px;
+        margin: 14px 0;
+      }
+      .mcq-q {
+        font-size: 0.92rem;
+        font-weight: 600;
+        color: var(--tx);
+        margin-bottom: 12px;
+      }
+      .mcq-options {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .mcq-opt {
+        background: #1a1a20;
+        border: 1px solid #333339;
+        border-radius: 6px;
+        padding: 10px 14px;
+        color: var(--tx);
+        text-align: left;
+        cursor: pointer;
+        font-family: inherit;
+        font-size: 0.84rem;
+        transition: all 0.2s;
+      }
+      .mcq-opt:hover:not(:disabled) {
+        border-color: var(--ac);
+        background: rgba(217, 119, 87, 0.1);
+      }
+      .mcq-opt.correct {
+        background: rgba(52, 211, 153, 0.18) !important;
+        border-color: #34d399 !important;
+        color: #34d399 !important;
+        font-weight: 600;
+      }
+      .mcq-opt.incorrect {
+        background: rgba(248, 113, 113, 0.18) !important;
+        border-color: #f87171 !important;
+        color: #f87171 !important;
+      }
+      .mcq-expl {
+        display: none;
+        margin-top: 10px;
+        padding: 10px 14px;
+        border-radius: 6px;
+        font-size: 0.82rem;
+        line-height: 1.5;
+      }
+      .mcq-expl.show { display: block; }
+      .mcq-expl.good { background: rgba(52, 211, 153, 0.1); border-left: 3px solid #34d399; color: #a7f3d0; }
+      .mcq-expl.bad { background: rgba(248, 113, 113, 0.1); border-left: 3px solid #f87171; color: #fca5a5; }
+
+      .score-box {
+        background: #18181f;
+        border: 1px solid var(--ac);
+        border-radius: 8px;
+        padding: 14px 20px;
+        text-align: center;
+        margin: 20px 0;
+        font-size: 1rem;
+        font-weight: 700;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="menu-toggle" onclick="toggleSidebar()" aria-label="Toggle navigation">☰</button>
+    <div id="sidebar-backdrop" onclick="toggleSidebar()"></div>
+
+    <!-- ═══════════════════════════════════════════════════════
+     SIDEBAR
+     ═══════════════════════════════════════════════════════ -->
+    <div id="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-header-text">
+          <div class="sidebar-course-label">FAST-NU • DS-3001</div>
+          <div class="sidebar-title">DAV Lab Mid Prep</div>
+        </div>
+      </div>
+      <div class="sidebar-search-wrap">
+        <input
+          type="text"
+          id="search-input"
+          placeholder="Search topics…"
+          onkeyup="filterContent()"
+        />
+      </div>
+      <ul class="nav-list" id="nav-list">
+        <!-- Current Module (Active & Expandable) -->
+        <li class="nav-section">
+          <div class="nav-section-title" onclick="toggleSection(this)">
+            <span>🎯 08 — Lab Midterm Exam Guide</span>
+            <span class="chevron">▼</span>
+          </div>
+          <ul class="nav-sublist">
+            <li>
+              <a href="javascript:void(0)" onclick="showTopic('topic-1')">
+                <span class="nav-num">01</span>Master Execution Roadmap
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" onclick="showTopic('topic-2')">
+                <span class="nav-num">02</span>Lab 2: APIs, Deep JSON &amp; Flattening
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" onclick="showTopic('topic-3')">
+                <span class="nav-num">03</span>Lab 3: Databricks Medallion &amp; Delta Upsert
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" onclick="showTopic('topic-4')">
+                <span class="nav-num">04</span>Lab 4: Schema Drift, Stringified JSON &amp; Joins
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" onclick="showTopic('topic-5')">
+                <span class="nav-num">05</span>Lab 5: Advanced Pandas &amp; MultiIndexing
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" onclick="showTopic('topic-6')">
+                <span class="nav-num">06</span>Labs 6–7: Power BI ETL, Star Schema &amp; DAX
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" onclick="showTopic('topic-7')">
+                <span class="nav-num">07</span>Exam Question Types &amp; Viva Traps
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" onclick="showTopic('topic-8')">
+                <span class="nav-num">08</span>Master Syntax &amp; Functions Cheatsheet
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" onclick="showTopic('topic-9')">
+                <span class="nav-num">09</span>Interactive Practice MCQs &amp; Challenges
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- Other Course Modules (Cross-File Links) -->
+        <li>
+          <a class="nav-module-link" href="./1- Introduction to Data Analysis & Visualization.html">
+            <span class="nav-num">01</span>Introduction to DAV
+          </a>
+        </li>
+        <li>
+          <a class="nav-module-link" href="./2- Data Analysis Lifecycle.html">
+            <span class="nav-num">02</span>Data Analysis Lifecycle
+          </a>
+        </li>
+        <li>
+          <a class="nav-module-link" href="./3- Data Preparation.html">
+            <span class="nav-num">03</span>Data Preparation
+          </a>
+        </li>
+        <li>
+          <a class="nav-module-link" href="./4- Exploratory Data Analysis.html">
+            <span class="nav-num">04</span>Exploratory Data Analysis
+          </a>
+        </li>
+        <li>
+          <a class="nav-module-link" href="./5- Evolution of Data Architecture.html">
+            <span class="nav-num">05</span>Evolution of Data Architecture
+          </a>
+        </li>
+        <li>
+          <a class="nav-module-link" href="./6- Distributed Data Processing & Apache Spark.html">
+            <span class="nav-num">06</span>Distributed Processing & Spark
+          </a>
+        </li>
+        <li>
+          <a class="nav-module-link" href="./7- Visualizing Data - Aesthetics & Coordinate Systems.html">
+            <span class="nav-num">07</span>Visualizing Data (Aesthetics & Coords)
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════
+     MAIN CONTENT
+     ═══════════════════════════════════════════════════════ -->
+    <div id="main-content">
+      <div class="module-container">
+        <div class="module-header">
+          <div class="module-eyebrow">FAST-NU • Data Analysis &amp; Visualization Lab (DS-3001)</div>
+          <h1 class="module-title">Lab Midterm: Sequential Code &amp; Exam Cheatsheet</h1>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════
+         TOPIC 1: MASTER EXAM EXECUTION ROADMAP
+         ═══════════════════════════════════════════════════════ -->
+        <div class="topic-card" id="topic-1">
+          <h2><span class="topic-num">1</span>Master Exam Execution Roadmap</h2>
+          <p class="topic-subtitle">The strict multi-tool execution order to survive the DAV Lab Midterm</p>
+
+          <p>
+            The Data Analysis &amp; Visualization (DAV) lab midterm tests <strong>four fundamentally distinct environments</strong>:
+            Python Requests &amp; Nested JSON parsing, PySpark on Databricks (Medallion Architecture &amp; Delta Lake), Advanced Pandas Hierarchical Multi-Indexing, and Microsoft Power BI (Power Query ETL, Star Schema Modeling, and DAX).
+            Students fail not because the code is impossible, but because they <strong>execute steps out of order</strong> — inferring schemas dynamically when drift occurs, averaging pre-aggregated ratios in DAX, or slicing unsorted MultiIndexes.
+          </p>
+
+          <div class="flow-card">
+            <div class="flow-title">⚡ The 5-Phase Sequential Lab Exam Pipeline</div>
+            <div class="flow-steps">
+              <div class="step-item active-step"><span class="step-num">PHASE 01</span>REST API &amp; JSON<br><code>requests</code> + Recursive</div>
+              <div class="step-item"><span class="step-num">PHASE 02</span>DATABRICKS BRONZE<br>Schema-on-Read DDL</div>
+              <div class="step-item"><span class="step-num">PHASE 03</span>SILVER UPSERT<br><code>DeltaTable.merge()</code></div>
+              <div class="step-item"><span class="step-num">PHASE 04</span>PANDAS MULTIINDEX<br><code>IndexSlice</code> &amp; Reshape</div>
+              <div class="step-item"><span class="step-num">PHASE 05</span>POWER BI DASHBOARD<br>PQ ETL &rarr; Star &rarr; DAX</div>
+            </div>
+          </div>
+
+          <div class="why-box">
+            <strong>Why order and strict typing are non-negotiable:</strong>
+            In distributed Spark engines and analytical BI models, downstream operations inherit the mathematical and structural contracts of upstream steps. If you allow Spark to infer a schema on mixed JSON, your ingestion crashes. If you calculate an average discount column and then take its average in Power BI, you commit the <em>Simpson’s Paradox / Ratio Fallacy</em>. You must follow the exact sequential rules outlined below.
+          </div>
+
+          <h3>Golden Rules for the DAV Lab Exam</h3>
+          <ul>
+            <li><strong>Rule 1 (Never Trust Inferred JSON Schemas):</strong> When reading API or clickstream JSON in Spark, always define an explicit <code>StructType</code>. If a field contains mixed types (nested object on Day 1, error string on Day 2), force it to <code>StringType()</code> in Bronze and extract fields safely downstream using <code>get_json_object()</code>.</li>
+            <li><strong>Rule 2 (Delta Lake Modes Matter):</strong> Use <code>mode("overwrite")</code> ONLY for initial full table creation or static Gold summary reports. For incremental batch updates, use <code>mode("append")</code> in Bronze and <code>merge()</code> (Upsert) in Silver to prevent duplicating historical primary keys.</li>
+            <li><strong>Rule 3 (MultiIndexes MUST be Lexicographically Sorted):</strong> In Pandas, never attempt range slicing (e.g. <code>pd.IndexSlice[:, '21730':'22752', :]</code>) on an unsorted index. It will throw an immediate <code>UnsortedIndexError</code>. Always call <code>.sort_index()</code> first.</li>
+            <li><strong>Rule 4 (Measures Over Calculated Columns in DAX):</strong> Never calculate ratios (like Profit Margin or Unit Price) as row-level calculated columns and then aggregate them with <code>AVERAGE()</code>. An average of ratios is mathematically invalid. Always create dynamic DAX measures using <code>DIVIDE(SUM(Numerator), SUM(Denominator))</code>.</li>
+            <li><strong>Rule 5 (Continuous Calendar Dimension is Mandatory):</strong> Time intelligence and monthly trend lines in Power BI require an official Date table marked as such, with text month names explicitly sorted by an integer <code>Month Number</code> to prevent alphabetical sorting ("Apr", "Aug", "Dec").</li>
+          </ul>
+
+          <div class="note-box">
+            <div class="callout-label">Exam Strategy &amp; Tool Setup</div>
+            Before the exam starts:
+            <ol>
+              <li>Open Google Colab (for API and Pandas sections).</li>
+              <li>Launch your Databricks Community Edition cluster (takes ~3 minutes to spin up).</li>
+              <li>Launch Power BI Desktop and verify the Excel/CSV connector is responsive.</li>
+            </ol>
+          </div>
+
+          <div class="summary-box">
+            <h4>Topic 1 Recap</h4>
+            <ul>
+              <li>The exam spans 4 toolsets: Python API $\rightarrow$ PySpark Medallion $\rightarrow$ Pandas MultiIndex $\rightarrow$ Power BI.</li>
+              <li>Explicit typing prevents schema drift crashes in Spark; lexicographical sorting prevents slice crashes in Pandas.</li>
+              <li>In Power BI, clean in Power Query, model 1-to-many star relationships, and use dynamic DAX measures.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════
+         TOPIC 2: LAB 2 SEQUENTIAL PIPELINE — REST APIS & JSON
+         ═══════════════════════════════════════════════════════ -->
+        <div class="topic-card" id="topic-2">
+          <h2><span class="topic-num">2</span>Lab 2: APIs, Deep JSON &amp; Flattening</h2>
+          <p class="topic-subtitle">Handling REST payloads, arbitrary-depth recursive key extraction &amp; safe normalization</p>
+
+          <span class="seq-badge">Workflow 1 • Ingestion to Analysis-Ready DataFrame</span>
+          <span class="query-pill pill-api">Requests</span>
+          <span class="query-pill pill-pandas">Pandas Normalization</span>
+
+          <p>
+            REST APIs return data formatted as JSON (JavaScript Object Notation). While JSON is flexible for web services, analytical algorithms require tabular 2D structures (rows and columns). In this lab, you must connect to an endpoint, validate the HTTP response, recursively map arbitrary-depth hierarchies, and flatten the nested dictionary into an analysis-ready DataFrame without crashing when keys are missing.
+          </p>
+
+          <div class="flow-card">
+            <div class="flow-title">⚡ Sequential Steps for Lab 2 Execution</div>
+            <div class="flow-steps">
+              <div class="step-item active-step"><span class="step-num">STEP 1</span>requests.get()<br>Status check</div>
+              <div class="step-item"><span class="step-num">STEP 2</span>Inspect Schema<br>Types &amp; lengths</div>
+              <div class="step-item"><span class="step-num">STEP 3</span>Recursive Traversal<br>extract_all_keys</div>
+              <div class="step-item"><span class="step-num">STEP 4</span>json_normalize()<br>sep="_"</div>
+              <div class="step-item"><span class="step-num">STEP 5</span>Safe Column Subset<br>Defensive select</div>
+              <div class="step-item"><span class="step-num">STEP 6</span>Derived Metrics<br>Filter &amp; Export</div>
+            </div>
+          </div>
+
+          <h3>Step 1 &amp; 2: Fetching API Data &amp; Top-Level Schema Inspection</h3>
+          <p>
+            Never call <code>response.json()</code> without checking <code>response.status_code</code> first. If the endpoint returns a 404 (Not Found) or 500 (Internal Server Error), parsing raw HTML error text as JSON will crash your script.
+          </p>
+
+          <div class="example">
+            <div class="example-title">Step 1 &amp; 2 Exam Code: API Request &amp; Schema Inspector</div>
+            <pre><code>import requests
+import json
+import pandas as pd
+
+url = "https://randomuser.me/api/?results=10"
+response = requests.get(url, timeout=10)
+
+# STEP 1: Verify Status Code
+if response.status_code != 200:
+    print(f"Error: API request failed with status code {response.status_code}")
+    exit()
+
+data = response.json()
+
+# STEP 2: Top-level Schema Inspection Function
+def inspect_top_level_schema(payload):
+    print(f"{'Key':<15} | {'Type':<12} | {'Details'}")
+    print("-" * 50)
+    for key, value in payload.items():
+        v_type = type(value).__name__
+        details = ""
+        if isinstance(value, list):
+            elem_type = type(value[0]).__name__ if len(value) > 0 else "None"
+            details = f"Length: {len(value)}, First elem: {elem_type}"
+        elif isinstance(value, dict):
+            details = f"Sub-keys: {list(value.keys())}"
+        print(f"{key:<15} | {v_type:<12} | {details}")
+
+inspect_top_level_schema(data)</code></pre>
+          </div>
+
+          <h3>Step 3: Recursive Deep Traversal (`extract_all_keys`)</h3>
+          <div class="definition">
+            <div class="def-title">Recursive JSON Traversal</div>
+            <p><strong>Formal Statement:</strong> A function $f(x)$ that inspects object $x$: if $x$ is a dictionary, $f$ adds all keys to a global set and recursively calls $f(v)$ for each value $v$; if $x$ is a list, $f$ calls $f(i)$ for each item $i$ in the list.</p>
+            <p><strong>Intuitive One-Liner:</strong> Drills down through infinite layers of Russian nesting dolls (dicts inside lists inside dicts) and brings back a list of every single field name.</p>
+          </div>
+
+          <div class="example">
+            <div class="example-title">Step 3 Exam Code: Universal Recursive Key Extractor</div>
+            <pre><code>def extract_all_keys(obj, key_set=None):
+    if key_set is None:
+        key_set = set()
+    
+    if isinstance(obj, dict):
+        for k, v in obj.items():
+            key_set.add(k)
+            extract_all_keys(v, key_set)
+    elif isinstance(obj, list):
+        for item in obj:
+            extract_all_keys(item, key_set)
+            
+    return key_set
+
+unique_keys = sorted(list(extract_all_keys(data)))
+print(f"Total Unique Keys Found: {len(unique_keys)}")
+print("Sample Keys:", unique_keys[:10])</code></pre>
+          </div>
+
+          <h3>Step 4 &amp; 5: Flattening with `json_normalize` &amp; Safe Subset Selection</h3>
+          <p>
+            <code>pd.json_normalize()</code> unpacks nested dictionaries into dotted or underscored column names (e.g., <code>{"location": {"city": "Lahore"}}</code> becomes <code>location_city</code>).
+            In production and exams, APIs frequently omit null keys. If you write <code>df[['name_first', 'email', 'missing_col']]</code>, Pandas will raise a <code>KeyError</code>. You must use defensive list comprehensions.
+          </p>
+
+          <div class="example">
+            <div class="example-title">Step 4 &amp; 5 Exam Code: Normalization &amp; Safe Column Selection</div>
+            <pre><code># STEP 4: Flatten the results array with underscore separator
+df_users = pd.json_normalize(data['results'], sep="_")
+print(f"DataFrame Shape: {df_users.shape}")
+
+# STEP 5: Defensive Column Selection (Crash-Proof)
+desired_columns = [
+    'name_first', 'name_last', 'email', 
+    'phone', 'location_city', 'location_country'
+]
+
+# Error handling requirement: Only select columns that actually exist
+available_cols = [col for col in desired_columns if col in df_users.columns]
+missing_cols = set(desired_columns) - set(available_cols)
+
+if missing_cols:
+    print(f"Warning: Missing columns from payload: {missing_cols}")
+
+df_contacts = df_users[available_cols].copy()
+print(df_contacts.head())</code></pre>
+          </div>
+
+          <h3>Step 6: Transformation, Multi-Condition Filtering &amp; Export</h3>
+          <div class="example">
+            <div class="example-title">Step 6 Exam Code: Business Logic &amp; CSV Export (DummyJSON Example)</div>
+            <pre><code># Fetch 30 products from DummyJSON
+res_prod = requests.get("https://dummyjson.com/products?limit=30").json()
+df_prod = pd.json_normalize(res_prod['products'])
+
+# Calculate discounted price formula: price * (1 - discountPercentage / 100)
+df_prod['discounted_price'] = (
+    df_prod['price'] * (1 - (df_prod['discountPercentage'] / 100))
+).round(2)
+
+# Multi-condition boolean filtering:
+# 1. category is 'beauty' OR 'smartphones'
+# 2. rating >= 4.5
+# 3. stock > 0
+cond_category = df_prod['category'].isin(['beauty', 'smartphones'])
+cond_rating   = df_prod['rating'] >= 4.5
+cond_stock    = df_prod['stock'] > 0
+
+df_filtered = df_prod[cond_category & cond_rating & cond_stock].copy()
+
+# Summary Aggregation by Category
+df_summary = df_filtered.groupby('category').agg(
+    total_products=('id', 'count'),
+    avg_price=('price', 'mean'),
+    avg_rating=('rating', 'mean'),
+    total_stock=('stock', 'sum')
+).reset_index()
+
+# Export both outputs to CSV
+df_filtered.to_csv("filtered_products.csv", index=False)
+df_summary.to_csv("category_summary.csv", index=False)
+print("Files exported successfully!")</code></pre>
+          </div>
+
+          <div class="warning-box">
+            <div class="callout-label">Common Student Mistake in Lab 2</div>
+            Writing bitwise boolean conditions in Pandas without parentheses: <code>df_prod[df_prod['rating'] &gt;= 4.5 &amp; df_prod['stock'] &gt; 0]</code> will fail with a <code>TypeError</code> because Python evaluates bitwise <code>&amp;</code> with higher precedence than comparison operators. Always wrap each individual condition in parentheses: <code>(cond1) &amp; (cond2)</code>.
+          </div>
+
+          <div class="summary-box">
+            <h4>Topic 2 Recap</h4>
+            <ul>
+              <li>Always check <code>response.status_code == 200</code> before parsing.</li>
+              <li><code>extract_all_keys</code> uses recursion on dicts (iterate items) and lists (iterate elements).</li>
+              <li><code>pd.json_normalize(data, sep='_')</code> flattens nested dicts into underscore columns.</li>
+              <li>Select subsets using list comprehension <code>[c for c in target if c in df.columns]</code> to prevent KeyErrors.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════
+         TOPIC 3: LAB 3 SEQUENTIAL PIPELINE — MEDALLION & UPSERT
+         ═══════════════════════════════════════════════════════ -->
+        <div class="topic-card" id="topic-3">
+          <h2><span class="topic-num">3</span>Lab 3: Databricks Medallion &amp; Delta Upsert</h2>
+          <p class="topic-subtitle">Building Bronze, Silver &amp; Gold layers, Schema Enforcement &amp; Delta Lake Upserts</p>
+
+          <span class="seq-badge">Workflow 2 • Enterprise Lakehouse Pipeline</span>
+          <span class="query-pill pill-spark">PySpark SQL</span>
+          <span class="query-pill pill-spark">Delta Lake Table</span>
+
+          <p>
+            In modern data engineering, raw data is never queried directly by business analysts. Instead, it moves through a <strong>Medallion Architecture</strong>:
+            <strong>Bronze (Raw Lake)</strong> preserves immutable incoming records with ingestion timestamps;
+            <strong>Silver (Enterprise Cleansed)</strong> enforces datatypes, drops invalid records, and deduplicates;
+            <strong>Gold (Business Aggregation)</strong> powers dashboards with pre-calculated KPI metrics.
+          </p>
+
+          <div class="flow-card">
+            <div class="flow-title">⚡ Sequential Pipeline for Lab 3 Execution</div>
+            <div class="flow-steps">
+              <div class="step-item active-step"><span class="step-num">STEP 1</span>Workspace Setup<br>Test spark.range</div>
+              <div class="step-item"><span class="step-num">STEP 2</span>Explicit Schema<br>StructType DDL</div>
+              <div class="step-item"><span class="step-num">STEP 3</span>Bronze Table<br>Format Delta Mode Overwrite</div>
+              <div class="step-item"><span class="step-num">STEP 4</span>Silver Cleanse<br>Casting &amp; Quality Filters</div>
+              <div class="step-item"><span class="step-num">STEP 5</span>Gold Summaries<br>groupBy() &amp; agg()</div>
+              <div class="step-item"><span class="step-num">STEP 6</span>Day 2 Ingestion<br>Bronze Append &amp; Silver MERGE</div>
+            </div>
+          </div>
+
+          <h3>Step 1 &amp; 2: Databricks Setup &amp; Explicit Schema DDL</h3>
+          <p>
+            In Databricks, APIs like DummyJSON return fields like <code>discountPercentage</code> as integers (e.g. <code>15</code>) for some products and floating-point decimals (e.g. <code>10.5</code>) for others. If you let Spark infer schema automatically, it can fail or corrupt data types. You must define an explicit <code>StructType</code>.
+          </p>
+
+          <div class="example">
+            <div class="example-title">Step 2 Exam Code: Defining Explicit Schema-on-Read</div>
+            <pre><code>import json
+from pyspark.sql.types import (
+    StructType, StructField, IntegerType, StringType, 
+    DoubleType, ArrayType, MapType
+)
+from pyspark.sql.functions import col, lit, current_timestamp, round, when, count, avg, sum as _sum
+
+# Define explicit schema to handle mixed int/double types
+product_schema = StructType([
+    StructField("id", IntegerType(), True),
+    StructField("title", StringType(), True),
+    StructField("category", StringType(), True),
+    StructField("price", DoubleType(), True),
+    StructField("discountPercentage", DoubleType(), True), # Mixed int/float in source
+    StructField("rating", DoubleType(), True),
+    StructField("stock", IntegerType(), True),
+    StructField("brand", StringType(), True),
+    StructField("availabilityStatus", StringType(), True),
+    StructField("minimumOrderQuantity", IntegerType(), True)
+])
+
+# Read raw file or array into Spark DataFrame
+with open("/Volumes/workspace/default/products/products.json") as f:
+    raw_json = json.load(f)
+
+products_list = raw_json["products"]
+bronze_raw_df = spark.createDataFrame(products_list, schema=product_schema)
+bronze_raw_df.printSchema()</code></pre>
+          </div>
+
+          <h3>Step 3: Writing the Bronze Delta Table</h3>
+          <p>
+            The Bronze layer must never destroy incoming raw data. It stores raw payloads along with two mandatory audit columns: <code>ingestion_time</code> (when it arrived) and <code>source</code> (where it came from).
+          </p>
+
+          <div class="example">
+            <div class="example-title">Step 3 Exam Code: Bronze Ingestion with Delta Lake</div>
+            <pre><code>bronze_df = (
+    bronze_raw_df
+    .withColumn("ingestion_time", current_timestamp())
+    .withColumn("source", lit("DummyJSON Products API"))
+)
+
+# Overwrite mode for initial full load
+bronze_df.write \
+    .format("delta") \
+    .mode("overwrite") \
+    .saveAsTable("bronze_products")
+
+# Verification
+spark.sql("SELECT COUNT(*) AS total_bronze FROM bronze_products").show()</code></pre>
+          </div>
+
+          <h3>Step 4: Silver Layer — Data Cleansing &amp; Quality Filtering</h3>
+          <p>
+            In Silver, you select relevant attributes, standardize naming to snake_case, enforce numeric types, apply business validation filters, and calculate derived fields.
+          </p>
+
+          <div class="example">
+            <div class="example-title">Step 4 Exam Code: Silver Cleansing &amp; Quality Filtering</div>
+            <pre><code>silver_df = (
+    spark.table("bronze_products")
+    .select(
+        col("id").cast("integer").alias("product_id"),
+        col("title"),
+        col("category"),
+        col("brand"),
+        col("price").cast("double"),
+        col("discountPercentage").cast("double").alias("discount_percentage"),
+        col("rating").cast("double"),
+        col("stock").cast("integer"),
+        col("ingestion_time")
+    )
+    # Business Data Quality Filters:
+    .filter(col("price") > 0)
+    .filter((col("rating") >= 0) & (col("rating") <= 5))
+    .filter(col("stock") >= 0)
+    # Business Calculations:
+    .withColumn("discounted_price", round(col("price") * (1 - col("discount_percentage") / 100), 2))
+    .withColumn(
+        "stock_status",
+        when(col("stock") == 0, "Out of Stock")
+        .when(col("stock") < 20, "Low Stock")
+        .otherwise("In Stock")
+    )
+)
+
+# Save Cleansed Silver Table
+silver_df.write \
+    .format("delta") \
+    .mode("overwrite") \
+    .saveAsTable("silver_products")
+
+display(spark.table("silver_products").limit(5))</code></pre>
+          </div>
+
+          <h3>Step 5: Gold Layer — Business KPI Reporting</h3>
+          <div class="example">
+            <div class="example-title">Step 5 Exam Code: Gold Aggregations (Category &amp; Brand Summaries)</div>
+            <pre><code># Category Summary
+gold_category_df = (
+    spark.table("silver_products")
+    .groupBy("category")
+    .agg(
+        count("product_id").alias("total_products"),
+        round(avg("price"), 2).alias("average_price"),
+        round(avg("rating"), 2).alias("average_rating"),
+        _sum("stock").alias("total_stock")
+    )
+    .orderBy(col("total_products").desc())
+)
+
+gold_category_df.write \
+    .format("delta") \
+    .mode("overwrite") \
+    .saveAsTable("gold_category_summary")
+
+display(spark.table("gold_category_summary"))</code></pre>
+          </div>
+
+          <h3>Step 6: Day 2 Incremental Ingestion &amp; Delta Lake Upsert (`MERGE`)</h3>
+          <div class="definition">
+            <div class="def-title">Delta Lake Upsert (`MERGE INTO`)</div>
+            <p><strong>Formal Statement:</strong> A single atomic operation that joins incoming batch data with an existing Delta table on a matching primary key: rows that match are updated with new values (<code>whenMatchedUpdateAll</code>), and rows that do not match are inserted as new records (<code>whenNotMatchedInsertAll</code>).</p>
+            <p><strong>Intuitive One-Liner:</strong> Updates old records that changed and inserts brand new records, guaranteeing zero duplicate primary keys.</p>
+          </div>
+
+          <div class="example">
+            <div class="example-title">Step 6 Exam Code: Bronze Append &amp; Silver MERGE Upsert</div>
+            <pre><code>from delta.tables import DeltaTable
+
+# 1. Simulate Day 2 Incoming Batch (contains new IDs 195-198 AND updated IDs 1, 2)
+# Convert day2_data list to Spark DataFrame
+day2_df = spark.createDataFrame(day2_data) \
+    .withColumn("ingestion_batch", lit("day2")) \
+    .withColumn("ingestion_time", current_timestamp())
+
+# 2. Append to Bronze Table (Bronze stores all historical events!)
+day2_df.write \
+    .format("delta") \
+    .mode("append") \
+    .saveAsTable("bronze_incremental_products")
+
+# 3. Clean Day 2 batch before Silver Merge
+day2_cleaned_df = (
+    day2_df
+    .filter(col("price") > 0)
+    .filter((col("rating") >= 0) & (col("rating") <= 5))
+    .filter(col("stock") >= 0)
+    .withColumn("product_id", col("id").cast("integer"))
+    .withColumn("discount_percentage", col("discountPercentage").cast("double"))
+    .withColumn("discounted_price", round(col("price") * (1 - col("discountPercentage") / 100), 2))
+    .select("product_id", "title", "category", "brand", "price", 
+            "discount_percentage", "discounted_price", "rating", "stock", "ingestion_time")
+)
+
+# 4. Execute the Atomic MERGE Upsert into Silver
+silver_target_table = DeltaTable.forName(spark, "silver_incremental_products")
+
+(
+    silver_target_table.alias("tgt")
+    .merge(
+        day2_cleaned_df.alias("src"),
+        "tgt.product_id = src.product_id"
+    )
+    .whenMatchedUpdateAll()
+    .whenNotMatchedInsertAll()
+    .execute()
+)
+
+# 5. Verification Query: Zero Duplicates Allowed!
+print("Duplicate Verification:")
+spark.sql("""
+    SELECT product_id, COUNT(*) AS occurrences
+    FROM silver_incremental_products
+    GROUP BY product_id
+    HAVING COUNT(*) > 1
+""").show()</code></pre>
+          </div>
+
+          <div class="note-box">
+            <div class="callout-label">Expected Row Count Logic in Lab 3 Exam</div>
+            Suppose Day 1 has 194 products. Day 2 brings 6 products: 4 brand new products (IDs 195–198) and 2 updates to existing products (IDs 1 and 2).
+            <ul>
+              <li><strong>Bronze Count:</strong> $194 + 6 = 200$ rows (Append mode keeps everything, including duplicate historical snapshots).</li>
+              <li><strong>Silver Count:</strong> $194 + 4 = 198$ rows (Upsert merges IDs 1 and 2 in place, inserting only the 4 new IDs).</li>
+            </ul>
+          </div>
+
+          <div class="summary-box">
+            <h4>Topic 3 Recap</h4>
+            <ul>
+              <li>Bronze preserves raw records with <code>ingestion_time</code>; Silver enforces types, cleans, and deduplicates.</li>
+              <li>Define explicit <code>StructType</code> to avoid mixed int/double type mismatch in JSON.</li>
+              <li>Bronze uses <code>mode("append")</code>; Silver uses <code>DeltaTable.merge()</code> with <code>whenMatchedUpdateAll</code> and <code>whenNotMatchedInsertAll</code>.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════
+         TOPIC 4: LAB 4 SEQUENTIAL PIPELINE — SCHEMA DRIFT & JOINS
+         ═══════════════════════════════════════════════════════ -->
+        <div class="topic-card" id="topic-4">
+          <h2><span class="topic-num">4</span>Lab 4: Schema Drift, Stringified JSON &amp; Joins</h2>
+          <p class="topic-subtitle">Schema-on-Read defense against corrupted events, get_json_object &amp; distributed joins</p>
+
+          <span class="seq-badge">Workflow 3 • Handling Corrupted Ingestion</span>
+          <span class="query-pill pill-spark">Schema Drift</span>
+          <span class="query-pill pill-spark">get_json_object</span>
+
+          <p>
+            In production data pipelines, upstream producers frequently break contracts. A field that was previously a JSON dictionary (e.g. <code>{"metadata": {"os": "android"}}</code>) suddenly arrives as a raw string error message (e.g. <code>{"metadata": "connection_error"}</code>). This is known as <strong>Schema Drift</strong>.
+            If you rely on default schema inference, your pipeline crashes. You must implement a <em>Schema-on-Read Defense</em>, clean the data in Silver, and execute distributed joins for the Gold layer.
+          </p>
+
+          <div class="flow-card">
+            <div class="flow-title">⚡ Sequential Steps for Lab 4 Execution</div>
+            <div class="flow-steps">
+              <div class="step-item active-step"><span class="step-num">STEP 1</span>Schema Trap<br>Identify crash</div>
+              <div class="step-item"><span class="step-num">STEP 2</span>Schema-on-Read<br>Force StringType</div>
+              <div class="step-item"><span class="step-num">STEP 3</span>Silver Users<br>CSV upper(city)</div>
+              <div class="step-item"><span class="step-num">STEP 4</span>Silver Clicks<br>get_json_object &amp; bots</div>
+              <div class="step-item"><span class="step-num">STEP 5</span>Gold Join<br>Join clicks &amp; users</div>
+              <div class="step-item"><span class="step-num">STEP 6</span>Matplotlib<br>toPandas() Bar Chart</div>
+            </div>
+          </div>
+
+          <h3>Step 1 &amp; 2: The Schema Trap &amp; Schema-on-Read Defense</h3>
+          <p>
+            If you run <code>spark.read.json("/raw_clicks/")</code> on folders containing both Day 3 (metadata is Struct) and Day 4 (metadata is String), Spark throws <code>AnalysisException: Since Spark 2.3, the queries on raw JSON datasources fail when conflicting types are found</code>.
+            <strong>The Defense:</strong> Explicitly define <code>metadata</code> as <code>StringType()</code> in a <code>StructType</code>. Spark will read the JSON object as a literal stringified JSON, avoiding the crash.
+          </p>
+
+          <div class="example">
+            <div class="example-title">Step 2 Exam Code: Schema-on-Read Defense for Bronze Clicks</div>
+            <pre><code>from pyspark.sql.types import StructType, StructField, StringType
+from pyspark.sql.functions import col, upper, current_timestamp, get_json_object, count
+import matplotlib.pyplot as plt
+
+# Explicit schema: metadata is STRICTLY read as StringType!
+click_schema = StructType([
+    StructField("event_id", StringType(), True),
+    StructField("user_id", StringType(), True),
+    StructField("action", StringType(), True),
+    StructField("metadata", StringType(), True),  # Neutralizes Struct vs String conflict!
+    StructField("timestamp", StringType(), True)
+])
+
+# Read directory containing both day3.json and day4.json
+bronze_clicks = (
+    spark.read
+    .schema(click_schema)
+    .json("/Workspace/Users/[your_email]/raw_clicks/")
+)
+
+bronze_clicks.write.format("delta").mode("overwrite").saveAsTable("bronze_clicks")
+display(spark.table("bronze_clicks"))</code></pre>
+          </div>
+
+          <h3>Step 3: Silver Users (CSV Cleansing)</h3>
+          <div class="example">
+            <div class="example-title">Step 3 Exam Code: Ingesting &amp; Cleansing Users CSV</div>
+            <pre><code>silver_users = (
+    spark.read
+    .option("header", "true")
+    .csv("/Workspace/Users/[your_email]/users/directory.csv")
+    .withColumn("signup_city", upper(col("signup_city"))) # Standardize to UPPERCASE
+    .withColumn("ingestion_timestamp", current_timestamp())
+)
+
+silver_users.write.format("delta").mode("overwrite").saveAsTable("silver_users")
+display(spark.table("silver_users"))</code></pre>
+          </div>
+
+          <h3>Step 4: Silver Clicks — Handling Stringified JSON &amp; Bot Filtering</h3>
+          <div class="definition">
+            <div class="def-title">PySpark `get_json_object` Function</div>
+            <p><strong>Formal Statement:</strong> <code>get_json_object(col, path)</code> evaluates a JSON path expression (e.g. <code>"$.os"</code>) against a column containing a stringified JSON payload.</p>
+            <p><strong>Intuitive One-Liner:</strong> Safely pulls a nested key out of a stringified JSON block; if the string is corrupt or missing (like <code>"connection_error"</code>), it gracefully returns <code>null</code> instead of crashing the job.</p>
+          </div>
+
+          <div class="example">
+            <div class="example-title">Step 4 Exam Code: Filtering Bots &amp; Safe JSON Extraction</div>
+            <pre><code>silver_clicks = (
+    spark.table("bronze_clicks")
+    # 1. Filter out bot crawlers (user_id containing 'bot')
+    .filter(~col("user_id").contains("bot"))
+    # 2. Boolean flag: True if action is checkout
+    .withColumn("is_checkout", col("action") == "checkout")
+    # 3. Extract the 'os' key from the stringified metadata column
+    .withColumn("os", get_json_object(col("metadata"), "$.os"))
+)
+
+silver_clicks.write.format("delta").mode("overwrite").saveAsTable("silver_clicks")
+display(spark.table("silver_clicks"))</code></pre>
+          </div>
+
+          <h3>Step 5 &amp; 6: Gold Layer Distributed Join &amp; Matplotlib Visualization</h3>
+          <div class="example">
+            <div class="example-title">Step 5 &amp; 6 Exam Code: Distributed Join &amp; Bar Chart</div>
+            <pre><code># STEP 5: Join Silver Clicks with Silver Users on 'user_id'
+gold_checkout_locations = (
+    spark.table("silver_clicks")
+    .join(spark.table("silver_users"), "user_id")
+    .filter(col("is_checkout") == True)
+    .groupBy("signup_city")
+    .agg(count("event_id").alias("total_checkouts"))
+    .orderBy(col("total_checkouts").desc())
+)
+
+gold_checkout_locations.write.format("delta").mode("overwrite").saveAsTable("gold_checkout_locations")
+
+# STEP 6: Visualization Bridge via Pandas
+pdf = gold_checkout_locations.toPandas()
+
+plt.figure(figsize=(8, 4.5))
+plt.bar(pdf['signup_city'], pdf['total_checkouts'], color="#d97757")
+plt.title("Checkout Locations by City", fontsize=14, fontweight="bold")
+plt.xlabel("City", fontsize=11)
+plt.ylabel("Number of Checkouts", fontsize=11)
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+plt.tight_layout()
+plt.show()</code></pre>
+          </div>
+
+          <div class="summary-box">
+            <h4>Topic 4 Recap</h4>
+            <ul>
+              <li>Schema drift occurs when data types change across days (e.g. Struct vs String).</li>
+              <li>Read corrupted JSON safely by forcing the drifting column to <code>StringType()</code> in an explicit schema.</li>
+              <li>Use <code>get_json_object(col("metadata"), "$.os")</code> to safely parse nested fields at runtime.</li>
+              <li>Gold tables join Silver tables on natural keys and convert to Pandas via <code>.toPandas()</code> for Matplotlib charts.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════
+         TOPIC 5: LAB 5 SEQUENTIAL PIPELINE — PANDAS MULTIINDEX
+         ═══════════════════════════════════════════════════════ -->
+        <div class="topic-card" id="topic-5">
+          <h2><span class="topic-num">5</span>Lab 5: Advanced Pandas &amp; MultiIndexing</h2>
+          <p class="topic-subtitle">Hierarchical indexing, IndexSlice, Cartesian grids, sorting traps &amp; level-wise transforms</p>
+
+          <span class="seq-badge">Workflow 4 • Multi-Dimensional Data in Pandas</span>
+          <span class="query-pill pill-pandas">MultiIndex</span>
+          <span class="query-pill pill-pandas">IndexSlice</span>
+          <span class="query-pill pill-pandas">transform()</span>
+
+          <p>
+            A Pandas MultiIndex (hierarchical index) allows you to represent multi-dimensional cubes (e.g. Country $\times$ Product $\times$ Month) within standard 2D DataFrames.
+            The exam rigorously tests: constructing MultiIndexes, handling missing combinations via Cartesian products, slicing across levels with <code>IndexSlice</code> and <code>.xs()</code>, reshaping via <code>unstack()</code>/<code>melt()</code>, and calculating group percentage shares using <code>transform()</code>.
+          </p>
+
+          <div class="flow-card">
+            <div class="flow-title">⚡ Sequential Steps for Lab 5 Execution</div>
+            <div class="flow-steps">
+              <div class="step-item active-step"><span class="step-num">STEP 1</span>Setup &amp; Cleaning<br>Dates &amp; Returns</div>
+              <div class="step-item"><span class="step-num">STEP 2</span>MultiIndex Build<br>set_index &amp; agg</div>
+              <div class="step-item"><span class="step-num">STEP 3</span>Exposing Zeros<br>from_product &amp; reindex</div>
+              <div class="step-item"><span class="step-num">STEP 4</span>Slicing &amp; xs()<br>pd.IndexSlice</div>
+              <div class="step-item"><span class="step-num">STEP 5</span>Sorting Traps<br>sort_index()</div>
+              <div class="step-item"><span class="step-num">STEP 6</span>Reshaping<br>unstack, pivot, melt</div>
+              <div class="step-item"><span class="step-num">STEP 7</span>Level-wise Shares<br>transform('sum')</div>
+            </div>
+          </div>
+
+          <h3>Step 1 &amp; 2: Setup, Data Cleaning &amp; MultiIndex Construction</h3>
+          <p>
+            In UCI Online Retail data, orders with <code>InvoiceNo</code> starting with "C" represent cancellations with negative quantities. They must be isolated into a separate DataFrame so they do not distort sales revenue.
+          </p>
+
+          <div class="example">
+            <div class="example-title">Step 1 &amp; 2 Exam Code: Setup, Hygiene &amp; GroupBy MultiIndex</div>
+            <pre><code>import pandas as pd
+import numpy as np
+
+# Load retail CSV
+df = pd.read_csv("online_retail.csv")
+
+# STEP 1: Parse Datetimes and Create Derived Calendar Attributes
+df['InvoiceDate'] = pd.to_datetime(df['InvoiceDate'])
+df['Date'] = df['InvoiceDate'].dt.date
+df['Month'] = df['InvoiceDate'].dt.strftime('%Y-%m')
+
+# Isolate cancellations (InvoiceNo starting with 'C')
+df_cancelled = df[df['InvoiceNo'].astype(str).str.startswith('C')].copy()
+df_clean = df[~df['InvoiceNo'].astype(str).str.startswith('C')].copy()
+
+# Add Revenue measure
+df_clean['Revenue'] = df_clean['Quantity'] * df_clean['UnitPrice']
+
+# STEP 2: Build Monthly Summary with 3-Level MultiIndex
+summary_monthly = df_clean.groupby(['Country', 'StockCode', 'Month']).agg(
+    TotalQty=('Quantity', 'sum'),
+    TotalRevenue=('Revenue', 'sum')
+)
+
+# Confirm and set level names
+summary_monthly.index.set_names(['Country', 'StockCode', 'Month'], inplace=True)
+print("Index Levels:", summary_monthly.index.nlevels)
+print("Level 0 Values:", summary_monthly.index.get_level_values(0).unique()[:5])</code></pre>
+          </div>
+
+          <h3>Step 3: Exposing Missing Sales with `from_product` &amp; `reindex`</h3>
+          <div class="definition">
+            <div class="def-title">Cartesian Grid Reindexing (`from_product`)</div>
+            <p><strong>Formal Statement:</strong> <code>pd.MultiIndex.from_product([A, B, C])</code> generates the full Cartesian product $A \times B \times C$. Reindexing an existing aggregated DataFrame against this grid reveals combinations where no transaction occurred.</p>
+            <p><strong>Intuitive One-Liner:</strong> GroupBy silently ignores items that didn't sell in a given country and month; <code>from_product</code> forces those missing combinations to appear explicitly with a revenue of <code>0</code>.</p>
+          </div>
+
+          <div class="example">
+            <div class="example-title">Step 3 Exam Code: Full Grid Reconstruction</div>
+            <pre><code>countries = df_clean['Country'].unique()
+stockcodes = df_clean['StockCode'].unique()
+months = df_clean['Month'].unique()
+
+# Generate complete Cartesian grid
+full_grid = pd.MultiIndex.from_product(
+    [countries, stockcodes, months],
+    names=['Country', 'StockCode', 'Month']
+)
+
+# Reindex and fill missing sales with 0
+summary_complete = summary_monthly.reindex(full_grid, fill_value=0)
+print(f"Original GroupBy Rows: {len(summary_monthly)}")
+print(f"Complete Grid Rows:    {len(summary_complete)}")</code></pre>
+          </div>
+
+          <h3>Step 4 &amp; 5: Slicing (`IndexSlice`, `.xs`) &amp; The Sorting Trap</h3>
+          <div class="warning-box">
+            <div class="callout-label">The Critical Lexicographical Sorting Trap</div>
+            If you attempt to slice an unsorted MultiIndex using a range (e.g. <code>'21730':'22752'</code>), Pandas will crash with:
+            <code>UnsortedIndexError: 'Key length (3) was greater than MultiIndex sort depth (0)'</code>.
+            Pandas requires sorted indexes for range slicing. You must run <code>summary.sort_index(inplace=True)</code> and verify <code>summary.index.is_monotonic_increasing</code>!
+          </div>
+
+          <div class="example">
+            <div class="example-title">Step 4 &amp; 5 Exam Code: Slicing &amp; Cross-Sections</div>
+            <pre><code># Sort index first to prevent UnsortedIndexError
+summary_monthly.sort_index(inplace=True)
+assert summary_monthly.index.is_monotonic_increasing
+
+# 1. Partial Indexing: Get all rows for 'Germany' (drops Country level)
+germany_data = summary_monthly.loc['Germany']
+
+# 2. Full Tuple Indexing: ('France', '85123A') across all months
+france_item = summary_monthly.loc[('France', '85123A')]
+
+# 3. pd.IndexSlice: All countries, StockCodes '21730' to '22752', all months
+idx = pd.IndexSlice
+range_slice = summary_monthly.loc[idx[:, '21730':'22752', :], :]
+
+# 4. Cross-Section .xs():
+# Extract December 2010 data without dropping other levels
+dec_keep = summary_monthly.xs('2010-12', level='Month', drop_level=False)
+
+# Extract StockCode '22633' across every country and month
+item_xs = summary_monthly.xs('22633', level='StockCode')</code></pre>
+          </div>
+
+          <h3>Step 6: Reshaping — `unstack()`, `pivot_table()`, and `melt()`</h3>
+          <div class="example">
+            <div class="example-title">Step 6 Exam Code: Wide vs Long Reshaping</div>
+            <pre><code># 1. Unstack: Turn StockCode from rows into columns (Wide Table)
+wide_table = summary_monthly['TotalRevenue'].unstack('StockCode')
+
+# 2. Stack: Pivot columns back down into rows (Tidy Long Format)
+long_table = wide_table.stack().to_frame(name='TotalRevenue')
+
+# 3. Pivot Table directly from raw data with Grand Totals (margins=True)
+pivot_sales = df_clean.pivot_table(
+    index='Country', 
+    columns='Month', 
+    values='Revenue', 
+    aggfunc='sum', 
+    margins=True, 
+    fill_value=0
+)
+
+# 4. Melt: Unpivot wide table back into flat records
+flattened = wide_table.reset_index()
+melted_df = flattened.melt(
+    id_vars=['Country', 'Month'], 
+    var_name='StockCode', 
+    value_name='TotalRevenue'
+)</code></pre>
+          </div>
+
+          <h3>Step 7: Level-wise Analysis &amp; Revenue Share with `transform()`</h3>
+          <div class="example">
+            <div class="example-title">Step 7 Exam Code: Group-Level Share &amp; Best-Seller per Country</div>
+            <pre><code># Calculate what % of each country's monthly revenue came from each product
+# transform('sum') broadcasts the monthly country total back to every product row
+monthly_country_total = summary_monthly.groupby(
+    level=['Country', 'Month']
+)['TotalRevenue'].transform('sum')
+
+summary_monthly['RevenueShare'] = (
+    summary_monthly['TotalRevenue'] / monthly_country_total
+).fillna(0)
+
+# Find the single product with highest revenue share in Dec 2010 per country
+dec_2010 = summary_monthly.xs('2010-12', level='Month', drop_level=False)
+top_products_idx = dec_2010.groupby(level='Country')['RevenueShare'].idxmax()
+best_sellers = dec_2010.loc[top_products_idx]
+print(best_sellers[['TotalRevenue', 'RevenueShare']])</code></pre>
+          </div>
+
+          <div class="summary-box">
+            <h4>Topic 5 Recap</h4>
+            <ul>
+              <li><code>pd.MultiIndex.from_product()</code> reveals missing sales skipped by standard groupby.</li>
+              <li>Always call <code>df.sort_index()</code> before range slicing with <code>pd.IndexSlice</code>.</li>
+              <li><code>.xs(key, level='...', drop_level=...)</code> extracts cross-sections across inner levels.</li>
+              <li><code>unstack()</code> pivots inner row index to columns; <code>stack()</code> reverses it.</li>
+              <li><code>groupby(level=...)['Revenue'].transform('sum')</code> aligns group totals back to individual rows for percentage shares.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════
+         TOPIC 6: LABS 6–7 SEQUENTIAL PIPELINE — POWER BI & DAX
+         ═══════════════════════════════════════════════════════ -->
+        <div class="topic-card" id="topic-6">
+          <h2><span class="topic-num">6</span>Labs 6–7: Power BI ETL, Star Schema &amp; DAX</h2>
+          <p class="topic-subtitle">Power Query ETL, Star Schema modeling, continuous Date tables &amp; DAX measures vs columns</p>
+
+          <span class="seq-badge">Workflow 5 • Power BI Desktop End-to-End</span>
+          <span class="query-pill pill-pbi">Power Query</span>
+          <span class="query-pill pill-pbi">Star Schema</span>
+          <span class="query-pill pill-dax">DAX Measures</span>
+
+          <p>
+            Power BI Desktop is the corporate standard for business intelligence. The midterm tests your ability to execute a complete three-phase pipeline:
+            <strong>Phase 1: Power Query ETL</strong> (cleaning, text standardization, deduplication, conditional columns);
+            <strong>Phase 2: Data Modeling</strong> (generating a continuous DAX calendar, establishing 1-to-many Star Schema relationships, hiding foreign keys);
+            <strong>Phase 3: DAX &amp; Visuals</strong> (writing atomic dynamic measures, building interactive KPI cards, trend lines, and multi-level slicers).
+          </p>
+
+          <div class="flow-card">
+            <div class="flow-title">⚡ Sequential Steps for Power BI Lab Midterm</div>
+            <div class="flow-steps">
+              <div class="step-item active-step"><span class="step-num">PHASE 1</span>Power Query ETL<br>Clean &amp; Deduplicate</div>
+              <div class="step-item"><span class="step-num">PHASE 2</span>Dimension Tables<br>Reference &amp; Deduplicate</div>
+              <div class="step-item"><span class="step-num">PHASE 3</span>DAX Calendar<br>CALENDAR &amp; Sort Month</div>
+              <div class="step-item"><span class="step-num">PHASE 4</span>Model View<br>1-to-many &amp; Hide FKs</div>
+              <div class="step-item"><span class="step-num">PHASE 5</span>DAX Measures<br>DIVIDE &amp; SUM</div>
+              <div class="step-item"><span class="step-num">PHASE 6</span>Canvas Dashboard<br>KPIs, Charts, Slicers</div>
+            </div>
+          </div>
+
+          <h3>Phase 1: Power Query ETL Cleaning Checklist</h3>
+          <p>
+            When data is imported into Power Query, follow this exact sequence in the <em>Applied Steps</em> list:
+          </p>
+          <ol>
+            <li><strong>Rename Columns:</strong> Add spaces for presentation (e.g. <code>PaymentMethod</code> $\rightarrow$ <code>Payment Method</code>, <code>CustomerSegment</code> $\rightarrow$ <code>Customer Segment</code>).</li>
+            <li><strong>Set Explicit Data Types:</strong>
+              <ul>
+                <li><code>Quantity</code>: <strong>Whole Number</strong></li>
+                <li><code>UnitPrice</code>, <code>Sales</code>, <code>Profit</code>: <strong>Fixed Decimal Number</strong> (currency)</li>
+                <li><code>Discount</code>: <strong>Decimal Number</strong></li>
+                <li><code>OrderDate</code>: <strong>Date</strong> (never Date/Time)</li>
+                <li>All IDs, Names, Categories: <strong>Text</strong></li>
+              </ul>
+            </li>
+            <li><strong>Remove Unnecessary Columns:</strong> Right-click <code>InternalNotes</code> $\rightarrow$ <strong>Remove</strong>.</li>
+            <li><strong>Deduplicate on Primary Key:</strong> Select <code>OrderID</code> $\rightarrow$ Home tab $\rightarrow$ <strong>Remove Rows &rarr; Remove Duplicates</strong> (OrderIDs must never repeat in the Fact table).</li>
+            <li><strong>Handle Missing Values (Nulls):</strong> Select <code>CustomerName</code> $\rightarrow$ Transform tab $\rightarrow$ <strong>Replace Values</strong> $\rightarrow$ Value To Find: <code>null</code> $\rightarrow$ Replace With: <code>Unknown</code>.</li>
+            <li><strong>Standardize Text:</strong> Select <code>Region</code> $\rightarrow$ Transform tab $\rightarrow$ <strong>Format &rarr; Trim</strong> (removes trailing spaces) $\rightarrow$ <strong>Format &rarr; Capitalize Each Word</strong> (standardizes 'east', 'EAST' to 'East').</li>
+            <li><strong>Filter Invalid Records:</strong> Click dropdown on <code>Sales</code> $\rightarrow$ Number Filters $\rightarrow$ <strong>Greater Than 0</strong>. Repeat for <code>Quantity</code>.</li>
+            <li><strong>Add Derived Conditional Column:</strong> Add Column tab $\rightarrow$ <strong>Conditional Column</strong> $\rightarrow$ Name: <code>Discount Band</code>:
+              <ul>
+                <li>If <code>Discount</code> equals <code>0</code> $\rightarrow$ <code>No Discount</code></li>
+                <li>Else If <code>Discount</code> is less than or equal to <code>0.1</code> $\rightarrow$ <code>Low Discount</code></li>
+                <li>Else $\rightarrow$ <code>High Discount</code></li>
+              </ul>
+            </li>
+          </ol>
+
+          <div class="why-box">
+            <strong>Lab 6 ETL Benchmark:</strong>
+            After completing these steps and clicking <em>Close &amp; Apply</em>, create a temporary Card visual with <code>Sales[Sales]</code>. The sum MUST display exactly <strong>105,932.52</strong>. If your total is different, you missed a duplicate row or invalid filter!
+          </div>
+
+          <h3>Phase 2: Generating Dimension Lookup Tables</h3>
+          <p>
+            To convert flat sales into a star schema:
+          </p>
+          <ul>
+            <li>In Power Query, right-click the cleaned <code>Sales</code> query $\rightarrow$ select <strong>Reference</strong> (never Duplicate; Reference re-uses the cleaned logic).</li>
+            <li>Rename the query to <code>Dim_Product</code>. Select columns <code>Product</code> and <code>Category</code> $\rightarrow$ right-click $\rightarrow$ <strong>Remove Other Columns</strong> $\rightarrow$ select <code>Product</code> $\rightarrow$ <strong>Remove Duplicates</strong> (results in exactly 12 products).</li>
+            <li>Repeat for <code>Dim_Region</code>: Reference Sales $\rightarrow$ Keep only <code>Region</code> $\rightarrow$ Remove Duplicates (results in 4 regions).</li>
+          </ul>
+
+          <h3>Phase 3: Continuous Calendar Generation with DAX</h3>
+          <p>
+            In Report View, go to <strong>Modeling &rarr; New Table</strong> and enter:
+          </p>
+
+          <div class="example">
+            <div class="example-title">Phase 3 Exam DAX: Continuous Calendar Table</div>
+            <pre><code>Dim_Date = 
+ADDCOLUMNS(
+    CALENDAR(DATE(2025, 1, 1), DATE(2025, 12, 31)),
+    "Year", YEAR([Date]),
+    "Month Number", MONTH([Date]),
+    "Month", FORMAT([Date], "mmm"),
+    "Quarter", "Q" & ROUNDUP(MONTH([Date]) / 3, 0)
+)</code></pre>
+          </div>
+
+          <div class="warning-box">
+            <div class="callout-label">The Alphabetical Month Sorting Trap</div>
+            By default, text columns sort alphabetically. If you put <code>Dim_Date[Month]</code> on a chart, your timeline will run: <strong>Apr, Aug, Dec, Feb, Jan, Jul...</strong> which is completely wrong!
+            <strong>The Mandatory Fix:</strong>
+            1. Select column <code>Month</code> in <code>Dim_Date</code>.
+            2. On ribbon, click <strong>Column tools &rarr; Sort by column &rarr; Month Number</strong>.
+            3. Right-click table <code>Dim_Date</code> $\rightarrow$ <strong>Mark as date table</strong> $\rightarrow$ select <code>Date</code>.
+          </div>
+
+          <h3>Phase 4: Model View Star Schema Relationships</h3>
+          <ul>
+            <li>Open <strong>Model View</strong> (third icon on left). Position <code>Sales</code> in the center, surrounded by <code>Dim_Product</code>, <code>Dim_Region</code>, and <code>Dim_Date</code>.</li>
+            <li>Drag <code>Dim_Product[Product]</code> $\rightarrow$ <code>Sales[Product]</code> (Cardinality: <strong>1 to many</strong>, Cross-filter direction: <strong>Single</strong>, Active: True).</li>
+            <li>Drag <code>Dim_Region[Region]</code> $\rightarrow$ <code>Sales[Region]</code> (1 to many).</li>
+            <li>Drag <code>Dim_Date[Date]</code> $\rightarrow$ <code>Sales[OrderDate]</code> (1 to many).</li>
+            <li><strong>Hide Technical Foreign Keys:</strong> In <code>Sales</code>, right-click and hide <code>Product</code>, <code>Category</code>, <code>Region</code>, and <code>OrderDate</code>. This forces all visual authors to pull descriptive fields from dimension tables.</li>
+          </ul>
+
+          <h3>Phase 5: DAX Measures vs Calculated Columns</h3>
+          <div class="definition">
+            <div class="def-title">Calculated Column vs DAX Measure</div>
+            <p><strong>Calculated Column:</strong> Stored in memory per row when data loads. Never aggregates dynamically.</p>
+            <p><strong>DAX Measure:</strong> Dynamic mathematical formula evaluated on-the-fly depending on the active filter context (slicers, drill-downs).</p>
+          </div>
+
+          <div class="example">
+            <div class="example-title">Phase 5 Exam DAX: 6 Core Business Measures</div>
+            <pre><code>-- 1. Total Sales
+Total Sales = SUM(Sales[Sales])
+
+-- 2. Total Profit
+Total Profit = SUM(Sales[Profit])
+
+-- 3. Total Quantity
+Total Quantity = SUM(Sales[Quantity])
+
+-- 4. Total Distinct Orders
+Total Orders = DISTINCTCOUNT(Sales[OrderID])
+
+-- 5. Average Order Value
+Average Order Value = DIVIDE([Total Sales], [Total Orders], 0)
+
+-- 6. Profit Margin (Format as Percentage with 2 decimals)
+Profit Margin = DIVIDE([Total Profit], [Total Sales], 0)</code></pre>
+          </div>
+
+          <div class="warning-box">
+            <div class="callout-label">The Ratio Fallacy Experiment (Lab 7 Task 1.4)</div>
+            If you create a calculated column <code>Profit per Unit = DIVIDE(Sales[Profit], Sales[Quantity])</code> and take its <code>AVERAGE</code>, you get a completely different number than measure <code>DIVIDE([Total Profit], [Total Quantity])</code>.
+            <strong>Why?</strong> The column average is an unweighted mean of individual row ratios (a small $10 order with 90% margin has the same weight as a $10,000 order with 2% margin). The measure calculates total profit divided by total units, which is the true economic reality. <strong>Always use DAX measures for ratios!</strong>
+          </div>
+
+          <h3>Phase 6: Interactive Dashboard Canvas Construction</h3>
+          <p>
+            Arrange visuals on a standard $1280 \times 720$ canvas:
+          </p>
+          <ul>
+            <li><strong>KPI Row (Top):</strong> 4 Card visuals showing <code>Total Sales</code>, <code>Total Profit</code>, <code>Profit Margin</code> (percentage), and <code>Average Order Value</code>.</li>
+            <li><strong>Trend Chart:</strong> Line Chart of <code>Total Sales</code> over <code>Dim_Date[Month]</code>.</li>
+            <li><strong>Category Comparison:</strong> Clustered Column Chart of <code>Total Sales</code> by <code>Dim_Product[Category]</code>.</li>
+            <li><strong>Regional Ranking:</strong> Clustered Bar Chart of <code>Total Sales</code> by <code>Dim_Region[Region]</code>.</li>
+            <li><strong>Product Profitability:</strong> Clustered Bar Chart of <code>Profit Margin</code> by <code>Dim_Product[Product]</code>, sorted ascending (reveals least profitable product at the top).</li>
+            <li><strong>Interactive Slicers:</strong>
+              <ul>
+                <li>Region (Style: Tile buttons)</li>
+                <li>Category (Style: Tile or Dropdown)</li>
+                <li>Customer Segment (Style: Tile buttons)</li>
+                <li>Order Date (Style: Between range slider)</li>
+              </ul>
+            </li>
+            <li><strong>Filter Scopes:</strong>
+              <ul>
+                <li><em>Visual-level filter:</em> Applied to one visual only (e.g. Filter type <strong>Top N &rarr; Bottom 3</strong> by Profit Margin on the product chart).</li>
+                <li><em>Page-level filter:</em> Affects all visuals on the active tab (e.g. Customer Segment = Corporate).</li>
+                <li><em>Report-level filter:</em> Affects all tabs across the entire report (e.g. Payment Method = Credit Card).</li>
+              </ul>
+            </li>
+          </ul>
+
+          <div class="summary-box">
+            <h4>Topic 6 Recap</h4>
+            <ul>
+              <li>Power Query applied steps: Remove Duplicates on OrderID $\rightarrow$ Replace nulls $\rightarrow$ Trim &amp; Capitalize Region $\rightarrow$ Filter $>0$.</li>
+              <li>Always sort <code>Dim_Date[Month]</code> by <code>Month Number</code> to fix alphabetical sorting.</li>
+              <li>Connect Star Schema with 1-to-many single direction relationships; hide foreign keys in Fact table.</li>
+              <li>Always use <code>DIVIDE(SUM(Num), SUM(Denom))</code> measures for ratios, never averages of calculated columns.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════
+         TOPIC 7: EXAM QUESTION TYPES, TEACHER TRAPS & VIVA DEFENSE
+         ═══════════════════════════════════════════════════════ -->
+        <div class="topic-card" id="topic-7">
+          <h2><span class="topic-num">7</span>Exam Question Types &amp; Viva Traps</h2>
+          <p class="topic-subtitle">The trickiest edge cases, grading rubrics &amp; oral viva questions asked by instructors</p>
+
+          <p>
+            Instructors at FAST-NU design lab midterms to test whether you blindly copy-paste code or genuinely understand data pipelines. Here are the most common exam questions and the traps designed to catch unprepared students.
+          </p>
+
+          <div class="exam-grid">
+            <div class="exam-card">
+              <h4><span>Trap 1: Schema Inference Crash</span> <span class="query-pill pill-spark">PySpark</span></h4>
+              <p><strong>The Trap:</strong> Teacher gives you a directory with two days of JSON where a field changes from dict to string (Lab 4 scenario). Running default <code>spark.read.json()</code> throws an <code>AnalysisException</code>.</p>
+              <p><strong>How to Pass:</strong> Immediately define an explicit <code>StructType</code> and set the offending field to <code>StringType()</code>. Then downstream in Silver, use <code>get_json_object(col, "$.field")</code>.</p>
+              <span class="quick-copy">StructField("metadata", StringType(), True)</span>
+            </div>
+
+            <div class="exam-card">
+              <h4><span>Trap 2: The Ratio Fallacy in DAX</span> <span class="query-pill pill-dax">DAX</span></h4>
+              <p><strong>The Trap:</strong> Teacher asks for Profit Margin. Students create a calculated column <code>[Profit]/[Sales]</code> and drop it on a card with <code>Average</code> aggregation.</p>
+              <p><strong>How to Pass:</strong> Never use calculated columns for ratios! Create a measure: <code>Profit Margin = DIVIDE([Total Profit], [Total Sales])</code>. Explain during viva: <em>"An average of ratios is not equal to the ratio of totals."</em></p>
+              <span class="quick-copy">DIVIDE(SUM(Sales[Profit]), SUM(Sales[Sales]))</span>
+            </div>
+
+            <div class="exam-card">
+              <h4><span>Trap 3: MultiIndex Range Slice Crash</span> <span class="query-pill pill-pandas">Pandas</span></h4>
+              <p><strong>The Trap:</strong> Teacher asks you to slice stock codes <code>'21730':'22752'</code> across all countries using <code>pd.IndexSlice</code>. Script crashes with <code>UnsortedIndexError</code>.</p>
+              <p><strong>How to Pass:</strong> Always call <code>df.sort_index(inplace=True)</code> before calling <code>.loc[pd.IndexSlice[...]]</code>. Lexicographical sorting is strictly required for range slices.</p>
+              <span class="quick-copy">df.sort_index(inplace=True)</span>
+            </div>
+
+            <div class="exam-card">
+              <h4><span>Trap 4: Alphabetical Months in Power BI</span> <span class="query-pill pill-pbi">Power BI</span></h4>
+              <p><strong>The Trap:</strong> Line chart shows months starting with April, August, December instead of January.</p>
+              <p><strong>How to Pass:</strong> Go to <code>Dim_Date</code>, select <code>Month</code> column, click <strong>Column tools &rarr; Sort by column &rarr; Month Number</strong>. Mark table as official Date Table.</p>
+              <span class="quick-copy">Sort by Column -> Month Number</span>
+            </div>
+
+            <div class="exam-card">
+              <h4><span>Trap 5: Missing Combinations in GroupBy</span> <span class="query-pill pill-pandas">Pandas</span></h4>
+              <p><strong>The Trap:</strong> Teacher asks: "Find all products with 0 sales in France in December". GroupBy skips missing combinations entirely!</p>
+              <p><strong>How to Pass:</strong> Generate the full Cartesian product using <code>pd.MultiIndex.from_product([countries, products, months])</code>, then <code>.reindex(grid, fill_value=0)</code>.</p>
+              <span class="quick-copy">MultiIndex.from_product([c, p, m])</span>
+            </div>
+
+            <div class="exam-card">
+              <h4><span>Trap 6: Incremental Ingestion Overwrites</span> <span class="query-pill pill-spark">Delta Lake</span></h4>
+              <p><strong>The Trap:</strong> Teacher provides Day 2 batch. Student uses <code>mode("overwrite")</code> in Silver, deleting Day 1 data!</p>
+              <p><strong>How to Pass:</strong> Append Day 2 to Bronze, then use <code>DeltaTable.forName().merge()</code> in Silver with <code>whenMatchedUpdateAll()</code> and <code>whenNotMatchedInsertAll()</code>.</p>
+              <span class="quick-copy">deltaTable.merge().whenMatchedUpdateAll()</span>
+            </div>
+          </div>
+
+          <h3>Top 10 Rapid-Fire Viva Defense Questions</h3>
+          <div class="note-box">
+            <ol>
+              <li><strong>Q: Why do we store raw data in Bronze with append mode instead of upserting immediately?</strong><br>
+              <em>A:</em> Bronze represents an immutable audit log of raw ingested history. Overwriting or deduplicating in Bronze destroys replayability and forensic audit capabilities.</li>
+              <li><strong>Q: Why did we force metadata to `StringType()` in Lab 4?</strong><br>
+              <em>A:</em> Day 3 had nested JSON (Struct) while Day 4 had an error string. In Spark, conflicting types cause an <code>AnalysisException</code> during schema inference. StringType accepts any shape safely.</li>
+              <li><strong>Q: In Power BI, when should you use a Slicer vs a Page-level filter?</strong><br>
+              <em>A:</em> Slicers are interactive visual controls designed for report consumers/end-users. Page-level filters in the filter pane are intended for report authors to restrict data scope permanently.</li>
+              <li><strong>Q: What is the difference between `stack()` and `unstack()` in Pandas?</strong><br>
+              <em>A:</em> <code>unstack()</code> pivots a row index level into wide column headers. <code>stack()</code> pivots column headers down into a long row index.</li>
+              <li><strong>Q: What does `margins=True` do in `pivot_table()`?</strong><br>
+              <em>A:</em> It appends an "All" row and column representing grand totals across all rows and columns.</li>
+              <li><strong>Q: Why do we hide foreign keys in the Sales Fact table in Power BI?</strong><br>
+              <em>A:</em> To enforce the Star Schema contract. It prevents users from accidentally dragging unlinked Fact attributes into charts instead of the validated Dimension table attributes.</li>
+              <li><strong>Q: What happens if you do not check `response.status_code` in a REST API script?</strong><br>
+              <em>A:</em> If the server returns a 404 or 500 error, calling <code>response.json()</code> fails with a JSONDecodeError because the returned response is HTML error text.</li>
+              <li><strong>Q: How does `get_json_object` behave when given corrupted JSON?</strong><br>
+              <em>A:</em> It evaluates safely to <code>null</code> without crashing the PySpark distributed executor task.</li>
+              <li><strong>Q: Why did we use `Reference` instead of `Duplicate` for dimension tables in Power Query?</strong><br>
+              <em>A:</em> <code>Reference</code> creates a dependency on the cleaned Sales query. Any future cleaning applied to Sales automatically flows into the dimension tables without duplicating logic.</li>
+              <li><strong>Q: What does `transform('sum')` do in Pandas that normal `agg('sum')` cannot do?</strong><br>
+              <em>A:</em> Normal <code>agg()</code> collapses rows to the group level. <code>transform()</code> calculates the group sum but retains the original DataFrame's shape, broadcasting the total back onto every row for percentage calculations.</li>
+            </ol>
+          </div>
+
+          <div class="summary-box">
+            <h4>Topic 7 Recap</h4>
+            <ul>
+              <li>Always defend schema drift with <code>StructType(StringType)</code> and <code>get_json_object()</code>.</li>
+              <li>Always explain why ratio measures in DAX must use dynamic sums, avoiding the average of averages fallacy.</li>
+              <li>Sort MultiIndexes before slicing, and reference cleaned queries in Power BI to ensure single source of truth.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════
+         TOPIC 8: MASTER SYNTAX & FUNCTIONS CHEATSHEET
+         ═══════════════════════════════════════════════════════ -->
+        <div class="topic-card" id="topic-8">
+          <h2><span class="topic-num">8</span>Master Syntax &amp; Functions Cheatsheet</h2>
+          <p class="topic-subtitle">Exhaustive copy-paste syntax reference for all PySpark, Pandas, and DAX functions</p>
+
+          <p>
+            Keep this cheatsheet open during your exam preparation. It covers every required function with exact arguments and one-line copy-paste templates.
+          </p>
+
+          <h3>1. Python Requests &amp; JSON</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Library / Function</th>
+                <th>Exact Syntax &amp; Parameters</th>
+                <th>Purpose / Exam Role</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>requests.get()</code></td>
+                <td><code>r = requests.get(url, timeout=10)</code></td>
+                <td>Sends HTTP GET; always specify timeout to avoid hanging.</td>
+              </tr>
+              <tr>
+                <td><code>r.status_code</code></td>
+                <td><code>if r.status_code == 200: ...</code></td>
+                <td>Validates successful HTTP response before parsing body.</td>
+              </tr>
+              <tr>
+                <td><code>r.json()</code></td>
+                <td><code>data = r.json()</code></td>
+                <td>Deserializes HTTP JSON body into Python dicts/lists.</td>
+              </tr>
+              <tr>
+                <td><code>pd.json_normalize()</code></td>
+                <td><code>pd.json_normalize(data['results'], sep='_')</code></td>
+                <td>Flattens nested dictionaries into 2D DataFrame with underscore columns.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>2. PySpark &amp; Delta Lake</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>PySpark Function</th>
+                <th>Exact Syntax</th>
+                <th>Exam Purpose</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>StructType DDL</code></td>
+                <td><code>StructType([StructField("col", StringType(), True)])</code></td>
+                <td>Enforces schema-on-read; neutralizes mixed int/float and schema drift crashes.</td>
+              </tr>
+              <tr>
+                <td><code>current_timestamp()</code></td>
+                <td><code>df.withColumn("ingest_time", current_timestamp())</code></td>
+                <td>Adds audit timestamp to Bronze/Silver tables.</td>
+              </tr>
+              <tr>
+                <td><code>when / otherwise</code></td>
+                <td><code>when(col("s") == 0, "Out").otherwise("In")</code></td>
+                <td>Conditional column tagging (like SQL CASE WHEN).</td>
+              </tr>
+              <tr>
+                <td><code>get_json_object()</code></td>
+                <td><code>get_json_object(col("metadata"), "$.os")</code></td>
+                <td>Safely extracts nested JSON from stringified columns; yields null on corruption.</td>
+              </tr>
+              <tr>
+                <td><code>DeltaTable.merge()</code></td>
+                <td><code>tgt.merge(src, "tgt.id = src.id").whenMatchedUpdateAll().whenNotMatchedInsertAll().execute()</code></td>
+                <td>Performs atomic upsert in Silver Delta Lake table to eliminate duplicate primary keys.</td>
+              </tr>
+              <tr>
+                <td><code>DataFrame.join()</code></td>
+                <td><code>df1.join(df2, "user_id", "inner")</code></td>
+                <td>Distributed relational join across Silver tables on natural keys.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>3. Pandas &amp; MultiIndexing</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Pandas Method</th>
+                <th>Exact Syntax</th>
+                <th>Exam Purpose</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>set_index()</code></td>
+                <td><code>df.set_index(['Country', 'StockCode', 'Date'])</code></td>
+                <td>Constructs multi-level row index.</td>
+              </tr>
+              <tr>
+                <td><code>pd.MultiIndex.from_product()</code></td>
+                <td><code>pd.MultiIndex.from_product([list1, list2, list3])</code></td>
+                <td>Builds complete Cartesian grid to expose missing sales.</td>
+              </tr>
+              <tr>
+                <td><code>reindex()</code></td>
+                <td><code>df.reindex(full_grid, fill_value=0)</code></td>
+                <td>Aligns DataFrame to complete grid, replacing missing records with 0.</td>
+              </tr>
+              <tr>
+                <td><code>pd.IndexSlice</code></td>
+                <td><code>df.loc[pd.IndexSlice[:, '21730':'22752', :], :]</code></td>
+                <td>Slices multi-level rows across arbitrary inner dimensions (requires sorted index).</td>
+              </tr>
+              <tr>
+                <td><code>.xs()</code></td>
+                <td><code>df.xs('2010-12', level='Month', drop_level=False)</code></td>
+                <td>Extracts cross-section for a specific inner level with/without dropping level.</td>
+              </tr>
+              <tr>
+                <td><code>sort_index()</code></td>
+                <td><code>df.sort_index(inplace=True)</code></td>
+                <td>Lexicographically sorts MultiIndex to prevent <code>UnsortedIndexError</code>.</td>
+              </tr>
+              <tr>
+                <td><code>unstack() / stack()</code></td>
+                <td><code>df.unstack('StockCode') / df.stack()</code></td>
+                <td>Pivots inner index level between row index and column headers.</td>
+              </tr>
+              <tr>
+                <td><code>pivot_table()</code></td>
+                <td><code>df.pivot_table(index='A', columns='B', values='C', aggfunc='sum', margins=True)</code></td>
+                <td>Direct 2D pivot aggregation; <code>margins=True</code> adds Grand Total rows/cols.</td>
+              </tr>
+              <tr>
+                <td><code>transform('sum')</code></td>
+                <td><code>df['Share'] = df['Rev'] / df.groupby(level=['A','B'])['Rev'].transform('sum')</code></td>
+                <td>Calculates group total without collapsing rows, enabling row-level share percentages.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>4. Power BI DAX Formulas</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>DAX Formula</th>
+                <th>Code Snippet</th>
+                <th>Exam Purpose</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>Date Table</code></td>
+                <td><code>Dim_Date = ADDCOLUMNS(CALENDAR(DATE(2025,1,1), DATE(2025,12,31)), "Month", FORMAT([Date], "mmm"), "Month Number", MONTH([Date]))</code></td>
+                <td>Generates continuous calendar table required for time intelligence and trend charts.</td>
+              </tr>
+              <tr>
+                <td><code>Total Sales</code></td>
+                <td><code>Total Sales = SUM(Sales[Sales])</code></td>
+                <td>Core additive revenue measure.</td>
+              </tr>
+              <tr>
+                <td><code>Total Orders</code></td>
+                <td><code>Total Orders = DISTINCTCOUNT(Sales[OrderID])</code></td>
+                <td>Counts unique orders without double counting multi-line invoices.</td>
+              </tr>
+              <tr>
+                <td><code>Average Order Value</code></td>
+                <td><code>Average Order Value = DIVIDE([Total Sales], [Total Orders], 0)</code></td>
+                <td>Safe division protecting against divide-by-zero errors.</td>
+              </tr>
+              <tr>
+                <td><code>Profit Margin</code></td>
+                <td><code>Profit Margin = DIVIDE([Total Profit], [Total Sales], 0)</code></td>
+                <td>Dynamic ratio measure; format as Percentage with 2 decimal places.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="summary-box">
+            <h4>Topic 8 Recap</h4>
+            <ul>
+              <li>Requests: always use <code>timeout</code> and verify <code>status_code == 200</code>.</li>
+              <li>PySpark: <code>get_json_object</code> parses stringified JSON; <code>DeltaTable.merge()</code> prevents duplicates.</li>
+              <li>Pandas: always call <code>sort_index()</code> before <code>IndexSlice</code>; use <code>transform('sum')</code> for group percentages.</li>
+              <li>DAX: generate <code>CALENDAR</code>, sort month by month number, and calculate ratios with <code>DIVIDE(SUM, SUM)</code>.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════
+         TOPIC 9: INTERACTIVE PRACTICE MCQS & LAB CHALLENGES
+         ═══════════════════════════════════════════════════════ -->
+        <div class="topic-card" id="topic-9">
+          <h2><span class="topic-num">9</span>Interactive Practice MCQs &amp; Challenges</h2>
+          <p class="topic-subtitle">Test your practical understanding with immediate feedback and worked exam questions</p>
+
+          <p>
+            Attempt these 10 exam-level MCQs. Each question reflects real tricky scenarios from the FAST-NU lab manuals.
+          </p>
+
+          <div id="quiz-container">
+            <!-- MCQ 1 -->
+            <div class="mcq-card" data-correct="2">
+              <div class="mcq-q">1. In Lab 4, why does reading raw clickstream JSON with default Spark inference crash when Day 4 data arrives?</div>
+              <div class="mcq-options">
+                <button class="mcq-opt" onclick="checkMCQ(this, 0)">Because Day 4 has more rows than Day 3.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 1)">Because timestamps are formatted as ISO-8601 strings.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 2)">Because metadata arrives as a StructType on Day 3 but a plain String on Day 4, causing a conflicting schema AnalysisException.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 3)">Because bot crawlers cannot be serialized into JSON.</button>
+              </div>
+              <div class="mcq-expl">Spark cannot unify a nested Struct with a primitive String in the same column during automatic inference. You must enforce an explicit <code>StructType</code> where metadata is read as <code>StringType()</code>.</div>
+            </div>
+
+            <!-- MCQ 2 -->
+            <div class="mcq-card" data-correct="1">
+              <div class="mcq-q">2. In Power BI, why does taking the AVERAGE of a calculated column `Profit per Unit = DIVIDE(Sales[Profit], Sales[Quantity])` produce an incorrect figure?</div>
+              <div class="mcq-options">
+                <button class="mcq-opt" onclick="checkMCQ(this, 0)">Because Power BI cannot divide two columns in a calculated column.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 1)">Because it calculates an unweighted average of individual row ratios, ignoring order size. The correct ratio requires dividing Total Profit by Total Quantity dynamically.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 2)">Because DIVIDE only works in DAX measures, not calculated columns.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 3)">Because calculated columns only update when slicers change.</button>
+              </div>
+              <div class="mcq-expl">This is the classic Ratio Fallacy / Simpson's Paradox. An average of row ratios treats a 1-unit order the same as a 10,000-unit order. You must always use a measure: <code>DIVIDE([Total Profit], [Total Quantity])</code>.</div>
+            </div>
+
+            <!-- MCQ 3 -->
+            <div class="mcq-card" data-correct="0">
+              <div class="mcq-q">3. In Pandas, what happens if you run `df.loc[pd.IndexSlice[:, '21730':'22752', :], :]` on an unsorted MultiIndex?</div>
+              <div class="mcq-options">
+                <button class="mcq-opt" onclick="checkMCQ(this, 0)">It raises an UnsortedIndexError because range slicing requires lexicographically sorted levels.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 1)">It automatically sorts the index in the background and returns the slice.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 2)">It converts the DataFrame into a wide pivot table.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 3)">It drops all outer index levels and returns a Series.</button>
+              </div>
+              <div class="mcq-expl">Range slicing in Pandas uses binary search under the hood, which strictly requires a sorted index. Call <code>df.sort_index(inplace=True)</code> first.</div>
+            </div>
+
+            <!-- MCQ 4 -->
+            <div class="mcq-card" data-correct="3">
+              <div class="mcq-q">4. When performing an incremental batch load into a Silver Delta Lake table, which operation must be used to prevent duplicate records?</div>
+              <div class="mcq-options">
+                <button class="mcq-opt" onclick="checkMCQ(this, 0)">.write.mode("overwrite")</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 1)">.write.mode("append")</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 2)">.write.mode("ignore")</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 3)">DeltaTable.merge() with whenMatchedUpdateAll() and whenNotMatchedInsertAll()</button>
+              </div>
+              <div class="mcq-expl"><code>overwrite</code> destroys old data; <code>append</code> creates duplicate rows for updated keys. <code>merge()</code> updates matching keys in place and inserts new ones.</div>
+            </div>
+
+            <!-- MCQ 5 -->
+            <div class="mcq-card" data-correct="2">
+              <div class="mcq-q">5. In Power BI, why do month names on a Line Chart sort as "Apr, Aug, Dec, Feb..." by default?</div>
+              <div class="mcq-options">
+                <button class="mcq-opt" onclick="checkMCQ(this, 0)">Because the line chart visual is corrupted.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 1)">Because the Date column was not formatted as Currency.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 2)">Because text columns sort alphabetically by default. You must select Month and set "Sort by column" to Month Number.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 3)">Because Power BI requires an active internet connection to sort dates.</button>
+              </div>
+              <div class="mcq-expl">Text strings always sort alphabetically (A-Z). You must explicitly link the text month column to an integer <code>Month Number</code> (1-12) via Column Tools &rarr; Sort by Column.</div>
+            </div>
+
+            <!-- MCQ 6 -->
+            <div class="mcq-card" data-correct="1">
+              <div class="mcq-q">6. Why does `pd.MultiIndex.from_product()` have significant analytical value over standard `groupby()`?</div>
+              <div class="mcq-options">
+                <button class="mcq-opt" onclick="checkMCQ(this, 0)">It runs faster than groupby by using GPU acceleration.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 1)">It generates all possible Cartesian combinations, allowing reindex() to expose combinations where zero sales occurred.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 2)">It automatically parses strings into datetime objects.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 3)">It flattens multi-level column headers into a single string.</button>
+              </div>
+              <div class="mcq-expl">GroupBy silently omits combinations with zero records. Cartesian products force those combinations into existence so you can fill them with <code>0</code>.</div>
+            </div>
+
+            <!-- MCQ 7 -->
+            <div class="mcq-card" data-correct="0">
+              <div class="mcq-q">7. How does PySpark's `get_json_object(col, "$.os")` handle corrupted text like `"connection_error"`?</div>
+              <div class="mcq-options">
+                <button class="mcq-opt" onclick="checkMCQ(this, 0)">It gracefully returns null without crashing the query.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 1)">It crashes with an AnalysisException.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 2)">It converts the string into an integer 0.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 3)">It deletes the row from the DataFrame.</button>
+              </div>
+              <div class="mcq-expl"><code>get_json_object</code> is designed for fault tolerance; if the JSON path does not match or the payload is not valid JSON, it returns <code>null</code>.</div>
+            </div>
+
+            <!-- MCQ 8 -->
+            <div class="mcq-card" data-correct="3">
+              <div class="mcq-q">8. What is the difference between a Visual-level filter and a Slicer in Power BI?</div>
+              <div class="mcq-options">
+                <button class="mcq-opt" onclick="checkMCQ(this, 0)">A Slicer only works on numerical fields, while filters work on text.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 1)">A Visual-level filter affects all pages in the report.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 2)">Slicers require DAX formulas to operate.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 3)">A Slicer is an interactive on-canvas control for report readers; a Visual-level filter applies strictly to one visual and is set by the report author.</button>
+              </div>
+              <div class="mcq-expl">Visual-level filters restrict one specific visual (like Bottom 3 products), while slicers sit on the canvas for user interaction.</div>
+            </div>
+
+            <!-- MCQ 9 -->
+            <div class="mcq-card" data-correct="1">
+              <div class="mcq-q">9. In Pandas, which code snippet correctly calculates the percentage share of each product within its country and month?</div>
+              <div class="mcq-options">
+                <button class="mcq-opt" onclick="checkMCQ(this, 0)">df['TotalRevenue'] / df['TotalRevenue'].sum()</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 1)">df['TotalRevenue'] / df.groupby(level=['Country','Month'])['TotalRevenue'].transform('sum')</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 2)">df.unstack('StockCode').mean()</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 3)">df.xs('TotalRevenue', level=0).sum()</button>
+              </div>
+              <div class="mcq-expl"><code>transform('sum')</code> preserves the original index and broadcasts the group sum to every row in that group, allowing direct division.</div>
+            </div>
+
+            <!-- MCQ 10 -->
+            <div class="mcq-card" data-correct="2">
+              <div class="mcq-q">10. Why must `Remove Duplicates` be executed on OrderID in Power Query during Lab 6?</div>
+              <div class="mcq-options">
+                <button class="mcq-opt" onclick="checkMCQ(this, 0)">Because Power Query cannot store more than 100 rows.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 1)">Because OrderID is a foreign key pointing to Dim_Date.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 2)">Because OrderID is the unique transaction key; repeated OrderIDs cause double-counting in financial totals.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 3)">Because Power BI requires all tables to have exactly 12 rows.</button>
+              </div>
+              <div class="mcq-expl">Duplicate OrderIDs in sales tables represent corrupted logging and artificially inflate sales and profit totals.</div>
+            </div>
+          </div>
+
+          <div class="score-box" id="quiz-score-box">
+            Score: <span id="quiz-score">0</span> / 10
+          </div>
+
+          <div class="summary-box">
+            <h4>Final Exam Preparation Checklist</h4>
+            <ul>
+              <li><strong>REST API:</strong> <code>requests.get()</code> status check $\rightarrow$ recursive keys extractor $\rightarrow$ <code>pd.json_normalize()</code> with defensive subset list comprehension.</li>
+              <li><strong>PySpark Medallion:</strong> Explicit <code>StructType</code> $\rightarrow$ Bronze append $\rightarrow$ Silver clean &amp; <code>DeltaTable.merge()</code> $\rightarrow$ Gold <code>groupBy().agg()</code>.</li>
+              <li><strong>Schema Drift:</strong> Force drifting fields to <code>StringType()</code> in Bronze $\rightarrow$ extract safely with <code>get_json_object()</code>.</li>
+              <li><strong>Pandas MultiIndex:</strong> Sort index before slicing $\rightarrow$ expose missing sales with <code>from_product()</code> $\rightarrow$ <code>transform('sum')</code> for percentage shares.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <!-- end module-container -->
+
+      <!-- ═══════════════════════════════════════════════════════
+       PAGINATION & BACK TO TOP
+       ═══════════════════════════════════════════════════════ -->
+      <div class="bottom-nav">
+        <button id="prev-btn" onclick="goPrev()" style="display:none;">
+          <div>
+            <span class="btn-label">← Previous</span>
+            <span class="btn-title" id="prev-title">Previous Topic</span>
+          </div>
+        </button>
+        <button id="next-btn" onclick="goNext()">
+          <div>
+            <span class="btn-label">Next →</span>
+            <span class="btn-title" id="next-title">Next Topic</span>
+          </div>
+        </button>
+      </div>
+    </div>
+    <!-- end main-content -->
+
+    <button
+      id="back-to-top"
+      onclick="document.getElementById('main-content').scrollTo({top:0, behavior:'smooth'})"
+      aria-label="Back to top"
+    >
+      &uarr;
+    </button>
+
+    <!-- ═══════════════════════════════════════════════════════
+     SCRIPTS
+     ═══════════════════════════════════════════════════════ -->
+    <script>
+      const topics = [
+        "topic-1",
+        "topic-2",
+        "topic-3",
+        "topic-4",
+        "topic-5",
+        "topic-6",
+        "topic-7",
+        "topic-8",
+        "topic-9"
+      ];
+      let currentTopicIndex = 0;
+
+      function getTopicTitle(id) {
+        const card = document.getElementById(id);
+        if (card) {
+          const h2 = card.querySelector("h2");
+          if (h2) {
+            const numEl = h2.querySelector(".topic-num");
+            if (numEl) {
+              return h2.textContent.replace(numEl.textContent, "").trim();
+            }
+            return h2.textContent.replace(/^\d+\s*/, "").trim();
+          }
+        }
+        return "Topic";
+      }
+
+      function toggleSidebar() {
+        const sb = document.getElementById("sidebar");
+        const bd = document.getElementById("sidebar-backdrop");
+        if (sb) sb.classList.toggle("open");
+        if (bd) bd.classList.toggle("active");
+      }
+
+      function showTopic(id) {
+        document
+          .querySelectorAll(".topic-card")
+          .forEach((c) => (c.style.display = "none"));
+        const t = document.getElementById(id);
+        if (t) t.style.display = "block";
+        currentTopicIndex = topics.indexOf(id);
+
+        document
+          .querySelectorAll(".nav-sublist a")
+          .forEach((a) => a.classList.remove("active"));
+        const lk =
+          document.querySelector(`.nav-sublist a[onclick*="'${id}'"]`) ||
+          document.querySelector(`.nav-sublist a[onclick*='"${id}"']`);
+        if (lk) {
+          lk.classList.add("active");
+          const sublist = lk.closest(".nav-sublist");
+          if (sublist && sublist.style.display === "none") {
+            sublist.style.display = "block";
+            const chevron = sublist.previousElementSibling
+              ? sublist.previousElementSibling.querySelector(".chevron")
+              : null;
+            if (chevron) chevron.style.transform = "rotate(0deg)";
+          }
+        }
+
+        const pb = document.getElementById("prev-btn");
+        const nb = document.getElementById("next-btn");
+        const pt = document.getElementById("prev-title");
+        const nt = document.getElementById("next-title");
+
+        if (currentTopicIndex > 0) {
+          pb.style.display = "flex";
+          if (pt) pt.textContent = getTopicTitle(topics[currentTopicIndex - 1]);
+        } else {
+          pb.style.display = "none";
+        }
+
+        if (currentTopicIndex < topics.length - 1) {
+          nb.style.display = "flex";
+          if (nt) nt.textContent = getTopicTitle(topics[currentTopicIndex + 1]);
+        } else {
+          nb.style.display = "none";
+        }
+
+        if (t) t.scrollIntoView({ behavior: "smooth", block: "start" });
+        if (window.innerWidth <= 768) {
+          const sb = document.getElementById("sidebar");
+          const bd = document.getElementById("sidebar-backdrop");
+          if (sb) sb.classList.remove("open");
+          if (bd) bd.classList.remove("active");
+        }
+      }
+
+      function goPrev() {
+        if (currentTopicIndex > 0) showTopic(topics[currentTopicIndex - 1]);
+      }
+      function goNext() {
+        if (currentTopicIndex < topics.length - 1)
+          showTopic(topics[currentTopicIndex + 1]);
+      }
+
+      function toggleSection(el) {
+        const s = el.nextElementSibling,
+          c = el.querySelector(".chevron");
+        if (s.style.display === "none") {
+          s.style.display = "block";
+          c.style.transform = "rotate(0deg)";
+        } else {
+          s.style.display = "none";
+          c.style.transform = "rotate(-90deg)";
+        }
+      }
+
+      function filterContent() {
+        const q = document.getElementById("search-input").value.toLowerCase();
+        document
+          .querySelectorAll(".nav-sublist li")
+          .forEach((i) =>
+            i.style.display = i.textContent.toLowerCase().includes(q)
+              ? ""
+              : "none",
+          );
+      }
+
+      // Quiz Score Logic
+      let userScore = 0;
+      let answeredCount = 0;
+
+      function checkMCQ(btn, choiceIdx) {
+        const card = btn.closest(".mcq-card");
+        if (card.dataset.answered) return;
+        card.dataset.answered = "true";
+
+        const correctIdx = parseInt(card.dataset.correct, 10);
+        const options = card.querySelectorAll(".mcq-opt");
+        const expl = card.querySelector(".mcq-expl");
+
+        options.forEach((opt) => (opt.disabled = true));
+
+        if (choiceIdx === correctIdx) {
+          btn.classList.add("correct");
+          expl.classList.add("show", "good");
+          userScore++;
+        } else {
+          btn.classList.add("incorrect");
+          options[correctIdx].classList.add("correct");
+          expl.classList.add("show", "bad");
+        }
+
+        answeredCount++;
+        document.getElementById("quiz-score").textContent = userScore;
+      }
+
+      // Initialise
+      if (topics.length > 0) showTopic(topics[0]);
+      const mc = document.getElementById("main-content");
+      const bb = document.getElementById("back-to-top");
+      mc.addEventListener(
+        "scroll",
+        () => (bb.style.display = mc.scrollTop > 300 ? "flex" : "none"),
+      );
+    </script>
+  </body>
+</html>

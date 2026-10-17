@@ -1610,17 +1610,28 @@ ORDER BY d.year, d.month;</code></pre>
         </div>
 
         <!-- PAGINATION CONTROLS -->
-        <div class="pagination" style="display:flex; justify-content:space-between; align-items:center; margin-top:40px; padding-top:20px; border-top:1px solid var(--bd);">
-          <button id="prev-btn" onclick="goPrev()" class="btn" style="display:none; background:#18181b; color:var(--tx); border:1px solid var(--bd); padding:8px 16px; border-radius:6px; cursor:pointer; font-family:Poppins, sans-serif;">
-            &larr; <span id="prev-title">Previous</span>
+        <div class="bottom-nav">
+          <button id="prev-btn" onclick="goPrev()" style="display:none;">
+            <div>
+              <span class="btn-label">← Previous</span>
+              <span class="btn-title" id="prev-title">Previous Topic</span>
+            </div>
           </button>
-          <div style="flex:1;"></div>
-          <button id="next-btn" onclick="goNext()" class="btn" style="display:none; background:var(--ac); color:#fff; border:none; padding:8px 16px; border-radius:6px; cursor:pointer; font-family:Poppins, sans-serif; font-weight:600;">
-            <span id="next-title">Next</span> &rarr;
+          <button id="next-btn" onclick="goNext()">
+            <div>
+              <span class="btn-label">Next →</span>
+              <span class="btn-title" id="next-title">Next Topic</span>
+            </div>
           </button>
         </div>
 
-        <button id="back-to-top" onclick="window.scrollTo({top:0, behavior:'smooth'})" aria-label="Back to top" style="display:none; position:fixed; bottom:24px; right:24px; width:40px; height:40px; border-radius:50%; background:var(--ac); color:#fff; border:none; cursor:pointer; font-size:18px; align-items:center; justify-content:center; box-shadow:0 4px 12px rgba(0,0,0,0.5); z-index:100;">&uarr;</button>
+        <button
+          id="back-to-top"
+          onclick="document.getElementById('main-content').scrollTo({top:0, behavior:'smooth'})"
+          aria-label="Back to top"
+        >
+          &uarr;
+        </button>
       </div>
     </div>
 
@@ -1686,14 +1697,14 @@ ORDER BY d.year, d.month;</code></pre>
         const nt = document.getElementById("next-title");
 
         if (currentTopicIndex > 0) {
-          pb.style.display = "inline-flex";
+          pb.style.display = "flex";
           if (pt) pt.textContent = getTopicTitle(topics[currentTopicIndex - 1]);
         } else {
           pb.style.display = "none";
         }
 
         if (currentTopicIndex < topics.length - 1) {
-          nb.style.display = "inline-flex";
+          nb.style.display = "flex";
           if (nt) nt.textContent = getTopicTitle(topics[currentTopicIndex + 1]);
         } else {
           nb.style.display = "none";
