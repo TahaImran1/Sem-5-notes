@@ -3,10 +3,10 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <title>DAV Lab Midterm — Sequential Code &amp; Exam Cheatsheet</title>
+    <title>DAV Lab Midterm — High-Speed Exam Prep &amp; Master Syntax Guide</title>
     <meta
       name="description"
-      content="Comprehensive, sequential exam preparation notes for FAST-NU Data Analysis & Visualization (DAV) Lab Midterm. Covers REST APIs, Nested JSON, Databricks PySpark Medallion Architecture, Delta Lake Upserts, Schema Drift, Advanced Pandas MultiIndexing, and Power BI Star Schema Modeling & DAX."
+      content="Ultimate, rapid-preparation exam guide for FAST-NU Data Analysis & Visualization (DAV) Lab Midterm. Covers Python REST APIs, Databricks PySpark Medallion Delta Lake, Deep Pandas MultiIndexing (from_product, IndexSlice, xs, unstack, transform), and Power BI Star Schema DAX."
     />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
@@ -14,7 +14,13 @@
     />
     <link rel="stylesheet" href="../notes.css" />
     <style>
-      /* ── Custom UI Enhancements for Fast Exam Review ── */
+      /* ── Full-Width Layout Enforcement ── */
+      .module-container, .topic-card {
+        max-width: 100% !important;
+        width: 100% !important;
+      }
+
+      /* ── Custom UI & Visual Aesthetics ── */
       .seq-badge {
         display: inline-flex;
         align-items: center;
@@ -47,6 +53,7 @@
       .pill-dax { background: rgba(244, 114, 182, 0.2); color: #f472b6; border: 1px solid rgba(244, 114, 182, 0.4); }
       .pill-crit { background: rgba(248, 113, 113, 0.2); color: #f87171; border: 1px solid rgba(248, 113, 113, 0.4); }
 
+      /* Flow Steps Visualizer */
       .flow-card {
         background: #141418;
         border: 1px solid #27272a;
@@ -65,7 +72,7 @@
       }
       .flow-steps {
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
         gap: 8px;
       }
       .step-item {
@@ -89,17 +96,101 @@
         margin-bottom: 3px;
       }
 
-      .why-box {
-        background: #12171f;
-        border-left: 4px solid #38bdf8;
-        padding: 12px 16px;
-        border-radius: 0 8px 8px 0;
-        margin: 12px 0 16px;
-        font-size: 0.88rem;
-        line-height: 1.6;
+      /* Native Visual Diagrams */
+      .diagram-box {
+        background: #111115;
+        border: 1px solid #2a2a30;
+        border-radius: 8px;
+        padding: 18px;
+        margin: 16px 0;
       }
-      .why-box strong { color: #38bdf8; }
+      .diagram-title {
+        font-size: 0.84rem;
+        font-weight: 700;
+        color: var(--ac);
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .grid-3col {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+        gap: 14px;
+      }
+      .grid-2col {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 14px;
+      }
+      .diag-card {
+        background: #18181e;
+        border: 1px solid #32323a;
+        border-radius: 6px;
+        padding: 12px 14px;
+      }
+      .diag-card h5 {
+        font-size: 0.82rem;
+        color: #38bdf8;
+        margin-bottom: 8px;
+      }
+      .diag-card pre {
+        background: #09090c;
+        border: 1px solid #222228;
+        padding: 8px 10px;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        line-height: 1.45;
+        margin: 0;
+      }
 
+      /* Syntax & Parameter Definition Card */
+      .syntax-card {
+        background: #12151b;
+        border-left: 4px solid #38bdf8;
+        border-radius: 0 8px 8px 0;
+        padding: 14px 18px;
+        margin: 14px 0 18px;
+      }
+      .syntax-card .func-sig {
+        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        font-size: 0.92rem;
+        font-weight: 700;
+        color: #38bdf8;
+        margin-bottom: 6px;
+      }
+      .syntax-card .func-desc {
+        font-size: 0.84rem;
+        color: var(--tx);
+        line-height: 1.5;
+        margin-bottom: 10px;
+      }
+      .param-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.78rem;
+        margin-top: 8px;
+      }
+      .param-table th {
+        text-align: left;
+        color: #94a3b8;
+        padding: 6px 8px;
+        border-bottom: 1px solid #27272a;
+      }
+      .param-table td {
+        padding: 6px 8px;
+        border-bottom: 1px solid #1e1e24;
+      }
+      .param-table code {
+        color: #fbbf24;
+        background: rgba(251, 191, 36, 0.1);
+        padding: 1px 4px;
+        border-radius: 3px;
+      }
+
+      /* Result Preview Terminal */
       .result-preview {
         background: #09090b;
         border: 1px solid #27272a;
@@ -115,44 +206,7 @@
       .result-preview .tag-zero { color: #38bdf8; font-weight: bold; }
       .result-preview .tag-err { color: #f87171; font-weight: bold; }
 
-      .exam-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 14px;
-        margin: 16px 0;
-      }
-      .exam-card {
-        background: #16161a;
-        border: 1px solid #2d2d32;
-        border-radius: 8px;
-        padding: 14px 16px;
-      }
-      .exam-card h4 {
-        font-size: 0.9rem;
-        color: var(--ac);
-        margin-bottom: 8px;
-        display: flex;
-        justify-content: space-between;
-      }
-      .exam-card p {
-        font-size: 0.82rem;
-        line-height: 1.5;
-        color: var(--tx);
-        margin-bottom: 6px;
-      }
-      .quick-copy {
-        font-size: 0.75rem;
-        background: #0e0e11;
-        padding: 6px 10px;
-        border-radius: 4px;
-        font-family: monospace;
-        color: #e2e8f0;
-        display: block;
-        margin-top: 6px;
-        word-break: break-all;
-      }
-
-      /* ── Interactive Quiz Styles ── */
+      /* Fast Interactive Quiz */
       .mcq-card {
         background: #141418;
         border: 1px solid #27272a;
@@ -240,7 +294,7 @@
         <input
           type="text"
           id="search-input"
-          placeholder="Search topics…"
+          placeholder="Search topics or functions…"
           onkeyup="filterContent()"
         />
       </div>
@@ -254,47 +308,62 @@
           <ul class="nav-sublist">
             <li>
               <a href="javascript:void(0)" onclick="showTopic('topic-1')">
-                <span class="nav-num">01</span>Master Execution Roadmap
+                <span class="nav-num">01</span>Master Execution Roadmap &amp; Strategy
               </a>
             </li>
             <li>
               <a href="javascript:void(0)" onclick="showTopic('topic-2')">
-                <span class="nav-num">02</span>Lab 2: APIs, Deep JSON &amp; Flattening
+                <span class="nav-num">02</span>REST APIs &amp; Deep Nested JSON
               </a>
             </li>
             <li>
               <a href="javascript:void(0)" onclick="showTopic('topic-3')">
-                <span class="nav-num">03</span>Lab 3: Databricks Medallion &amp; Delta Upsert
+                <span class="nav-num">03</span>Databricks Medallion &amp; Delta Upsert
               </a>
             </li>
             <li>
               <a href="javascript:void(0)" onclick="showTopic('topic-4')">
-                <span class="nav-num">04</span>Lab 4: Schema Drift, Stringified JSON &amp; Joins
+                <span class="nav-num">04</span>Schema Drift, JSON &amp; PySpark Joins
               </a>
             </li>
             <li>
               <a href="javascript:void(0)" onclick="showTopic('topic-5')">
-                <span class="nav-num">05</span>Lab 5: Advanced Pandas &amp; MultiIndexing
+                <span class="nav-num">05</span>Pandas Core: Cleaning &amp; Hygiene
               </a>
             </li>
             <li>
               <a href="javascript:void(0)" onclick="showTopic('topic-6')">
-                <span class="nav-num">06</span>Labs 6–7: Power BI ETL, Star Schema &amp; DAX
+                <span class="nav-num">06</span>MultiIndex: Grids &amp; Exposing Absences
               </a>
             </li>
             <li>
               <a href="javascript:void(0)" onclick="showTopic('topic-7')">
-                <span class="nav-num">07</span>Exam Question Types &amp; Viva Traps
+                <span class="nav-num">07</span>MultiIndex Navigation: Slicing &amp; .xs()
               </a>
             </li>
             <li>
               <a href="javascript:void(0)" onclick="showTopic('topic-8')">
-                <span class="nav-num">08</span>Master Syntax &amp; Functions Cheatsheet
+                <span class="nav-num">08</span>Reshaping: Stack, Unstack, Pivot &amp; Melt
               </a>
             </li>
             <li>
               <a href="javascript:void(0)" onclick="showTopic('topic-9')">
-                <span class="nav-num">09</span>Interactive Practice MCQs &amp; Challenges
+                <span class="nav-num">09</span>Level GroupBy, Transform &amp; Columns
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" onclick="showTopic('topic-10')">
+                <span class="nav-num">10</span>Power BI ETL, Star Schema &amp; DAX
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" onclick="showTopic('topic-11')">
+                <span class="nav-num">11</span>Master Syntax &amp; Quick Lookup Cheatsheet
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" onclick="showTopic('topic-12')">
+                <span class="nav-num">12</span>Viva Traps &amp; Interactive Exam MCQs
               </a>
             </li>
           </ul>
@@ -346,20 +415,25 @@
       <div class="module-container">
         <div class="module-header">
           <div class="module-eyebrow">FAST-NU • Data Analysis &amp; Visualization Lab (DS-3001)</div>
-          <h1 class="module-title">Lab Midterm: Sequential Code &amp; Exam Cheatsheet</h1>
+          <h1 class="module-title">Lab Midterm: High-Speed Exam Prep &amp; Master Syntax Guide</h1>
         </div>
 
         <!-- ═══════════════════════════════════════════════════════
-         TOPIC 1: MASTER EXAM EXECUTION ROADMAP
+         TOPIC 1: MASTER EXAM EXECUTION ROADMAP & STRATEGY
          ═══════════════════════════════════════════════════════ -->
         <div class="topic-card" id="topic-1">
-          <h2><span class="topic-num">1</span>Master Exam Execution Roadmap</h2>
-          <p class="topic-subtitle">The strict multi-tool execution order to survive the DAV Lab Midterm</p>
+          <h2><span class="topic-num">1</span>Master Exam Execution Roadmap &amp; Strategy</h2>
+          <p class="topic-subtitle">The rapid multi-tool execution order to ace the DAV Lab Midterm in under 90 minutes</p>
+
+          <span class="seq-badge">High-Yield Exam Strategy</span>
+          <span class="query-pill pill-spark">PySpark</span>
+          <span class="query-pill pill-pandas">Pandas MultiIndex</span>
+          <span class="query-pill pill-pbi">Power BI</span>
 
           <p>
-            The Data Analysis &amp; Visualization (DAV) lab midterm tests <strong>four fundamentally distinct environments</strong>:
-            Python Requests &amp; Nested JSON parsing, PySpark on Databricks (Medallion Architecture &amp; Delta Lake), Advanced Pandas Hierarchical Multi-Indexing, and Microsoft Power BI (Power Query ETL, Star Schema Modeling, and DAX).
-            Students fail not because the code is impossible, but because they <strong>execute steps out of order</strong> — inferring schemas dynamically when drift occurs, averaging pre-aggregated ratios in DAX, or slicing unsorted MultiIndexes.
+            The Data Analysis &amp; Visualization (DAV) lab midterm evaluates your ability to work across <strong>four distinct technical stacks</strong>:
+            Python Requests &amp; JSON traversal, Databricks PySpark Medallion Lakehouses, Advanced Pandas MultiIndexing, and Power BI Star Schema Modeling with DAX.
+            To score an A+, you must not just know how to write code; you must know the <strong>exact execution order, parameter signatures, and edge-case pitfalls</strong>.
           </p>
 
           <div class="flow-card">
@@ -373,1248 +447,1515 @@
             </div>
           </div>
 
-          <div class="why-box">
-            <strong>Why order and strict typing are non-negotiable:</strong>
-            In distributed Spark engines and analytical BI models, downstream operations inherit the mathematical and structural contracts of upstream steps. If you allow Spark to infer a schema on mixed JSON, your ingestion crashes. If you calculate an average discount column and then take its average in Power BI, you commit the <em>Simpson’s Paradox / Ratio Fallacy</em>. You must follow the exact sequential rules outlined below.
+          <div class="diagram-box">
+            <div class="diagram-title">🗺️ The End-to-End Architectural Pipeline</div>
+            <div class="grid-3col">
+              <div class="diag-card">
+                <h5>1. Web / Ingestion Layer</h5>
+                <pre>REST API / JSON
+      │
+      ▼ requests.get()
+Top-Level Schema Check
+      │
+      ▼ pd.json_normalize()
+Flattened 2D Dataframe</pre>
+              </div>
+              <div class="diag-card">
+                <h5>2. Lakehouse Engine (Spark)</h5>
+                <pre>Raw Data ──► Bronze (Parquet)
+      │      [Strict DDL StructType]
+      ▼
+Delta Lake ──► Silver (Cleaned)
+             [DeltaTable.merge() Upsert]
+             [Quarantine Stringified JSON]</pre>
+              </div>
+              <div class="diag-card">
+                <h5>3. Analysis &amp; BI Layer</h5>
+                <pre>Advanced Pandas MultiIndex
+  • Cartesian Grid (from_product)
+  • Slicing (pd.IndexSlice, .xs)
+  • Broadcasting (transform)
+        │
+        ▼ Power BI
+Star Schema (1:*) + Dynamic DAX</pre>
+              </div>
+            </div>
           </div>
 
-          <h3>Golden Rules for the DAV Lab Exam</h3>
-          <ul>
-            <li><strong>Rule 1 (Never Trust Inferred JSON Schemas):</strong> When reading API or clickstream JSON in Spark, always define an explicit <code>StructType</code>. If a field contains mixed types (nested object on Day 1, error string on Day 2), force it to <code>StringType()</code> in Bronze and extract fields safely downstream using <code>get_json_object()</code>.</li>
-            <li><strong>Rule 2 (Delta Lake Modes Matter):</strong> Use <code>mode("overwrite")</code> ONLY for initial full table creation or static Gold summary reports. For incremental batch updates, use <code>mode("append")</code> in Bronze and <code>merge()</code> (Upsert) in Silver to prevent duplicating historical primary keys.</li>
-            <li><strong>Rule 3 (MultiIndexes MUST be Lexicographically Sorted):</strong> In Pandas, never attempt range slicing (e.g. <code>pd.IndexSlice[:, '21730':'22752', :]</code>) on an unsorted index. It will throw an immediate <code>UnsortedIndexError</code>. Always call <code>.sort_index()</code> first.</li>
-            <li><strong>Rule 4 (Measures Over Calculated Columns in DAX):</strong> Never calculate ratios (like Profit Margin or Unit Price) as row-level calculated columns and then aggregate them with <code>AVERAGE()</code>. An average of ratios is mathematically invalid. Always create dynamic DAX measures using <code>DIVIDE(SUM(Numerator), SUM(Denominator))</code>.</li>
-            <li><strong>Rule 5 (Continuous Calendar Dimension is Mandatory):</strong> Time intelligence and monthly trend lines in Power BI require an official Date table marked as such, with text month names explicitly sorted by an integer <code>Month Number</code> to prevent alphabetical sorting ("Apr", "Aug", "Dec").</li>
-          </ul>
+          <h3>The 5 Cardinal Sins of the DAV Lab Exam</h3>
+          <div class="warning-box">
+            <div class="callout-label">Avoid These Common Mistakes That Cost 80% of Marks</div>
+            <ol>
+              <li><strong>Inferring schema automatically in PySpark:</strong> Never do <code>spark.read.option("inferSchema", "true").json(...)</code> on mixed-type or schema-drifting files. It crashes runtime executors. Always use strict <code>StructType</code> DDL!</li>
+              <li><strong>Slicing unsorted MultiIndexes in Pandas:</strong> Slicing ranges on an unsorted index throws <code>UnsortedIndexError</code>. You must call <code>df.sort_index(inplace=True)</code> before slicing!</li>
+              <li><strong>Modifying DataFrame slices without <code>.copy()</code>:</strong> Filtering a DataFrame and mutating it raises <code>SettingWithCopyWarning</code> and causes silent bugs. Always append <code>.copy()</code>!</li>
+              <li><strong>Averaging pre-aggregated ratios in Power BI:</strong> Creating a calculated column <code>Margin = Profit / Revenue</code> and doing <code>AVERAGE(Margin)</code> commits the Ratio Fallacy. Always use a DAX measure: <code>DIVIDE(SUM(Profit), SUM(Revenue))</code>!</li>
+              <li><strong>Forgetting to sort Month Names by Month Number:</strong> In Power BI, months sort alphabetically ("Apr", "Aug", "Dec") unless you select the column and click <em>Sort by Column &rarr; MonthNumber</em>.</li>
+            </ol>
+          </div>
 
           <div class="note-box">
-            <div class="callout-label">Exam Strategy &amp; Tool Setup</div>
-            Before the exam starts:
-            <ol>
-              <li>Open Google Colab (for API and Pandas sections).</li>
-              <li>Launch your Databricks Community Edition cluster (takes ~3 minutes to spin up).</li>
-              <li>Launch Power BI Desktop and verify the Excel/CSV connector is responsive.</li>
-            </ol>
+            <div class="callout-label">3-Minute Pre-Exam Environment Checklist</div>
+            Before the professor distributes the exam prompt:
+            <ul>
+              <li><strong>Databricks:</strong> Start your Community Edition cluster immediately (spins up in ~3-4 minutes).</li>
+              <li><strong>Google Colab / Jupyter:</strong> Open a notebook, run <code>import pandas as pd, numpy as np, requests, json</code>.</li>
+              <li><strong>Power BI Desktop:</strong> Launch Power BI, ensure the CSV/Excel connector responds without hanging.</li>
+            </ul>
           </div>
 
           <div class="summary-box">
             <h4>Topic 1 Recap</h4>
             <ul>
-              <li>The exam spans 4 toolsets: Python API $\rightarrow$ PySpark Medallion $\rightarrow$ Pandas MultiIndex $\rightarrow$ Power BI.</li>
-              <li>Explicit typing prevents schema drift crashes in Spark; lexicographical sorting prevents slice crashes in Pandas.</li>
-              <li>In Power BI, clean in Power Query, model 1-to-many star relationships, and use dynamic DAX measures.</li>
+              <li>Follow the 5 phases in strict chronological order to avoid downstream data contract mismatches.</li>
+              <li>Lakehouses require explicit typing; MultiIndexes require lexicographical sorting.</li>
+              <li>DAX requires dynamic filter context measures, never averaged row-level ratios.</li>
             </ul>
           </div>
+
+          <h3>Self-Test Practice Questions</h3>
+          <details>
+            <summary>Q1: Why does performing a groupby followed by reindex against a Cartesian grid expose "silent absences"?</summary>
+            <div class="example">
+              <strong>Worked Solution:</strong> Standard <code>.groupby()</code> only groups rows that actually exist in the raw transaction log. If a store sold zero units of a product in March, that combination never appears. Generating a Cartesian product of all stores $\times$ all products $\times$ all months with <code>pd.MultiIndex.from_product()</code> and reindexing against it forces missing combinations into the index, filled with <code>0</code> via <code>fill_value=0</code>.
+            </div>
+          </details>
+          <details>
+            <summary>Q2: What is the difference between Delta Lake append mode and a DeltaTable merge upsert?</summary>
+            <div class="example">
+              <strong>Worked Solution:</strong> <code>.write.format("delta").mode("append").save()</code> blindly appends incoming batch rows, resulting in duplicate primary keys if rows were re-sent or updated. <code>DeltaTable.merge()</code> matches on primary key: if matched, it updates the existing record (SCD Type 1); if not matched, it inserts the new record, guaranteeing exactly-once primary key integrity.
+            </div>
+          </details>
+          <details>
+            <summary>Q3: Why is <code>AVERAGE(Sales[ProfitMargin])</code> statistically invalid in Power BI?</summary>
+            <div class="example">
+              <strong>Worked Solution:</strong> It calculates an unweighted arithmetic mean of ratios. A $10 order with 50% margin is weighted identically to a $1,000,000 order with 2% margin, distorting total company margin (Simpson's Paradox). The valid measure is <code>DIVIDE(SUM(Sales[Profit]), SUM(Sales[Revenue]))</code>.
+            </div>
+          </details>
         </div>
 
         <!-- ═══════════════════════════════════════════════════════
-         TOPIC 2: LAB 2 SEQUENTIAL PIPELINE — REST APIS & JSON
+         TOPIC 2: REST APIS & DEEP NESTED JSON
          ═══════════════════════════════════════════════════════ -->
         <div class="topic-card" id="topic-2">
-          <h2><span class="topic-num">2</span>Lab 2: APIs, Deep JSON &amp; Flattening</h2>
-          <p class="topic-subtitle">Handling REST payloads, arbitrary-depth recursive key extraction &amp; safe normalization</p>
+          <h2><span class="topic-num">2</span>REST APIs &amp; Deep Nested JSON</h2>
+          <p class="topic-subtitle">HTTP response verification, arbitrary recursive key discovery &amp; robust JSON flattening</p>
 
-          <span class="seq-badge">Workflow 1 • Ingestion to Analysis-Ready DataFrame</span>
-          <span class="query-pill pill-api">Requests</span>
-          <span class="query-pill pill-pandas">Pandas Normalization</span>
+          <span class="seq-badge">Phase 1 • Web Ingestion</span>
+          <span class="query-pill pill-api">requests</span>
+          <span class="query-pill pill-pandas">json_normalize</span>
 
           <p>
-            REST APIs return data formatted as JSON (JavaScript Object Notation). While JSON is flexible for web services, analytical algorithms require tabular 2D structures (rows and columns). In this lab, you must connect to an endpoint, validate the HTTP response, recursively map arbitrary-depth hierarchies, and flatten the nested dictionary into an analysis-ready DataFrame without crashing when keys are missing.
+            REST APIs deliver hierarchical JSON payloads. Tabular models require 2D rows and columns. In the exam, you must query an endpoint, validate response health, inspect nested schemas of arbitrary depth, and flatten records safely even when keys vary across items.
           </p>
 
-          <div class="flow-card">
-            <div class="flow-title">⚡ Sequential Steps for Lab 2 Execution</div>
-            <div class="flow-steps">
-              <div class="step-item active-step"><span class="step-num">STEP 1</span>requests.get()<br>Status check</div>
-              <div class="step-item"><span class="step-num">STEP 2</span>Inspect Schema<br>Types &amp; lengths</div>
-              <div class="step-item"><span class="step-num">STEP 3</span>Recursive Traversal<br>extract_all_keys</div>
-              <div class="step-item"><span class="step-num">STEP 4</span>json_normalize()<br>sep="_"</div>
-              <div class="step-item"><span class="step-num">STEP 5</span>Safe Column Subset<br>Defensive select</div>
-              <div class="step-item"><span class="step-num">STEP 6</span>Derived Metrics<br>Filter &amp; Export</div>
-            </div>
+          <div class="syntax-card">
+            <div class="func-sig">requests.get(url, params=None, headers=None, timeout=10)</div>
+            <div class="func-desc">Sends an HTTP GET request to fetch remote data. Always specify <code>timeout</code> to prevent hanging on slow university connections.</div>
+            <table class="param-table">
+              <tr><th>Parameter</th><th>Type</th><th>Exam Role</th></tr>
+              <tr><td><code>url</code></td><td><code>str</code></td><td>The REST endpoint URL (e.g. <code>https://randomuser.me/api/?results=100</code>).</td></tr>
+              <tr><td><code>timeout</code></td><td><code>float/int</code></td><td>Maximum seconds to wait. Always pass <code>timeout=10</code>.</td></tr>
+            </table>
           </div>
 
-          <h3>Step 1 &amp; 2: Fetching API Data &amp; Top-Level Schema Inspection</h3>
+          <div class="syntax-card">
+            <div class="func-sig">pd.json_normalize(data, record_path=None, meta=None, sep='_')</div>
+            <div class="func-desc">Flattens nested JSON dicts/lists into a 2D Pandas DataFrame with flattened column names.</div>
+            <table class="param-table">
+              <tr><th>Parameter</th><th>Type</th><th>Exam Role</th></tr>
+              <tr><td><code>data</code></td><td><code>dict / list</code></td><td>The parsed JSON object (e.g. <code>response.json()['results']</code>).</td></tr>
+              <tr><td><code>record_path</code></td><td><code>str / list</code></td><td>Path to nested list if flattening embedded sub-arrays (e.g. order items).</td></tr>
+              <tr><td><code>sep</code></td><td><code>str</code></td><td>Separator for nested keys. Default is <code>.</code>, but exam standard is <code>sep='_'</code>.</td></tr>
+            </table>
+          </div>
+
+          <h3>Step-by-Step API Extraction &amp; Recursive Schema Discovery</h3>
           <p>
-            Never call <code>response.json()</code> without checking <code>response.status_code</code> first. If the endpoint returns a 404 (Not Found) or 500 (Internal Server Error), parsing raw HTML error text as JSON will crash your script.
+            Before flattening, you must inspect the structure without crashing. Here is the exam-tested defensive code template:
           </p>
 
           <div class="example">
-            <div class="example-title">Step 1 &amp; 2 Exam Code: API Request &amp; Schema Inspector</div>
+            <div class="example-title">API Extraction &amp; Recursive Schema Scanner</div>
             <pre><code>import requests
 import json
 import pandas as pd
 
-url = "https://randomuser.me/api/?results=10"
+url = "https://randomuser.me/api/?results=5"
 response = requests.get(url, timeout=10)
 
-# STEP 1: Verify Status Code
+# STEP 1: Defensive HTTP Status Validation
 if response.status_code != 200:
-    print(f"Error: API request failed with status code {response.status_code}")
-    exit()
+    raise RuntimeError(f"API Request Failed: HTTP {response.status_code}")
 
-data = response.json()
+payload = response.json()
+records = payload.get('results', [])
 
-# STEP 2: Top-level Schema Inspection Function
-def inspect_top_level_schema(payload):
-    print(f"{'Key':<15} | {'Type':<12} | {'Details'}")
-    print("-" * 50)
-    for key, value in payload.items():
-        v_type = type(value).__name__
-        details = ""
-        if isinstance(value, list):
-            elem_type = type(value[0]).__name__ if len(value) > 0 else "None"
-            details = f"Length: {len(value)}, First elem: {elem_type}"
-        elif isinstance(value, dict):
-            details = f"Sub-keys: {list(value.keys())}"
-        print(f"{key:<15} | {v_type:<12} | {details}")
-
-inspect_top_level_schema(data)</code></pre>
-          </div>
-
-          <h3>Step 3: Recursive Deep Traversal (`extract_all_keys`)</h3>
-          <div class="definition">
-            <div class="def-title">Recursive JSON Traversal</div>
-            <p><strong>Formal Statement:</strong> A function $f(x)$ that inspects object $x$: if $x$ is a dictionary, $f$ adds all keys to a global set and recursively calls $f(v)$ for each value $v$; if $x$ is a list, $f$ calls $f(i)$ for each item $i$ in the list.</p>
-            <p><strong>Intuitive One-Liner:</strong> Drills down through infinite layers of Russian nesting dolls (dicts inside lists inside dicts) and brings back a list of every single field name.</p>
-          </div>
-
-          <div class="example">
-            <div class="example-title">Step 3 Exam Code: Universal Recursive Key Extractor</div>
-            <pre><code>def extract_all_keys(obj, key_set=None):
-    if key_set is None:
-        key_set = set()
-    
+# STEP 2: Recursive Arbitrary-Depth Key Scanner
+def get_all_keys(obj, prefix=''):
+    keys = []
     if isinstance(obj, dict):
         for k, v in obj.items():
-            key_set.add(k)
-            extract_all_keys(v, key_set)
-    elif isinstance(obj, list):
-        for item in obj:
-            extract_all_keys(item, key_set)
-            
-    return key_set
+            full_key = f"{prefix}.{k}" if prefix else k
+            keys.append(full_key)
+            keys.extend(get_all_keys(v, full_key))
+    elif isinstance(obj, list) and len(obj) > 0:
+        keys.extend(get_all_keys(obj[0], f"{prefix}[]"))
+    return keys
 
-unique_keys = sorted(list(extract_all_keys(data)))
-print(f"Total Unique Keys Found: {len(unique_keys)}")
-print("Sample Keys:", unique_keys[:10])</code></pre>
+print("Discovered Keys in First Record:")
+print(get_all_keys(records[0])[:8])
+
+# STEP 3: Safe Flattening with Underscore Separators
+df_flat = pd.json_normalize(records, sep='_')
+
+# STEP 4: Defensive Column Selection (Never crash on missing keys!)
+desired_cols = ['gender', 'name_first', 'name_last', 'location_city', 'location_country', 'dob_age']
+available_cols = [c for c in desired_cols if c in df_flat.columns]
+df_clean = df_flat[available_cols].copy()
+
+print(df_clean.head(2))</code></pre>
           </div>
 
-          <h3>Step 4 &amp; 5: Flattening with `json_normalize` &amp; Safe Subset Selection</h3>
-          <p>
-            <code>pd.json_normalize()</code> unpacks nested dictionaries into dotted or underscored column names (e.g., <code>{"location": {"city": "Lahore"}}</code> becomes <code>location_city</code>).
-            In production and exams, APIs frequently omit null keys. If you write <code>df[['name_first', 'email', 'missing_col']]</code>, Pandas will raise a <code>KeyError</code>. You must use defensive list comprehensions.
-          </p>
-
-          <div class="example">
-            <div class="example-title">Step 4 &amp; 5 Exam Code: Normalization &amp; Safe Column Selection</div>
-            <pre><code># STEP 4: Flatten the results array with underscore separator
-df_users = pd.json_normalize(data['results'], sep="_")
-print(f"DataFrame Shape: {df_users.shape}")
-
-# STEP 5: Defensive Column Selection (Crash-Proof)
-desired_columns = [
-    'name_first', 'name_last', 'email', 
-    'phone', 'location_city', 'location_country'
-]
-
-# Error handling requirement: Only select columns that actually exist
-available_cols = [col for col in desired_columns if col in df_users.columns]
-missing_cols = set(desired_columns) - set(available_cols)
-
-if missing_cols:
-    print(f"Warning: Missing columns from payload: {missing_cols}")
-
-df_contacts = df_users[available_cols].copy()
-print(df_contacts.head())</code></pre>
-          </div>
-
-          <h3>Step 6: Transformation, Multi-Condition Filtering &amp; Export</h3>
-          <div class="example">
-            <div class="example-title">Step 6 Exam Code: Business Logic &amp; CSV Export (DummyJSON Example)</div>
-            <pre><code># Fetch 30 products from DummyJSON
-res_prod = requests.get("https://dummyjson.com/products?limit=30").json()
-df_prod = pd.json_normalize(res_prod['products'])
-
-# Calculate discounted price formula: price * (1 - discountPercentage / 100)
-df_prod['discounted_price'] = (
-    df_prod['price'] * (1 - (df_prod['discountPercentage'] / 100))
-).round(2)
-
-# Multi-condition boolean filtering:
-# 1. category is 'beauty' OR 'smartphones'
-# 2. rating >= 4.5
-# 3. stock > 0
-cond_category = df_prod['category'].isin(['beauty', 'smartphones'])
-cond_rating   = df_prod['rating'] >= 4.5
-cond_stock    = df_prod['stock'] > 0
-
-df_filtered = df_prod[cond_category & cond_rating & cond_stock].copy()
-
-# Summary Aggregation by Category
-df_summary = df_filtered.groupby('category').agg(
-    total_products=('id', 'count'),
-    avg_price=('price', 'mean'),
-    avg_rating=('rating', 'mean'),
-    total_stock=('stock', 'sum')
-).reset_index()
-
-# Export both outputs to CSV
-df_filtered.to_csv("filtered_products.csv", index=False)
-df_summary.to_csv("category_summary.csv", index=False)
-print("Files exported successfully!")</code></pre>
-          </div>
-
-          <div class="warning-box">
-            <div class="callout-label">Common Student Mistake in Lab 2</div>
-            Writing bitwise boolean conditions in Pandas without parentheses: <code>df_prod[df_prod['rating'] &gt;= 4.5 &amp; df_prod['stock'] &gt; 0]</code> will fail with a <code>TypeError</code> because Python evaluates bitwise <code>&amp;</code> with higher precedence than comparison operators. Always wrap each individual condition in parentheses: <code>(cond1) &amp; (cond2)</code>.
+          <div class="result-preview">
+Discovered Keys in First Record:
+['gender', 'name', 'name.title', 'name.first', 'name.last', 'location', 'location.street', 'location.city']
+   gender name_first name_last location_city location_country  dob_age
+0  female    Eleanor      Ross        Dundee   United Kingdom       44
+1    male      Lucas   Schmidt        Berlin          Germany       32
           </div>
 
           <div class="summary-box">
             <h4>Topic 2 Recap</h4>
             <ul>
-              <li>Always check <code>response.status_code == 200</code> before parsing.</li>
-              <li><code>extract_all_keys</code> uses recursion on dicts (iterate items) and lists (iterate elements).</li>
-              <li><code>pd.json_normalize(data, sep='_')</code> flattens nested dicts into underscore columns.</li>
-              <li>Select subsets using list comprehension <code>[c for c in target if c in df.columns]</code> to prevent KeyErrors.</li>
+              <li>Always check <code>response.status_code == 200</code> before parsing <code>.json()</code>.</li>
+              <li>Use <code>pd.json_normalize(records, sep='_')</code> to convert nested dicts into tabular columns.</li>
+              <li>Defensively filter columns using list comprehensions so unexpected missing keys do not raise <code>KeyError</code>.</li>
             </ul>
           </div>
+
+          <h3>Self-Test Practice Questions</h3>
+          <details>
+            <summary>Q1: Why is <code>sep='_'</code> preferred over <code>sep='.'</code> in <code>pd.json_normalize</code>?</summary>
+            <div class="example">
+              <strong>Worked Solution:</strong> Dots (<code>.</code>) in column names break SQL engines, Spark schemas, and Pandas dot-accessors (e.g. <code>df.location.city</code> will fail or be ambiguous). Underscores (<code>_</code>) guarantee SQL and Delta Lake compatibility.
+            </div>
+          </details>
+          <details>
+            <summary>Q2: What happens if an API returns an HTTP 500 error and you immediately call <code>response.json()</code>?</summary>
+            <div class="example">
+              <strong>Worked Solution:</strong> An HTTP 500 response usually returns an HTML error page or raw string text, not valid JSON. Calling <code>response.json()</code> immediately throws a <code>json.decoder.JSONDecodeError</code>, abruptly terminating execution.
+            </div>
+          </details>
+          <details>
+            <summary>Q3: How do you extract nested arrays inside JSON objects using <code>json_normalize</code>?</summary>
+            <div class="example">
+              <strong>Worked Solution:</strong> Use the <code>record_path</code> argument. For example, if each user has a list of orders in <code>data['orders']</code>, call <code>pd.json_normalize(data, record_path=['orders'], meta=['user_id', 'user_name'])</code>.
+            </div>
+          </details>
         </div>
 
         <!-- ═══════════════════════════════════════════════════════
-         TOPIC 3: LAB 3 SEQUENTIAL PIPELINE — MEDALLION & UPSERT
+         TOPIC 3: DATABRICKS MEDALLION & DELTA UPSERT
          ═══════════════════════════════════════════════════════ -->
         <div class="topic-card" id="topic-3">
-          <h2><span class="topic-num">3</span>Lab 3: Databricks Medallion &amp; Delta Upsert</h2>
-          <p class="topic-subtitle">Building Bronze, Silver &amp; Gold layers, Schema Enforcement &amp; Delta Lake Upserts</p>
+          <h2><span class="topic-num">3</span>Databricks Medallion &amp; Delta Upsert</h2>
+          <p class="topic-subtitle">Architecting Bronze, Silver &amp; Gold tiers with strict Schema-on-Read and ACID Delta merges</p>
 
-          <span class="seq-badge">Workflow 2 • Enterprise Lakehouse Pipeline</span>
-          <span class="query-pill pill-spark">PySpark SQL</span>
-          <span class="query-pill pill-spark">Delta Lake Table</span>
+          <span class="seq-badge">Phase 2 &amp; 3 • Databricks PySpark</span>
+          <span class="query-pill pill-spark">Medallion</span>
+          <span class="query-pill pill-spark">Delta Lake</span>
 
           <p>
-            In modern data engineering, raw data is never queried directly by business analysts. Instead, it moves through a <strong>Medallion Architecture</strong>:
-            <strong>Bronze (Raw Lake)</strong> preserves immutable incoming records with ingestion timestamps;
-            <strong>Silver (Enterprise Cleansed)</strong> enforces datatypes, drops invalid records, and deduplicates;
-            <strong>Gold (Business Aggregation)</strong> powers dashboards with pre-calculated KPI metrics.
+            In modern data engineering, raw data is never ingested directly into production reporting tables. Databricks utilizes the <strong>Medallion Architecture</strong> to systematically guarantee data quality across three distinct tiers.
           </p>
 
-          <div class="flow-card">
-            <div class="flow-title">⚡ Sequential Pipeline for Lab 3 Execution</div>
-            <div class="flow-steps">
-              <div class="step-item active-step"><span class="step-num">STEP 1</span>Workspace Setup<br>Test spark.range</div>
-              <div class="step-item"><span class="step-num">STEP 2</span>Explicit Schema<br>StructType DDL</div>
-              <div class="step-item"><span class="step-num">STEP 3</span>Bronze Table<br>Format Delta Mode Overwrite</div>
-              <div class="step-item"><span class="step-num">STEP 4</span>Silver Cleanse<br>Casting &amp; Quality Filters</div>
-              <div class="step-item"><span class="step-num">STEP 5</span>Gold Summaries<br>groupBy() &amp; agg()</div>
-              <div class="step-item"><span class="step-num">STEP 6</span>Day 2 Ingestion<br>Bronze Append &amp; Silver MERGE</div>
+          <div class="diagram-box">
+            <div class="diagram-title">🏛️ The Medallion Lakehouse Architecture</div>
+            <div class="grid-3col">
+              <div class="diag-card" style="border-top: 3px solid #cd7f32;">
+                <h5>BRONZE TIER (Raw Append)</h5>
+                <p style="font-size: 0.8rem; line-height: 1.5; color: var(--tx);">
+                  • Raw source format (JSON / CSV / Kafka)<br>
+                  • Strict Schema-on-Read via <code>StructType</code><br>
+                  • Audit metadata: <code>current_timestamp()</code><br>
+                  • Append-only (never overwrite historical raw logs)
+                </p>
+              </div>
+              <div class="diag-card" style="border-top: 3px solid #c0c0c0;">
+                <h5>SILVER TIER (Cleansed Upsert)</h5>
+                <p style="font-size: 0.8rem; line-height: 1.5; color: var(--tx);">
+                  • Deduplicated and type-cast<br>
+                  • Enforced Primary Keys via <code>DeltaTable.merge()</code><br>
+                  • Derived business attributes (e.g. status flags)<br>
+                  • Single source of truth for analytical entities
+                </p>
+              </div>
+              <div class="diag-card" style="border-top: 3px solid #ffd700;">
+                <h5>GOLD TIER (Aggregated BI)</h5>
+                <p style="font-size: 0.8rem; line-height: 1.5; color: var(--tx);">
+                  • Star Schema dimensional models (Fact / Dim)<br>
+                  • Pre-aggregated KPIs (Daily Sales, Monthly Churn)<br>
+                  • Highly optimized Parquet for Power BI / Tableau<br>
+                  • Overwritten or partitioned by calendar period
+                </p>
+              </div>
             </div>
           </div>
 
-          <h3>Step 1 &amp; 2: Databricks Setup &amp; Explicit Schema DDL</h3>
-          <p>
-            In Databricks, APIs like DummyJSON return fields like <code>discountPercentage</code> as integers (e.g. <code>15</code>) for some products and floating-point decimals (e.g. <code>10.5</code>) for others. If you let Spark infer schema automatically, it can fail or corrupt data types. You must define an explicit <code>StructType</code>.
-          </p>
+          <h3>1. Schema-on-Read: Enforcing Strict DDL</h3>
+          <div class="syntax-card">
+            <div class="func-sig">StructType([StructField(name, dataType, nullable)])</div>
+            <div class="func-desc">Defines explicit Spark schemas. Prevents catastrophic job failures caused by mixed primitive types during runtime inference.</div>
+          </div>
 
           <div class="example">
-            <div class="example-title">Step 2 Exam Code: Defining Explicit Schema-on-Read</div>
-            <pre><code>import json
-from pyspark.sql.types import (
-    StructType, StructField, IntegerType, StringType, 
-    DoubleType, ArrayType, MapType
-)
-from pyspark.sql.functions import col, lit, current_timestamp, round, when, count, avg, sum as _sum
+            <div class="example-title">Bronze Tier Ingestion with Explicit DDL &amp; Audit Metadata</div>
+            <pre><code>from pyspark.sql.types import StructType, StructField, StringType, IntegerType, DoubleType, TimestampType
+from pyspark.sql.functions import current_timestamp, col
 
-# Define explicit schema to handle mixed int/double types
-product_schema = StructType([
-    StructField("id", IntegerType(), True),
-    StructField("title", StringType(), True),
-    StructField("category", StringType(), True),
-    StructField("price", DoubleType(), True),
-    StructField("discountPercentage", DoubleType(), True), # Mixed int/float in source
-    StructField("rating", DoubleType(), True),
-    StructField("stock", IntegerType(), True),
-    StructField("brand", StringType(), True),
-    StructField("availabilityStatus", StringType(), True),
-    StructField("minimumOrderQuantity", IntegerType(), True)
+# STEP 1: Define Explicit Schema-on-Read
+bronze_schema = StructType([
+    StructField("order_id", StringType(), False),
+    StructField("customer_id", StringType(), True),
+    StructField("order_date", StringType(), True),
+    StructField("amount", DoubleType(), True),
+    StructField("status", StringType(), True)
 ])
 
-# Read raw file or array into Spark DataFrame
-with open("/Volumes/workspace/default/products/products.json") as f:
-    raw_json = json.load(f)
+# STEP 2: Read Raw Stream / JSON with Enforced Schema
+df_raw = spark.read.schema(bronze_schema).json("/FileStore/tables/raw_orders.json")
 
-products_list = raw_json["products"]
-bronze_raw_df = spark.createDataFrame(products_list, schema=product_schema)
-bronze_raw_df.printSchema()</code></pre>
+# STEP 3: Append Audit Metadata Column
+df_bronze = df_raw.withColumn("ingest_timestamp", current_timestamp())
+
+# STEP 4: Write to Bronze Delta Table (Append-only)
+df_bronze.write.format("delta").mode("append").save("/mnt/lakehouse/bronze_orders")</code></pre>
           </div>
 
-          <h3>Step 3: Writing the Bronze Delta Table</h3>
+          <h3>2. Silver Tier: The Ultimate Delta Table Merge (Upsert)</h3>
           <p>
-            The Bronze layer must never destroy incoming raw data. It stores raw payloads along with two mandatory audit columns: <code>ingestion_time</code> (when it arrived) and <code>source</code> (where it came from).
+            If a customer updates their order status from <em>PENDING</em> to <em>COMPLETED</em>, appending the row creates a duplicate primary key. A blind overwrite erases all other orders. You must perform an <strong>ACID Upsert</strong> via <code>DeltaTable.merge()</code>.
           </p>
 
-          <div class="example">
-            <div class="example-title">Step 3 Exam Code: Bronze Ingestion with Delta Lake</div>
-            <pre><code>bronze_df = (
-    bronze_raw_df
-    .withColumn("ingestion_time", current_timestamp())
-    .withColumn("source", lit("DummyJSON Products API"))
-)
-
-# Overwrite mode for initial full load
-bronze_df.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .saveAsTable("bronze_products")
-
-# Verification
-spark.sql("SELECT COUNT(*) AS total_bronze FROM bronze_products").show()</code></pre>
-          </div>
-
-          <h3>Step 4: Silver Layer — Data Cleansing &amp; Quality Filtering</h3>
-          <p>
-            In Silver, you select relevant attributes, standardize naming to snake_case, enforce numeric types, apply business validation filters, and calculate derived fields.
-          </p>
-
-          <div class="example">
-            <div class="example-title">Step 4 Exam Code: Silver Cleansing &amp; Quality Filtering</div>
-            <pre><code>silver_df = (
-    spark.table("bronze_products")
-    .select(
-        col("id").cast("integer").alias("product_id"),
-        col("title"),
-        col("category"),
-        col("brand"),
-        col("price").cast("double"),
-        col("discountPercentage").cast("double").alias("discount_percentage"),
-        col("rating").cast("double"),
-        col("stock").cast("integer"),
-        col("ingestion_time")
-    )
-    # Business Data Quality Filters:
-    .filter(col("price") > 0)
-    .filter((col("rating") >= 0) & (col("rating") <= 5))
-    .filter(col("stock") >= 0)
-    # Business Calculations:
-    .withColumn("discounted_price", round(col("price") * (1 - col("discount_percentage") / 100), 2))
-    .withColumn(
-        "stock_status",
-        when(col("stock") == 0, "Out of Stock")
-        .when(col("stock") < 20, "Low Stock")
-        .otherwise("In Stock")
-    )
-)
-
-# Save Cleansed Silver Table
-silver_df.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .saveAsTable("silver_products")
-
-display(spark.table("silver_products").limit(5))</code></pre>
-          </div>
-
-          <h3>Step 5: Gold Layer — Business KPI Reporting</h3>
-          <div class="example">
-            <div class="example-title">Step 5 Exam Code: Gold Aggregations (Category &amp; Brand Summaries)</div>
-            <pre><code># Category Summary
-gold_category_df = (
-    spark.table("silver_products")
-    .groupBy("category")
-    .agg(
-        count("product_id").alias("total_products"),
-        round(avg("price"), 2).alias("average_price"),
-        round(avg("rating"), 2).alias("average_rating"),
-        _sum("stock").alias("total_stock")
-    )
-    .orderBy(col("total_products").desc())
-)
-
-gold_category_df.write \
-    .format("delta") \
-    .mode("overwrite") \
-    .saveAsTable("gold_category_summary")
-
-display(spark.table("gold_category_summary"))</code></pre>
-          </div>
-
-          <h3>Step 6: Day 2 Incremental Ingestion &amp; Delta Lake Upsert (`MERGE`)</h3>
-          <div class="definition">
-            <div class="def-title">Delta Lake Upsert (`MERGE INTO`)</div>
-            <p><strong>Formal Statement:</strong> A single atomic operation that joins incoming batch data with an existing Delta table on a matching primary key: rows that match are updated with new values (<code>whenMatchedUpdateAll</code>), and rows that do not match are inserted as new records (<code>whenNotMatchedInsertAll</code>).</p>
-            <p><strong>Intuitive One-Liner:</strong> Updates old records that changed and inserts brand new records, guaranteeing zero duplicate primary keys.</p>
+          <div class="syntax-card">
+            <div class="func-sig">delta_table.alias("t").merge(df_source.alias("s"), condition).whenMatchedUpdate(...).whenNotMatchedInsert(...).execute()</div>
+            <div class="func-desc">Atomically updates existing records and inserts brand new records in a single transactional commit.</div>
           </div>
 
           <div class="example">
-            <div class="example-title">Step 6 Exam Code: Bronze Append &amp; Silver MERGE Upsert</div>
+            <div class="example-title">Silver Delta Merge (Upsert) Implementation</div>
             <pre><code>from delta.tables import DeltaTable
 
-# 1. Simulate Day 2 Incoming Batch (contains new IDs 195-198 AND updated IDs 1, 2)
-# Convert day2_data list to Spark DataFrame
-day2_df = spark.createDataFrame(day2_data) \
-    .withColumn("ingestion_batch", lit("day2")) \
-    .withColumn("ingestion_time", current_timestamp())
+# Path to existing Silver Delta table
+silver_path = "/mnt/lakehouse/silver_orders"
 
-# 2. Append to Bronze Table (Bronze stores all historical events!)
-day2_df.write \
-    .format("delta") \
-    .mode("append") \
-    .saveAsTable("bronze_incremental_products")
+# If table does not exist, create it from initial batch:
+# df_bronze.write.format("delta").save(silver_path)
 
-# 3. Clean Day 2 batch before Silver Merge
-day2_cleaned_df = (
-    day2_df
-    .filter(col("price") > 0)
-    .filter((col("rating") >= 0) & (col("rating") <= 5))
-    .filter(col("stock") >= 0)
-    .withColumn("product_id", col("id").cast("integer"))
-    .withColumn("discount_percentage", col("discountPercentage").cast("double"))
-    .withColumn("discounted_price", round(col("price") * (1 - col("discountPercentage") / 100), 2))
-    .select("product_id", "title", "category", "brand", "price", 
-            "discount_percentage", "discounted_price", "rating", "stock", "ingestion_time")
-)
+# Load existing Silver table as DeltaTable object
+silver_table = DeltaTable.forPath(spark, silver_path)
 
-# 4. Execute the Atomic MERGE Upsert into Silver
-silver_target_table = DeltaTable.forName(spark, "silver_incremental_products")
+# Incoming updates batch from Bronze
+df_incoming = df_bronze.dropDuplicates(["order_id"])
 
-(
-    silver_target_table.alias("tgt")
-    .merge(
-        day2_cleaned_df.alias("src"),
-        "tgt.product_id = src.product_id"
-    )
-    .whenMatchedUpdateAll()
-    .whenNotMatchedInsertAll()
-    .execute()
-)
+# Execute Atomic Upsert (Merge)
+silver_table.alias("target").merge(
+    source=df_incoming.alias("source"),
+    condition="target.order_id = source.order_id"
+).whenMatchedUpdate(set={
+    "target.status": col("source.status"),
+    "target.amount": col("source.amount"),
+    "target.order_date": col("source.order_date"),
+    "target.last_updated": current_timestamp()
+}).whenNotMatchedInsert(values={
+    "order_id": col("source.order_id"),
+    "customer_id": col("source.customer_id"),
+    "order_date": col("source.order_date"),
+    "amount": col("source.amount"),
+    "status": col("source.status"),
+    "last_updated": current_timestamp()
+}).execute()
 
-# 5. Verification Query: Zero Duplicates Allowed!
-print("Duplicate Verification:")
-spark.sql("""
-    SELECT product_id, COUNT(*) AS occurrences
-    FROM silver_incremental_products
-    GROUP BY product_id
-    HAVING COUNT(*) > 1
-""").show()</code></pre>
-          </div>
-
-          <div class="note-box">
-            <div class="callout-label">Expected Row Count Logic in Lab 3 Exam</div>
-            Suppose Day 1 has 194 products. Day 2 brings 6 products: 4 brand new products (IDs 195–198) and 2 updates to existing products (IDs 1 and 2).
-            <ul>
-              <li><strong>Bronze Count:</strong> $194 + 6 = 200$ rows (Append mode keeps everything, including duplicate historical snapshots).</li>
-              <li><strong>Silver Count:</strong> $194 + 4 = 198$ rows (Upsert merges IDs 1 and 2 in place, inserting only the 4 new IDs).</li>
-            </ul>
+print("Silver Upsert Merge Completed Successfully!")</code></pre>
           </div>
 
           <div class="summary-box">
             <h4>Topic 3 Recap</h4>
             <ul>
-              <li>Bronze preserves raw records with <code>ingestion_time</code>; Silver enforces types, cleans, and deduplicates.</li>
-              <li>Define explicit <code>StructType</code> to avoid mixed int/double type mismatch in JSON.</li>
-              <li>Bronze uses <code>mode("append")</code>; Silver uses <code>DeltaTable.merge()</code> with <code>whenMatchedUpdateAll</code> and <code>whenNotMatchedInsertAll</code>.</li>
+              <li>Bronze: Ingest raw data with explicit <code>StructType</code> and append <code>current_timestamp()</code>.</li>
+              <li>Silver: Deduplicate primary keys and perform an ACID <code>DeltaTable.merge()</code>.</li>
+              <li>Gold: Create star schemas and aggregated KPI tables for direct Power BI consumption.</li>
             </ul>
           </div>
+
+          <h3>Self-Test Practice Questions</h3>
+          <details>
+            <summary>Q1: How does Delta Lake ensure ACID transactions under the hood?</summary>
+            <div class="example">
+              <strong>Worked Solution:</strong> Delta Lake pairs columnar Parquet storage files with an ordered, JSON-based transaction log directory called <code>_delta_log/</code>. Every write operation generates an atomic commit file. Readers only see records validated by the latest commit, preventing dirty reads or partial writes.
+            </div>
+          </details>
+          <details>
+            <summary>Q2: What is the risk of using <code>mode("overwrite")</code> on a Silver table?</summary>
+            <div class="example">
+              <strong>Worked Solution:</strong> Overwrite completely replaces the target table with only the records present in the current micro-batch. Any historical records not present in the current batch are wiped out.
+            </div>
+          </details>
+          <details>
+            <summary>Q3: When should you use <code>whenNotMatchedBySourceDelete()</code> in a Delta merge?</summary>
+            <div class="example">
+              <strong>Worked Solution:</strong> When implementing a full synchronization with an operational database. If records deleted in the source database must also be removed from the Delta table, <code>whenNotMatchedBySourceDelete()</code> deletes unmatched target rows.
+            </div>
+          </details>
         </div>
 
         <!-- ═══════════════════════════════════════════════════════
-         TOPIC 4: LAB 4 SEQUENTIAL PIPELINE — SCHEMA DRIFT & JOINS
+         TOPIC 4: SCHEMA DRIFT, STRINGIFIED JSON & JOINS
          ═══════════════════════════════════════════════════════ -->
         <div class="topic-card" id="topic-4">
-          <h2><span class="topic-num">4</span>Lab 4: Schema Drift, Stringified JSON &amp; Joins</h2>
-          <p class="topic-subtitle">Schema-on-Read defense against corrupted events, get_json_object &amp; distributed joins</p>
+          <h2><span class="topic-num">4</span>Schema Drift, Stringified JSON &amp; Joins</h2>
+          <p class="topic-subtitle">Handling mixed data types, JSONPath string extraction &amp; distributed Spark SQL joins</p>
 
-          <span class="seq-badge">Workflow 3 • Handling Corrupted Ingestion</span>
+          <span class="seq-badge">Phase 3 • Advanced PySpark</span>
           <span class="query-pill pill-spark">Schema Drift</span>
           <span class="query-pill pill-spark">get_json_object</span>
 
           <p>
-            In production data pipelines, upstream producers frequently break contracts. A field that was previously a JSON dictionary (e.g. <code>{"metadata": {"os": "android"}}</code>) suddenly arrives as a raw string error message (e.g. <code>{"metadata": "connection_error"}</code>). This is known as <strong>Schema Drift</strong>.
-            If you rely on default schema inference, your pipeline crashes. You must implement a <em>Schema-on-Read Defense</em>, clean the data in Silver, and execute distributed joins for the Gold layer.
+            In production pipelines, upstream sources frequently change their formats without notice (<strong>Schema Drift</strong>).
+            A column that was a nested JSON dictionary on Monday might arrive as an escaped JSON string or integer code on Tuesday. If Spark attempts to infer a unified schema across both files, it throws an <code>AnalysisException: Cannot resolve column conflicting types</code>.
           </p>
 
-          <div class="flow-card">
-            <div class="flow-title">⚡ Sequential Steps for Lab 4 Execution</div>
-            <div class="flow-steps">
-              <div class="step-item active-step"><span class="step-num">STEP 1</span>Schema Trap<br>Identify crash</div>
-              <div class="step-item"><span class="step-num">STEP 2</span>Schema-on-Read<br>Force StringType</div>
-              <div class="step-item"><span class="step-num">STEP 3</span>Silver Users<br>CSV upper(city)</div>
-              <div class="step-item"><span class="step-num">STEP 4</span>Silver Clicks<br>get_json_object &amp; bots</div>
-              <div class="step-item"><span class="step-num">STEP 5</span>Gold Join<br>Join clicks &amp; users</div>
-              <div class="step-item"><span class="step-num">STEP 6</span>Matplotlib<br>toPandas() Bar Chart</div>
-            </div>
+          <div class="definition">
+            <div class="def-title">The Quarantine Pattern for Conflicting Schema Drift</div>
+            <p><strong>Formal Statement:</strong> When incoming files contain incompatible structural types across partitions, read the drifting field as a plain <code>StringType()</code> in Bronze. Defer field parsing to Silver using JSONPath extraction.</p>
+            <p><strong>Intuitive One-Liner:</strong> Treat messy, changing data as dumb text first so your ingestion never crashes; surgically extract the clean pieces later!</p>
           </div>
 
-          <h3>Step 1 &amp; 2: The Schema Trap &amp; Schema-on-Read Defense</h3>
-          <p>
-            If you run <code>spark.read.json("/raw_clicks/")</code> on folders containing both Day 3 (metadata is Struct) and Day 4 (metadata is String), Spark throws <code>AnalysisException: Since Spark 2.3, the queries on raw JSON datasources fail when conflicting types are found</code>.
-            <strong>The Defense:</strong> Explicitly define <code>metadata</code> as <code>StringType()</code> in a <code>StructType</code>. Spark will read the JSON object as a literal stringified JSON, avoiding the crash.
-          </p>
+          <div class="syntax-card">
+            <div class="func-sig">get_json_object(col, "$.path.to.key")</div>
+            <div class="func-desc">Extracts scalar values from stringified or escaped JSON columns using standard JSONPath notation without compiling an explicit schema.</div>
+            <table class="param-table">
+              <tr><th>JSONPath Expression</th><th>Meaning</th><th>Exam Example</th></tr>
+              <tr><td><code>"$.user_id"</code></td><td>Top-level key in JSON string</td><td>Extracting account ID from raw clickstream log</td></tr>
+              <tr><td><code>"$.device.browser"</code></td><td>Nested dictionary field</td><td>Extracting nested browser from device telemetry</td></tr>
+              <tr><td><code>"$.items[0].sku"</code></td><td>First element of embedded list</td><td>Extracting primary product from order array</td></tr>
+            </table>
+          </div>
 
           <div class="example">
-            <div class="example-title">Step 2 Exam Code: Schema-on-Read Defense for Bronze Clicks</div>
-            <pre><code>from pyspark.sql.types import StructType, StructField, StringType
-from pyspark.sql.functions import col, upper, current_timestamp, get_json_object, count
-import matplotlib.pyplot as plt
+            <div class="example-title">Quarantine Ingestion &amp; get_json_object Extraction</div>
+            <pre><code>from pyspark.sql.functions import get_json_object, col, when
 
-# Explicit schema: metadata is STRICTLY read as StringType!
-click_schema = StructType([
-    StructField("event_id", StringType(), True),
-    StructField("user_id", StringType(), True),
-    StructField("action", StringType(), True),
-    StructField("metadata", StringType(), True),  # Neutralizes Struct vs String conflict!
-    StructField("timestamp", StringType(), True)
+# Day 1: {"event_id": "E1", "payload": {"device": "Mobile", "os": "iOS"}}
+# Day 2: {"event_id": "E2", "payload": "{\"device\": \"Desktop\", \"os\": \"Windows\"}"}
+
+# STEP 1: Quarantine by enforcing StringType on the drifting column
+drift_schema = StructType([
+    StructField("event_id", StringType(), False),
+    StructField("payload", StringType(), True)
 ])
 
-# Read directory containing both day3.json and day4.json
-bronze_clicks = (
-    spark.read
-    .schema(click_schema)
-    .json("/Workspace/Users/[your_email]/raw_clicks/")
-)
+df_drift = spark.read.schema(drift_schema).json("/FileStore/tables/clickstream_drifting/*.json")
 
-bronze_clicks.write.format("delta").mode("overwrite").saveAsTable("bronze_clicks")
-display(spark.table("bronze_clicks"))</code></pre>
+# STEP 2: Surgically extract attributes via get_json_object
+df_silver_clean = df_drift.withColumn(
+    "device_type", get_json_object(col("payload"), "$.device")
+).withColumn(
+    "os_name", get_json_object(col("payload"), "$.os")
+).select("event_id", "device_type", "os_name")
+
+df_silver_clean.show(2)</code></pre>
           </div>
 
-          <h3>Step 3: Silver Users (CSV Cleansing)</h3>
-          <div class="example">
-            <div class="example-title">Step 3 Exam Code: Ingesting &amp; Cleansing Users CSV</div>
-            <pre><code>silver_users = (
-    spark.read
-    .option("header", "true")
-    .csv("/Workspace/Users/[your_email]/users/directory.csv")
-    .withColumn("signup_city", upper(col("signup_city"))) # Standardize to UPPERCASE
-    .withColumn("ingestion_timestamp", current_timestamp())
-)
+          <h3>PySpark Distributed Joins &amp; Broadcast Optimization</h3>
+          <p>
+            When joining a massive fact table (10,000,000 rows) with a tiny dimension lookup table (50 rows, e.g. Country Codes or Category Names), a standard shuffle join sends millions of rows across the network.
+            You must use <code>broadcast()</code> to replicate the small table to every executor, eliminating network shuffle overhead.
+          </p>
 
-silver_users.write.format("delta").mode("overwrite").saveAsTable("silver_users")
-display(spark.table("silver_users"))</code></pre>
-          </div>
-
-          <h3>Step 4: Silver Clicks — Handling Stringified JSON &amp; Bot Filtering</h3>
-          <div class="definition">
-            <div class="def-title">PySpark `get_json_object` Function</div>
-            <p><strong>Formal Statement:</strong> <code>get_json_object(col, path)</code> evaluates a JSON path expression (e.g. <code>"$.os"</code>) against a column containing a stringified JSON payload.</p>
-            <p><strong>Intuitive One-Liner:</strong> Safely pulls a nested key out of a stringified JSON block; if the string is corrupt or missing (like <code>"connection_error"</code>), it gracefully returns <code>null</code> instead of crashing the job.</p>
+          <div class="syntax-card">
+            <div class="func-sig">df_fact.join(broadcast(df_dim), on="join_key", how="left")</div>
+            <div class="func-desc">Executes a Broadcast Hash Join. The small DataFrame is broadcast to all worker nodes in memory.</div>
           </div>
 
           <div class="example">
-            <div class="example-title">Step 4 Exam Code: Filtering Bots &amp; Safe JSON Extraction</div>
-            <pre><code>silver_clicks = (
-    spark.table("bronze_clicks")
-    # 1. Filter out bot crawlers (user_id containing 'bot')
-    .filter(~col("user_id").contains("bot"))
-    # 2. Boolean flag: True if action is checkout
-    .withColumn("is_checkout", col("action") == "checkout")
-    # 3. Extract the 'os' key from the stringified metadata column
-    .withColumn("os", get_json_object(col("metadata"), "$.os"))
+            <div class="example-title">Broadcast Hash Join Example</div>
+            <pre><code>from pyspark.sql.functions import broadcast
+
+# Large transaction log (Millions of rows)
+df_sales = spark.table("silver_sales")
+
+# Small lookup table (Country code to Region name, 30 rows)
+df_country_lookup = spark.read.csv("/FileStore/country_regions.csv", header=True)
+
+# Optimized Broadcast Join
+df_enriched = df_sales.join(
+    broadcast(df_country_lookup),
+    on="CountryCode",
+    how="left"
 )
 
-silver_clicks.write.format("delta").mode("overwrite").saveAsTable("silver_clicks")
-display(spark.table("silver_clicks"))</code></pre>
-          </div>
-
-          <h3>Step 5 &amp; 6: Gold Layer Distributed Join &amp; Matplotlib Visualization</h3>
-          <div class="example">
-            <div class="example-title">Step 5 &amp; 6 Exam Code: Distributed Join &amp; Bar Chart</div>
-            <pre><code># STEP 5: Join Silver Clicks with Silver Users on 'user_id'
-gold_checkout_locations = (
-    spark.table("silver_clicks")
-    .join(spark.table("silver_users"), "user_id")
-    .filter(col("is_checkout") == True)
-    .groupBy("signup_city")
-    .agg(count("event_id").alias("total_checkouts"))
-    .orderBy(col("total_checkouts").desc())
-)
-
-gold_checkout_locations.write.format("delta").mode("overwrite").saveAsTable("gold_checkout_locations")
-
-# STEP 6: Visualization Bridge via Pandas
-pdf = gold_checkout_locations.toPandas()
-
-plt.figure(figsize=(8, 4.5))
-plt.bar(pdf['signup_city'], pdf['total_checkouts'], color="#d97757")
-plt.title("Checkout Locations by City", fontsize=14, fontweight="bold")
-plt.xlabel("City", fontsize=11)
-plt.ylabel("Number of Checkouts", fontsize=11)
-plt.grid(axis='y', linestyle='--', alpha=0.7)
-plt.tight_layout()
-plt.show()</code></pre>
+df_enriched.write.format("delta").mode("overwrite").saveAsTable("gold_sales_by_region")</code></pre>
           </div>
 
           <div class="summary-box">
             <h4>Topic 4 Recap</h4>
             <ul>
-              <li>Schema drift occurs when data types change across days (e.g. Struct vs String).</li>
-              <li>Read corrupted JSON safely by forcing the drifting column to <code>StringType()</code> in an explicit schema.</li>
-              <li>Use <code>get_json_object(col("metadata"), "$.os")</code> to safely parse nested fields at runtime.</li>
-              <li>Gold tables join Silver tables on natural keys and convert to Pandas via <code>.toPandas()</code> for Matplotlib charts.</li>
+              <li>Neutralize schema drift by casting conflicting columns to <code>StringType()</code> in Bronze.</li>
+              <li>Extract nested attributes safely using <code>get_json_object(col, "$.key")</code>.</li>
+              <li>Always wrap small lookup tables in <code>broadcast()</code> when joining with large transaction DataFrames.</li>
             </ul>
           </div>
+
+          <h3>Self-Test Practice Questions</h3>
+          <details>
+            <summary>Q1: Why does Spark fail if Day 1 has <code>{"val": 100}</code> and Day 2 has <code>{"val": "N/A"}</code> under inferSchema?</summary>
+            <div class="example">
+              <strong>Worked Solution:</strong> Spark's automatic type inference cannot unify a primitive <code>IntegerType</code> with a primitive <code>StringType</code> within the same column across different input files, resulting in an <code>AnalysisException</code> during DAG resolution.
+            </div>
+          </details>
+          <details>
+            <summary>Q2: What is the maximum recommended size for a DataFrame passed to <code>broadcast()</code>?</summary>
+            <div class="example">
+              <strong>Worked Solution:</strong> The default Spark threshold is 10 MB (controlled by <code>spark.sql.autoBroadcastJoinThreshold</code>), but manually broadcast DataFrames should ideally remain under a few hundred megabytes to prevent driver and executor out-of-memory (OOM) errors.
+            </div>
+          </details>
+          <details>
+            <summary>Q3: What does <code>get_json_object</code> return if the specified JSONPath key does not exist?</summary>
+            <div class="example">
+              <strong>Worked Solution:</strong> It returns <code>NULL</code> (None) instead of throwing an exception, making it safe for defensive ETL.
+            </div>
+          </details>
         </div>
 
         <!-- ═══════════════════════════════════════════════════════
-         TOPIC 5: LAB 5 SEQUENTIAL PIPELINE — PANDAS MULTIINDEX
+         TOPIC 5: PANDAS CORE: CLEANING & HYGIENE
          ═══════════════════════════════════════════════════════ -->
         <div class="topic-card" id="topic-5">
-          <h2><span class="topic-num">5</span>Lab 5: Advanced Pandas &amp; MultiIndexing</h2>
-          <p class="topic-subtitle">Hierarchical indexing, IndexSlice, Cartesian grids, sorting traps &amp; level-wise transforms</p>
+          <h2><span class="topic-num">5</span>Pandas Core: Cleaning &amp; Hygiene</h2>
+          <p class="topic-subtitle">High-speed data ingestion, datetime accessors, string filtering, type casting &amp; memory safety</p>
 
-          <span class="seq-badge">Workflow 4 • Multi-Dimensional Data in Pandas</span>
-          <span class="query-pill pill-pandas">MultiIndex</span>
-          <span class="query-pill pill-pandas">IndexSlice</span>
-          <span class="query-pill pill-pandas">transform()</span>
+          <span class="seq-badge">Phase 4 • Pandas Foundations</span>
+          <span class="query-pill pill-pandas">read_csv</span>
+          <span class="query-pill pill-pandas">.dt Accessor</span>
+          <span class="query-pill pill-pandas">.copy()</span>
 
           <p>
-            A Pandas MultiIndex (hierarchical index) allows you to represent multi-dimensional cubes (e.g. Country $\times$ Product $\times$ Month) within standard 2D DataFrames.
-            The exam rigorously tests: constructing MultiIndexes, handling missing combinations via Cartesian products, slicing across levels with <code>IndexSlice</code> and <code>.xs()</code>, reshaping via <code>unstack()</code>/<code>melt()</code>, and calculating group percentage shares using <code>transform()</code>.
+            Before constructing advanced MultiIndexes, raw tabular data must be cleaned, typed, and isolated.
+            In this section, you will master the foundational Pandas methods that appear in every lab exam question.
           </p>
 
-          <div class="flow-card">
-            <div class="flow-title">⚡ Sequential Steps for Lab 5 Execution</div>
-            <div class="flow-steps">
-              <div class="step-item active-step"><span class="step-num">STEP 1</span>Setup &amp; Cleaning<br>Dates &amp; Returns</div>
-              <div class="step-item"><span class="step-num">STEP 2</span>MultiIndex Build<br>set_index &amp; agg</div>
-              <div class="step-item"><span class="step-num">STEP 3</span>Exposing Zeros<br>from_product &amp; reindex</div>
-              <div class="step-item"><span class="step-num">STEP 4</span>Slicing &amp; xs()<br>pd.IndexSlice</div>
-              <div class="step-item"><span class="step-num">STEP 5</span>Sorting Traps<br>sort_index()</div>
-              <div class="step-item"><span class="step-num">STEP 6</span>Reshaping<br>unstack, pivot, melt</div>
-              <div class="step-item"><span class="step-num">STEP 7</span>Level-wise Shares<br>transform('sum')</div>
+          <div class="syntax-card">
+            <div class="func-sig">pd.read_csv(filepath, parse_dates=None, dtype=None, na_values=None, usecols=None)</div>
+            <div class="func-desc">Loads tabular CSV data with optimized memory footprint and type controls.</div>
+            <table class="param-table">
+              <tr><th>Parameter</th><th>Value Example</th><th>Exam Purpose</th></tr>
+              <tr><td><code>parse_dates</code></td><td><code>['InvoiceDate']</code></td><td>Parses date strings into real datetime64 objects directly during loading.</td></tr>
+              <tr><td><code>dtype</code></td><td><code>{'InvoiceNo': str}</code></td><td>Forces column types (e.g. keeps invoice numbers with letters as strings).</td></tr>
+              <tr><td><code>usecols</code></td><td><code>['InvoiceNo', 'UnitPrice']</code></td><td>Loads only required columns, saving RAM.</td></tr>
+            </table>
+          </div>
+
+          <div class="syntax-card">
+            <div class="func-sig">pd.to_datetime(arg, format=None, errors='coerce')</div>
+            <div class="func-desc">Converts strings to timestamps. <code>errors='coerce'</code> turns corrupted dates into <code>NaT</code> (Not-a-Time) instead of crashing.</div>
+          </div>
+
+          <h3>The `.dt` and `.str` Accessors: Surgical Feature Engineering</h3>
+          <div class="grid-2col">
+            <div class="diag-card">
+              <h5>📅 Datetime `.dt` Accessor Functions</h5>
+              <pre>df['Date'] = df['InvoiceDate'].dt.date
+# Extracts YYYY-MM-DD calendar date
+
+df['Month'] = df['InvoiceDate'].dt.to_period('M')
+# Creates Monthly Period object (e.g. 2010-12)
+
+df['MonthStr'] = df['InvoiceDate'].dt.strftime('%Y-%m')
+# String representation for grouping
+
+df['DayName'] = df['InvoiceDate'].dt.day_name()
+# Monday, Tuesday, etc.</pre>
+            </div>
+            <div class="diag-card">
+              <h5>🔤 String `.str` Accessor Functions</h5>
+              <pre># Filter cancellations (InvoiceNo starts with 'C')
+mask_c = df['InvoiceNo'].astype(str).str.startswith('C')
+df_cancelled = df[mask_c].copy()
+df_valid = df[~mask_c].copy()
+
+# Case normalization & whitespace cleanup
+df['Description'] = df['Description'].str.strip().str.upper()
+
+# String search
+has_gift = df['Description'].str.contains('GIFT', na=False)</pre>
             </div>
           </div>
 
-          <h3>Step 1 &amp; 2: Setup, Data Cleaning &amp; MultiIndex Construction</h3>
-          <p>
-            In UCI Online Retail data, orders with <code>InvoiceNo</code> starting with "C" represent cancellations with negative quantities. They must be isolated into a separate DataFrame so they do not distort sales revenue.
-          </p>
-
-          <div class="example">
-            <div class="example-title">Step 1 &amp; 2 Exam Code: Setup, Hygiene &amp; GroupBy MultiIndex</div>
-            <pre><code>import pandas as pd
-import numpy as np
-
-# Load retail CSV
-df = pd.read_csv("online_retail.csv")
-
-# STEP 1: Parse Datetimes and Create Derived Calendar Attributes
-df['InvoiceDate'] = pd.to_datetime(df['InvoiceDate'])
-df['Date'] = df['InvoiceDate'].dt.date
-df['Month'] = df['InvoiceDate'].dt.strftime('%Y-%m')
-
-# Isolate cancellations (InvoiceNo starting with 'C')
-df_cancelled = df[df['InvoiceNo'].astype(str).str.startswith('C')].copy()
-df_clean = df[~df['InvoiceNo'].astype(str).str.startswith('C')].copy()
-
-# Add Revenue measure
-df_clean['Revenue'] = df_clean['Quantity'] * df_clean['UnitPrice']
-
-# STEP 2: Build Monthly Summary with 3-Level MultiIndex
-summary_monthly = df_clean.groupby(['Country', 'StockCode', 'Month']).agg(
-    TotalQty=('Quantity', 'sum'),
-    TotalRevenue=('Revenue', 'sum')
-)
-
-# Confirm and set level names
-summary_monthly.index.set_names(['Country', 'StockCode', 'Month'], inplace=True)
-print("Index Levels:", summary_monthly.index.nlevels)
-print("Level 0 Values:", summary_monthly.index.get_level_values(0).unique()[:5])</code></pre>
-          </div>
-
-          <h3>Step 3: Exposing Missing Sales with `from_product` &amp; `reindex`</h3>
-          <div class="definition">
-            <div class="def-title">Cartesian Grid Reindexing (`from_product`)</div>
-            <p><strong>Formal Statement:</strong> <code>pd.MultiIndex.from_product([A, B, C])</code> generates the full Cartesian product $A \times B \times C$. Reindexing an existing aggregated DataFrame against this grid reveals combinations where no transaction occurred.</p>
-            <p><strong>Intuitive One-Liner:</strong> GroupBy silently ignores items that didn't sell in a given country and month; <code>from_product</code> forces those missing combinations to appear explicitly with a revenue of <code>0</code>.</p>
-          </div>
-
-          <div class="example">
-            <div class="example-title">Step 3 Exam Code: Full Grid Reconstruction</div>
-            <pre><code>countries = df_clean['Country'].unique()
-stockcodes = df_clean['StockCode'].unique()
-months = df_clean['Month'].unique()
-
-# Generate complete Cartesian grid
-full_grid = pd.MultiIndex.from_product(
-    [countries, stockcodes, months],
-    names=['Country', 'StockCode', 'Month']
-)
-
-# Reindex and fill missing sales with 0
-summary_complete = summary_monthly.reindex(full_grid, fill_value=0)
-print(f"Original GroupBy Rows: {len(summary_monthly)}")
-print(f"Complete Grid Rows:    {len(summary_complete)}")</code></pre>
-          </div>
-
-          <h3>Step 4 &amp; 5: Slicing (`IndexSlice`, `.xs`) &amp; The Sorting Trap</h3>
+          <h3>Preventing the Dreaded `SettingWithCopyWarning`</h3>
           <div class="warning-box">
-            <div class="callout-label">The Critical Lexicographical Sorting Trap</div>
-            If you attempt to slice an unsorted MultiIndex using a range (e.g. <code>'21730':'22752'</code>), Pandas will crash with:
-            <code>UnsortedIndexError: 'Key length (3) was greater than MultiIndex sort depth (0)'</code>.
-            Pandas requires sorted indexes for range slicing. You must run <code>summary.sort_index(inplace=True)</code> and verify <code>summary.index.is_monotonic_increasing</code>!
+            <div class="callout-label">The Root Cause of SettingWithCopyWarning</div>
+            When you filter a DataFrame with <code>sub_df = df[df['Qty'] > 0]</code> and then assign <code>sub_df['Revenue'] = ...</code>, Pandas cannot determine if <code>sub_df</code> is a view or a separate copy in memory. It throws a warning, and your mutation might be silently discarded!
+            <strong>Golden Rule:</strong> Whenever creating a filtered subset DataFrame, ALWAYS append <code>.copy()</code>:
+            <pre><code>df_clean = df[~df['InvoiceNo'].str.startswith('C')].copy()
+df_clean['Revenue'] = df_clean['Quantity'] * df_clean['UnitPrice']  # Safe!</code></pre>
           </div>
 
-          <div class="example">
-            <div class="example-title">Step 4 &amp; 5 Exam Code: Slicing &amp; Cross-Sections</div>
-            <pre><code># Sort index first to prevent UnsortedIndexError
-summary_monthly.sort_index(inplace=True)
-assert summary_monthly.index.is_monotonic_increasing
-
-# 1. Partial Indexing: Get all rows for 'Germany' (drops Country level)
-germany_data = summary_monthly.loc['Germany']
-
-# 2. Full Tuple Indexing: ('France', '85123A') across all months
-france_item = summary_monthly.loc[('France', '85123A')]
-
-# 3. pd.IndexSlice: All countries, StockCodes '21730' to '22752', all months
-idx = pd.IndexSlice
-range_slice = summary_monthly.loc[idx[:, '21730':'22752', :], :]
-
-# 4. Cross-Section .xs():
-# Extract December 2010 data without dropping other levels
-dec_keep = summary_monthly.xs('2010-12', level='Month', drop_level=False)
-
-# Extract StockCode '22633' across every country and month
-item_xs = summary_monthly.xs('22633', level='StockCode')</code></pre>
-          </div>
-
-          <h3>Step 6: Reshaping — `unstack()`, `pivot_table()`, and `melt()`</h3>
-          <div class="example">
-            <div class="example-title">Step 6 Exam Code: Wide vs Long Reshaping</div>
-            <pre><code># 1. Unstack: Turn StockCode from rows into columns (Wide Table)
-wide_table = summary_monthly['TotalRevenue'].unstack('StockCode')
-
-# 2. Stack: Pivot columns back down into rows (Tidy Long Format)
-long_table = wide_table.stack().to_frame(name='TotalRevenue')
-
-# 3. Pivot Table directly from raw data with Grand Totals (margins=True)
-pivot_sales = df_clean.pivot_table(
-    index='Country', 
-    columns='Month', 
-    values='Revenue', 
-    aggfunc='sum', 
-    margins=True, 
-    fill_value=0
-)
-
-# 4. Melt: Unpivot wide table back into flat records
-flattened = wide_table.reset_index()
-melted_df = flattened.melt(
-    id_vars=['Country', 'Month'], 
-    var_name='StockCode', 
-    value_name='TotalRevenue'
-)</code></pre>
-          </div>
-
-          <h3>Step 7: Level-wise Analysis &amp; Revenue Share with `transform()`</h3>
-          <div class="example">
-            <div class="example-title">Step 7 Exam Code: Group-Level Share &amp; Best-Seller per Country</div>
-            <pre><code># Calculate what % of each country's monthly revenue came from each product
-# transform('sum') broadcasts the monthly country total back to every product row
-monthly_country_total = summary_monthly.groupby(
-    level=['Country', 'Month']
-)['TotalRevenue'].transform('sum')
-
-summary_monthly['RevenueShare'] = (
-    summary_monthly['TotalRevenue'] / monthly_country_total
-).fillna(0)
-
-# Find the single product with highest revenue share in Dec 2010 per country
-dec_2010 = summary_monthly.xs('2010-12', level='Month', drop_level=False)
-top_products_idx = dec_2010.groupby(level='Country')['RevenueShare'].idxmax()
-best_sellers = dec_2010.loc[top_products_idx]
-print(best_sellers[['TotalRevenue', 'RevenueShare']])</code></pre>
+          <div class="syntax-card">
+            <div class="func-sig">df.fillna(value, method=None, inplace=False)</div>
+            <div class="func-desc">Replaces <code>NaN</code> / missing values. In the retail lab, missing sales combinations are filled with <code>0</code>: <code>df.fillna(0, inplace=True)</code>.</div>
           </div>
 
           <div class="summary-box">
             <h4>Topic 5 Recap</h4>
             <ul>
-              <li><code>pd.MultiIndex.from_product()</code> reveals missing sales skipped by standard groupby.</li>
-              <li>Always call <code>df.sort_index()</code> before range slicing with <code>pd.IndexSlice</code>.</li>
-              <li><code>.xs(key, level='...', drop_level=...)</code> extracts cross-sections across inner levels.</li>
-              <li><code>unstack()</code> pivots inner row index to columns; <code>stack()</code> reverses it.</li>
-              <li><code>groupby(level=...)['Revenue'].transform('sum')</code> aligns group totals back to individual rows for percentage shares.</li>
+              <li>Use <code>pd.to_datetime()</code> with <code>.dt.to_period('M')</code> or <code>.dt.strftime('%Y-%m')</code> to group by monthly cohorts.</li>
+              <li>Filter strings with <code>.astype(str).str.startswith('C')</code> to isolate cancellations.</li>
+              <li>Always call <code>.copy()</code> when subsetting DataFrames to eliminate <code>SettingWithCopyWarning</code>.</li>
             </ul>
           </div>
+
+          <h3>Self-Test Practice Questions</h3>
+          <details>
+            <summary>Q1: What is the difference between <code>df['Date'].dt.to_period('M')</code> and <code>df['Date'].dt.strftime('%Y-%m')</code>?</summary>
+            <div class="example">
+              <strong>Worked Solution:</strong> <code>.dt.to_period('M')</code> creates a Pandas <code>PeriodIndex</code> object with temporal awareness (supports chronological arithmetic, offsets, and time intervals). <code>.dt.strftime('%Y-%m')</code> returns a plain Python string. Both can be used as MultiIndex levels, but Period objects allow time-series frequency conversions.
+            </div>
+          </details>
+          <details>
+            <summary>Q2: Why must you wrap <code>df['InvoiceNo'].astype(str)</code> before calling <code>.str.startswith('C')</code>?</summary>
+            <div class="example">
+              <strong>Worked Solution:</strong> In raw retail datasets, standard order numbers are integers (e.g. <code>536365</code>), while cancellation orders are strings with a leading letter (e.g. <code>C536379</code>). Calling <code>.str</code> on integer or mixed object columns throws an <code>AttributeError</code> or skips integers. Explicitly casting with <code>.astype(str)</code> ensures uniform string evaluation.
+            </div>
+          </details>
+          <details>
+            <summary>Q3: How do you replace missing values in only specific columns using <code>.fillna()</code>?</summary>
+            <div class="example">
+              <strong>Worked Solution:</strong> Pass a dictionary mapping column names to replacement values: <code>df.fillna({'Quantity': 0, 'UnitPrice': df['UnitPrice'].median()}, inplace=True)</code>.
+            </div>
+          </details>
         </div>
 
         <!-- ═══════════════════════════════════════════════════════
-         TOPIC 6: LABS 6–7 SEQUENTIAL PIPELINE — POWER BI & DAX
+         TOPIC 6: MULTIINDEX: GRIDS & EXPOSING ABSENCES
          ═══════════════════════════════════════════════════════ -->
         <div class="topic-card" id="topic-6">
-          <h2><span class="topic-num">6</span>Labs 6–7: Power BI ETL, Star Schema &amp; DAX</h2>
-          <p class="topic-subtitle">Power Query ETL, Star Schema modeling, continuous Date tables &amp; DAX measures vs columns</p>
+          <h2><span class="topic-num">6</span>MultiIndex: Grids &amp; Exposing Absences</h2>
+          <p class="topic-subtitle">Hierarchical coordinates, Cartesian grid reconstruction (from_product) &amp; lexicographical sorting</p>
 
-          <span class="seq-badge">Workflow 5 • Power BI Desktop End-to-End</span>
-          <span class="query-pill pill-pbi">Power Query</span>
-          <span class="query-pill pill-pbi">Star Schema</span>
-          <span class="query-pill pill-dax">DAX Measures</span>
+          <span class="seq-badge">Phase 4 • MultiIndex Core</span>
+          <span class="query-pill pill-pandas">from_product</span>
+          <span class="query-pill pill-pandas">reindex</span>
+          <span class="query-pill pill-pandas">sort_index</span>
 
           <p>
-            Power BI Desktop is the corporate standard for business intelligence. The midterm tests your ability to execute a complete three-phase pipeline:
-            <strong>Phase 1: Power Query ETL</strong> (cleaning, text standardization, deduplication, conditional columns);
-            <strong>Phase 2: Data Modeling</strong> (generating a continuous DAX calendar, establishing 1-to-many Star Schema relationships, hiding foreign keys);
-            <strong>Phase 3: DAX &amp; Visuals</strong> (writing atomic dynamic measures, building interactive KPI cards, trend lines, and multi-level slicers).
+            A <strong>MultiIndex</strong> (hierarchical index) allows you to represent multi-dimensional data cubes (e.g. Country $\times$ Product $\times$ Month) within a standard 2D Pandas DataFrame.
+            In this section, you will learn how to construct MultiIndexes, discover "silent absences" using full Cartesian products, and avoid sorting crashes.
           </p>
 
-          <div class="flow-card">
-            <div class="flow-title">⚡ Sequential Steps for Power BI Lab Midterm</div>
-            <div class="flow-steps">
-              <div class="step-item active-step"><span class="step-num">PHASE 1</span>Power Query ETL<br>Clean &amp; Deduplicate</div>
-              <div class="step-item"><span class="step-num">PHASE 2</span>Dimension Tables<br>Reference &amp; Deduplicate</div>
-              <div class="step-item"><span class="step-num">PHASE 3</span>DAX Calendar<br>CALENDAR &amp; Sort Month</div>
-              <div class="step-item"><span class="step-num">PHASE 4</span>Model View<br>1-to-many &amp; Hide FKs</div>
-              <div class="step-item"><span class="step-num">PHASE 5</span>DAX Measures<br>DIVIDE &amp; SUM</div>
-              <div class="step-item"><span class="step-num">PHASE 6</span>Canvas Dashboard<br>KPIs, Charts, Slicers</div>
-            </div>
+          <div class="diagram-box">
+            <div class="diagram-title">🧊 The Multi-Dimensional MultiIndex Hierarchy</div>
+            <pre>
+Level 0 (Country) │ Level 1 (StockCode) │ Level 2 (Month) │ TotalRevenue │ TotalQty
+──────────────────┼─────────────────────┼─────────────────┼──────────────┼─────────
+Germany           │ 21730               │ 2010-12         │ $450.00      │ 30
+                  │                     │ 2011-01         │ $120.00      │ 10
+                  │ 22752               │ 2010-12         │ $890.00      │ 50
+United Kingdom    │ 21730               │ 2010-12         │ $1,240.00    │ 120
+            </pre>
           </div>
 
-          <h3>Phase 1: Power Query ETL Cleaning Checklist</h3>
-          <p>
-            When data is imported into Power Query, follow this exact sequence in the <em>Applied Steps</em> list:
-          </p>
-          <ol>
-            <li><strong>Rename Columns:</strong> Add spaces for presentation (e.g. <code>PaymentMethod</code> $\rightarrow$ <code>Payment Method</code>, <code>CustomerSegment</code> $\rightarrow$ <code>Customer Segment</code>).</li>
-            <li><strong>Set Explicit Data Types:</strong>
-              <ul>
-                <li><code>Quantity</code>: <strong>Whole Number</strong></li>
-                <li><code>UnitPrice</code>, <code>Sales</code>, <code>Profit</code>: <strong>Fixed Decimal Number</strong> (currency)</li>
-                <li><code>Discount</code>: <strong>Decimal Number</strong></li>
-                <li><code>OrderDate</code>: <strong>Date</strong> (never Date/Time)</li>
-                <li>All IDs, Names, Categories: <strong>Text</strong></li>
-              </ul>
-            </li>
-            <li><strong>Remove Unnecessary Columns:</strong> Right-click <code>InternalNotes</code> $\rightarrow$ <strong>Remove</strong>.</li>
-            <li><strong>Deduplicate on Primary Key:</strong> Select <code>OrderID</code> $\rightarrow$ Home tab $\rightarrow$ <strong>Remove Rows &rarr; Remove Duplicates</strong> (OrderIDs must never repeat in the Fact table).</li>
-            <li><strong>Handle Missing Values (Nulls):</strong> Select <code>CustomerName</code> $\rightarrow$ Transform tab $\rightarrow$ <strong>Replace Values</strong> $\rightarrow$ Value To Find: <code>null</code> $\rightarrow$ Replace With: <code>Unknown</code>.</li>
-            <li><strong>Standardize Text:</strong> Select <code>Region</code> $\rightarrow$ Transform tab $\rightarrow$ <strong>Format &rarr; Trim</strong> (removes trailing spaces) $\rightarrow$ <strong>Format &rarr; Capitalize Each Word</strong> (standardizes 'east', 'EAST' to 'East').</li>
-            <li><strong>Filter Invalid Records:</strong> Click dropdown on <code>Sales</code> $\rightarrow$ Number Filters $\rightarrow$ <strong>Greater Than 0</strong>. Repeat for <code>Quantity</code>.</li>
-            <li><strong>Add Derived Conditional Column:</strong> Add Column tab $\rightarrow$ <strong>Conditional Column</strong> $\rightarrow$ Name: <code>Discount Band</code>:
-              <ul>
-                <li>If <code>Discount</code> equals <code>0</code> $\rightarrow$ <code>No Discount</code></li>
-                <li>Else If <code>Discount</code> is less than or equal to <code>0.1</code> $\rightarrow$ <code>Low Discount</code></li>
-                <li>Else $\rightarrow$ <code>High Discount</code></li>
-              </ul>
-            </li>
-          </ol>
-
-          <div class="why-box">
-            <strong>Lab 6 ETL Benchmark:</strong>
-            After completing these steps and clicking <em>Close &amp; Apply</em>, create a temporary Card visual with <code>Sales[Sales]</code>. The sum MUST display exactly <strong>105,932.52</strong>. If your total is different, you missed a duplicate row or invalid filter!
+          <h3>1. Constructing MultiIndexes: `set_index` vs `groupby`</h3>
+          <div class="syntax-card">
+            <div class="func-sig">df.set_index(['Level0', 'Level1', 'Level2'], drop=True, inplace=False)</div>
+            <div class="func-desc">Converts existing DataFrame columns into a hierarchical row index.</div>
           </div>
 
-          <h3>Phase 2: Generating Dimension Lookup Tables</h3>
-          <p>
-            To convert flat sales into a star schema:
-          </p>
-          <ul>
-            <li>In Power Query, right-click the cleaned <code>Sales</code> query $\rightarrow$ select <strong>Reference</strong> (never Duplicate; Reference re-uses the cleaned logic).</li>
-            <li>Rename the query to <code>Dim_Product</code>. Select columns <code>Product</code> and <code>Category</code> $\rightarrow$ right-click $\rightarrow$ <strong>Remove Other Columns</strong> $\rightarrow$ select <code>Product</code> $\rightarrow$ <strong>Remove Duplicates</strong> (results in exactly 12 products).</li>
-            <li>Repeat for <code>Dim_Region</code>: Reference Sales $\rightarrow$ Keep only <code>Region</code> $\rightarrow$ Remove Duplicates (results in 4 regions).</li>
-          </ul>
-
-          <h3>Phase 3: Continuous Calendar Generation with DAX</h3>
-          <p>
-            In Report View, go to <strong>Modeling &rarr; New Table</strong> and enter:
-          </p>
-
-          <div class="example">
-            <div class="example-title">Phase 3 Exam DAX: Continuous Calendar Table</div>
-            <pre><code>Dim_Date = 
-ADDCOLUMNS(
-    CALENDAR(DATE(2025, 1, 1), DATE(2025, 12, 31)),
-    "Year", YEAR([Date]),
-    "Month Number", MONTH([Date]),
-    "Month", FORMAT([Date], "mmm"),
-    "Quarter", "Q" & ROUNDUP(MONTH([Date]) / 3, 0)
-)</code></pre>
+          <div class="syntax-card">
+            <div class="func-sig">df.reset_index(level=None, drop=False)</div>
+            <div class="func-desc">Moves hierarchical index levels back into normal columns. If <code>level</code> is specified, only resets that specific tier.</div>
           </div>
 
-          <div class="warning-box">
-            <div class="callout-label">The Alphabetical Month Sorting Trap</div>
-            By default, text columns sort alphabetically. If you put <code>Dim_Date[Month]</code> on a chart, your timeline will run: <strong>Apr, Aug, Dec, Feb, Jan, Jul...</strong> which is completely wrong!
-            <strong>The Mandatory Fix:</strong>
-            1. Select column <code>Month</code> in <code>Dim_Date</code>.
-            2. On ribbon, click <strong>Column tools &rarr; Sort by column &rarr; Month Number</strong>.
-            3. Right-click table <code>Dim_Date</code> $\rightarrow$ <strong>Mark as date table</strong> $\rightarrow$ select <code>Date</code>.
-          </div>
-
-          <h3>Phase 4: Model View Star Schema Relationships</h3>
-          <ul>
-            <li>Open <strong>Model View</strong> (third icon on left). Position <code>Sales</code> in the center, surrounded by <code>Dim_Product</code>, <code>Dim_Region</code>, and <code>Dim_Date</code>.</li>
-            <li>Drag <code>Dim_Product[Product]</code> $\rightarrow$ <code>Sales[Product]</code> (Cardinality: <strong>1 to many</strong>, Cross-filter direction: <strong>Single</strong>, Active: True).</li>
-            <li>Drag <code>Dim_Region[Region]</code> $\rightarrow$ <code>Sales[Region]</code> (1 to many).</li>
-            <li>Drag <code>Dim_Date[Date]</code> $\rightarrow$ <code>Sales[OrderDate]</code> (1 to many).</li>
-            <li><strong>Hide Technical Foreign Keys:</strong> In <code>Sales</code>, right-click and hide <code>Product</code>, <code>Category</code>, <code>Region</code>, and <code>OrderDate</code>. This forces all visual authors to pull descriptive fields from dimension tables.</li>
-          </ul>
-
-          <h3>Phase 5: DAX Measures vs Calculated Columns</h3>
+          <h3>2. Exposing "Silent Absences" with `from_product` &amp; `reindex`</h3>
           <div class="definition">
-            <div class="def-title">Calculated Column vs DAX Measure</div>
-            <p><strong>Calculated Column:</strong> Stored in memory per row when data loads. Never aggregates dynamically.</p>
-            <p><strong>DAX Measure:</strong> Dynamic mathematical formula evaluated on-the-fly depending on the active filter context (slicers, drill-downs).</p>
+            <div class="def-title">Silent Absence &amp; The Cartesian Grid Principle</div>
+            <p><strong>Formal Statement:</strong> <code>pd.MultiIndex.from_product([Iterables])</code> generates the complete Cartesian product $L_1 \times L_2 \times \dots \times L_k$. Reindexing an aggregated DataFrame against this grid reveals non-occurring events.</p>
+            <p><strong>Intuitive One-Liner:</strong> If a store sold zero units of a product in January, <code>groupby()</code> silently drops that row. <code>from_product</code> forces the empty coordinate to appear, and <code>reindex(..., fill_value=0)</code> fills it with $0$!</p>
           </div>
 
           <div class="example">
-            <div class="example-title">Phase 5 Exam DAX: 6 Core Business Measures</div>
-            <pre><code>-- 1. Total Sales
-Total Sales = SUM(Sales[Sales])
+            <div class="example-title">Generating the Full Cartesian Grid to Reveal Zero-Sales</div>
+            <pre><code># Sample Aggregated Sales
+summary = df_clean.groupby(['Country', 'StockCode', 'Month']).agg(
+    TotalRevenue=('Revenue', 'sum')
+)
 
--- 2. Total Profit
-Total Profit = SUM(Sales[Profit])
+# Extract distinct coordinates
+countries = df_clean['Country'].unique()
+products = df_clean['StockCode'].unique()
+months = df_clean['Month'].unique()
 
--- 3. Total Quantity
-Total Quantity = SUM(Sales[Quantity])
+# STEP 1: Generate Complete Cartesian Grid (All combinations)
+full_grid = pd.MultiIndex.from_product(
+    [countries, products, months],
+    names=['Country', 'StockCode', 'Month']
+)
 
--- 4. Total Distinct Orders
-Total Orders = DISTINCTCOUNT(Sales[OrderID])
+# STEP 2: Reindex to expose silent absences and fill with 0
+summary_complete = summary.reindex(full_grid, fill_value=0)
 
--- 5. Average Order Value
-Average Order Value = DIVIDE([Total Sales], [Total Orders], 0)
-
--- 6. Profit Margin (Format as Percentage with 2 decimals)
-Profit Margin = DIVIDE([Total Profit], [Total Sales], 0)</code></pre>
+print(f"Original GroupBy Rows:     {len(summary):,}")
+print(f"Complete Cartesian Rows:   {len(summary_complete):,}")
+print(f"Silent Absences Uncovered: {len(summary_complete) - len(summary):,}")</code></pre>
           </div>
 
-          <div class="warning-box">
-            <div class="callout-label">The Ratio Fallacy Experiment (Lab 7 Task 1.4)</div>
-            If you create a calculated column <code>Profit per Unit = DIVIDE(Sales[Profit], Sales[Quantity])</code> and take its <code>AVERAGE</code>, you get a completely different number than measure <code>DIVIDE([Total Profit], [Total Quantity])</code>.
-            <strong>Why?</strong> The column average is an unweighted mean of individual row ratios (a small $10 order with 90% margin has the same weight as a $10,000 order with 2% margin). The measure calculates total profit divided by total units, which is the true economic reality. <strong>Always use DAX measures for ratios!</strong>
+          <div class="result-preview">
+Original GroupBy Rows:     <span class="tag-match">4,210</span>
+Complete Cartesian Rows:   <span class="tag-zero">48,000</span>
+Silent Absences Uncovered: <span class="tag-err">43,790</span>  <-- These would be lost without from_product!
           </div>
 
-          <h3>Phase 6: Interactive Dashboard Canvas Construction</h3>
+          <h3>3. Custom Watchlist Indices with `from_tuples`</h3>
           <p>
-            Arrange visuals on a standard $1280 \times 720$ canvas:
+            While <code>from_product</code> creates an exhaustive grid of every combination, <code>pd.MultiIndex.from_tuples()</code> allows you to create specific, targeted coordinate pairs (e.g. an audit watchlist of specific high-risk products in specific countries).
           </p>
-          <ul>
-            <li><strong>KPI Row (Top):</strong> 4 Card visuals showing <code>Total Sales</code>, <code>Total Profit</code>, <code>Profit Margin</code> (percentage), and <code>Average Order Value</code>.</li>
-            <li><strong>Trend Chart:</strong> Line Chart of <code>Total Sales</code> over <code>Dim_Date[Month]</code>.</li>
-            <li><strong>Category Comparison:</strong> Clustered Column Chart of <code>Total Sales</code> by <code>Dim_Product[Category]</code>.</li>
-            <li><strong>Regional Ranking:</strong> Clustered Bar Chart of <code>Total Sales</code> by <code>Dim_Region[Region]</code>.</li>
-            <li><strong>Product Profitability:</strong> Clustered Bar Chart of <code>Profit Margin</code> by <code>Dim_Product[Product]</code>, sorted ascending (reveals least profitable product at the top).</li>
-            <li><strong>Interactive Slicers:</strong>
-              <ul>
-                <li>Region (Style: Tile buttons)</li>
-                <li>Category (Style: Tile or Dropdown)</li>
-                <li>Customer Segment (Style: Tile buttons)</li>
-                <li>Order Date (Style: Between range slider)</li>
-              </ul>
-            </li>
-            <li><strong>Filter Scopes:</strong>
-              <ul>
-                <li><em>Visual-level filter:</em> Applied to one visual only (e.g. Filter type <strong>Top N &rarr; Bottom 3</strong> by Profit Margin on the product chart).</li>
-                <li><em>Page-level filter:</em> Affects all visuals on the active tab (e.g. Customer Segment = Corporate).</li>
-                <li><em>Report-level filter:</em> Affects all tabs across the entire report (e.g. Payment Method = Credit Card).</li>
-              </ul>
-            </li>
-          </ul>
+
+          <div class="syntax-card">
+            <div class="func-sig">pd.MultiIndex.from_tuples(tuples, names=None)</div>
+            <div class="func-desc">Constructs a MultiIndex directly from an array or list of coordinate tuples.</div>
+          </div>
+
+          <div class="example">
+            <div class="example-title">Creating a Specific Audit Watchlist with from_tuples</div>
+            <pre><code># Define specific target pairs
+watchlist = [
+    ('France', 'POST'),
+    ('Germany', '22492'),
+    ('United Kingdom', 'DOT')
+]
+
+watchlist_idx = pd.MultiIndex.from_tuples(
+    watchlist, 
+    names=['Country', 'StockCode']
+)
+
+print(watchlist_idx)</code></pre>
+          </div>
+
+          <h3>4. The Lexicographical Sorting Law &amp; Index Properties</h3>
+          <div class="warning-box">
+            <div class="callout-label">CRITICAL EXAM TRAP: UnsortedIndexError</div>
+            Pandas uses binary search to slice MultiIndex levels. If the index is not sorted, any range slice (e.g. <code>'21730':'22752'</code>) immediately crashes with:
+            <br><code>UnsortedIndexError: 'Key length (3) was greater than MultiIndex sort depth (0)'</code>
+            <br><strong>Solution:</strong> Always run <code>df.sort_index(inplace=True)</code> and verify <code>df.index.is_monotonic_increasing</code>!
+          </div>
+
+          <div class="diag-card">
+            <h5>Essential MultiIndex Inspection Properties</h5>
+            <pre><code># Check number of hierarchical tiers
+print("Index Levels:", summary.index.nlevels)          # Output: 3
+
+# View level names
+print("Index Names:", summary.index.names)             # ['Country', 'StockCode', 'Month']
+
+# Extract all unique values from a specific level (0 = Country)
+print("Countries:", summary.index.get_level_values('Country').unique())
+
+# Rename index levels in-place
+summary.index.set_names(['Nation', 'SKU', 'Period'], inplace=True)
+
+# Verify lexicographical sorting
+assert summary.index.is_monotonic_increasing, "Index is unsorted!"</code></pre>
+          </div>
 
           <div class="summary-box">
             <h4>Topic 6 Recap</h4>
             <ul>
-              <li>Power Query applied steps: Remove Duplicates on OrderID $\rightarrow$ Replace nulls $\rightarrow$ Trim &amp; Capitalize Region $\rightarrow$ Filter $>0$.</li>
-              <li>Always sort <code>Dim_Date[Month]</code> by <code>Month Number</code> to fix alphabetical sorting.</li>
-              <li>Connect Star Schema with 1-to-many single direction relationships; hide foreign keys in Fact table.</li>
-              <li>Always use <code>DIVIDE(SUM(Num), SUM(Denom))</code> measures for ratios, never averages of calculated columns.</li>
+              <li><code>pd.MultiIndex.from_product()</code> generates all possible Cartesian combinations.</li>
+              <li><code>.reindex(full_grid, fill_value=0)</code> exposes silent absences where transactions never occurred.</li>
+              <li><code>pd.MultiIndex.from_tuples()</code> builds specific, non-Cartesian coordinate watchlists.</li>
+              <li>Always call <code>.sort_index()</code> to avoid <code>UnsortedIndexError</code> during range slicing.</li>
             </ul>
           </div>
+
+          <h3>Self-Test Practice Questions</h3>
+          <details>
+            <summary>Q1: When should you use <code>from_product</code> vs <code>from_tuples</code>?</summary>
+            <div class="example">
+              <strong>Worked Solution:</strong> Use <code>from_product</code> when you need the complete $N \times M$ Cartesian grid of every possible combination (e.g. finding missing sales across all months for all items). Use <code>from_tuples</code> when you only want a specific list of coordinate pairs (e.g. a targeted audit list of 5 specific Country-Product combinations).
+            </div>
+          </details>
+          <details>
+            <summary>Q2: What is the return value of <code>df.index.get_level_values(1)</code>?</summary>
+            <div class="example">
+              <strong>Worked Solution:</strong> It returns a 1D Index containing the values of the second hierarchical level (Index position 1) for every single row in the DataFrame, preserving row alignment.
+            </div>
+          </details>
+          <details>
+            <summary>Q3: Why does <code>df.index.is_monotonic_increasing</code> matter?</summary>
+            <div class="example">
+              <strong>Worked Solution:</strong> It returns a boolean indicating whether the MultiIndex labels are strictly sorted in ascending lexicographical order. If <code>False</code>, any slice or range lookup will throw an <code>UnsortedIndexError</code> or return incorrect results.
+            </div>
+          </details>
         </div>
 
         <!-- ═══════════════════════════════════════════════════════
-         TOPIC 7: EXAM QUESTION TYPES, TEACHER TRAPS & VIVA DEFENSE
+         TOPIC 7: MULTIINDEX NAVIGATION: SLICING & .xs()
          ═══════════════════════════════════════════════════════ -->
         <div class="topic-card" id="topic-7">
-          <h2><span class="topic-num">7</span>Exam Question Types &amp; Viva Traps</h2>
-          <p class="topic-subtitle">The trickiest edge cases, grading rubrics &amp; oral viva questions asked by instructors</p>
+          <h2><span class="topic-num">7</span>MultiIndex Navigation: Slicing &amp; .xs()</h2>
+          <p class="topic-subtitle">Extracting multi-dimensional data without resetting the index using .loc, pd.IndexSlice, and .xs()</p>
+
+          <span class="seq-badge">Phase 4 • MultiIndex Selection</span>
+          <span class="query-pill pill-pandas">IndexSlice</span>
+          <span class="query-pill pill-pandas">.xs()</span>
 
           <p>
-            Instructors at FAST-NU design lab midterms to test whether you blindly copy-paste code or genuinely understand data pipelines. Here are the most common exam questions and the traps designed to catch unprepared students.
+            A common amateur mistake in Pandas exams is resetting the index (<code>df.reset_index()</code>) just to perform a simple filter, destroying the multi-dimensional structure and wasting memory.
+            Pandas provides three powerful native extraction tools: <strong>Partial Indexing</strong>, <strong><code>pd.IndexSlice</code></strong>, and <strong><code>.xs()</code> (Cross-Section)</strong>.
           </p>
 
-          <div class="exam-grid">
-            <div class="exam-card">
-              <h4><span>Trap 1: Schema Inference Crash</span> <span class="query-pill pill-spark">PySpark</span></h4>
-              <p><strong>The Trap:</strong> Teacher gives you a directory with two days of JSON where a field changes from dict to string (Lab 4 scenario). Running default <code>spark.read.json()</code> throws an <code>AnalysisException</code>.</p>
-              <p><strong>How to Pass:</strong> Immediately define an explicit <code>StructType</code> and set the offending field to <code>StringType()</code>. Then downstream in Silver, use <code>get_json_object(col, "$.field")</code>.</p>
-              <span class="quick-copy">StructField("metadata", StringType(), True)</span>
-            </div>
-
-            <div class="exam-card">
-              <h4><span>Trap 2: The Ratio Fallacy in DAX</span> <span class="query-pill pill-dax">DAX</span></h4>
-              <p><strong>The Trap:</strong> Teacher asks for Profit Margin. Students create a calculated column <code>[Profit]/[Sales]</code> and drop it on a card with <code>Average</code> aggregation.</p>
-              <p><strong>How to Pass:</strong> Never use calculated columns for ratios! Create a measure: <code>Profit Margin = DIVIDE([Total Profit], [Total Sales])</code>. Explain during viva: <em>"An average of ratios is not equal to the ratio of totals."</em></p>
-              <span class="quick-copy">DIVIDE(SUM(Sales[Profit]), SUM(Sales[Sales]))</span>
-            </div>
-
-            <div class="exam-card">
-              <h4><span>Trap 3: MultiIndex Range Slice Crash</span> <span class="query-pill pill-pandas">Pandas</span></h4>
-              <p><strong>The Trap:</strong> Teacher asks you to slice stock codes <code>'21730':'22752'</code> across all countries using <code>pd.IndexSlice</code>. Script crashes with <code>UnsortedIndexError</code>.</p>
-              <p><strong>How to Pass:</strong> Always call <code>df.sort_index(inplace=True)</code> before calling <code>.loc[pd.IndexSlice[...]]</code>. Lexicographical sorting is strictly required for range slices.</p>
-              <span class="quick-copy">df.sort_index(inplace=True)</span>
-            </div>
-
-            <div class="exam-card">
-              <h4><span>Trap 4: Alphabetical Months in Power BI</span> <span class="query-pill pill-pbi">Power BI</span></h4>
-              <p><strong>The Trap:</strong> Line chart shows months starting with April, August, December instead of January.</p>
-              <p><strong>How to Pass:</strong> Go to <code>Dim_Date</code>, select <code>Month</code> column, click <strong>Column tools &rarr; Sort by column &rarr; Month Number</strong>. Mark table as official Date Table.</p>
-              <span class="quick-copy">Sort by Column -> Month Number</span>
-            </div>
-
-            <div class="exam-card">
-              <h4><span>Trap 5: Missing Combinations in GroupBy</span> <span class="query-pill pill-pandas">Pandas</span></h4>
-              <p><strong>The Trap:</strong> Teacher asks: "Find all products with 0 sales in France in December". GroupBy skips missing combinations entirely!</p>
-              <p><strong>How to Pass:</strong> Generate the full Cartesian product using <code>pd.MultiIndex.from_product([countries, products, months])</code>, then <code>.reindex(grid, fill_value=0)</code>.</p>
-              <span class="quick-copy">MultiIndex.from_product([c, p, m])</span>
-            </div>
-
-            <div class="exam-card">
-              <h4><span>Trap 6: Incremental Ingestion Overwrites</span> <span class="query-pill pill-spark">Delta Lake</span></h4>
-              <p><strong>The Trap:</strong> Teacher provides Day 2 batch. Student uses <code>mode("overwrite")</code> in Silver, deleting Day 1 data!</p>
-              <p><strong>How to Pass:</strong> Append Day 2 to Bronze, then use <code>DeltaTable.forName().merge()</code> in Silver with <code>whenMatchedUpdateAll()</code> and <code>whenNotMatchedInsertAll()</code>.</p>
-              <span class="quick-copy">deltaTable.merge().whenMatchedUpdateAll()</span>
-            </div>
+          <div class="diagram-box">
+            <div class="diagram-title">🎯 Navigation Selection Decision Matrix</div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Method</th>
+                  <th>Syntax Example</th>
+                  <th>Drop Level?</th>
+                  <th>Best Use Case</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Partial Indexing</strong></td>
+                  <td><code>df.loc['Germany']</code></td>
+                  <td>Yes (drops Level 0)</td>
+                  <td>Selecting an entire outer level easily.</td>
+                </tr>
+                <tr>
+                  <td><strong>Tuple Indexing</strong></td>
+                  <td><code>df.loc[('France', 'POST')]</code></td>
+                  <td>Yes (drops specified levels)</td>
+                  <td>Pinpointing exact coordinates across multiple outer levels.</td>
+                </tr>
+                <tr>
+                  <td><strong><code>pd.IndexSlice</code></strong></td>
+                  <td><code>df.loc[idx[:, '21730':'22752', :], :]</code></td>
+                  <td>No (preserves hierarchy)</td>
+                  <td><strong>The Ultimate Slicer:</strong> slicing ranges or wildcards across inner levels!</td>
+                </tr>
+                <tr>
+                  <td><strong><code>.xs()</code> Cross-Section</strong></td>
+                  <td><code>df.xs('2010-12', level='Month')</code></td>
+                  <td>Configurable (<code>drop_level=True/False</code>)</td>
+                  <td>Extracting a single key across an inner level cleanly without wildcards.</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
 
-          <h3>Top 10 Rapid-Fire Viva Defense Questions</h3>
-          <div class="note-box">
-            <ol>
-              <li><strong>Q: Why do we store raw data in Bronze with append mode instead of upserting immediately?</strong><br>
-              <em>A:</em> Bronze represents an immutable audit log of raw ingested history. Overwriting or deduplicating in Bronze destroys replayability and forensic audit capabilities.</li>
-              <li><strong>Q: Why did we force metadata to `StringType()` in Lab 4?</strong><br>
-              <em>A:</em> Day 3 had nested JSON (Struct) while Day 4 had an error string. In Spark, conflicting types cause an <code>AnalysisException</code> during schema inference. StringType accepts any shape safely.</li>
-              <li><strong>Q: In Power BI, when should you use a Slicer vs a Page-level filter?</strong><br>
-              <em>A:</em> Slicers are interactive visual controls designed for report consumers/end-users. Page-level filters in the filter pane are intended for report authors to restrict data scope permanently.</li>
-              <li><strong>Q: What is the difference between `stack()` and `unstack()` in Pandas?</strong><br>
-              <em>A:</em> <code>unstack()</code> pivots a row index level into wide column headers. <code>stack()</code> pivots column headers down into a long row index.</li>
-              <li><strong>Q: What does `margins=True` do in `pivot_table()`?</strong><br>
-              <em>A:</em> It appends an "All" row and column representing grand totals across all rows and columns.</li>
-              <li><strong>Q: Why do we hide foreign keys in the Sales Fact table in Power BI?</strong><br>
-              <em>A:</em> To enforce the Star Schema contract. It prevents users from accidentally dragging unlinked Fact attributes into charts instead of the validated Dimension table attributes.</li>
-              <li><strong>Q: What happens if you do not check `response.status_code` in a REST API script?</strong><br>
-              <em>A:</em> If the server returns a 404 or 500 error, calling <code>response.json()</code> fails with a JSONDecodeError because the returned response is HTML error text.</li>
-              <li><strong>Q: How does `get_json_object` behave when given corrupted JSON?</strong><br>
-              <em>A:</em> It evaluates safely to <code>null</code> without crashing the PySpark distributed executor task.</li>
-              <li><strong>Q: Why did we use `Reference` instead of `Duplicate` for dimension tables in Power Query?</strong><br>
-              <em>A:</em> <code>Reference</code> creates a dependency on the cleaned Sales query. Any future cleaning applied to Sales automatically flows into the dimension tables without duplicating logic.</li>
-              <li><strong>Q: What does `transform('sum')` do in Pandas that normal `agg('sum')` cannot do?</strong><br>
-              <em>A:</em> Normal <code>agg()</code> collapses rows to the group level. <code>transform()</code> calculates the group sum but retains the original DataFrame's shape, broadcasting the total back onto every row for percentage calculations.</li>
-            </ol>
+          <h3>1. Partial &amp; Tuple Indexing with `.loc[]`</h3>
+          <div class="example">
+            <div class="example-title">Basic .loc Navigation</div>
+            <pre><code># Assume MultiIndex: (Country, StockCode, Month)
+# 1. Outer Level Slice: All products and months for Germany
+germany_data = summary.loc['Germany']
+
+# 2. Outer Two Levels: All months for France and product 'POST'
+france_post = summary.loc[('France', 'POST')]
+
+# 3. Exact Point Coordinate: Specific country, product, and month
+dec_sale = summary.loc[('France', 'POST', '2010-12'), 'TotalRevenue']</code></pre>
+          </div>
+
+          <h3>2. `pd.IndexSlice`: Slicing Across Multiple Levels Simultaneously</h3>
+          <div class="definition">
+            <div class="def-title">pd.IndexSlice Anatomy</div>
+            <p><strong>Formal Statement:</strong> <code>pd.IndexSlice</code> provides slice construction syntax inside <code>.loc[]</code>. Wildcard <code>:</code> represents "all items in this level", while <code>'A':'B'</code> represents a lexicographical range.</p>
+            <p><strong>Syntax:</strong> <code>df.loc[idx[level0_slice, level1_slice, level2_slice], column_slice]</code></p>
+          </div>
+
+          <div class="example">
+            <div class="example-title">Multi-Level Range Slicing with pd.IndexSlice</div>
+            <pre><code># CRITICAL: Always sort index first!
+summary.sort_index(inplace=True)
+
+idx = pd.IndexSlice
+
+# Slicing: All Countries, Products from '21730' to '22752', All Months
+range_slice = summary.loc[idx[:, '21730':'22752', :], :]
+
+# Slicing: Only France & Germany, All Products, Only Month '2010-12'
+dec_subset = summary.loc[idx[['France', 'Germany'], :, '2010-12'], ['TotalRevenue']]
+
+print(dec_subset.head(3))</code></pre>
+          </div>
+
+          <h3>3. Cross-Section with `.xs()`: Surgical Inner-Level Extraction</h3>
+          <div class="syntax-card">
+            <div class="func-sig">df.xs(key, level=None, drop_level=True, axis=0)</div>
+            <div class="func-desc">Extracts a cross-section from the DataFrame at a specific index level without needing colons or wildcards.</div>
+            <table class="param-table">
+              <tr><th>Parameter</th><th>Value</th><th>Exam Significance</th></tr>
+              <tr><td><code>key</code></td><td><code>'2010-12'</code></td><td>The label value to filter on.</td></tr>
+              <tr><td><code>level</code></td><td><code>'Month'</code> or <code>2</code></td><td>The level name or integer position to search.</td></tr>
+              <tr><td><code>drop_level</code></td><td><code>True / False</code></td><td>If <code>True</code>, removes the sliced level. If <code>False</code>, retains the level in the index!</td></tr>
+            </table>
+          </div>
+
+          <div class="example">
+            <div class="example-title">Cross-Section .xs() in Action</div>
+            <pre><code># Extract December 2010 data for all countries and products, keeping the Month level:
+dec_keep = summary.xs('2010-12', level='Month', drop_level=False)
+
+# Extract a specific product '22492' across every country and month, dropping the product level:
+product_data = summary.xs('22492', level='StockCode', drop_level=True)
+
+print("Dec with level preserved:", dec_keep.index.names)
+print("Product with level dropped:", product_data.index.names)</code></pre>
+          </div>
+
+          <div class="result-preview">
+Dec with level preserved:   ['Country', 'StockCode', 'Month']
+Product with level dropped: ['Country', 'Month']
           </div>
 
           <div class="summary-box">
             <h4>Topic 7 Recap</h4>
             <ul>
-              <li>Always defend schema drift with <code>StructType(StringType)</code> and <code>get_json_object()</code>.</li>
-              <li>Always explain why ratio measures in DAX must use dynamic sums, avoiding the average of averages fallacy.</li>
-              <li>Sort MultiIndexes before slicing, and reference cleaned queries in Power BI to ensure single source of truth.</li>
+              <li>Use <code>df.loc['Germany']</code> for quick outer-level slicing.</li>
+              <li>Use <code>idx = pd.IndexSlice; df.loc[idx[:, 'A':'B', :], :]</code> for complex range slices across inner levels.</li>
+              <li>Use <code>.xs(key, level='...', drop_level=False)</code> to slice inner levels while preserving index dimensionality.</li>
             </ul>
           </div>
+
+          <h3>Self-Test Practice Questions</h3>
+          <details>
+            <summary>Q1: How do you select all rows for product 'POST' across all countries and months using <code>pd.IndexSlice</code>?</summary>
+            <div class="example">
+              <strong>Worked Solution:</strong> <code>summary.loc[pd.IndexSlice[:, 'POST', :], :]</code>. The first colon <code>:</code> matches all countries (Level 0), <code>'POST'</code> matches the product (Level 1), the third colon matches all months (Level 2), and the final colon selects all columns.
+            </div>
+          </details>
+          <details>
+            <summary>Q2: What is the primary difference between <code>df.xs()</code> and <code>df.loc[pd.IndexSlice]</code>?</summary>
+            <div class="example">
+              <strong>Worked Solution:</strong> <code>.xs()</code> cannot slice ranges (e.g. <code>'2010-01':'2010-06'</code>); it only accepts a single label. However, <code>.xs()</code> allows you to choose whether to drop or keep the sliced level via <code>drop_level=True/False</code>, whereas <code>IndexSlice</code> always retains the full index hierarchy.
+            </div>
+          </details>
+          <details>
+            <summary>Q3: What error is raised if you perform range slicing on an unsorted MultiIndex?</summary>
+            <div class="example">
+              <strong>Worked Solution:</strong> <code>UnsortedIndexError</code>. Always run <code>df.sort_index(inplace=True)</code> before slicing.
+            </div>
+          </details>
         </div>
 
         <!-- ═══════════════════════════════════════════════════════
-         TOPIC 8: MASTER SYNTAX & FUNCTIONS CHEATSHEET
+         TOPIC 8: RESHAPING: STACK, UNSTACK, PIVOT & MELT
          ═══════════════════════════════════════════════════════ -->
         <div class="topic-card" id="topic-8">
-          <h2><span class="topic-num">8</span>Master Syntax &amp; Functions Cheatsheet</h2>
-          <p class="topic-subtitle">Exhaustive copy-paste syntax reference for all PySpark, Pandas, and DAX functions</p>
+          <h2><span class="topic-num">8</span>Reshaping: Stack, Unstack, Pivot &amp; Melt</h2>
+          <p class="topic-subtitle">Pivoting between Tidy Long format and Analytical Wide format, Grand Totals, and Round-Trip verification</p>
+
+          <span class="seq-badge">Phase 4 • Data Reshaping</span>
+          <span class="query-pill pill-pandas">unstack()</span>
+          <span class="query-pill pill-pandas">stack()</span>
+          <span class="query-pill pill-pandas">pivot_table()</span>
 
           <p>
-            Keep this cheatsheet open during your exam preparation. It covers every required function with exact arguments and one-line copy-paste templates.
+            Data reshaping is the process of altering the physical layout of rows and columns without changing the underlying mathematical values.
+            In the lab exam, you must fluidly move between <strong>Long (Tidy)</strong> format (ideal for regression and Seaborn) and <strong>Wide</strong> format (ideal for matrix math and executive reporting).
+          </p>
+
+          <div class="diagram-box">
+            <div class="diagram-title">🔄 The Reshaping Matrix</div>
+            <div class="grid-2col">
+              <div class="diag-card">
+                <h5>.unstack() : Long &rarr; Wide</h5>
+                <pre>
+Pivots an INDEX LEVEL into COLUMN HEADERS.
+Row height shrinks; Column width expands.
+
+Index: (Country, Month)
+Revenue: [100, 150, 200, 250]
+        │
+        ▼ df['Revenue'].unstack('Month')
+Country │ 2010-12 │ 2011-01
+────────┼─────────┼────────
+Germany │ 100     │ 150
+France  │ 200     │ 250</pre>
+              </div>
+              <div class="diag-card">
+                <h5>.stack() : Wide &rarr; Long</h5>
+                <pre>
+Pivots COLUMN HEADERS down into the ROW INDEX.
+Column width shrinks; Row height expands.
+
+Country │ 2010-12 │ 2011-01
+────────┼─────────┼────────
+Germany │ 100     │ 150
+        │
+        ▼ wide_df.stack()
+Country │ Month   │ Revenue
+────────┼─────────┼────────
+Germany │ 2010-12 │ 100
+Germany │ 2011-01 │ 150</pre>
+              </div>
+            </div>
+          </div>
+
+          <h3>1. `unstack()` and `stack()` Syntax &amp; Usage</h3>
+          <div class="syntax-card">
+            <div class="func-sig">df.unstack(level=-1, fill_value=None)</div>
+            <div class="func-desc">Pivots the specified row index level into columns. Default level is <code>-1</code> (the innermost level).</div>
+          </div>
+
+          <div class="syntax-card">
+            <div class="func-sig">df.stack(level=-1, dropna=True)</div>
+            <div class="func-desc">Pivots column levels down into the row index. If <code>dropna=True</code>, omits combinations with missing values.</div>
+          </div>
+
+          <div class="example">
+            <div class="example-title">Unstack &amp; Stack Round-Trip with .equals() Verification</div>
+            <pre><code># Starting with Long MultiIndex: (Country, Month)
+long_df = summary.groupby(['Country', 'Month'])['TotalRevenue'].sum()
+
+# 1. Unstack Month to Columns (Wide Table)
+wide_table = long_df.unstack('Month', fill_value=0)
+
+# 2. Stack Columns back into Rows (Long Table)
+restored_long = wide_table.stack().to_frame(name='TotalRevenue')
+
+# 3. Verify Exact Equality
+# Note: Re-sort to match original order before testing equals
+print("Round-trip Successful?", restored_long.sort_index().equals(long_df.to_frame().sort_index()))</code></pre>
+          </div>
+
+          <h3>2. `pivot_table()`: Spreadsheet-Style Pivoting with Grand Totals</h3>
+          <div class="syntax-card">
+            <div class="func-sig">pd.pivot_table(data, values=None, index=None, columns=None, aggfunc='mean', fill_value=None, margins=False)</div>
+            <div class="func-desc">Aggregates and reshapes directly from raw tidy data. Setting <code>margins=True</code> automatically calculates Grand Total rows and columns.</div>
+          </div>
+
+          <div class="example">
+            <div class="example-title">Pivot Table with margins=True Grand Totals</div>
+            <pre><code>pivot_sales = df_clean.pivot_table(
+    index='Country',
+    columns='Month',
+    values='Revenue',
+    aggfunc='sum',
+    fill_value=0,
+    margins=True,          # Calculates "All" Grand Total row and column!
+    margins_name='Grand Total'
+)
+
+print(pivot_sales.head(3))</code></pre>
+          </div>
+
+          <div class="result-preview">
+Month        2010-12   2011-01  Grand Total
+Country                                    
+Australia    1005.10    900.20      1905.30
+France       9800.50   7400.00     17200.50
+Germany     15400.20  12100.00     27500.20
+          </div>
+
+          <h3>3. `melt()`: The Unpivot Powerhouse</h3>
+          <div class="syntax-card">
+            <div class="func-sig">pd.melt(df, id_vars=None, value_vars=None, var_name=None, value_name='value')</div>
+            <div class="func-desc">Flattens a wide DataFrame by melting measurement columns into identifier rows (tidy long format).</div>
+          </div>
+
+          <div class="example">
+            <div class="example-title">Melting Wide Pivot Data back into Tidy Rows</div>
+            <pre><code># Reset index of wide table so Country is a normal column
+wide_flat = wide_table.reset_index()
+
+# Melt month columns into rows
+melted = wide_flat.melt(
+    id_vars=['Country'],
+    var_name='Month',
+    value_name='TotalRevenue'
+)
+
+print(melted.head(3))</code></pre>
+          </div>
+
+          <div class="summary-box">
+            <h4>Topic 8 Recap</h4>
+            <ul>
+              <li><code>.unstack(level)</code> turns row index levels into wide column headers.</li>
+              <li><code>.stack()</code> turns wide column headers back into long row index levels.</li>
+              <li><code>pd.pivot_table(..., margins=True)</code> automatically adds "All" Grand Total rows and columns.</li>
+              <li><code>.melt(id_vars=...)</code> unpivots wide columns into tidy key-value row records.</li>
+              <li><code>df1.equals(df2)</code> verifies exact structural, index, and numeric equality.</li>
+            </ul>
+          </div>
+
+          <h3>Self-Test Practice Questions</h3>
+          <details>
+            <summary>Q1: What happens if you unstack an index level where combinations have no data?</summary>
+            <div class="example">
+              <strong>Worked Solution:</strong> Pandas inserts <code>NaN</code> for those cells. You can prevent missing values by specifying <code>.unstack(fill_value=0)</code>.
+            </div>
+          </details>
+          <details>
+            <summary>Q2: How does <code>df.equals(df_other)</code> differ from <code>df == df_other</code>?</summary>
+            <div class="example">
+              <strong>Worked Solution:</strong> <code>df == df_other</code> returns an element-wise boolean DataFrame, which fails or throws an error if shapes or index alignments differ. <code>df.equals(df_other)</code> returns a single scalar boolean (<code>True</code> or <code>False</code>), verifying identical shape, identical index labels, identical column names, and identical element values (including proper handling of <code>NaN == NaN</code>).
+            </div>
+          </details>
+          <details>
+            <summary>Q3: When should you use <code>melt()</code> instead of <code>stack()</code>?</summary>
+            <div class="example">
+              <strong>Worked Solution:</strong> Use <code>stack()</code> when your data uses a MultiIndex and you want columns moved into index levels. Use <code>melt()</code> when your data is a standard flat 2D DataFrame with normal columns and you want to unpivot wide measurement columns into tidy columns (<code>var_name</code> and <code>value_name</code>).
+            </div>
+          </details>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════
+         TOPIC 9: LEVEL GROUPBY, TRANSFORM & COLUMNS
+         ═══════════════════════════════════════════════════════ -->
+        <div class="topic-card" id="topic-9">
+          <h2><span class="topic-num">9</span>Level GroupBy, Transform &amp; Columns</h2>
+          <p class="topic-subtitle">Level-wise aggregations, group broadcasting with .transform(), best-seller identification &amp; MultiIndex columns</p>
+
+          <span class="seq-badge">Phase 4 • Advanced Analytics</span>
+          <span class="query-pill pill-pandas">transform()</span>
+          <span class="query-pill pill-pandas">idxmax()</span>
+          <span class="query-pill pill-pandas">MultiIndex Columns</span>
+
+          <p>
+            When data is structured hierarchically, calculations often require comparing individual items against group-level benchmarks (e.g. <em>What percentage of Germany's monthly revenue came from this product?</em>).
+            In this section, you will master <strong>level-wise groupby</strong>, <strong>group broadcasting via <code>.transform()</code></strong>, <strong><code>.idxmax()</code></strong>, and <strong>MultiIndex column management</strong>.
+          </p>
+
+          <h3>1. Grouping by Hierarchical Levels Without Resetting</h3>
+          <div class="syntax-card">
+            <div class="func-sig">df.groupby(level='LevelName', axis=0).agg(...)</div>
+            <div class="func-desc">Aggregates directly across index levels without ever calling <code>reset_index()</code>. You can specify levels by name or integer (e.g. <code>level=0</code> or <code>level=['Country', 'Month']</code>).</div>
+          </div>
+
+          <div class="syntax-card">
+            <div class="func-sig">Named vs Dictionary Aggregation</div>
+            <div class="func-desc">
+              • <strong>Named Aggregation:</strong> <code>.agg(TotalRev=('Revenue', 'sum'))</code> &rarr; Outputs clean, single-level column names.<br>
+              • <strong>Dictionary Aggregation:</strong> <code>.agg({'Revenue': ['sum', 'mean']})</code> &rarr; Outputs <strong>hierarchical MultiIndex columns</strong>!
+            </div>
+          </div>
+
+          <h3>2. The Magic of `.transform()`: Group-Level Broadcasting</h3>
+          <div class="diagram-box">
+            <div class="diagram-title">⚡ .agg() vs .transform() Visualized</div>
+            <div class="grid-2col">
+              <div class="diag-card">
+                <h5>.agg('sum') Collapses Rows</h5>
+                <pre>
+Country │ Product │ Rev
+────────┼─────────┼────
+Germany │ A       │ 100
+Germany │ B       │ 200
+France  │ A       │ 300
+        │
+        ▼ .groupby('Country')['Rev'].agg('sum')
+Country │ Rev
+────────┼────
+Germany │ 300   <-- 2 rows collapsed to 1!
+France  │ 300</pre>
+              </div>
+              <div class="diag-card">
+                <h5>.transform('sum') Broadcasts to Every Row!</h5>
+                <pre>
+Country │ Product │ Rev │ transform('sum')
+────────┼─────────┼─────┼─────────────────
+Germany │ A       │ 100 │ 300
+Germany │ B       │ 200 │ 300  <-- Group sum broadcast!
+France  │ A       │ 300 │ 300
+        │
+        ▼ RevenueShare = Rev / transform('sum')
+Germany A: 100 / 300 = 33.3%
+Germany B: 200 / 300 = 66.7%</pre>
+              </div>
+            </div>
+          </div>
+
+          <div class="example">
+            <div class="example-title">Calculating Percentage Shares with .transform() &amp; Best-Seller with .idxmax()</div>
+            <pre><code># MultiIndex: (Country, StockCode, Month)
+# STEP 1: Broadcast country-month total revenue back to every individual product row
+country_month_totals = summary.groupby(
+    level=['Country', 'Month']
+)['TotalRevenue'].transform('sum')
+
+# STEP 2: Compute percentage revenue share
+summary['RevenueShare'] = (summary['TotalRevenue'] / country_month_totals).fillna(0)
+
+# STEP 3: Identify the single best-selling product per country in Dec 2010
+dec_data = summary.xs('2010-12', level='Month', drop_level=False)
+
+# .idxmax() returns the coordinate tuple of the highest value in each group
+best_seller_indices = dec_data.groupby(level='Country')['RevenueShare'].idxmax()
+
+# Extract best seller rows using .loc[]
+best_sellers = dec_data.loc[best_seller_indices]
+
+print(best_sellers[['TotalRevenue', 'RevenueShare']].head(3))</code></pre>
+          </div>
+
+          <h3>3. MultiIndex Column Handling: Indexing &amp; Flattening</h3>
+          <p>
+            When performing dictionary aggregations like <code>.agg({'Revenue': ['sum', 'mean']})</code>, Pandas generates <strong>MultiIndex column headers</strong>. You must know how to access, slice, and flatten them.
+          </p>
+
+          <div class="diag-card">
+            <h5>Hierarchical Column Operations</h5>
+            <pre><code># Sample DataFrame with MultiIndex columns
+col_summary = df_clean.groupby('Country').agg({
+    'Revenue': ['sum', 'mean'],
+    'Quantity': ['sum']
+})
+
+# 1. Tuple Column Access:
+total_rev = col_summary[('Revenue', 'sum')]
+
+# 2. Cross-Section on Columns (axis=1):
+# Extract all 'mean' metrics across all columns
+mean_metrics = col_summary.xs('mean', level=1, axis=1)
+
+# 3. Flattening MultiIndex Columns using List Comprehension (EXAM STANDARD):
+col_summary.columns = [f"{col[0]}_{col[1]}" for col in col_summary.columns]
+# Result: ['Revenue_sum', 'Revenue_mean', 'Quantity_sum'] (Clean 1D strings!)</code></pre>
+          </div>
+
+          <h3>4. Data Combining: Merging Flattened Data with Lookup Tables</h3>
+          <div class="syntax-card">
+            <div class="func-sig">df_flat.merge(lookup_df, on='Country', how='left')</div>
+            <div class="func-desc">Joins the flattened aggregated DataFrame with reference dimension tables (e.g. mapping Countries to Continental Regions).</div>
+          </div>
+
+          <div class="example">
+            <div class="example-title">Merging Aggregations with Country-Region Lookup Table</div>
+            <pre><code># Reset index to create flat table
+df_export = col_summary.reset_index()
+
+# Lookup Table (Country to Region)
+lookup = pd.DataFrame({
+    'Country': ['Germany', 'France', 'United Kingdom'],
+    'Region': ['Central Europe', 'Western Europe', 'British Isles']
+})
+
+# Left join
+enriched_df = df_export.merge(lookup, on='Country', how='left')
+print(enriched_df.head(2))</code></pre>
+          </div>
+
+          <div class="summary-box">
+            <h4>Topic 9 Recap</h4>
+            <ul>
+              <li><code>.groupby(level=...)</code> calculates aggregates across hierarchical index tiers without resetting.</li>
+              <li><code>.transform('sum')</code> broadcasts group calculations back to original row counts, enabling instant percentage share formulas.</li>
+              <li><code>.idxmax()</code> returns the index coordinate tuple of the maximum value per group.</li>
+              <li>Flatten MultiIndex columns using list comprehensions: <code>[f"{c[0]}_{c[1]}" for c in df.columns]</code>.</li>
+            </ul>
+          </div>
+
+          <h3>Self-Test Practice Questions</h3>
+          <details>
+            <summary>Q1: Why does <code>df['Rev'] / df.groupby(level='Country')['Rev'].sum()</code> fail or produce NaN without <code>transform()</code>?</summary>
+            <div class="example">
+              <strong>Worked Solution:</strong> <code>.sum()</code> collapses rows to one row per country, so its index only contains unique countries. The original DataFrame has thousands of rows with a 3-level MultiIndex. Dividing series with mismatched index shapes fails alignment and fills rows with <code>NaN</code>. <code>.transform('sum')</code> stretches the sums back to match the original row length and index, allowing seamless vectorized division.
+            </div>
+          </details>
+          <details>
+            <summary>Q2: How do you extract the top 3 highest-revenue items per country?</summary>
+            <div class="example">
+              <strong>Worked Solution:</strong> Use <code>.nlargest()</code>: <code>top3 = summary.groupby(level='Country')['TotalRevenue'].nlargest(3)</code>.
+            </div>
+          </details>
+          <details>
+            <summary>Q3: How do you access a specific column in a DataFrame with MultiIndex columns?</summary>
+            <div class="example">
+              <strong>Worked Solution:</strong> Pass a tuple matching the levels: <code>df[('Revenue', 'sum')]</code> or <code>df.loc[:, ('Revenue', 'sum')]</code>.
+            </div>
+          </details>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════
+         TOPIC 10: POWER BI ETL, STAR SCHEMA & DAX
+         ═══════════════════════════════════════════════════════ -->
+        <div class="topic-card" id="topic-10">
+          <h2><span class="topic-num">10</span>Power BI ETL, Star Schema &amp; DAX</h2>
+          <p class="topic-subtitle">Power Query transformations, Star Schema dimensional modeling, continuous Date tables &amp; dynamic DAX measures</p>
+
+          <span class="seq-badge">Phase 5 • Business Intelligence</span>
+          <span class="query-pill pill-pbi">Star Schema</span>
+          <span class="query-pill pill-dax">DAX Measures</span>
+
+          <p>
+            Microsoft Power BI is the analytical capstone of the DAV lab. The exam evaluates your ability to perform ETL in <strong>Power Query</strong>, build a high-performance <strong>Star Schema</strong>, generate a continuous <strong>Date Dimension</strong>, and create dynamic <strong>DAX measures</strong>.
+          </p>
+
+          <div class="diagram-box">
+            <div class="diagram-title">⭐ The Star Schema Dimensional Model</div>
+            <div class="grid-3col">
+              <div class="diag-card">
+                <h5>Dim_Customer (1)</h5>
+                <pre>
+[CustomerID] (PK)
+CustomerName
+City
+Country</pre>
+              </div>
+              <div class="diag-card" style="border: 2px solid var(--ac);">
+                <h5>Fact_Sales (*) [CENTRAL]</h5>
+                <pre>
+[SalesID] (PK)
+CustomerID (FK) ──► 1:N
+ProductSKU (FK) ──► 1:N
+OrderDate (FK)  ──► 1:N
+Quantity
+Revenue
+Margin</pre>
+              </div>
+              <div class="diag-card">
+                <h5>Dim_Date (1)</h5>
+                <pre>
+[Date] (PK)
+Year
+MonthNumber
+MonthName (Sort by MonthNo!)</pre>
+              </div>
+            </div>
+          </div>
+
+          <h3>1. Power Query M Hygiene Rules</h3>
+          <ul>
+            <li><strong>Promote Headers:</strong> Always verify that the first row is promoted to column names.</li>
+            <li><strong>Strict Data Types:</strong> Ensure dates are <code>Date</code> (not DateTime if time is irrelevant), amounts are <code>Decimal Number</code>, and IDs are <code>Text</code>.</li>
+            <li><strong>Remove Unused Columns:</strong> Delete raw unparsed strings or temporary keys in Power Query before loading into the VertiPaq tabular memory engine.</li>
+          </ul>
+
+          <h3>2. The Continuous Date Dimension Requirement</h3>
+          <div class="warning-box">
+            <div class="callout-label">Time Intelligence Will Fail Without a Contiguous Calendar</div>
+            If your transaction data skips weekends or holidays, DAX time-intelligence functions like <code>SAMEPERIODLASTYEAR</code>, <code>TOTALYTD</code>, or <code>DATEADD</code> will return corrupted results!
+            You must generate an unbroken Date table with DAX:
+            <pre><code>Dim_Date = 
+VAR MinDate = MIN(Fact_Sales[OrderDate])
+VAR MaxDate = MAX(Fact_Sales[OrderDate])
+RETURN
+    ADDCOLUMNS(
+        CALENDAR(MinDate, MaxDate),
+        "Year", YEAR([Date]),
+        "MonthNumber", MONTH([Date]),
+        "MonthName", FORMAT([Date], "mmm"),
+        "Quarter", "Q" & FORMAT([Date], "q")
+    )</code></pre>
+            <strong>Mandatory Step:</strong> Select <code>MonthName</code> column &rarr; Click <em>Column Tools</em> &rarr; <em>Sort by Column</em> &rarr; Choose <strong>MonthNumber</strong>!
+          </div>
+
+          <h3>3. Calculated Columns vs DAX Measures: Simpson's Paradox</h3>
+          <div class="definition">
+            <div class="def-title">Calculated Columns vs DAX Measures</div>
+            <p><strong>Calculated Columns:</strong> Computed during data refresh row-by-row. Stored permanently in RAM. Operates under <em>Row Context</em>.</p>
+            <p><strong>DAX Measures:</strong> Computed on-the-fly dynamically when visuals render. Takes zero RAM. Operates under <em>Filter Context</em>.</p>
+          </div>
+
+          <div class="example">
+            <div class="example-title">The Ratio Fallacy: Why Measures are Mandatory</div>
+            <pre><code>-- ❌ CRITICAL MISTAKE: Averaging a calculated column ratio
+-- Average Discount = AVERAGE(Sales[DiscountPct])
+-- This treats a 1-unit order the same as a 10,000-unit order!
+
+-- ✅ CORRECT: Dynamic DAX Measure with DIVIDE
+Total Revenue = SUM(Fact_Sales[Revenue])
+Total Cost    = SUM(Fact_Sales[Cost])
+Total Profit  = [Total Revenue] - [Total Cost]
+
+Profit Margin = 
+DIVIDE(
+    [Total Profit], 
+    [Total Revenue], 
+    0 -- Safe alternate result if Revenue is 0
+)
+
+-- Time-Shifted Metric (Prior Year Sales)
+Sales Prior Year = 
+CALCULATE(
+    [Total Revenue],
+    SAMEPERIODLASTYEAR(Dim_Date[Date])
+)</code></pre>
+          </div>
+
+          <div class="summary-box">
+            <h4>Topic 10 Recap</h4>
+            <ul>
+              <li>Always model in a Star Schema: 1-to-many relationships pointing from Dimensions into Fact.</li>
+              <li>Always mark your Date table as an official Date table and sort <code>MonthName</code> by <code>MonthNumber</code>.</li>
+              <li>Never average pre-calculated ratios in calculated columns; always create dynamic measures with <code>DIVIDE(SUM, SUM)</code>.</li>
+            </ul>
+          </div>
+
+          <h3>Self-Test Practice Questions</h3>
+          <details>
+            <summary>Q1: Why should relationships between Dimensions and Facts have Single cross-filter direction instead of Both?</summary>
+            <div class="example">
+              <strong>Worked Solution:</strong> Bi-directional cross-filtering creates ambiguous filter paths in complex models, degrades query performance, and can lead to unexpected filter context propagation. Single direction ensures filters flow cleanly from Dimensions to Facts.
+            </div>
+          </details>
+          <details>
+            <summary>Q2: What is the purpose of the <code>DIVIDE()</code> function in DAX over the slash operator <code>/</code>?</summary>
+            <div class="example">
+              <strong>Worked Solution:</strong> <code>DIVIDE(a, b, alternate)</code> automatically intercepts division by zero and returns <code>BLANK()</code> or the specified alternate value (e.g. 0), whereas <code>a / b</code> displays <code>Infinity</code> or throws an error in visuals.
+            </div>
+          </details>
+          <details>
+            <summary>Q3: When is a calculated column justified over a measure?</summary>
+            <div class="example">
+              <strong>Worked Solution:</strong> When you need to slice or group data by the result (e.g. creating an <em>Age Group</em> category like "Youth", "Adult", "Senior" for use in slicers or axis labels).
+            </div>
+          </details>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════
+         TOPIC 11: MASTER SYNTAX & QUICK LOOKUP CHEATSHEET
+         ═══════════════════════════════════════════════════════ -->
+        <div class="topic-card" id="topic-11">
+          <h2><span class="topic-num">11</span>Master Syntax &amp; Quick Lookup Cheatsheet</h2>
+          <p class="topic-subtitle">High-density copy-paste reference tables for all PySpark, Pandas, and DAX functions</p>
+
+          <span class="seq-badge">Quick-Recall Cheatsheet</span>
+          <span class="query-pill pill-spark">PySpark</span>
+          <span class="query-pill pill-pandas">Pandas</span>
+          <span class="query-pill pill-dax">DAX</span>
+
+          <p>
+            Keep this section open for instant syntax lookup during preparation. Every signature shows exact argument order and exam usage.
           </p>
 
           <h3>1. Python Requests &amp; JSON</h3>
           <table>
             <thead>
-              <tr>
-                <th>Library / Function</th>
-                <th>Exact Syntax &amp; Parameters</th>
-                <th>Purpose / Exam Role</th>
-              </tr>
+              <tr><th>Function</th><th>Exact Syntax</th><th>Exam Purpose</th></tr>
             </thead>
             <tbody>
-              <tr>
-                <td><code>requests.get()</code></td>
-                <td><code>r = requests.get(url, timeout=10)</code></td>
-                <td>Sends HTTP GET; always specify timeout to avoid hanging.</td>
-              </tr>
-              <tr>
-                <td><code>r.status_code</code></td>
-                <td><code>if r.status_code == 200: ...</code></td>
-                <td>Validates successful HTTP response before parsing body.</td>
-              </tr>
-              <tr>
-                <td><code>r.json()</code></td>
-                <td><code>data = r.json()</code></td>
-                <td>Deserializes HTTP JSON body into Python dicts/lists.</td>
-              </tr>
-              <tr>
-                <td><code>pd.json_normalize()</code></td>
-                <td><code>pd.json_normalize(data['results'], sep='_')</code></td>
-                <td>Flattens nested dictionaries into 2D DataFrame with underscore columns.</td>
-              </tr>
+              <tr><td><code>requests.get</code></td><td><code>r = requests.get(url, timeout=10)</code></td><td>HTTP GET with 10s timeout to prevent hanging.</td></tr>
+              <tr><td><code>status_code</code></td><td><code>if r.status_code == 200: ...</code></td><td>Defensive check before reading body.</td></tr>
+              <tr><td><code>r.json()</code></td><td><code>payload = r.json()</code></td><td>Parses HTTP response body into Python dict/list.</td></tr>
+              <tr><td><code>pd.json_normalize</code></td><td><code>pd.json_normalize(data, sep='_')</code></td><td>Flattens nested JSON dictionaries into 2D DataFrame.</td></tr>
             </tbody>
           </table>
 
           <h3>2. PySpark &amp; Delta Lake</h3>
           <table>
             <thead>
-              <tr>
-                <th>PySpark Function</th>
-                <th>Exact Syntax</th>
-                <th>Exam Purpose</th>
-              </tr>
+              <tr><th>Function</th><th>Exact Syntax</th><th>Exam Purpose</th></tr>
             </thead>
             <tbody>
-              <tr>
-                <td><code>StructType DDL</code></td>
-                <td><code>StructType([StructField("col", StringType(), True)])</code></td>
-                <td>Enforces schema-on-read; neutralizes mixed int/float and schema drift crashes.</td>
-              </tr>
-              <tr>
-                <td><code>current_timestamp()</code></td>
-                <td><code>df.withColumn("ingest_time", current_timestamp())</code></td>
-                <td>Adds audit timestamp to Bronze/Silver tables.</td>
-              </tr>
-              <tr>
-                <td><code>when / otherwise</code></td>
-                <td><code>when(col("s") == 0, "Out").otherwise("In")</code></td>
-                <td>Conditional column tagging (like SQL CASE WHEN).</td>
-              </tr>
-              <tr>
-                <td><code>get_json_object()</code></td>
-                <td><code>get_json_object(col("metadata"), "$.os")</code></td>
-                <td>Safely extracts nested JSON from stringified columns; yields null on corruption.</td>
-              </tr>
-              <tr>
-                <td><code>DeltaTable.merge()</code></td>
-                <td><code>tgt.merge(src, "tgt.id = src.id").whenMatchedUpdateAll().whenNotMatchedInsertAll().execute()</code></td>
-                <td>Performs atomic upsert in Silver Delta Lake table to eliminate duplicate primary keys.</td>
-              </tr>
-              <tr>
-                <td><code>DataFrame.join()</code></td>
-                <td><code>df1.join(df2, "user_id", "inner")</code></td>
-                <td>Distributed relational join across Silver tables on natural keys.</td>
-              </tr>
+              <tr><td><code>StructType DDL</code></td><td><code>StructType([StructField("col", StringType(), True)])</code></td><td>Strict Schema-on-Read; stops drift crashes.</td></tr>
+              <tr><td><code>current_timestamp</code></td><td><code>df.withColumn("audit_time", current_timestamp())</code></td><td>Adds ingestion timestamp to Bronze/Silver.</td></tr>
+              <tr><td><code>when / otherwise</code></td><td><code>when(col("qty") > 0, "Sale").otherwise("Return")</code></td><td>Conditional column transformation.</td></tr>
+              <tr><td><code>get_json_object</code></td><td><code>get_json_object(col("raw_str"), "$.user.id")</code></td><td>Extracts JSONPath keys from quarantined string columns.</td></tr>
+              <tr><td><code>Delta merge</code></td><td><code>table.alias("t").merge(df.alias("s"), "t.id=s.id").whenMatchedUpdate(...).whenNotMatchedInsert(...).execute()</code></td><td>ACID Upsert on primary keys; prevents duplicate rows.</td></tr>
+              <tr><td><code>broadcast join</code></td><td><code>df_large.join(broadcast(df_small), on="key", how="left")</code></td><td>Eliminates shuffle latency when joining lookup tables.</td></tr>
             </tbody>
           </table>
 
           <h3>3. Pandas &amp; MultiIndexing</h3>
           <table>
             <thead>
-              <tr>
-                <th>Pandas Method</th>
-                <th>Exact Syntax</th>
-                <th>Exam Purpose</th>
-              </tr>
+              <tr><th>Function</th><th>Exact Syntax</th><th>Exam Purpose</th></tr>
             </thead>
             <tbody>
-              <tr>
-                <td><code>set_index()</code></td>
-                <td><code>df.set_index(['Country', 'StockCode', 'Date'])</code></td>
-                <td>Constructs multi-level row index.</td>
-              </tr>
-              <tr>
-                <td><code>pd.MultiIndex.from_product()</code></td>
-                <td><code>pd.MultiIndex.from_product([list1, list2, list3])</code></td>
-                <td>Builds complete Cartesian grid to expose missing sales.</td>
-              </tr>
-              <tr>
-                <td><code>reindex()</code></td>
-                <td><code>df.reindex(full_grid, fill_value=0)</code></td>
-                <td>Aligns DataFrame to complete grid, replacing missing records with 0.</td>
-              </tr>
-              <tr>
-                <td><code>pd.IndexSlice</code></td>
-                <td><code>df.loc[pd.IndexSlice[:, '21730':'22752', :], :]</code></td>
-                <td>Slices multi-level rows across arbitrary inner dimensions (requires sorted index).</td>
-              </tr>
-              <tr>
-                <td><code>.xs()</code></td>
-                <td><code>df.xs('2010-12', level='Month', drop_level=False)</code></td>
-                <td>Extracts cross-section for a specific inner level with/without dropping level.</td>
-              </tr>
-              <tr>
-                <td><code>sort_index()</code></td>
-                <td><code>df.sort_index(inplace=True)</code></td>
-                <td>Lexicographically sorts MultiIndex to prevent <code>UnsortedIndexError</code>.</td>
-              </tr>
-              <tr>
-                <td><code>unstack() / stack()</code></td>
-                <td><code>df.unstack('StockCode') / df.stack()</code></td>
-                <td>Pivots inner index level between row index and column headers.</td>
-              </tr>
-              <tr>
-                <td><code>pivot_table()</code></td>
-                <td><code>df.pivot_table(index='A', columns='B', values='C', aggfunc='sum', margins=True)</code></td>
-                <td>Direct 2D pivot aggregation; <code>margins=True</code> adds Grand Total rows/cols.</td>
-              </tr>
-              <tr>
-                <td><code>transform('sum')</code></td>
-                <td><code>df['Share'] = df['Rev'] / df.groupby(level=['A','B'])['Rev'].transform('sum')</code></td>
-                <td>Calculates group total without collapsing rows, enabling row-level share percentages.</td>
-              </tr>
+              <tr><td><code>pd.to_datetime</code></td><td><code>df['Date'] = pd.to_datetime(df['Date'], errors='coerce')</code></td><td>Converts text dates safely.</td></tr>
+              <tr><td><code>.dt.to_period</code></td><td><code>df['Month'] = df['Date'].dt.to_period('M')</code></td><td>Creates monthly cohort Period object.</td></tr>
+              <tr><td><code>.str.startswith</code></td><td><code>df[df['InvoiceNo'].astype(str).str.startswith('C')]</code></td><td>Filters cancellation orders.</td></tr>
+              <tr><td><code>.copy()</code></td><td><code>clean_df = df[mask].copy()</code></td><td>Prevents <code>SettingWithCopyWarning</code>.</td></tr>
+              <tr><td><code>from_product</code></td><td><code>pd.MultiIndex.from_product([countries, skus, months], names=[...])</code></td><td>Generates Cartesian grid to expose silent absences.</td></tr>
+              <tr><td><code>from_tuples</code></td><td><code>pd.MultiIndex.from_tuples([('DE', 'A'), ('FR', 'B')], names=[...])</code></td><td>Creates specific coordinate watchlist.</td></tr>
+              <tr><td><code>.reindex</code></td><td><code>summary.reindex(full_grid, fill_value=0)</code></td><td>Matches DataFrame to full grid, filling missing sales with 0.</td></tr>
+              <tr><td><code>.sort_index</code></td><td><code>summary.sort_index(inplace=True)</code></td><td>Sorts levels lexicographically; mandatory for slicing!</td></tr>
+              <tr><td><code>pd.IndexSlice</code></td><td><code>idx = pd.IndexSlice; df.loc[idx[:, 'A':'B', :], :]</code></td><td>Slices ranges across inner levels without resetting index.</td></tr>
+              <tr><td><code>.xs()</code></td><td><code>df.xs('2010-12', level='Month', drop_level=False)</code></td><td>Cross-section of a single key at an inner level.</td></tr>
+              <tr><td><code>.unstack()</code></td><td><code>df.unstack(level='StockCode', fill_value=0)</code></td><td>Pivots row index levels up to columns (Long &rarr; Wide).</td></tr>
+              <tr><td><code>.stack()</code></td><td><code>wide_df.stack()</code></td><td>Pivots columns down into row index (Wide &rarr; Long).</td></tr>
+              <tr><td><code>.pivot_table</code></td><td><code>df.pivot_table(index='A', columns='B', values='V', aggfunc='sum', margins=True)</code></td><td>Pivots with automatic Grand Total row &amp; column.</td></tr>
+              <tr><td><code>.melt()</code></td><td><code>wide.melt(id_vars=['A'], var_name='B', value_name='V')</code></td><td>Unpivots wide columns back into tidy long records.</td></tr>
+              <tr><td><code>.transform()</code></td><td><code>df['Share'] = df['Rev'] / df.groupby(level='Country')['Rev'].transform('sum')</code></td><td>Broadcasts group aggregates back to individual rows for shares.</td></tr>
+              <tr><td><code>.idxmax()</code></td><td><code>dec_data.groupby(level='Country')['RevenueShare'].idxmax()</code></td><td>Finds coordinate tuple of maximum value (best seller).</td></tr>
+              <tr><td><code>flatten cols</code></td><td><code>df.columns = [f"{c[0]}_{c[1]}" for c in df.columns]</code></td><td>Flattens MultiIndex column headers to single strings.</td></tr>
+              <tr><td><code>.equals()</code></td><td><code>df1.equals(df2)</code></td><td>Verifies identical shapes, indices, and data values.</td></tr>
             </tbody>
           </table>
 
           <h3>4. Power BI DAX Formulas</h3>
           <table>
             <thead>
-              <tr>
-                <th>DAX Formula</th>
-                <th>Code Snippet</th>
-                <th>Exam Purpose</th>
-              </tr>
+              <tr><th>DAX Function</th><th>Exact Syntax</th><th>Exam Purpose</th></tr>
             </thead>
             <tbody>
-              <tr>
-                <td><code>Date Table</code></td>
-                <td><code>Dim_Date = ADDCOLUMNS(CALENDAR(DATE(2025,1,1), DATE(2025,12,31)), "Month", FORMAT([Date], "mmm"), "Month Number", MONTH([Date]))</code></td>
-                <td>Generates continuous calendar table required for time intelligence and trend charts.</td>
-              </tr>
-              <tr>
-                <td><code>Total Sales</code></td>
-                <td><code>Total Sales = SUM(Sales[Sales])</code></td>
-                <td>Core additive revenue measure.</td>
-              </tr>
-              <tr>
-                <td><code>Total Orders</code></td>
-                <td><code>Total Orders = DISTINCTCOUNT(Sales[OrderID])</code></td>
-                <td>Counts unique orders without double counting multi-line invoices.</td>
-              </tr>
-              <tr>
-                <td><code>Average Order Value</code></td>
-                <td><code>Average Order Value = DIVIDE([Total Sales], [Total Orders], 0)</code></td>
-                <td>Safe division protecting against divide-by-zero errors.</td>
-              </tr>
-              <tr>
-                <td><code>Profit Margin</code></td>
-                <td><code>Profit Margin = DIVIDE([Total Profit], [Total Sales], 0)</code></td>
-                <td>Dynamic ratio measure; format as Percentage with 2 decimal places.</td>
-              </tr>
+              <tr><td><code>DIVIDE</code></td><td><code>Profit Margin = DIVIDE([Total Profit], [Total Revenue], 0)</code></td><td>Safe division intercepting divide-by-zero.</td></tr>
+              <tr><td><code>CALCULATE</code></td><td><code>CALCULATE([Sales], Dim_Customer[Country] = "Germany")</code></td><td>Modifies or overwrites filter context.</td></tr>
+              <tr><td><code>SAMEPERIODLASTYEAR</code></td><td><code>CALCULATE([Sales], SAMEPERIODLASTYEAR(Dim_Date[Date]))</code></td><td>Prior year sales comparison.</td></tr>
+              <tr><td><code>ALL</code></td><td><code>% of Total = DIVIDE([Sales], CALCULATE([Sales], ALL(Dim_Customer)))</code></td><td>Removes filters on a dimension to compute global share.</td></tr>
+              <tr><td><code>CALENDAR</code></td><td><code>CALENDAR(DATE(2020,1,1), DATE(2025,12,31))</code></td><td>Generates continuous date range.</td></tr>
             </tbody>
           </table>
 
           <div class="summary-box">
-            <h4>Topic 8 Recap</h4>
+            <h4>Topic 11 Recap</h4>
             <ul>
-              <li>Requests: always use <code>timeout</code> and verify <code>status_code == 200</code>.</li>
-              <li>PySpark: <code>get_json_object</code> parses stringified JSON; <code>DeltaTable.merge()</code> prevents duplicates.</li>
-              <li>Pandas: always call <code>sort_index()</code> before <code>IndexSlice</code>; use <code>transform('sum')</code> for group percentages.</li>
-              <li>DAX: generate <code>CALENDAR</code>, sort month by month number, and calculate ratios with <code>DIVIDE(SUM, SUM)</code>.</li>
+              <li>Use this cheatsheet for rapid syntax verification during code execution.</li>
+              <li>Remember the core parameters: <code>timeout=10</code>, <code>fill_value=0</code>, <code>drop_level=False</code>, and <code>margins=True</code>.</li>
             </ul>
           </div>
         </div>
 
         <!-- ═══════════════════════════════════════════════════════
-         TOPIC 9: INTERACTIVE PRACTICE MCQS & LAB CHALLENGES
+         TOPIC 12: VIVA TRAPS & INTERACTIVE EXAM MCQS
          ═══════════════════════════════════════════════════════ -->
-        <div class="topic-card" id="topic-9">
-          <h2><span class="topic-num">9</span>Interactive Practice MCQs &amp; Challenges</h2>
-          <p class="topic-subtitle">Test your practical understanding with immediate feedback and worked exam questions</p>
+        <div class="topic-card" id="topic-12">
+          <h2><span class="topic-num">12</span>Viva Traps &amp; Interactive Exam MCQs</h2>
+          <p class="topic-subtitle">Master the 10 lethal professor viva voce traps and test yourself with 15 interactive MCQs</p>
+
+          <span class="seq-badge">Oral Viva &amp; Self-Test</span>
+          <span class="query-pill pill-crit">Viva Traps</span>
+          <span class="query-pill pill-spark">Interactive Quiz</span>
 
           <p>
-            Attempt these 10 exam-level MCQs. Each question reflects real tricky scenarios from the FAST-NU lab manuals.
+            During lab midterms, professors and lab instructors walk around and grill students on <strong>why</strong> their code is written a certain way. Below are the top viva questions and 15 interactive MCQs.
           </p>
+
+          <h3>Top 5 Professor Viva Voce Questions</h3>
+          <div class="example">
+            <strong>Viva Q1: "Why did you use <code>.copy()</code> after filtering cancellations in Pandas?"</strong><br>
+            <em>Model Answer:</em> "Filtering a DataFrame creates a sliced view of the underlying NumPy memory block. If I mutate or create new columns on that view without <code>.copy()</code>, Pandas issues a <code>SettingWithCopyWarning</code> because it cannot guarantee whether changes persist to the parent or child. <code>.copy()</code> allocates independent memory and ensures mutation integrity."
+          </div>
+          <div class="example">
+            <strong>Viva Q2: "Why can't you just use <code>.groupby()</code> to find missing product sales?"</strong><br>
+            <em>Model Answer:</em> "GroupBy is an aggregate of observed events. If a country had zero transactions for a product in January, that coordinate never existed in the log, so GroupBy silently ignores it. To expose zero sales, we must generate the theoretical Cartesian product using <code>pd.MultiIndex.from_product()</code> and reindex with <code>fill_value=0</code>."
+          </div>
+          <div class="example">
+            <strong>Viva Q3: "What happens if you slice an unsorted MultiIndex using <code>pd.IndexSlice</code>?"</strong><br>
+            <em>Model Answer:</em> "Pandas raises an <code>UnsortedIndexError</code>. Range slicing relies on lexicographical binary search over the MultiIndex levels. If the index is unsorted, binary search fails. Calling <code>.sort_index()</code> sorts the levels and guarantees $O(\log N)$ slicing."
+          </div>
+          <div class="example">
+            <strong>Viva Q4: "Why did you read drifting JSON as StringType in Databricks instead of letting Spark infer the schema?"</strong><br>
+            <em>Model Answer:</em> "If metadata arrives as a nested JSON object in Batch 1 but an escaped string or integer code in Batch 2, Spark's automatic inference cannot resolve the conflicting types and throws an <code>AnalysisException</code>. Reading as <code>StringType()</code> quarantines the data safely, allowing downstream extraction with <code>get_json_object()</code>."
+          </div>
+          <div class="example">
+            <strong>Viva Q5: "Why is a dynamic DAX measure preferred over an averaged calculated column for Profit Margin?"</strong><br>
+            <em>Model Answer:</em> "Averaging row-level margin percentages commits the Ratio Fallacy (Simpson's Paradox), weighting small transactions equally with massive enterprise sales. A DAX measure evaluates under filter context dynamically: <code>DIVIDE(SUM(Profit), SUM(Revenue))</code>, guaranteeing mathematically accurate margin ratios."
+          </div>
+
+          <h3>Interactive Practice MCQ Simulator (15 Questions)</h3>
+          <p>Select your answer for instant verification and explanation:</p>
+
+          <div class="score-box">
+            🎯 Current Score: <span id="quiz-score" style="color: var(--ac);">0</span> / 15
+          </div>
 
           <div id="quiz-container">
             <!-- MCQ 1 -->
@@ -1648,140 +1989,183 @@ Profit Margin = DIVIDE([Total Profit], [Total Sales], 0)</code></pre>
                 <button class="mcq-opt" onclick="checkMCQ(this, 0)">It raises an UnsortedIndexError because range slicing requires lexicographically sorted levels.</button>
                 <button class="mcq-opt" onclick="checkMCQ(this, 1)">It automatically sorts the index in the background and returns the slice.</button>
                 <button class="mcq-opt" onclick="checkMCQ(this, 2)">It converts the DataFrame into a wide pivot table.</button>
-                <button class="mcq-opt" onclick="checkMCQ(this, 3)">It drops all outer index levels and returns a Series.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 3)">It silently drops non-matching rows and returns empty results.</button>
               </div>
-              <div class="mcq-expl">Range slicing in Pandas uses binary search under the hood, which strictly requires a sorted index. Call <code>df.sort_index(inplace=True)</code> first.</div>
+              <div class="mcq-expl">Pandas requires the MultiIndex to be lexicographically sorted before executing range slices with <code>pd.IndexSlice</code>. Always call <code>df.sort_index(inplace=True)</code> first.</div>
             </div>
 
             <!-- MCQ 4 -->
             <div class="mcq-card" data-correct="3">
-              <div class="mcq-q">4. When performing an incremental batch load into a Silver Delta Lake table, which operation must be used to prevent duplicate records?</div>
+              <div class="mcq-q">4. In PySpark Delta Lake, what is the primary benefit of using `DeltaTable.merge()` over `.write.mode("append")`?</div>
               <div class="mcq-options">
-                <button class="mcq-opt" onclick="checkMCQ(this, 0)">.write.mode("overwrite")</button>
-                <button class="mcq-opt" onclick="checkMCQ(this, 1)">.write.mode("append")</button>
-                <button class="mcq-opt" onclick="checkMCQ(this, 2)">.write.mode("ignore")</button>
-                <button class="mcq-opt" onclick="checkMCQ(this, 3)">DeltaTable.merge() with whenMatchedUpdateAll() and whenNotMatchedInsertAll()</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 0)">It encrypts the parquet files automatically.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 1)">It compresses the files into Gzip format.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 2)">It converts PySpark DataFrames into Pandas DataFrames.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 3)">It provides idempotent UPSERT semantics, updating existing primary keys and inserting new rows without duplicates.</button>
               </div>
-              <div class="mcq-expl"><code>overwrite</code> destroys old data; <code>append</code> creates duplicate rows for updated keys. <code>merge()</code> updates matching keys in place and inserts new ones.</div>
+              <div class="mcq-expl"><code>DeltaTable.merge()</code> matches on primary key: if matched, it updates; if not matched, it inserts. <code>append</code> blindly appends duplicate rows.</div>
             </div>
 
             <!-- MCQ 5 -->
-            <div class="mcq-card" data-correct="2">
-              <div class="mcq-q">5. In Power BI, why do month names on a Line Chart sort as "Apr, Aug, Dec, Feb..." by default?</div>
+            <div class="mcq-card" data-correct="1">
+              <div class="mcq-q">5. Why do we reindex a retail GroupBy summary with `pd.MultiIndex.from_product([countries, products, months])`?</div>
               <div class="mcq-options">
-                <button class="mcq-opt" onclick="checkMCQ(this, 0)">Because the line chart visual is corrupted.</button>
-                <button class="mcq-opt" onclick="checkMCQ(this, 1)">Because the Date column was not formatted as Currency.</button>
-                <button class="mcq-opt" onclick="checkMCQ(this, 2)">Because text columns sort alphabetically by default. You must select Month and set "Sort by column" to Month Number.</button>
-                <button class="mcq-opt" onclick="checkMCQ(this, 3)">Because Power BI requires an active internet connection to sort dates.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 0)">To remove negative quantity return orders.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 1)">To reveal silent absences where zero sales occurred, which standard groupby completely skips.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 2)">To convert monthly periods into ISO strings.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 3)">To sort the columns alphabetically.</button>
               </div>
-              <div class="mcq-expl">Text strings always sort alphabetically (A-Z). You must explicitly link the text month column to an integer <code>Month Number</code> (1-12) via Column Tools &rarr; Sort by Column.</div>
+              <div class="mcq-expl">Standard groupby only groups transactions that actually occurred. It drops non-events. <code>from_product</code> generates the complete Cartesian grid so missing sales show as 0.</div>
             </div>
 
             <!-- MCQ 6 -->
-            <div class="mcq-card" data-correct="1">
-              <div class="mcq-q">6. Why does `pd.MultiIndex.from_product()` have significant analytical value over standard `groupby()`?</div>
+            <div class="mcq-card" data-correct="2">
+              <div class="mcq-q">6. What does `df.unstack('Month', fill_value=0)` do?</div>
               <div class="mcq-options">
-                <button class="mcq-opt" onclick="checkMCQ(this, 0)">It runs faster than groupby by using GPU acceleration.</button>
-                <button class="mcq-opt" onclick="checkMCQ(this, 1)">It generates all possible Cartesian combinations, allowing reindex() to expose combinations where zero sales occurred.</button>
-                <button class="mcq-opt" onclick="checkMCQ(this, 2)">It automatically parses strings into datetime objects.</button>
-                <button class="mcq-opt" onclick="checkMCQ(this, 3)">It flattens multi-level column headers into a single string.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 0)">Pivots columns into index levels (Wide to Long).</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 1)">Deletes the Month index level.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 2)">Pivots the 'Month' row index level into wide column headers (Long to Wide), filling missing combinations with 0.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 3)">Converts the DataFrame into JSON.</button>
               </div>
-              <div class="mcq-expl">GroupBy silently omits combinations with zero records. Cartesian products force those combinations into existence so you can fill them with <code>0</code>.</div>
+              <div class="mcq-expl"><code>.unstack()</code> pivots row index levels up into column headers. <code>.stack()</code> does the reverse (columns down to rows).</div>
             </div>
 
             <!-- MCQ 7 -->
             <div class="mcq-card" data-correct="0">
-              <div class="mcq-q">7. How does PySpark's `get_json_object(col, "$.os")` handle corrupted text like `"connection_error"`?</div>
+              <div class="mcq-q">7. How does `.transform('sum')` differ from `.agg('sum')` during GroupBy operations?</div>
               <div class="mcq-options">
-                <button class="mcq-opt" onclick="checkMCQ(this, 0)">It gracefully returns null without crashing the query.</button>
-                <button class="mcq-opt" onclick="checkMCQ(this, 1)">It crashes with an AnalysisException.</button>
-                <button class="mcq-opt" onclick="checkMCQ(this, 2)">It converts the string into an integer 0.</button>
-                <button class="mcq-opt" onclick="checkMCQ(this, 3)">It deletes the row from the DataFrame.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 0)">.agg() collapses rows to one per group, while .transform() calculates the group sum and broadcasts it back to every individual original row.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 1)">.transform() only works on string columns.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 2)">.agg() requires Spark while .transform() requires Dask.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 3)">They are identical aliases in Pandas.</button>
               </div>
-              <div class="mcq-expl"><code>get_json_object</code> is designed for fault tolerance; if the JSON path does not match or the payload is not valid JSON, it returns <code>null</code>.</div>
+              <div class="mcq-expl"><code>.transform()</code> returns an output aligned to the original DataFrame's index with identical row count, making percentage share calculations trivial.</div>
             </div>
 
             <!-- MCQ 8 -->
-            <div class="mcq-card" data-correct="3">
-              <div class="mcq-q">8. What is the difference between a Visual-level filter and a Slicer in Power BI?</div>
+            <div class="mcq-card" data-correct="1">
+              <div class="mcq-q">8. What does `df.xs('2010-12', level='Month', drop_level=False)` achieve?</div>
               <div class="mcq-options">
-                <button class="mcq-opt" onclick="checkMCQ(this, 0)">A Slicer only works on numerical fields, while filters work on text.</button>
-                <button class="mcq-opt" onclick="checkMCQ(this, 1)">A Visual-level filter affects all pages in the report.</button>
-                <button class="mcq-opt" onclick="checkMCQ(this, 2)">Slicers require DAX formulas to operate.</button>
-                <button class="mcq-opt" onclick="checkMCQ(this, 3)">A Slicer is an interactive on-canvas control for report readers; a Visual-level filter applies strictly to one visual and is set by the report author.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 0)">Deletes December 2010 data from memory.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 1)">Extracts December 2010 data across all outer levels while retaining 'Month' in the MultiIndex hierarchy.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 2)">Sorts the index in descending order.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 3)">Calculates the cumulative sum for December.</button>
               </div>
-              <div class="mcq-expl">Visual-level filters restrict one specific visual (like Bottom 3 products), while slicers sit on the canvas for user interaction.</div>
+              <div class="mcq-expl"><code>.xs()</code> extracts a cross-section. Setting <code>drop_level=False</code> retains the sliced level in the MultiIndex.</div>
             </div>
 
             <!-- MCQ 9 -->
-            <div class="mcq-card" data-correct="1">
-              <div class="mcq-q">9. In Pandas, which code snippet correctly calculates the percentage share of each product within its country and month?</div>
+            <div class="mcq-card" data-correct="3">
+              <div class="mcq-q">9. In Power BI, why must Month Name be sorted by an integer Month Number?</div>
               <div class="mcq-options">
-                <button class="mcq-opt" onclick="checkMCQ(this, 0)">df['TotalRevenue'] / df['TotalRevenue'].sum()</button>
-                <button class="mcq-opt" onclick="checkMCQ(this, 1)">df['TotalRevenue'] / df.groupby(level=['Country','Month'])['TotalRevenue'].transform('sum')</button>
-                <button class="mcq-opt" onclick="checkMCQ(this, 2)">df.unstack('StockCode').mean()</button>
-                <button class="mcq-opt" onclick="checkMCQ(this, 3)">df.xs('TotalRevenue', level=0).sum()</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 0)">Because Power BI crashes if text columns are placed on visual axes.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 1)">Because DAX cannot calculate sales without numeric dates.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 2)">Because Star Schemas only support numeric data.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 3)">Because text month names sort alphabetically ('Apr', 'Aug', 'Dec') by default rather than chronologically.</button>
               </div>
-              <div class="mcq-expl"><code>transform('sum')</code> preserves the original index and broadcasts the group sum to every row in that group, allowing direct division.</div>
+              <div class="mcq-expl">Without explicit column sorting, text months will sort alphabetically, ruining trend line charts.</div>
             </div>
 
             <!-- MCQ 10 -->
             <div class="mcq-card" data-correct="2">
-              <div class="mcq-q">10. Why must `Remove Duplicates` be executed on OrderID in Power Query during Lab 6?</div>
+              <div class="mcq-q">10. What is the standard list comprehension to flatten MultiIndex columns into clean 1D strings?</div>
               <div class="mcq-options">
-                <button class="mcq-opt" onclick="checkMCQ(this, 0)">Because Power Query cannot store more than 100 rows.</button>
-                <button class="mcq-opt" onclick="checkMCQ(this, 1)">Because OrderID is a foreign key pointing to Dim_Date.</button>
-                <button class="mcq-opt" onclick="checkMCQ(this, 2)">Because OrderID is the unique transaction key; repeated OrderIDs cause double-counting in financial totals.</button>
-                <button class="mcq-opt" onclick="checkMCQ(this, 3)">Because Power BI requires all tables to have exactly 12 rows.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 0)">`df.columns = df.columns.flatten()`</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 1)">`df.columns = list(df.index)`</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 2)">`df.columns = [f"{col[0]}_{col[1]}" for col in df.columns]`</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 3)">`df.columns = df.columns.to_csv()`</button>
               </div>
-              <div class="mcq-expl">Duplicate OrderIDs in sales tables represent corrupted logging and artificially inflate sales and profit totals.</div>
+              <div class="mcq-expl"><code>[f"{col[0]}_{col[1]}" for col in df.columns]</code> concatenates the multi-tier tuple headers into a single clean string like <code>Revenue_sum</code>.</div>
+            </div>
+
+            <!-- MCQ 11 -->
+            <div class="mcq-card" data-correct="0">
+              <div class="mcq-q">11. Why should you always use `pd.MultiIndex.from_tuples()` instead of `from_product()` for an audit watchlist?</div>
+              <div class="mcq-options">
+                <button class="mcq-opt" onclick="checkMCQ(this, 0)">Because a watchlist only targets specific, isolated coordinate pairs rather than the entire Cartesian product.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 1)">Because from_tuples runs in parallel on GPU.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 2)">Because from_product cannot accept string tuples.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 3)">Because from_tuples automatically removes nulls.</button>
+              </div>
+              <div class="mcq-expl"><code>from_tuples</code> creates specific coordinate pairs (e.g. <code>[('France', 'POST'), ('Germany', '22492')]</code>), whereas <code>from_product</code> generates every possible combination.</div>
+            </div>
+
+            <!-- MCQ 12 -->
+            <div class="mcq-card" data-correct="1">
+              <div class="mcq-q">12. What does `df.pivot_table(..., margins=True)` add to the resulting DataFrame?</div>
+              <div class="mcq-options">
+                <button class="mcq-opt" onclick="checkMCQ(this, 0)">A column of profit margins.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 1)">An 'All' row and 'All' column containing the Grand Totals of the aggregations.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 2)">A percentage share calculation.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 3)">Margin of error confidence intervals.</button>
+              </div>
+              <div class="mcq-expl"><code>margins=True</code> adds an extra 'All' row and 'All' column computing overall grand totals.</div>
+            </div>
+
+            <!-- MCQ 13 -->
+            <div class="mcq-card" data-correct="2">
+              <div class="mcq-q">13. In PySpark, when joining a 10M row sales table with a 50-row country lookup table, what optimization should you use?</div>
+              <div class="mcq-options">
+                <button class="mcq-opt" onclick="checkMCQ(this, 0)">SortMerge Join</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 1)">Cartesian Product Join</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 2)">Broadcast Hash Join via `broadcast(lookup_df)`</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 3)">Collect to Python list</button>
+              </div>
+              <div class="mcq-expl">Broadcasting copies the tiny lookup table to every worker node, eliminating expensive network shuffles of the 10M row table.</div>
+            </div>
+
+            <!-- MCQ 14 -->
+            <div class="mcq-card" data-correct="3">
+              <div class="mcq-q">14. What does `df.index.nlevels` return?</div>
+              <div class="mcq-options">
+                <button class="mcq-opt" onclick="checkMCQ(this, 0)">The total number of rows in the DataFrame.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 1)">The memory size of the index.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 2)">The number of columns.</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 3)">The number of hierarchical tiers in the MultiIndex (e.g. 3 for Country, Product, Month).</button>
+              </div>
+              <div class="mcq-expl"><code>.nlevels</code> returns an integer representing the depth of the MultiIndex hierarchy.</div>
+            </div>
+
+            <!-- MCQ 15 -->
+            <div class="mcq-card" data-correct="0">
+              <div class="mcq-q">15. How do you find the best-selling product in each country using a MultiIndex?</div>
+              <div class="mcq-options">
+                <button class="mcq-opt" onclick="checkMCQ(this, 0)">`summary.groupby(level='Country')['RevenueShare'].idxmax()`</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 1)">`summary.sort_values().head(1)`</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 2)">`summary.unstack().max()`</button>
+                <button class="mcq-opt" onclick="checkMCQ(this, 3)">`summary.loc['max']`</button>
+              </div>
+              <div class="mcq-expl"><code>.idxmax()</code> returns the exact index coordinate tuple containing the maximum value for each country group.</div>
             </div>
           </div>
 
-          <div class="score-box" id="quiz-score-box">
-            Score: <span id="quiz-score">0</span> / 10
-          </div>
-
           <div class="summary-box">
-            <h4>Final Exam Preparation Checklist</h4>
+            <h4>Topic 12 Recap</h4>
             <ul>
-              <li><strong>REST API:</strong> <code>requests.get()</code> status check $\rightarrow$ recursive keys extractor $\rightarrow$ <code>pd.json_normalize()</code> with defensive subset list comprehension.</li>
-              <li><strong>PySpark Medallion:</strong> Explicit <code>StructType</code> $\rightarrow$ Bronze append $\rightarrow$ Silver clean &amp; <code>DeltaTable.merge()</code> $\rightarrow$ Gold <code>groupBy().agg()</code>.</li>
-              <li><strong>Schema Drift:</strong> Force drifting fields to <code>StringType()</code> in Bronze $\rightarrow$ extract safely with <code>get_json_object()</code>.</li>
-              <li><strong>Pandas MultiIndex:</strong> Sort index before slicing $\rightarrow$ expose missing sales with <code>from_product()</code> $\rightarrow$ <code>transform('sum')</code> for percentage shares.</li>
+              <li>Always explain the architectural <em>why</em> during oral vivas: memory isolation, Cartesian grids, and ratio fallacy.</li>
+              <li>Re-attempt any missed MCQs until you achieve a consistent 15/15 score!</li>
             </ul>
           </div>
         </div>
-      </div>
-      <!-- end module-container -->
 
-      <!-- ═══════════════════════════════════════════════════════
-       PAGINATION & BACK TO TOP
-       ═══════════════════════════════════════════════════════ -->
+      </div><!-- /.module-container -->
       <div class="bottom-nav">
-        <button id="prev-btn" onclick="goPrev()" style="display:none;">
+        <button id="prev-btn" onclick="goPrev()">
           <div>
             <span class="btn-label">← Previous</span>
-            <span class="btn-title" id="prev-title">Previous Topic</span>
+            <span class="btn-title" id="prev-title">Topic</span>
           </div>
         </button>
         <button id="next-btn" onclick="goNext()">
           <div>
             <span class="btn-label">Next →</span>
-            <span class="btn-title" id="next-title">Next Topic</span>
+            <span class="btn-title" id="next-title">Topic</span>
           </div>
         </button>
       </div>
-    </div>
-    <!-- end main-content -->
+    </div><!-- /#main-content -->
 
-    <button
-      id="back-to-top"
-      onclick="document.getElementById('main-content').scrollTo({top:0, behavior:'smooth'})"
-      aria-label="Back to top"
-    >
-      &uarr;
-    </button>
+    <button id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" aria-label="Back to top">↑</button>
 
     <!-- ═══════════════════════════════════════════════════════
      SCRIPTS
@@ -1796,7 +2180,10 @@ Profit Margin = DIVIDE([Total Profit], [Total Sales], 0)</code></pre>
         "topic-6",
         "topic-7",
         "topic-8",
-        "topic-9"
+        "topic-9",
+        "topic-10",
+        "topic-11",
+        "topic-12"
       ];
       let currentTopicIndex = 0;
 
@@ -1853,21 +2240,26 @@ Profit Margin = DIVIDE([Total Profit], [Total Sales], 0)</code></pre>
         const pt = document.getElementById("prev-title");
         const nt = document.getElementById("next-title");
 
-        if (currentTopicIndex > 0) {
-          pb.style.display = "flex";
-          if (pt) pt.textContent = getTopicTitle(topics[currentTopicIndex - 1]);
-        } else {
-          pb.style.display = "none";
+        if (pb) {
+          if (currentTopicIndex > 0) {
+            pb.style.display = "flex";
+            if (pt) pt.textContent = getTopicTitle(topics[currentTopicIndex - 1]);
+          } else {
+            pb.style.display = "none";
+          }
         }
 
-        if (currentTopicIndex < topics.length - 1) {
-          nb.style.display = "flex";
-          if (nt) nt.textContent = getTopicTitle(topics[currentTopicIndex + 1]);
-        } else {
-          nb.style.display = "none";
+        if (nb) {
+          if (currentTopicIndex < topics.length - 1) {
+            nb.style.display = "flex";
+            if (nt) nt.textContent = getTopicTitle(topics[currentTopicIndex + 1]);
+          } else {
+            nb.style.display = "none";
+          }
         }
 
-        if (t) t.scrollIntoView({ behavior: "smooth", block: "start" });
+        const mc = document.getElementById("main-content");
+        if (mc) mc.scrollTop = 0;
         if (window.innerWidth <= 768) {
           const sb = document.getElementById("sidebar");
           const bd = document.getElementById("sidebar-backdrop");
@@ -1909,12 +2301,13 @@ Profit Margin = DIVIDE([Total Profit], [Total Sales], 0)</code></pre>
 
       // Quiz Score Logic
       let userScore = 0;
-      let answeredCount = 0;
+      let answeredQuestions = new Set();
 
       function checkMCQ(btn, choiceIdx) {
         const card = btn.closest(".mcq-card");
-        if (card.dataset.answered) return;
-        card.dataset.answered = "true";
+        const qText = card.querySelector(".mcq-q").textContent;
+        if (answeredQuestions.has(qText)) return;
+        answeredQuestions.add(qText);
 
         const correctIdx = parseInt(card.dataset.correct, 10);
         const options = card.querySelectorAll(".mcq-opt");
@@ -1932,7 +2325,6 @@ Profit Margin = DIVIDE([Total Profit], [Total Sales], 0)</code></pre>
           expl.classList.add("show", "bad");
         }
 
-        answeredCount++;
         document.getElementById("quiz-score").textContent = userScore;
       }
 
@@ -1940,10 +2332,12 @@ Profit Margin = DIVIDE([Total Profit], [Total Sales], 0)</code></pre>
       if (topics.length > 0) showTopic(topics[0]);
       const mc = document.getElementById("main-content");
       const bb = document.getElementById("back-to-top");
-      mc.addEventListener(
-        "scroll",
-        () => (bb.style.display = mc.scrollTop > 300 ? "flex" : "none"),
-      );
+      if (mc && bb) {
+        mc.addEventListener(
+          "scroll",
+          () => (bb.style.display = mc.scrollTop > 300 ? "flex" : "none"),
+        );
+      }
     </script>
   </body>
 </html>
