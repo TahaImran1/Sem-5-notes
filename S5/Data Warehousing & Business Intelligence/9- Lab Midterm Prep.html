@@ -1,0 +1,1945 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>DW&amp;BI Lab — Lab Midterm Prep</title>
+    <meta name="description" content="Concise exam-focused notes for DW&BI Lab midterm. Covers all 6 labs: SQL, Power BI, data modeling, dimensional modeling, OLAP, and DW implementation." />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../notes.css" />
+  </head>
+  <body>
+    <button id="menu-toggle" onclick="toggleSidebar()" aria-label="Toggle navigation">☰</button>
+    <div id="sidebar-backdrop" onclick="toggleSidebar()"></div>
+    <div id="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-header-text">
+          <div class="sidebar-course-label">DW &amp; BI Lab</div>
+          <div class="sidebar-title">Lab Midterm Prep</div>
+        </div>
+      </div>
+      <div class="sidebar-search-wrap">
+        <input type="text" id="search-input" placeholder="Search topics…" onkeyup="filterContent()" />
+      </div>
+      <ul class="nav-list" id="nav-list">
+        <li><a class="nav-module-link" href="./1- Introduction to DW.html"><span class="nav-mod-num">01</span>Introduction to DW</a></li>
+        <li><a class="nav-module-link" href="./2- Quiz Prep - Intro to DW.html"><span class="nav-mod-num">02</span>Quiz Prep: Intro to DW</a></li>
+        <li><a class="nav-module-link" href="./3- High Performance DSS Database Design.html"><span class="nav-mod-num">03</span>Logical &amp; Physical Data Modeling</a></li>
+        <li><a class="nav-module-link" href="./4- Quiz Prep - DSS Database Design.html"><span class="nav-mod-num">04</span>Quiz Prep: DSS Database Design</a></li>
+        <li><a class="nav-module-link" href="./5- OLAP Implementation Techniques.html"><span class="nav-mod-num">05</span>OLAP Implementation Techniques</a></li>
+        <li><a class="nav-module-link" href="./6- Dimensional Modeling.html"><span class="nav-mod-num">06</span>Dimensional Modeling (Pre-Midterm)</a></li>
+        <li><a class="nav-module-link" href="./7- Solved Sample Midterm.html"><span class="nav-mod-num">07</span>Solved Sample Midterm</a></li>
+        <li><a class="nav-module-link" href="./8- Dimensional Modeling Concepts.html"><span class="nav-mod-num">08</span>Dimensional Modeling Concepts</a></li>
+        <li class="nav-section">
+          <div class="nav-section-title" onclick="toggleSection(this)">
+            <span>🧪 Lab Midterm Prep</span>
+            <span class="chevron">▼</span>
+          </div>
+          <ul class="nav-sublist">
+            <li><a href="javascript:void(0)" onclick="showTopic('topic-1')"><span class="nav-num">01</span>OLTP vs DSS vs DW</a></li>
+            <li><a href="javascript:void(0)" onclick="showTopic('topic-2')"><span class="nav-num">02</span>PostgreSQL Basics</a></li>
+            <li><a href="javascript:void(0)" onclick="showTopic('topic-3')"><span class="nav-num">03</span>Analytical SQL</a></li>
+            <li><a href="javascript:void(0)" onclick="showTopic('topic-4')"><span class="nav-num">04</span>Power BI</a></li>
+            <li><a href="javascript:void(0)" onclick="showTopic('topic-5')"><span class="nav-num">05</span>Normalization &amp; Denormalization</a></li>
+            <li><a href="javascript:void(0)" onclick="showTopic('topic-6')"><span class="nav-num">06</span>Dimensional Modeling</a></li>
+            <li><a href="javascript:void(0)" onclick="showTopic('topic-7')"><span class="nav-num">07</span>OLAP: ROLLUP, CUBE &amp; Types</a></li>
+            <li><a href="javascript:void(0)" onclick="showTopic('topic-8')"><span class="nav-num">08</span>DW Implementation &amp; ETL</a></li>
+            <li><a href="javascript:void(0)" onclick="showTopic('topic-9')"><span class="nav-num">09</span>Master Lab Summary &amp; Cheatsheet</a></li>
+            <li><a href="javascript:void(0)" onclick="showTopic('topic-10')"><span class="nav-num">10</span>Difficult &amp; Tricky Exam Questions</a></li>
+          </ul>
+        </li>
+        <li><a class="nav-module-link" href="./10- Query Processing, Join Techniques & ETL.html"><span class="nav-mod-num">10</span>Query Processing, Joins &amp; ETL</a></li>
+        <li><a class="nav-module-link" href="./11- Lab Midterm Sequential Codes & Exam Guide.html" style="color:var(--ac); font-weight:600;"><span class="nav-mod-num" style="background:var(--ac); color:#fff;">11</span>🎯 Lab Midterm — Sequential Guide</a></li>
+
+      </ul>
+    </div>
+
+    <div id="main-content">
+      <div class="module-container">
+        <div class="module-header">
+          <div class="module-eyebrow">Data Warehousing &amp; BI Lab</div>
+          <h1 class="module-title">Lab Midterm Prep — All 6 Labs</h1>
+        </div>
+
+        <!-- HIGHLIGHT BANNER TO NEW SEQUENTIAL LAB EXAM GUIDE -->
+        <div style="background: linear-gradient(135deg, rgba(217, 119, 87, 0.22), rgba(167, 139, 250, 0.15)); border: 2px solid var(--ac); border-radius: 12px; padding: 18px 22px; margin-bottom: 28px; display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; box-shadow: 0 4px 20px rgba(0,0,0,0.35);">
+          <div>
+            <div style="font-size: 0.72rem; font-weight: 700; color: var(--ac); text-transform: uppercase; letter-spacing: 1px;">🔥 NEW LAB MIDTERM EXAM GUIDE AVAILABLE</div>
+            <div style="font-size: 1.1rem; font-weight: 700; color: #fff; margin: 3px 0;">Looking for Step-by-Step Exam Queries (Lab 6 ETL + Lab 4 OLAP)?</div>
+            <div style="font-size: 0.82rem; color: var(--tx); line-height: 1.5;">This file contains general conceptual background. For the exact query order (Schemas &rarr; Staging &rarr; Audit &rarr; DimDate &rarr; Surrogate Key Mapping &rarr; Reconciliation &rarr; ROLLUP/CUBE), open the new dedicated exam guide:</div>
+          </div>
+          <a href="./11- Lab Midterm Sequential Codes &amp; Exam Guide.html" style="background: var(--ac); color: #fff; font-weight: 600; padding: 11px 20px; border-radius: 8px; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; box-shadow: 0 2px 12px rgba(217, 119, 87, 0.4); white-space: nowrap; font-size: 0.88rem;">
+            Open Module 11 Exam Guide &rarr;
+          </a>
+        </div>
+
+        <!-- TOPIC 1 -->
+        <div class="topic-card" id="topic-1">
+          <h2><span class="topic-num">1</span>OLTP vs DSS vs DW</h2>
+          <p class="topic-subtitle">Lab 01 — Understanding the two worlds of data systems</p>
+          <p>Every database serves a purpose. <strong>OLTP</strong> (Online Transaction Processing) keeps day-to-day business running; a <strong>DSS/DW</strong> (Decision Support System / Data Warehouse) helps <em>managers decide</em>. They are built differently on purpose.</p>
+
+          <div class="definition"><div class="callout-label">Definition</div>
+            <strong>OLTP:</strong> Optimised for high-speed, row-level INSERT/UPDATE/DELETE operations. One transaction at a time. Normalised schema to protect consistency.</div>
+          <div class="definition"><div class="callout-label">Definition</div>
+            <strong>DSS / Data Warehouse:</strong> Optimised for aggregation across millions of rows. Read-heavy, historical. Answers "Which region drove the most revenue this quarter?"</div>
+
+          <h3>Key Comparison</h3>
+          <table>
+            <thead><tr><th>Dimension</th><th>OLTP</th><th>DSS / DW</th></tr></thead>
+            <tbody>
+              <tr><td>Primary operation</td><td>INSERT / UPDATE / DELETE</td><td>SELECT + GROUP BY / aggregates</td></tr>
+              <tr><td>Query type</td><td>Point lookup — "Order 104512?"</td><td>Aggregation — "Revenue by region?"</td></tr>
+              <tr><td>Schema style</td><td>Normalised (3NF)</td><td>Denormalised star/snowflake</td></tr>
+              <tr><td>Data currency</td><td>Current (real-time)</td><td>Historical (periodic loads)</td></tr>
+              <tr><td>Typical users</td><td>Clerks, operational staff</td><td>Managers, analysts, BI tools</td></tr>
+              <tr><td>Rows per query</td><td>1–10 rows</td><td>Millions of rows</td></tr>
+              <tr><td>Performance concern</td><td>Write throughput, concurrency</td><td>Read speed, aggregation performance</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Role of DW/BI in Decision-Making</h3>
+          <ul>
+            <li><strong>Single source of truth</strong> — one consistent version of business data across systems</li>
+            <li><strong>Historical context</strong> — compare this quarter to last year</li>
+            <li><strong>Cross-system integration</strong> — sales + inventory + HR in one place</li>
+            <li><strong>Self-service analytics</strong> — managers answer questions without IT involvement</li>
+          </ul>
+
+          <div class="example"><div class="callout-label">Example</div>
+            <h4>CampusCart: Two Query Worlds</h4>
+            <pre><code>-- OLTP: point lookup — retrieve one specific order
+SELECT * FROM lab01.campuscart_sales WHERE order_id = 104250;
+
+-- DSS: aggregation across 7,800 rows
+SELECT date_trunc('month', order_date) AS month,
+       category,
+       SUM(net_revenue_pkr) AS net_revenue
+FROM   lab01.campuscart_sales
+WHERE  order_status &lt;&gt; 'Cancelled'
+GROUP  BY 1, 2
+ORDER  BY 1, net_revenue DESC;</code></pre>
+          </div>
+
+          <div class="note-box"><div class="callout-label">Exam Tip</div>
+            <strong>EXPLAIN ANALYZE:</strong> OLTP point-lookup → <em>Index Scan</em> (fast, few rows). DSS aggregate → <em>Sequential Scan + HashAggregate</em> (scans everything). You may be asked to identify which is OLTP vs DSS from the plan.</div>
+
+          <div class="summary-box"><h4>Key Takeaways</h4><ul>
+            <li>OLTP = fast writes, current data, normalised, point lookups</li>
+            <li>DSS = fast reads, historical, aggregation, millions of rows</li>
+            <li>DW is the foundation for BI — consolidates, cleans, and stores history</li>
+            <li>Same dataset → very different query patterns depending on the question</li>
+          </ul></div>
+
+          <div class="practice-section"><div class="practice-section-label">Practice Questions</div>
+            <details><summary>Easy: Give two differences between OLTP and DSS systems.</summary>
+              <p><strong>Answer:</strong> (1) OLTP is optimised for INSERT/UPDATE/DELETE on individual rows; DSS is optimised for SELECT aggregations across millions of rows. (2) OLTP stores current data; DSS stores historical data over time.</p></details>
+            <details><summary>Medium: "Which product category had the highest return count last month?" — OLTP or DSS query? Why?</summary>
+              <p><strong>Answer:</strong> DSS. It scans all order rows for last month, filters by order_status='Returned', groups by category, and counts — a classic aggregation query, not a point lookup.</p></details>
+            <details><summary>Hard: Why is running DSS queries directly on an OLTP production database problematic?</summary>
+              <p><strong>Answer:</strong> DSS queries do full-table scans and hold locks for long durations, competing with the constant INSERT/UPDATE stream on OLTP — causing lock contention, degraded write performance, and slower response for operational users. The normalised schema also requires many joins, making analytical queries slow. A separate DW with denormalised schema and read-only access eliminates these problems.</p></details>
+          </div>
+        </div>
+
+        <!-- TOPIC 2 -->
+        <div class="topic-card" id="topic-2">
+          <h2><span class="topic-num">2</span>PostgreSQL Basics</h2>
+          <p class="topic-subtitle">Lab 01 — DDL: databases, schemas, tables, data types, PKs, FKs</p>
+          <p>PostgreSQL organises objects in a three-level hierarchy: <strong>Database → Schema → Table</strong>. Schemas are namespaces — <code>lab01</code> and <code>lab03</code> can coexist in the same database without name conflicts.</p>
+
+          <div class="example"><div class="callout-label">Example</div>
+            <h4>Complete Lab Setup Workflow</h4>
+            <pre><code>-- 1. Create schema (namespace)
+CREATE SCHEMA IF NOT EXISTS lab01;
+
+-- 2. Create table inside schema
+CREATE TABLE lab01.campuscart_sales (
+    order_id          INT,
+    order_date        DATE,
+    customer_id       INT,
+    customer_segment  TEXT,
+    product_id        INT,
+    product_name      TEXT,
+    category          TEXT,
+    region_id         TEXT,
+    channel           TEXT,
+    quantity          INT,
+    unit_price_pkr    NUMERIC(12,2),   -- NUMERIC for money, never FLOAT!
+    discount_pct      INT,
+    order_status      TEXT,
+    gross_revenue_pkr NUMERIC(14,2),
+    net_revenue_pkr   NUMERIC(14,2)
+);
+
+-- 3. Manual insert
+INSERT INTO lab01.campuscart_sales (order_id, order_date, category, net_revenue_pkr)
+VALUES (9999, '2025-03-15', 'Electronics', 4500.00);
+
+-- 4. Import CSV: pgAdmin → right-click table → Import/Export Data
+--    Settings: Header=Yes, Delimiter=comma, Encoding=UTF-8</code></pre>
+          </div>
+
+          <h3>Data Types Quick Reference</h3>
+          <table>
+            <thead><tr><th>Type</th><th>Use For</th><th>Example</th></tr></thead>
+            <tbody>
+              <tr><td>INT / INTEGER</td><td>Whole numbers, IDs, counts</td><td>order_id, quantity</td></tr>
+              <tr><td>NUMERIC(p,s)</td><td>Exact decimal values (money)</td><td>NUMERIC(14,2) for revenue</td></tr>
+              <tr><td>TEXT</td><td>Variable-length strings</td><td>customer_segment, category</td></tr>
+              <tr><td>DATE</td><td>Calendar date (no time)</td><td>order_date</td></tr>
+              <tr><td>TIMESTAMP</td><td>Date + time</td><td>created_at</td></tr>
+              <tr><td>BOOLEAN</td><td>True/False flags</td><td>is_active</td></tr>
+              <tr><td>SERIAL / BIGSERIAL</td><td>Auto-increment PK (surrogate keys)</td><td>customer_key SERIAL PRIMARY KEY</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Primary Keys &amp; Foreign Keys</h3>
+          <div class="definition"><div class="callout-label">Definition</div>
+            <strong>Primary Key (PK):</strong> Uniquely identifies every row. Cannot be NULL. Example: <code>order_id INT PRIMARY KEY</code>.</div>
+          <div class="definition"><div class="callout-label">Definition</div>
+            <strong>Foreign Key (FK):</strong> References the PK of another table. Enforces <em>referential integrity</em> — prevents orphan rows. Example: <code>product_id INT REFERENCES products(product_id)</code>.</div>
+
+          <div class="example"><div class="callout-label">Example</div>
+            <h4>PK + FK in Practice</h4>
+            <pre><code>CREATE TABLE products (
+    product_id   INT PRIMARY KEY,
+    product_name TEXT,
+    category     TEXT
+);
+
+CREATE TABLE order_items (
+    line_id    INT PRIMARY KEY,
+    order_id   INT,
+    product_id INT REFERENCES products(product_id),  -- FK
+    quantity   INT
+);</code></pre>
+          </div>
+
+          <div class="warning-box"><div class="callout-label">Common Mistake</div>
+            Confusing schemas and databases. A <strong>schema</strong> is a namespace inside one database (like a folder). A <strong>database</strong> is a separate server-level container. Labs use one database + multiple schemas.</div>
+
+          <div class="summary-box"><h4>Key Takeaways</h4><ul>
+            <li>Hierarchy: CREATE DATABASE → CREATE SCHEMA → CREATE TABLE</li>
+            <li>Use NUMERIC(p,s) for money — never FLOAT (causes rounding errors)</li>
+            <li>PKs enforce uniqueness; FKs enforce referential integrity</li>
+            <li>Import CSVs: pgAdmin → right-click table → Import/Export Data</li>
+          </ul></div>
+
+          <div class="practice-section"><div class="practice-section-label">Practice Questions</div>
+            <details><summary>Easy: What is a schema in PostgreSQL?</summary>
+              <p><strong>Answer:</strong> A namespace/container within a database that groups related tables. Example: <code>lab03</code> for normalised tables and <code>lab03_report</code> for reporting tables — both in the same database, logically separated.</p></details>
+            <details><summary>Medium: Write DDL for a Customers table: customer_id, name, segment, registration_date.</summary>
+              <p><strong>Answer:</strong><pre><code>CREATE TABLE customers (
+    customer_id       INT PRIMARY KEY,
+    name              TEXT,
+    segment           TEXT,
+    registration_date DATE
+);</code></pre></p></details>
+            <details><summary>Hard: order_items has a FK on product_id. Developer tries to INSERT a row with product_id=999 that doesn't exist in products. What happens?</summary>
+              <p><strong>Answer:</strong> PostgreSQL raises a <em>foreign key violation</em> error and rejects the INSERT. The FK constraint verifies product_id=999 exists in products before allowing the row — referential integrity enforcement. Fix: insert the product first, or the FK is wrongly pointing to the wrong table.</p></details>
+          </div>
+        </div>
+
+        <!-- TOPIC 3 -->
+        <div class="topic-card" id="topic-3">
+          <h2><span class="topic-num">3</span>Analytical SQL</h2>
+          <p class="topic-subtitle">Labs 01 &amp; 04 — SELECT, aggregations, GROUP BY, HAVING, JOINs, Top-N, trend analysis</p>
+          <p>Mental model for analytical SQL: <strong>filter rows → group rows → aggregate → filter groups → sort/present</strong>. This maps exactly to: <code>WHERE → GROUP BY → aggregate functions → HAVING → ORDER BY</code>.</p>
+
+          <div class="example"><div class="callout-label">Example</div>
+            <h4>All Clauses Together — The Complete Query</h4>
+            <pre><code>SELECT
+    category,
+    channel,
+    COUNT(*)                  AS order_count,
+    SUM(net_revenue_pkr)      AS total_revenue,
+    AVG(net_revenue_pkr)      AS avg_revenue,
+    MIN(net_revenue_pkr)      AS min_revenue,
+    MAX(net_revenue_pkr)      AS max_revenue
+FROM   lab01.campuscart_sales
+WHERE  order_status = 'Completed'          -- row-level filter (BEFORE grouping)
+GROUP  BY category, channel                -- collapse rows into groups
+HAVING SUM(net_revenue_pkr) &gt; 1000000     -- group-level filter (AFTER aggregation)
+ORDER  BY total_revenue DESC               -- sort output
+LIMIT  5;                                  -- top-N</code></pre>
+          </div>
+
+          <h3>Key Clauses Reference</h3>
+          <table>
+            <thead><tr><th>Clause</th><th>Purpose</th><th>Key Rule</th></tr></thead>
+            <tbody>
+              <tr><td><code>WHERE</code></td><td>Filter rows <em>before</em> grouping</td><td>Cannot reference aggregate functions</td></tr>
+              <tr><td><code>GROUP BY</code></td><td>Collapse rows by distinct values</td><td>Every non-aggregate in SELECT must be here</td></tr>
+              <tr><td><code>HAVING</code></td><td>Filter groups <em>after</em> aggregation</td><td>Use when condition involves SUM, COUNT, etc.</td></tr>
+              <tr><td><code>ORDER BY</code></td><td>Sort result</td><td>DESC = largest first; ASC = default</td></tr>
+              <tr><td><code>DISTINCT</code></td><td>Remove duplicate rows</td><td><code>SELECT DISTINCT category FROM …</code></td></tr>
+              <tr><td><code>LIMIT</code></td><td>Return only N rows</td><td>Use AFTER ORDER BY for Top-N</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Top-N Queries</h3>
+          <div class="example"><div class="callout-label">Example</div>
+            <pre><code>-- ALWAYS aggregate first, THEN limit
+SELECT product_name, category,
+       SUM(net_revenue_pkr) AS total_revenue
+FROM   lab01.campuscart_sales
+WHERE  order_status = 'Completed'
+GROUP  BY product_name, category
+ORDER  BY total_revenue DESC
+LIMIT  5;   -- Top 5 products</code></pre>
+          </div>
+
+          <h3>Trend Analysis (Monthly)</h3>
+          <div class="example"><div class="callout-label">Example</div>
+            <pre><code>-- date_trunc truncates date to given precision
+SELECT date_trunc('month', order_date) AS month,
+       SUM(net_revenue_pkr)            AS monthly_revenue,
+       COUNT(DISTINCT order_id)        AS orders
+FROM   lab01.campuscart_sales
+WHERE  order_status &lt;&gt; 'Cancelled'
+GROUP  BY 1          -- "1" refers to first SELECT column
+ORDER  BY 1;         -- chronological order</code></pre>
+          </div>
+
+          <h3>JOINs</h3>
+          <div class="definition"><div class="callout-label">Definition</div>
+            <strong>INNER JOIN:</strong> Returns only rows where the condition matches in <em>both</em> tables. Unmatched rows excluded from both sides.</div>
+          <div class="definition"><div class="callout-label">Definition</div>
+            <strong>LEFT JOIN:</strong> Returns ALL rows from the left table + matched rows from the right. Unmatched right-side columns are NULL. Use for orphan detection.</div>
+
+          <div class="example"><div class="callout-label">Example</div>
+            <h4>INNER JOIN vs LEFT JOIN + Orphan Detection</h4>
+            <pre><code>-- INNER JOIN: only items with a matching product
+SELECT oi.line_id, p.product_name, oi.quantity
+FROM   order_items oi
+INNER JOIN products p ON oi.product_id = p.product_id;
+
+-- LEFT JOIN: all items; NULL product_name = orphan
+SELECT oi.line_id, p.product_name
+FROM   order_items oi
+LEFT  JOIN products p ON oi.product_id = p.product_id;
+
+-- Orphan detection pattern:
+SELECT oi.line_id
+FROM   order_items oi
+LEFT  JOIN products p ON oi.product_id = p.product_id
+WHERE  p.product_id IS NULL;   -- these items have no matching product</code></pre>
+          </div>
+
+          <div class="note-box"><div class="callout-label">Exam Tip — HAVING vs WHERE</div>
+            The #1 exam trap. Use <code>WHERE order_status = 'Completed'</code> (row filter). Use <code>HAVING SUM(revenue) &gt; 1000000</code> (group filter). <strong>You cannot write <code>WHERE SUM(...) &gt; ...</code></strong> — it's a syntax error.</div>
+
+          <div class="warning-box"><div class="callout-label">Common Mistake</div>
+            Top-N before aggregating. Always: GROUP BY → ORDER BY DESC → LIMIT. If LIMIT comes before GROUP BY, you get raw top rows, not the top aggregated groups.</div>
+
+          <div class="summary-box"><h4>Key Takeaways</h4><ul>
+            <li>Execution order: WHERE → GROUP BY → HAVING → SELECT → ORDER BY → LIMIT</li>
+            <li>SUM, AVG, COUNT, MIN, MAX — collapse multiple rows into one value per group</li>
+            <li>INNER JOIN = intersection only; LEFT JOIN = all left + matched right (NULLs for misses)</li>
+            <li>Top-N = GROUP BY + ORDER BY DESC + LIMIT — always this order</li>
+            <li>Trend: <code>date_trunc('month', date_col)</code> groups all days in a month together</li>
+          </ul></div>
+
+          <div class="practice-section"><div class="practice-section-label">Practice Questions</div>
+            <details><summary>Easy: Write a query for total net revenue and order count per channel, completed orders only.</summary>
+              <p><strong>Answer:</strong><pre><code>SELECT channel,
+       SUM(net_revenue_pkr) AS total_revenue,
+       COUNT(*)             AS order_lines
+FROM   lab01.campuscart_sales
+WHERE  order_status = 'Completed'
+GROUP  BY channel
+ORDER  BY total_revenue DESC;</code></pre></p></details>
+            <details><summary>Medium: Return customer segments where avg order-line revenue exceeds PKR 5,000, completed orders only.</summary>
+              <p><strong>Answer:</strong><pre><code>SELECT customer_segment,
+       AVG(net_revenue_pkr) AS avg_revenue
+FROM   lab01.campuscart_sales
+WHERE  order_status = 'Completed'
+GROUP  BY customer_segment
+HAVING AVG(net_revenue_pkr) &gt; 5000
+ORDER  BY avg_revenue DESC;</code></pre></p></details>
+            <details><summary>Hard: Top 3 region+category combinations by net revenue, only combinations with more than 100 orders.</summary>
+              <p><strong>Answer:</strong><pre><code>SELECT region_name, category,
+       SUM(net_revenue_pkr) AS total_revenue,
+       COUNT(*)             AS order_count
+FROM   lab01.campuscart_sales
+WHERE  order_status &lt;&gt; 'Cancelled'
+GROUP  BY region_name, category
+HAVING COUNT(*) &gt; 100
+ORDER  BY total_revenue DESC
+LIMIT  3;</code></pre></p></details>
+          </div>
+        </div>
+
+        <!-- TOPIC 4 -->
+        <div class="topic-card" id="topic-4">
+          <h2><span class="topic-num">4</span>Power BI</h2>
+          <p class="topic-subtitle">Lab 02 — Interface, data import, Power Query, relationships, visuals, dashboards</p>
+          <p>Power BI Desktop is Microsoft's self-service BI tool. Import or connect to data, model relationships, build DAX measures, and design interactive dashboards — no writing SQL against production.</p>
+
+          <h3>Interface Overview</h3>
+          <table>
+            <thead><tr><th>View / Pane</th><th>Purpose</th></tr></thead>
+            <tbody>
+              <tr><td>Report View</td><td>Design and arrange visual elements on pages</td></tr>
+              <tr><td>Data View</td><td>Browse table data, verify column values and types</td></tr>
+              <tr><td>Model View</td><td>Create and inspect relationships between tables</td></tr>
+              <tr><td>Fields Pane</td><td>Lists all tables, columns, and measures</td></tr>
+              <tr><td>Visualizations Pane</td><td>Select and configure chart types</td></tr>
+              <tr><td>Filters Pane</td><td>Apply report/page/visual-level filters</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Importing Data</h3>
+          <div class="example"><div class="callout-label">Example</div>
+            <h4>Two Ways to Get Data into Power BI</h4>
+            <p><strong>CSV Import:</strong> Home → Get Data → Text/CSV → Browse to file → Transform Data (inspect) → Close &amp; Apply</p>
+            <p><strong>PostgreSQL Connection:</strong> Home → Get Data → PostgreSQL → Server + Database → Select tables → Load</p>
+            <p>Always choose <strong>Transform Data</strong> (opens Power Query) before loading to clean and validate first.</p>
+          </div>
+
+          <h3>Power Query — Data Cleaning</h3>
+          <div class="definition"><div class="callout-label">Definition</div>
+            <strong>Power Query:</strong> The ETL layer inside Power BI. Apply transformations (change types, rename columns, filter rows, remove duplicates) before data enters the model. All steps auto-replay on refresh.</div>
+          <ul>
+            <li>Set correct <strong>data types</strong>: IDs → Whole Number, dates → Date, money → Decimal Number</li>
+            <li>Rename queries: <code>Sales</code>, <code>Products</code>, <code>Regions</code> (not "Query1")</li>
+            <li>Check for <strong>blanks</strong> in key columns, <strong>inconsistent casing</strong> in text columns</li>
+            <li>Verify row counts match expected values after import</li>
+          </ul>
+
+          <h3>Data Model &amp; Relationships</h3>
+          <div class="definition"><div class="callout-label">Definition</div>
+            <strong>One-to-Many (1:*):</strong> "1" side (dimension) has unique keys; "*" side (fact) has repeated FK values. Filters flow 1→* by default (single cross-filter direction).</div>
+
+          <div class="example"><div class="callout-label">Example</div>
+            <pre><code>-- Lab 02 Model:
+Products[product_id]  1 ──────── * Sales[product_id]
+Regions[region_id]   1 ──────── * Sales[region_id]
+
+Rules:
+• "1" side key must be UNIQUE and NOT NULL
+• Create in Model View: drag a column onto the related column
+• Use single cross-filter direction (lookup → fact)</code></pre>
+          </div>
+
+          <h3>Measures (DAX Basics)</h3>
+          <div class="example"><div class="callout-label">Example</div>
+            <pre><code>-- Lab 02 core measures (write in Sales table)
+Total Net Revenue   = SUM(Sales[net_revenue_pkr])
+Total Orders        = DISTINCTCOUNT(Sales[order_id])
+Units Sold          = SUM(Sales[quantity])
+Average Order Value = DIVIDE([Total Net Revenue], [Total Orders])</code></pre>
+            <p>A <strong>measure</strong> evaluates in the current <em>filter context</em> — the same formula shows grand total in a card and per-category totals in a bar chart.</p>
+          </div>
+
+          <h3>Required Visuals Cheatsheet</h3>
+          <table>
+            <thead><tr><th>Visual</th><th>Use For</th><th>Key Configuration</th></tr></thead>
+            <tbody>
+              <tr><td>Card</td><td>Single KPI (Revenue, Orders)</td><td>Field = one measure</td></tr>
+              <tr><td>Line Chart</td><td>Trends over time</td><td>X-axis = date by month, Y-axis = measure</td></tr>
+              <tr><td>Bar/Column Chart</td><td>Compare categories</td><td>Axis = dimension, Value = measure, sort desc</td></tr>
+              <tr><td>Matrix</td><td>Cross-tab (region × category)</td><td>Rows + Columns + Values = measures</td></tr>
+              <tr><td>Slicer</td><td>Interactive on-canvas filter</td><td>Field = dimension column (region, channel…)</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Filters, Slicers &amp; Interactions</h3>
+          <ul>
+            <li><strong>Slicer:</strong> On-canvas widget users click to filter the whole page</li>
+            <li><strong>Filters pane:</strong> Hidden developer-set filters at visual/page/report level</li>
+            <li><strong>Edit Interactions:</strong> Format → Edit Interactions → click a visual to control which others it filters. Disable an interaction if a chart should not respond to a particular slicer.</li>
+          </ul>
+
+          <div class="note-box"><div class="callout-label">Dashboard Design Rules</div>
+            KPI Cards → top | Trend/Comparison → middle | Matrix/Detail → bottom. Meaningful chart titles. Consistent currency formatting. No 3D effects. Test every slicer before submitting.</div>
+
+          <div class="warning-box"><div class="callout-label">Common Mistake</div>
+            Power BI refuses to create 1:* relationship → "1-side" key has duplicates or NULLs. Fix: Power Query → check that distinct count of key = total row count in that table.</div>
+
+          <div class="summary-box"><h4>Key Takeaways</h4><ul>
+            <li>CSV: Get Data → Text/CSV | PostgreSQL: Get Data → PostgreSQL</li>
+            <li>Power Query: set types, rename queries, check nulls/duplicates before loading</li>
+            <li>Model = 1:* from dimension (unique key) to fact (repeated FK)</li>
+            <li>Measures evaluate dynamically per filter context — one formula, many results</li>
+            <li>Five core visuals: Card, Line, Bar, Matrix, Slicer</li>
+          </ul></div>
+
+          <div class="practice-section"><div class="practice-section-label">Practice Questions</div>
+            <details><summary>Easy: What is a slicer? How does it differ from the Filters pane?</summary>
+              <p><strong>Answer:</strong> A slicer is an on-canvas visual element users click to interactively filter page visuals. The Filters pane is behind-the-scenes — developers set static/dynamic filters there. Slicers are user-facing and always visible; Filters pane entries can be hidden.</p></details>
+            <details><summary>Medium: Power BI won't create a 1:* relationship between Products[product_id] and Sales[product_id]. Likely cause and fix?</summary>
+              <p><strong>Answer:</strong> Products table has duplicate product_id values (or NULLs). Fix: Power Query → Remove Duplicates on product_id, or investigate the source. The "1" side must have unique, non-null keys.</p></details>
+            <details><summary>Hard: What is "filter context" in Power BI? How does the same measure show different values in a card vs a bar chart?</summary>
+              <p><strong>Answer:</strong> Filter context = the set of active filters Power BI applies when evaluating a measure. In a card with no slicers, all rows are visible → grand total. In a bar chart with Category on the axis, each bar creates its own filter context ("Electronics only", "Stationery only", etc.) — the same SUM formula evaluates only those rows. The formula is identical; the data it sees changes with context.</p></details>
+          </div>
+        </div>
+
+        <!-- TOPIC 5 -->
+        <div class="topic-card" id="topic-5">
+          <h2><span class="topic-num">5</span>Normalization &amp; Denormalization</h2>
+          <p class="topic-subtitle">Lab 03 — Logical vs physical models, 3NF, pre-join, column replication, pre-aggregation</p>
+          <p>Normalization reduces redundancy and prevents inconsistency. Denormalization deliberately adds redundancy for analytical performance. Both are valid — the key is knowing when to use each.</p>
+
+          <div class="definition"><div class="callout-label">Definition</div>
+            <strong>Logical Data Model:</strong> Describes <em>what</em> data exists — entities, attributes, relationships, and business rules. Technology-independent ERD with PKs, FKs, and cardinalities.</div>
+          <div class="definition"><div class="callout-label">Definition</div>
+            <strong>Physical Data Model:</strong> Describes <em>how</em> data is stored — actual table names, column types, indexes, and constraints for a specific DBMS (PostgreSQL). Translates the logical model into runnable DDL.</div>
+
+          <h3>Why Normalize? The Three Anomalies</h3>
+          <p>A wide flat table (like the CampusCart CSV) stores product name, category, region name on thousands of rows — creating:</p>
+          <ul>
+            <li><strong>Update anomaly:</strong> Rename "Electronics" → must update thousands of rows. Miss one → inconsistency.</li>
+            <li><strong>Insert anomaly:</strong> Can't add a product without also having a sale.</li>
+            <li><strong>Delete anomaly:</strong> Delete the last sale of a product → lose the product's details forever.</li>
+          </ul>
+
+          <div class="example"><div class="callout-label">Example</div>
+            <h4>Lab 03: Normalised Schema (3NF)</h4>
+            <pre><code>CREATE TABLE lab03.regions (
+    region_id TEXT PRIMARY KEY, region_name TEXT);
+
+CREATE TABLE lab03.customers (
+    customer_id INT PRIMARY KEY,
+    customer_name TEXT, customer_segment TEXT);
+
+CREATE TABLE lab03.products (
+    product_id INT PRIMARY KEY,
+    product_name TEXT, category TEXT, brand TEXT);
+
+CREATE TABLE lab03.orders (
+    order_id INT PRIMARY KEY,
+    order_date DATE,
+    customer_id INT REFERENCES lab03.customers(customer_id),
+    region_id   TEXT REFERENCES lab03.regions(region_id),
+    channel TEXT, payment_method TEXT, order_status TEXT);
+
+CREATE TABLE lab03.order_items (
+    line_id INT PRIMARY KEY,
+    order_id   INT REFERENCES lab03.orders(order_id),
+    product_id INT REFERENCES lab03.products(product_id),
+    quantity INT, unit_price_pkr NUMERIC(12,2),
+    discount_pct INT, net_revenue_pkr NUMERIC(14,2));
+
+-- Load dimensions from flat source using DISTINCT
+INSERT INTO lab03.regions
+SELECT DISTINCT region_id, region_name FROM lab03.raw_sales_flat;
+
+INSERT INTO lab03.customers
+SELECT DISTINCT customer_id, customer_name, customer_segment
+FROM   lab03.raw_sales_flat;</code></pre>
+          </div>
+
+          <h3>Three Denormalization Strategies</h3>
+
+          <div class="definition"><div class="callout-label">Definition</div>
+            <strong>1. Pre-Join Denormalization:</strong> Materialise all joins into one wide reporting table. Query reads one table instead of 4–5 joins at runtime. Trade-off: data duplication, must refresh when sources change.</div>
+          <div class="example"><div class="callout-label">Example</div>
+            <pre><code>CREATE SCHEMA lab03_report;
+
+CREATE TABLE lab03_report.sales_prejoined AS
+SELECT oi.line_id, o.order_id, o.order_date,
+       c.customer_segment, r.region_name,
+       p.product_name, p.category, p.brand,
+       o.channel, oi.quantity, oi.net_revenue_pkr
+FROM   lab03.order_items oi
+JOIN   lab03.orders    o ON oi.order_id   = o.order_id
+JOIN   lab03.customers c ON o.customer_id = c.customer_id
+JOIN   lab03.regions   r ON o.region_id   = r.region_id
+JOIN   lab03.products  p ON oi.product_id = p.product_id;</code></pre>
+          </div>
+
+          <div class="definition"><div class="callout-label">Definition</div>
+            <strong>2. Column Replication / Movement:</strong> Copy frequently-filtered attributes (e.g., customer_segment, region_name) into another table (Orders) to avoid joins at query time. Risk: stale if master changes.</div>
+
+          <div class="definition"><div class="callout-label">Definition</div>
+            <strong>3. Pre-Aggregation:</strong> Compute and store summary totals in advance. Repetitive executive dashboards hit a tiny summary table instead of millions of detail rows.</div>
+          <div class="example"><div class="callout-label">Example</div>
+            <pre><code>CREATE TABLE lab03_report.monthly_region_category AS
+SELECT DATE_TRUNC('month', o.order_date) AS reporting_month,
+       r.region_name, p.category,
+       SUM(oi.net_revenue_pkr)    AS total_net_revenue,
+       SUM(oi.quantity)           AS total_quantity,
+       COUNT(DISTINCT o.order_id) AS distinct_orders
+FROM   lab03.order_items oi
+JOIN   lab03.orders   o ON oi.order_id  = o.order_id
+JOIN   lab03.regions  r ON o.region_id  = r.region_id
+JOIN   lab03.products p ON oi.product_id= p.product_id
+WHERE  o.order_status = 'Completed'
+GROUP  BY 1, 2, 3;
+-- Result: tiny table (12 mo × N regions × M categories) — instant queries</code></pre>
+          </div>
+
+          <h3>Design Selection Guide</h3>
+          <table>
+            <thead><tr><th>Workload</th><th>Best Design</th><th>Reason</th></tr></thead>
+            <tbody>
+              <tr><td>Live order updates, frequent writes</td><td>Normalised (3NF)</td><td>Updates one place, no anomalies</td></tr>
+              <tr><td>Executive repeating dashboard</td><td>Pre-Aggregated</td><td>Tiny summary table, instant</td></tr>
+              <tr><td>Analyst exploring raw detail</td><td>Pre-Joined</td><td>One fat table, no joins needed</td></tr>
+              <tr><td>Region rename must be consistent</td><td>Normalised</td><td>Change one row in Regions table</td></tr>
+            </tbody>
+          </table>
+
+          <div class="summary-box"><h4>Key Takeaways</h4><ul>
+            <li>Logical = what data (ERD, tech-agnostic); Physical = how stored (DDL for a specific DBMS)</li>
+            <li>Normalization eliminates redundancy → prevents update/insert/delete anomalies</li>
+            <li>Pre-join: one fat table, no runtime joins — good for exploratory analysis</li>
+            <li>Column replication: copies attributes for fast filtering — risk is staleness</li>
+            <li>Pre-aggregation: tiny summary table for repetitive reporting — fastest for dashboards</li>
+          </ul></div>
+
+          <div class="practice-section"><div class="practice-section-label">Practice Questions</div>
+            <details><summary>Easy: What is an update anomaly? Example using a flat sales table.</summary>
+              <p><strong>Answer:</strong> Changing one logical fact requires updating many rows. Example: renaming region "East Lahore" in a flat table requires updating 2,000 rows. Miss 500 → inconsistency. A normalised model stores it once in Regions — one row to update.</p></details>
+            <details><summary>Medium: Compare pre-join denormalization and pre-aggregation. When would you use each?</summary>
+              <p><strong>Answer:</strong> Pre-join creates a wide table at detail grain (all attributes joined). Use for exploratory analysis needing raw rows with many attributes. Pre-aggregation computes totals at summary grain. Use for repetitive executive dashboards querying the same GROUP BY daily. Pre-aggregation is faster for summaries; pre-join is more flexible but still holds all detail.</p></details>
+            <details><summary>Hard: Developer copies region_name into Orders table (column replication). "North Zone" is later renamed to "Northern Zone" in Regions. What problem arises?</summary>
+              <p><strong>Answer:</strong> Orders still shows "North Zone" while Regions shows "Northern Zone". Reports querying Orders get the old name; reports joining Regions get the new name — inconsistency. A normalised design stores only region_id in Orders and joins to Regions for the name. One update to Regions propagates everywhere automatically.</p></details>
+          </div>
+        </div>
+
+        <!-- TOPIC 6 -->
+        <div class="topic-card" id="topic-6">
+          <h2><span class="topic-num">6</span>Dimensional Modeling</h2>
+          <p class="topic-subtitle">Lab 05 — Star schema, fact/dimension tables, grain, measures, natural/surrogate keys</p>
+          <p>Dimensional modeling organises data for analytics. It answers: <em>"What happened, when, where, by whom, involving what?"</em> The result is a <strong>star schema</strong> — one central fact table surrounded by dimension tables.</p>
+
+          <div class="definition"><div class="callout-label">Definition</div>
+            <strong>Business Process:</strong> The analytical subject being modelled. One fact table per business process. Examples: Sales Transactions, Inventory Snapshots, Promotions.</div>
+          <div class="definition"><div class="callout-label">Definition</div>
+            <strong>Grain:</strong> Precise description of what one row in the fact table represents. Must be declared BEFORE building anything else. Example: <em>"One row in FactSales = one order-line item for one product."</em></div>
+          <div class="definition"><div class="callout-label">Definition</div>
+            <strong>Fact Table:</strong> Central table. Contains numeric <em>measures</em> (quantities, revenues) + FK references to dimensions. Millions of rows, narrow columns.</div>
+          <div class="definition"><div class="callout-label">Definition</div>
+            <strong>Dimension Table:</strong> Describes context — who, what, where, when. Contains descriptive attributes. Thousands of rows, wide columns. Examples: DimDate, DimProduct, DimCustomer.</div>
+
+          <h3>Measures: Additivity</h3>
+          <table>
+            <thead><tr><th>Measure</th><th>Additive across rows?</th><th>Additive across time?</th><th>Note</th></tr></thead>
+            <tbody>
+              <tr><td>quantity</td><td>✅ Yes</td><td>✅ Yes</td><td>Fully additive</td></tr>
+              <tr><td>gross_revenue_pkr</td><td>✅ Yes</td><td>✅ Yes</td><td>Fully additive</td></tr>
+              <tr><td>net_revenue_pkr</td><td>✅ Yes</td><td>✅ Yes</td><td>Fully additive</td></tr>
+              <tr><td>unit_price_pkr</td><td>❌ No</td><td>❌ No</td><td>Non-additive — use weighted avg</td></tr>
+              <tr><td>discount_pct</td><td>❌ No</td><td>❌ No</td><td>Non-additive — compute from additive parts</td></tr>
+              <tr><td>on_hand_qty (inventory)</td><td>✅ across products</td><td>⚠️ Semi-additive</td><td>Don't SUM across periods — use last snapshot</td></tr>
+            </tbody>
+          </table>
+
+          <h3>Natural Keys vs Surrogate Keys</h3>
+          <div class="definition"><div class="callout-label">Definition</div>
+            <strong>Natural Key (Business Key):</strong> Identifier from source system — e.g., <code>customer_code = "C0042"</code>. May change, may not be unique across multiple sources.</div>
+          <div class="definition"><div class="callout-label">Definition</div>
+            <strong>Surrogate Key:</strong> Meaningless integer generated by the warehouse — e.g., <code>customer_key = 117</code>. Never changes. Insulates DW from source changes. Required for versioning (SCD).</div>
+
+          <h3>Why Surrogate Keys? (3 Reasons to Know)</h3>
+          <ol>
+            <li><strong>Source independence:</strong> Source can renumber business keys — surrogate stays stable in DW</li>
+            <li><strong>History/versioning:</strong> When a customer changes segment, a new surrogate key is issued; old facts keep the old key</li>
+            <li><strong>Multi-source integration:</strong> Two systems both using product_code "P100" for different products — surrogates disambiguate</li>
+          </ol>
+
+          <div class="example"><div class="callout-label">Example</div>
+            <h4>CampusCart Star Schema</h4>
+            <pre><code>                    DimDate
+                  (date_key PK)
+                       |
+DimCustomer ─── FactSales ─── DimProduct
+(customer_key PK) (line_id PK) (product_key PK)
+                   date_key FK
+                   customer_key FK
+                   product_key FK  ─── DimRegion
+                   region_key FK      (region_key PK)
+                   channel_key FK
+                   order_id        ─── DimChannel
+                   (degenerate dim)   (channel_key PK)
+                   -- Measures:
+                   quantity
+                   unit_price_pkr
+                   discount_pct
+                   gross_revenue_pkr
+                   net_revenue_pkr
+
+Hierarchies:
+  Time:    Year → Quarter → Month → Date
+  Product: Category → Brand → Product</code></pre>
+          </div>
+
+          <div class="definition"><div class="callout-label">Definition</div>
+            <strong>Degenerate Dimension:</strong> A business identifier (like <code>order_id</code>) stored directly in the fact table with no separate dimension table. It has no descriptive attributes worth a full dimension.</div>
+
+          <div class="note-box"><div class="callout-label">Exam Tip</div>
+            <strong>Grain first, always.</strong> Before any DDL, write: "One row in FactSales represents ___." This determines what FKs, measures, and key strategy you need. Changing grain mid-design means redesigning everything.</div>
+
+          <div class="summary-box"><h4>Key Takeaways</h4><ul>
+            <li>Design order: Business Process → Grain → Dimensions → Facts</li>
+            <li>Fact table = measures + FK surrogate keys (many rows, narrow)</li>
+            <li>Dimension table = descriptive context (fewer rows, wide)</li>
+            <li>Natural key = source identifier; Surrogate key = warehouse integer, never changes</li>
+            <li>Star schema: one fact + dimensions connecting directly — simple joins for BI tools</li>
+          </ul></div>
+
+          <div class="practice-section"><div class="practice-section-label">Practice Questions</div>
+            <details><summary>Easy: What is the grain of a fact table and why must it be declared first?</summary>
+              <p><strong>Answer:</strong> The grain is a precise statement of what one row represents (e.g., "one order-line item"). It must be declared first because it determines which measures belong, which dimensions connect, and how many rows the table has. Changing the grain mid-design forces a complete redesign.</p></details>
+            <details><summary>Medium: Why is unit_price_pkr non-additive? How do you compute a correct overall average price?</summary>
+              <p><strong>Answer:</strong> SUM(unit_price_pkr) across rows is meaningless — it adds selling prices for different products. Correct weighted average: SUM(net_revenue_pkr) / SUM(quantity). The numerator and denominator are both additive; dividing them gives the correct average price.</p></details>
+            <details><summary>Hard: Two source systems both use customer_code "C100" for completely different customers. How does a surrogate key solve this?</summary>
+              <p><strong>Answer:</strong> The ETL tags source keys with their origin (e.g., "SysA-C100" vs "SysB-C100") before loading as business keys in the dimension. Each gets a unique surrogate (e.g., customer_key 412 and 873). The fact table stores only surrogates, so the two different "C100" customers are unambiguously separate — even though their raw business keys look identical.</p></details>
+          </div>
+        </div>
+
+        <!-- TOPIC 7 -->
+        <div class="topic-card" id="topic-7">
+          <h2><span class="topic-num">7</span>OLAP: ROLLUP, CUBE &amp; Implementation Types</h2>
+          <p class="topic-subtitle">Lab 04 — Multidimensional analysis, hierarchical subtotals, ROLAP/MOLAP/HOLAP/DOLAP</p>
+          <p>OLAP provides multi-dimensional analysis — slicing data across time, products, and regions simultaneously. SQL extensions <code>ROLLUP</code> and <code>CUBE</code> generate subtotals automatically without writing multiple queries.</p>
+
+          <h3>OLAP Implementation Types</h3>
+          <table>
+            <thead><tr><th>Type</th><th>How It Works</th><th>When To Use</th></tr></thead>
+            <tbody>
+              <tr><td><strong>ROLAP</strong></td><td>Queries run directly on relational fact + dimension tables. Flexible, scales to detail.</td><td>Need flexibility and full detail access</td></tr>
+              <tr><td><strong>MOLAP</strong></td><td>Summaries pre-computed and stored in a multidimensional cube. Fastest for standard queries.</td><td>Fixed dimensions, maximum speed needed</td></tr>
+              <tr><td><strong>HOLAP</strong></td><td>Detail stays relational (ROLAP); frequently-used summaries pre-computed (MOLAP). Best of both.</td><td>Mix of standard reports + ad-hoc detail</td></tr>
+              <tr><td><strong>DOLAP</strong></td><td>Small analytical subset downloaded to desktop for local offline analysis.</td><td>Travelling analysts, offline usage</td></tr>
+            </tbody>
+          </table>
+
+          <div class="note-box"><div class="callout-label">Lab Context</div>
+            ROLAP = querying the star schema tables directly. MOLAP is simulated by pre-aggregated summary tables (like <code>lab03_report.monthly_region_category</code>). HOLAP = both approaches coexist in the same system.</div>
+
+          <h3>ROLLUP — Hierarchical Subtotals</h3>
+          <p><code>ROLLUP(A, B, C)</code> generates subtotals by progressively removing columns from the right: (A,B,C), (A,B), (A), () — the grand total. 4 levels for 3 dimensions.</p>
+
+          <div class="example"><div class="callout-label">Example</div>
+            <h4>Product Hierarchy Rollup: Region → Category → Product</h4>
+            <pre><code>SELECT
+    CASE WHEN GROUPING(r.region_name) = 1 THEN 'ALL REGIONS'
+         ELSE r.region_name END  AS region,
+    CASE WHEN GROUPING(p.category)    = 1 THEN 'ALL CATEGORIES'
+         ELSE p.category END     AS category,
+    CASE WHEN GROUPING(p.product_name)= 1 THEN 'ALL PRODUCTS'
+         ELSE p.product_name END AS product,
+    SUM(fs.net_revenue_pkr)      AS net_revenue
+FROM   lab04.fact_sales fs
+JOIN   lab04.dim_product p ON fs.product_id = p.product_id
+JOIN   lab04.dim_region  r ON fs.region_id  = r.region_id
+GROUP  BY ROLLUP(r.region_name, p.category, p.product_name)
+ORDER  BY r.region_name NULLS LAST, p.category NULLS LAST;
+-- Rows: product-level | category subtotals | region subtotals | grand total</code></pre>
+          </div>
+
+          <div class="definition"><div class="callout-label">Definition</div>
+            <strong>GROUPING(column):</strong> Returns <code>1</code> when the column was removed by ROLLUP/CUBE (subtotal row), and <code>0</code> for normal detail rows. Use with CASE to replace NULL labels with "ALL REGIONS", etc.</div>
+
+          <h3>Time Hierarchy Rollup</h3>
+          <div class="example"><div class="callout-label">Example</div>
+            <pre><code>SELECT d.year, d.quarter, d.month,
+       SUM(fs.net_revenue_pkr) AS revenue
+FROM   lab04.fact_sales fs
+JOIN   lab04.dim_date d ON fs.date_key = d.date_key
+GROUP  BY ROLLUP(d.year, d.quarter, d.month)
+ORDER  BY d.year NULLS LAST, d.quarter NULLS LAST, d.month NULLS LAST;
+-- Output: monthly detail → quarter subtotals → year subtotals → grand total</code></pre>
+          </div>
+
+          <h3>CUBE — All Combinations</h3>
+          <p><code>CUBE(A, B, C)</code> generates ALL possible subtotal combinations: 2³ = 8 grouping sets. Adding one dimension doubles the combinations.</p>
+
+          <div class="example"><div class="callout-label">Example</div>
+            <h4>Two-Dimensional Cube: Region × Channel</h4>
+            <pre><code>SELECT
+    COALESCE(r.region_name, 'ALL REGIONS') AS region,
+    COALESCE(fs.channel,    'ALL CHANNELS') AS channel,
+    SUM(fs.net_revenue_pkr)                AS revenue
+FROM   lab04.fact_sales fs
+JOIN   lab04.dim_region r ON fs.region_id = r.region_id
+GROUP  BY CUBE(r.region_name, fs.channel)
+ORDER  BY r.region_name NULLS LAST, fs.channel NULLS LAST;
+-- Includes: Region+Channel detail | Region-only subtotals |
+--           Channel-only subtotals | Grand total (both NULL)</code></pre>
+          </div>
+
+          <table>
+            <thead><tr><th>Dimensions in CUBE</th><th>Grouping Sets Generated</th></tr></thead>
+            <tbody>
+              <tr><td>2 (A, B)</td><td>2² = 4</td></tr>
+              <tr><td>3 (A, B, C)</td><td>2³ = 8</td></tr>
+              <tr><td>4 (A, B, C, D)</td><td>2⁴ = 16</td></tr>
+            </tbody>
+          </table>
+
+          <div class="warning-box"><div class="callout-label">Common Mistake — ROLLUP vs CUBE</div>
+            <strong>ROLLUP</strong> follows one strict hierarchy (A → B → C → total) — use for time or product hierarchies. <strong>CUBE</strong> generates every possible combination — use when there's no natural hierarchy and you want all subtotals (region × channel × category).</div>
+
+          <div class="summary-box"><h4>Key Takeaways</h4><ul>
+            <li>ROLAP: query star directly | MOLAP: pre-computed cubes | HOLAP: both | DOLAP: local desktop</li>
+            <li>ROLLUP(A,B,C) → 4 subtotal levels: (A,B,C), (A,B), (A), () — hierarchical</li>
+            <li>CUBE(A,B,C) → 2³ = 8 grouping sets — all combinations</li>
+            <li>GROUPING(col) = 1 → subtotal row, = 0 → normal detail row</li>
+            <li>Adding one dimension to CUBE doubles the subtotal combinations</li>
+          </ul></div>
+
+          <div class="practice-section"><div class="practice-section-label">Practice Questions</div>
+            <details><summary>Easy: What is the difference between ROLLUP and CUBE?</summary>
+              <p><strong>Answer:</strong> ROLLUP generates subtotals along a single hierarchy — progressively removing columns right to left (detail → subtotal → total). CUBE generates subtotals for ALL possible combinations of listed columns. ROLLUP is for hierarchies (Year-Quarter-Month); CUBE is for cross-dimensional analysis where every combination matters.</p></details>
+            <details><summary>Medium: CUBE on (Region, Channel, Category) produces how many grouping sets?</summary>
+              <p><strong>Answer:</strong> 2³ = 8: (R,Ch,Cat), (R,Ch), (R,Cat), (Ch,Cat), (R), (Ch), (Cat), () = grand total.</p></details>
+            <details><summary>Hard: Explain HOLAP and when you'd choose it over pure ROLAP.</summary>
+              <p><strong>Answer:</strong> HOLAP keeps detailed fact data in relational tables (ROLAP layer) for ad-hoc queries, while pre-computing frequently-used summaries in materialised aggregate tables (MOLAP layer). Choose HOLAP when: most user queries are repetitive and standard (use pre-computed tables for speed), but analysts occasionally need raw detail (use the relational star). Pure ROLAP is slower for repetitive queries; pure MOLAP can't answer unexpected detail-level questions.</p></details>
+          </div>
+        </div>
+
+        <!-- TOPIC 8 -->
+        <div class="topic-card" id="topic-8">
+          <h2><span class="topic-num">8</span>DW Implementation &amp; ETL</h2>
+          <p class="topic-subtitle">Lab 06 — Staging, dimensions, surrogate-key mapping, fact loading, data quality validation</p>
+          <p>Lab 06 is the full DW build. Raw source files → staging schema → dimension tables with surrogates → Date dimension → fact table with surrogate-key mapping → validation that everything reconciles to the source.</p>
+
+          <h3>Pipeline Architecture</h3>
+          <div class="example"><div class="callout-label">Example</div>
+            <pre><code>Source CSVs
+    │
+    ▼
+lab06_stg (Staging) ← raw data preserved as-is; profile quality here
+    │
+    ▼
+lab06_dw.dim_* (Dimensions) ← cleaned + surrogate keys generated
+    │
+    ▼
+lab06_dw.dim_date ← generated by GENERATE_SERIES(), date_key = YYYYMMDD INT
+    │
+    ▼
+lab06_dw.fact_sales ← surrogate FKs only (no raw business codes)
+    │
+    ▼
+Validation: row counts match + measures reconcile + zero orphans</code></pre>
+          </div>
+
+          <h3>Step 1 — Schemas &amp; Staging</h3>
+          <div class="example"><div class="callout-label">Example</div>
+            <pre><code>CREATE SCHEMA IF NOT EXISTS lab06_stg;
+CREATE SCHEMA IF NOT EXISTS lab06_dw;
+
+-- Staging: permissive types, natural keys, no surrogates
+CREATE TABLE lab06_stg.stg_customers (
+    customer_code    TEXT,  -- may have duplicates in source!
+    customer_name    TEXT,
+    customer_segment TEXT
+);
+-- Import CSV via pgAdmin → record row counts</code></pre>
+          </div>
+
+          <h3>Step 2 — Data Quality Checks</h3>
+          <div class="example"><div class="callout-label">Example</div>
+            <h4>All Four Quality Checks</h4>
+            <pre><code>-- NULL checking: missing business keys cannot be loaded
+SELECT COUNT(*) FROM lab06_stg.stg_customers
+WHERE  customer_code IS NULL;
+
+-- Duplicate checking: must be unique in dimension
+SELECT customer_code, COUNT(*) AS cnt
+FROM   lab06_stg.stg_customers
+GROUP  BY customer_code
+HAVING COUNT(*) &gt; 1;
+
+-- Row count validation: staging row count = CSV row count
+SELECT COUNT(*) FROM lab06_stg.stg_order_items;
+
+-- Invalid foreign key checking: order items with no matching order
+SELECT oi.line_id
+FROM   lab06_stg.stg_order_items oi
+LEFT   JOIN lab06_stg.stg_orders o ON oi.order_id = o.order_id
+WHERE  o.order_id IS NULL;
+
+-- Whitespace / casing: look for 'student' vs 'Student' vs ' Student'
+SELECT DISTINCT customer_segment FROM lab06_stg.stg_customers;</code></pre>
+          </div>
+
+          <h3>Step 3 — Load Dimensions with Surrogates</h3>
+          <div class="example"><div class="callout-label">Example</div>
+            <pre><code>-- DimCustomer: SERIAL auto-generates surrogate, UNIQUE on business key
+CREATE TABLE lab06_dw.dim_customer (
+    customer_key     SERIAL PRIMARY KEY,       -- surrogate (auto-increment)
+    customer_code    TEXT UNIQUE NOT NULL,     -- natural/business key (cleaned)
+    customer_name    TEXT,
+    customer_segment TEXT
+);
+
+-- Load: TRIM whitespace, standardise casing, DISTINCT to deduplicate
+INSERT INTO lab06_dw.dim_customer (customer_code, customer_name, customer_segment)
+SELECT DISTINCT
+    TRIM(customer_code)             AS customer_code,
+    INITCAP(TRIM(customer_name))    AS customer_name,
+    INITCAP(TRIM(customer_segment)) AS customer_segment
+FROM   lab06_stg.stg_customers
+WHERE  customer_code IS NOT NULL;
+
+-- Validate: no duplicate business keys in warehouse dim
+SELECT customer_code, COUNT(*) FROM lab06_dw.dim_customer
+GROUP BY 1 HAVING COUNT(*) &gt; 1;  -- must return 0 rows</code></pre>
+          </div>
+
+          <h3>Step 4 — Generate Date Dimension</h3>
+          <div class="example"><div class="callout-label">Example</div>
+            <pre><code>CREATE TABLE lab06_dw.dim_date (
+    date_key    INT PRIMARY KEY,   -- YYYYMMDD: 20250315
+    full_date   DATE,
+    day         INT,
+    month       INT,
+    month_name  TEXT,
+    quarter     INT,
+    year        INT,
+    day_of_week TEXT
+);
+
+INSERT INTO lab06_dw.dim_date
+SELECT TO_CHAR(d, 'YYYYMMDD')::INT  AS date_key,
+       d                             AS full_date,
+       EXTRACT(DAY     FROM d)::INT  AS day,
+       EXTRACT(MONTH   FROM d)::INT  AS month,
+       TO_CHAR(d, 'Month')           AS month_name,
+       EXTRACT(QUARTER FROM d)::INT  AS quarter,
+       EXTRACT(YEAR    FROM d)::INT  AS year,
+       TO_CHAR(d, 'Day')             AS day_of_week
+FROM   GENERATE_SERIES('2024-01-01'::DATE, '2026-12-31'::DATE, '1 day') AS d;
+-- Never insert dates manually — use GENERATE_SERIES</code></pre>
+          </div>
+
+          <h3>Step 5 — Create &amp; Load Fact Table (Surrogate-Key Mapping)</h3>
+          <div class="example"><div class="callout-label">Example</div>
+            <pre><code>CREATE TABLE lab06_dw.fact_sales (
+    line_id              INT PRIMARY KEY,  -- natural grain key
+    order_id             INT,              -- degenerate dimension
+    date_key             INT REFERENCES lab06_dw.dim_date(date_key),
+    customer_key         INT REFERENCES lab06_dw.dim_customer(customer_key),
+    product_key          INT REFERENCES lab06_dw.dim_product(product_key),
+    region_key           INT REFERENCES lab06_dw.dim_region(region_key),
+    channel_key          INT REFERENCES lab06_dw.dim_channel(channel_key),
+    quantity             INT,
+    unit_price_pkr       NUMERIC(12,2),
+    discount_pct         INT,
+    gross_revenue_pkr    NUMERIC(14,2),
+    discount_amount_pkr  NUMERIC(14,2),
+    net_revenue_pkr      NUMERIC(14,2)
+);
+
+-- Surrogate-key mapping: JOIN staging tables to dimensions
+INSERT INTO lab06_dw.fact_sales
+SELECT
+    oi.line_id,
+    oi.order_id,
+    TO_CHAR(o.order_date, 'YYYYMMDD')::INT AS date_key,
+    dc.customer_key,   -- resolved: customer_code → customer_key
+    dp.product_key,    -- resolved: product_code  → product_key
+    dr.region_key,     -- resolved: region_code   → region_key
+    dch.channel_key,
+    oi.quantity, oi.unit_price_pkr, oi.discount_pct,
+    oi.gross_revenue_pkr, oi.discount_amount_pkr, oi.net_revenue_pkr
+FROM   lab06_stg.stg_order_items oi
+JOIN   lab06_stg.stg_orders      o   ON oi.order_id        = o.order_id
+JOIN   lab06_dw.dim_customer     dc  ON TRIM(o.customer_code)= dc.customer_code
+JOIN   lab06_dw.dim_product      dp  ON TRIM(oi.product_code) = dp.product_code
+JOIN   lab06_dw.dim_region       dr  ON TRIM(o.region_code)   = dr.region_code
+JOIN   lab06_dw.dim_channel      dch ON TRIM(o.channel)       = dch.channel_name;
+-- The fact table stores surrogate integers only — never raw codes</code></pre>
+          </div>
+
+          <h3>Step 6 — Validate Everything</h3>
+          <div class="example"><div class="callout-label">Example</div>
+            <pre><code>-- 1. Row count: staging vs fact must match
+SELECT COUNT(*) FROM lab06_stg.stg_order_items;   -- source
+SELECT COUNT(*) FROM lab06_dw.fact_sales;          -- warehouse
+
+-- 2. Orphan checks (all must return 0 rows)
+SELECT COUNT(*) FROM lab06_dw.fact_sales fs
+LEFT JOIN lab06_dw.dim_customer dc ON fs.customer_key = dc.customer_key
+WHERE dc.customer_key IS NULL;
+
+-- 3. Measure reconciliation (must match exactly)
+SELECT SUM(net_revenue_pkr) FROM lab06_stg.stg_order_items;
+SELECT SUM(net_revenue_pkr) FROM lab06_dw.fact_sales;
+
+-- 4. Constraint test: prove FK protection works
+INSERT INTO lab06_dw.fact_sales (line_id, customer_key, ...)
+VALUES (99999, 99999, ...);  -- customer_key 99999 doesn't exist → FK error!</code></pre>
+          </div>
+
+          <h3>Common Load Failures</h3>
+          <table>
+            <thead><tr><th>Symptom</th><th>Root Cause</th><th>Diagnostic</th></tr></thead>
+            <tbody>
+              <tr><td>DW has MORE rows than source</td><td>Dimension has duplicate business keys → many-to-many join during mapping</td><td>Check dim for duplicate business keys</td></tr>
+              <tr><td>DW revenue &gt; source revenue</td><td>Fact rows duplicated (bad join or double-load)</td><td>Compare row counts staging vs fact</td></tr>
+              <tr><td>DW has FEWER rows than source</td><td>Orphan source rows dropped (INNER JOIN misses records)</td><td>Use LEFT JOIN in fact load; check NULLs on dim side</td></tr>
+              <tr><td>FK constraint error on fact INSERT</td><td>Dimension not loaded first, or business key cleaned inconsistently</td><td>Check exact match between staging key and dim cleaned key</td></tr>
+            </tbody>
+          </table>
+
+          <div class="note-box"><div class="callout-label">Critical Rule</div>
+            <strong>Row-count reconciliation alone is insufficient.</strong> You must also verify <strong>measure reconciliation</strong> (SUM revenues match). A fact table can have the correct row count but wrong revenue if a mapping error caused incorrect surrogate resolution.</div>
+
+          <div class="summary-box"><h4>Key Takeaways</h4><ul>
+            <li>Pipeline: Source CSVs → Staging (raw) → DW Dimensions (cleaned+surrogates) → Fact (surrogate FKs only)</li>
+            <li>Data quality: NULL keys, duplicate keys, row count, orphan FKs, whitespace/casing</li>
+            <li>Surrogate-key mapping: fact INSERT must JOIN staging to each dimension to swap business key → surrogate</li>
+            <li>Date dimension: generate with GENERATE_SERIES() — never insert manually</li>
+            <li>Validation = row-count match + measure reconciliation + zero orphans + constraint tests</li>
+          </ul></div>
+
+          <div class="practice-section"><div class="practice-section-label">Practice Questions</div>
+            <details><summary>Easy: What is the purpose of a staging schema in a DW pipeline?</summary>
+              <p><strong>Answer:</strong> Staging is a landing zone for raw source data, preserved as-is without transformation. It enables: (1) data quality profiling before loading, (2) audit trail for reconciliation (compare staging vs DW at any time), and (3) decoupling source system loads from warehouse transformations. Clean only when loading dimensions and facts, not in staging.</p></details>
+            <details><summary>Medium: Fact table has 3,500 rows but source staging has only 3,469. Most likely cause?</summary>
+              <p><strong>Answer:</strong> A dimension table has duplicate business keys. When the fact load JOINs staging to the dimension on the business key, one source row matches multiple dimension rows → one source row produces multiple fact rows (fan-out). Fix: ensure each dimension business key is unique (HAVING COUNT(*) &gt; 1 must return nothing) before loading facts.</p></details>
+            <details><summary>Hard: Describe the full surrogate-key mapping flow from a source order_item row to a fact_sales row.</summary>
+              <p><strong>Answer:</strong> (1) Staging: stg_order_items has raw codes: customer_code='C042', product_code='P018'. (2) ETL JOINs stg_order_items to stg_orders to get order context (customer_code, order_date, region_code). (3) JOINs to dim_customer on customer_code='C042' → resolves customer_key=117. (4) JOINs to dim_product on product_code='P018' → resolves product_key=36. (5) JOINs to dim_date on formatted date → date_key=20250315. (6) Inserts fact row: line_id, order_id, date_key=20250315, customer_key=117, product_key=36, + measures. The fact table never stores 'C042' or 'P018' — only surrogate integers.</p></details>
+          </div>
+        </div>
+
+
+        <!-- TOPIC 9 -->
+        <div class="topic-card" id="topic-9">
+          <h2><span class="topic-num">9</span>All Labs Concise Master Summary &amp; Cheatsheet</h2>
+          <p class="topic-subtitle">Labs 01 to 06 at a Glance — High-Yield Synthesis of Core Formulas, DDL/DML, Pipelines &amp; Architecture</p>
+
+          <p>This master cheat sheet condenses the essential architectural patterns, analytical SQL commands, dimensional modeling rules, and ETL verification techniques from <strong>all 6 DW&amp;BI Lab Manuals</strong> into a single, high-yield reference.</p>
+
+          <!-- System Architecture Pipeline -->
+          <div style="display:flex; gap:12px; align-items:center; justify-content:center; flex-wrap:wrap; margin:24px 0; background:#18181b; padding:20px; border-radius:12px; border:1px solid var(--bd);">
+            <div style="background:#27272a; border:1px solid #3f3f46; border-radius:8px; padding:12px 16px; text-align:center; min-width:140px;">
+              <div style="font-size:0.7rem; color:var(--mt); text-transform:uppercase; letter-spacing:1px; font-weight:700;">Source Data</div>
+              <div style="font-weight:700; color:#fff; font-size:0.95rem; margin-top:4px;">OLTP &amp; CSVs</div>
+              <div style="font-size:0.75rem; color:#a1a1aa; margin-top:2px;">Normalized / Flat</div>
+            </div>
+            <div style="color:var(--ac); font-weight:800; font-size:1.2rem;">&rarr;</div>
+            <div style="background:#27272a; border:1px solid #3f3f46; border-radius:8px; padding:12px 16px; text-align:center; min-width:140px;">
+              <div style="font-size:0.7rem; color:var(--mt); text-transform:uppercase; letter-spacing:1px; font-weight:700;">Landing Zone</div>
+              <div style="font-weight:700; color:#38bdf8; font-size:0.95rem; margin-top:4px;">Staging Area</div>
+              <div style="font-size:0.75rem; color:#a1a1aa; margin-top:2px;">Raw staging.* Tables</div>
+            </div>
+            <div style="color:var(--ac); font-weight:800; font-size:1.2rem;">&rarr;</div>
+            <div style="background:#27272a; border:1px solid #3f3f46; border-radius:8px; padding:12px 16px; text-align:center; min-width:140px;">
+              <div style="font-size:0.7rem; color:var(--mt); text-transform:uppercase; letter-spacing:1px; font-weight:700;">Analytical Core</div>
+              <div style="font-weight:700; color:#34d399; font-size:0.95rem; margin-top:4px;">Dimensional DW</div>
+              <div style="font-size:0.75rem; color:#a1a1aa; margin-top:2px;">Star / Snowflake (SKs)</div>
+            </div>
+            <div style="color:var(--ac); font-weight:800; font-size:1.2rem;">&rarr;</div>
+            <div style="background:#27272a; border:1px solid #3f3f46; border-radius:8px; padding:12px 16px; text-align:center; min-width:140px;">
+              <div style="font-size:0.7rem; color:var(--mt); text-transform:uppercase; letter-spacing:1px; font-weight:700;">Presentation</div>
+              <div style="font-weight:700; color:#fbbf24; font-size:0.95rem; margin-top:4px;">OLAP &amp; Power BI</div>
+              <div style="font-size:0.75rem; color:#a1a1aa; margin-top:2px;">Measures, CUBE, Visuals</div>
+            </div>
+          </div>
+
+          <div class="definition">
+            <div class="callout-label">The Golden Rule of Data Warehousing</div>
+            <strong>Never query production OLTP for analytics, and never enforce operational surrogate keys in staging.</strong>
+            <p>OLTP databases are designed for atomic write throughput (ACID transactions) with indexed point lookups ($O(\log N)$). Data Warehouses are read-mostly analytical stores designed for bulk aggregations over millions of rows ($O(N)$) organized in Star Schemas with integer surrogate keys.</p>
+          </div>
+
+          <h3>1. Workload Comparison: OLTP vs Staging vs DW vs Data Mart (Lab 01)</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Property</th>
+                <th>OLTP (Operational)</th>
+                <th>Staging Schema</th>
+                <th>Enterprise DW (EDW)</th>
+                <th>Data Mart</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Primary Objective</strong></td>
+                <td>Run daily operations fast; eliminate anomalies</td>
+                <td>Temporary landing zone for raw extracts</td>
+                <td>Enterprise-wide historical decision support</td>
+                <td>Department-specific analytical reporting (e.g. Sales, HR)</td>
+              </tr>
+              <tr>
+                <td><strong>Data Modeling</strong></td>
+                <td>Highly Normalized (3NF / BCNF)</td>
+                <td>Flat, raw tabular structures (stg_*)</td>
+                <td>Dimensional Modeling (Star / Snowflake)</td>
+                <td>Star Schema or OLAP Cube</td>
+              </tr>
+              <tr>
+                <td><strong>Key Strategy</strong></td>
+                <td>Natural / Business Keys (e.g., CNIC, SKU)</td>
+                <td>Source Business Keys (no warehouse keys)</td>
+                <td>Warehouse Surrogate Keys (bigint identity)</td>
+                <td>Warehouse Surrogate Keys</td>
+              </tr>
+              <tr>
+                <td><strong>Query Pattern</strong></td>
+                <td>Small point lookups (SELECT/UPDATE by PK)</td>
+                <td>Bulk read during ETL; TRUNCATE between runs</td>
+                <td>Complex aggregations, windowing, historical scans</td>
+                <td>Fast slice-and-dice, BI dashboards</td>
+              </tr>
+              <tr>
+                <td><strong>Data Volatility</strong></td>
+                <td>Dynamic read-write; continuously changing</td>
+                <td>Transient / volatile during ingestion</td>
+                <td>Append-mostly; read-only for business users</td>
+                <td>Periodic scheduled refresh</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>2. Analytical SQL &amp; Window Functions Cheatsheet (Labs 01 &amp; 02)</h3>
+          <p>Analytical SQL avoids multiple correlated subqueries by computing ranking, running totals, and period-over-period differences across partitioned subsets of data in a single scan.</p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Function / Clause</th>
+                <th>Syntax Example</th>
+                <th>Behavior on Ties &amp; Use Case</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>ROW_NUMBER()</code></td>
+                <td><code>ROW_NUMBER() OVER (PARTITION BY category ORDER BY sales DESC)</code></td>
+                <td>Always unique: <code>1, 2, 3, 4</code>. Used to deduplicate or grab Top-1 per group.</td>
+              </tr>
+              <tr>
+                <td><code>RANK()</code></td>
+                <td><code>RANK() OVER (ORDER BY score DESC)</code></td>
+                <td>Ties get equal rank, skips ranks: <code>1, 2, 2, 4</code>. Used for competition ranking.</td>
+              </tr>
+              <tr>
+                <td><code>DENSE_RANK()</code></td>
+                <td><code>DENSE_RANK() OVER (ORDER BY score DESC)</code></td>
+                <td>Ties get equal rank, no gaps: <code>1, 2, 2, 3</code>. Ideal for financial tiers.</td>
+              </tr>
+              <tr>
+                <td><code>LAG()</code> / <code>LEAD()</code></td>
+                <td><code>LAG(revenue, 1) OVER (PARTITION BY dept ORDER BY month_id)</code></td>
+                <td>Fetches previous / next row value. Essential for Month-over-Month (MoM) growth: <code>(rev - lag)/lag</code>.</td>
+              </tr>
+              <tr>
+                <td><code>SUM() OVER (...)</code></td>
+                <td><code>SUM(rev) OVER (ORDER BY dt ROWS BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW)</code></td>
+                <td>Computes cumulative running total from beginning of partition up to current row.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="note-box">
+            <div class="callout-label">Frame Specification Warning: ROWS vs RANGE</div>
+            <strong><code>ROWS BETWEEN</code></strong> operates on exact physical row offsets (e.g. exactly 2 preceding physical rows).<br/>
+            <strong><code>RANGE BETWEEN</code></strong> operates on logical value intervals of the ORDER BY column (default if omitted: <code>RANGE BETWEEN UNBOUNDED PRECEDING AND CURRENT ROW</code>, which treats duplicate order values identically). For moving averages over time with missing dates, physical <code>ROWS</code> will skip calendar months!
+          </div>
+
+          <h3>3. Normalization (3NF) vs Physical Denormalization (Labs 03 &amp; 04)</h3>
+          <p>Normalization reduces redundancy to protect write integrity; physical denormalization intentionally introduces controlled redundancy to eliminate expensive relational JOINs during decision support queries.</p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Normal Form</th>
+                <th>Core Requirement</th>
+                <th>Eliminated Anomaly</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1NF (Atomic Values)</strong></td>
+                <td>Atomic columns (no arrays or comma-delimited values); primary key identified; no repeating groups.</td>
+                <td>Prevents multi-value parsing errors and undefined row addresses.</td>
+              </tr>
+              <tr>
+                <td><strong>2NF (No Partial Dependency)</strong></td>
+                <td>Must be in 1NF + every non-key column depends on the <em>entire</em> candidate key (not just part of a composite key).</td>
+                <td>Prevents storing order attributes repeatedly for every line item.</td>
+              </tr>
+              <tr>
+                <td><strong>3NF (No Transitive Dependency)</strong></td>
+                <td>Must be in 2NF + non-key columns cannot depend on other non-key columns ($A 	o B 	o C$).</td>
+                <td>Prevents city/region data duplication across millions of customer records.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="example">
+            <div class="example-title">3 Denormalization Techniques for Analytical DSS</div>
+            <ul>
+              <li><strong>Pre-join Denormalization:</strong> Merging parent table (e.g., <code>orders</code>) into child table (e.g., <code>order_items</code>) into a single wide flat table. <em>Benefit:</em> Zero JOINs at query time. <em>Trade-off:</em> High storage redundancy.</li>
+              <li><strong>Column Replication / Movement:</strong> Copying frequently filtered descriptive columns (e.g., <code>category_name</code>) into the fact table or intermediate lookup table to satisfy 90% of queries without touching the dimension.</li>
+              <li><strong>Pre-aggregation:</strong> Building dedicated summary tables (e.g., <code>agg_monthly_sales</code>) storing pre-calculated <code>SUM(sales)</code> and <code>COUNT(orders)</code> per month.</li>
+            </ul>
+          </div>
+
+          <h3>4. Dimensional Modeling &amp; Kimball Architecture (Labs 04 &amp; 05)</h3>
+          <p>Kimball dimensional modeling centers around business processes. Every design follows four disciplined steps:</p>
+
+          <ol>
+            <li><strong>Select the Business Process:</strong> E.g., Retail Sales, Order Fulfillment, Inventory Snapshot, Exam Attendance.</li>
+            <li><strong>Declare the Grain:</strong> Specify <em>exactly what one single row in the fact table represents</em> before selecting any columns.</li>
+            <li><strong>Identify Dimensions:</strong> The contextual descriptors (Who, What, Where, When, Why, How).</li>
+            <li><strong>Identify Facts &amp; Measures:</strong> The quantitative numeric metrics generated at that precise grain.</li>
+          </ol>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Measure Type</th>
+                <th>Definition &amp; Rule</th>
+                <th>Classic Examples</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Fully Additive</strong></td>
+                <td>Can be summed across <em>all</em> dimensional hierarchies (time, store, customer, product).</td>
+                <td><code>quantity_sold</code>, <code>sales_amount</code>, <code>discount_cost</code></td>
+              </tr>
+              <tr>
+                <td><strong>Semi-Additive</strong></td>
+                <td>Can be summed across some dimensions (e.g. store, product), but <em>never across time</em>. Use ending value or average over time.</td>
+                <td><code>account_balance</code>, <code>inventory_quantity_on_hand</code>, <code>headcount</code></td>
+              </tr>
+              <tr>
+                <td><strong>Non-Additive</strong></td>
+                <td>Cannot be meaningfully summed across <em>any</em> dimension. Must be calculated as a ratio of components.</td>
+                <td><code>unit_price</code>, <code>profit_margin_pct</code>, <code>tax_rate</code></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="warning-box">
+            <div class="callout-label">Surrogate Keys vs Natural Keys</div>
+            <strong>Never use source natural/business keys as Primary Keys or Foreign Keys in the DW.</strong>
+            <ul>
+              <li><strong>Immunity:</strong> Protects DW when source systems change their format or reuse keys.</li>
+              <li><strong>Multi-source Integration:</strong> Resolves key collisions when Branch A and Branch B both have Customer ID 101.</li>
+              <li><strong>Historical Tracking (SCD Type 2):</strong> A customer who moves has one business key but multiple surrogate key rows for each address revision.</li>
+              <li><strong>Performance:</strong> Joins on compact 4-byte or 8-byte integers are orders of magnitude faster than compound text strings.</li>
+              <li><strong>Unknown Members:</strong> Allows inserting a placeholder row with key <code>-1</code> for orphan records.</li>
+            </ul>
+          </div>
+
+          <h3>5. Physical DW ETL Ingestion Pipeline (Lab 06)</h3>
+          <p>The standard multi-schema PostgreSQL pipeline consists of 4 distinct loading stages:</p>
+
+          <pre><code>-- 1. Create separate schemas
+CREATE SCHEMA IF NOT EXISTS staging;
+CREATE SCHEMA IF NOT EXISTS dw;
+
+-- 2. Populate Date Dimension using generate_series (NEVER insert manually)
+INSERT INTO dw.dim_date (date_key, calendar_date, day, month, quarter, year, is_weekend)
+SELECT 
+    TO_CHAR(d, 'YYYYMMDD')::INTEGER AS date_key,
+    d::DATE AS calendar_date,
+    EXTRACT(DAY FROM d)::INTEGER,
+    EXTRACT(MONTH FROM d)::INTEGER,
+    EXTRACT(QUARTER FROM d)::INTEGER,
+    EXTRACT(YEAR FROM d)::INTEGER,
+    CASE WHEN EXTRACT(ISODOW FROM d) IN (6, 7) THEN TRUE ELSE FALSE END
+FROM GENERATE_SERIES('2024-01-01'::DATE, '2025-12-31'::DATE, '1 day'::INTERVAL) d;
+
+-- 3. Load Dimensions with Surrogate Keys & Unknown Fallback
+INSERT INTO dw.dim_customer (customer_key, customer_id, customer_name, city)
+VALUES (-1, 'UNKNOWN', 'Unknown Customer', 'Unknown')
+ON CONFLICT (customer_key) DO NOTHING;
+
+INSERT INTO dw.dim_customer (customer_id, customer_name, city)
+SELECT DISTINCT TRIM(customer_id), TRIM(customer_name), TRIM(city)
+FROM staging.stg_customers
+WHERE customer_id IS NOT NULL;
+
+-- 4. Load Fact Table resolving Natural Keys to Surrogate Keys
+INSERT INTO dw.fact_sales (date_key, customer_key, product_key, quantity, amount)
+SELECT 
+    TO_CHAR(s.order_date, 'YYYYMMDD')::INTEGER AS date_key,
+    COALESCE(c.customer_key, -1) AS customer_key,
+    COALESCE(p.product_key, -1) AS product_key,
+    s.quantity,
+    s.amount
+FROM staging.stg_orders s
+LEFT JOIN dw.dim_customer c ON TRIM(s.customer_id) = c.customer_id
+LEFT JOIN dw.dim_product  p ON TRIM(s.product_id)  = p.product_id;</code></pre>
+
+          <h3>6. Power BI &amp; DAX Modeling Essentials (Labs 02 &amp; 03)</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Feature</th>
+                <th>Calculated Column</th>
+                <th>DAX Measure</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Evaluation Time</strong></td>
+                <td>Data refresh time (static row-by-row).</td>
+                <td>Query / Visual render time (on-the-fly dynamic aggregation).</td>
+              </tr>
+              <tr>
+                <td><strong>Storage &amp; RAM</strong></td>
+                <td>Stored physically in RAM VertiPaq database.</td>
+                <td>Zero storage; calculated in CPU at query time.</td>
+              </tr>
+              <tr>
+                <td><strong>Context</strong></td>
+                <td><strong>Row Context</strong> (evaluates current row attributes).</td>
+                <td><strong>Filter Context</strong> (evaluates visual coordinates + slicers).</td>
+              </tr>
+              <tr>
+                <td><strong>Best Practice</strong></td>
+                <td>Use sparingly; only for row-level slicer categories.</td>
+                <td>Default for all numeric aggregations, KPIs, and ratios.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="note-box">
+            <div class="callout-label">Power BI Cardinality &amp; Relationship Rule</div>
+            Always establish <strong>1-to-Many ($1 	o *$)</strong> relationships from Dimension tables ($1$-side) to Fact tables ($*$-side) with <strong>Single Cross-Filter Direction</strong>. Filters must naturally flow <em>from</em> dimensions <em>down to</em> facts, never bi-directionally unless modeling a bridge table for many-to-many relationships.
+          </div>
+
+          <h3>7. OLAP Operations &amp; PostgreSQL Syntax (Labs 04 &amp; 05)</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Clause</th>
+                <th>Number of Subtotals</th>
+                <th>Grouping Sets Produced for (A, B, C)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>GROUP BY ROLLUP(A, B, C)</code></td>
+                <td>$N + 1 = 4$ sets</td>
+                <td><code>(A, B, C)</code>, <code>(A, B)</code>, <code>(A)</code>, <code>()</code> [Hierarchical Grand Total]</td>
+              </tr>
+              <tr>
+                <td><code>GROUP BY CUBE(A, B, C)</code></td>
+                <td>$2^N = 8$ sets</td>
+                <td>All combinations: <code>(A,B,C), (A,B), (A,C), (B,C), (A), (B), (C), ()</code></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <p><strong><code>GROUPING(col)</code>:</strong> Returns <code>1</code> if the column is currently aggregated (subtotaled) in the row, and <code>0</code> if the row is grouped on that specific column's value. This allows you to distinguish an actual <code>NULL</code> data value from a subtotal aggregate row.</p>
+
+          <div class="summary-box">
+            <h4>Master Lab Takeaways</h4>
+            <ul>
+              <li><strong>Architecture:</strong> Separate <code>staging</code> (raw) from <code>dw</code> (dimensional). Cleanse during ingestion; never pollute raw staging with surrogates.</li>
+              <li><strong>Grain &amp; Additivity:</strong> Define grain explicitly before creating tables. Never sum non-additive ratios or semi-additive balances across time.</li>
+              <li><strong>Surrogate Keys:</strong> Use integer identity surrogates in dimensions and fact FKs. Provide fallback key <code>-1</code> for unknown/orphan members.</li>
+              <li><strong>Analytical SQL:</strong> Master <code>ROW_NUMBER()</code> for Top-N and deduplication, <code>LAG()</code> for MoM growth, and <code>ROLLUP/CUBE</code> for multidimensional hierarchies.</li>
+              <li><strong>Reconciliation:</strong> Validate row counts, measure sums, and check for zero orphans before certifying any ETL load.</li>
+            </ul>
+          </div>
+
+          <div class="practice-section">
+            <div class="practice-section-label">Master Self-Assessment Questions</div>
+            <details>
+              <summary>Question 1: Why is an integer surrogate key superior to a UUID or natural text code in fact tables?</summary>
+              <p><strong>Answer:</strong> (1) Storage: Integer surrogate keys use 4 bytes (or 8 bytes for bigint), whereas natural string codes or UUIDs consume 16–36 bytes per row. In a 50-million row fact table with 6 foreign keys, this saves tens of gigabytes of RAM. (2) Join Performance: CPU integer comparison is hardware-accelerated and fits neatly into L1/L2 CPU caches. (3) Isolation: If the source system renames a customer code or recycles an ID, the warehouse history remains intact.</p>
+            </details>
+            <details>
+              <summary>Question 2: In a monthly sales report with CUBE(Region, Category, Year), how many grouping combinations are generated?</summary>
+              <p><strong>Answer:</strong> For $N = 3$ dimensions in <code>CUBE</code>, the number of grouping sets is $2^N = 2^3 = 8$ distinct combinations: (Region, Category, Year), (Region, Category), (Region, Year), (Category, Year), (Region), (Category), (Year), and () [grand total]. For <code>ROLLUP</code>, it would only be $3 + 1 = 4$ levels.</p>
+            </details>
+            <details>
+              <summary>Question 3: If an ETL load finishes with zero errors, what two reconciliation queries MUST be run before sign-off?</summary>
+              <p><strong>Answer:</strong> (1) <strong>Row Count Reconciliation:</strong> <code>SELECT COUNT(*) FROM staging.stg_orders</code> must match <code>SELECT COUNT(*) FROM dw.fact_sales</code> (or match expected filtered valid rows). (2) <strong>Measure Sum Reconciliation:</strong> <code>SELECT SUM(amount) FROM staging.stg_orders</code> must equal <code>SELECT SUM(amount) FROM dw.fact_sales</code> down to the exact cent. Verifying row count alone misses join fan-out bugs or column mapping mismatches.</p>
+            </details>
+          </div>
+        </div>
+
+
+        <!-- TOPIC 10 -->
+        <div class="topic-card" id="topic-10">
+          <h2><span class="topic-num">10</span>Difficult &amp; Tricky Exam Questions (Worked Solutions)</h2>
+          <p class="topic-subtitle">Lab Midterm Exam Simulator — 8 Multi-Concept Scenarios, Common Pitfalls &amp; Full Worked Solutions</p>
+
+          <p>These 8 questions represent high-difficulty, multi-concept problems commonly asked in university lab midterm exams (DL3004). They test your ability to debug broken ETL pipelines, avoid subtle SQL window framing bugs, decode complex OLAP bitmasks, transform normalized systems into Kimball Star Schemas, and write robust DAX measures.</p>
+
+          <!-- QUESTION 1 -->
+          <h3>Problem 1: Multi-Source Surrogate Key Fan-Out Disaster (ETL &amp; SQL)</h3>
+          <p><strong>Scenario:</strong> You are loading order data from two regional branches (North and South) into a centralized data warehouse. The staging table <code>staging.stg_orders</code> contains exactly <strong>50,000</strong> transactions totaling <strong>$4,500,000</strong>. When the ETL query executes:</p>
+
+          <pre><code>INSERT INTO dw.fact_sales (date_key, customer_key, product_key, revenue)
+SELECT 
+    d.date_key,
+    c.customer_key,
+    p.product_key,
+    s.revenue
+FROM staging.stg_orders s
+JOIN dw.dim_customer c ON s.customer_id = c.customer_id
+JOIN dw.dim_product  p ON s.product_id  = p.product_id
+JOIN dw.dim_date     d ON s.order_date  = d.calendar_date;</code></pre>
+
+          <p>The resulting <code>dw.fact_sales</code> contains <strong>68,400 rows</strong> and total revenue of <strong>$6,120,000</strong>! Furthermore, 1,200 orders from new customers completely vanished from the warehouse.</p>
+
+          <div class="warning-box">
+            <div class="callout-label">The Tricky Exam Pitfall</div>
+            <strong>Why did row count expand AND some rows disappear?</strong>
+            <ol>
+              <li><strong>Key Collision / Fan-out:</strong> Both branches assigned local customer IDs starting from 1 (e.g. North branch had Customer #101, and South branch also had Customer #101). When loaded into <code>dw.dim_customer</code> without the branch prefix, multiple rows exist with <code>customer_id = '101'</code>. The <code>JOIN</code> produces an $M 	imes N$ Cartesian multiplication (fan-out)!</li>
+              <li><strong>Inner Join Dropping Orphans:</strong> <code>INNER JOIN</code> silently discarded 1,200 orders because their customer IDs were not yet present in <code>dim_customer</code>.</li>
+            </ol>
+          </div>
+
+          <div class="example">
+            <div class="example-title">Full Model Solution &amp; Fix</div>
+            <p><strong>Step 1: Diagnostic Queries</strong></p>
+            <pre><code>-- Detect duplicate business keys causing fan-out
+SELECT customer_id, COUNT(*) 
+FROM dw.dim_customer 
+GROUP BY customer_id 
+HAVING COUNT(*) > 1;
+
+-- Detect orphan orders missing in dimension
+SELECT COUNT(*) 
+FROM staging.stg_orders s
+LEFT JOIN dw.dim_customer c ON s.customer_id = c.customer_id
+WHERE c.customer_key IS NULL;</code></pre>
+
+            <p><strong>Step 2: Correct DDL and ETL Load Query</strong></p>
+            <pre><code>-- Fix DimCustomer: compound natural key (branch_id + customer_id)
+ALTER TABLE dw.dim_customer ADD COLUMN IF NOT EXISTS branch_id VARCHAR(10);
+ALTER TABLE dw.dim_customer DROP CONSTRAINT IF EXISTS uq_cust_bk;
+ALTER TABLE dw.dim_customer ADD CONSTRAINT uq_cust_bk UNIQUE (branch_id, customer_id);
+
+-- Insert Unknown Member fallback
+INSERT INTO dw.dim_customer (customer_key, branch_id, customer_id, customer_name)
+VALUES (-1, 'SYS', 'UNKNOWN', 'Unknown Customer')
+ON CONFLICT (customer_key) DO NOTHING;
+
+-- Production ETL: LEFT JOIN with COALESCE to fallback key -1
+INSERT INTO dw.fact_sales (date_key, customer_key, product_key, revenue)
+SELECT 
+    COALESCE(d.date_key, -1) AS date_key,
+    COALESCE(c.customer_key, -1) AS customer_key,
+    COALESCE(p.product_key, -1) AS product_key,
+    s.revenue
+FROM staging.stg_orders s
+LEFT JOIN dw.dim_customer c 
+    ON s.customer_id = c.customer_id AND s.branch_id = c.branch_id
+LEFT JOIN dw.dim_product p 
+    ON s.product_id = p.product_id
+LEFT JOIN dw.dim_date d 
+    ON s.order_date = d.calendar_date;</code></pre>
+
+            <p><strong>Step 3: Verification Reconciliation</strong></p>
+            <pre><code>-- Verify row count matches staging exactly (50,000)
+SELECT 
+    (SELECT COUNT(*) FROM staging.stg_orders) AS stg_rows,
+    (SELECT COUNT(*) FROM dw.fact_sales) AS fact_rows;
+
+-- Verify exact revenue match ($4,500,000)
+SELECT 
+    (SELECT SUM(revenue) FROM staging.stg_orders) AS stg_revenue,
+    (SELECT SUM(revenue) FROM dw.fact_sales) AS fact_revenue;</code></pre>
+          </div>
+
+          <!-- QUESTION 2 -->
+          <h3>Problem 2: OLAP CUBE Bitmask Decoding &amp; Clean Subtotal Labeling</h3>
+          <p><strong>Scenario:</strong> You are asked to write a single PostgreSQL query across <code>FactSales</code>, <code>DimChannel</code>, <code>DimCategory</code>, and <code>DimDate</code> that produces all 8 multidimensional cross-tabulations using <code>CUBE(channel_name, category_name, sale_year)</code>. However, the raw data contains legitimate <code>NULL</code> values in <code>channel_name</code> for direct over-the-counter walk-in transactions.</p>
+
+          <div class="warning-box">
+            <div class="callout-label">The Tricky Exam Pitfall</div>
+            If you write <code>COALESCE(channel_name, 'All Channels')</code>, walk-in customers with actual <code>NULL</code> channel values will be falsely displayed as "All Channels" subtotal rows! You MUST use the <code>GROUPING()</code> function to differentiate real data NULLs from OLAP subtotal rows.
+          </div>
+
+          <div class="example">
+            <div class="example-title">Full Model Solution</div>
+            <pre><code>SELECT 
+    -- 1. Dynamic label using GROUPING() to avoid clobbering real NULLs
+    CASE 
+        WHEN GROUPING(ch.channel_name) = 1 THEN '== ALL CHANNELS =='
+        WHEN ch.channel_name IS NULL       THEN '[Walk-in / Direct]'
+        ELSE ch.channel_name 
+    END AS channel_display,
+
+    CASE 
+        WHEN GROUPING(cat.category_name) = 1 THEN '== ALL CATEGORIES =='
+        ELSE cat.category_name 
+    END AS category_display,
+
+    CASE 
+        WHEN GROUPING(d.year) = 1 THEN '== ALL YEARS =='
+        ELSE d.year::TEXT 
+    END AS year_display,
+
+    -- 2. Bitmask Level ID: 4*G(ch) + 2*G(cat) + 1*G(year)
+    (GROUPING(ch.channel_name) * 4 + 
+     GROUPING(cat.category_name) * 2 + 
+     GROUPING(d.year) * 1) AS grouping_bitmask,
+
+    -- 3. Human readable aggregation tier description
+    CASE (GROUPING(ch.channel_name)*4 + GROUPING(cat.category_name)*2 + GROUPING(d.year)*1)
+        WHEN 0 THEN 'Detailed: Channel x Category x Year'
+        WHEN 1 THEN 'Subtotal: Channel x Category'
+        WHEN 2 THEN 'Subtotal: Channel x Year'
+        WHEN 3 THEN 'Subtotal: Channel Only'
+        WHEN 4 THEN 'Subtotal: Category x Year'
+        WHEN 5 THEN 'Subtotal: Category Only'
+        WHEN 6 THEN 'Subtotal: Year Only'
+        WHEN 7 THEN 'GRAND TOTAL: All Sales'
+    END AS aggregation_level,
+
+    COUNT(*) AS transaction_count,
+    SUM(f.revenue) AS total_revenue
+FROM dw.fact_sales f
+LEFT JOIN dw.dim_channel  ch  ON f.channel_key = ch.channel_key
+LEFT JOIN dw.dim_category cat ON f.category_key = cat.category_key
+LEFT JOIN dw.dim_date     d   ON f.date_key = d.date_key
+GROUP BY CUBE(ch.channel_name, cat.category_name, d.year)
+ORDER BY grouping_bitmask ASC, total_revenue DESC;</code></pre>
+          </div>
+
+          <!-- QUESTION 3 -->
+          <h3>Problem 3: Semi-Additive Inventory Balances &amp; Month-End Reporting</h3>
+          <p><strong>Scenario:</strong> A retail chain tracks daily warehouse inventory in <code>fact_daily_inventory</code>. The table stores <code>(date_key, store_key, product_key, on_hand_qty, unit_cost)</code>. A junior developer writes the following query to report monthly inventory value per store:</p>
+
+          <pre><code>-- BROKEN QUERY
+SELECT 
+    d.year, d.month, f.store_key,
+    SUM(f.on_hand_qty) AS total_units,
+    SUM(f.unit_cost) AS total_cost
+FROM dw.fact_daily_inventory f
+JOIN dw.dim_date d ON f.date_key = d.date_key
+GROUP BY d.year, d.month, f.store_key;</code></pre>
+
+          <div class="warning-box">
+            <div class="callout-label">The Tricky Exam Pitfall</div>
+            <ol>
+              <li><code>on_hand_qty</code> is a <strong>semi-additive measure</strong>. Summing 30 daily balances calculates 30 times the inventory actually present in the warehouse! You must report the balance from the <em>last recorded calendar day of each month</em>.</li>
+              <li><code>unit_cost</code> is <strong>non-additive</strong>. Summing prices makes no financial sense. Total inventory value must be computed row-by-row as <code>on_hand_qty * unit_cost</code>.</li>
+              <li>Some stores close on Sundays or public holidays, so the last day with an inventory record may be the 29th or 30th rather than the 31st.</li>
+            </ol>
+          </div>
+
+          <div class="example">
+            <div class="example-title">Full Model Solution</div>
+            <pre><code>WITH ranked_daily_snapshots AS (
+    SELECT 
+        d.year,
+        d.month,
+        f.store_key,
+        f.product_key,
+        f.on_hand_qty,
+        f.unit_cost,
+        (f.on_hand_qty * f.unit_cost) AS inventory_valuation,
+        -- Rank dates descending within each store, product, and month
+        ROW_NUMBER() OVER (
+            PARTITION BY d.year, d.month, f.store_key, f.product_key
+            ORDER BY d.calendar_date DESC
+        ) AS rank_in_month
+    FROM dw.fact_daily_inventory f
+    JOIN dw.dim_date d ON f.date_key = d.date_key
+)
+SELECT 
+    year,
+    month,
+    s.store_name,
+    COUNT(DISTINCT product_key) AS distinct_products_stocked,
+    SUM(on_hand_qty) AS month_end_units_on_hand,
+    SUM(inventory_valuation) AS total_month_end_inventory_value
+FROM ranked_daily_snapshots r
+JOIN dw.dim_store s ON r.store_key = s.store_key
+WHERE rank_in_month = 1 -- Strictly take the latest recorded day of the month
+GROUP BY year, month, s.store_name
+ORDER BY year, month, total_month_end_inventory_value DESC;</code></pre>
+          </div>
+
+          <!-- QUESTION 4 -->
+          <h3>Problem 4: Sparse Time-Series &amp; Window Framing: ROWS vs RANGE</h3>
+          <p><strong>Scenario:</strong> You are tasked with calculating a <strong>3-Month Rolling Average Revenue</strong> for every product category across 2024. Certain niche product categories have zero sales in some months (no rows exist in the sales table for those months).</p>
+
+          <div class="warning-box">
+            <div class="callout-label">The Tricky Exam Pitfall</div>
+            If you write <code>AVG(rev) OVER (PARTITION BY cat ORDER BY month_id ROWS BETWEEN 2 PRECEDING AND CURRENT ROW)</code>, the window counts <strong>3 physical records</strong>. If Category 'Winter Gear' had sales in January, February, and November (9 months gap), the average for November will incorrectly use January and February!
+          </div>
+
+          <div class="example">
+            <div class="example-title">Full Model Solution (Dense Calendar Spine)</div>
+            <pre><code>-- Step 1: Generate a continuous monthly calendar spine crossed with all categories
+WITH all_months AS (
+    SELECT GENERATE_SERIES('2024-01-01'::DATE, '2024-12-01'::DATE, '1 month'::INTERVAL)::DATE AS month_start
+),
+all_categories AS (
+    SELECT category_key, category_name FROM dw.dim_category
+),
+month_category_spine AS (
+    SELECT m.month_start, c.category_key, c.category_name
+    FROM all_months m
+    CROSS JOIN all_categories c
+),
+-- Step 2: Aggregate actual sales per month per category
+actual_monthly_sales AS (
+    SELECT 
+        d.month_start_date AS month_start,
+        f.category_key,
+        SUM(f.revenue) AS monthly_revenue
+    FROM dw.fact_sales f
+    JOIN dw.dim_date d ON f.date_key = d.date_key
+    WHERE d.year = 2024
+    GROUP BY d.month_start_date, f.category_key
+),
+-- Step 3: Combine spine with actual sales, imputing missing months with 0.00
+dense_monthly_data AS (
+    SELECT 
+        s.month_start,
+        s.category_key,
+        s.category_name,
+        COALESCE(a.monthly_revenue, 0.00) AS clean_revenue
+    FROM month_category_spine s
+    LEFT JOIN actual_monthly_sales a 
+        ON s.month_start = a.month_start AND s.category_key = a.category_key
+)
+-- Step 4: Window rolling average across true consecutive calendar months
+SELECT 
+    month_start,
+    category_name,
+    clean_revenue,
+    ROUND(
+        AVG(clean_revenue) OVER (
+            PARTITION BY category_key 
+            ORDER BY month_start 
+            ROWS BETWEEN 2 PRECEDING AND CURRENT ROW
+        ), 2
+    ) AS rolling_3_month_avg_revenue,
+    DENSE_RANK() OVER (
+        PARTITION BY month_start 
+        ORDER BY clean_revenue DESC
+    ) AS monthly_category_rank
+FROM dense_monthly_data
+ORDER BY category_name, month_start;</code></pre>
+          </div>
+
+          <!-- QUESTION 5 -->
+          <h3>Problem 5: 3NF Operational Schema Transformation to Kimball Star Schema</h3>
+          <p><strong>Scenario:</strong> You are given an operational database in 3NF containing 6 tables: <code>orders (order_id, order_num, order_date, customer_id, order_status)</code>, <code>order_items (line_id, order_id, product_id, qty, unit_price, discount)</code>, <code>customers (customer_id, name, city_id)</code>, <code>cities (city_id, city_name, state_id)</code>, <code>states (state_id, state_name, country)</code>, and <code>products (product_id, name, category_id)</code>.</p>
+
+          <p>Design a production-ready Kimball Star Schema in PostgreSQL. Where do <code>order_num</code> and <code>order_status</code> go?</p>
+
+          <div class="note-box">
+            <div class="callout-label">Kimball Design Insight: Degenerate Dimensions</div>
+            <code>order_num</code> and <code>order_status</code> are <strong>Degenerate Dimensions</strong>. They do not belong in a separate dimension table because they have no attributes other than themselves. Instead, store them directly in the fact table. This allows grouping line items back to their original invoice without an unnecessary dimension JOIN!
+          </div>
+
+          <div class="example">
+            <div class="example-title">Full Model Solution (PostgreSQL DDL &amp; Load)</div>
+            <pre><code>-- Dimension 1: Conformed Customer (Denormalized with City & State)
+CREATE TABLE dw.dim_customer (
+    customer_key BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    customer_id  VARCHAR(50) NOT NULL UNIQUE,
+    customer_name VARCHAR(150) NOT NULL,
+    city_name    VARCHAR(100),
+    state_name   VARCHAR(100),
+    country      VARCHAR(50)
+);
+
+-- Dimension 2: Product
+CREATE TABLE dw.dim_product (
+    product_key  BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    product_id   VARCHAR(50) NOT NULL UNIQUE,
+    product_name VARCHAR(150) NOT NULL,
+    category_name VARCHAR(100)
+);
+
+-- Fact Table: Grain = One individual line item per order
+CREATE TABLE dw.fact_sales_order_item (
+    sales_item_key  BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    -- Foreign Keys to Dimensions
+    date_key        INTEGER NOT NULL REFERENCES dw.dim_date(date_key),
+    customer_key    BIGINT  NOT NULL REFERENCES dw.dim_customer(customer_key),
+    product_key     BIGINT  NOT NULL REFERENCES dw.dim_product(product_key),
+    -- Degenerate Dimensions (stored directly in fact)
+    order_num       VARCHAR(50) NOT NULL,
+    order_status    VARCHAR(30) NOT NULL,
+    -- Additive Measures
+    quantity        INTEGER NOT NULL,
+    unit_price      NUMERIC(12,2) NOT NULL,
+    discount_amount NUMERIC(12,2) NOT NULL,
+    extended_sales_amount NUMERIC(12,2) NOT NULL -- (qty * unit_price) - discount
+);
+
+-- ETL Transformation Query
+INSERT INTO dw.fact_sales_order_item (
+    date_key, customer_key, product_key, order_num, order_status,
+    quantity, unit_price, discount_amount, extended_sales_amount
+)
+SELECT 
+    TO_CHAR(o.order_date, 'YYYYMMDD')::INTEGER,
+    c.customer_key,
+    p.product_key,
+    o.order_num,
+    o.order_status,
+    oi.qty,
+    oi.unit_price,
+    oi.discount,
+    (oi.qty * oi.unit_price) - oi.discount
+FROM operational.order_items oi
+JOIN operational.orders o ON oi.order_id = o.order_id
+JOIN dw.dim_customer c ON o.customer_id = c.customer_id
+JOIN dw.dim_product p ON oi.product_id = p.product_id;</code></pre>
+          </div>
+
+          <!-- QUESTION 6 -->
+          <h3>Problem 6: Power BI DAX Context Transition &amp; Parent Category Ratios</h3>
+          <p><strong>Scenario:</strong> In Power BI, an analyst creates a matrix visual displaying <code>Division</code>, <code>Category</code>, and <code>Total Sales</code>. They want to calculate <strong>Percentage of Parent Division Sales</strong> (i.e. each category's share of its parent division, summing to 100% within each division). Their first attempt:</p>
+
+          <pre><code>-- BROKEN DAX
+% of Division Sales = 
+DIVIDE(
+    [Total Sales], 
+    CALCULATE([Total Sales], ALL(DimProduct[Category]))
+)</code></pre>
+
+          <p>This works until the user adds a slicer on <code>DimProduct[Brand]</code>, after which the parent total becomes incorrect. Why?</p>
+
+          <div class="note-box">
+            <div class="callout-label">DAX Context Transition Mechanics</div>
+            <code>ALL(DimProduct[Category])</code> only removes the filter on the <code>Category</code> column, leaving all other columns (such as <code>Brand</code> or <code>Subcategory</code>) active. To reliably compute a percentage of the parent division, you must remove filters on everything inside the division while preserving the filter on <code>Division</code>.
+          </div>
+
+          <div class="example">
+            <div class="example-title">Full Model Solution (Robust DAX Measure)</div>
+            <pre><code>-- 1. Base Measure
+Total Sales = SUM(FactSales[ExtendedSalesAmount])
+
+-- 2. Division Level Denominator
+Division Sales = 
+CALCULATE(
+    [Total Sales],
+    ALLEXCEPT(DimProduct, DimProduct[Division])
+)
+
+-- 3. Robust Percentage Share with Zero Protection
+Category % of Division = 
+DIVIDE(
+    [Total Sales],
+    [Division Sales],
+    0 -- Fallback if denominator is 0
+)
+
+-- 4. Dynamic Percentage of Selected Total (Respecting all external visual filters)
+Category % of Selected = 
+DIVIDE(
+    [Total Sales],
+    CALCULATE([Total Sales], ALLSELECTED(DimProduct[Category])),
+    0
+)</code></pre>
+          </div>
+
+          <!-- QUESTION 7 -->
+          <h3>Problem 7: Auditing Non-Events with Factless Fact Tables (Attendance)</h3>
+          <p><strong>Scenario:</strong> FAST-NU administers midterm lab exams. The academic audit committee needs to know:</p>
+          <ol>
+            <li>How many registered students actually attended each exam session?</li>
+            <li>Which specific students registered for an exam but <strong>failed to show up</strong> (absentee list)?</li>
+          </ol>
+
+          <p>Explain why a standard transactional sales-style fact table cannot record this, and provide the Star Schema DDL and SQL query.</p>
+
+          <div class="warning-box">
+            <div class="callout-label">Why Factless Fact Tables Are Required</div>
+            Standard transaction fact tables record <em>events that occurred</em> (e.g. attendance scanned). They do not generate records for things that <em>did not happen</em>. To track absentees, you need two tables:
+            <ol>
+              <li><strong>Coverage Fact Table (Eligibility/Registration):</strong> A factless table defining who was <em>scheduled</em> to attend.</li>
+              <li><strong>Event Fact Table (Attendance):</strong> A factless table recording who <em>actually showed up</em>.</li>
+            </ol>
+          </div>
+
+          <div class="example">
+            <div class="example-title">Full Model Solution (PostgreSQL Schema &amp; Anti-Join)</div>
+            <pre><code>-- 1. Factless Fact: Exam Registration (Coverage Matrix)
+CREATE TABLE dw.fact_exam_registration (
+    student_key BIGINT REFERENCES dw.dim_student(student_key),
+    course_key  BIGINT REFERENCES dw.dim_course(course_key),
+    exam_key    BIGINT REFERENCES dw.dim_exam(exam_key),
+    PRIMARY KEY (student_key, course_key, exam_key)
+);
+
+-- 2. Factless Fact: Exam Attendance (Actual Events)
+CREATE TABLE dw.fact_exam_attendance (
+    student_key     BIGINT REFERENCES dw.dim_student(student_key),
+    exam_key        BIGINT REFERENCES dw.dim_exam(exam_key),
+    check_in_time   TIMESTAMP NOT NULL,
+    lab_station_id  VARCHAR(20),
+    PRIMARY KEY (student_key, exam_key)
+);
+
+-- 3. Audit Query: Find Absentees (Registered but Zero Attendance)
+SELECT 
+    s.roll_number,
+    s.student_name,
+    c.course_code,
+    e.exam_title,
+    e.exam_date
+FROM dw.fact_exam_registration reg
+JOIN dw.dim_student s ON reg.student_key = s.student_key
+JOIN dw.dim_course  c ON reg.course_key  = c.course_key
+JOIN dw.dim_exam    e ON reg.exam_key    = e.exam_key
+-- Anti-Join: Check if attendance record is missing
+LEFT JOIN dw.fact_exam_attendance att 
+    ON reg.student_key = att.student_key AND reg.exam_key = att.exam_key
+WHERE att.student_key IS NULL -- No attendance scan found
+ORDER BY c.course_code, s.roll_number;</code></pre>
+          </div>
+
+          <!-- QUESTION 8 -->
+          <h3>Problem 8: Slowly Changing Dimensions (SCD Type 1 vs Type 2) Historical Corruption</h3>
+          <p><strong>Scenario:</strong> Customer <code>Ali</code> lived in <strong>Lahore</strong> during 2024 and purchased $100,000 worth of equipment. On January 1, 2025, Ali moved to <strong>Karachi</strong> and purchased $15,000 worth of goods.</p>
+
+          <p>The company data warehouse implemented <strong>SCD Type 1</strong> (overwrite in place). When the Regional Vice President runs the annual review for 2024 regional sales, what will the report show, and why is this a critical audit failure?</p>
+
+          <div class="warning-box">
+            <div class="callout-label">The SCD Type 1 Historical Corruption Trap</div>
+            In SCD Type 1, updating Ali's city from Lahore to Karachi overwrites the existing row. Because the 2024 fact rows point to Ali's surrogate key, joining to <code>dim_customer</code> will retroactively attribute all $100,000 of 2024 sales to <strong>Karachi</strong>! Lahore loses $100,000 and Karachi falsely gains $100,000. <strong>Historical financial truth is destroyed.</strong>
+          </div>
+
+          <div class="example">
+            <div class="example-title">Full Model Solution (SCD Type 2 Point-in-Time Join)</div>
+            <pre><code>-- SCD Type 2 Table Structure
+CREATE TABLE dw.dim_customer_scd2 (
+    customer_key    BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+    customer_id     VARCHAR(50) NOT NULL, -- Business Key
+    customer_name   VARCHAR(150),
+    city            VARCHAR(100),
+    effective_date  DATE NOT NULL,
+    expiry_date     DATE NOT NULL, -- '9999-12-31' if current
+    is_current      BOOLEAN NOT NULL
+);
+
+-- Ali's Historical Records in DimCustomer:
+-- Row 1: key=101, id='C01', city='Lahore',  effective='2024-01-01', expiry='2024-12-31', is_current=FALSE
+-- Row 2: key=205, id='C01', city='Karachi', effective='2025-01-01', expiry='9999-12-31', is_current=TRUE
+
+-- Point-in-Time ETL Fact Loading Query:
+INSERT INTO dw.fact_sales (date_key, customer_key, revenue)
+SELECT 
+    d.date_key,
+    c.customer_key, -- Resolves to 101 for 2024 orders, and 205 for 2025 orders!
+    stg.revenue
+FROM staging.stg_orders stg
+JOIN dw.dim_date d ON stg.order_date = d.calendar_date
+JOIN dw.dim_customer_scd2 c 
+    ON stg.customer_id = c.customer_id
+   AND stg.order_date >= c.effective_date 
+   AND stg.order_date <= c.expiry_date;</code></pre>
+          </div>
+
+          <div class="summary-box">
+            <h4>Top 5 Golden Rules for Acing the DW&amp;BI Lab Midterm</h4>
+            <ul>
+              <li><strong>Always Qualify Natural Keys:</strong> Combine natural keys with branch/system IDs to prevent duplicate fan-out in fact table joins.</li>
+              <li><strong>Verify Grain First:</strong> State the physical grain in plain English before drafting any DDL or choosing foreign keys.</li>
+              <li><strong>Watch Window Frames:</strong> Never use <code>ROWS BETWEEN</code> for calendar time-series without a continuous date spine.</li>
+              <li><strong>Protect Against Divide-by-Zero:</strong> In DAX, always wrap division in <code>DIVIDE(num, denom, 0)</code> rather than using bare forward slashes <code>/</code>.</li>
+              <li><strong>Differentiate Real NULLs from OLAP Subtotals:</strong> Use <code>GROUPING()</code> inside <code>CASE</code> statements when performing <code>CUBE</code> or <code>ROLLUP</code>.</li>
+            </ul>
+          </div>
+
+          <div class="practice-section">
+            <div class="practice-section-label">Extra High-Difficulty Practice Questions</div>
+            <details>
+              <summary>Question 1: Why does a fact table with an accumulating snapshot grain require frequent UPDATE operations, violating the "append-only" warehouse rule?</summary>
+              <p><strong>Answer:</strong> An Accumulating Snapshot Fact Table models a predictable pipeline or lifecycle with distinct milestones (e.g., Order Placed &rarr; Payment Received &rarr; Item Picked &rarr; Shipped &rarr; Delivered). Each milestone corresponds to a separate date foreign key in the same row. As the order advances through its lifecycle over days or weeks, the same fact row must be updated to populate newly achieved milestone dates and durations. This is the only legitimate exception to the append-only rule in dimensional warehouses.</p>
+            </details>
+            <details>
+              <summary>Question 2: What is a conformed dimension, and why is it required when drilling across multiple fact tables?</summary>
+              <p><strong>Answer:</strong> A conformed dimension is a single dimension table (or consistent subset) that means the exact same thing across multiple disparate business processes (e.g. <code>DimCustomer</code> or <code>DimDate</code> shared between <code>FactSales</code> and <code>FactSupportTickets</code>). It enables "drill-across" queries where results from two separate star schemas are combined and compared along the conformed dimension attributes (e.g., comparing sales revenue vs support ticket volume per customer).</p>
+            </details>
+            <details>
+              <summary>Question 3: If an ETL load inserts fact rows with surrogate key -1, how does a BI dashboard report these transactions?</summary>
+              <p><strong>Answer:</strong> Because the dimension table contains a designated record with surrogate key <code>-1</code>, business key <code>'UNKNOWN'</code>, and descriptive attributes like <code>'[Unassigned / Missing Data]'</code>, the BI visual displays these transactions grouped under '[Unassigned / Missing Data]' instead of dropping them or throwing database foreign key constraint errors. This preserves financial revenue totals while alerting data quality engineers to investigate the source data.</p>
+            </details>
+          </div>
+        </div>
+
+      </div><!-- end module-container -->
+
+      <div class="bottom-nav">
+        <button id="prev-btn" onclick="goPrev()">
+          <div><span class="btn-label">← Previous</span><span class="btn-title" id="prev-title">Topic</span></div>
+        </button>
+        <button id="next-btn" onclick="goNext()">
+          <div><span class="btn-label">Next →</span><span class="btn-title" id="next-title">Topic</span></div>
+        </button>
+      </div>
+    </div><!-- end main-content -->
+
+    <button id="back-to-top" onclick="document.getElementById('main-content').scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+    <script>
+      const topics = ["topic-1","topic-2","topic-3","topic-4","topic-5","topic-6","topic-7","topic-8","topic-9","topic-10"];
+      let currentTopicIndex = 0;
+
+      function getTopicTitle(id) {
+        const link = document.querySelector(`.nav-sublist a[onclick*="'${id}'"]`);
+        if (link) {
+          const numEl = link.querySelector('.nav-num');
+          return numEl ? link.textContent.replace(numEl.textContent,'').trim() : link.textContent.replace(/^\d+\s*/,'').trim();
+        }
+        const card = document.getElementById(id);
+        if (card) {
+          const h2 = card.querySelector('h2');
+          if (h2) { const numEl = h2.querySelector('.topic-num'); return numEl ? h2.textContent.replace(numEl.textContent,'').trim() : h2.textContent.replace(/^\d+\s*/,'').trim(); }
+        }
+        return 'Topic';
+      }
+
+      function toggleSidebar() {
+        document.getElementById('sidebar').classList.toggle('open');
+        document.getElementById('sidebar-backdrop').classList.toggle('active');
+      }
+
+      function showTopic(id) {
+        document.querySelectorAll(".topic-card").forEach(c => c.style.display = "none");
+        const t = document.getElementById(id);
+        if (t) t.style.display = "block";
+        currentTopicIndex = topics.indexOf(id);
+
+        document.querySelectorAll(".nav-sublist a").forEach(a => a.classList.remove("active"));
+        const lk = document.querySelector(`.nav-sublist a[onclick*="'${id}'"]`);
+        if (lk) {
+          lk.classList.add("active");
+          const sublist = lk.closest('.nav-sublist');
+          if (sublist && sublist.style.display === 'none') { sublist.style.display = 'block'; const ch = sublist.previousElementSibling?.querySelector('.chevron'); if (ch) ch.style.transform = 'rotate(0deg)'; }
+        }
+
+        const pb = document.getElementById("prev-btn"), nb = document.getElementById("next-btn");
+        const pt = document.getElementById("prev-title"), nt = document.getElementById("next-title");
+        pb.style.display = currentTopicIndex > 0 ? "flex" : "none";
+        if (currentTopicIndex > 0 && pt) pt.textContent = getTopicTitle(topics[currentTopicIndex - 1]);
+        nb.style.display = currentTopicIndex < topics.length - 1 ? "flex" : "none";
+        if (currentTopicIndex < topics.length - 1 && nt) nt.textContent = getTopicTitle(topics[currentTopicIndex + 1]);
+
+        if (t) t.scrollIntoView({ behavior: "smooth", block: "start" });
+        if (window.innerWidth <= 768) { document.getElementById('sidebar').classList.remove('open'); document.getElementById('sidebar-backdrop').classList.remove('active'); }
+      }
+
+      function goPrev() { if (currentTopicIndex > 0) showTopic(topics[currentTopicIndex - 1]); }
+      function goNext() { if (currentTopicIndex < topics.length - 1) showTopic(topics[currentTopicIndex + 1]); }
+
+      function toggleSection(el) {
+        const s = el.nextElementSibling, c = el.querySelector(".chevron");
+        s.style.display = s.style.display === "none" ? "block" : "none";
+        c.style.transform = s.style.display === "none" ? "rotate(-90deg)" : "rotate(0deg)";
+      }
+
+      function filterContent() {
+        const q = document.getElementById("search-input").value.toLowerCase();
+        document.querySelectorAll(".nav-sublist li").forEach(i => i.style.display = i.textContent.toLowerCase().includes(q) ? "" : "none");
+      }
+
+      if (topics.length > 0) showTopic(topics[0]);
+      const mc = document.getElementById("main-content"), bb = document.getElementById("back-to-top");
+      mc.addEventListener("scroll", () => bb.style.display = mc.scrollTop > 300 ? "flex" : "none");
+    </script>
+  </body>
+</html>

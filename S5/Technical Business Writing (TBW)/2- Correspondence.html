@@ -1,42 +1,34 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <title>Technical &amp; Business Writing — Module 2: Correspondence</title>
-    <meta
-      name="description"
-      content="Comprehensive, high-yield lecture notes for TBW Module 2 (Pfeiffer Chapter 6): Correspondence Guidelines, ABC Format, Positive/Negative/Neutral/Persuasive Patterns, Business Letters, Memos, Email Hygiene, and Case Studies."
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="../notes.css" />
-  </head>
-  <body>
-    <button id="menu-toggle" onclick="toggleSidebar()" aria-label="Toggle navigation">☰</button>
-    <div id="sidebar-backdrop" onclick="toggleSidebar()"></div>
 
-    <!-- ═══════════════════════════════════════════════════════
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Technical &amp; Business Writing — Module 2: Correspondence</title>
+  <meta name="description"
+    content="Comprehensive, high-yield lecture notes for TBW Module 2 (Pfeiffer Chapter 6): Correspondence Guidelines, ABC Format, Positive/Negative/Neutral/Persuasive Patterns, Business Letters, Memos, Email Hygiene, and Case Studies." />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="../notes.css" />
+</head>
+
+<body>
+  <button id="menu-toggle" onclick="toggleSidebar()" aria-label="Toggle navigation">☰</button>
+  <div id="sidebar-backdrop" onclick="toggleSidebar()"></div>
+
+  <!-- ═══════════════════════════════════════════════════════
          SIDEBAR
          ═══════════════════════════════════════════════════════ -->
-    <div id="sidebar">
-      <div class="sidebar-header">
-        <div class="sidebar-header-text">
-          <div class="sidebar-course-label">Course Notes</div>
-          <div class="sidebar-title">Technical Business Writing</div>
-        </div>
+  <div id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-header-text">
+        <div class="sidebar-course-label">Course Notes</div>
+        <div class="sidebar-title">Technical Business Writing</div>
       </div>
-      <div class="sidebar-search-wrap">
-        <input
-          type="text"
-          id="search-input"
-          placeholder="Search topics…"
-          onkeyup="filterContent()"
-        />
-      </div>
-
+    </div>
+    <div class="sidebar-search-wrap">
+      <input type="text" id="search-input" placeholder="Search topics…" onkeyup="filterContent()" />
+    </div>
       <ul class="nav-list" id="nav-list">
         <li>
           <a class="nav-module-link" href="./1- Technical Communication in the Workplace.html">
@@ -86,217 +78,277 @@
             <span class="nav-num">04</span>Exam Prep: Midterm I
           </a>
         </li>
+        <li>
+          <a class="nav-module-link" href="./5- Technical Research.html">
+            <span class="nav-num">05</span>Technical Research &amp; IEEE
+          </a>
+        </li>
       </ul>
     </div>
 
-    <!-- ═══════════════════════════════════════════════════════
+  <!-- ═══════════════════════════════════════════════════════
          MAIN CONTENT
          ═══════════════════════════════════════════════════════ -->
-    <div id="main-content">
-      <div class="module-container">
-        <div class="module-header">
-          <div class="module-eyebrow">Technical &amp; Business Writing (TBW) — Module 2</div>
-          <h1 class="module-title">Correspondence: Letters, Memos &amp; Email</h1>
-          <p style="color: var(--mt); font-size: 0.9rem; margin-top: 6px;">
-            <strong>Primary Textbook:</strong> William S. Pfeiffer, <em>Technical Communication: A Practical Approach</em> (8th Ed.), Chapter 6
-          </p>
-        </div>
+  <div id="main-content">
+    <div class="module-container">
+      <div class="module-header">
+        <div class="module-eyebrow">Technical &amp; Business Writing (TBW) — Module 2</div>
+        <h1 class="module-title">Correspondence: Letters, Memos &amp; Email</h1>
+        <p style="color: var(--mt); font-size: 0.9rem; margin-top: 6px;">
+          <strong>Primary Textbook:</strong> William S. Pfeiffer, <em>Technical Communication: A Practical Approach</em>
+          (8th Ed.), Chapter 6
+        </p>
+      </div>
 
-        <!-- ═════════════════════════════════════════════════════
+      <!-- ═════════════════════════════════════════════════════
              TOPIC 1: General Principles & ABC Message Patterns
              ═════════════════════════════════════════════════════ -->
-        <div class="topic-card" id="topic-1">
-          <h2><span class="topic-num">1</span>General Principles &amp; ABC Message Patterns</h2>
-          <p class="topic-subtitle">Planning correspondence, the ABC Diamond structure, and strategic message patterns</p>
+      <div class="topic-card" id="topic-1">
+        <h2><span class="topic-num">1</span>General Principles &amp; ABC Message Patterns</h2>
+        <p class="topic-subtitle">Planning correspondence, the ABC Diamond structure, and strategic message patterns</p>
 
-          <p>
-            Workplace correspondence consists of written messages sent to individuals or small groups. It comprises three primary vehicles:
-            <strong>Letters</strong> (external formal), <strong>Memos</strong> (internal formal/semi-formal), and <strong>E-mail</strong> (electronic internal or external).
-          </p>
+        <p>
+          Workplace correspondence consists of written messages sent to individuals or small groups. It comprises three
+          primary vehicles:
+          <strong>Letters</strong> (external formal), <strong>Memos</strong> (internal formal/semi-formal), and
+          <strong>E-mail</strong> (electronic internal or external).
+        </p>
 
-          <h3>1. Planning Your Correspondence (Pfeiffer Guidelines)</h3>
+        <h3>1. Planning Your Correspondence (Pfeiffer Guidelines)</h3>
+        <ul>
+          <li><strong>Determine Your Reader:</strong> Who is the primary decision-maker? Who might receive courtesy
+            copies (CC)? What is their technical level and existing knowledge?</li>
+          <li><strong>Determine Your Purpose:</strong> Are you delivering good news, bad news, routine data, or
+            requesting action?</li>
+          <li><strong>Determine Your Scope:</strong> Include only what the reader needs to act. Avoid cluttering the
+            page with irrelevant background.</li>
+        </ul>
+
+        <h3>2. The Universal ABC Format</h3>
+        <p>
+          Pfeiffer organizes all technical correspondence using the <strong>ABC Format</strong> (Abstract, Body,
+          Conclusion).
+        </p>
+        <div class="definition">
+          <div class="callout-label">The ABC Diamond Structure</div>
           <ul>
-            <li><strong>Determine Your Reader:</strong> Who is the primary decision-maker? Who might receive courtesy copies (CC)? What is their technical level and existing knowledge?</li>
-            <li><strong>Determine Your Purpose:</strong> Are you delivering good news, bad news, routine data, or requesting action?</li>
-            <li><strong>Determine Your Scope:</strong> Include only what the reader needs to act. Avoid cluttering the page with irrelevant background.</li>
+            <li><strong>Abstract (A):</strong> The lead-in / orientation. States clearly why you are writing, provides
+              immediate context, and reveals the "bottom line" (what the document is about).</li>
+            <li><strong>Body (B):</strong> The detailed discussion. Contains the evidence, technical specifications,
+              background facts, and figures. Broken up visually with bullet points, numbered lists, or bold subheadings.
+            </li>
+            <li><strong>Conclusion (C):</strong> The forward-looking action step. Tells the reader what happens next,
+              states deadlines or specific requested actions, and ends with professional goodwill.</li>
           </ul>
+        </div>
 
-          <h3>2. The Universal ABC Format</h3>
-          <p>
-            Pfeiffer organizes all technical correspondence using the <strong>ABC Format</strong> (Abstract, Body, Conclusion).
-          </p>
-          <div class="definition">
-            <div class="callout-label">The ABC Diamond Structure</div>
-            <ul>
-              <li><strong>Abstract (A):</strong> The lead-in / orientation. States clearly why you are writing, provides immediate context, and reveals the "bottom line" (what the document is about).</li>
-              <li><strong>Body (B):</strong> The detailed discussion. Contains the evidence, technical specifications, background facts, and figures. Broken up visually with bullet points, numbered lists, or bold subheadings.</li>
-              <li><strong>Conclusion (C):</strong> The forward-looking action step. Tells the reader what happens next, states deadlines or specific requested actions, and ends with professional goodwill.</li>
+        <h3>3. Strategic Message Patterns (Positive, Negative, Neutral, Persuasive)</h3>
+        <p>How you sequence the ABC format depends entirely on how the reader is expected to react to your news:</p>
+
+        <div
+          style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin: 18px 0;">
+          <!-- Positive -->
+          <div
+            style="background: var(--sb); border: 1px solid var(--bd); border-top: 4px solid var(--def-bd); border-radius: 8px; padding: 16px;">
+            <h4 style="color: var(--def-bd); margin-bottom: 6px;">Positive Correspondence (Direct Plan)</h4>
+            <p style="font-size: 0.85rem; color: var(--mt);">Used when the reader will be pleased or eager to receive
+              your message (e.g., job offer, refund granted, promotion).</p>
+            <ul style="font-size: 0.88rem; margin-top: 8px; padding-left: 18px;">
+              <li><strong>Abstract:</strong> State the good news or approval immediately.</li>
+              <li><strong>Body:</strong> Give necessary details, terms, explanations, or instructions.</li>
+              <li><strong>Conclusion:</strong> Express warm, friendly goodwill and look forward to future collaboration.
+              </li>
             </ul>
           </div>
 
-          <h3>3. Strategic Message Patterns (Positive, Negative, Neutral, Persuasive)</h3>
-          <p>How you sequence the ABC format depends entirely on how the reader is expected to react to your news:</p>
-
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin: 18px 0;">
-            <!-- Positive -->
-            <div style="background: var(--sb); border: 1px solid var(--bd); border-top: 4px solid var(--def-bd); border-radius: 8px; padding: 16px;">
-              <h4 style="color: var(--def-bd); margin-bottom: 6px;">Positive Correspondence (Direct Plan)</h4>
-              <p style="font-size: 0.85rem; color: var(--mt);">Used when the reader will be pleased or eager to receive your message (e.g., job offer, refund granted, promotion).</p>
-              <ul style="font-size: 0.88rem; margin-top: 8px; padding-left: 18px;">
-                <li><strong>Abstract:</strong> State the good news or approval immediately.</li>
-                <li><strong>Body:</strong> Give necessary details, terms, explanations, or instructions.</li>
-                <li><strong>Conclusion:</strong> Express warm, friendly goodwill and look forward to future collaboration.</li>
-              </ul>
-            </div>
-
-            <!-- Negative -->
-            <div style="background: var(--sb); border: 1px solid var(--bd); border-top: 4px solid var(--crit-bd); border-radius: 8px; padding: 16px;">
-              <h4 style="color: var(--crit-bd); margin-bottom: 6px;">Negative Correspondence (Indirect Plan)</h4>
-              <p style="font-size: 0.85rem; color: var(--mt);">Used when delivering unwelcome news (e.g., claim refusal, credit denial, contract rejection).</p>
-              <ul style="font-size: 0.88rem; margin-top: 8px; padding-left: 18px;">
-                <li><strong>Abstract (Buffer):</strong> Open with a neutral, pleasant statement that sets common ground without falsely promising approval.</li>
-                <li><strong>Body (Reasons First):</strong> Explain the objective facts, company policies, or constraints <em>before</em> stating the refusal.</li>
-                <li><strong>De-emphasized Refusal:</strong> State the bad news gently and diplomatically (often combined with a constructive alternative).</li>
-                <li><strong>Conclusion:</strong> Offer a counterproposal or helpful alternative, closing on genuine goodwill without reopening the negative issue.</li>
-              </ul>
-            </div>
-
-            <!-- Neutral -->
-            <div style="background: var(--sb); border: 1px solid var(--bd); border-top: 4px solid var(--exp-bd); border-radius: 8px; padding: 16px;">
-              <h4 style="color: var(--exp-bd); margin-bottom: 6px;">Neutral Correspondence (Direct Plan)</h4>
-              <p style="font-size: 0.85rem; color: var(--mt);">Used for routine workplace transactions (e.g., inquiries, acknowledgements, transmittals).</p>
-              <ul style="font-size: 0.88rem; margin-top: 8px; padding-left: 18px;">
-                <li><strong>Abstract:</strong> State the request, questions, or transmittal purpose directly.</li>
-                <li><strong>Body:</strong> Present questions or details in an itemized, numbered list for easy reading.</li>
-                <li><strong>Conclusion:</strong> Specify the desired response date and explain why that date matters.</li>
-              </ul>
-            </div>
-
-            <!-- Persuasive -->
-            <div style="background: var(--sb); border: 1px solid var(--bd); border-top: 4px solid var(--wrn-bd); border-radius: 8px; padding: 16px;">
-              <h4 style="color: var(--wrn-bd); margin-bottom: 6px;">Persuasive Correspondence (AIDA Plan)</h4>
-              <p style="font-size: 0.85rem; color: var(--mt);">Used when the reader is indifferent or hesitant (e.g., sales letters, project budget proposals).</p>
-              <ul style="font-size: 0.88rem; margin-top: 8px; padding-left: 18px;">
-                <li><strong>A — Attention:</strong> Open with an engaging hook, compelling statistic, or shared problem.</li>
-                <li><strong>I — Interest:</strong> Explain the solution and highlight direct benefits to the reader.</li>
-                <li><strong>D — Desire:</strong> Provide credible evidence, testimonials, or data to remove objections.</li>
-                <li><strong>A — Action:</strong> Make it effortless for the reader to take the specific next step.</li>
-              </ul>
-            </div>
+          <!-- Negative -->
+          <div
+            style="background: var(--sb); border: 1px solid var(--bd); border-top: 4px solid var(--crit-bd); border-radius: 8px; padding: 16px;">
+            <h4 style="color: var(--crit-bd); margin-bottom: 6px;">Negative Correspondence (Indirect Plan)</h4>
+            <p style="font-size: 0.85rem; color: var(--mt);">Used when delivering unwelcome news (e.g., claim refusal,
+              credit denial, contract rejection).</p>
+            <ul style="font-size: 0.88rem; margin-top: 8px; padding-left: 18px;">
+              <li><strong>Abstract (Buffer):</strong> Open with a neutral, pleasant statement that sets common ground
+                without falsely promising approval.</li>
+              <li><strong>Body (Reasons First):</strong> Explain the objective facts, company policies, or constraints
+                <em>before</em> stating the refusal.</li>
+              <li><strong>De-emphasized Refusal:</strong> State the bad news gently and diplomatically (often combined
+                with a constructive alternative).</li>
+              <li><strong>Conclusion:</strong> Offer a counterproposal or helpful alternative, closing on genuine
+                goodwill without reopening the negative issue.</li>
+            </ul>
           </div>
 
-          <div class="note-box">
-            <div class="callout-label">Exam Tip: The Indirect Bad News Formula</div>
-            FAST and Pfeiffer exams frequently test negative letters! Remember the exact 5-step sequence:
-            <br />
-            <strong>1. Neutral Buffer &rarr; 2. Thorough Explanation &rarr; 3. Diplomatic Refusal &rarr; 4. Constructive Alternative &rarr; 5. Forward-Looking Goodwill Close.</strong>
-            <br />
-            <em>Never start a negative letter with "I am writing to inform you that we have rejected your request."</em> That alienates the customer instantly!
+          <!-- Neutral -->
+          <div
+            style="background: var(--sb); border: 1px solid var(--bd); border-top: 4px solid var(--exp-bd); border-radius: 8px; padding: 16px;">
+            <h4 style="color: var(--exp-bd); margin-bottom: 6px;">Neutral Correspondence (Direct Plan)</h4>
+            <p style="font-size: 0.85rem; color: var(--mt);">Used for routine workplace transactions (e.g., inquiries,
+              acknowledgements, transmittals).</p>
+            <ul style="font-size: 0.88rem; margin-top: 8px; padding-left: 18px;">
+              <li><strong>Abstract:</strong> State the request, questions, or transmittal purpose directly.</li>
+              <li><strong>Body:</strong> Present questions or details in an itemized, numbered list for easy reading.
+              </li>
+              <li><strong>Conclusion:</strong> Specify the desired response date and explain why that date matters.</li>
+            </ul>
           </div>
 
-          <div class="summary-box">
-            <h4>Key Takeaways</h4>
-            <ul>
-              <li>The ABC format adapts to four emotional contexts: Positive, Negative, Neutral, and Persuasive.</li>
-              <li>Good news uses the <strong>direct pattern</strong> (news first); bad news uses the <strong>indirect pattern</strong> (buffer and reasons first).</li>
-              <li>Always maintain the "You" attitude and end with a forward-looking action step.</li>
+          <!-- Persuasive -->
+          <div
+            style="background: var(--sb); border: 1px solid var(--bd); border-top: 4px solid var(--wrn-bd); border-radius: 8px; padding: 16px;">
+            <h4 style="color: var(--wrn-bd); margin-bottom: 6px;">Persuasive Correspondence (AIDA Plan)</h4>
+            <p style="font-size: 0.85rem; color: var(--mt);">Used when the reader is indifferent or hesitant (e.g.,
+              sales letters, project budget proposals).</p>
+            <ul style="font-size: 0.88rem; margin-top: 8px; padding-left: 18px;">
+              <li><strong>A — Attention:</strong> Open with an engaging hook, compelling statistic, or shared problem.
+              </li>
+              <li><strong>I — Interest:</strong> Explain the solution and highlight direct benefits to the reader.</li>
+              <li><strong>D — Desire:</strong> Provide credible evidence, testimonials, or data to remove objections.
+              </li>
+              <li><strong>A — Action:</strong> Make it effortless for the reader to take the specific next step.</li>
             </ul>
           </div>
         </div>
 
-        <!-- ═════════════════════════════════════════════════════
+        <div class="note-box">
+          <div class="callout-label">Exam Tip: The Indirect Bad News Formula</div>
+          FAST and Pfeiffer exams frequently test negative letters! Remember the exact 5-step sequence:
+          <br />
+          <strong>1. Neutral Buffer &rarr; 2. Thorough Explanation &rarr; 3. Diplomatic Refusal &rarr; 4. Constructive
+            Alternative &rarr; 5. Forward-Looking Goodwill Close.</strong>
+          <br />
+          <em>Never start a negative letter with "I am writing to inform you that we have rejected your request."</em>
+          That alienates the customer instantly!
+        </div>
+
+        <div class="summary-box">
+          <h4>Key Takeaways</h4>
+          <ul>
+            <li>The ABC format adapts to four emotional contexts: Positive, Negative, Neutral, and Persuasive.</li>
+            <li>Good news uses the <strong>direct pattern</strong> (news first); bad news uses the <strong>indirect
+                pattern</strong> (buffer and reasons first).</li>
+            <li>Always maintain the "You" attitude and end with a forward-looking action step.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ═════════════════════════════════════════════════════
              TOPIC 2: Business Letters & The 3 Layout Formats
              ═════════════════════════════════════════════════════ -->
-        <div class="topic-card" id="topic-2" style="display:none;">
-          <h2><span class="topic-num">2</span>Business Letters &amp; The 3 Layout Formats</h2>
-          <p class="topic-subtitle">External formal correspondence, the 10 standard parts, and formatting rules</p>
+      <div class="topic-card" id="topic-2" style="display:none;">
+        <h2><span class="topic-num">2</span>Business Letters &amp; The 3 Layout Formats</h2>
+        <p class="topic-subtitle">External formal correspondence, the 10 standard parts, and formatting rules</p>
 
-          <p>
-            A <strong>Business Letter</strong> is a formal document sent to individuals <strong>outside</strong> your organization (clients, suppliers, government agencies, shareholders). It serves as a permanent, legally recognized record of a business transaction.
-          </p>
+        <p>
+          A <strong>Business Letter</strong> is a formal document sent to individuals <strong>outside</strong> your
+          organization (clients, suppliers, government agencies, shareholders). It serves as a permanent, legally
+          recognized record of a business transaction.
+        </p>
 
-          <h3>1. The 10 Standard Components of a Business Letter</h3>
-          <p>According to Pfeiffer (Chapter 6) and university course rubrics, an official business letter consists of the following 10 parts:</p>
+        <h3>1. The 10 Standard Components of a Business Letter</h3>
+        <p>According to Pfeiffer (Chapter 6) and university course rubrics, an official business letter consists of the
+          following 10 parts:</p>
 
-          <table style="width:100%; margin: 16px 0; border-collapse: collapse;">
-            <thead>
-              <tr style="border-bottom: 2px solid var(--bd); text-align: left;">
-                <th style="padding: 10px 12px; color: var(--ac); width: 22%;">Element</th>
-                <th style="padding: 10px 12px; color: var(--exp-bd); width: 38%;">Description &amp; Placement</th>
-                <th style="padding: 10px 12px; color: var(--def-bd); width: 40%;">Exact Example</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr style="border-bottom: 1px solid var(--bd);">
-                <td style="padding: 10px 12px; font-weight: 600;">1. Letterhead / Heading</td>
-                <td style="padding: 10px 12px;">Company logo, company name, address, phone, email, and web address. If using plain paper, type your full return address without your personal name.</td>
-                <td style="padding: 10px 12px;"><code>Avanceon Private Limited<br>12-B, Main Boulevard, Gulberg-II<br>Lahore, Pakistan</code></td>
-              </tr>
-              <tr style="border-bottom: 1px solid var(--bd);">
-                <td style="padding: 10px 12px; font-weight: 600;">2. Date Line</td>
-                <td style="padding: 10px 12px;">Placed 2 lines below the letterhead. <strong>Never abbreviate the month</strong> (avoid <em>10/24/26</em> to eliminate global date format confusion).</td>
-                <td style="padding: 10px 12px;"><code>October 24, 2026</code> (or <code>24 October 2026</code>)</td>
-              </tr>
-              <tr style="border-bottom: 1px solid var(--bd);">
-                <td style="padding: 10px 12px; font-weight: 600;">3. Inside Address</td>
-                <td style="padding: 10px 12px;">Placed 2 to 4 lines below the date. Recipient's courtesy title, full name, professional title, company name, and full postal address.</td>
-                <td style="padding: 10px 12px;"><code>Mr. Adil Rizwan<br>Manager Customer Support<br>Social Square<br>Phase III, DHA, Lahore</code></td>
-              </tr>
-              <tr style="border-bottom: 1px solid var(--bd);">
-                <td style="padding: 10px 12px; font-weight: 600;">4. Subject Line</td>
-                <td style="padding: 10px 12px;">Optional but highly recommended in technical writing. Placed either immediately above or below the salutation. Clearly states the document focus.</td>
-                <td style="padding: 10px 12px;"><code>SUBJECT: Defect in Salary Management Software (Contract #440)</code></td>
-              </tr>
-              <tr style="border-bottom: 1px solid var(--bd);">
-                <td style="padding: 10px 12px; font-weight: 600;">5. Salutation</td>
-                <td style="padding: 10px 12px;">Formal greeting. Always use a <strong>colon (:)</strong> in formal American business letters (commas are only for informal personal letters).</td>
-                <td style="padding: 10px 12px;"><code>Dear Mr. Rizwan:</code> (Avoid: <em>"To Whom It May Concern"</em>)</td>
-              </tr>
-              <tr style="border-bottom: 1px solid var(--bd);">
-                <td style="padding: 10px 12px; font-weight: 600;">6. Body Paragraphs</td>
-                <td style="padding: 10px 12px;">Single-spaced within paragraphs, with 1 blank line between paragraphs. Organized using the ABC Format.</td>
-                <td style="padding: 10px 12px;">Abstract (Purpose) &rarr; Body (Facts/Impact) &rarr; Conclusion (Action/Deadline).</td>
-              </tr>
-              <tr style="border-bottom: 1px solid var(--bd);">
-                <td style="padding: 10px 12px; font-weight: 600;">7. Complimentary Close</td>
-                <td style="padding: 10px 12px;">Placed 2 lines below the body. Capitalize <strong>only the first word</strong>, followed by a comma (in mixed punctuation).</td>
-                <td style="padding: 10px 12px;"><code>Sincerely,</code> or <code>Best regards,</code></td>
-              </tr>
-              <tr style="border-bottom: 1px solid var(--bd);">
-                <td style="padding: 10px 12px; font-weight: 600;">8. Signature Block</td>
-                <td style="padding: 10px 12px;">Leave 3 to 4 blank lines for the physical, handwritten signature in blue or black ink.</td>
-                <td style="padding: 10px 12px;"><em>[Handwritten Signature]</em></td>
-              </tr>
-              <tr style="border-bottom: 1px solid var(--bd);">
-                <td style="padding: 10px 12px; font-weight: 600;">9. Typed Name &amp; Title</td>
-                <td style="padding: 10px 12px;">The writer's full typed name and organizational job designation.</td>
-                <td style="padding: 10px 12px;"><code>Kaleem Ullah<br>Executive Assistant to CEO</code></td>
-              </tr>
-              <tr style="border-bottom: 1px solid var(--bd);">
-                <td style="padding: 10px 12px; font-weight: 600;">10. End Notations</td>
-                <td style="padding: 10px 12px;">Placed 1 to 2 lines below the typed title. Indicates enclosed documents, typist initials, or courtesy copies.</td>
-                <td style="padding: 10px 12px;"><code>Enclosure: Error Screenshot<br>cc: Mr. Avais, CEO, Social Square</code></td>
-              </tr>
-            </tbody>
-          </table>
+        <table style="width:100%; margin: 16px 0; border-collapse: collapse;">
+          <thead>
+            <tr style="border-bottom: 2px solid var(--bd); text-align: left;">
+              <th style="padding: 10px 12px; color: var(--ac); width: 22%;">Element</th>
+              <th style="padding: 10px 12px; color: var(--exp-bd); width: 38%;">Description &amp; Placement</th>
+              <th style="padding: 10px 12px; color: var(--def-bd); width: 40%;">Exact Example</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid var(--bd);">
+              <td style="padding: 10px 12px; font-weight: 600;">1. Letterhead / Heading</td>
+              <td style="padding: 10px 12px;">Company logo, company name, address, phone, email, and web address. If
+                using plain paper, type your full return address without your personal name.</td>
+              <td style="padding: 10px 12px;">
+                <code>Avanceon Private Limited<br>12-B, Main Boulevard, Gulberg-II<br>Lahore, Pakistan</code></td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--bd);">
+              <td style="padding: 10px 12px; font-weight: 600;">2. Date Line</td>
+              <td style="padding: 10px 12px;">Placed 2 lines below the letterhead. <strong>Never abbreviate the
+                  month</strong> (avoid <em>10/24/26</em> to eliminate global date format confusion).</td>
+              <td style="padding: 10px 12px;"><code>October 24, 2026</code> (or <code>24 October 2026</code>)</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--bd);">
+              <td style="padding: 10px 12px; font-weight: 600;">3. Inside Address</td>
+              <td style="padding: 10px 12px;">Placed 2 to 4 lines below the date. Recipient's courtesy title, full name,
+                professional title, company name, and full postal address.</td>
+              <td style="padding: 10px 12px;">
+                <code>Mr. Adil Rizwan<br>Manager Customer Support<br>Social Square<br>Phase III, DHA, Lahore</code></td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--bd);">
+              <td style="padding: 10px 12px; font-weight: 600;">4. Subject Line</td>
+              <td style="padding: 10px 12px;">Optional but highly recommended in technical writing. Placed either
+                immediately above or below the salutation. Clearly states the document focus.</td>
+              <td style="padding: 10px 12px;"><code>SUBJECT: Defect in Salary Management Software (Contract #440)</code>
+              </td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--bd);">
+              <td style="padding: 10px 12px; font-weight: 600;">5. Salutation</td>
+              <td style="padding: 10px 12px;">Formal greeting. Always use a <strong>colon (:)</strong> in formal
+                American business letters (commas are only for informal personal letters).</td>
+              <td style="padding: 10px 12px;"><code>Dear Mr. Rizwan:</code> (Avoid: <em>"To Whom It May Concern"</em>)
+              </td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--bd);">
+              <td style="padding: 10px 12px; font-weight: 600;">6. Body Paragraphs</td>
+              <td style="padding: 10px 12px;">Single-spaced within paragraphs, with 1 blank line between paragraphs.
+                Organized using the ABC Format.</td>
+              <td style="padding: 10px 12px;">Abstract (Purpose) &rarr; Body (Facts/Impact) &rarr; Conclusion
+                (Action/Deadline).</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--bd);">
+              <td style="padding: 10px 12px; font-weight: 600;">7. Complimentary Close</td>
+              <td style="padding: 10px 12px;">Placed 2 lines below the body. Capitalize <strong>only the first
+                  word</strong>, followed by a comma (in mixed punctuation).</td>
+              <td style="padding: 10px 12px;"><code>Sincerely,</code> or <code>Best regards,</code></td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--bd);">
+              <td style="padding: 10px 12px; font-weight: 600;">8. Signature Block</td>
+              <td style="padding: 10px 12px;">Leave 3 to 4 blank lines for the physical, handwritten signature in blue
+                or black ink.</td>
+              <td style="padding: 10px 12px;"><em>[Handwritten Signature]</em></td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--bd);">
+              <td style="padding: 10px 12px; font-weight: 600;">9. Typed Name &amp; Title</td>
+              <td style="padding: 10px 12px;">The writer's full typed name and organizational job designation.</td>
+              <td style="padding: 10px 12px;"><code>Kaleem Ullah<br>Executive Assistant to CEO</code></td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--bd);">
+              <td style="padding: 10px 12px; font-weight: 600;">10. End Notations</td>
+              <td style="padding: 10px 12px;">Placed 1 to 2 lines below the typed title. Indicates enclosed documents,
+                typist initials, or courtesy copies.</td>
+              <td style="padding: 10px 12px;">
+                <code>Enclosure: Error Screenshot<br>cc: Mr. Avais, CEO, Social Square</code></td>
+            </tr>
+          </tbody>
+        </table>
 
-          <h3>2. The 3 Standard Letter Layout Formats</h3>
-          <p>
-            In modern business communication, three formats dominate. In all three, text within paragraphs is single-spaced, with double-spacing between paragraphs.
-          </p>
+        <h3>2. The 3 Standard Letter Layout Formats</h3>
+        <p>
+          In modern business communication, three formats dominate. In all three, text within paragraphs is
+          single-spaced, with double-spacing between paragraphs.
+        </p>
 
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin: 16px 0;">
-            <!-- Full Block -->
-            <div style="background: var(--sb); border: 1px solid var(--bd); border-radius: 8px; padding: 16px;">
-              <h4 style="color: var(--ac); margin-bottom: 6px;">1. Full Block Format</h4>
-              <p style="font-size: 0.85rem; color: var(--mt);"><strong>The Most Popular &amp; Contemporary Format.</strong></p>
-              <ul style="font-size: 0.88rem; margin: 8px 0; padding-left: 18px;">
-                <li><strong>Alignment:</strong> Every single line begins flush against the left margin.</li>
-                <li><strong>Indentation:</strong> Zero indentation for paragraph beginnings.</li>
-                <li><strong>Punctuation:</strong> Usually pairs with <em>Open Punctuation</em> (no punctuation after salutation or complimentary close) or <em>Mixed Punctuation</em> (colon after salutation, comma after close).</li>
-                <li><strong>Advantage:</strong> Fastest to type; modern, sleek aesthetic.</li>
-              </ul>
-              <pre style="background: var(--bg); padding: 10px; font-size: 0.75rem; border-radius: 6px; border: 1px solid var(--bd);"><code>[Letterhead]
+        <div
+          style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin: 16px 0;">
+          <!-- Full Block -->
+          <div style="background: var(--sb); border: 1px solid var(--bd); border-radius: 8px; padding: 16px;">
+            <h4 style="color: var(--ac); margin-bottom: 6px;">1. Full Block Format</h4>
+            <p style="font-size: 0.85rem; color: var(--mt);"><strong>The Most Popular &amp; Contemporary
+                Format.</strong></p>
+            <ul style="font-size: 0.88rem; margin: 8px 0; padding-left: 18px;">
+              <li><strong>Alignment:</strong> Every single line begins flush against the left margin.</li>
+              <li><strong>Indentation:</strong> Zero indentation for paragraph beginnings.</li>
+              <li><strong>Punctuation:</strong> Usually pairs with <em>Open Punctuation</em> (no punctuation after
+                salutation or complimentary close) or <em>Mixed Punctuation</em> (colon after salutation, comma after
+                close).</li>
+              <li><strong>Advantage:</strong> Fastest to type; modern, sleek aesthetic.</li>
+            </ul>
+            <pre
+              style="background: var(--bg); padding: 10px; font-size: 0.75rem; border-radius: 6px; border: 1px solid var(--bd);"><code>[Letterhead]
 [Date]
 [Inside Address]
 [Salutation:]
@@ -305,53 +357,59 @@
 [Complimentary Close,]
 [Signature]
 [Typed Name]</code></pre>
-            </div>
-
-            <!-- Modified Block -->
-            <div style="background: var(--sb); border: 1px solid var(--bd); border-radius: 8px; padding: 16px;">
-              <h4 style="color: var(--exp-bd); margin-bottom: 6px;">2. Modified Block Format</h4>
-              <p style="font-size: 0.85rem; color: var(--mt);"><strong>The Traditional Balanced Format.</strong></p>
-              <ul style="font-size: 0.88rem; margin: 8px 0; padding-left: 18px;">
-                <li><strong>Alignment:</strong> The <strong>Date</strong>, <strong>Complimentary Close</strong>, and <strong>Signature Block</strong> start at the horizontal center of the page (tabbed to center).</li>
-                <li><strong>Inside Address &amp; Salutation:</strong> Flush left.</li>
-                <li><strong>Paragraphs:</strong> Block style (no paragraph indentation).</li>
-                <li><strong>Punctuation:</strong> Typically uses <em>Mixed Punctuation</em> (colon after salutation, comma after close).</li>
-              </ul>
-              <pre style="background: var(--bg); padding: 10px; font-size: 0.75rem; border-radius: 6px; border: 1px solid var(--bd);"><code>                  [Date]
-[Inside Address]
-[Salutation:]
-[Body - flush left]
-[Body - flush left]
-                  [Close,]
-                  [Signature]
-                  [Typed Name]</code></pre>
-            </div>
-
-            <!-- Semi-Block -->
-            <div style="background: var(--sb); border: 1px solid var(--bd); border-radius: 8px; padding: 16px;">
-              <h4 style="color: var(--def-bd); margin-bottom: 6px;">3. Semi-Block (Indented) Format</h4>
-              <p style="font-size: 0.85rem; color: var(--mt);"><strong>The Classic Formal Style.</strong></p>
-              <ul style="font-size: 0.88rem; margin: 8px 0; padding-left: 18px;">
-                <li><strong>Alignment:</strong> Date, Complimentary Close, and Signature Block start at the horizontal center (like Modified Block).</li>
-                <li><strong>Paragraphs:</strong> The first line of each paragraph is <strong>indented 5 spaces (0.5 inch)</strong>.</li>
-                <li><strong>Inside Address &amp; Salutation:</strong> Flush left.</li>
-                <li><strong>Use Case:</strong> Conservative industries, formal academic or diplomatic correspondence.</li>
-              </ul>
-              <pre style="background: var(--bg); padding: 10px; font-size: 0.75rem; border-radius: 6px; border: 1px solid var(--bd);"><code>                  [Date]
-[Inside Address]
-[Salutation:]
-     [Body - indented]
-     [Body - indented]
-                  [Close,]
-                  [Signature]
-                  [Typed Name]</code></pre>
-            </div>
           </div>
 
-          <h3>3. Complete Model: Full Block Complaint Letter</h3>
-          <div class="example">
-            <div class="callout-label">Model Full Block Letter (Avanceon Scenario)</div>
-            <pre><code>AVANCEON PRIVATE LIMITED
+          <!-- Modified Block -->
+          <div style="background: var(--sb); border: 1px solid var(--bd); border-radius: 8px; padding: 16px;">
+            <h4 style="color: var(--exp-bd); margin-bottom: 6px;">2. Modified Block Format</h4>
+            <p style="font-size: 0.85rem; color: var(--mt);"><strong>The Traditional Balanced Format.</strong></p>
+            <ul style="font-size: 0.88rem; margin: 8px 0; padding-left: 18px;">
+              <li><strong>Alignment:</strong> The <strong>Date</strong>, <strong>Complimentary Close</strong>, and
+                <strong>Signature Block</strong> start at the horizontal center of the page (tabbed to center).</li>
+              <li><strong>Inside Address &amp; Salutation:</strong> Flush left.</li>
+              <li><strong>Paragraphs:</strong> Block style (no paragraph indentation).</li>
+              <li><strong>Punctuation:</strong> Typically uses <em>Mixed Punctuation</em> (colon after salutation, comma
+                after close).</li>
+            </ul>
+            <pre
+              style="background: var(--bg); padding: 10px; font-size: 0.75rem; border-radius: 6px; border: 1px solid var(--bd);"><code>                  [Date]
+[Inside Address]
+[Salutation:]
+[Body - flush left]
+[Body - flush left]
+                  [Close,]
+                  [Signature]
+                  [Typed Name]</code></pre>
+          </div>
+
+          <!-- Semi-Block -->
+          <div style="background: var(--sb); border: 1px solid var(--bd); border-radius: 8px; padding: 16px;">
+            <h4 style="color: var(--def-bd); margin-bottom: 6px;">3. Semi-Block (Indented) Format</h4>
+            <p style="font-size: 0.85rem; color: var(--mt);"><strong>The Classic Formal Style.</strong></p>
+            <ul style="font-size: 0.88rem; margin: 8px 0; padding-left: 18px;">
+              <li><strong>Alignment:</strong> Date, Complimentary Close, and Signature Block start at the horizontal
+                center (like Modified Block).</li>
+              <li><strong>Paragraphs:</strong> The first line of each paragraph is <strong>indented 5 spaces (0.5
+                  inch)</strong>.</li>
+              <li><strong>Inside Address &amp; Salutation:</strong> Flush left.</li>
+              <li><strong>Use Case:</strong> Conservative industries, formal academic or diplomatic correspondence.</li>
+            </ul>
+            <pre
+              style="background: var(--bg); padding: 10px; font-size: 0.75rem; border-radius: 6px; border: 1px solid var(--bd);"><code>                  [Date]
+[Inside Address]
+[Salutation:]
+     [Body - indented]
+     [Body - indented]
+                  [Close,]
+                  [Signature]
+                  [Typed Name]</code></pre>
+          </div>
+        </div>
+
+        <h3>3. Complete Model: Full Block Complaint Letter</h3>
+        <div class="example">
+          <div class="callout-label">Model Full Block Letter (Avanceon Scenario)</div>
+          <pre><code>AVANCEON PRIVATE LIMITED
 12-B, Main Boulevard, Gulberg-II, Lahore, Pakistan | Tel: +92-42-35789000
 
 October 24, 2026
@@ -385,100 +443,113 @@ Personal Assistant to Chief Executive Officer
 
 Enclosure: Error Screen Capture (Error_0x80040154.png)
 cc: Mr. Avais, Chief Executive Officer, Social Square</code></pre>
-          </div>
-
-          <div class="summary-box">
-            <h4>Key Takeaways</h4>
-            <ul>
-              <li>Always identify all 10 standard parts in business letter questions.</li>
-              <li>In <strong>Full Block</strong>, everything is flush left. In <strong>Modified Block</strong>, date and close start at horizontal midpoint. In <strong>Semi-Block</strong>, paragraph first lines are indented.</li>
-              <li>A business letter salutation uses a <strong>colon (:)</strong>, never a comma.</li>
-              <li>Complaint letters must remain objective, factual, and polite while specifying the exact requested remedy and deadline.</li>
-            </ul>
-          </div>
         </div>
 
-        <!-- ═════════════════════════════════════════════════════
+        <div class="summary-box">
+          <h4>Key Takeaways</h4>
+          <ul>
+            <li>Always identify all 10 standard parts in business letter questions.</li>
+            <li>In <strong>Full Block</strong>, everything is flush left. In <strong>Modified Block</strong>, date and
+              close start at horizontal midpoint. In <strong>Semi-Block</strong>, paragraph first lines are indented.
+            </li>
+            <li>A business letter salutation uses a <strong>colon (:)</strong>, never a comma.</li>
+            <li>Complaint letters must remain objective, factual, and polite while specifying the exact requested remedy
+              and deadline.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ═════════════════════════════════════════════════════
              TOPIC 3: Memorandums (Memos - Internal Comms)
              ═════════════════════════════════════════════════════ -->
-        <div class="topic-card" id="topic-3" style="display:none;">
-          <h2><span class="topic-num">3</span>Memorandums (Memos - Internal Correspondence)</h2>
-          <p class="topic-subtitle">In-house correspondence, standard header formatting, and memo types</p>
+      <div class="topic-card" id="topic-3" style="display:none;">
+        <h2><span class="topic-num">3</span>Memorandums (Memos - Internal Correspondence)</h2>
+        <p class="topic-subtitle">In-house correspondence, standard header formatting, and memo types</p>
 
-          <p>
-            A <strong>Memorandum (Memo)</strong> is a written document used exclusively for communication <strong>within</strong> an organization. It travels upward to management, downward to subordinates, or horizontally to colleagues and peers across departments.
-          </p>
+        <p>
+          A <strong>Memorandum (Memo)</strong> is a written document used exclusively for communication
+          <strong>within</strong> an organization. It travels upward to management, downward to subordinates, or
+          horizontally to colleagues and peers across departments.
+        </p>
 
-          <div class="definition">
-            <div class="callout-label">Letter vs. Memo: Key Structural Differences</div>
-            <table style="width:100%; margin: 12px 0; border-collapse: collapse;">
-              <thead>
-                <tr style="border-bottom: 2px solid var(--bd); text-align: left;">
-                  <th style="padding: 8px 10px; color: var(--ac);">Feature</th>
-                  <th style="padding: 8px 10px; color: var(--exp-bd);">Business Letter</th>
-                  <th style="padding: 8px 10px; color: var(--def-bd);">Memorandum (Memo)</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr style="border-bottom: 1px solid var(--bd);">
-                  <td style="padding: 8px 10px; font-weight: 600;">Audience</td>
-                  <td style="padding: 8px 10px;">External stakeholders (clients, vendors, public).</td>
-                  <td style="padding: 8px 10px;">Internal employees, managers, coworkers.</td>
-                </tr>
-                <tr style="border-bottom: 1px solid var(--bd);">
-                  <td style="padding: 8px 10px; font-weight: 600;">Header Block</td>
-                  <td style="padding: 8px 10px;">Letterhead, Date, Inside Address.</td>
-                  <td style="padding: 8px 10px;">Standard 4-line block: <code>DATE:, TO:, FROM:, SUBJECT:</code></td>
-                </tr>
-                <tr style="border-bottom: 1px solid var(--bd);">
-                  <td style="padding: 8px 10px; font-weight: 600;">Salutation &amp; Close</td>
-                  <td style="padding: 8px 10px;">Mandatory (<em>Dear Mr. X:</em> and <em>Sincerely,</em>).</td>
-                  <td style="padding: 8px 10px;"><strong>Omitted completely!</strong> (No "Dear...", no "Sincerely").</td>
-                </tr>
-                <tr style="border-bottom: 1px solid var(--bd);">
-                  <td style="padding: 8px 10px; font-weight: 600;">Signature</td>
-                  <td style="padding: 8px 10px;">Handwritten signature above typed name at bottom.</td>
-                  <td style="padding: 8px 10px;">Writer initials their name in the <code>FROM:</code> line at top.</td>
-                </tr>
-                <tr style="border-bottom: 1px solid var(--bd);">
-                  <td style="padding: 8px 10px; font-weight: 600;">Technical Jargon</td>
-                  <td style="padding: 8px 10px;">Minimized or explained for outside readers.</td>
-                  <td style="padding: 8px 10px;">Company acronyms and technical terms used freely.</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+        <div class="definition">
+          <div class="callout-label">Letter vs. Memo: Key Structural Differences</div>
+          <table style="width:100%; margin: 12px 0; border-collapse: collapse;">
+            <thead>
+              <tr style="border-bottom: 2px solid var(--bd); text-align: left;">
+                <th style="padding: 8px 10px; color: var(--ac);">Feature</th>
+                <th style="padding: 8px 10px; color: var(--exp-bd);">Business Letter</th>
+                <th style="padding: 8px 10px; color: var(--def-bd);">Memorandum (Memo)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid var(--bd);">
+                <td style="padding: 8px 10px; font-weight: 600;">Audience</td>
+                <td style="padding: 8px 10px;">External stakeholders (clients, vendors, public).</td>
+                <td style="padding: 8px 10px;">Internal employees, managers, coworkers.</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--bd);">
+                <td style="padding: 8px 10px; font-weight: 600;">Header Block</td>
+                <td style="padding: 8px 10px;">Letterhead, Date, Inside Address.</td>
+                <td style="padding: 8px 10px;">Standard 4-line block: <code>DATE:, TO:, FROM:, SUBJECT:</code></td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--bd);">
+                <td style="padding: 8px 10px; font-weight: 600;">Salutation &amp; Close</td>
+                <td style="padding: 8px 10px;">Mandatory (<em>Dear Mr. X:</em> and <em>Sincerely,</em>).</td>
+                <td style="padding: 8px 10px;"><strong>Omitted completely!</strong> (No "Dear...", no "Sincerely").</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--bd);">
+                <td style="padding: 8px 10px; font-weight: 600;">Signature</td>
+                <td style="padding: 8px 10px;">Handwritten signature above typed name at bottom.</td>
+                <td style="padding: 8px 10px;">Writer initials their name in the <code>FROM:</code> line at top.</td>
+              </tr>
+              <tr style="border-bottom: 1px solid var(--bd);">
+                <td style="padding: 8px 10px; font-weight: 600;">Technical Jargon</td>
+                <td style="padding: 8px 10px;">Minimized or explained for outside readers.</td>
+                <td style="padding: 8px 10px;">Company acronyms and technical terms used freely.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
 
-          <h3>1. The Standard Memo Heading Block</h3>
-          <p>
-            Memos begin with a standardized 4-part heading. The order of these lines may vary slightly by company template, but all four must be present:
-          </p>
-          <pre style="background: var(--sb); border: 1px solid var(--bd); padding: 14px; border-radius: 8px; font-family: monospace;"><code>DATE:    October 25, 2026
+        <h3>1. The Standard Memo Heading Block</h3>
+        <p>
+          Memos begin with a standardized 4-part heading. The order of these lines may vary slightly by company
+          template, but all four must be present:
+        </p>
+        <pre
+          style="background: var(--sb); border: 1px solid var(--bd); padding: 14px; border-radius: 8px; font-family: monospace;"><code>DATE:    October 25, 2026
 TO:      Naveed Ahmed, Manager Product Development
 FROM:    Adil Rizwan, Manager Customer Support [AR]
 SUBJECT: Urgent Complaint Regarding Avanceon Payroll Software Error</code></pre>
 
-          <div class="warning-box">
-            <div class="callout-label">Writing Effective Subject Lines</div>
-            A vague subject line like <code>SUBJECT: Payroll</code> or <code>SUBJECT: Error</code> is unacceptable.
-            A strong subject line combines <strong>Topic + Specific Focus</strong>:
-            <code>SUBJECT: Payroll Software Error - Investigation Request for Avanceon Account</code>.
-          </div>
+        <div class="warning-box">
+          <div class="callout-label">Writing Effective Subject Lines</div>
+          A vague subject line like <code>SUBJECT: Payroll</code> or <code>SUBJECT: Error</code> is unacceptable.
+          A strong subject line combines <strong>Topic + Specific Focus</strong>:
+          <code>SUBJECT: Payroll Software Error - Investigation Request for Avanceon Account</code>.
+        </div>
 
-          <h3>2. The 6 Core Purposes of Memos (Pfeiffer)</h3>
-          <ul>
-            <li><strong>1. Documenting:</strong> Creating an official paper trail of expenses, decisions, software incidents, or personnel actions.</li>
-            <li><strong>2. Explaining Procedures:</strong> Instructing staff on how to use new tools, observe safety standards, or configure servers.</li>
-            <li><strong>3. Transmittal / Cover:</strong> Accompanying attached documents (e.g., formal audit reports or blueprints) and summarizing key findings.</li>
-            <li><strong>4. Confirming Decisions:</strong> Documenting verbal agreements made during meetings or phone calls to prevent future disputes.</li>
-            <li><strong>5. Feasibility Analysis:</strong> Evaluating whether a proposed change (e.g., migrating to cloud servers) is practical and cost-effective.</li>
-            <li><strong>6. Status &amp; Progress Reporting:</strong> Providing weekly, monthly, or quarterly updates on milestone completion and budget burn.</li>
-          </ul>
+        <h3>2. The 6 Core Purposes of Memos (Pfeiffer)</h3>
+        <ul>
+          <li><strong>1. Documenting:</strong> Creating an official paper trail of expenses, decisions, software
+            incidents, or personnel actions.</li>
+          <li><strong>2. Explaining Procedures:</strong> Instructing staff on how to use new tools, observe safety
+            standards, or configure servers.</li>
+          <li><strong>3. Transmittal / Cover:</strong> Accompanying attached documents (e.g., formal audit reports or
+            blueprints) and summarizing key findings.</li>
+          <li><strong>4. Confirming Decisions:</strong> Documenting verbal agreements made during meetings or phone
+            calls to prevent future disputes.</li>
+          <li><strong>5. Feasibility Analysis:</strong> Evaluating whether a proposed change (e.g., migrating to cloud
+            servers) is practical and cost-effective.</li>
+          <li><strong>6. Status &amp; Progress Reporting:</strong> Providing weekly, monthly, or quarterly updates on
+            milestone completion and budget burn.</li>
+        </ul>
 
-          <h3>3. Complete Model: Internal Investigation Memo</h3>
-          <div class="example">
-            <div class="callout-label">Model Internal Memo (Social Square Field Visit)</div>
-            <pre><code>MEMORANDUM
+        <h3>3. Complete Model: Internal Investigation Memo</h3>
+        <div class="example">
+          <div class="callout-label">Model Internal Memo (Social Square Field Visit)</div>
+          <pre><code>MEMORANDUM
 
 DATE:    October 26, 2026
 TO:      Adil Rizwan, Manager Customer Support
@@ -501,125 +572,159 @@ Because the shutdown was caused by an internal security breach at the client's p
 
 Enclosure: Field Visit Diagnostic &amp; Security Audit Report (Ref #SR-2026-99)
 cc: Mrs. Naveed, Manager Product Development</code></pre>
-          </div>
-
-          <div class="summary-box">
-            <h4>Key Takeaways</h4>
-            <ul>
-              <li>Memos are strictly internal; never include salutations (<em>Dear...</em>) or complimentary closings (<em>Sincerely...</em>).</li>
-              <li>The header must always include <strong>DATE, TO, FROM, SUBJECT</strong>.</li>
-              <li>The writer signifies approval by initialing next to their typed name on the <code>FROM:</code> line.</li>
-              <li>Organize the memo body using ABC format with clear subheadings or bullet points.</li>
-            </ul>
-          </div>
         </div>
 
-        <!-- ═════════════════════════════════════════════════════
+        <div class="summary-box">
+          <h4>Key Takeaways</h4>
+          <ul>
+            <li>Memos are strictly internal; never include salutations (<em>Dear...</em>) or complimentary closings
+              (<em>Sincerely...</em>).</li>
+            <li>The header must always include <strong>DATE, TO, FROM, SUBJECT</strong>.</li>
+            <li>The writer signifies approval by initialing next to their typed name on the <code>FROM:</code> line.
+            </li>
+            <li>Organize the memo body using ABC format with clear subheadings or bullet points.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ═════════════════════════════════════════════════════
              TOPIC 4: Email Hygiene, Group Rules & The 7 Cs
              ═════════════════════════════════════════════════════ -->
-        <div class="topic-card" id="topic-4" style="display:none;">
-          <h2><span class="topic-num">4</span>Email Hygiene, Group Rules &amp; The 7 Cs</h2>
-          <p class="topic-subtitle">Speed vs. quality trade-off, Netiquette, group distribution etiquette, and the 7 Cs</p>
+      <div class="topic-card" id="topic-4" style="display:none;">
+        <h2><span class="topic-num">4</span>Email Hygiene, Group Rules &amp; The 7 Cs</h2>
+        <p class="topic-subtitle">Speed vs. quality trade-off, Netiquette, group distribution etiquette, and the 7 Cs
+        </p>
 
-          <p>
-            Email is the lifeblood of contemporary business communication. However, its greatest strength—<strong>instant speed</strong>—is also its greatest liability. Careless emails can permanently damage reputations, create legal liabilities, and ruin client relationships.
-          </p>
+        <p>
+          Email is the lifeblood of contemporary business communication. However, its greatest strength—<strong>instant
+            speed</strong>—is also its greatest liability. Careless emails can permanently damage reputations, create
+          legal liabilities, and ruin client relationships.
+        </p>
 
-          <h3>1. The Speed vs. Quality Dilemma (Pfeiffer)</h3>
-          <div class="definition">
-            <div class="callout-label">Core Principle</div>
-            <strong>Balance Speed and Craft:</strong> Never hit "Send" in haste or anger. An email that takes 2 minutes to dash off can take months to clean up legally or professionally.
-          </div>
+        <h3>1. The Speed vs. Quality Dilemma (Pfeiffer)</h3>
+        <div class="definition">
+          <div class="callout-label">Core Principle</div>
+          <strong>Balance Speed and Craft:</strong> Never hit "Send" in haste or anger. An email that takes 2 minutes to
+          dash off can take months to clean up legally or professionally.
+        </div>
 
-          <h3>2. Professional Email Hygiene &amp; Netiquette</h3>
-          <ul>
-            <li><strong>The "Billboard Test":</strong> Never put anything in an email that you would not want posted on a public billboard or read aloud in a courtroom. Emails are legally discoverable records.</li>
-            <li><strong>No Flames:</strong> A "flame" is an aggressive, sarcastic, or insulting email sent in emotional anger. If you receive a flame, wait at least 24 hours before responding, and always respond with objective facts.</li>
-            <li><strong>No ALL CAPS (Shouting):</strong> Writing in all uppercase letters is perceived as shouting and aggressive. Writing in all lowercase looks lazy and illiterate.</li>
-            <li><strong>Professional Usernames:</strong> Use official name-based accounts (<code>kullah@avanceon.com</code>), never personal nicknames or hobby aliases (<code>gamer99@domain.com</code>).</li>
-            <li><strong>Eliminate Emoticons &amp; Chat Slang:</strong> Keep smileys, emojis, and texting acronyms (<em>LOL, BTW, TTYL, ASAP</em>) out of formal workplace emails.</li>
-            <li><strong>Attachment Cover Context:</strong> Never attach a document without explaining what it is in the email body (e.g., <em>"Attached is the revised Q3 budget spreadsheet. Please review rows 14-22..."</em>).</li>
-          </ul>
+        <h3>2. Professional Email Hygiene &amp; Netiquette</h3>
+        <ul>
+          <li><strong>The "Billboard Test":</strong> Never put anything in an email that you would not want posted on a
+            public billboard or read aloud in a courtroom. Emails are legally discoverable records.</li>
+          <li><strong>No Flames:</strong> A "flame" is an aggressive, sarcastic, or insulting email sent in emotional
+            anger. If you receive a flame, wait at least 24 hours before responding, and always respond with objective
+            facts.</li>
+          <li><strong>No ALL CAPS (Shouting):</strong> Writing in all uppercase letters is perceived as shouting and
+            aggressive. Writing in all lowercase looks lazy and illiterate.</li>
+          <li><strong>Professional Usernames:</strong> Use official name-based accounts
+            (<code>kullah@avanceon.com</code>), never personal nicknames or hobby aliases
+            (<code>gamer99@domain.com</code>).</li>
+          <li><strong>Eliminate Emoticons &amp; Chat Slang:</strong> Keep smileys, emojis, and texting acronyms
+            (<em>LOL, BTW, TTYL, ASAP</em>) out of formal workplace emails.</li>
+          <li><strong>Attachment Cover Context:</strong> Never attach a document without explaining what it is in the
+            email body (e.g., <em>"Attached is the revised Q3 budget spreadsheet. Please review rows 14-22..."</em>).
+          </li>
+        </ul>
 
-          <h3>3. Group Email Rules: Thoughtful Distribution</h3>
-          <p>Pfeiffer outlines two vital rules when addressing groups:</p>
-          <ul>
-            <li><strong>Give Readers Individual Response Instructions:</strong> When emailing a team, specify clearly who needs to take action and who is just informed. If you need a response from one person, address them directly in the first line.</li>
-            <li><strong>Suppress Addresses Using BCC (Blind Courtesy Copy):</strong> When sending announcements to external clients or large groups:
-              <ul>
-                <li>Place the recipient list in <strong>BCC</strong> rather than <strong>TO</strong> or <strong>CC</strong>.</li>
-                <li><em>Reason 1 (Privacy):</em> Prevents exposing confidential client email addresses to each other (GDPR/privacy violation).</li>
-                <li><em>Reason 2 (Prevents Reply-All Chaos):</em> Stops recipients from accidentally triggering an annoying "Reply All" flood to hundreds of people.</li>
-              </ul>
-            </li>
-          </ul>
-
-          <h3>4. The 7 Cs of Business Communication</h3>
-          <p>The gold standard checklist for evaluating any piece of correspondence:</p>
-
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin: 16px 0;">
-            <div style="background: var(--sb); padding: 12px 14px; border: 1px solid var(--bd); border-radius: 8px;">
-              <strong style="color: var(--ac);">1. Clear</strong>
-              <p style="font-size: 0.83rem; margin-top: 4px; color: var(--mt);">Simple words, short sentences, and explicit main points so the reader never has to guess your intent.</p>
-            </div>
-            <div style="background: var(--sb); padding: 12px 14px; border: 1px solid var(--bd); border-radius: 8px;">
-              <strong style="color: var(--ac);">2. Concise</strong>
-              <p style="font-size: 0.83rem; margin-top: 4px; color: var(--mt);">Eliminate wordy fluff, deadwood, and redundancies (e.g., replace <em>"due to the fact that"</em> with <em>"because"</em>).</p>
-            </div>
-            <div style="background: var(--sb); padding: 12px 14px; border: 1px solid var(--bd); border-radius: 8px;">
-              <strong style="color: var(--ac);">3. Concrete</strong>
-              <p style="font-size: 0.83rem; margin-top: 4px; color: var(--mt);">Use specific numbers, exact dates, and verified facts instead of vague generalizations (<em>"by 4:00 PM on Friday"</em> vs <em>"soon"</em>).</p>
-            </div>
-            <div style="background: var(--sb); padding: 12px 14px; border: 1px solid var(--bd); border-radius: 8px;">
-              <strong style="color: var(--ac);">4. Correct</strong>
-              <p style="font-size: 0.83rem; margin-top: 4px; color: var(--mt);">Accurate technical figures, proper spelling, grammatical precision, and correct formatting.</p>
-            </div>
-            <div style="background: var(--sb); padding: 12px 14px; border: 1px solid var(--bd); border-radius: 8px;">
-              <strong style="color: var(--ac);">5. Coherent</strong>
-              <p style="font-size: 0.83rem; margin-top: 4px; color: var(--mt);">Logical sequence of ideas connected with transitional phrases; flows naturally from Abstract to Body to Conclusion.</p>
-            </div>
-            <div style="background: var(--sb); padding: 12px 14px; border: 1px solid var(--bd); border-radius: 8px;">
-              <strong style="color: var(--ac);">6. Complete</strong>
-              <p style="font-size: 0.83rem; margin-top: 4px; color: var(--mt);">Answers all the reader's questions and provides all background facts necessary for an immediate decision.</p>
-            </div>
-            <div style="background: var(--sb); padding: 12px 14px; border: 1px solid var(--bd); border-radius: 8px;">
-              <strong style="color: var(--ac);">7. Courteous</strong>
-              <p style="font-size: 0.83rem; margin-top: 4px; color: var(--mt);">Adopts the "You" attitude, shows genuine respect, avoids accusatory phrasing, and projects positive goodwill.</p>
-            </div>
-          </div>
-
-          <div class="summary-box">
-            <h4>Key Takeaways</h4>
+        <h3>3. Group Email Rules: Thoughtful Distribution</h3>
+        <p>Pfeiffer outlines two vital rules when addressing groups:</p>
+        <ul>
+          <li><strong>Give Readers Individual Response Instructions:</strong> When emailing a team, specify clearly who
+            needs to take action and who is just informed. If you need a response from one person, address them directly
+            in the first line.</li>
+          <li><strong>Suppress Addresses Using BCC (Blind Courtesy Copy):</strong> When sending announcements to
+            external clients or large groups:
             <ul>
-              <li>Treat every workplace email as a permanent public document.</li>
-              <li>Subject lines must combine <strong>Topic + Action/Focus</strong>.</li>
-              <li>Suppress mass email distribution lists with <strong>BCC</strong> to protect privacy and prevent reply-all storms.</li>
-              <li>Verify your draft against the <strong>7 Cs</strong> before sending.</li>
+              <li>Place the recipient list in <strong>BCC</strong> rather than <strong>TO</strong> or
+                <strong>CC</strong>.</li>
+              <li><em>Reason 1 (Privacy):</em> Prevents exposing confidential client email addresses to each other
+                (GDPR/privacy violation).</li>
+              <li><em>Reason 2 (Prevents Reply-All Chaos):</em> Stops recipients from accidentally triggering an
+                annoying "Reply All" flood to hundreds of people.</li>
             </ul>
+          </li>
+        </ul>
+
+        <h3>4. The 7 Cs of Business Communication</h3>
+        <p>The gold standard checklist for evaluating any piece of correspondence:</p>
+
+        <div
+          style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin: 16px 0;">
+          <div style="background: var(--sb); padding: 12px 14px; border: 1px solid var(--bd); border-radius: 8px;">
+            <strong style="color: var(--ac);">1. Clear</strong>
+            <p style="font-size: 0.83rem; margin-top: 4px; color: var(--mt);">Simple words, short sentences, and
+              explicit main points so the reader never has to guess your intent.</p>
+          </div>
+          <div style="background: var(--sb); padding: 12px 14px; border: 1px solid var(--bd); border-radius: 8px;">
+            <strong style="color: var(--ac);">2. Concise</strong>
+            <p style="font-size: 0.83rem; margin-top: 4px; color: var(--mt);">Eliminate wordy fluff, deadwood, and
+              redundancies (e.g., replace <em>"due to the fact that"</em> with <em>"because"</em>).</p>
+          </div>
+          <div style="background: var(--sb); padding: 12px 14px; border: 1px solid var(--bd); border-radius: 8px;">
+            <strong style="color: var(--ac);">3. Concrete</strong>
+            <p style="font-size: 0.83rem; margin-top: 4px; color: var(--mt);">Use specific numbers, exact dates, and
+              verified facts instead of vague generalizations (<em>"by 4:00 PM on Friday"</em> vs <em>"soon"</em>).</p>
+          </div>
+          <div style="background: var(--sb); padding: 12px 14px; border: 1px solid var(--bd); border-radius: 8px;">
+            <strong style="color: var(--ac);">4. Correct</strong>
+            <p style="font-size: 0.83rem; margin-top: 4px; color: var(--mt);">Accurate technical figures, proper
+              spelling, grammatical precision, and correct formatting.</p>
+          </div>
+          <div style="background: var(--sb); padding: 12px 14px; border: 1px solid var(--bd); border-radius: 8px;">
+            <strong style="color: var(--ac);">5. Coherent</strong>
+            <p style="font-size: 0.83rem; margin-top: 4px; color: var(--mt);">Logical sequence of ideas connected with
+              transitional phrases; flows naturally from Abstract to Body to Conclusion.</p>
+          </div>
+          <div style="background: var(--sb); padding: 12px 14px; border: 1px solid var(--bd); border-radius: 8px;">
+            <strong style="color: var(--ac);">6. Complete</strong>
+            <p style="font-size: 0.83rem; margin-top: 4px; color: var(--mt);">Answers all the reader's questions and
+              provides all background facts necessary for an immediate decision.</p>
+          </div>
+          <div style="background: var(--sb); padding: 12px 14px; border: 1px solid var(--bd); border-radius: 8px;">
+            <strong style="color: var(--ac);">7. Courteous</strong>
+            <p style="font-size: 0.83rem; margin-top: 4px; color: var(--mt);">Adopts the "You" attitude, shows genuine
+              respect, avoids accusatory phrasing, and projects positive goodwill.</p>
           </div>
         </div>
 
-        <!-- ═════════════════════════════════════════════════════
+        <div class="summary-box">
+          <h4>Key Takeaways</h4>
+          <ul>
+            <li>Treat every workplace email as a permanent public document.</li>
+            <li>Subject lines must combine <strong>Topic + Action/Focus</strong>.</li>
+            <li>Suppress mass email distribution lists with <strong>BCC</strong> to protect privacy and prevent
+              reply-all storms.</li>
+            <li>Verify your draft against the <strong>7 Cs</strong> before sending.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ═════════════════════════════════════════════════════
              TOPIC 5: Exam Case Studies & Solved Scenarios
              ═════════════════════════════════════════════════════ -->
-        <div class="topic-card" id="topic-5" style="display:none;">
-          <h2><span class="topic-num">5</span>Exam Case Studies &amp; Solved Scenarios</h2>
-          <p class="topic-subtitle">Complete worked models from past FAST Midterm I exams</p>
+      <div class="topic-card" id="topic-5" style="display:none;">
+        <h2><span class="topic-num">5</span>Exam Case Studies &amp; Solved Scenarios</h2>
+        <p class="topic-subtitle">Complete worked models from past FAST Midterm I exams</p>
 
-          <p>
-            FAST Midterm I exams evaluate your mastery of correspondence through realistic, multi-stage business dilemmas. Study these complete, high-yield solutions.
-          </p>
+        <p>
+          FAST Midterm I exams evaluate your mastery of correspondence through realistic, multi-stage business dilemmas.
+          Study these complete, high-yield solutions.
+        </p>
 
-          <div class="practice-section">
-            <div class="practice-section-label">Case Study Series: The Avanceon &amp; Social Square Dilemma</div>
+        <div class="practice-section">
+          <div class="practice-section-label">Case Study Series: The Avanceon &amp; Social Square Dilemma</div>
 
-            <!-- Case 1: Acknowledgement Letter -->
-            <details>
-              <summary><strong>Document 1:</strong> Letter of Acknowledgement (Social Square to Avanceon)</summary>
-              <p>
-                <strong>Scenario:</strong> You are Mr. Adil Rizwan, Manager Customer Support at Social Square (DHA, Lahore). On July 28, you received a complaint letter from the CEO of Avanceon regarding software errors. Ask your assistant (Asad Irfan) to write a formal acknowledgement letter under Full Block format.
-              </p>
-              <pre style="background: var(--sb); padding: 12px; border-radius: 6px; font-size: 0.8rem; border: 1px solid var(--bd);"><code>SOCIAL SQUARE (PVT) LIMITED
+          <!-- Case 1: Acknowledgement Letter -->
+          <details>
+            <summary><strong>Document 1:</strong> Letter of Acknowledgement (Social Square to Avanceon)</summary>
+            <p>
+              <strong>Scenario:</strong> You are Mr. Adil Rizwan, Manager Customer Support at Social Square (DHA,
+              Lahore). On July 28, you received a complaint letter from the CEO of Avanceon regarding software errors.
+              Ask your assistant (Asad Irfan) to write a formal acknowledgement letter under Full Block format.
+            </p>
+            <pre
+              style="background: var(--sb); padding: 12px; border-radius: 6px; font-size: 0.8rem; border: 1px solid var(--bd);"><code>SOCIAL SQUARE (PVT) LIMITED
 Plot 88, Commercial Zone, Phase III, DHA, Lahore | info@socialsquare.pk
 
 July 29, 2026
@@ -650,15 +755,19 @@ Asad Irfan
 Assistant to Manager Customer Support
 
 cc: Mr. Adil Rizwan, Manager Customer Support</code></pre>
-            </details>
+          </details>
 
-            <!-- Case 2: Adjustment Letter -->
-            <details>
-              <summary><strong>Document 2:</strong> Adjustment Letter (Social Square Resolving Incident &amp; Retaining Client)</summary>
-              <p>
-                <strong>Scenario:</strong> Write the follow-up Adjustment Letter from Customer Support Manager (Adil Rizwan) to the CEO of Avanceon. Your objective is to explain that an external hacking attempt from Avanceon's IP triggered the security shutdown, restore their access, and preserve their long-term trust.
-              </p>
-              <pre style="background: var(--sb); padding: 12px; border-radius: 6px; font-size: 0.8rem; border: 1px solid var(--bd);"><code>SOCIAL SQUARE (PVT) LIMITED
+          <!-- Case 2: Adjustment Letter -->
+          <details>
+            <summary><strong>Document 2:</strong> Adjustment Letter (Social Square Resolving Incident &amp; Retaining
+              Client)</summary>
+            <p>
+              <strong>Scenario:</strong> Write the follow-up Adjustment Letter from Customer Support Manager (Adil
+              Rizwan) to the CEO of Avanceon. Your objective is to explain that an external hacking attempt from
+              Avanceon's IP triggered the security shutdown, restore their access, and preserve their long-term trust.
+            </p>
+            <pre
+              style="background: var(--sb); padding: 12px; border-radius: 6px; font-size: 0.8rem; border: 1px solid var(--bd);"><code>SOCIAL SQUARE (PVT) LIMITED
 Plot 88, Commercial Zone, Phase III, DHA, Lahore | info@socialsquare.pk
 
 July 31, 2026
@@ -692,235 +801,253 @@ Manager Customer Support
 
 Enclosure: On-Site Security Forensic Report (Ref #SR-99)
 cc: Mr. Avais, Chief Executive Officer, Social Square</code></pre>
-            </details>
-          </div>
-
-          <h3>Interactive Practice: Tone &amp; Format Drills</h3>
-          <div class="practice-section">
-            <div class="practice-section-label">Exam Questions Bank</div>
-
-            <!-- Q1 -->
-            <details>
-              <summary><strong>Q1:</strong> What are the structural differences between Modified Block and Full Block formats?</summary>
-              <p>
-                <strong>Answer:</strong><br />
-                In <strong>Full Block</strong> format, every single line—including the date, inside address, salutation, body paragraphs, complimentary close, and signature—starts flush against the left margin. It typically uses open or mixed punctuation.<br /><br />
-                In <strong>Modified Block</strong> format, the inside address and body paragraphs remain flush left, but the <strong>Date</strong>, <strong>Complimentary Close</strong>, and <strong>Signature Block</strong> start at the horizontal midpoint (tabbed to center). It typically uses mixed punctuation (colon after salutation, comma after close).
-              </p>
-            </details>
-
-            <!-- Q2 -->
-            <details>
-              <summary><strong>Q2:</strong> Explain the difference in punctuation between Open Punctuation and Mixed Punctuation.</summary>
-              <p>
-                <strong>Answer:</strong><br />
-                &bull; <strong>Open Punctuation:</strong> Omits all punctuation after both the salutation (e.g., <code>Dear Mr. Smith</code>) and the complimentary close (e.g., <code>Sincerely</code>).<br />
-                &bull; <strong>Mixed Punctuation:</strong> Uses a <strong>colon (:)</strong> after the salutation (e.g., <code>Dear Mr. Smith:</code>) and a <strong>comma (,)</strong> after the complimentary close (e.g., <code>Sincerely,</code>). Mixed punctuation is standard for formal American business correspondence.
-              </p>
-            </details>
-
-            <!-- Q3 -->
-            <details>
-              <summary><strong>Q3:</strong> Why is an indirect organizational pattern required for negative correspondence?</summary>
-              <p>
-                <strong>Answer:</strong><br />
-                When readers receive disappointing news directly at the start of a letter, they experience immediate psychological rejection and frustration. As a result, they often stop reading and ignore subsequent explanations. By using the <strong>indirect pattern</strong> (Buffer &rarr; Reasons First &rarr; Diplomatic Refusal &rarr; Alternative &rarr; Goodwill), the writer ensures the reader understands the objective reasons, legal policies, or financial facts before the bad news is revealed, keeping the door open for future business.
-              </p>
-            </details>
-
-            <!-- Q4 -->
-            <details>
-              <summary><strong>Q4:</strong> Identify three reasons why BCC should be used when emailing large external client lists.</summary>
-              <p>
-                <strong>Answer:</strong><br />
-                1. <strong>Confidentiality / Privacy:</strong> Prevents disclosing proprietary customer email lists to competitors or third parties (compliance with privacy regulations).<br />
-                2. <strong>Spam Prevention:</strong> Protects client inboxes from being scraped by malware or bad actors on the thread.<br />
-                3. <strong>Prevents "Reply All" Storms:</strong> Ensures that if one client replies, their message only goes to the sender rather than broadcasting to all recipients.
-              </p>
-            </details>
-          </div>
-
-          <div class="summary-box">
-            <h4>Module Summary Checklist</h4>
-            <ul>
-              <li>Master the 10 standard parts of a business letter and their exact placements.</li>
-              <li>Differentiate Full Block, Modified Block, and Semi-Block letter layouts.</li>
-              <li>Use the standard 4-line header (DATE, TO, FROM, SUBJECT) for all internal memos.</li>
-              <li>Apply the indirect pattern (buffer &amp; reasons first) for all bad news messages.</li>
-              <li>Verify documents against the 7 Cs of business communication.</li>
-            </ul>
-          </div>
+          </details>
         </div>
 
-      </div>
-      <!-- end module-container -->
+        <h3>Interactive Practice: Tone &amp; Format Drills</h3>
+        <div class="practice-section">
+          <div class="practice-section-label">Exam Questions Bank</div>
 
-      <!-- ═════════════════════════════════════════════════════
-           BOTTOM NAVIGATION
-           ═════════════════════════════════════════════════════ -->
-      <div class="bottom-nav">
-        <button id="prev-btn" onclick="goPrev()">
-          <div>
-            <span class="btn-label">&larr; Previous</span>
-            <span class="btn-title" id="prev-title">Topic</span>
-          </div>
-        </button>
-        <button id="next-btn" onclick="goNext()">
-          <div>
-            <span class="btn-label">Next &rarr;</span>
-            <span class="btn-title" id="next-title">Topic</span>
-          </div>
-        </button>
+          <!-- Q1 -->
+          <details>
+            <summary><strong>Q1:</strong> What are the structural differences between Modified Block and Full Block
+              formats?</summary>
+            <p>
+              <strong>Answer:</strong><br />
+              In <strong>Full Block</strong> format, every single line—including the date, inside address, salutation,
+              body paragraphs, complimentary close, and signature—starts flush against the left margin. It typically
+              uses open or mixed punctuation.<br /><br />
+              In <strong>Modified Block</strong> format, the inside address and body paragraphs remain flush left, but
+              the <strong>Date</strong>, <strong>Complimentary Close</strong>, and <strong>Signature Block</strong>
+              start at the horizontal midpoint (tabbed to center). It typically uses mixed punctuation (colon after
+              salutation, comma after close).
+            </p>
+          </details>
+
+          <!-- Q2 -->
+          <details>
+            <summary><strong>Q2:</strong> Explain the difference in punctuation between Open Punctuation and Mixed
+              Punctuation.</summary>
+            <p>
+              <strong>Answer:</strong><br />
+              &bull; <strong>Open Punctuation:</strong> Omits all punctuation after both the salutation (e.g.,
+              <code>Dear Mr. Smith</code>) and the complimentary close (e.g., <code>Sincerely</code>).<br />
+              &bull; <strong>Mixed Punctuation:</strong> Uses a <strong>colon (:)</strong> after the salutation (e.g.,
+              <code>Dear Mr. Smith:</code>) and a <strong>comma (,)</strong> after the complimentary close (e.g.,
+              <code>Sincerely,</code>). Mixed punctuation is standard for formal American business correspondence.
+            </p>
+          </details>
+
+          <!-- Q3 -->
+          <details>
+            <summary><strong>Q3:</strong> Why is an indirect organizational pattern required for negative
+              correspondence?</summary>
+            <p>
+              <strong>Answer:</strong><br />
+              When readers receive disappointing news directly at the start of a letter, they experience immediate
+              psychological rejection and frustration. As a result, they often stop reading and ignore subsequent
+              explanations. By using the <strong>indirect pattern</strong> (Buffer &rarr; Reasons First &rarr;
+              Diplomatic Refusal &rarr; Alternative &rarr; Goodwill), the writer ensures the reader understands the
+              objective reasons, legal policies, or financial facts before the bad news is revealed, keeping the door
+              open for future business.
+            </p>
+          </details>
+
+          <!-- Q4 -->
+          <details>
+            <summary><strong>Q4:</strong> Identify three reasons why BCC should be used when emailing large external
+              client lists.</summary>
+            <p>
+              <strong>Answer:</strong><br />
+              1. <strong>Confidentiality / Privacy:</strong> Prevents disclosing proprietary customer email lists to
+              competitors or third parties (compliance with privacy regulations).<br />
+              2. <strong>Spam Prevention:</strong> Protects client inboxes from being scraped by malware or bad actors
+              on the thread.<br />
+              3. <strong>Prevents "Reply All" Storms:</strong> Ensures that if one client replies, their message only
+              goes to the sender rather than broadcasting to all recipients.
+            </p>
+          </details>
+        </div>
+
+        <div class="summary-box">
+          <h4>Module Summary Checklist</h4>
+          <ul>
+            <li>Master the 10 standard parts of a business letter and their exact placements.</li>
+            <li>Differentiate Full Block, Modified Block, and Semi-Block letter layouts.</li>
+            <li>Use the standard 4-line header (DATE, TO, FROM, SUBJECT) for all internal memos.</li>
+            <li>Apply the indirect pattern (buffer &amp; reasons first) for all bad news messages.</li>
+            <li>Verify documents against the 7 Cs of business communication.</li>
+          </ul>
+        </div>
       </div>
+
     </div>
-    <!-- end main-content -->
-
-    <button
-      id="back-to-top"
-      onclick="document.getElementById('main-content').scrollTo({ top: 0, behavior: 'smooth' })"
-    >
-      &uarr;
-    </button>
+    <!-- end module-container -->
 
     <!-- ═════════════════════════════════════════════════════
+           BOTTOM NAVIGATION
+           ═════════════════════════════════════════════════════ -->
+    <div class="bottom-nav">
+      <button id="prev-btn" onclick="goPrev()">
+        <div>
+          <span class="btn-label">&larr; Previous</span>
+          <span class="btn-title" id="prev-title">Topic</span>
+        </div>
+      </button>
+      <button id="next-btn" onclick="goNext()">
+        <div>
+          <span class="btn-label">Next &rarr;</span>
+          <span class="btn-title" id="next-title">Topic</span>
+        </div>
+      </button>
+    </div>
+  </div>
+  <!-- end main-content -->
+
+  <button id="back-to-top" onclick="document.getElementById('main-content').scrollTo({ top: 0, behavior: 'smooth' })">
+    &uarr;
+  </button>
+
+  <!-- ═════════════════════════════════════════════════════
          SCRIPTS
          ═════════════════════════════════════════════════════ -->
-    <script>
-      const topics = [
-        "topic-1",
-        "topic-2",
-        "topic-3",
-        "topic-4",
-        "topic-5"
-      ];
-      let currentTopicIndex = 0;
+  <script>
+    const topics = [
+      "topic-1",
+      "topic-2",
+      "topic-3",
+      "topic-4",
+      "topic-5"
+    ];
+    let currentTopicIndex = 0;
 
-      function getTopicTitle(id) {
-        const link =
-          document.querySelector(`.nav-sublist a[onclick*="'${id}'"]`) ||
-          document.querySelector(`.nav-sublist a[onclick*='"${id}"']`);
-        if (link) {
-          const numEl = link.querySelector(".nav-num");
+    function getTopicTitle(id) {
+      const link =
+        document.querySelector(`.nav-sublist a[onclick*="'${id}'"]`) ||
+        document.querySelector(`.nav-sublist a[onclick*='"${id}"']`);
+      if (link) {
+        const numEl = link.querySelector(".nav-num");
+        if (numEl) {
+          return link.textContent.replace(numEl.textContent, "").trim();
+        }
+        return link.textContent.replace(/^\d+\s*/, "").trim();
+      }
+      const card = document.getElementById(id);
+      if (card) {
+        const h2 = card.querySelector("h2");
+        if (h2) {
+          const numEl = h2.querySelector(".topic-num");
           if (numEl) {
-            return link.textContent.replace(numEl.textContent, "").trim();
+            return h2.textContent.replace(numEl.textContent, "").trim();
           }
-          return link.textContent.replace(/^\d+\s*/, "").trim();
+          return h2.textContent.replace(/^\d+\s*/, "").trim();
         }
-        const card = document.getElementById(id);
-        if (card) {
-          const h2 = card.querySelector("h2");
-          if (h2) {
-            const numEl = h2.querySelector(".topic-num");
-            if (numEl) {
-              return h2.textContent.replace(numEl.textContent, "").trim();
-            }
-            return h2.textContent.replace(/^\d+\s*/, "").trim();
-          }
+      }
+      return "Topic";
+    }
+
+    function toggleSidebar() {
+      const sb = document.getElementById("sidebar");
+      const bd = document.getElementById("sidebar-backdrop");
+      if (sb) sb.classList.toggle("open");
+      if (bd) bd.classList.toggle("active");
+    }
+
+    function showTopic(id) {
+      document
+        .querySelectorAll(".topic-card")
+        .forEach((c) => (c.style.display = "none"));
+      const t = document.getElementById(id);
+      if (t) t.style.display = "block";
+      currentTopicIndex = topics.indexOf(id);
+
+      document
+        .querySelectorAll(".nav-sublist a")
+        .forEach((a) => a.classList.remove("active"));
+      const lk =
+        document.querySelector(`.nav-sublist a[onclick*="'${id}'"]`) ||
+        document.querySelector(`.nav-sublist a[onclick*='"${id}"']`);
+      if (lk) {
+        lk.classList.add("active");
+        const sublist = lk.closest(".nav-sublist");
+        if (sublist && sublist.style.display === "none") {
+          sublist.style.display = "block";
+          const chevron = sublist.previousElementSibling
+            ? sublist.previousElementSibling.querySelector(".chevron")
+            : null;
+          if (chevron) chevron.style.transform = "rotate(0deg)";
         }
-        return "Topic";
       }
 
-      function toggleSidebar() {
+      const pb = document.getElementById("prev-btn");
+      const nb = document.getElementById("next-btn");
+      const pt = document.getElementById("prev-title");
+      const nt = document.getElementById("next-title");
+
+      if (currentTopicIndex > 0) {
+        pb.style.display = "flex";
+        if (pt) pt.textContent = getTopicTitle(topics[currentTopicIndex - 1]);
+      } else {
+        pb.style.display = "none";
+      }
+
+      if (currentTopicIndex < topics.length - 1) {
+        nb.style.display = "flex";
+        if (nt) nt.textContent = getTopicTitle(topics[currentTopicIndex + 1]);
+      } else {
+        nb.style.display = "none";
+      }
+
+      if (t) t.scrollIntoView({ behavior: "smooth", block: "start" });
+      if (window.innerWidth <= 768) {
         const sb = document.getElementById("sidebar");
         const bd = document.getElementById("sidebar-backdrop");
-        if (sb) sb.classList.toggle("open");
-        if (bd) bd.classList.toggle("active");
+        if (sb) sb.classList.remove("open");
+        if (bd) bd.classList.remove("active");
       }
+    }
 
-      function showTopic(id) {
-        document
-          .querySelectorAll(".topic-card")
-          .forEach((c) => (c.style.display = "none"));
-        const t = document.getElementById(id);
-        if (t) t.style.display = "block";
-        currentTopicIndex = topics.indexOf(id);
+    function goPrev() {
+      if (currentTopicIndex > 0) showTopic(topics[currentTopicIndex - 1]);
+    }
 
-        document
-          .querySelectorAll(".nav-sublist a")
-          .forEach((a) => a.classList.remove("active"));
-        const lk =
-          document.querySelector(`.nav-sublist a[onclick*="'${id}'"]`) ||
-          document.querySelector(`.nav-sublist a[onclick*='"${id}"']`);
-        if (lk) {
-          lk.classList.add("active");
-          const sublist = lk.closest(".nav-sublist");
-          if (sublist && sublist.style.display === "none") {
-            sublist.style.display = "block";
-            const chevron = sublist.previousElementSibling
-              ? sublist.previousElementSibling.querySelector(".chevron")
-              : null;
-            if (chevron) chevron.style.transform = "rotate(0deg)";
-          }
-        }
+    function goNext() {
+      if (currentTopicIndex < topics.length - 1)
+        showTopic(topics[currentTopicIndex + 1]);
+    }
 
-        const pb = document.getElementById("prev-btn");
-        const nb = document.getElementById("next-btn");
-        const pt = document.getElementById("prev-title");
-        const nt = document.getElementById("next-title");
-
-        if (currentTopicIndex > 0) {
-          pb.style.display = "flex";
-          if (pt) pt.textContent = getTopicTitle(topics[currentTopicIndex - 1]);
-        } else {
-          pb.style.display = "none";
-        }
-
-        if (currentTopicIndex < topics.length - 1) {
-          nb.style.display = "flex";
-          if (nt) nt.textContent = getTopicTitle(topics[currentTopicIndex + 1]);
-        } else {
-          nb.style.display = "none";
-        }
-
-        if (t) t.scrollIntoView({ behavior: "smooth", block: "start" });
-        if (window.innerWidth <= 768) {
-          const sb = document.getElementById("sidebar");
-          const bd = document.getElementById("sidebar-backdrop");
-          if (sb) sb.classList.remove("open");
-          if (bd) bd.classList.remove("active");
-        }
+    function toggleSection(el) {
+      const s = el.nextElementSibling,
+        c = el.querySelector(".chevron");
+      if (s.style.display === "none") {
+        s.style.display = "block";
+        c.style.transform = "rotate(0deg)";
+      } else {
+        s.style.display = "none";
+        c.style.transform = "rotate(-90deg)";
       }
+    }
 
-      function goPrev() {
-        if (currentTopicIndex > 0) showTopic(topics[currentTopicIndex - 1]);
-      }
+    function filterContent() {
+      const q = document.getElementById("search-input").value.toLowerCase();
+      document
+        .querySelectorAll(".nav-sublist li")
+        .forEach((i) => {
+          i.style.display = i.textContent.toLowerCase().includes(q)
+            ? ""
+            : "none";
+        });
+    }
 
-      function goNext() {
-        if (currentTopicIndex < topics.length - 1)
-          showTopic(topics[currentTopicIndex + 1]);
-      }
+    // Initialise
+    if (topics.length > 0) showTopic(topics[0]);
+    const mc = document.getElementById("main-content");
+    const bb = document.getElementById("back-to-top");
+    mc.addEventListener(
+      "scroll",
+      () => (bb.style.display = mc.scrollTop > 300 ? "flex" : "none"),
+    );
+  </script>
+</body>
 
-      function toggleSection(el) {
-        const s = el.nextElementSibling,
-          c = el.querySelector(".chevron");
-        if (s.style.display === "none") {
-          s.style.display = "block";
-          c.style.transform = "rotate(0deg)";
-        } else {
-          s.style.display = "none";
-          c.style.transform = "rotate(-90deg)";
-        }
-      }
-
-      function filterContent() {
-        const q = document.getElementById("search-input").value.toLowerCase();
-        document
-          .querySelectorAll(".nav-sublist li")
-          .forEach((i) => {
-            i.style.display = i.textContent.toLowerCase().includes(q)
-              ? ""
-              : "none";
-          });
-      }
-
-      // Initialise
-      if (topics.length > 0) showTopic(topics[0]);
-      const mc = document.getElementById("main-content");
-      const bb = document.getElementById("back-to-top");
-      mc.addEventListener(
-        "scroll",
-        () => (bb.style.display = mc.scrollTop > 300 ? "flex" : "none"),
-      );
-    </script>
-  </body>
 </html>

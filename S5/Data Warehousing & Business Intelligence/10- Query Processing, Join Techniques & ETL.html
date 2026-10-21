@@ -1,0 +1,1189 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Data Warehousing &amp; BI &#8212; Query Processing, Join Techniques &amp; ETL</title>
+    <meta
+      name="description"
+      content="Concise, visual study notes for Query Execution, Join Algorithms (DSS vs OLTP, Winter Case Study), Sort-Merge vs Hash Joins (Graefe Duality), Query Optimization, and ETL Architecture (Ponniah Ch. 12)."
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../notes.css" />
+    <style>
+      /* ── Source Citation ─────────────────────────────────────────── */
+      .source-citation {
+        background: rgba(217, 119, 87, 0.08);
+        border-left: 3px solid var(--ac);
+        padding: 8px 14px;
+        border-radius: 0 6px 6px 0;
+        font-size: 0.8rem;
+        color: var(--mt);
+        margin-bottom: 18px;
+        line-height: 1.5;
+      }
+      .source-citation strong { color: var(--ac); }
+
+      /* ── Visual Layouts & Cards ─────────────────────────────────── */
+      .visual-box {
+        background: #111114;
+        border: 1px solid var(--bd);
+        border-radius: 10px;
+        padding: 16px 20px;
+        margin: 16px 0;
+      }
+      .visual-header {
+        font-size: 0.78rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.8px;
+        color: var(--ac);
+        margin-bottom: 12px;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+      }
+      .card-grid-2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin: 14px 0;
+      }
+      .card-grid-3 {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+        gap: 12px;
+        margin: 14px 0;
+      }
+      .vcard {
+        background: #16161a;
+        border: 1px solid #2d2d32;
+        border-radius: 8px;
+        padding: 14px;
+        transition: transform 0.15s ease, border-color 0.15s ease;
+      }
+      .vcard:hover {
+        transform: translateY(-2px);
+        border-color: var(--ac);
+      }
+      .vcard h4 {
+        font-size: 0.88rem;
+        margin-bottom: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .vcard p, .vcard ul {
+        font-size: 0.82rem;
+        line-height: 1.5;
+        color: var(--tx);
+      }
+      .vcard ul { padding-left: 16px; margin: 0; }
+
+      /* ── Pipeline Flows ─────────────────────────────────────────── */
+      .flow-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        flex-wrap: wrap;
+      }
+      .flow-step {
+        background: #1a1a1f;
+        border: 1px solid #333338;
+        border-radius: 6px;
+        padding: 10px 12px;
+        text-align: center;
+        flex: 1;
+        min-width: 105px;
+      }
+      .flow-step .num {
+        font-size: 0.65rem;
+        font-weight: 700;
+        color: var(--ac);
+        text-transform: uppercase;
+      }
+      .flow-step .title {
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: var(--tx);
+        margin: 2px 0;
+      }
+      .flow-step .desc {
+        font-size: 0.7rem;
+        color: var(--mt);
+      }
+      .flow-arrow {
+        color: var(--ac);
+        font-weight: bold;
+        font-size: 1.1rem;
+      }
+
+      /* ── Query Tree Shapes Visualizer ───────────────────────────── */
+      .tree-showcase {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 12px;
+        margin: 14px 0;
+      }
+      .tree-card {
+        background: #131316;
+        border: 1px solid #2f2f35;
+        border-radius: 8px;
+        padding: 12px;
+        text-align: center;
+      }
+      .tree-title {
+        font-size: 0.8rem;
+        font-weight: 700;
+        color: var(--tx);
+        margin-bottom: 8px;
+      }
+      .tree-art {
+        font-family: monospace;
+        font-size: 0.72rem;
+        line-height: 1.35;
+        background: #09090b;
+        border: 1px dashed #27272a;
+        padding: 8px;
+        border-radius: 6px;
+        color: #38bdf8;
+        white-space: pre;
+        margin-bottom: 8px;
+      }
+      .tree-note {
+        font-size: 0.72rem;
+        color: var(--mt);
+        text-align: left;
+      }
+
+      /* ── Boustrophedonism Visual ─────────────────────────────────── */
+      .boustro-diagram {
+        background: #141418;
+        border: 1px solid #2d2d33;
+        border-radius: 8px;
+        padding: 12px 16px;
+        margin: 12px 0;
+      }
+      .boustro-track {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin: 8px 0;
+        font-size: 0.76rem;
+      }
+      .boustro-label {
+        width: 90px;
+        font-weight: 600;
+        color: var(--mt);
+      }
+      .boustro-blocks {
+        display: flex;
+        gap: 4px;
+        flex: 1;
+      }
+      .bblock {
+        flex: 1;
+        padding: 4px;
+        text-align: center;
+        background: #202026;
+        border: 1px solid #3a3a42;
+        border-radius: 4px;
+        color: var(--tx);
+        font-family: monospace;
+      }
+      .bblock.hit {
+        background: rgba(79, 191, 139, 0.25);
+        border-color: #4fbf8b;
+        color: #86efac;
+        font-weight: bold;
+      }
+
+      /* ── Richard Winter Metric Meters ────────────────────────────── */
+      .scale-meter {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin: 14px 0;
+      }
+      .meter-row {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .meter-name {
+        width: 140px;
+        font-size: 0.8rem;
+        font-weight: 600;
+      }
+      .meter-bar-wrap {
+        flex: 1;
+        background: #1c1c22;
+        height: 20px;
+        border-radius: 4px;
+        overflow: hidden;
+        border: 1px solid #2c2c34;
+        position: relative;
+      }
+      .meter-fill {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        padding-left: 8px;
+        font-size: 0.7rem;
+        font-weight: 700;
+        color: #fff;
+      }
+      .meter-time {
+        width: 95px;
+        text-align: right;
+        font-family: monospace;
+        font-size: 0.8rem;
+        font-weight: 700;
+      }
+
+      /* ── Badges & Tags ──────────────────────────────────────────── */
+      .badge-tag {
+        display: inline-block;
+        font-size: 0.65rem;
+        font-weight: 700;
+        padding: 2px 6px;
+        border-radius: 4px;
+        text-transform: uppercase;
+        letter-spacing: 0.4px;
+      }
+      .tag-fast { background: rgba(79, 191, 139, 0.18); color: #86efac; border: 1px solid #4fbf8b; }
+      .tag-warn { background: rgba(240, 169, 78, 0.18); color: #fde68a; border: 1px solid #f0a94e; }
+      .tag-slow { background: rgba(240, 82, 79, 0.18); color: #fca5a5; border: 1px solid #f0524f; }
+      .tag-info { background: rgba(79, 163, 227, 0.18); color: #93c5fd; border: 1px solid #4fa3e3; }
+
+      @media (max-width: 768px) {
+        .card-grid-2, .tree-showcase { grid-template-columns: 1fr; }
+        .flow-row { flex-direction: column; align-items: stretch; }
+        .flow-arrow { text-align: center; transform: rotate(90deg); margin: 2px 0; }
+        .meter-row { flex-direction: column; align-items: flex-start; gap: 4px; }
+        .meter-bar-wrap { width: 100%; }
+      }
+    </style>
+  </head>
+  <body>
+    <button id="menu-toggle" onclick="toggleSidebar()" aria-label="Toggle navigation">&#9776;</button>
+    <div id="sidebar-backdrop" onclick="toggleSidebar()"></div>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SIDEBAR NAVIGATION
+         ═══════════════════════════════════════════════════════ -->
+    <div id="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-header-text">
+          <div class="sidebar-course-label">Course Notes</div>
+          <div class="sidebar-title">Data Warehousing &amp; BI</div>
+        </div>
+      </div>
+      <div class="sidebar-search-wrap">
+        <input type="text" id="search-input" placeholder="Search topics&#8230;" onkeyup="filterContent()" />
+      </div>
+      <ul class="nav-list" id="nav-list">
+        <li><a class="nav-module-link" href="./1- Introduction to DW.html"><span class="nav-mod-num">01</span>Introduction to DW</a></li>
+        <li><a class="nav-module-link" href="./2- Quiz Prep - Intro to DW.html"><span class="nav-mod-num">02</span>Quiz Prep: Intro to DW</a></li>
+        <li><a class="nav-module-link" href="./3- High Performance DSS Database Design.html"><span class="nav-mod-num">03</span>Logical &amp; Physical Data Modeling</a></li>
+        <li><a class="nav-module-link" href="./4- Quiz Prep - DSS Database Design.html"><span class="nav-mod-num">04</span>Quiz Prep: DSS Database Design</a></li>
+        <li><a class="nav-module-link" href="./5- OLAP Implementation Techniques.html"><span class="nav-mod-num">05</span>OLAP Implementation Techniques</a></li>
+        <li><a class="nav-module-link" href="./6- Dimensional Modeling.html"><span class="nav-mod-num">06</span>Dimensional Modeling (Pre-Midterm)</a></li>
+        <li><a class="nav-module-link" href="./7- Solved Sample Midterm.html"><span class="nav-mod-num">07</span>Solved Sample Midterm</a></li>
+        <li><a class="nav-module-link" href="./8- Dimensional Modeling Concepts.html"><span class="nav-mod-num">08</span>Dimensional Modeling Concepts</a></li>
+        <li><a class="nav-module-link" href="./9- Lab Midterm Prep.html"><span class="nav-mod-num">09</span>Lab Archive (Labs 1–6 Survey)</a></li>
+        <li class="nav-section">
+          <div class="nav-section-title" onclick="toggleSection(this)">
+            <span>Query Processing, Joins &amp; ETL</span><span class="chevron">&#9660;</span>
+          </div>
+          <ul class="nav-sublist">
+            <li><a href="javascript:void(0)" onclick="showTopic('topic-1')"><span class="nav-num">01</span>Query Engine Architecture</a></li>
+            <li><a href="javascript:void(0)" onclick="showTopic('topic-2')"><span class="nav-num">02</span>Join Techniques: DSS vs OLTP</a></li>
+            <li><a href="javascript:void(0)" onclick="showTopic('topic-3')"><span class="nav-num">03</span>Sort-Merge vs Hash &amp; Duality</a></li>
+            <li><a href="javascript:void(0)" onclick="showTopic('topic-4')"><span class="nav-num">04</span>Optimization &amp; Cost Estimation</a></li>
+            <li><a href="javascript:void(0)" onclick="showTopic('topic-5')"><span class="nav-num">05</span>ETL Architecture (Ponniah Ch. 12)</a></li>
+            <li><a href="javascript:void(0)" onclick="showTopic('topic-6')"><span class="nav-num">06</span>Master Matrix &amp; Practice Quiz</a></li>
+          </ul>
+        </li>
+        <li><a class="nav-module-link" href="./11- Lab Midterm Sequential Codes & Exam Guide.html" style="color:var(--ac); font-weight:600;"><span class="nav-mod-num" style="background:var(--ac); color:#fff;">11</span>🎯 Lab Midterm — Sequential Guide</a></li>
+      </ul>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════
+         MAIN CONTENT AREA
+         ═══════════════════════════════════════════════════════ -->
+    <div id="main-content">
+      <div class="module-container">
+        <div class="module-header">
+          <div class="module-eyebrow">Data Warehousing &amp; Business Intelligence &#8212; Module 10</div>
+          <h1 class="module-title">Query Processing, Join Techniques &amp; ETL</h1>
+          <div class="source-citation">
+            <strong>Sources:</strong> Paulraj Ponniah, <em>DW Fundamentals</em> (Ch. 12: ETL) &bull; Goetz Graefe (ACM Survey) &bull; Richard Winter (<em>Join, Defray</em>) &bull; Stonebraker &amp; Hellerstein &bull; Prof. Ishaq Raza's DSS Joins Deck.
+          </div>
+        </div>
+
+        <!-- ──────────────────────────────────────────────────────────
+             TOPIC 1: Query Execution Architecture
+             ────────────────────────────────────────────────────────── -->
+        <div class="topic-card" id="topic-1">
+          <h2><span class="topic-num">1</span>Query Execution Engine Architecture</h2>
+          <p class="topic-subtitle">Volcano Iterator Model, Plan Trees &amp; Scan-Resistant Buffer Management</p>
+
+          <div class="visual-box">
+            <div class="visual-header">&#9654; 5-Step Query Execution Pipeline</div>
+            <div class="flow-row">
+              <div class="flow-step">
+                <div class="num">Step 1</div>
+                <div class="title">Parser</div>
+                <div class="desc">Syntax check &amp; token tree</div>
+              </div>
+              <div class="flow-arrow">&rarr;</div>
+              <div class="flow-step">
+                <div class="num">Step 2</div>
+                <div class="title">Catalog Resolver</div>
+                <div class="desc">Verify schemas, types &amp; auth</div>
+              </div>
+              <div class="flow-arrow">&rarr;</div>
+              <div class="flow-step">
+                <div class="num">Step 3</div>
+                <div class="title">Algebra Tree</div>
+                <div class="desc">Logical operators (&sigma;, &pi;, &bowtie;)</div>
+              </div>
+              <div class="flow-arrow">&rarr;</div>
+              <div class="flow-step">
+                <div class="num">Step 4</div>
+                <div class="title">Optimizer</div>
+                <div class="desc">Cost-based physical plan</div>
+              </div>
+              <div class="flow-arrow">&rarr;</div>
+              <div class="flow-step">
+                <div class="num">Step 5</div>
+                <div class="title">Execution Engine</div>
+                <div class="desc">Iterator calls &amp; buffer I/O</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-grid-2">
+            <div class="vcard" style="border-left: 3px solid var(--def-bd);">
+              <h4>Volcano / Iterator Model <span class="badge-tag tag-fast">Goetz Graefe</span></h4>
+              <p>Every operator implements three standardized procedural methods:</p>
+              <ul>
+                <li><code>open()</code>: Allocates buffers and initializes child streams.</li>
+                <li><code>next()</code>: Pulls one data tuple (granule) on-demand.</li>
+                <li><code>close()</code>: Cleans up state and deallocates memory.</li>
+              </ul>
+              <p style="margin-top:6px; color:var(--mt); font-size:0.75rem;"><strong>Win:</strong> Demand-driven pipelining in a single OS process&#8212;avoids writing intermediate results to temporary disk files.</p>
+            </div>
+            <div class="vcard" style="border-left: 3px solid var(--crit-bd);">
+              <h4>Buffer Management in DSS <span class="badge-tag tag-slow">LRU Fails</span></h4>
+              <p><strong>Buffer Thrashing:</strong> A 50 GB table scanned through a 4 GB RAM pool under standard OS LRU will continuously evict pages without a single cache hit.</p>
+              <ul>
+                <li><strong>Fix/Unfix Semantics:</strong> Pin hot pages (e.g. hash tables) in RAM.</li>
+                <li><strong>Read-Ahead (Track-at-a-Crack):</strong> Asynchronous prefetching matches disk bus speed with CPU execution.</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3>Execution Tree Topologies</h3>
+          <div class="tree-showcase">
+            <div class="tree-card">
+              <div class="tree-title">Left-Deep Tree</div>
+              <div class="tree-art">    (&bowtie;)
+    /   \
+  (&bowtie;)  (R3)
+  /   \
+(R1) (R2)</div>
+              <div class="tree-note">
+                <strong>Rule:</strong> Right child is always a base leaf.<br />
+                <strong>Pros:</strong> Minimal memory footprint; outer relation streams through. Standard in OLTP.
+              </div>
+            </div>
+
+            <div class="tree-card">
+              <div class="tree-title">Right-Deep Tree</div>
+              <div class="tree-art">  (&bowtie;)
+  /   \
+(R1)  (&bowtie;)
+      /   \
+    (R2)  (R3)</div>
+              <div class="tree-note">
+                <strong>Rule:</strong> Left child is always a base leaf.<br />
+                <strong>Pros:</strong> Builds multiple hash tables in parallel memory across dimension tables.
+              </div>
+            </div>
+
+            <div class="tree-card">
+              <div class="tree-title">Bushy Tree</div>
+              <div class="tree-art">    (&bowtie;)
+   /     \
+ (&bowtie;)    (&bowtie;)
+ /  \     /  \
+(R1)(R2) (R3)(R4)</div>
+              <div class="tree-note">
+                <strong>Rule:</strong> Joins combine results of other joins.<br />
+                <strong>Pros:</strong> Maximum inter-operator parallelism; critical for complex snowflake queries.
+              </div>
+            </div>
+          </div>
+
+          <div class="note-box">
+            <div class="callout-label">Benchmark Test</div>
+            <strong>The "Guy Lohman Test":</strong> <em>Can the operator join 3 inputs without materializing and storing the output of 2 of them?</em> Pipelined iterators pass; blocking sort-partition passes fail.
+          </div>
+
+          <div class="summary-box">
+            <h4>Key Takeaways</h4>
+            <ul>
+              <li>Volcano iterators stream data tuple-by-tuple in a single process via <code>open()</code>, <code>next()</code>, and <code>close()</code>.</li>
+              <li>Left-deep trees minimize memory; Right-deep trees enable parallel hash table building; Bushy trees maximize cluster parallelism.</li>
+              <li>Standard OS LRU causes buffer thrashing on bulk scans; DSS engines use page pinning and read-ahead forecasting.</li>
+            </ul>
+          </div>
+
+          <div class="practice-section">
+            <div class="practice-section-label">Quick Quiz</div>
+            <details>
+              <summary>Easy: What is the main performance benefit of the Volcano iterator model?</summary>
+              <p><strong>Answer:</strong> It provides demand-driven pipelining within a single process. Operators pass tuples via fast function calls, eliminating disk I/O for intermediate query results and avoiding heavy OS process-switching (IPC).</p>
+            </details>
+            <details>
+              <summary>Medium: Why do Right-Deep trees suit parallel data warehouse joins?</summary>
+              <p><strong>Answer:</strong> Because every inner child is an independent base relation leaf (typically dimension tables). The engine can scan and build all in-memory hash tables concurrently before streaming the fact table through.</p>
+            </details>
+          </div>
+        </div>
+
+        <!-- ──────────────────────────────────────────────────────────
+             TOPIC 2: Join Techniques: DSS vs. OLTP
+             ────────────────────────────────────────────────────────── -->
+        <div class="topic-card" id="topic-2">
+          <h2><span class="topic-num">2</span>Join Techniques: DSS vs. OLTP &amp; Scalability</h2>
+          <p class="topic-subtitle">Nested loops, Boustrophedonism &amp; Richard Winter's 3,800-Year Join Analysis</p>
+
+          <div class="card-grid-2">
+            <div class="vcard" style="border-top: 3px solid var(--exp-bd);">
+              <h4>OLTP Joins: Point Seeks</h4>
+              <ul>
+                <li><strong>High Selectivity:</strong> Fetches 1–10 rows (e.g. <code>WHERE id = 42</code>).</li>
+                <li><strong>Access:</strong> Traverses B-tree root-to-leaf in 2–3 disk reads.</li>
+                <li><strong>Resource:</strong> Kilobytes of memory; milliseconds to finish.</li>
+              </ul>
+            </div>
+            <div class="vcard" style="border-top: 3px solid var(--ac);">
+              <h4>DSS Joins: Analytical Scans</h4>
+              <ul>
+                <li><strong>Low Selectivity:</strong> Joins millions of rows across multi-year facts.</li>
+                <li><strong>Access:</strong> Bulk sequential sweeps and large partition buckets.</li>
+                <li><strong>Resource:</strong> Gigabytes of buffer cache and disk scratch space.</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3>Nested Loop Join Family &amp; Boustrophedonism</h3>
+          <div class="card-grid-3">
+            <div class="vcard">
+              <h4>Naive NLJ <span class="badge-tag tag-slow">O(R &times; S)</span></h4>
+              <p>For each tuple in $R$, scans entire inner $S$. Disastrous on large tables without memory caching.</p>
+            </div>
+            <div class="vcard">
+              <h4>Block NLJ <span class="badge-tag tag-warn">O(R&times;S / M)</span></h4>
+              <p>Loads $M - K$ pages of $R$ into memory at once, scanning $S$ once per block. Cuts disk reads of $S$ by memory capacity factor.</p>
+            </div>
+            <div class="vcard">
+              <h4>Index NLJ <span class="badge-tag tag-fast">Fast if R &lt;&lt; S</span></h4>
+              <p>Uses pre-existing index on inner table $S$. Fast only when outer table $R$ is small and index is memory-resident.</p>
+            </div>
+          </div>
+
+          <div class="boustro-diagram">
+            <div style="font-size:0.75rem; font-weight:700; color:var(--ac); text-transform:uppercase; margin-bottom:4px;">
+              &#9654; Boustrophedonism: Alternating Scan Directions
+            </div>
+            <p style="font-size:0.78rem; color:var(--mt); margin-bottom:8px;">
+              Eliminates buffer pool waste by alternating scan order so the last read pages in RAM are immediately reused:
+            </p>
+            <div class="boustro-track">
+              <span class="boustro-label">Outer Block 1:</span>
+              <div class="boustro-blocks">
+                <span class="bblock">Page 1 &rarr;</span>
+                <span class="bblock">Page 2 &rarr;</span>
+                <span class="bblock">Page 3 &rarr;</span>
+                <span class="bblock hit">Page 4 (In RAM)</span>
+              </div>
+            </div>
+            <div class="boustro-track">
+              <span class="boustro-label">Outer Block 2:</span>
+              <div class="boustro-blocks">
+                <span class="bblock hit">Page 4 (Cache Hit!)</span>
+                <span class="bblock">&larr; Page 3</span>
+                <span class="bblock">&larr; Page 2</span>
+                <span class="bblock">&larr; Page 1</span>
+              </div>
+            </div>
+          </div>
+
+          <h3>Richard Winter's Case Study: 10M Customers &times; 100M Transactions</h3>
+          <p style="font-size:0.84rem;">
+            Database: <strong>125 GB</strong> (Customer = 25 GB, Txns = 100 GB). Query finds transactions &gt; $1,000 in 1999 (4M rows qualify). Assumes 50 reads/sec:
+          </p>
+
+          <div class="scale-meter">
+            <div class="meter-row">
+              <span class="meter-name" style="color:#fca5a5;">Naive NLJ</span>
+              <div class="meter-bar-wrap">
+                <div class="meter-fill" style="width: 100%; background: #dc2626;">6 Trillion Disk Reads</div>
+              </div>
+              <span class="meter-time" style="color:#fca5a5;">~3,800 Years</span>
+            </div>
+            <div class="meter-row">
+              <span class="meter-name" style="color:#fde68a;">Indexed NLJ</span>
+              <div class="meter-bar-wrap">
+                <div class="meter-fill" style="width: 25%; background: #d97706;">16M Reads (Random Seeks)</div>
+              </div>
+              <span class="meter-time" style="color:#fde68a;">~3 Days</span>
+            </div>
+            <div class="meter-row">
+              <span class="meter-name" style="color:#86efac;">Sort-Merge Join</span>
+              <div class="meter-bar-wrap">
+                <div class="meter-fill" style="width: 22%; background: #16a34a;">15M Reads (Pure Sequential)</div>
+              </div>
+              <span class="meter-time" style="color:#86efac;">~3.5 Days</span>
+            </div>
+          </div>
+
+          <div class="warning-box">
+            <div class="callout-label">Winter's Scalability Laws</div>
+            In the 125 GB dataset above, <strong>only 540 MB (&lt; 1%)</strong> of data actually participates in the join!
+            <br /><strong>Law 1:</strong> Filter &amp; project early to isolate the &lt; 1% participating data without scanning full tables.
+            <br /><strong>Law 2:</strong> Operate on that subset with set-oriented linear algorithms ($O(N)$ Hash or Sort-Merge).
+          </div>
+
+          <div class="summary-box">
+            <h4>Key Takeaways</h4>
+            <ul>
+              <li>Naive NLJ explodes non-linearly: a 10,000&times; database size jump caused a 4-billion-fold disk I/O explosion.</li>
+              <li>Boustrophedonism scans inner tables alternately forwards and backwards to reuse RAM pages.</li>
+              <li>Only &lt; 1% of analytical data typically participates in joins&#8212;scalability requires isolating this subset early.</li>
+            </ul>
+          </div>
+
+          <div class="practice-section">
+            <div class="practice-section-label">Quick Quiz</div>
+            <details>
+              <summary>Easy: How does Boustrophedonism save disk I/O in Block Nested Loop joins?</summary>
+              <p><strong>Answer:</strong> By alternating the scan direction (first $1 \to N$, next $N \to 1$), the next outer block immediately reuses the final pages of the inner table currently sitting in the buffer pool, avoiding a re-read from disk.</p>
+            </details>
+            <details>
+              <summary>Medium: Why did Sort-Merge Join beat Indexed NLJ in Winter's study even though both performed ~15–16M reads?</summary>
+              <p><strong>Answer:</strong> Indexed NLJ performed 4 million <em>random disk seeks</em> (slow head movement), whereas Sort-Merge performed 15 million <em>sequential reads</em> at maximum bus bandwidth.</p>
+            </details>
+          </div>
+        </div>
+
+        <!-- ──────────────────────────────────────────────────────────
+             TOPIC 3: Sort-Merge vs. Hash Joins & Duality
+             ────────────────────────────────────────────────────────── -->
+        <div class="topic-card" id="topic-3">
+          <h2><span class="topic-num">3</span>Sort-Merge vs. Hash Joins &amp; Graefe Duality</h2>
+          <p class="topic-subtitle">External 2-pass sorting, Hybrid hash partitions, recursive asymmetry &amp; Bloom filters</p>
+
+          <div class="card-grid-2">
+            <div class="vcard" style="border-top: 3px solid var(--qst-bd);">
+              <h4>Sort-Merge Join (SMJ)</h4>
+              <p><strong>1. Sort Phase ($O(N \log N)$):</strong> Both tables sorted on join key using external merge sort.</p>
+              <p><strong>2. Merge Phase ($O(R + S)$):</strong> Two pointers scan through in lockstep.</p>
+              <p style="color:var(--mt); font-size:0.75rem;"><strong>Sort Elimination:</strong> If inputs are already ordered (clustered index or Teradata hash ordering), SMJ runs in purely linear time $O(R + S)$!</p>
+            </div>
+            <div class="vcard" style="border-top: 3px solid var(--def-bd);">
+              <h4>Hash Join Family</h4>
+              <p><strong>Classic:</strong> Builds hash table of small $R$ in RAM; streams probe $S$. Pure $O(R + S)$, zero disk scratch.</p>
+              <p><strong>Grace:</strong> Partitions both tables to disk buckets $1..k$; joins bucket pairs in RAM.</p>
+              <p><strong>Hybrid:</strong> Keeps <strong>Partition 0 in RAM</strong>, joining immediately while Partitions $1..k-1$ spill to disk.</p>
+            </div>
+          </div>
+
+          <div class="definition">
+            <div class="callout-label">Replacement Selection Formula</div>
+            <strong>Quicksort vs. Replacement Selection (Run Generation):</strong>
+            <br />Quicksort generates sorted runs of length $= M$ (memory size).
+            <br /><strong>Replacement Selection</strong> uses a priority min-heap to produce runs averaging <strong>$2M$ (twice memory size!)</strong>, cutting the number of merge passes on disk in half.
+          </div>
+
+          <div class="note-box">
+            <div class="callout-label">Critical Asymmetry</div>
+            <strong>Why Hash Join Crushes SMJ when $|R| \ll |S|$:</strong>
+            If partitions overflow, Hash Join partitions recursively. The recursion depth depends <strong>strictly on build table $R$</strong>:
+            $$\text{Recursion Depth} \approx \log_K(R / K)$$
+            The probe table $S$ never increases recursion depth! SMJ, in contrast, must sort massive table $S$ with cost proportional to $\log(S / K)$.
+          </div>
+
+          <h3>Graefe's Divide-and-Conquer Duality</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Dimension</th>
+                <th>External Sorting</th>
+                <th>Hash Partitioning</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Divide Phase</strong></td>
+                <td><strong>Physical:</strong> Slices fixed $M$-page chunks.</td>
+                <td><strong>Logical:</strong> Partitions by hash key $h(k)$.</td>
+              </tr>
+              <tr>
+                <td><strong>Combine Phase</strong></td>
+                <td><strong>Logical:</strong> Compares keys to merge.</td>
+                <td><strong>Physical:</strong> Concatenates bucket files.</td>
+              </tr>
+              <tr>
+                <td><strong>I/O Pattern</strong></td>
+                <td>Sequential write, Random read.</td>
+                <td>Random write, Sequential read.</td>
+              </tr>
+              <tr>
+                <td><strong>"Interesting Orderings"</strong></td>
+                <td><span class="badge-tag tag-fast">Preserved</span> Downstream <code>GROUP BY</code> needs no sort.</td>
+                <td><span class="badge-tag tag-slow">Destroyed</span> Unpredictable hash bucket order.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="visual-box">
+            <div class="visual-header">&#9654; Bloom Filters: Early Probe Rejection</div>
+            <p style="font-size:0.8rem; margin-bottom:8px;">
+              A bit-vector filter is populated during the build phase of $R$. As probe rows from $S$ arrive, keys are checked before writing to disk partitions:
+            </p>
+            <div style="font-family:monospace; font-size:0.75rem; background:#16161a; padding:10px; border-radius:6px; color:#a1a1aa;">
+              Probe Row Key &rarr; Hash($k$) &rarr; Bit = 0? &rarr; <span style="color:#f87171; font-weight:bold;">DISCARD IMMEDIATELY (Lossy Semijoin, saves disk I/O!)</span><br />
+              Probe Row Key &rarr; Hash($k$) &rarr; Bit = 1? &rarr; <span style="color:#4ade80; font-weight:bold;">Write to Partition Buffer for Join Match</span>
+            </div>
+          </div>
+
+          <div class="summary-box">
+            <h4>Key Takeaways</h4>
+            <ul>
+              <li>Replacement selection generates runs averaging $2M$ (twice memory size), halving external merge passes.</li>
+              <li>Hybrid Hash Join keeps Partition 0 in RAM, drastically reducing I/O compared to Grace Hash Join.</li>
+              <li>Hash Join recursion depth depends strictly on build table $R$ ($\log_K(R/K)$), giving it an immense edge when $|R| \ll |S|$.</li>
+              <li>Graefe Duality: Sorting divides physically and combines logically; Hashing divides logically and combines physically.</li>
+            </ul>
+          </div>
+
+          <div class="practice-section">
+            <div class="practice-section-label">Quick Quiz</div>
+            <details>
+              <summary>Easy: What is an "Interesting Ordering" and which join algorithm preserves it?</summary>
+              <p><strong>Answer:</strong> An interesting ordering is output data that emerges pre-sorted by a key. Sort-Merge Join preserves interesting orderings, allowing subsequent joins, <code>ORDER BY</code>, or <code>GROUP BY</code> operations to execute without a fresh sort.</p>
+            </details>
+            <details>
+              <summary>Medium: Why does Hash Join outperform Sort-Merge Join when joining a 10 MB dimension with a 500 GB fact table?</summary>
+              <p><strong>Answer:</strong> The 10 MB dimension fits completely in RAM as the build table. The 500 GB fact table streams through once as the probe relation without ever being partitioned, sorted, or written to disk. Sort-Merge would be forced to sort the entire 500 GB fact table across multiple disk passes.</p>
+            </details>
+          </div>
+        </div>
+
+        <!-- ──────────────────────────────────────────────────────────
+             TOPIC 4: Query Optimization & Cost Estimation
+             ────────────────────────────────────────────────────────── -->
+        <div class="topic-card" id="topic-4">
+          <h2><span class="topic-num">4</span>Query Optimization &amp; Cost Estimation</h2>
+          <p class="topic-subtitle">CBO vs. RBO, Algebraic Pushdowns, and Cardinality Estimation Formulas</p>
+
+          <div class="card-grid-2">
+            <div class="vcard" style="border-left:3px solid var(--def-bd);">
+              <h4>Cost-Based Optimizer (CBO) <span class="badge-tag tag-fast">Mandatory in DW</span></h4>
+              <p>Calculates mathematical cost using catalog histograms, NDV (Number of Distinct Values), and page counts. Correctly chooses bulk sequential scans and hash joins over slow index seeks for analytical queries.</p>
+            </div>
+            <div class="vcard" style="border-left:3px solid var(--crit-bd);">
+              <h4>Rule-Based Optimizer (RBO) <span class="badge-tag tag-slow">Fails in DW</span></h4>
+              <p>Uses rigid syntax heuristics (e.g. "always use an index"). Disastrous in DW where scanning 70% of a table via index seek creates millions of slow random disk reads.</p>
+            </div>
+          </div>
+
+          <div class="visual-box">
+            <div class="visual-header">&#9654; Heuristic Algebraic Rewrite: Selection Pushdown</div>
+            <div class="card-grid-2" style="margin:0;">
+              <div style="background:#16161a; padding:10px; border-radius:6px; font-family:monospace; font-size:0.75rem;">
+                <span style="color:#f87171; font-weight:bold;">BEFORE REWRITE (Naive):</span><br />
+                &sigma;<sub>date='2024'</sub> ( Customers &bowtie; Orders )<br />
+                <em>Joins 100M rows first, then filters! High memory and slow I/O.</em>
+              </div>
+              <div style="background:#16161a; padding:10px; border-radius:6px; font-family:monospace; font-size:0.75rem;">
+                <span style="color:#4ade80; font-weight:bold;">AFTER PUSHDOWN (&sigma; pushed to leaf):</span><br />
+                Customers &bowtie; ( &sigma;<sub>date='2024'</sub> (Orders) )<br />
+                <em>Filters down to 2M rows before joining! Massively faster.</em>
+              </div>
+            </div>
+          </div>
+
+          <h3>Essential Cardinality &amp; Cost Formulas</h3>
+          <div class="card-grid-3">
+            <div class="vcard">
+              <h4>Cartesian Product</h4>
+              <p style="font-family:monospace; color:var(--ac); font-weight:bold;">Card(R) &times; Card(S)</p>
+              <p style="font-size:0.75rem; color:var(--mt);">Upper bound on size if no join condition exists.</p>
+            </div>
+            <div class="vcard">
+              <h4>Equijoin Size Estimate</h4>
+              <p style="font-family:monospace; color:var(--ac); font-weight:bold;">Card(R) &times; Card(S) / max(V(R,A), V(S,A))</p>
+              <p style="font-size:0.75rem; color:var(--mt);">Assumes uniform distribution and containment.</p>
+            </div>
+            <div class="vcard">
+              <h4>PK-FK Join Size</h4>
+              <p style="font-family:monospace; color:var(--ac); font-weight:bold;">Card(Fact &bowtie; Dim) = Card(Fact)</p>
+              <p style="font-size:0.75rem; color:var(--mt);">Every foreign key matches at most 1 primary key.</p>
+            </div>
+          </div>
+
+          <div class="note-box">
+            <div class="callout-label">External Sort I/O Cost Formula</div>
+            $$\text{Cost} = 2 \times \text{NCARD}(R) \times \left(1 + \lceil \log_{M-1}(\lceil \text{NCARD}(R)/M \rceil) \rceil\right)$$
+            Step 1 (Run generation) reads and writes once ($2 \times \text{NCARD}$). Each merge pass with fan-in $M-1$ reads and writes once.
+          </div>
+
+          <div class="summary-box">
+            <h4>Key Takeaways</h4>
+            <ul>
+              <li>CBO uses catalog statistics ($V(R,A)$, histograms) to prevent disastrous index choices in analytical workloads.</li>
+              <li>Selection and projection pushdowns prune intermediate data volume before joins take place.</li>
+              <li>BI query tools generate complex "ugly" SQL; enterprise DW engines rely on query rewrites to unnest subqueries.</li>
+            </ul>
+          </div>
+
+          <div class="practice-section">
+            <div class="practice-section-label">Quick Quiz</div>
+            <details>
+              <summary>Easy: Why is Selection Pushdown always prioritized during query optimization?</summary>
+              <p><strong>Answer:</strong> It filters rows directly on the base table before the join occurs, dramatically reducing intermediate row counts and memory consumption.</p>
+            </details>
+            <details>
+              <summary>Medium: Table R has 200,000 rows with V(R,A) = 10,000. Table S has 300,000 rows with V(S,A) = 30,000. Estimate the equijoin cardinality.</summary>
+              <p><strong>Answer:</strong> $\text{Card} = \frac{200,000 \times 300,000}{\max(10,000, 30,000)} = \frac{6 \times 10^{10}}{30,000} = 2,000,000 \text{ tuples.}$</p>
+            </details>
+          </div>
+        </div>
+
+        <!-- ──────────────────────────────────────────────────────────
+             TOPIC 5: ETL Architecture (Ponniah Ch. 12)
+             ────────────────────────────────────────────────────────── -->
+        <div class="topic-card" id="topic-5">
+          <h2><span class="topic-num">5</span>Data Extraction, Transformation &amp; Loading (ETL)</h2>
+          <p class="topic-subtitle">Paulraj Ponniah Ch. 12: Data Staging, CDC Techniques, Cleansing &amp; Bulk Loading</p>
+
+          <div class="stat-highlight" style="padding:10px 14px; margin:12px 0;">
+            <div class="stat-number" style="font-size:1.4rem;">70% – 80%</div>
+            <div class="stat-label">Of total data warehouse project time, budget, and labor is consumed by the ETL subsystem!</div>
+          </div>
+
+          <div class="visual-box">
+            <div class="visual-header">&#9654; 4-Stage ETL Architecture</div>
+            <div class="flow-row">
+              <div class="flow-step">
+                <div class="num">Sources</div>
+                <div class="title">Operational Systems</div>
+                <div class="desc">OLTP, ERP, Flat Files, APIs</div>
+              </div>
+              <div class="flow-arrow">&rarr;</div>
+              <div class="flow-step">
+                <div class="num">Staging</div>
+                <div class="title">Data Staging Area (DSA)</div>
+                <div class="desc">Isolated buffer outside OLTP/DW</div>
+              </div>
+              <div class="flow-arrow">&rarr;</div>
+              <div class="flow-step">
+                <div class="num">Transform</div>
+                <div class="title">Cleanse &amp; Conform</div>
+                <div class="desc">Surrogate keys, dedupe, SCD 1-3</div>
+              </div>
+              <div class="flow-arrow">&rarr;</div>
+              <div class="flow-step">
+                <div class="num">Load</div>
+                <div class="title">Warehouse Target</div>
+                <div class="desc">Bulk append &amp; parallel index build</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="note-box">
+            <div class="callout-label">Architectural Rule</div>
+            <strong>Why Use a Data Staging Area (DSA)?</strong> Transforming directly on OLTP slows production operations; transforming directly inside DW locks analytical queries. The DSA isolates intermediate processing.
+          </div>
+
+          <h3>Change Data Capture (CDC) Comparison</h3>
+          <div class="card-grid-3">
+            <div class="vcard" style="border-top: 3px solid var(--wrn-bd);">
+              <h4>Audit Timestamps</h4>
+              <p><code>WHERE updated_at &gt; :last_run</code></p>
+              <ul>
+                <li><span style="color:#86efac;">+</span> Simple; non-intrusive.</li>
+                <li><span style="color:#fca5a5;">-</span> Cannot capture physical hard deletes.</li>
+              </ul>
+            </div>
+            <div class="vcard" style="border-top: 3px solid var(--crit-bd);">
+              <h4>Database Triggers</h4>
+              <p><code>AFTER INSERT/UPDATE/DELETE</code></p>
+              <ul>
+                <li><span style="color:#86efac;">+</span> Captures 100% of deletes instantly.</li>
+                <li><span style="color:#fca5a5;">-</span> Slows down every production transaction.</li>
+              </ul>
+            </div>
+            <div class="vcard" style="border-top: 3px solid var(--def-bd);">
+              <h4>Log-Based CDC <span class="badge-tag tag-fast">Gold Standard</span></h4>
+              <p>Scrapes DBMS Redo Logs / WAL</p>
+              <ul>
+                <li><span style="color:#86efac;">+</span> Zero overhead on OLTP apps.</li>
+                <li><span style="color:#86efac;">+</span> Captures all deletes &amp; changes.</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3>High-Performance Bulk Loading Protocol</h3>
+          <div class="visual-box">
+            <div class="flow-row">
+              <div class="flow-step">
+                <div class="num">Step 1</div>
+                <div class="title">Drop / Disable</div>
+                <div class="desc">Indexes &amp; FK constraints</div>
+              </div>
+              <div class="flow-arrow">&rarr;</div>
+              <div class="flow-step">
+                <div class="num">Step 2</div>
+                <div class="title">Direct Append</div>
+                <div class="desc">Fast bulk load (COPY / nologging)</div>
+              </div>
+              <div class="flow-arrow">&rarr;</div>
+              <div class="flow-step">
+                <div class="num">Step 3</div>
+                <div class="title">Rebuild Indexes</div>
+                <div class="desc">Parallelized single-pass build</div>
+              </div>
+              <div class="flow-arrow">&rarr;</div>
+              <div class="flow-step">
+                <div class="num">Step 4</div>
+                <div class="title">Re-enable FKs</div>
+                <div class="desc">Set-oriented validation</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card-grid-2">
+            <div class="vcard">
+              <h4>Surrogate Keys vs. Natural Keys</h4>
+              <p>Natural operational keys change, get reused, or conflict across source mergers. ETL assigns synthetic integer <strong>Surrogate Keys</strong> to insulate the warehouse and support <strong>Slowly Changing Dimensions (SCD 1–3)</strong>.</p>
+            </div>
+            <div class="vcard">
+              <h4>Traditional ETL vs. Modern ELT</h4>
+              <p><strong>ETL:</strong> Transforms data in a dedicated external server before loading.<br />
+              <strong>ELT (Cloud DW):</strong> Loads raw data into the warehouse first; transforms in-place using MPP compute (Snowflake, BigQuery, dbt).</p>
+            </div>
+          </div>
+
+          <div class="summary-box">
+            <h4>Key Takeaways</h4>
+            <ul>
+              <li>ETL accounts for 70%–80% of data warehouse project time and labor.</li>
+              <li>Data Staging Areas (DSA) isolate extraction and cleaning from production OLTP and end-user DW queries.</li>
+              <li>Log-Based CDC is the enterprise gold standard: zero impact on OLTP and 100% accurate change/delete capture.</li>
+              <li>Bulk loading drops indexes, streams data via direct-path append, and rebuilds indexes in parallel.</li>
+            </ul>
+          </div>
+
+          <div class="practice-section">
+            <div class="practice-section-label">Quick Quiz</div>
+            <details>
+              <summary>Easy: Why are surrogate keys used instead of operational natural keys in warehouse dimension tables?</summary>
+              <p><strong>Answer:</strong> Natural keys can change, be reused, or conflict when consolidating multiple sources. Surrogate keys provide stable, integer primary keys independent of source systems and allow multiple historical versions of rows (SCD Type 2).</p>
+            </details>
+            <details>
+              <summary>Medium: Why is log-based CDC superior to trigger-based CDC in production environments?</summary>
+              <p><strong>Answer:</strong> Trigger-based CDC executes synchronously inside production write transactions, degrading OLTP application throughput. Log-based CDC asynchronously reads the database's write-ahead log (WAL) out-of-band with zero overhead on production transactions.</p>
+            </details>
+          </div>
+        </div>
+
+        <!-- ──────────────────────────────────────────────────────────
+             TOPIC 6: Master Matrix & Practice Quiz
+             ────────────────────────────────────────────────────────── -->
+        <div class="topic-card" id="topic-6">
+          <h2><span class="topic-num">6</span>Master Comparison Matrix &amp; Practice Quiz</h2>
+          <p class="topic-subtitle">Algorithm Matrix, Exam Takeaway Checklist &amp; 5 High-Yield Exam Problems</p>
+
+          <h3>Master Join Algorithm Comparison Matrix</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Algorithm</th>
+                <th>Time Cost</th>
+                <th>Memory Needed</th>
+                <th>Pre-Sort?</th>
+                <th>Skew Sensitive?</th>
+                <th>Best DW Use Case</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Naive NLJ</strong></td>
+                <td>$O(|R| \times |S|)$</td>
+                <td>1 page</td>
+                <td>No</td>
+                <td>No</td>
+                <td><span class="badge-tag tag-slow">Never in DW</span> Only tiny toy tables.</td>
+              </tr>
+              <tr>
+                <td><strong>Block NLJ (BNLJ)</strong></td>
+                <td>$O(|R| \times |S| / M)$</td>
+                <td>$M$ pages</td>
+                <td>No</td>
+                <td>No</td>
+                <td>Fallback when no indexes exist and condition is non-equality.</td>
+              </tr>
+              <tr>
+                <td><strong>Index NLJ (INLJ)</strong></td>
+                <td>$O(|R| \log |S|)$</td>
+                <td>Index root</td>
+                <td>No</td>
+                <td>Low</td>
+                <td>Joining very small filtered dimension ($|R| &lt; 100$) with indexed fact.</td>
+              </tr>
+              <tr>
+                <td><strong>Sort-Merge (SMJ)</strong></td>
+                <td>$O(N \log N)$ or $O(R+S)$</td>
+                <td>Merge buffers</td>
+                <td>Yes</td>
+                <td>Low</td>
+                <td>Joining large tables already sorted or preserving key order for <code>GROUP BY</code>.</td>
+              </tr>
+              <tr>
+                <td><strong>Hybrid Hash</strong></td>
+                <td>$O(R + S)$ linear</td>
+                <td>Partition buffer</td>
+                <td>No</td>
+                <td>High</td>
+                <td><span class="badge-tag tag-fast">Gold Standard</span> General large analytical equijoins exceeding RAM.</td>
+              </tr>
+              <tr>
+                <td><strong>Pointer Join</strong></td>
+                <td>$O(|R|)$ traversal</td>
+                <td>Low</td>
+                <td>No</td>
+                <td>Low</td>
+                <td>Object-relational navigation when &lt; 1% of outer data participates.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="card-grid-2">
+            <div class="vcard" style="border-left:3px solid var(--ac);">
+              <h4>Query &amp; Join Cheat-Sheet</h4>
+              <ul>
+                <li><strong>Volcano:</strong> <code>open</code>, <code>next</code>, <code>close</code> pull pipeline.</li>
+                <li><strong>Tree Shapes:</strong> Left-deep (memory), Right-deep (parallel hash), Bushy (cluster).</li>
+                <li><strong>Graefe Duality:</strong> Sort = physical divide + logical merge; Hash = logical divide + physical concat.</li>
+                <li><strong>Winter's Law:</strong> Isolate participating &lt; 1% data; process with linear algorithms.</li>
+              </ul>
+            </div>
+            <div class="vcard" style="border-left:3px solid var(--def-bd);">
+              <h4>Optimization &amp; ETL Cheat-Sheet</h4>
+              <ul>
+                <li><strong>CBO:</strong> Relies on catalog distinct values $V(R,A)$ and histograms.</li>
+                <li><strong>Pushdown:</strong> Filter (&sigma;) before join (&bowtie;) to shrink intermediate data.</li>
+                <li><strong>DSA:</strong> Isolates heavy ETL transforms from production OLTP and DW.</li>
+                <li><strong>Bulk Load:</strong> Drop indexes &rarr; Direct append &rarr; Rebuild in parallel.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="practice-section">
+            <div class="practice-section-label">Master Exam Practice Quiz (5 High-Yield Problems)</div>
+
+            <details>
+              <summary>Question 1: Explain Goetz Graefe's Divide-and-Conquer Duality between sorting and hashing.</summary>
+              <p><strong>Answer:</strong> Sorting performs <em>physical division</em> (arbitrary memory-sized runs) and <em>logical combination</em> (key-comparison merge). Hashing performs <em>logical division</em> (key-based hash partitioning) and <em>physical combination</em> (concatenating bucket results). Sorting preserves sorted key order for downstream aggregations, while hashing destroys it.</p>
+            </details>
+
+            <details>
+              <summary>Question 2: In Richard Winter's case study, why did a 10,000&times; database scale jump cause a 4-billion-fold disk I/O explosion under Naive NLJ?</summary>
+              <p><strong>Answer:</strong> In the small test database, the entire inner customer table fit inside the RAM buffer pool (0 disk I/O during inner scans). In the enterprise warehouse, neither table fit in memory. For each qualifying transaction (4M rows), the engine performed a full 25 GB disk scan of the customer table, turning cached lookups into 6 Trillion physical disk reads.</p>
+            </details>
+
+            <details>
+              <summary>Question 3: Why does Hash Join have a structural advantage over Sort-Merge when joining a small build table R with a massive probe table S?</summary>
+              <p><strong>Answer:</strong> Because the recursive partitioning depth in Hash Join depends strictly on the build table $R$ ($\log_K(R/K)$). Massive table $S$ simply streams through as the probe input. In contrast, Sort-Merge Join must sort both tables, incurring heavy $O(S \log S)$ external merge overhead on the massive relation.</p>
+            </details>
+
+            <details>
+              <summary>Question 4: What are the trade-offs between Trigger-Based CDC and Log-Based CDC?</summary>
+              <p><strong>Answer:</strong> Trigger-based CDC runs synchronously inside application write transactions, degrading production OLTP performance and requiring maintenance when schemas change. Log-based CDC asynchronously scrapes the database's write-ahead log (WAL) with zero overhead on production applications while still capturing 100% of hard deletes.</p>
+            </details>
+
+            <details>
+              <summary>Question 5: Why do database engineers drop non-clustered indexes before bulk loading a large fact table?</summary>
+              <p><strong>Answer:</strong> Loading rows with indexes active causes each inserted row to search, lock, and modify B-tree index structures, creating millions of random I/O operations and page splits. Dropping indexes allows fast sequential data appending; rebuilding the index at the end allows the engine to sort keys and construct the entire B-tree in a single, parallelized pass.</p>
+            </details>
+          </div>
+        </div>
+
+      </div>
+      <!-- end module-container -->
+
+      <div class="bottom-nav">
+        <button id="prev-btn" onclick="goPrev()">
+          <div>
+            <span class="btn-label">&larr; Previous</span>
+            <span class="btn-title" id="prev-title">Topic</span>
+          </div>
+        </button>
+        <button id="next-btn" onclick="goNext()">
+          <div>
+            <span class="btn-label">Next &rarr;</span>
+            <span class="btn-title" id="next-title">Topic</span>
+          </div>
+        </button>
+      </div>
+    </div>
+    <!-- end main-content -->
+
+    <button
+      id="back-to-top"
+      onclick="document.getElementById('main-content').scrollTo({ top: 0, behavior: 'smooth' })"
+    >
+      &uarr;
+    </button>
+
+    <script>
+      // ── List all topic IDs in order ────────────────────────
+      const topics = ["topic-1", "topic-2", "topic-3", "topic-4", "topic-5", "topic-6"];
+      let currentTopicIndex = 0;
+
+      function getTopicTitle(id) {
+        const link = document.querySelector(`.nav-sublist a[onclick*="'${id}'"]`) ||
+                     document.querySelector(`.nav-sublist a[onclick*='"${id}"']`);
+        if (link) {
+          const numEl = link.querySelector('.nav-num');
+          if (numEl) {
+            return link.textContent.replace(numEl.textContent, '').trim();
+          }
+          return link.textContent.replace(/^\d+\s*/, '').trim();
+        }
+        const card = document.getElementById(id);
+        if (card) {
+          const h2 = card.querySelector('h2');
+          if (h2) {
+            const numEl = h2.querySelector('.topic-num');
+            if (numEl) {
+              return h2.textContent.replace(numEl.textContent, '').trim();
+            }
+            return h2.textContent.replace(/^\d+\s*/, '').trim();
+          }
+        }
+        return 'Topic';
+      }
+
+      function toggleSidebar() {
+        const sb = document.getElementById('sidebar');
+        const bd = document.getElementById('sidebar-backdrop');
+        if (sb) sb.classList.toggle('open');
+        if (bd) bd.classList.toggle('active');
+      }
+
+      function showTopic(id) {
+        document
+          .querySelectorAll(".topic-card")
+          .forEach((c) => (c.style.display = "none"));
+        const t = document.getElementById(id);
+        if (t) t.style.display = "block";
+        currentTopicIndex = topics.indexOf(id);
+
+        document
+          .querySelectorAll(".nav-sublist a")
+          .forEach((a) => a.classList.remove("active"));
+        const lk = document.querySelector(`.nav-sublist a[onclick*="'${id}'"]`) ||
+                   document.querySelector(`.nav-sublist a[onclick*='"${id}"']`);
+        if (lk) {
+          lk.classList.add("active");
+          const sublist = lk.closest('.nav-sublist');
+          if (sublist && sublist.style.display === 'none') {
+            sublist.style.display = 'block';
+            const chevron = sublist.previousElementSibling ? sublist.previousElementSibling.querySelector('.chevron') : null;
+            if (chevron) chevron.style.transform = 'rotate(0deg)';
+          }
+        }
+
+        const pb = document.getElementById("prev-btn");
+        const nb = document.getElementById("next-btn");
+        const pt = document.getElementById("prev-title");
+        const nt = document.getElementById("next-title");
+
+        if (currentTopicIndex > 0) {
+          pb.style.display = "flex";
+          if (pt) pt.textContent = getTopicTitle(topics[currentTopicIndex - 1]);
+        } else {
+          pb.style.display = "none";
+        }
+
+        if (currentTopicIndex < topics.length - 1) {
+          nb.style.display = "flex";
+          if (nt) nt.textContent = getTopicTitle(topics[currentTopicIndex + 1]);
+        } else {
+          nb.style.display = "none";
+        }
+
+        if (t) t.scrollIntoView({ behavior: "smooth", block: "start" });
+        if (window.innerWidth <= 768) {
+          const sb = document.getElementById('sidebar');
+          const bd = document.getElementById('sidebar-backdrop');
+          if (sb) sb.classList.remove('open');
+          if (bd) bd.classList.remove('active');
+        }
+      }
+
+      function goPrev() {
+        if (currentTopicIndex > 0) showTopic(topics[currentTopicIndex - 1]);
+      }
+      function goNext() {
+        if (currentTopicIndex < topics.length - 1)
+          showTopic(topics[currentTopicIndex + 1]);
+      }
+
+      function toggleSection(el) {
+        const s = el.nextElementSibling,
+          c = el.querySelector(".chevron");
+        if (s.style.display === "none") {
+          s.style.display = "block";
+          c.style.transform = "rotate(0deg)";
+        } else {
+          s.style.display = "none";
+          c.style.transform = "rotate(-90deg)";
+        }
+      }
+
+      function filterContent() {
+        const q = document.getElementById("search-input").value.toLowerCase();
+        document
+          .querySelectorAll(".nav-sublist li")
+          .forEach(
+            (i) =>
+              (i.style.display = i.textContent.toLowerCase().includes(q)
+                ? ""
+                : "none"),
+          );
+      }
+
+      // Initialise
+      if (topics.length > 0) showTopic(topics[0]);
+      const mc = document.getElementById("main-content");
+      const bb = document.getElementById("back-to-top");
+      mc.addEventListener(
+        "scroll",
+        () => (bb.style.display = mc.scrollTop > 300 ? "flex" : "none"),
+      );
+    </script>
+  </body>
+</html>

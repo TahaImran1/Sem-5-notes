@@ -1,0 +1,2113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Data Analysis &amp; Visualization — Visualizing Data: Aesthetics &amp; Coordinate Systems</title>
+    <meta
+      name="description"
+      content="Concise high-yield visual notes for Claus O. Wilke's Fundamentals of Data Visualization (Chapters 2 & 3). Aesthetics, continuous vs discrete scales, Cartesian coordinates, aspect ratios, log/sqrt scales, polar coordinates, map projections, master summary, and interactive MCQ exam quiz."
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../notes.css" />
+    <style>
+      /* ── Compact Design & Visual Diagram Enhancements ── */
+      .citation-header {
+        background: rgba(217, 119, 87, 0.08);
+        border: 1px solid rgba(217, 119, 87, 0.25);
+        border-radius: 8px;
+        padding: 10px 14px;
+        font-size: 0.82rem;
+        color: var(--mt);
+        margin-bottom: 20px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .citation-header strong {
+        color: var(--ac);
+      }
+
+      .visual-card {
+        background: rgba(24, 24, 27, 0.7);
+        border: 1px solid var(--bd);
+        border-radius: 12px;
+        padding: 18px;
+        margin: 18px 0;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+      }
+      .visual-card h4 {
+        margin: 0 0 4px;
+        color: var(--tx);
+        font-size: 0.95rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .visual-card p.visual-caption {
+        font-size: 0.78rem;
+        color: var(--mt);
+        margin-bottom: 14px;
+      }
+
+      /* Aesthetic Channels Grid */
+      .aesthetic-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 12px;
+        margin: 14px 0;
+      }
+      .aes-card {
+        background: rgba(0, 0, 0, 0.3);
+        border: 1px solid var(--bd);
+        border-radius: 10px;
+        padding: 12px;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        transition: transform 0.2s, border-color 0.2s;
+      }
+      .aes-card:hover {
+        transform: translateY(-2px);
+        border-color: var(--ac);
+      }
+      .aes-card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .aes-name {
+        font-weight: 600;
+        font-size: 0.88rem;
+        color: var(--tx);
+      }
+      .aes-badge {
+        font-size: 0.65rem;
+        font-weight: 700;
+        padding: 2px 7px;
+        border-radius: 5px;
+        text-transform: uppercase;
+        letter-spacing: 0.4px;
+      }
+      .badge-both {
+        background: rgba(16, 185, 129, 0.18);
+        color: var(--def-bd);
+        border: 1px solid rgba(16, 185, 129, 0.3);
+      }
+      .badge-discrete {
+        background: rgba(234, 179, 8, 0.18);
+        color: #eab308;
+        border: 1px solid rgba(234, 179, 8, 0.3);
+      }
+      .aes-demo-box {
+        height: 52px;
+        background: rgba(255, 255, 255, 0.02);
+        border-radius: 6px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        padding: 0 10px;
+        border: 1px dashed rgba(255, 255, 255, 0.08);
+      }
+
+      /* Compact Data Types */
+      .datatype-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 12px;
+        margin: 16px 0;
+      }
+      .dt-box {
+        padding: 14px;
+        border-radius: 10px;
+        border: 1px solid var(--bd);
+        background: rgba(0, 0, 0, 0.25);
+      }
+      .dt-box.quant { border-top: 3px solid var(--exp-bd); }
+      .dt-box.qual { border-top: 3px solid var(--def-bd); }
+      .dt-box.temporal { border-top: 3px solid var(--qst-bd); }
+      .dt-box.textual { border-top: 3px solid var(--wrn-bd); }
+      .dt-box h4 {
+        margin: 0 0 6px;
+        font-size: 0.9rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .dt-box ul {
+        margin: 0;
+        padding-left: 16px;
+        font-size: 0.8rem;
+        color: var(--mt);
+      }
+      .dt-box ul li {
+        margin-bottom: 4px;
+      }
+      .dt-box ul li strong {
+        color: var(--tx);
+      }
+
+      /* Heatmap Simulation */
+      .heatmap-wrapper {
+        overflow-x: auto;
+        margin: 14px 0;
+      }
+      .heatmap-grid {
+        display: grid;
+        grid-template-columns: 85px repeat(12, 1fr);
+        gap: 3px;
+        min-width: 580px;
+        font-size: 0.72rem;
+        text-align: center;
+      }
+      .heatmap-cell {
+        padding: 6px 2px;
+        border-radius: 4px;
+        font-weight: 600;
+        color: #fff;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .heatmap-row-label {
+        display: flex;
+        align-items: center;
+        font-weight: 600;
+        color: var(--tx);
+        padding-right: 6px;
+        justify-content: flex-end;
+      }
+      .heatmap-col-header {
+        font-weight: 600;
+        color: var(--mt);
+        padding-bottom: 4px;
+      }
+
+      /* Aspect Ratio Cards */
+      .aspect-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 12px;
+        margin: 14px 0;
+      }
+      .aspect-card {
+        background: rgba(0, 0, 0, 0.25);
+        border: 1px solid var(--bd);
+        border-radius: 10px;
+        padding: 12px;
+        text-align: center;
+      }
+      .aspect-card h5 {
+        margin: 0 0 4px;
+        font-size: 0.85rem;
+        color: var(--ac);
+      }
+      .aspect-card p {
+        font-size: 0.76rem;
+        color: var(--mt);
+        margin: 0 0 10px;
+      }
+
+      .svg-diagram {
+        width: 100%;
+        max-width: 680px;
+        margin: 0 auto;
+        display: block;
+      }
+
+      /* Map Projection Cards */
+      .projection-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 12px;
+        margin: 14px 0;
+      }
+      .proj-card {
+        background: rgba(0, 0, 0, 0.25);
+        border: 1px solid var(--bd);
+        border-radius: 8px;
+        padding: 12px;
+        transition: border-color 0.2s;
+      }
+      .proj-card:hover {
+        border-color: var(--ac);
+      }
+      .proj-card h5 {
+        margin: 0 0 4px;
+        font-size: 0.88rem;
+        color: var(--tx);
+      }
+      .proj-property {
+        font-size: 0.74rem;
+        margin-bottom: 3px;
+      }
+      .proj-property strong {
+        color: var(--mt);
+      }
+
+      /* ── Interactive Quiz Styles ── */
+      .quiz-header-banner {
+        background: linear-gradient(135deg, rgba(217, 119, 87, 0.12), rgba(139, 92, 246, 0.12));
+        border: 1px solid rgba(217, 119, 87, 0.3);
+        border-radius: 12px;
+        padding: 18px 20px;
+        margin-bottom: 22px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 14px;
+      }
+      .quiz-title-wrap h3 {
+        margin: 0 0 2px;
+        font-size: 1.15rem;
+        color: #fff;
+      }
+      .quiz-title-wrap p {
+        margin: 0;
+        font-size: 0.8rem;
+        color: var(--mt);
+      }
+      .score-board {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .score-pill {
+        background: rgba(0, 0, 0, 0.45);
+        border: 1px solid var(--bd);
+        padding: 6px 14px;
+        border-radius: 20px;
+        font-weight: 700;
+        font-size: 0.9rem;
+        color: var(--ac);
+      }
+      .reset-quiz-btn {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid var(--bd);
+        color: var(--tx);
+        padding: 6px 14px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-family: inherit;
+        font-size: 0.78rem;
+        font-weight: 600;
+        transition: all 0.2s;
+      }
+      .reset-quiz-btn:hover {
+        background: var(--hv);
+        border-color: var(--ac);
+        color: var(--ac);
+      }
+
+      .mcq-card {
+        background: rgba(24, 24, 27, 0.65);
+        border: 1px solid var(--bd);
+        border-radius: 10px;
+        padding: 16px 18px;
+        margin-bottom: 16px;
+        transition: border-color 0.2s;
+      }
+      .mcq-card:hover {
+        border-color: rgba(217, 119, 87, 0.35);
+      }
+      .mcq-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 10px;
+        margin-bottom: 10px;
+      }
+      .mcq-qnum {
+        font-size: 0.68rem;
+        font-weight: 700;
+        background: rgba(217, 119, 87, 0.15);
+        color: var(--ac);
+        padding: 2px 7px;
+        border-radius: 5px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        flex-shrink: 0;
+      }
+      .mcq-question {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--tx);
+        line-height: 1.45;
+        flex: 1;
+      }
+      .mcq-options {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        margin: 10px 0;
+      }
+      .mcq-opt {
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid var(--bd);
+        border-radius: 6px;
+        padding: 8px 12px;
+        font-size: 0.83rem;
+        color: var(--tx);
+        cursor: pointer;
+        text-align: left;
+        font-family: inherit;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: all 0.15s;
+        outline: none;
+      }
+      .mcq-opt:hover:not(:disabled) {
+        background: rgba(255, 255, 255, 0.06);
+        border-color: var(--ac);
+      }
+      .mcq-opt .opt-letter {
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.08);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.68rem;
+        font-weight: 700;
+        flex-shrink: 0;
+      }
+      .mcq-opt.selected-correct {
+        background: rgba(16, 185, 129, 0.18) !important;
+        border-color: var(--def-bd) !important;
+        color: #ffffff !important;
+      }
+      .mcq-opt.selected-correct .opt-letter {
+        background: var(--def-bd) !important;
+        color: #000 !important;
+      }
+      .mcq-opt.selected-incorrect {
+        background: rgba(239, 68, 68, 0.18) !important;
+        border-color: #ef4444 !important;
+        color: #ffffff !important;
+      }
+      .mcq-opt.selected-incorrect .opt-letter {
+        background: #ef4444 !important;
+        color: #fff !important;
+      }
+      .mcq-opt.show-correct {
+        background: rgba(16, 185, 129, 0.1) !important;
+        border-color: var(--def-bd) !important;
+      }
+      .mcq-opt.show-correct .opt-letter {
+        background: var(--def-bd) !important;
+        color: #000 !important;
+      }
+      .mcq-opt:disabled {
+        cursor: default;
+      }
+      .mcq-feedback {
+        display: none;
+        padding: 10px 14px;
+        border-radius: 6px;
+        font-size: 0.8rem;
+        line-height: 1.5;
+        margin-top: 8px;
+      }
+      .mcq-feedback.visible { display: block; }
+      .mcq-feedback.correct {
+        background: rgba(16, 185, 129, 0.08);
+        border-left: 3px solid var(--def-bd);
+        color: #bbf7d0;
+      }
+      .mcq-feedback.incorrect {
+        background: rgba(239, 68, 68, 0.08);
+        border-left: 3px solid #ef4444;
+        color: #fecaca;
+      }
+
+      .exam-trap-box {
+        background: rgba(240, 82, 79, 0.06);
+        border: 1px solid rgba(240, 82, 79, 0.3);
+        border-left: 4px solid var(--crit-bd);
+        border-radius: 8px;
+        padding: 12px 16px;
+        margin: 12px 0;
+      }
+      .exam-trap-box h5 {
+        margin: 0 0 4px;
+        color: var(--crit-bd);
+        font-size: 0.88rem;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="menu-toggle" onclick="toggleSidebar()" aria-label="Toggle navigation">☰</button>
+    <div id="sidebar-backdrop" onclick="toggleSidebar()"></div>
+
+    <!-- ═══════════════════════════════════════════════════════
+     SIDEBAR
+     ═══════════════════════════════════════════════════════ -->
+    <div id="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-header-text">
+          <div class="sidebar-course-label">Course Notes</div>
+          <div class="sidebar-title">Data Analysis &amp; Visualization</div>
+        </div>
+      </div>
+      <div class="sidebar-search-wrap">
+        <input
+          type="text"
+          id="search-input"
+          placeholder="Search topics…"
+          onkeyup="filterContent()"
+        />
+      </div>
+      <ul class="nav-list" id="nav-list">
+        <!-- Current Module (Active & Expandable) -->
+        <li class="nav-section">
+          <div class="nav-section-title" onclick="toggleSection(this)">
+            <span>Module 7 — Visualizing Data</span>
+            <span class="chevron">▼</span>
+          </div>
+          <ul class="nav-sublist">
+            <li>
+              <a href="javascript:void(0)" onclick="showTopic('topic-1')">
+                <span class="nav-num">01</span>Aesthetics &amp; Data Types
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" onclick="showTopic('topic-2')">
+                <span class="nav-num">02</span>Scales &amp; Multi-Aesthetic Mapping
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" onclick="showTopic('topic-3')">
+                <span class="nav-num">03</span>Cartesian Coordinates &amp; Aspect Ratios
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" onclick="showTopic('topic-4')">
+                <span class="nav-num">04</span>Nonlinear Axes (Log &amp; Sqrt)
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" onclick="showTopic('topic-5')">
+                <span class="nav-num">05</span>Curved &amp; Geospatial Coordinates
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" onclick="showTopic('topic-6')">
+                <span class="nav-num">06</span>📋 Master Exam Summary
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" onclick="showTopic('topic-7')">
+                <span class="nav-num">07</span>🎯 MCQ Exam Quiz
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- Other Course Modules (Cross-File Links) -->
+        <li>
+          <a class="nav-module-link" href="./1- Introduction to Data Analysis & Visualization.html">
+            <span class="nav-num">01</span>Introduction to DAV
+          </a>
+        </li>
+        <li>
+          <a class="nav-module-link" href="./2- Data Analysis Lifecycle.html">
+            <span class="nav-num">02</span>Data Analysis Lifecycle
+          </a>
+        </li>
+        <li>
+          <a class="nav-module-link" href="./3- Data Preparation.html">
+            <span class="nav-num">03</span>Data Preparation
+          </a>
+        </li>
+        <li>
+          <a class="nav-module-link" href="./4- Exploratory Data Analysis.html">
+            <span class="nav-num">04</span>Exploratory Data Analysis
+          </a>
+        </li>
+        <li>
+          <a class="nav-module-link" href="./5- Evolution of Data Architecture.html">
+            <span class="nav-num">05</span>Evolution of Data Architecture
+          </a>
+        </li>
+        <li>
+          <a class="nav-module-link" href="./6- Distributed Data Processing & Apache Spark.html">
+            <span class="nav-num">06</span>Distributed Processing & Spark
+          </a>
+        </li>
+        <li>
+          <a class="nav-module-link" href="./8- Lab Midterm Sequential Codes & Exam Guide.html">
+            <span class="nav-num">08</span>Lab Midterm Sequential Codes & Exam Guide
+          </a>
+        </li>
+              <li>
+          <a class="nav-module-link" href="./9- Principles of Figure Design & Visualization Pitfalls.html">
+            <span class="nav-num">09</span>Principles of Figure Design &amp; Pitfalls
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════
+     MAIN CONTENT
+     ═══════════════════════════════════════════════════════ -->
+    <div id="main-content">
+      <div class="module-container" id="module-7">
+        <div class="module-header">
+          <div class="module-eyebrow">Data Analysis &amp; Visualization • Chapters 2 &amp; 3</div>
+          <h1 class="module-title">Visualizing Data: Mapping Aesthetics &amp; Coordinate Systems</h1>
+        </div>
+
+        <div class="citation-header">
+          <span>📖</span>
+          <div>
+            <strong>Core Reference:</strong> Claus O. Wilke, <em>Fundamentals of Data Visualization</em> (O'Reilly, 2019), Ch 2 (<em>Mapping Data onto Aesthetics</em>) &amp; Ch 3 (<em>Coordinate Systems and Axes</em>).
+          </div>
+        </div>
+
+        <!-- ───────────────────────────────────────────────────
+         TOPIC 1: AESTHETICS & TYPES OF DATA
+         ─────────────────────────────────────────────────── -->
+        <div class="topic-card" id="topic-1">
+          <h2><span class="topic-num">1</span>Aesthetics and Types of Data</h2>
+          <p class="topic-subtitle">The grammar of graphics: mapping raw data values into quantifiable visual channels.</p>
+
+          <p>
+            All data visualizations share a unified foundation: they systematically map data values into quantifiable, visible features of graphical marks. These visual attributes are called <strong>aesthetics</strong>.
+          </p>
+
+          <div class="definition">
+            <div class="callout-label">Definition</div>
+            <strong>Aesthetic:</strong> A quantifiable visual property of a graphical mark (position, shape, size, color, line width, line type) varied systematically to represent data.
+            <br />
+            <em>Intuitive translation: The visual dial you twist (making a dot higher, larger, or darker) to represent data values.</em>
+          </div>
+
+          <!-- Aesthetic Channels Visual Diagram -->
+          <div class="visual-card">
+            <h4>🎨 Aesthetic Channels &amp; Data Capabilities</h4>
+            <p class="visual-caption">Aesthetics are categorized by whether they support continuous gradients or are strictly discrete.</p>
+
+            <div class="aesthetic-grid">
+              <div class="aes-card">
+                <div class="aes-card-header">
+                  <span class="aes-name">1. Position (x, y)</span>
+                  <span class="aes-badge badge-both">Continuous &amp; Discrete</span>
+                </div>
+                <div class="aes-demo-box">
+                  <svg width="180" height="34" viewBox="0 0 180 34">
+                    <line x1="10" y1="17" x2="170" y2="17" stroke="#52525b" stroke-width="1.5" />
+                    <circle cx="30" cy="17" r="5" fill="#d97757" />
+                    <circle cx="85" cy="17" r="5" fill="#4fa3e3" />
+                    <circle cx="150" cy="17" r="5" fill="#4fbf8b" />
+                  </svg>
+                </div>
+                <p style="font-size:0.75rem; color:var(--mt); margin:0;">
+                  Horizontal (x) and vertical (y) placement. Rank 1 in human perceptual accuracy.
+                </p>
+              </div>
+
+              <div class="aes-card">
+                <div class="aes-card-header">
+                  <span class="aes-name">2. Size / Area</span>
+                  <span class="aes-badge badge-both">Continuous &amp; Discrete</span>
+                </div>
+                <div class="aes-demo-box">
+                  <svg width="180" height="34" viewBox="0 0 180 34">
+                    <circle cx="30" cy="17" r="3" fill="#d97757" />
+                    <circle cx="80" cy="17" r="6" fill="#d97757" />
+                    <circle cx="145" cy="17" r="11" fill="#d97757" />
+                  </svg>
+                </div>
+                <p style="font-size:0.75rem; color:var(--mt); margin:0;">
+                  Bubble area/length. Encodes magnitudes (population, GDP, weight).
+                </p>
+              </div>
+
+              <div class="aes-card">
+                <div class="aes-card-header">
+                  <span class="aes-name">3. Color (Hue &amp; Lum)</span>
+                  <span class="aes-badge badge-both">Continuous &amp; Discrete</span>
+                </div>
+                <div class="aes-demo-box">
+                  <div style="display:flex; width:80%; height:14px; border-radius:4px; overflow:hidden; border:1px solid #3f3f46;">
+                    <div style="flex:1; background:#3b82f6;"></div>
+                    <div style="flex:1; background:#10b981;"></div>
+                    <div style="flex:1; background:#f59e0b;"></div>
+                    <div style="flex:1; background:#ef4444;"></div>
+                  </div>
+                </div>
+                <p style="font-size:0.75rem; color:var(--mt); margin:0;">
+                  Luminance/saturation for continuous metrics; distinct hues for categories.
+                </p>
+              </div>
+
+              <div class="aes-card">
+                <div class="aes-card-header">
+                  <span class="aes-name">4. Line Width</span>
+                  <span class="aes-badge badge-both">Continuous &amp; Discrete</span>
+                </div>
+                <div class="aes-demo-box">
+                  <svg width="180" height="34" viewBox="0 0 180 34">
+                    <line x1="20" y1="9" x2="160" y2="9" stroke="#a1a1aa" stroke-width="1.5" />
+                    <line x1="20" y1="18" x2="160" y2="18" stroke="#a1a1aa" stroke-width="3" />
+                    <line x1="20" y1="27" x2="160" y2="27" stroke="#a1a1aa" stroke-width="5" />
+                  </svg>
+                </div>
+                <p style="font-size:0.75rem; color:var(--mt); margin:0;">
+                  Thickness of paths. Useful for network traffic or flow volume.
+                </p>
+              </div>
+
+              <div class="aes-card">
+                <div class="aes-card-header">
+                  <span class="aes-name">5. Shape</span>
+                  <span class="aes-badge badge-discrete">Discrete Only</span>
+                </div>
+                <div class="aes-demo-box">
+                  <svg width="180" height="34" viewBox="0 0 180 34">
+                    <circle cx="30" cy="17" r="6" fill="#d97757" />
+                    <rect x="75" y="11" width="12" height="12" fill="#4fa3e3" />
+                    <polygon points="145,10 152,24 138,24" fill="#4fbf8b" />
+                  </svg>
+                </div>
+                <p style="font-size:0.75rem; color:var(--mt); margin:0;">
+                  Circles, triangles, squares. Cannot represent continuous data (no intermediate shapes).
+                </p>
+              </div>
+
+              <div class="aes-card">
+                <div class="aes-card-header">
+                  <span class="aes-name">6. Line Type</span>
+                  <span class="aes-badge badge-discrete">Discrete Only</span>
+                </div>
+                <div class="aes-demo-box">
+                  <svg width="180" height="34" viewBox="0 0 180 34">
+                    <line x1="15" y1="10" x2="165" y2="10" stroke="#d97757" stroke-width="2" />
+                    <line x1="15" y1="17" x2="165" y2="17" stroke="#4fa3e3" stroke-width="2" stroke-dasharray="5,3" />
+                    <line x1="15" y1="24" x2="165" y2="24" stroke="#4fbf8b" stroke-width="2" stroke-dasharray="2,3" />
+                  </svg>
+                </div>
+                <p style="font-size:0.75rem; color:var(--mt); margin:0;">
+                  Solid, dashed, dotted. Strictly categorical.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="warning-box">
+            <div class="callout-label">Quiz Trap: Continuous vs. Discrete Aesthetics</div>
+            <strong>Shape and Line Type can NEVER represent continuous quantitative data!</strong>
+            Continuous data requires infinitely fine intermediates (e.g., between 4.1 and 4.2). No intermediate shape exists halfway between a square and a triangle.
+          </div>
+
+          <h3>Variable Types Taxonomy</h3>
+          <div class="datatype-container">
+            <div class="dt-box quant">
+              <h4>Quantitative (Numerical)</h4>
+              <ul>
+                <li><strong>Continuous:</strong> Real numbers with infinite intermediates (e.g. Height: 1.75m, Temp: 72.4°F, Duration: 50.51s).</li>
+                <li><strong>Discrete:</strong> Countable units where fractional values do not exist in dataset (e.g. Persons: 1, 2, 3; Shoe sizes: 8.5, 9.0).</li>
+              </ul>
+            </div>
+
+            <div class="dt-box qual">
+              <h4>Qualitative (Categorical)</h4>
+              <ul>
+                <li><strong>Unordered Factor (Nominal):</strong> Discrete categories with no inherent ranking (e.g. <code>dog, cat, fish</code>; <code>Chicago, Houston</code>).</li>
+                <li><strong>Ordered Factor (Ordinal):</strong> Discrete categories with strict hierarchy (e.g. <code>poor &lt; fair &lt; good</code>; <code>Jan, Feb, Mar</code>).</li>
+              </ul>
+            </div>
+
+            <div class="dt-box temporal">
+              <h4>Date / Time</h4>
+              <ul>
+                <li><strong>Specific Timestamps:</strong> <code>Jan 5 2024, 08:30 AM</code> (continuous elapsed time or discrete calendar day).</li>
+                <li><strong>Cyclical Dates:</strong> Repeating periods without year (e.g. <code>July 4th</code>, <code>Month 1-12</code>).</li>
+              </ul>
+            </div>
+
+            <div class="dt-box textual">
+              <h4>Text Data</h4>
+              <ul>
+                <li><strong>Free-Form Text:</strong> Open-ended text labels or unstructured prose. Treated as qualitative labels.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="definition">
+            <div class="callout-label">Definition</div>
+            <strong>Factor and Levels:</strong> A qualitative categorical variable is called a <strong>factor</strong>, and each unique category within it is a <strong>level</strong>.
+            <br />
+            <em>Example: Variable `City` is a factor; its levels are `['Chicago', 'San Diego', 'Houston', 'Death Valley']`.</em>
+          </div>
+
+          <h3>Summary Table: Data Types &amp; Valid Aesthetics</h3>
+          <table style="width:100%; border-collapse:collapse; margin:14px 0; font-size:0.85rem;">
+            <thead>
+              <tr style="border-bottom:2px solid var(--bd); text-align:left;">
+                <th style="padding:8px;">Data Type</th>
+                <th style="padding:8px;">Examples</th>
+                <th style="padding:8px;">Scale</th>
+                <th style="padding:8px;">Valid Aesthetics</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid var(--bd);">
+                <td style="padding:8px;"><strong>Quantitative Continuous</strong></td>
+                <td style="padding:8px;"><code>1.3, 5.7, 83.0, 1.5×10⁻²</code></td>
+                <td style="padding:8px;"><span class="aes-badge badge-both">Continuous</span></td>
+                <td style="padding:8px;">Position, Size/Area, Color luminance, Line width</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--bd);">
+                <td style="padding:8px;"><strong>Quantitative Discrete</strong></td>
+                <td style="padding:8px;"><code>1, 2, 3, 4</code></td>
+                <td style="padding:8px;"><span class="aes-badge badge-discrete">Discrete</span></td>
+                <td style="padding:8px;">Position, Size, Shape, Line type, Color</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--bd);">
+                <td style="padding:8px;"><strong>Qualitative Unordered</strong></td>
+                <td style="padding:8px;"><code>dog, cat, fish</code>; <code>Chicago</code></td>
+                <td style="padding:8px;"><span class="aes-badge badge-discrete">Discrete</span></td>
+                <td style="padding:8px;">Color hue, Shape, Line type, Position (arbitrary order)</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--bd);">
+                <td style="padding:8px;"><strong>Qualitative Ordered</strong></td>
+                <td style="padding:8px;"><code>poor, fair, good</code>; <code>Jan-Dec</code></td>
+                <td style="padding:8px;"><span class="aes-badge badge-discrete">Discrete</span></td>
+                <td style="padding:8px;">Position (fixed order), Color lightness, Size</td>
+              </tr>
+              <tr>
+                <td style="padding:8px;"><strong>Date / Time</strong></td>
+                <td style="padding:8px;"><code>Jan 5 2018, 8:03 AM</code></td>
+                <td style="padding:8px;"><span class="aes-badge badge-both">Both</span></td>
+                <td style="padding:8px;">Position timeline, Color gradient</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="example">
+            <div class="callout-label">Example: Dissecting the NOAA Weather Dataset (Wilke Table 2-2)</div>
+            <pre style="margin:6px 0; font-size:0.8rem;"><code>Month (Jan)      → Ordered Factor (12 natural sequential levels)
+Day (1, 2)       → Quantitative Discrete (calendar day units)
+Location (SD)    → Unordered Factor (4 geographical nominal categories)
+Station ID       → Unordered Factor (identifier code, NOT quantitative!)
+Temp (55.2°F)    → Quantitative Continuous (real-valued measurement)</code></pre>
+          </div>
+
+          <div class="note-box">
+            <div class="callout-label">Pro Tip: ID Numbers are NOT Quantitative</div>
+            Variables containing digits (e.g. Station ID <code>USW00014819</code>, Zip Code <code>90210</code>, Student ID) are <strong>unordered factors</strong> because arithmetic (averaging, addition) is meaningless.
+          </div>
+
+          <div class="practice-section">
+            <div class="practice-section-label">Practice Questions for Topic 1</div>
+            <details>
+              <summary>Easy: Can you map continuous salary values to the "Shape" aesthetic?</summary>
+              <p><strong>Answer:</strong> <strong>No.</strong> Salary is continuous, while shape is strictly discrete with no intermediate geometric states.</p>
+            </details>
+            <details>
+              <summary>Medium: What distinguishes an Ordered Factor from an Unordered Factor?</summary>
+              <p><strong>Answer:</strong> An ordered factor has an intrinsic ranking (e.g. <code>poor &lt; fair &lt; good</code>) that must be preserved on the visual axis. Unordered factors have no ranking and can be sorted arbitrarily.</p>
+            </details>
+            <details>
+              <summary>Hard: Can fractional numbers (e.g. 0.5, 1.0, 1.5) be classified as Quantitative Discrete?</summary>
+              <p><strong>Answer:</strong> <strong>Yes.</strong> If intermediate fractions cannot exist in the dataset (e.g. half-size shoe measurements), the numbers represent discrete units.</p>
+            </details>
+          </div>
+
+          <div class="summary-box">
+            <h4>Key Takeaways: Aesthetics &amp; Data Types</h4>
+            <ul>
+              <li><strong>Continuous Aesthetics:</strong> Position, size, color luminance, and line width.</li>
+              <li><strong>Discrete-Only Aesthetics:</strong> Shape and line type (never use for continuous data).</li>
+              <li><strong>Factors &amp; Levels:</strong> Categorical variables are factors; unique values are levels. Ordered factors demand strict visual sequencing.</li>
+            </ul>
+          </div>
+        </div>
+        <!-- end topic-1 -->
+
+        <!-- ───────────────────────────────────────────────────
+         TOPIC 2: SCALES & MULTI-AESTHETIC DATA MAPPING
+         ─────────────────────────────────────────────────── -->
+        <div class="topic-card" id="topic-2">
+          <h2><span class="topic-num">2</span>Scales and Multi-Aesthetic Data Mapping</h2>
+          <p class="topic-subtitle">How scales create unambiguous 1-to-1 mappings and encode high-dimensional data.</p>
+
+          <p>
+            A <strong>scale</strong> is the mathematical bridge linking data values to aesthetic values.
+          </p>
+
+          <div class="definition">
+            <div class="callout-label">Definition</div>
+            <strong>Scale:</strong> A formal mapping function from data space to aesthetic space.
+            <br />
+            <strong>The One-to-One Rule:</strong> Scales must be strictly <strong>bijective (one-to-one and invertible)</strong>. Each data value maps to exactly one aesthetic value, and vice-versa. Non-invertible scales cause visual ambiguity.
+          </div>
+
+          <!-- Scale Mapping SVG Diagram -->
+          <div class="visual-card">
+            <h4>🔄 One-to-One Scale Mapping Architecture</h4>
+            <p class="visual-caption">A scale takes input from the Data Domain and projects it onto the Visual Aesthetic Range.</p>
+            <svg class="svg-diagram" viewBox="0 0 680 130">
+              <rect x="20" y="15" width="160" height="100" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="1.5" />
+              <text x="100" y="38" fill="#a1a1aa" font-size="11" font-weight="700" text-anchor="middle">DATA SPACE</text>
+              <text x="45" y="62" fill="#ededed" font-size="11">Value: 1</text>
+              <text x="45" y="80" fill="#ededed" font-size="11">Value: 2</text>
+              <text x="45" y="98" fill="#ededed" font-size="11">Value: 3</text>
+
+              <g transform="translate(230, 30)">
+                <rect x="5" y="5" width="70" height="50" rx="6" fill="rgba(217,119,87,0.15)" stroke="#d97757" stroke-width="1.5" />
+                <text x="40" y="28" fill="#d97757" font-size="10" font-weight="700" text-anchor="middle">SCALE</text>
+                <text x="40" y="42" fill="#a1a1aa" font-size="8" text-anchor="middle">1-to-1 Mapping</text>
+              </g>
+
+              <rect x="360" y="15" width="290" height="100" rx="8" fill="#18181b" stroke="#3f3f46" stroke-width="1.5" />
+              <text x="505" y="38" fill="#a1a1aa" font-size="11" font-weight="700" text-anchor="middle">AESTHETIC RANGE</text>
+              <circle cx="400" cy="62" r="5" fill="#3b82f6" />
+              <text x="415" y="66" fill="#a1a1aa" font-size="10">x = 100px (Position)</text>
+              <rect x="395" y="78" width="10" height="10" fill="#10b981" />
+              <text x="415" y="86" fill="#a1a1aa" font-size="10">Square (Shape)</text>
+              <circle cx="540" cy="62" r="8" fill="#d97757" />
+              <text x="555" y="66" fill="#a1a1aa" font-size="10">Radius 8 (Size)</text>
+            </svg>
+          </div>
+
+          <h3>Alternative Mappings: Line Plot vs. Heatmap Tiles</h3>
+          <p>
+            There is rarely only one valid mapping for a dataset. Consider Wilke's analysis of the NOAA temperature normals across four cities:
+          </p>
+
+          <div class="visual-card">
+            <h4>📊 Line Plot vs. Heatmap Tiles (Wilke Figures 2-3 &amp; 2-4)</h4>
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:16px;">
+              <!-- Line Plot -->
+              <div style="background:rgba(0,0,0,0.3); border:1px solid var(--bd); border-radius:8px; padding:12px;">
+                <h5 style="margin:0 0 4px; color:var(--ac); font-size:0.85rem;">Mapping 1: Line Plot (Continuous Y)</h5>
+                <p style="font-size:0.74rem; color:var(--mt); margin-bottom:8px;">
+                  <code>x</code> = Day | <code>y</code> = Temperature (Continuous) | <code>color</code> = Location
+                </p>
+                <svg viewBox="0 0 300 140" style="width:100%; height:auto;">
+                  <line x1="35" y1="120" x2="280" y2="120" stroke="#52525b" />
+                  <line x1="35" y1="15" x2="35" y2="120" stroke="#52525b" />
+                  <text x="30" y="122" fill="#a1a1aa" font-size="8" text-anchor="end">20°</text>
+                  <text x="30" y="30" fill="#a1a1aa" font-size="8" text-anchor="end">100°</text>
+                  <text x="45" y="132" fill="#a1a1aa" font-size="8">Jan</text>
+                  <text x="155" y="132" fill="#a1a1aa" font-size="8">Jul</text>
+                  <text x="265" y="132" fill="#a1a1aa" font-size="8">Dec</text>
+                  <path d="M 40 90 Q 155 25 270 90" fill="none" stroke="#f97316" stroke-width="2" />
+                  <path d="M 40 85 Q 155 50 270 85" fill="none" stroke="#10b981" stroke-width="2" />
+                  <path d="M 40 82 Q 155 68 270 82" fill="none" stroke="#3b82f6" stroke-width="2" />
+                  <path d="M 40 115 Q 155 55 270 115" fill="none" stroke="#b385f0" stroke-width="2" />
+                </svg>
+                <div style="font-size:0.72rem; color:var(--mt); margin-top:4px;">Best for tracking continuous change over time.</div>
+              </div>
+
+              <!-- Heatmap -->
+              <div style="background:rgba(0,0,0,0.3); border:1px solid var(--bd); border-radius:8px; padding:12px;">
+                <h5 style="margin:0 0 4px; color:var(--def-bd); font-size:0.85rem;">Mapping 2: Heatmap Tile Grid (Discrete X &amp; Y)</h5>
+                <p style="font-size:0.74rem; color:var(--mt); margin-bottom:8px;">
+                  <code>x</code> = Month | <code>y</code> = Location (Coldest→Hottest) | <code>fill</code> = Temperature
+                </p>
+                <div class="heatmap-wrapper">
+                  <div class="heatmap-grid" style="min-width:280px;">
+                    <div></div>
+                    <div class="heatmap-col-header">J</div>
+                    <div class="heatmap-col-header">F</div>
+                    <div class="heatmap-col-header">M</div>
+                    <div class="heatmap-col-header">A</div>
+                    <div class="heatmap-col-header">M</div>
+                    <div class="heatmap-col-header">J</div>
+                    <div class="heatmap-col-header">J</div>
+                    <div class="heatmap-col-header">A</div>
+                    <div class="heatmap-col-header">S</div>
+                    <div class="heatmap-col-header">O</div>
+                    <div class="heatmap-col-header">N</div>
+                    <div class="heatmap-col-header">D</div>
+
+                    <div class="heatmap-row-label">D. Valley</div>
+                    <div class="heatmap-cell" style="background:#f59e0b;">51</div>
+                    <div class="heatmap-cell" style="background:#f97316;">58</div>
+                    <div class="heatmap-cell" style="background:#ea580c;">67</div>
+                    <div class="heatmap-cell" style="background:#dc2626;">76</div>
+                    <div class="heatmap-cell" style="background:#b91c1c;">88</div>
+                    <div class="heatmap-cell" style="background:#991b1b;">98</div>
+                    <div class="heatmap-cell" style="background:#7f1d1d;">102</div>
+                    <div class="heatmap-cell" style="background:#7f1d1d;">101</div>
+                    <div class="heatmap-cell" style="background:#991b1b;">93</div>
+                    <div class="heatmap-cell" style="background:#dc2626;">79</div>
+                    <div class="heatmap-cell" style="background:#f97316;">62</div>
+                    <div class="heatmap-cell" style="background:#f59e0b;">51</div>
+
+                    <div class="heatmap-row-label">Houston</div>
+                    <div class="heatmap-cell" style="background:#3b82f6;">53</div>
+                    <div class="heatmap-cell" style="background:#10b981;">57</div>
+                    <div class="heatmap-cell" style="background:#10b981;">64</div>
+                    <div class="heatmap-cell" style="background:#f59e0b;">71</div>
+                    <div class="heatmap-cell" style="background:#f97316;">78</div>
+                    <div class="heatmap-cell" style="background:#ea580c;">83</div>
+                    <div class="heatmap-cell" style="background:#dc2626;">85</div>
+                    <div class="heatmap-cell" style="background:#dc2626;">85</div>
+                    <div class="heatmap-cell" style="background:#ea580c;">80</div>
+                    <div class="heatmap-cell" style="background:#f59e0b;">72</div>
+                    <div class="heatmap-cell" style="background:#10b981;">63</div>
+                    <div class="heatmap-cell" style="background:#3b82f6;">55</div>
+
+                    <div class="heatmap-row-label">San Diego</div>
+                    <div class="heatmap-cell" style="background:#3b82f6;">56</div>
+                    <div class="heatmap-cell" style="background:#3b82f6;">57</div>
+                    <div class="heatmap-cell" style="background:#10b981;">59</div>
+                    <div class="heatmap-cell" style="background:#10b981;">62</div>
+                    <div class="heatmap-cell" style="background:#10b981;">65</div>
+                    <div class="heatmap-cell" style="background:#f59e0b;">68</div>
+                    <div class="heatmap-cell" style="background:#f59e0b;">71</div>
+                    <div class="heatmap-cell" style="background:#f59e0b;">72</div>
+                    <div class="heatmap-cell" style="background:#f59e0b;">71</div>
+                    <div class="heatmap-cell" style="background:#10b981;">67</div>
+                    <div class="heatmap-cell" style="background:#10b981;">61</div>
+                    <div class="heatmap-cell" style="background:#3b82f6;">56</div>
+
+                    <div class="heatmap-row-label">Chicago</div>
+                    <div class="heatmap-cell" style="background:#1e3a8a;">25</div>
+                    <div class="heatmap-cell" style="background:#1e3a8a;">29</div>
+                    <div class="heatmap-cell" style="background:#2563eb;">39</div>
+                    <div class="heatmap-cell" style="background:#3b82f6;">49</div>
+                    <div class="heatmap-cell" style="background:#10b981;">60</div>
+                    <div class="heatmap-cell" style="background:#f59e0b;">70</div>
+                    <div class="heatmap-cell" style="background:#f97316;">76</div>
+                    <div class="heatmap-cell" style="background:#f59e0b;">74</div>
+                    <div class="heatmap-cell" style="background:#10b981;">66</div>
+                    <div class="heatmap-cell" style="background:#3b82f6;">54</div>
+                    <div class="heatmap-cell" style="background:#2563eb;">42</div>
+                    <div class="heatmap-cell" style="background:#1e3a8a;">29</div>
+                  </div>
+                </div>
+                <div style="font-size:0.72rem; color:var(--mt); margin-top:4px;">Staggering from coldest to hottest creates a clean gradient.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="definition">
+            <div class="callout-label">Scientific Rule</div>
+            <strong>Stone-Albers Szafir Area Saliency Rule (2014):</strong> When continuous quantitative data is mapped to <strong>color</strong>, graphical elements must have <em>sufficiently large visual areas</em> (like tiles) for the human visual cortex to distinguish shade differences. Thin lines fail.
+          </div>
+
+          <h3>Multi-Scale Mapping: Encoding 5 Variables (Wilke Fig 2-5)</h3>
+          <p>
+            Multiple scales can be layered onto a single scatter plot:
+          </p>
+          <ul style="margin-left:20px; line-height:1.7; font-size:0.85rem;">
+            <li><strong>X Position:</strong> Engine Displacement (Quantitative Continuous)</li>
+            <li><strong>Y Position:</strong> Fuel Efficiency / MPG (Quantitative Continuous)</li>
+            <li><strong>Color:</strong> Horsepower / Power (Quantitative Continuous)</li>
+            <li><strong>Size (Area):</strong> Car Weight (Quantitative Continuous)</li>
+            <li><strong>Shape:</strong> Cylinders: 4, 6, 8 (Qualitative Ordered / Discrete Count)</li>
+          </ul>
+
+          <div class="note-box">
+            <div class="callout-label">Ordering Unordered Factors</div>
+            On discrete axes, unordered factors should be sorted intentionally by a meaningful metric (e.g. coldest to hottest) rather than left alphabetical.
+          </div>
+
+          <div class="practice-section">
+            <div class="practice-section-label">Practice Questions for Topic 2</div>
+            <details>
+              <summary>Easy: Why must visual scales be one-to-one?</summary>
+              <p><strong>Answer:</strong> To prevent ambiguity; every data value must map to a unique visual mark, and vice-versa.</p>
+            </details>
+            <details>
+              <summary>Medium: Why did Wilke use square tiles instead of lines in the temperature heatmap?</summary>
+              <p><strong>Answer:</strong> Per Stone et al. (2014), continuous color requires large surface area for human eyes to perceive subtle differences in shade.</p>
+            </details>
+            <details>
+              <summary>Hard: Can Weight be mapped to Shape in the 5-variable car plot?</summary>
+              <p><strong>Answer:</strong> <strong>No.</strong> Weight is continuous, and shape cannot represent continuous data.</p>
+            </details>
+          </div>
+
+          <div class="summary-box">
+            <h4>Key Takeaways: Scales &amp; Multi-Aesthetic Mapping</h4>
+            <ul>
+              <li><strong>1-to-1 Mapping:</strong> Scales must be bijective functions to avoid ambiguous decoding.</li>
+              <li><strong>Area Saliency for Color:</strong> Continuous color requires large spatial blocks (heatmaps) rather than thin lines.</li>
+              <li><strong>Multi-Scale Stacking:</strong> Up to 5 variables can be encoded (x, y, color, size, shape), but shape must remain discrete.</li>
+            </ul>
+          </div>
+        </div>
+        <!-- end topic-2 -->
+
+        <!-- ───────────────────────────────────────────────────
+         TOPIC 3: CARTESIAN COORDINATES & ASPECT RATIOS
+         ─────────────────────────────────────────────────── -->
+        <div class="topic-card" id="topic-3">
+          <h2><span class="topic-num">3</span>Cartesian Coordinates, Units &amp; Aspect Ratios</h2>
+          <p class="topic-subtitle">Geometric arrangements, aspect ratio perception, and invariance under linear transformations.</p>
+
+          <div class="definition">
+            <div class="callout-label">Definition</div>
+            <strong>Coordinate System:</strong> A set of position scales and their relative geometric arrangement.
+            <br />
+            <strong>Cartesian Coordinates:</strong> Two straight axes ($x, y$) meeting orthogonally at 90°, with grid lines marking discrete steps in data units.
+          </div>
+
+          <h3>Aspect Ratio Dynamics</h3>
+          <p>
+            When axes measure <strong>different units</strong> (e.g. °F vs. Months), there is no physically mandated aspect ratio. Stretching or compressing changes perceived rate of change:
+          </p>
+
+          <!-- Aspect Ratio SVG Diagram -->
+          <div class="visual-card">
+            <h4>📐 Aspect Ratio Perception (Wilke Figure 3-2)</h4>
+            <div class="aspect-grid">
+              <div class="aspect-card">
+                <h5>(a) Tall &amp; Narrow</h5>
+                <p>Emphasizes vertical swings. Slopes appear steep.</p>
+                <svg viewBox="0 0 120 140" style="width:100%; max-width:110px; height:auto; margin:0 auto; display:block;">
+                  <rect width="120" height="140" fill="#18181b" stroke="#3f3f46" />
+                  <path d="M 15 110 Q 60 20 105 110" fill="none" stroke="#d97757" stroke-width="2" />
+                  <line x1="15" y1="125" x2="105" y2="125" stroke="#52525b" />
+                  <line x1="15" y1="15" x2="15" y2="125" stroke="#52525b" />
+                </svg>
+              </div>
+
+              <div class="aspect-card">
+                <h5>(b) Balanced (Banked ~45°)</h5>
+                <p>Natural proportional rate of change (Cleveland's principle).</p>
+                <svg viewBox="0 0 160 110" style="width:100%; max-width:140px; height:auto; margin:0 auto; display:block;">
+                  <rect width="160" height="110" fill="#18181b" stroke="#3f3f46" />
+                  <path d="M 15 85 Q 80 20 145 85" fill="none" stroke="#4fa3e3" stroke-width="2" />
+                  <line x1="15" y1="95" x2="145" y2="95" stroke="#52525b" />
+                  <line x1="15" y1="15" x2="15" y2="95" stroke="#52525b" />
+                </svg>
+              </div>
+
+              <div class="aspect-card">
+                <h5>(c) Short &amp; Wide</h5>
+                <p>De-emphasizes vertical swings. Curve appears flat.</p>
+                <svg viewBox="0 0 200 70" style="width:100%; max-width:180px; height:auto; margin:0 auto; display:block;">
+                  <rect width="200" height="70" fill="#18181b" stroke="#3f3f46" />
+                  <path d="M 15 50 Q 100 15 185 50" fill="none" stroke="#4fbf8b" stroke-width="2" />
+                  <line x1="15" y1="58" x2="185" y2="58" stroke="#52525b" />
+                  <line x1="15" y1="10" x2="15" y2="58" stroke="#52525b" />
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="warning-box">
+            <div class="callout-label">The Same-Units Rule: 1:1 Aspect Ratio Mandatory!</div>
+            When both axes measure the <strong>same physical quantity in the same units</strong> (e.g. Houston Temp vs. San Diego Temp in °F), the grid <strong>must form perfect squares (1:1 aspect ratio)</strong>. Otherwise, the 45° diagonal line of equality ($y = x$) rotates, distorting comparison.
+          </div>
+
+          <h3>Invariance Under Linear Transformations</h3>
+          <p>
+            Converting units is a linear transformation: $y' = a \cdot y + b$ (e.g. $C = \frac{5}{9}(F - 32)$).
+          </p>
+          <div class="definition">
+            <div class="callout-label">Core Principle</div>
+            <strong>Linear Invariance:</strong> Cartesian coordinate systems are strictly invariant under linear transformations. Changing units (°F to °C) shifts grid values, but the <strong>relative visual scatter of points and slopes remains 100% identical</strong>.
+          </div>
+
+          <!-- Linear Transformation SVG -->
+          <div class="visual-card">
+            <h4>🌡️ Linear Transformation Invariance (Wilke Figure 3-3)</h4>
+            <div style="display:flex; flex-wrap:wrap; justify-content:space-around; align-items:center; gap:16px;">
+              <div style="background:rgba(0,0,0,0.3); border:1px solid var(--bd); border-radius:8px; padding:10px; text-align:center; flex:1; min-width:200px;">
+                <strong style="color:var(--ac); font-size:0.85rem;">Fahrenheit (°F)</strong>
+                <svg viewBox="0 0 160 160" style="width:100%; max-width:150px; height:auto; margin-top:6px;">
+                  <rect x="25" y="15" width="120" height="120" fill="none" stroke="#52525b" />
+                  <line x1="25" y1="55" x2="145" y2="55" stroke="#27272a" />
+                  <line x1="25" y1="95" x2="145" y2="95" stroke="#27272a" />
+                  <line x1="65" y1="15" x2="65" y2="135" stroke="#27272a" />
+                  <line x1="105" y1="15" x2="105" y2="135" stroke="#27272a" />
+                  <text x="20" y="98" fill="#a1a1aa" font-size="8" text-anchor="end">60°</text>
+                  <text x="65" y="146" fill="#a1a1aa" font-size="8" text-anchor="middle">60°</text>
+                  <ellipse cx="85" cy="75" rx="35" ry="22" fill="none" stroke="#d97757" stroke-width="2" transform="rotate(-35, 85, 75)" />
+                </svg>
+              </div>
+
+              <div style="font-size:1.5rem; color:var(--ac); font-weight:700;">≡</div>
+
+              <div style="background:rgba(0,0,0,0.3); border:1px solid var(--bd); border-radius:8px; padding:10px; text-align:center; flex:1; min-width:200px;">
+                <strong style="color:var(--def-bd); font-size:0.85rem;">Celsius (°C)</strong>
+                <svg viewBox="0 0 160 160" style="width:100%; max-width:150px; height:auto; margin-top:6px;">
+                  <rect x="25" y="15" width="120" height="120" fill="none" stroke="#52525b" />
+                  <line x1="25" y1="55" x2="145" y2="55" stroke="#27272a" />
+                  <line x1="25" y1="95" x2="145" y2="95" stroke="#27272a" />
+                  <line x1="65" y1="15" x2="65" y2="135" stroke="#27272a" />
+                  <line x1="105" y1="15" x2="105" y2="135" stroke="#27272a" />
+                  <text x="20" y="98" fill="#a1a1aa" font-size="8" text-anchor="end">15°</text>
+                  <text x="65" y="146" fill="#a1a1aa" font-size="8" text-anchor="middle">15°</text>
+                  <ellipse cx="85" cy="75" rx="35" ry="22" fill="none" stroke="#4fbf8b" stroke-width="2" transform="rotate(-35, 85, 75)" />
+                </svg>
+              </div>
+            </div>
+            <p style="font-size:0.75rem; color:var(--mt); text-align:center; margin-top:8px;">Identical visual geometry; only axis numbers shift.</p>
+          </div>
+
+          <div class="practice-section">
+            <div class="practice-section-label">Practice Questions for Topic 3</div>
+            <details>
+              <summary>Easy: What is an orthogonal coordinate system?</summary>
+              <p><strong>Answer:</strong> A system where axes meet at right angles (90 degrees).</p>
+            </details>
+            <details>
+              <summary>Medium: When plotting weight (lbs) vs. height (inches), must the aspect ratio be 1:1?</summary>
+              <p><strong>Answer:</strong> <strong>No.</strong> Pounds and inches are different physical units. Aspect ratio can be adjusted freely.</p>
+            </details>
+            <details>
+              <summary>Hard: Why does converting miles to km leave a Cartesian scatter plot unchanged?</summary>
+              <p><strong>Answer:</strong> Converting miles to km is a linear transformation ($km = 1.609 \times miles$). Cartesian coordinates are invariant under linear transformations.</p>
+            </details>
+          </div>
+
+          <div class="summary-box">
+            <h4>Key Takeaways: Cartesian Coordinates</h4>
+            <ul>
+              <li><strong>Different Units:</strong> Aspect ratio can be stretched/compressed (Cleveland recommends banking slopes to ~45°).</li>
+              <li><strong>Same Units:</strong> Requires a strict 1:1 square grid to avoid angular distortion.</li>
+              <li><strong>Linear Invariance:</strong> Linear conversions ($y' = ay + b$) preserve exact data geometry.</li>
+            </ul>
+          </div>
+        </div>
+        <!-- end topic-3 -->
+
+        <!-- ───────────────────────────────────────────────────
+         TOPIC 4: NONLINEAR AXES (LOG & SQRT)
+         ─────────────────────────────────────────────────── -->
+        <div class="topic-card" id="topic-4">
+          <h2><span class="topic-num">4</span>Nonlinear Axes: Logarithmic and Square-Root Scales</h2>
+          <p class="topic-subtitle">Handling multi-order magnitudes, ratio symmetry, and zero boundaries.</p>
+
+          <p>
+            Linear scales fail when data spans <strong>multiple orders of magnitude</strong> or represents <strong>multiplicative ratios</strong>.
+          </p>
+
+          <div class="definition">
+            <div class="callout-label">Definition</div>
+            <strong>Logarithmic Scale (Log Scale):</strong> A nonlinear position scale that is <strong>linear in multiplication</strong>. Equal physical distance corresponds to multiplying by a fixed constant factor ($\times 10$ or $\times 2$).
+          </div>
+
+          <!-- Linear vs Log SVG Diagram -->
+          <div class="visual-card">
+            <h4>📏 Linear vs. Logarithmic Spacing (Wilke Figure 3-4)</h4>
+            <div style="margin:12px 0;">
+              <div style="font-size:0.8rem; font-weight:600; color:var(--exp-bd); margin-bottom:2px;">
+                (a) Linear Scale (Additive: +25 per step) → Severe clustering near 0!
+              </div>
+              <svg viewBox="0 0 620 40" style="width:100%; height:auto;">
+                <line x1="15" y1="20" x2="600" y2="20" stroke="#52525b" stroke-width="2" />
+                <text x="15" y="34" fill="#a1a1aa" font-size="9" text-anchor="middle">0</text>
+                <text x="160" y="34" fill="#a1a1aa" font-size="9" text-anchor="middle">25</text>
+                <text x="305" y="34" fill="#a1a1aa" font-size="9" text-anchor="middle">50</text>
+                <text x="450" y="34" fill="#a1a1aa" font-size="9" text-anchor="middle">75</text>
+                <text x="595" y="34" fill="#a1a1aa" font-size="9" text-anchor="middle">100</text>
+                <circle cx="21" cy="20" r="4" fill="#ef4444" />
+                <circle cx="33" cy="20" r="4" fill="#ef4444" />
+                <circle cx="73" cy="20" r="4" fill="#ef4444" />
+                <circle cx="199" cy="20" r="4" fill="#ef4444" />
+                <circle cx="595" cy="20" r="4" fill="#ef4444" />
+              </svg>
+
+              <div style="font-size:0.8rem; font-weight:600; color:var(--def-bd); margin:10px 0 2px;">
+                (b) Logarithmic Scale (Multiplicative: ×10 per major interval) → Even geometric steps!
+              </div>
+              <svg viewBox="0 0 620 40" style="width:100%; height:auto;">
+                <line x1="15" y1="20" x2="600" y2="20" stroke="#52525b" stroke-width="2" />
+                <text x="15" y="34" fill="#10b981" font-size="10" font-weight="700" text-anchor="middle">1</text>
+                <text x="160" y="34" fill="#a1a1aa" font-size="9" text-anchor="middle">3.16 (10⁰·⁵)</text>
+                <text x="305" y="34" fill="#10b981" font-size="10" font-weight="700" text-anchor="middle">10</text>
+                <text x="450" y="34" fill="#a1a1aa" font-size="9" text-anchor="middle">31.6 (10¹·⁵)</text>
+                <text x="595" y="10b981" fill="#10b981" font-size="10" font-weight="700" text-anchor="middle">100</text>
+                <circle cx="15" cy="20" r="4" fill="#10b981" />
+                <circle cx="160" cy="20" r="4" fill="#10b981" />
+                <circle cx="305" cy="20" r="4" fill="#10b981" />
+                <circle cx="450" cy="20" r="4" fill="#10b981" />
+                <circle cx="595" cy="20" r="4" fill="#10b981" />
+              </svg>
+            </div>
+            <p style="font-size:0.75rem; color:var(--mt); margin:0;">
+              <strong>The 3.16 Rule:</strong> On a log-10 scale, the halfway point between 1 ($10^0$) and 10 ($10^1$) is $10^{0.5} = \sqrt{10} \approx 3.16$.
+            </p>
+          </div>
+
+          <div class="note-box">
+            <div class="callout-label">Exam Trap: Axis Labeling on Log Scales</div>
+            The correct axis title on a log scale is the <strong>name of the variable</strong> (e.g. <code>"Population"</code>), NOT <code>"log(Population)"</code>. Tick marks should show raw values (<code>1, 10, 100</code>).
+          </div>
+
+          <h3>Why Ratios Must Use Log Scales: Texas Counties Case Study</h3>
+          <p>
+            When dividing by a median, <strong>1.0 is the natural neutral midpoint</strong>.
+          </p>
+          <ul style="margin-left:20px; line-height:1.7; font-size:0.85rem;">
+            <li>On a <strong>linear scale</strong>, a 10× increase (1 to 10) takes 9 units, but a 10× decrease (1 to 0.1) takes only 0.9 units (10× visual distortion!).</li>
+            <li>On a <strong>log scale</strong>, doubling ($\times 2$) and halving ($\div 2$) are <em>visually symmetric around 1.0</em>.</li>
+          </ul>
+
+          <!-- Texas Counties Visual -->
+          <div class="visual-card">
+            <h4>🤠 Texas County Population Ratios (Wilke Figures 3-5 &amp; 3-6)</h4>
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:14px;">
+              <div style="background:rgba(239,68,68,0.06); border:1px solid rgba(239,68,68,0.3); border-radius:8px; padding:12px;">
+                <h5 style="color:#ef4444; margin:0 0 4px; font-size:0.85rem;">❌ Linear Scale: Misleading Asymmetry</h5>
+                <svg viewBox="0 0 280 120" style="width:100%; height:auto;">
+                  <line x1="35" y1="100" x2="260" y2="100" stroke="#52525b" />
+                  <line x1="35" y1="15" x2="35" y2="100" stroke="#52525b" />
+                  <text x="30" y="100" fill="#a1a1aa" font-size="8" text-anchor="end">1.0</text>
+                  <text x="30" y="25" fill="#ef4444" font-size="8" text-anchor="end">200</text>
+                  <circle cx="230" cy="25" r="4" fill="#ef4444" />
+                  <text x="225" y="20" fill="#ef4444" font-size="8" text-anchor="end">Harris (~220×)</text>
+                  <circle cx="45" cy="99" r="3" fill="#3b82f6" />
+                  <text x="50" y="112" fill="#3b82f6" font-size="7">Loving (buried at 0)</text>
+                </svg>
+              </div>
+
+              <div style="background:rgba(16,185,129,0.06); border:1px solid rgba(16,185,129,0.3); border-radius:8px; padding:12px;">
+                <h5 style="color:var(--def-bd); margin:0 0 4px; font-size:0.85rem;">✅ Log Scale: Perfect Symmetry</h5>
+                <svg viewBox="0 0 280 120" style="width:100%; height:auto;">
+                  <line x1="35" y1="100" x2="260" y2="100" stroke="#52525b" />
+                  <line x1="35" y1="15" x2="35" y2="100" stroke="#52525b" />
+                  <line x1="35" y1="58" x2="260" y2="58" stroke="#10b981" stroke-dasharray="3,3" />
+                  <text x="30" y="61" fill="#10b981" font-size="8" font-weight="700" text-anchor="end">1.0</text>
+                  <circle cx="230" cy="20" r="4" fill="#d97757" />
+                  <text x="225" y="18" fill="#d97757" font-size="8" text-anchor="end">Harris (~220×)</text>
+                  <circle cx="45" cy="95" r="3" fill="#3b82f6" />
+                  <text x="50" y="98" fill="#3b82f6" font-size="8">Loving (0.004×)</text>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <div class="warning-box">
+            <div class="callout-label">The Zero Barrier</div>
+            <strong>Zero can NEVER appear on a log scale: $\log(0) = -\infty$.</strong> Reaching zero requires infinite divisions.
+          </div>
+
+          <h3>The Square-Root Scale: Properties &amp; Flaws</h3>
+          <p>
+            Square-root scales ($\sqrt{x}$) accommodate zero ($\sqrt{0} = 0$) and naturally model <strong>geographic surface areas</strong> ($\sqrt{\text{Area}} \propto \text{linear driving time}$ across a state).
+          </p>
+          <div class="exam-trap-box">
+            <h5>⚠️ Wilke's 2 Critiques of Square-Root Scales:</h5>
+            <ol style="margin-left:16px; font-size:0.82rem; line-height:1.6;">
+              <li><strong>No Constant Step Meaning:</strong> Unit step meaning changes depending on starting value (0 to 1 adds 1; 9 to 16 adds 7).</li>
+              <li><strong>Awkward Tick Placement:</strong> Ticks placed at squares (0, 4, 25, 49) or linear intervals (10, 20, 30) are both visually awkward.</li>
+            </ol>
+          </div>
+
+          <div class="practice-section">
+            <div class="practice-section-label">Practice Questions for Topic 4</div>
+            <details>
+              <summary>Easy: Why is zero forbidden on a log scale?</summary>
+              <p><strong>Answer:</strong> Because $\log(0) = -\infty$.</p>
+            </details>
+            <details>
+              <summary>Medium: What value is halfway between 1 and 10 on a log-10 scale?</summary>
+              <p><strong>Answer:</strong> $10^{0.5} \approx 3.16$.</p>
+            </details>
+            <details>
+              <summary>Hard: Why are square-root scales used for geographic land area?</summary>
+              <p><strong>Answer:</strong> Area scales quadratically ($\text{length}^2$). Taking $\sqrt{\text{Area}}$ yields linear border-to-border extent, which correlates with driving time.</p>
+            </details>
+          </div>
+
+          <div class="summary-box">
+            <h4>Key Takeaways: Nonlinear Axes</h4>
+            <ul>
+              <li><strong>Log Scales are Multiplicative:</strong> Equal distance = fixed multiplier. Mandatory for ratios (symmetric around 1.0).</li>
+              <li><strong>Zero Barrier:</strong> Never use log scales for datasets containing zeros or negative values.</li>
+              <li><strong>Square-Root Trade-Off:</strong> Accommodates zero and land areas, but suffers from non-uniform steps and awkward ticks.</li>
+            </ul>
+          </div>
+        </div>
+        <!-- end topic-4 -->
+
+        <!-- ───────────────────────────────────────────────────
+         TOPIC 5: CURVED & GEOSPATIAL COORDINATES
+         ─────────────────────────────────────────────────── -->
+        <div class="topic-card" id="topic-5">
+          <h2><span class="topic-num">5</span>Curved Coordinates and Map Projections</h2>
+          <p class="topic-subtitle">Polar cycles for periodic data and navigating the map projection distortion trilemma.</p>
+
+          <div class="definition">
+            <div class="callout-label">Definition</div>
+            <strong>Polar Coordinates:</strong> Position is specified by an <strong>angle</strong> ($\theta$) and a <strong>radial distance</strong> ($r$) from the center origin.
+            <br />
+            <strong>Best For:</strong> Periodic or cyclical data where the end wraps into the beginning (days of year, 24h clock, wind direction).
+          </div>
+
+          <!-- Polar Dial SVG -->
+          <div class="visual-card">
+            <h4>🔄 Cartesian Split vs. Polar Continuity (Wilke Figure 3-10)</h4>
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(260px, 1fr)); gap:16px; align-items:center;">
+              <div style="background:rgba(0,0,0,0.3); border:1px solid var(--bd); border-radius:8px; padding:12px;">
+                <h5 style="color:var(--wrn-bd); margin:0 0 4px; font-size:0.85rem;">Cartesian: Severed Winter Continuum</h5>
+                <p style="font-size:0.75rem; color:var(--mt);">Jan 1 and Dec 31 sit on opposite edges of the canvas, hiding the fact that winter weather is continuous.</p>
+                <svg viewBox="0 0 240 80" style="width:100%; height:auto;">
+                  <line x1="25" y1="65" x2="220" y2="65" stroke="#52525b" />
+                  <path d="M 30 45 Q 120 15 210 45" fill="none" stroke="#d97757" stroke-width="2" />
+                  <circle cx="30" cy="45" r="4" fill="#ef4444" />
+                  <circle cx="210" cy="45" r="4" fill="#ef4444" />
+                  <text x="30" y="76" fill="#a1a1aa" font-size="8" text-anchor="middle">Jan 1</text>
+                  <text x="210" y="76" fill="#a1a1aa" font-size="8" text-anchor="middle">Dec 31</text>
+                </svg>
+              </div>
+
+              <div style="background:rgba(0,0,0,0.3); border:1px solid var(--bd); border-radius:8px; padding:12px; text-align:center;">
+                <h5 style="color:var(--def-bd); margin:0 0 4px; font-size:0.85rem;">Polar: Continuous Seasonal Loop</h5>
+                <p style="font-size:0.75rem; color:var(--mt);">Dec 31 connects directly to Jan 1 around the circular dial.</p>
+                <svg viewBox="0 0 160 140" style="width:100%; max-width:140px; height:auto; margin:0 auto; display:block;">
+                  <circle cx="80" cy="70" r="40" fill="none" stroke="#3f3f46" stroke-dasharray="2,2" />
+                  <line x1="80" y1="15" x2="80" y2="125" stroke="#3f3f46" />
+                  <line x1="25" y1="70" x2="135" y2="70" stroke="#3f3f46" />
+                  <path d="M 80 105 C 120 100, 115 35, 80 30 C 45 35, 40 100, 80 105 Z" fill="rgba(217,119,87,0.15)" stroke="#d97757" stroke-width="2" />
+                  <circle cx="80" cy="105" r="3" fill="#10b981" />
+                  <text x="80" y="12" fill="#a1a1aa" font-size="7" text-anchor="middle">Jul</text>
+                  <text x="80" y="135" fill="#10b981" font-size="7" text-anchor="middle">Dec 31 / Jan 1</text>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <h3>Geospatial Map Projections &amp; The Distortion Trilemma</h3>
+          <p>
+            Flattening the 3D spherical Earth onto a 2D surface forces a compromise among three properties: <strong>preserving area</strong>, <strong>preserving angles/shapes</strong>, and <strong>continuity</strong>.
+          </p>
+
+          <div class="projection-grid">
+            <div class="proj-card">
+              <h5>1. Cartesian Lat/Long (Equirectangular)</h5>
+              <div class="proj-property"><strong>Area:</strong> <span style="color:#ef4444;">Severe Polar Inflation</span></div>
+              <div class="proj-property"><strong>Verdict:</strong> Not recommended for scientific maps.</div>
+            </div>
+
+            <div class="proj-card">
+              <h5>2. Interrupted Goode Homolosine</h5>
+              <div class="proj-property"><strong>Area:</strong> <span style="color:#10b981;">100% Equal-Area</span></div>
+              <div class="proj-property"><strong>Trade-Off:</strong> Slices oceans into separate lobes.</div>
+            </div>
+
+            <div class="proj-card">
+              <h5>3. Robinson Projection</h5>
+              <div class="proj-property"><strong>Type:</strong> Compromise Projection</div>
+              <div class="proj-property"><strong>Verdict:</strong> Visually pleasing balance of shapes and areas.</div>
+            </div>
+
+            <div class="proj-card">
+              <h5>4. Winkel Tripel Projection</h5>
+              <div class="proj-property"><strong>Type:</strong> Compromise Projection</div>
+              <div class="proj-property"><strong>Verdict:</strong> Gold standard for global maps (lowest overall distortion).</div>
+            </div>
+          </div>
+
+          <div class="practice-section">
+            <div class="practice-section-label">Practice Questions for Topic 5</div>
+            <details>
+              <summary>Easy: What coordinates define a point in a polar system?</summary>
+              <p><strong>Answer:</strong> Angle ($\theta$) and radial distance ($r$).</p>
+            </details>
+            <details>
+              <summary>Medium: What visual defect occurs when mapping latitude and longitude to Cartesian axes?</summary>
+              <p><strong>Answer:</strong> Massive horizontal stretching near the poles (Greenland appears equal in size to Africa).</p>
+            </details>
+            <details>
+              <summary>Hard: Why must choropleth thematic maps use equal-area projections?</summary>
+              <p><strong>Answer:</strong> Because viewers judge magnitude by visible surface area. Conformal projections (like Mercator) distort land areas, misrepresenting the data.</p>
+            </details>
+          </div>
+
+          <div class="summary-box">
+            <h4>Key Takeaways: Curved &amp; Geospatial Coordinates</h4>
+            <ul>
+              <li><strong>Polar Coordinates:</strong> Natural for cyclical/periodic data (connects Dec 31 to Jan 1).</li>
+              <li><strong>Projection Trilemma:</strong> You cannot flatten a 3D sphere into 2D without distorting area, angles, or continuity.</li>
+              <li><strong>Key Projections:</strong> Goode Homolosine preserves true area; Robinson and Winkel Tripel minimize overall compromise distortion.</li>
+            </ul>
+          </div>
+        </div>
+        <!-- end topic-5 -->
+
+        <!-- ───────────────────────────────────────────────────
+         TOPIC 6: MASTER EXAM SUMMARY & HIGH-YIELD REVIEW
+         ─────────────────────────────────────────────────── -->
+        <div class="topic-card" id="topic-6">
+          <h2><span class="topic-num">6</span>📋 Master Exam Summary &amp; High-Yield Review</h2>
+          <p class="topic-subtitle">Rapid-cram cheat sheet for tomorrow's quiz: core theorems, benchmark examples, and the 10 deadly exam traps.</p>
+
+          <h3>1. Aesthetics Capability Matrix</h3>
+          <table style="width:100%; border-collapse:collapse; margin:12px 0; font-size:0.83rem;">
+            <thead>
+              <tr style="border-bottom:2px solid var(--bd); text-align:left;">
+                <th style="padding:6px;">Aesthetic Channel</th>
+                <th style="padding:6px;">Data Capability</th>
+                <th style="padding:6px;">Core Exam Rule</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid var(--bd);">
+                <td style="padding:6px;"><strong>Position (x, y)</strong></td>
+                <td style="padding:6px;"><span class="aes-badge badge-both">Both</span></td>
+                <td style="padding:6px;">Rank 1 in human perception. Highest accuracy.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--bd);">
+                <td style="padding:6px;"><strong>Size / Area</strong></td>
+                <td style="padding:6px;"><span class="aes-badge badge-both">Both</span></td>
+                <td style="padding:6px;">Scale by area, not radius (avoids quadratic distortion).</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--bd);">
+                <td style="padding:6px;"><strong>Color (Luminance)</strong></td>
+                <td style="padding:6px;"><span class="aes-badge badge-both">Both</span></td>
+                <td style="padding:6px;">Continuous color requires large surface area (heatmaps).</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--bd);">
+                <td style="padding:6px;"><strong>Shape</strong></td>
+                <td style="padding:6px;"><span class="aes-badge badge-discrete">Discrete Only</span></td>
+                <td style="padding:6px; color:#ef4444;"><strong>Never</strong> for continuous data (no intermediate shapes).</td>
+              </tr>
+              <tr>
+                <td style="padding:6px;"><strong>Line Type</strong></td>
+                <td style="padding:6px;"><span class="aes-badge badge-discrete">Discrete Only</span></td>
+                <td style="padding:6px; color:#ef4444;"><strong>Never</strong> for continuous data (solid, dashed, dotted).</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>2. Coordinate System Decision Matrix</h3>
+          <table style="width:100%; border-collapse:collapse; margin:12px 0; font-size:0.83rem;">
+            <thead>
+              <tr style="border-bottom:2px solid var(--bd); text-align:left;">
+                <th style="padding:6px;">Coordinate System</th>
+                <th style="padding:6px;">When to Use</th>
+                <th style="padding:6px;">Zero Handling</th>
+                <th style="padding:6px;">Key Rule</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom:1px solid var(--bd);">
+                <td style="padding:6px;"><strong>Cartesian (Linear)</strong></td>
+                <td style="padding:6px;">Standard continuous variables</td>
+                <td style="padding:6px; color:#10b981;">Native ($0, 0$)</td>
+                <td style="padding:6px;">Same units $\to$ 1:1 square grid mandatory.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--bd);">
+                <td style="padding:6px;"><strong>Logarithmic</strong></td>
+                <td style="padding:6px;">Multi-order spread, ratios</td>
+                <td style="padding:6px; color:#ef4444;"><strong>Impossible ($\log 0 = -\infty$)</strong></td>
+                <td style="padding:6px;">Ratios centered symmetrically around 1.0.</td>
+              </tr>
+              <tr style="border-bottom:1px solid var(--bd);">
+                <td style="padding:6px;"><strong>Square-Root</strong></td>
+                <td style="padding:6px;">Land areas ($\sqrt{\text{Area}} \propto \text{time}$)</td>
+                <td style="padding:6px; color:#10b981;">Permitted ($\sqrt{0} = 0$)</td>
+                <td style="padding:6px;">Unit step size is non-uniform.</td>
+              </tr>
+              <tr>
+                <td style="padding:6px;"><strong>Polar</strong></td>
+                <td style="padding:6px;">Periodic / cyclical time data</td>
+                <td style="padding:6px;">Origin center pole</td>
+                <td style="padding:6px;">Continuous circular wrap (Dec 31 connects to Jan 1).</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>3. Benchmark Numbers &amp; Facts to Memorize</h3>
+          <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(220px, 1fr)); gap:10px; margin:12px 0; font-size:0.82rem;">
+            <div style="background:rgba(0,0,0,0.25); border:1px solid var(--bd); border-radius:6px; padding:10px;">
+              <strong style="color:var(--ac);">Texas Population Range:</strong><br />
+              Harris (4,092,459) vs. Loving (82). Spans 5 orders of magnitude.
+            </div>
+            <div style="background:rgba(0,0,0,0.25); border:1px solid var(--bd); border-radius:6px; padding:10px;">
+              <strong style="color:var(--exp-bd);">Log-10 Halfway Point:</strong><br />
+              Between 1 and 10 is $10^{0.5} \approx \mathbf{3.16}$. Between 10 and 100 is $10^{1.5} \approx \mathbf{31.6}$.
+            </div>
+            <div style="background:rgba(0,0,0,0.25); border:1px solid var(--bd); border-radius:6px; padding:10px;">
+              <strong style="color:var(--def-bd);">NOAA Four Cities:</strong><br />
+              Chicago (coldest) $\to$ San Diego $\to$ Houston $\to$ Death Valley (hottest).
+            </div>
+          </div>
+
+          <h3>4. The 10 Deadly Exam Traps</h3>
+          <div class="exam-trap-box">
+            <ol style="margin-left:16px; font-size:0.82rem; line-height:1.6;">
+              <li><strong>Trap 1:</strong> <em>"Can Shape represent continuous data?"</em> $\to$ <strong>NEVER</strong>. Discrete only.</li>
+              <li><strong>Trap 2:</strong> <em>"Are numeric ID codes quantitative?"</em> $\to$ <strong>No</strong>, they are qualitative unordered factors.</li>
+              <li><strong>Trap 3:</strong> <em>"Can zero be plotted on a log scale?"</em> $\to$ <strong>No</strong>, $\log(0) = -\infty$.</li>
+              <li><strong>Trap 4:</strong> <em>"How should a log axis be labeled?"</em> $\to$ With the <strong>variable name</strong> (e.g. <code>Population</code>), NOT <code>log(Population)</code>.</li>
+              <li><strong>Trap 5:</strong> <em>"What happens if a scale is not 1-to-1?"</em> $\to$ The visualization becomes ambiguous.</li>
+              <li><strong>Trap 6:</strong> <em>"When is a 1:1 aspect ratio mandatory?"</em> $\to$ When both axes share the <strong>same physical unit</strong>.</li>
+              <li><strong>Trap 7:</strong> <em>"Does °F to °C change scatter plot shape?"</em> $\to$ <strong>No</strong>, Cartesian systems are invariant under linear transformations.</li>
+              <li><strong>Trap 8:</strong> <em>"Why plot ratios on log scales?"</em> $\to$ Doubling and halving are symmetric around the natural midpoint 1.0.</li>
+              <li><strong>Trap 9:</strong> <em>"What is the flaw of square-root scales?"</em> $\to$ Step size has no uniform meaning across the scale.</li>
+              <li><strong>Trap 10:</strong> <em>"Why avoid Mercator for choropleth maps?"</em> $\to$ Severe high-latitude area distortion misrepresents data magnitude.</li>
+            </ol>
+          </div>
+
+          <div class="summary-box">
+            <h4>Ready to Test Your Knowledge?</h4>
+            <p style="font-size:0.85rem; margin:0;">
+              Navigate to <strong>Topic 07 (🎯 MCQ Exam Quiz)</strong> to practice with 20 exam-style questions!
+            </p>
+          </div>
+        </div>
+        <!-- end topic-6 -->
+
+        <!-- ───────────────────────────────────────────────────
+         TOPIC 7: MCQ EXAM QUIZ
+         ─────────────────────────────────────────────────── -->
+        <div class="topic-card" id="topic-7">
+          <h2><span class="topic-num">7</span>🎯 Comprehensive MCQ Exam Quiz</h2>
+          <p class="topic-subtitle">Test your mastery of Chapters 2 &amp; 3 with 20 interactive multiple-choice questions.</p>
+
+          <div class="quiz-header-banner">
+            <div class="quiz-title-wrap">
+              <h3>Exam Readiness Simulator</h3>
+              <p>Instant visual feedback and detailed explanations on click.</p>
+            </div>
+            <div class="score-board">
+              <div class="score-pill" id="score-display">Score: 0 / 20 (0%)</div>
+              <button class="reset-quiz-btn" onclick="resetQuiz()">🔄 Reset Quiz</button>
+            </div>
+          </div>
+
+          <div id="mcq-list">
+            <!-- Questions rendered via JS -->
+          </div>
+        </div>
+        <!-- end topic-7 -->
+
+      </div>
+      <!-- end module-container -->
+
+      <div class="bottom-nav">
+        <button id="prev-btn" onclick="goPrev()">
+          <div>
+            <span class="btn-label">← Previous</span>
+            <span class="btn-title" id="prev-title">Topic</span>
+          </div>
+        </button>
+        <button id="next-btn" onclick="goNext()">
+          <div>
+            <span class="btn-label">Next →</span>
+            <span class="btn-title" id="next-title">Topic</span>
+          </div>
+        </button>
+      </div>
+    </div>
+    <!-- end main-content -->
+
+    <button
+      id="back-to-top"
+      onclick="
+        document
+          .getElementById('main-content')
+          .scrollTo({ top: 0, behavior: 'smooth' })
+      "
+    >
+      ↑
+    </button>
+
+    <script>
+      // ── List all topic IDs in order ────────────────────────
+      const topics = [
+        "topic-1",
+        "topic-2",
+        "topic-3",
+        "topic-4",
+        "topic-5",
+        "topic-6",
+        "topic-7"
+      ];
+      let currentTopicIndex = 0;
+
+      function getTopicTitle(id) {
+        const link =
+          document.querySelector(`.nav-sublist a[onclick*="'${id}'"]`) ||
+          document.querySelector(`.nav-sublist a[onclick*='"${id}"']`);
+        if (link) {
+          const numEl = link.querySelector(".nav-num");
+          if (numEl) {
+            return link.textContent.replace(numEl.textContent, "").trim();
+          }
+          return link.textContent.replace(/^\d+\s*/, "").trim();
+        }
+        const card = document.getElementById(id);
+        if (card) {
+          const h2 = card.querySelector("h2");
+          if (h2) {
+            const numEl = h2.querySelector(".topic-num");
+            if (numEl) {
+              return h2.textContent.replace(numEl.textContent, "").trim();
+            }
+            return h2.textContent.replace(/^\d+\s*/, "").trim();
+          }
+        }
+        return "Topic";
+      }
+
+      function toggleSidebar() {
+        const sb = document.getElementById("sidebar");
+        const bd = document.getElementById("sidebar-backdrop");
+        if (sb) sb.classList.toggle("open");
+        if (bd) bd.classList.toggle("active");
+      }
+
+      function showTopic(id) {
+        document
+          .querySelectorAll(".topic-card")
+          .forEach((c) => (c.style.display = "none"));
+        const t = document.getElementById(id);
+        if (t) t.style.display = "block";
+        currentTopicIndex = topics.indexOf(id);
+
+        document
+          .querySelectorAll(".nav-sublist a")
+          .forEach((a) => a.classList.remove("active"));
+        const lk =
+          document.querySelector(`.nav-sublist a[onclick*="'${id}'"]`) ||
+          document.querySelector(`.nav-sublist a[onclick*='"${id}"']`);
+        if (lk) {
+          lk.classList.add("active");
+          const sublist = lk.closest(".nav-sublist");
+          if (sublist && sublist.style.display === "none") {
+            sublist.style.display = "block";
+            const chevron = sublist.previousElementSibling
+              ? sublist.previousElementSibling.querySelector(".chevron")
+              : null;
+            if (chevron) chevron.style.transform = "rotate(0deg)";
+          }
+        }
+
+        const pb = document.getElementById("prev-btn");
+        const nb = document.getElementById("next-btn");
+        const pt = document.getElementById("prev-title");
+        const nt = document.getElementById("next-title");
+
+        if (currentTopicIndex > 0) {
+          pb.style.display = "flex";
+          if (pt) pt.textContent = getTopicTitle(topics[currentTopicIndex - 1]);
+        } else {
+          pb.style.display = "none";
+        }
+
+        if (currentTopicIndex < topics.length - 1) {
+          nb.style.display = "flex";
+          if (nt) nt.textContent = getTopicTitle(topics[currentTopicIndex + 1]);
+        } else {
+          nb.style.display = "none";
+        }
+
+        document
+          .getElementById("main-content")
+          .scrollTo({ top: 0, behavior: "smooth" });
+
+        if (window.innerWidth <= 768) {
+          const sb = document.getElementById("sidebar");
+          const bd = document.getElementById("sidebar-backdrop");
+          if (sb) sb.classList.remove("open");
+          if (bd) bd.classList.remove("active");
+        }
+      }
+
+      function goPrev() {
+        if (currentTopicIndex > 0) showTopic(topics[currentTopicIndex - 1]);
+      }
+      function goNext() {
+        if (currentTopicIndex < topics.length - 1)
+          showTopic(topics[currentTopicIndex + 1]);
+      }
+
+      function toggleSection(el) {
+        const s = el.nextElementSibling;
+        const c = el.querySelector(".chevron");
+        if (s.style.display === "none") {
+          s.style.display = "block";
+          c.style.transform = "rotate(0deg)";
+        } else {
+          s.style.display = "none";
+          c.style.transform = "rotate(-90deg)";
+        }
+      }
+
+      function filterContent() {
+        const q = document.getElementById("search-input").value.toLowerCase();
+        document
+          .querySelectorAll(".nav-sublist li")
+          .forEach(
+            (i) =>
+              (i.style.display = i.textContent.toLowerCase().includes(q)
+                ? ""
+                : "none"),
+          );
+      }
+
+      // ── MCQ QUIZ DATA ────────────────────────────────────
+      const quizData = [
+        {
+          id: 1,
+          question: "Which of the following visual aesthetics can represent BOTH continuous quantitative data and discrete categorical data?",
+          options: [
+            "Shape",
+            "Line type",
+            "Position",
+            "Font family"
+          ],
+          answer: 2,
+          explanation: "Position, Size, Color, and Line Width can represent both continuous and discrete data. Shape and Line Type can usually only represent discrete data."
+        },
+        {
+          id: 2,
+          question: "Why is the visual aesthetic 'Shape' fundamentally incapable of representing continuous quantitative data?",
+          options: [
+            "Shapes require too much computer memory to render.",
+            "Arbitrarily fine intermediate shapes do not exist in human visual perception.",
+            "Shapes can only be drawn using black and white outlines.",
+            "Scatter plots only permit circular points by mathematical convention."
+          ],
+          answer: 1,
+          explanation: "Continuous data requires infinitely fine intermediates. There is no natural intermediate geometric shape between a circle and a triangle."
+        },
+        {
+          id: 3,
+          question: "A weather station ID variable is recorded as 'USW00014819'. How should this variable be classified for data visualization?",
+          options: [
+            "Quantitative Continuous",
+            "Quantitative Discrete",
+            "Qualitative Unordered Factor (Nominal)",
+            "Qualitative Ordered Factor (Ordinal)"
+          ],
+          answer: 2,
+          explanation: "Even though station IDs contain digits, arithmetic operations are meaningless on IDs. It is an unordered factor (nominal category)."
+        },
+        {
+          id: 4,
+          question: "What is the primary requirement for a scale connecting data values to aesthetic values?",
+          options: [
+            "It must be non-linear to compress extreme values.",
+            "It must be strictly one-to-one (bijective and invertible).",
+            "It must always map numbers to the horizontal x-axis.",
+            "It must normalize all data values between 0 and 1."
+          ],
+          answer: 1,
+          explanation: "A scale must be strictly one-to-one so that for each data value there is exactly one aesthetic value and vice-versa, avoiding ambiguity."
+        },
+        {
+          id: 5,
+          question: "According to research by Stone, Albers Szafir, and Setlur (2014) cited by Wilke, what is required when mapping continuous data to color?",
+          options: [
+            "The graphic must use rainbow color palettes exclusively.",
+            "The colored graphical elements must occupy sufficiently large spatial areas.",
+            "The data must be log-transformed before applying color.",
+            "Color must always be combined with shape glyphs."
+          ],
+          answer: 1,
+          explanation: "The human eye cannot accurately discern subtle luminance/hue variations across tiny dots or razor-thin lines. Large colored areas (like tiles) are required."
+        },
+        {
+          id: 6,
+          question: "In Wilke's 5-scale car scatterplot (Figure 2-5), which aesthetic channel was used to represent car weight?",
+          options: [
+            "Shape of the data points",
+            "Color luminance of the data points",
+            "Size (area) of the data points",
+            "Line width connecting the points"
+          ],
+          answer: 2,
+          explanation: "Displacement was mapped to x, fuel efficiency to y, horsepower to color, weight to size (area), and cylinders to shape."
+        },
+        {
+          id: 7,
+          question: "When plotting two variables on Cartesian axes that are measured in the EXACT SAME physical units (e.g. Houston Temp vs. San Diego Temp), what rule must be enforced?",
+          options: [
+            "The aspect ratio must be tall and narrow to emphasize differences.",
+            "The aspect ratio must be 1:1 such that grid lines form perfect squares.",
+            "Both axes must be transformed using natural logarithms.",
+            "The origin (0, 0) must be removed from the view."
+          ],
+          answer: 1,
+          explanation: "When x and y share the exact same units, grid spacings must be identical (1:1 aspect ratio, forming perfect squares) so identical distance represents identical magnitude."
+        },
+        {
+          id: 8,
+          question: "Why does converting temperature data from degrees Fahrenheit to degrees Celsius NOT alter the visual layout or scatter of points in a Cartesian plot?",
+          options: [
+            "Fahrenheit and Celsius are identical at room temperature.",
+            "Cartesian coordinate systems are invariant under linear transformations.",
+            "Software automatically converts all numbers back to Fahrenheit internally.",
+            "The aspect ratio automatically stretches to compensate."
+          ],
+          answer: 1,
+          explanation: "Converting °F to °C is a linear transformation: C = 5/9(F - 32). Cartesian systems are invariant under linear transformations; data geometry is unaltered."
+        },
+        {
+          id: 9,
+          question: "What fundamental mathematical property characterizes a logarithmic scale?",
+          options: [
+            "It is linear in addition (unit step = adding a constant).",
+            "It is linear in multiplication (unit step = multiplying by a constant).",
+            "It forces all negative numbers to become positive.",
+            "It squares every input number before plotting."
+          ],
+          answer: 1,
+          explanation: "Log scales are linear in multiplication: equal physical distance corresponds to multiplying by a fixed factor (such as 10)."
+        },
+        {
+          id: 10,
+          question: "On a standard base-10 logarithmic scale, which value lies exactly halfway between 1 and 10 in physical visual distance?",
+          options: [
+            "5.0",
+            "5.5",
+            "3.16 (approx. 10^0.5)",
+            "4.5"
+          ],
+          answer: 2,
+          explanation: "On a log-10 scale, the halfway point is 10^0.5 = sqrt(10) ≈ 3.162. Similarly, halfway between 10 and 100 is 10^1.5 ≈ 31.62."
+        },
+        {
+          id: 11,
+          question: "What is the recommended axis title when displaying a variable on a logarithmic scale?",
+          options: [
+            "log(Variable Name)",
+            "log10(Variable Name)",
+            "The variable name itself (e.g. 'Population' or 'Population (log scale)')",
+            "10^x"
+          ],
+          answer: 2,
+          explanation: "The axis title should be the variable name, not the logarithm of the variable. Ticks should show actual numbers (1, 10, 100)."
+        },
+        {
+          id: 12,
+          question: "Why MUST ratios (such as county population divided by median population) be visualized on a logarithmic scale rather than a linear scale?",
+          options: [
+            "Ratios can never be larger than 1.0.",
+            "On a log scale, doubling (x2) and halving (/2) are visually symmetric around the natural midpoint 1.0.",
+            "Linear scales cannot render fractions or decimals.",
+            "Computers cannot compute ratios without converting to logarithms first."
+          ],
+          answer: 1,
+          explanation: "For ratios, 1.0 is the neutral midpoint. On a log scale, multiplication and division are treated symmetrically around 1.0."
+        },
+        {
+          id: 13,
+          question: "What happens if a dataset contains a value of ZERO and you attempt to plot it on a logarithmic scale?",
+          options: [
+            "It is plotted at the center of the canvas.",
+            "It cannot be displayed because log(0) = -infinity.",
+            "It automatically converts to 1.0.",
+            "It is placed at the origin (0, 0)."
+          ],
+          answer: 1,
+          explanation: "Zero can never appear on a log scale because log(0) is negative infinity."
+        },
+        {
+          id: 14,
+          question: "Which of the following is an advantage of a square-root scale over a logarithmic scale?",
+          options: [
+            "A unit step on a square-root scale has a constant intuitive meaning everywhere.",
+            "A square-root scale can accommodate the value zero (sqrt(0) = 0).",
+            "A square-root scale is completely invariant under non-linear rotations.",
+            "A square-root scale automatically centers ratios around 1.0."
+          ],
+          answer: 1,
+          explanation: "Unlike log scales, a square-root scale accommodates zero because sqrt(0) = 0."
+        },
+        {
+          id: 15,
+          question: "What are the two major weaknesses of square-root scales identified by Wilke?",
+          options: [
+            "They cannot be computed in Python, and they distort small numbers.",
+            "Unit steps have no constant intuitive meaning, and tick mark placement is awkward/unintuitive.",
+            "They can only plot negative numbers, and they blur colors.",
+            "They require circular polar grids, and they distort straight lines."
+          ],
+          answer: 1,
+          explanation: "Square-root scales have non-uniform unit step meanings and awkward tick mark spacing."
+        },
+        {
+          id: 16,
+          question: "Why is a square-root scale considered the natural scale for visualizing the land areas of geographic regions (like US states)?",
+          options: [
+            "Because states are shaped like perfect squares.",
+            "Because the square root of area represents linear extent, which correlates with driving time across the region.",
+            "Because census population counts are always squared.",
+            "Because square roots eliminate map projection distortions."
+          ],
+          answer: 1,
+          explanation: "Area scales with length squared. Taking sqrt(Area) brings the dimension back to linear border-to-border extent (driving time)."
+        },
+        {
+          id: 17,
+          question: "In what scenario are Polar Coordinate systems specifically superior to Cartesian systems?",
+          options: [
+            "When plotting linear financial stock trends over 50 years.",
+            "When displaying periodic or cyclical data where the end of the scale logically joins the beginning (e.g. Dec 31 to Jan 1).",
+            "When the dataset contains values that span over 10 orders of magnitude.",
+            "When plotting high-dimensional car fuel efficiency."
+          ],
+          answer: 1,
+          explanation: "Polar coordinates specify positions via angle and radial distance, making the angular axis circular. This is ideal for periodic cyclical data."
+        },
+        {
+          id: 18,
+          question: "What is the primary visual defect of mapping latitude and longitude directly onto a flat Cartesian coordinate grid (Equirectangular projection)?",
+          options: [
+            "It turns circular continents into octagons.",
+            "It severely distorts areas and angles near the poles, making landmasses like Greenland appear gigantic.",
+            "It clips all points located in the Southern Hemisphere.",
+            "It cannot display coastal shorelines."
+          ],
+          answer: 1,
+          explanation: "Mapping spherical latitude/longitude directly to a Cartesian grid causes severe area inflation near the poles (Greenland appears as large as Africa)."
+        },
+        {
+          id: 19,
+          question: "Which map projection perfectly preserves true surface areas by dividing some ocean masses into separate lobes?",
+          options: [
+            "Mercator Projection",
+            "Interrupted Goode Homolosine Projection",
+            "Cartesian Longitude/Latitude",
+            "Plate Carrée Projection"
+          ],
+          answer: 1,
+          explanation: "The interrupted Goode homolosine is an equal-area projection that preserves true relative continental surface areas by slicing ocean basins."
+        },
+        {
+          id: 20,
+          question: "When ordering the levels of an UNORDERED factor (such as weather station locations) along a discrete axis, what is considered the best visualization practice?",
+          options: [
+            "Always sort them in reverse alphabetical order.",
+            "Order them intentionally based on a meaningful secondary metric (e.g. from coldest to hottest).",
+            "Randomize the order so the graphic appears unbiased.",
+            "Group them strictly by the number of letters in their names."
+          ],
+          answer: 1,
+          explanation: "Sorting unordered factor levels intentionally by a meaningful metric (like mean temperature) creates a clean, readable visual progression."
+        }
+      ];
+
+      let userAnswers = {};
+
+      function renderQuiz() {
+        const container = document.getElementById("mcq-list");
+        if (!container) return;
+        container.innerHTML = "";
+
+        quizData.forEach((q) => {
+          const card = document.createElement("div");
+          card.className = "mcq-card";
+          card.id = `mcq-${q.id}`;
+
+          const header = document.createElement("div");
+          header.className = "mcq-header";
+          header.innerHTML = `
+            <span class="mcq-qnum">Q${q.id}</span>
+            <div class="mcq-question">${q.question}</div>
+          `;
+          card.appendChild(header);
+
+          const optionsWrap = document.createElement("div");
+          optionsWrap.className = "mcq-options";
+
+          const letters = ["A", "B", "C", "D"];
+          q.options.forEach((optText, optIdx) => {
+            const btn = document.createElement("button");
+            btn.className = "mcq-opt";
+            btn.id = `opt-${q.id}-${optIdx}`;
+            btn.innerHTML = `<span class="opt-letter">${letters[optIdx]}</span> <span>${optText}</span>`;
+            btn.onclick = () => selectOption(q.id, optIdx);
+            optionsWrap.appendChild(btn);
+          });
+          card.appendChild(optionsWrap);
+
+          const feedback = document.createElement("div");
+          feedback.className = "mcq-feedback";
+          feedback.id = `feedback-${q.id}`;
+          card.appendChild(feedback);
+
+          container.appendChild(card);
+        });
+      }
+
+      function selectOption(qId, selectedIdx) {
+        if (userAnswers[qId] !== undefined) return;
+
+        userAnswers[qId] = selectedIdx;
+        const q = quizData.find((item) => item.id === qId);
+        const isCorrect = selectedIdx === q.answer;
+
+        q.options.forEach((_, idx) => {
+          const btn = document.getElementById(`opt-${qId}-${idx}`);
+          btn.disabled = true;
+          if (idx === q.answer) {
+            btn.classList.add(isCorrect ? "selected-correct" : "show-correct");
+          } else if (idx === selectedIdx && !isCorrect) {
+            btn.classList.add("selected-incorrect");
+          }
+        });
+
+        const fb = document.getElementById(`feedback-${qId}`);
+        fb.classList.add("visible");
+        if (isCorrect) {
+          fb.classList.add("correct");
+          fb.innerHTML = `<strong>✓ Correct!</strong> ${q.explanation}`;
+        } else {
+          fb.classList.add("incorrect");
+          fb.innerHTML = `<strong>✗ Incorrect.</strong> Correct answer is <strong>Option ${["A", "B", "C", "D"][q.answer]}: ${q.options[q.answer]}</strong>.<br />${q.explanation}`;
+        }
+
+        updateScore();
+      }
+
+      function updateScore() {
+        let correctCount = 0;
+        let answeredCount = Object.keys(userAnswers).length;
+
+        quizData.forEach((q) => {
+          if (userAnswers[q.id] === q.answer) {
+            correctCount++;
+          }
+        });
+
+        const pct = answeredCount > 0 ? Math.round((correctCount / answeredCount) * 100) : 0;
+        const scoreEl = document.getElementById("score-display");
+        if (scoreEl) {
+          scoreEl.textContent = `Score: ${correctCount} / ${quizData.length} (${pct}%) • Answered: ${answeredCount}/${quizData.length}`;
+          if (pct >= 85 && answeredCount >= 15) {
+            scoreEl.style.borderColor = "var(--def-bd)";
+            scoreEl.style.color = "var(--def-bd)";
+          } else if (pct < 60 && answeredCount >= 5) {
+            scoreEl.style.borderColor = "#ef4444";
+            scoreEl.style.color = "#ef4444";
+          }
+        }
+      }
+
+      function resetQuiz() {
+        userAnswers = {};
+        renderQuiz();
+        const scoreEl = document.getElementById("score-display");
+        if (scoreEl) {
+          scoreEl.textContent = `Score: 0 / ${quizData.length} (0%)`;
+          scoreEl.style.borderColor = "var(--bd)";
+          scoreEl.style.color = "var(--ac)";
+        }
+      }
+
+      // ── Initialise Page ───────────────────────────────────
+      renderQuiz();
+      if (topics.length > 0) showTopic(topics[0]);
+      const mc = document.getElementById("main-content");
+      const bb = document.getElementById("back-to-top");
+      mc.addEventListener(
+        "scroll",
+        () => (bb.style.display = mc.scrollTop > 300 ? "flex" : "none"),
+      );
+    </script>
+  </body>
+</html>

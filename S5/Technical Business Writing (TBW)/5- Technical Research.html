@@ -1,0 +1,1386 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>TBW — Technical Research &amp; IEEE Documentation</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../notes.css" />
+  </head>
+  <body>
+    <button id="menu-toggle" onclick="toggleSidebar()" aria-label="Toggle navigation">☰</button>
+    <div id="sidebar-backdrop" onclick="toggleSidebar()"></div>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SIDEBAR
+         ═══════════════════════════════════════════════════════ -->
+    <div id="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-header-text">
+          <div class="sidebar-course-label">Course Notes</div>
+          <div class="sidebar-title">Technical &amp; Business Writing</div>
+        </div>
+      </div>
+      <div class="sidebar-search-wrap">
+        <input
+          type="text"
+          id="search-input"
+          placeholder="Search topics…"
+          onkeyup="filterContent()"
+        />
+      </div>
+
+      <ul class="nav-list" id="nav-list">
+        <li>
+          <a class="nav-module-link" href="./1- Technical Communication in the Workplace.html">
+            <span class="nav-num">01</span>Technical Communication in the Workplace
+          </a>
+        </li>
+        <li>
+          <a class="nav-module-link" href="./2- Correspondence.html">
+            <span class="nav-num">02</span>Correspondence
+          </a>
+        </li>
+        <li>
+          <a class="nav-module-link" href="./3- Presentations.html">
+            <span class="nav-num">03</span>Presentations &amp; Delivery
+          </a>
+        </li>
+        <li>
+          <a class="nav-module-link" href="./4- Exam Prep Midterm I.html">
+            <span class="nav-num">04</span>Exam Prep: Midterm I
+          </a>
+        </li>
+        <li class="nav-section">
+          <div class="nav-section-title" onclick="toggleSection(this)">
+            <span>5. Technical Research</span>
+            <span class="chevron">▼</span>
+          </div>
+          <ul class="nav-sublist">
+            <li>
+              <a href="javascript:void(0)" onclick="showTopic('topic-1')" class="active">
+                <span class="nav-num">01</span>Research Foundations &amp; Sources
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" onclick="showTopic('topic-2')">
+                <span class="nav-num">02</span>Quant vs. Qual &amp; Analysis
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" onclick="showTopic('topic-3')">
+                <span class="nav-num">03</span>Plagiarism &amp; GenAI Policy
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" onclick="showTopic('topic-4')">
+                <span class="nav-num">04</span>IEEE In-Text Mechanics
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" onclick="showTopic('topic-5')">
+                <span class="nav-num">05</span>IEEE Reference Templates
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════
+         MAIN CONTENT
+         ═══════════════════════════════════════════════════════ -->
+    <div id="main-content">
+      <div class="module-container" id="module-tbw-5">
+        <div class="module-header">
+          <div class="module-eyebrow">Technical &amp; Business Writing (TBW) — Module 05</div>
+          <h1 class="module-title">Technical Research &amp; IEEE Documentation</h1>
+          <p style="color: var(--mt); font-size: 0.9rem; margin-top: 6px;">
+            Comprehensive lecture notes covering Chapter 9 (Technical Research), Primary vs. Secondary data gathering, Qualitative &amp; Quantitative methodologies, Academic Integrity, Student AI-use policies, and the complete IEEE Referencing &amp; Citation standard.
+          </p>
+        </div>
+
+        <!-- ───────────────────────────────────────────────────
+             TOPIC 1: FOUNDATIONS OF TECHNICAL RESEARCH
+             ─────────────────────────────────────────────────── -->
+        <div class="topic-card" id="topic-1">
+          <h2><span class="topic-num">1</span>Foundations of Technical Research: Primary vs. Secondary Sources</h2>
+          <p class="topic-subtitle">Establishing professional context through published literature and gathering empirical field evidence</p>
+
+          <p>
+            In engineering, computing, and professional business environments, intuition and unsupported claims carry significant operational and liability risks. <strong>Technical research</strong> is the systematic process of investigating, evaluating, and synthesizing verifiable information to solve concrete problems, validate system designs, and inform critical business decisions.
+          </p>
+
+          <div class="definition">
+            <div class="callout-label">Definition</div>
+            <strong>Technical Research:</strong> The purposeful inquiry and systematic gathering of qualitative and quantitative evidence to understand a problem domain, establish professional benchmarks, and justify engineering recommendations. <em>(Intuitive: Turning unknown technical questions into backed, verifiable engineering solutions).</em>
+          </div>
+
+          <h3>1.1 The Research Pipeline: How Technical Inquiries Flow</h3>
+          <p>
+            Effective technical communicators follow a disciplined progression. They never jump directly into field experiments or prototype construction without first investigating the existing intellectual and professional landscape.
+          </p>
+
+          <!-- Native CSS Diagram: Research Workflow -->
+          <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--bd); border-radius: 12px; padding: 22px; margin: 24px 0;">
+            <div style="font-size: 0.75rem; font-weight: 700; color: var(--ac); letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 14px;">The Technical Research Workflow</div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px;">
+              <div style="background: var(--bg); border: 1px solid var(--bd); border-radius: 8px; padding: 14px; position: relative;">
+                <div style="font-size: 0.7rem; color: var(--ac); font-weight: 700;">STAGE 01</div>
+                <div style="font-size: 0.92rem; font-weight: 600; color: var(--tx); margin: 4px 0 6px;">Secondary Research</div>
+                <div style="font-size: 0.8rem; color: var(--mt); line-height: 1.5;">Review existing journals, books, standards, and manuals to define the problem context.</div>
+              </div>
+              <div style="background: var(--bg); border: 1px solid var(--bd); border-radius: 8px; padding: 14px; position: relative;">
+                <div style="font-size: 0.7rem; color: var(--exp-bd); font-weight: 700;">STAGE 02</div>
+                <div style="font-size: 0.92rem; font-weight: 600; color: var(--tx); margin: 4px 0 6px;">Primary Research</div>
+                <div style="font-size: 0.8rem; color: var(--mt); line-height: 1.5;">Conduct interviews, deploy surveys, run experiments, or analyze proprietary source documents.</div>
+              </div>
+              <div style="background: var(--bg); border: 1px solid var(--bd); border-radius: 8px; padding: 14px; position: relative;">
+                <div style="font-size: 0.7rem; color: var(--def-bd); font-weight: 700;">STAGE 03</div>
+                <div style="font-size: 0.92rem; font-weight: 600; color: var(--tx); margin: 4px 0 6px;">Data Analysis</div>
+                <div style="font-size: 0.8rem; color: var(--mt); line-height: 1.5;">Calculate statistics, run significance tests, identify recurring qualitative themes.</div>
+              </div>
+              <div style="background: var(--bg); border: 1px solid var(--bd); border-radius: 8px; padding: 14px; position: relative;">
+                <div style="font-size: 0.7rem; color: var(--qst-bd); font-weight: 700;">STAGE 04</div>
+                <div style="font-size: 0.92rem; font-weight: 600; color: var(--tx); margin: 4px 0 6px;">IEEE Documentation</div>
+                <div style="font-size: 0.8rem; color: var(--mt); line-height: 1.5;">Integrate in-text numeric citations `[1]` and assemble a compliant IEEE References list.</div>
+              </div>
+            </div>
+          </div>
+
+          <h3>1.2 Secondary Sources: Mapping the Existing Knowledge Base</h3>
+          <p>
+            <strong>Secondary sources</strong> synthesize, critique, or report on information that has already been shared through print, digital media, or academic presentations. They provide researchers with background context by establishing the professional and intellectual framework of an issue.
+          </p>
+
+          <div class="definition">
+            <div class="callout-label">Definition</div>
+            <strong>Secondary Source:</strong> Material compiled by authors who did not directly experience or author the original event or raw data, serving to summarize, evaluate, or contextualize previous discoveries. <em>(Intuitive: Reading what someone else discovered and documented before you begin your own experiments).</em>
+          </div>
+
+          <h4>Key Channels for Secondary Discovery</h4>
+          <ul>
+            <li><strong>Online Search:</strong>
+              <ul>
+                <li><em>Keyword Searching:</em> Querying conceptual descriptors using exact phrases, Boolean logic (<code>AND</code>, <code>OR</code>, <code>NOT</code>), and truncation wildcards (e.g., <code>"cloud migration" AND latency NOT edge</code>).</li>
+                <li><em>Author / Title Search:</em> Tracking seminal authorities, lead investigators, or exact benchmark papers within academic databases such as IEEE Xplore, ACM Digital Library, or Google Scholar.</li>
+              </ul>
+            </li>
+            <li><strong>Library &amp; Archival Resources:</strong>
+              <ul>
+                <li><em>Books &amp; Monographs:</em> Comprehensive, in-depth overviews of established fundamental engineering principles and frameworks.</li>
+                <li><em>Research Journals &amp; Transactions:</em> Peer-reviewed, state-of-the-art breakthroughs and algorithmic formulations.</li>
+                <li><em>Periodicals &amp; Trade Magazines:</em> Industry developments, commercial adoption trends, and current market practices.</li>
+                <li><em>Newspapers &amp; Wire Services:</em> Contemporary public policy announcements, corporate mergers, and societal impact reports.</li>
+                <li><em>Company Directories &amp; Annual Reports:</em> Competitive intelligence, organizational hierarchies, and fiscal disclosures.</li>
+                <li><em>Dictionaries, Encyclopedias &amp; Handbooks:</em> Fast reference standards, operational terminology, and standardized domain definitions.</li>
+              </ul>
+            </li>
+          </ul>
+
+          <h3>1.3 Primary Research: Generating First-Hand Empirical Data</h3>
+          <p>
+            When published literature cannot answer the specific, localized, or proprietary questions of your organization, you must conduct <strong>primary research</strong>. Primary research collects direct, unmediated data straight from the source.
+          </p>
+
+          <div class="definition">
+            <div class="callout-label">Definition</div>
+            <strong>Primary Research:</strong> First-hand data gathering conducted by the researcher through direct engagement with subjects, experiments, environments, or original uncurated artifacts. <em>(Intuitive: Collecting brand new data that didn't exist anywhere in print before you gathered it).</em>
+          </div>
+
+          <h4>Core Primary Research Methods in Technical Communication</h4>
+          <ul>
+            <li><strong>Interviews:</strong> Direct, one-on-one dialogues with subject matter experts (SMEs), system architects, end users, or corporate executives to gain nuanced insights.</li>
+            <li><strong>Focus Groups:</strong> Guided interactive discussions with 6–10 representative participants to surface collective attitudes, competing priorities, and feature reactions.</li>
+            <li><strong>Surveys &amp; Questionnaires:</strong> Structured sets of closed and open questions distributed to sample populations to quantify satisfaction, usage patterns, or operational needs.</li>
+            <li><strong>Laboratory Experiments:</strong> Controlled empirical testing manipulating independent variables (e.g., memory allocation, CPU clock frequency) to measure resulting effects on dependent variables (e.g., throughput, power draw).</li>
+            <li><strong>Field Observations &amp; Ergonomic Shadowing:</strong> Watching actual technicians, developers, or customers interact with systems in their natural operational environment to discover workflow friction and real-world edge cases.</li>
+            <li><strong>Document Analysis &amp; Archival Examination:</strong> In-depth technical autopsy of original primary artifacts, including server incident logs, internal corporate memos, source code repositories, engineering change orders (ECOs), user manuals, and competitor software UI layouts.</li>
+          </ul>
+
+          <h3>1.4 Comparative Matrix: Primary vs. Secondary Research</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Dimension</th>
+                <th>Secondary Research</th>
+                <th>Primary Research</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Primary Objective</strong></td>
+                <td>Understand existing theory, context, prior art, and industry benchmarks.</td>
+                <td>Address specific, novel, localized, or proprietary engineering questions.</td>
+              </tr>
+              <tr>
+                <td><strong>Data Origin</strong></td>
+                <td>Synthesized, edited, or compiled by other researchers/authors.</td>
+                <td>Collected first-hand from direct experiments, users, or raw corporate records.</td>
+              </tr>
+              <tr>
+                <td><strong>Cost &amp; Velocity</strong></td>
+                <td>Fast turnaround, relatively low financial expenditure.</td>
+                <td>Resource-intensive; requires significant planning, ethics clearance, and time.</td>
+              </tr>
+              <tr>
+                <td><strong>Typical Artifacts</strong></td>
+                <td>Peer-reviewed journals, trade books, IEEE standards, industry whitepapers.</td>
+                <td>Audio transcripts, raw survey matrices, sensor logs, telemetry dumps.</td>
+              </tr>
+              <tr>
+                <td><strong>Sequence in Project</strong></td>
+                <td>Conducted first to avoid repeating solved problems ("reinventing the wheel").</td>
+                <td>Conducted second to test hypotheses formulated during literature review.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="example">
+            <div class="callout-label">Real-World Case Study</div>
+            <h4>Deploying a Biometric Authentication System for Campus Labs</h4>
+            <p>Consider a software engineering team tasked with replacing magnetic ID cards with biometric facial/fingerprint scanners at campus computer labs. Here is how both research branches operate together:</p>
+            <ol>
+              <li><strong>Secondary Research Phase:</strong> The team reviews IEEE Transactions on Biometrics to evaluate false-acceptance rates (FAR) across different illumination conditions, downloads vendor datasheets for optical sensors, and reviews GDPR/FERPA legal guidelines on biometric data retention.</li>
+              <li><strong>Primary Research Phase:</strong> The team distributes an online questionnaire to 400 lab students regarding privacy concerns, conducts in-depth interviews with the campus security chief, and sets up a controlled test rig at Lab 3 to measure sensor authentication latency during peak rush hours (8:50 AM – 9:05 AM).</li>
+            </ol>
+          </div>
+
+          <div class="note-box">
+            <div class="callout-label">Pro Tip: The Literature Review Litmus Test</div>
+            Never enter a primary interview or deploy a survey until your secondary literature review is complete. Asking a subject matter expert a basic question whose answer is published on page 2 of the official system manual destroys your technical credibility immediately. Reserve primary research for unanswered or context-specific engineering questions.
+          </div>
+
+          <div class="warning-box">
+            <div class="callout-label">Common Student Mistake</div>
+            <strong>Treating Web Search Engine Results as Primary Data:</strong> A blog post or online medium article discussing cloud architecture is <em>never</em> primary research. Even when evaluating secondary sources, always prioritize peer-reviewed research papers and authoritative technical documentation over personal blogs or commercial promotional advertorials.
+          </div>
+
+          <div class="summary-box">
+            <h4>Key Takeaways: Research Foundations</h4>
+            <ul>
+              <li><strong>Sequential Strategy:</strong> Secondary research always precedes primary research; it establishes the intellectual context and prevents redundant effort.</li>
+              <li><strong>Secondary Breadth:</strong> Encompasses online keyword/author queries and library resources (journals, books, patents, directories, encyclopedias).</li>
+              <li><strong>Primary Depth:</strong> Direct empirical methods include interviews, focus groups, surveys, lab experiments, field observation, and original document analysis.</li>
+              <li><strong>Technical Rigor:</strong> Professional reports synthesize both: secondary literature to frame the problem, and primary data to justify the local solution.</li>
+            </ul>
+          </div>
+
+          <div class="practice-section">
+            <div class="practice-section-label">Practice Questions &amp; Exam Scenarios</div>
+
+            <details>
+              <summary>Easy: Classifying Information Sources</summary>
+              <p><strong>Question:</strong> An engineering student preparing a capstone proposal consults (a) the official IEEE 802.11ax standard, (b) raw Wi-Fi packet latency dumps collected with Wireshark in Lab 4, and (c) a review article in IEEE Communications Magazine summarizing recent trends in Wi-Fi 6. Classify each of these three items as either a Primary or Secondary source.</p>
+              <p><strong>Answer:</strong>
+                <ul>
+                  <li><strong>(a) IEEE 802.11ax Standard:</strong> Primary source when analyzing the definitive specification document itself (or secondary when used as background regulatory reference; strictly, the standard is an authoritative primary technical specification).</li>
+                  <li><strong>(b) Raw Wireshark packet latency dumps in Lab 4:</strong> Primary source. This is unmediated, first-hand empirical data collected directly from an ongoing network environment.</li>
+                  <li><strong>(c) Review article in IEEE Communications Magazine:</strong> Secondary source. It compiles, evaluates, and summarizes empirical research conducted and originally published by other researchers.</li>
+                </ul>
+              </p>
+            </details>
+
+            <details>
+              <summary>Medium: Keyword Search vs. Author Search Tactics</summary>
+              <p><strong>Question:</strong> When investigating algorithmic mitigations for "catastrophic forgetting" in continual learning models, describe a situation where an Author Search is superior to a Keyword Search, and explain how Boolean operators can refine a crowded keyword search.</p>
+              <p><strong>Answer:</strong>
+                <ul>
+                  <li><strong>Author Search Superiority:</strong> When a seminal researcher (e.g., Geoffrey Hinton or Yoshua Bengio) has established the foundational theorems in continual learning, searching directly by author retrieves their complete research trajectory, lab preprints, and authoritative follow-ups without being inundated by thousands of low-quality papers matching the generic term "learning."</li>
+                  <li><strong>Boolean Query Optimization:</strong> A raw query for <code>catastrophic forgetting</code> returns tens of thousands of hits. Refining it to: <code>("catastrophic forgetting" OR "continual learning") AND ("memory replay" OR "regularization") NOT "robotics"</code> forces the database to return only articles discussing algorithmic memory/regularization while filtering out physical robotics implementations.</li>
+                </ul>
+              </p>
+            </details>
+
+            <details>
+              <summary>Hard: Research Design Scenario</summary>
+              <p><strong>Question:</strong> Your company wants to redesign its internal customer support ticketing software because support engineers complain it is "slow and confusing." Formulate a balanced research design employing both primary and secondary methods. Specify which primary tools you would use to capture both technical bottlenecks and human user frustration.</p>
+              <p><strong>Answer:</strong>
+                <ul>
+                  <li><strong>Secondary Research Phase:</strong> Examine database latency logs (document analysis of existing infrastructure), review industry usability heuristics (e.g., Nielsen Norman Group ticketing UI guidelines), and inspect vendor feature specifications for modern ticketing APIs (Zendesk, Jira Service Desk).</li>
+                  <li><strong>Primary Research Phase — Technical Bottlenecks:</strong> Conduct laboratory experiments and telemetry instrumentation to measure the exact millisecond response time of database queries when opening a ticket under peak concurrency load (Quantitative).</li>
+                  <li><strong>Primary Research Phase — Human Frustration:</strong> 
+                    1. <em>Field Observation / Shadowing:</em> Watch 5 support engineers handle incoming tickets live for two hours to spot unnecessary mouse clicks and tab switching.
+                    2. <em>Semi-Structured Interviews:</em> Conduct 30-minute interviews with senior support staff to elicit qualitative pain points.
+                    3. <em>Survey / Questionnaire:</em> Deploy a Likert-scale questionnaire to all 80 support personnel to measure perceived usability (System Usability Scale - SUS) and rank desired features.</li>
+                </ul>
+              </p>
+            </details>
+          </div>
+        </div>
+        <!-- end topic-1 -->
+
+        <!-- ───────────────────────────────────────────────────
+             TOPIC 2: QUANTITATIVE VS QUALITATIVE RESEARCH
+             ─────────────────────────────────────────────────── -->
+        <div class="topic-card" id="topic-2" style="display: none;">
+          <h2><span class="topic-num">2</span>Quantitative vs. Qualitative Research Methodologies &amp; Analysis</h2>
+          <p class="topic-subtitle">Balancing numerical precision and statistical significance with human behavior, processes, and thematic analysis</p>
+
+          <p>
+            Technical professionals must balance two complementary types of inquiry: <strong>quantitative research</strong> (which measures numbers, durations, and statistical relationships) and <strong>qualitative research</strong> (which explores words, visual designs, user intentions, and workplace processes). Both are essential for credible engineering reports.
+          </p>
+
+          <h3>2.1 Quantitative Research: Metrics, Durations &amp; Hard Data</h3>
+          <p>
+            In technical communication and computer science, quantitative research answers questions that can be counted, benchmarked, or measured with instruments. Examples include measuring how many milliseconds a database transaction takes, what percentage of users complete onboarding without errors, or how server temperature correlates with fan speed.
+          </p>
+
+          <div class="definition">
+            <div class="callout-label">Definition</div>
+            <strong>Quantitative Research:</strong> The empirical investigation of observable phenomena via statistical, mathematical, or computational techniques, collecting data that can be represented in numbers. <em>(Intuitive: If it can be counted, averaged, or plotted on an X-Y axis, it is quantitative).</em>
+          </div>
+
+          <h4>The Dual Pillars of Quantitative Integrity: Validity vs. Reliability</h4>
+          <p>
+            Any quantitative dataset or survey presented in an engineering proposal is judged by two fundamental criteria:
+          </p>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0;">
+            <div class="definition" style="margin: 0;">
+              <div class="callout-label">Pillar 1</div>
+              <strong>Validity:</strong> A study or instrument is <em>valid</em> if it measures <strong>what it was designed to measure</strong>. If a survey claims to evaluate programming competence but only tests memorization of obscure compiler syntax flags, the survey lacks validity.
+            </div>
+            <div class="definition" style="margin: 0; border-left-color: var(--exp-bd); background: var(--exp-bg);">
+              <div class="callout-label" style="color: var(--exp-bd);">Pillar 2</div>
+              <strong>Reliability:</strong> A study or instrument is <em>reliable</em> if it can be <strong>repeated with the same results</strong> under identical experimental conditions. If running the exact same latency benchmark three times produces wildly diverging results, the instrument is unreliable.
+            </div>
+          </div>
+
+          <h3>2.2 Qualitative Research: Words, Workflows &amp; Human Meaning</h3>
+          <p>
+            Not all critical engineering information can be reduced to a number. Understanding why engineers ignore a cybersecurity protocol, how technicians interpret a faulty warning lamp, or why users abandon a shopping cart requires <strong>qualitative research</strong>.
+          </p>
+
+          <div class="definition">
+            <div class="callout-label">Definition</div>
+            <strong>Qualitative Research:</strong> The systematic investigation of non-numerical data to understand concepts, opinions, experiences, workflows, or cultural behaviors through words, images, and artifacts. <em>(Intuitive: Exploring the 'why' and 'how' behind human behavior and technical processes).</em>
+          </div>
+
+          <h4>Information Gathering Channels in Qualitative Research</h4>
+          <ul>
+            <li><strong>In-Depth Interviews:</strong> Asking open-ended questions that allow participants to explain their reasoning, emotional friction, and mental models in their own vocabulary.</li>
+            <li><strong>Focus Groups:</strong> Generating exploratory feedback on prototype ergonomics or company policies where group dynamics prompt unconsidered edge cases.</li>
+            <li><strong>Field Observations:</strong> Directly watching how operators execute manual workarounds when an automated pipeline fails silently.</li>
+            <li><strong>Document Analysis:</strong> Scrutinizing the language, structure, tone, and visual clarity of user manuals, API documentation, or legacy correspondence.</li>
+          </ul>
+
+          <h3>2.3 Comparing Methodologies: Side-by-Side Breakdown</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Factor</th>
+                <th>Quantitative Research</th>
+                <th>Qualitative Research</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Core Focus</strong></td>
+                <td>Measuring quantities, testing hypotheses, finding statistical correlation.</td>
+                <td>Understanding meaning, exploring underlying reasons, mapping human processes.</td>
+              </tr>
+              <tr>
+                <td><strong>Data Format</strong></td>
+                <td>Numbers, percentages, task durations, frequencies, sensor readings.</td>
+                <td>Words, audio recordings, field notes, images, behavioral transcripts.</td>
+              </tr>
+              <tr>
+                <td><strong>Primary Tools</strong></td>
+                <td>Surveys/Questionnaires, automated telemetry, controlled bench tests.</td>
+                <td>Interviews, focus groups, observational shadowing, document analysis.</td>
+              </tr>
+              <tr>
+                <td><strong>Core Quality Metrics</strong></td>
+                <td><strong>Validity</strong> (measures right thing) &amp; <strong>Reliability</strong> (repeatable).</td>
+                <td><strong>Credibility</strong>, authenticity, contextual depth, transferability.</td>
+              </tr>
+              <tr>
+                <td><strong>Sample Size</strong></td>
+                <td>Large, representative samples to ensure statistical significance.</td>
+                <td>Small, focused cohorts selected for deep domain expertise.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>2.4 Results &amp; Data Analysis: How to Present Findings in Technical Reports</h3>
+          <p>
+            Raw data must never be dumped uninterpreted into a business or technical document. How you analyze and present data depends directly on whether it was gathered via questionnaires or interviews:
+          </p>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0;">
+            <!-- Quantitative Reporting -->
+            <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--bd); border-radius: 10px; padding: 20px;">
+              <div style="font-size: 0.75rem; font-weight: 700; color: var(--ac); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px;">Quantitative Presentation</div>
+              <h4 style="margin: 0 0 10px; color: var(--tx);">Questionnaire &amp; Sensor Data</h4>
+              <p style="font-size: 0.85rem; color: var(--mt); line-height: 1.6;">Focuses on aggregated statistical precision:</p>
+              <ul style="font-size: 0.85rem; padding-left: 18px; color: rgba(237,237,237,0.85);">
+                <li><strong>Percentages &amp; Proportions:</strong> e.g., <em>"78% (n=156) of developers reported faster build times."</em></li>
+                <li><strong>Statistical Tests for Significance:</strong> Calculating p-values (p &lt; 0.05), confidence intervals, and standard deviations.</li>
+                <li><strong>Visual Data Displays:</strong> Tabulated matrices, bar charts, line trends, and frequency distributions.</li>
+              </ul>
+            </div>
+
+            <!-- Qualitative Reporting -->
+            <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--bd); border-radius: 10px; padding: 20px;">
+              <div style="font-size: 0.75rem; font-weight: 700; color: var(--exp-bd); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 8px;">Qualitative Presentation</div>
+              <h4 style="margin: 0 0 10px; color: var(--tx);">Interviews &amp; Observations</h4>
+              <p style="font-size: 0.85rem; color: var(--mt); line-height: 1.6;">Focuses on conceptual patterns and narrative synthesis:</p>
+              <ul style="font-size: 0.85rem; padding-left: 18px; color: rgba(237,237,237,0.85);">
+                <li><strong>Themes &amp; Inductive Coding:</strong> Grouping open feedback into overarching thematic clusters (e.g., "Authentication Fatigue").</li>
+                <li><strong>Written Narrative Paragraphs:</strong> Cohesive synthesis describing user reactions, context, and root motivations.</li>
+                <li><strong>Selective Direct Quotations:</strong> Exemplary quotes illustrating specific user friction or insights.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="example">
+            <div class="callout-label">Step-by-Step Example</div>
+            <h4>Reporting Results in a Software Latency &amp; Usability Study</h4>
+            <p>Below is an example showing how an engineer presents both quantitative survey results and qualitative interview themes in an executive technical memo:</p>
+            <pre><code>// 1. QUANTITATIVE REPORTING (Questionnaires &amp; Benchmarks)
+Table 2 summarizes the task completion duration across 120 participants:
+- Baseline UI: Mean duration = 48.2s (SD = 6.4s)
+- Redesigned UI: Mean duration = 21.6s (SD = 3.1s)
+A two-tailed paired t-test confirmed this 55.2% reduction is statistically significant (t(119) = 14.82, p &lt; 0.001).
+Furthermore, 84.1% of surveyed engineers rated the new navigation as "Highly Intuitive" (Score 5/5).
+
+// 2. QUALITATIVE REPORTING (Interviews &amp; Thematic Coding)
+Post-test interviews with 12 lead administrators revealed two primary themes:
+1. Cognitive Relief: Participants reported less anxiety when performing batch operations, noting that the confirmation modal clearly displayed affected server hostnames.
+2. Workflow Integration: Three administrators suggested adding keyboard hotkeys (Ctrl+Shift+D) to bypass modal confirmation entirely during urgent outages.</code></pre>
+          </div>
+
+          <div class="note-box">
+            <div class="callout-label">Pro Tip: Validity vs. Reliability on Exams</div>
+            Remember this simple target analogy:
+            <ul>
+              <li><strong>Reliable but not Valid:</strong> All arrows hit the exact same spot repeatedly, but far off in the top-left corner (repeatable, but wrong target).</li>
+              <li><strong>Valid and Reliable:</strong> All arrows hit the exact bullseye repeatedly (measures the true concept consistently).</li>
+              <li><em>Key Rule:</em> An instrument can be highly reliable without being valid, but it can <strong>never</strong> be valid unless it is reliable!</li>
+            </ul>
+          </div>
+
+          <div class="warning-box">
+            <div class="callout-label">Common Mistake</div>
+            <strong>Treating Qualitative Interview Quotes as Statistical Proof:</strong> Stating <em>"Interviews showed that 66% of all campus users prefer dark mode"</em> based on interviewing 6 students is bad methodology. Qualitative samples are non-probabilistic; you cannot extrapolate percentages to an entire population from small interview cohorts. Use interviews for <em>themes</em> and surveys for <em>percentages</em>.
+          </div>
+
+          <div class="summary-box">
+            <h4>Key Takeaways: Research Methodologies</h4>
+            <ul>
+              <li><strong>Quantitative Metric:</strong> Collects numerical data, benchmark times, and survey metrics; evaluated rigorously on <em>validity</em> (accurate measurement) and <em>reliability</em> (reproducible results).</li>
+              <li><strong>Qualitative Insight:</strong> Explores non-numerical data (words, observations, document structures) through interviews, focus groups, and field shadowing.</li>
+              <li><strong>Quantitative Output:</strong> Presented via statistical significance tests, percentages, matrices, and charts.</li>
+              <li><strong>Qualitative Output:</strong> Presented via thematic categorization, narrative paragraphs, and illustrative quotations.</li>
+            </ul>
+          </div>
+
+          <div class="practice-section">
+            <div class="practice-section-label">Practice Questions &amp; Exam Scenarios</div>
+
+            <details>
+              <summary>Easy: Defining Validity and Reliability</summary>
+              <p><strong>Question:</strong> State the precise definitions of Validity and Reliability in quantitative technical research. Can an experiment be reliable without being valid? Give a one-sentence technical example.</p>
+              <p><strong>Answer:</strong>
+                <ul>
+                  <li><strong>Validity:</strong> The degree to which an instrument or experimental test measures what it was specifically designed to measure.</li>
+                  <li><strong>Reliability:</strong> The degree to which an experiment or measurement can be repeated under identical conditions with the same consistent results.</li>
+                  <li><strong>Reliable without Valid Example:</strong> A network latency meter whose clock is miscalibrated by exactly +50ms will produce the exact same reading every time (perfect reliability), but will report an inaccurate latency figure (zero validity).</li>
+                </ul>
+              </p>
+            </details>
+
+            <details>
+              <summary>Medium: Choosing the Correct Methodological Tool</summary>
+              <p><strong>Question:</strong> An autonomous vehicle startup needs to evaluate (1) the mean stopping distance of their braking system on wet asphalt at 60 km/h, and (2) how drivers feel about the transition of control when the autopilot disconnects unexpectedly. Identify whether each inquiry requires quantitative or qualitative research, and state the best data-gathering instrument for each.</p>
+              <p><strong>Answer:</strong>
+                <ul>
+                  <li><strong>(1) Stopping distance on wet asphalt:</strong> Requires <strong>Quantitative Research</strong>. The variable is physical, continuous, and numerical (meters). The best instrument is a controlled <strong>laboratory/track experiment</strong> using precision GPS telemetry, accelerometer sensors, and repeated trials across varying moisture levels.</li>
+                  <li><strong>(2) Driver emotional state and perceived safety during disengagement:</strong> Requires <strong>Qualitative Research</strong>. Perceptions, psychological comfort, and instinctive reactions cannot be captured simply by numbers. The best instrument is a combination of <strong>field observation/video analysis</strong> inside a test vehicle followed immediately by <strong>in-depth semi-structured interviews</strong> to probe the driver's mental model and feelings.</li>
+                </ul>
+              </p>
+            </details>
+
+            <details>
+              <summary>Hard: Designing the Presentation of Survey and Interview Results</summary>
+              <p><strong>Question:</strong> You have collected data on a newly introduced DevOps automated CI/CD pipeline using two instruments: (a) a Likert-scale survey of 200 developers, and (b) 1-hour interviews with 8 senior DevOps architects. Write out the outline of how the Results &amp; Analysis section of your final report should be organized, contrasting the specific presentation format for (a) versus (b).</p>
+              <p><strong>Answer:</strong>
+                <ul>
+                  <li><strong>Section 1: Quantitative Survey Results (200 Developers)</strong>
+                    <ul>
+                      <li><em>Presentation Format:</em> Tabulated frequency distributions and bar charts showing the percentage breakdown for each Likert prompt (e.g., "Pipeline setup is friction-free: 62% Agree, 28% Neutral, 10% Disagree").</li>
+                      <li><em>Statistical Analysis:</em> Calculate mean satisfaction scores and conduct an independent t-test comparing junior vs. senior developers to demonstrate statistical significance (p &lt; 0.05).</li>
+                    </ul>
+                  </li>
+                  <li><strong>Section 2: Qualitative Architect Interview Findings (8 DevOps Leads)</strong>
+                    <ul>
+                      <li><em>Presentation Format:</em> Structured narrative paragraphs organized around 3 core emergent themes: (1) Credential management friction, (2) Lack of rollback transparency, and (3) Container caching bottlenecks.</li>
+                      <li><em>Qualitative Evidence:</em> Embed representative quotes from interview transcripts (e.g., *"Architect C noted: 'When a Docker layer cache misses unexpectedly, our deployment duration quadruples without any diagnostic warning.'"*).</li>
+                    </ul>
+                  </li>
+                </ul>
+              </p>
+            </details>
+          </div>
+        </div>
+        <!-- end topic-2 -->
+
+        <!-- ───────────────────────────────────────────────────
+             TOPIC 3: PLAGIARISM & GENAI INTEGRITY POLICY
+             ─────────────────────────────────────────────────── -->
+        <div class="topic-card" id="topic-3" style="display: none;">
+          <h2><span class="topic-num">3</span>Academic Integrity, Plagiarism &amp; AI-Use Frameworks</h2>
+          <p class="topic-subtitle">Ethical documentation, common knowledge boundaries, the four modes of GenAI engagement, and the mandatory AI Process Note</p>
+
+          <p>
+            Technical writing is judged by its accuracy, intellectual ownership, and transparency. Misrepresenting the origin of text, algorithms, data, or system designs is not merely an academic infraction—it can lead to copyright infringement, patent disputes, contract terminations, and loss of professional licensure.
+          </p>
+
+          <h3>3.1 Plagiarism: What It Is and What Must Be Cited</h3>
+          <p>
+            With the single exception of <strong>common knowledge</strong>, you must cite sources for all borrowed information used in your technical documents, whether that material is directly quoted, paraphrased, or summarized.
+          </p>
+
+          <div class="definition">
+            <div class="callout-label">Definition</div>
+            <strong>Plagiarism:</strong> The act of taking someone else's work, ideas, algorithms, phrases, or data and passing them off as one's own without explicit, standardized bibliographic attribution. <em>(Intuitive: Using anyone else's thoughts or words without immediately pointing back to them).</em>
+          </div>
+
+          <h4>The Three Forms of Borrowed Information</h4>
+          <ul>
+            <li><strong>Direct Quotations:</strong> Word-for-word duplication of original text. Must be enclosed in quotation marks <code>"..."</code> and immediately linked to an in-text numeric citation with exact page numbers (e.g., <code>[4, p. 19]</code>).</li>
+            <li><strong>Paraphrasing:</strong> Restating another author's specific idea, mechanism, or workflow completely in your own fresh sentence structure and vocabulary. <em>Paraphrasing still requires an in-text citation!</em></li>
+            <li><strong>Summarizing:</strong> Condensing a broad discussion, whole chapter, or research paper into a high-level conceptual overview. <em>Requires an in-text citation pointing to the cited paper.</em></li>
+          </ul>
+
+          <h4>The Common Knowledge Exception</h4>
+          <p>
+            <strong>Common knowledge</strong> refers to facts, dates, foundational theorems, and domain realities that are widely known and undisputed by educated readers within a discipline. Common knowledge does <em>not</em> require a citation.
+          </p>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0;">
+            <div style="background: rgba(79, 191, 139, 0.08); border: 1px solid rgba(79, 191, 139, 0.3); border-radius: 8px; padding: 14px;">
+              <div style="font-size: 0.75rem; font-weight: 700; color: var(--def-bd); text-transform: uppercase;">Common Knowledge (No Citation Needed)</div>
+              <ul style="font-size: 0.85rem; margin: 8px 0 0 16px; color: var(--tx);">
+                <li>The speed of light in vacuum is approx. 3x10^8 m/s.</li>
+                <li>HTTP traffic communicates over port 80 by default.</li>
+                <li>Python uses indentation to define scope.</li>
+                <li>Tim Berners-Lee invented the World Wide Web.</li>
+              </ul>
+            </div>
+            <div style="background: rgba(240, 82, 79, 0.08); border: 1px solid rgba(240, 82, 79, 0.3); border-radius: 8px; padding: 14px;">
+              <div style="font-size: 0.75rem; font-weight: 700; color: var(--crit-bd); text-transform: uppercase;">Borrowed Info (Citation Strictly Mandatory)</div>
+              <ul style="font-size: 0.85rem; margin: 8px 0 0 16px; color: var(--tx);">
+                <li>A specific model achieved 94.2% accuracy on ImageNet.</li>
+                <li>A survey finding that 42% of IoT nodes leak tokens.</li>
+                <li>An author's proprietary cryptographic architecture.</li>
+                <li>Any exact sentence or figure reproduced from an article.</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3>3.2 The Two Essential Components of Documentation</h3>
+          <p>
+            Proper technical documentation functions as a two-part referencing bridge that connects claims in your text to the original published artifact:
+          </p>
+          <ol>
+            <li><strong>In-Text Citation:</strong> A concise numeric marker (e.g., <code>[1]</code>) placed directly adjacent to the borrowed idea within the body paragraph.</li>
+            <li><strong>List of Works Cited / References:</strong> A comprehensive, numerically indexed bibliography at the very end of the document containing complete bibliographic metadata (authors, titles, publishers, volume, page numbers, dates, URLs) enabling any reader to locate the original publication.</li>
+          </ol>
+
+          <h3>3.3 Student AI-Use Policy: The Four Engagement Modes</h3>
+          <p>
+            Generative Artificial Intelligence (GenAI) tools like ChatGPT, Claude, and Gemini have revolutionized workflows. However, submitting AI-generated prose as your own work is academic dishonesty. FAST-NUCES and modern engineering institutions enforce a rigorous <strong>Four-Mode AI-Use Framework</strong>:
+          </p>
+
+          <!-- Native CSS Diagram: The 4 AI Modes -->
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; margin: 20px 0;">
+            <div style="background: var(--bg); border: 1px solid var(--bd); border-top: 3px solid var(--crit-bd); border-radius: 8px; padding: 16px;">
+              <div style="font-size: 0.7rem; font-weight: 700; color: var(--crit-bd);">MODE 0</div>
+              <h4 style="margin: 4px 0 8px; color: var(--tx);">Human-Only</h4>
+              <p style="font-size: 0.82rem; color: var(--mt); margin: 0; line-height: 1.6;">
+                <strong>Strict prohibition:</strong> Absolutely zero generative AI tools are permitted during any stage of the task. All analysis and writing must be 100% human-authored.
+              </p>
+            </div>
+            <div style="background: var(--bg); border: 1px solid var(--bd); border-top: 3px solid var(--wrn-bd); border-radius: 8px; padding: 16px;">
+              <div style="font-size: 0.7rem; font-weight: 700; color: var(--wrn-bd);">MODE 1</div>
+              <h4 style="margin: 4px 0 8px; color: var(--tx);">AI as Critic</h4>
+              <p style="font-size: 0.82rem; color: var(--mt); margin: 0; line-height: 1.6;">
+                <strong>Diagnostic peer review:</strong> AI may be used to challenge your logic, suggest counterarguments, or critique readability. <em>AI is strictly prohibited from generating submit-ready prose.</em>
+              </p>
+            </div>
+            <div style="background: var(--bg); border: 1px solid var(--bd); border-top: 3px solid var(--exp-bd); border-radius: 8px; padding: 16px;">
+              <div style="font-size: 0.7rem; font-weight: 700; color: var(--exp-bd);">MODE 2</div>
+              <h4 style="margin: 4px 0 8px; color: var(--tx);">Research Assistant</h4>
+              <p style="font-size: 0.82rem; color: var(--mt); margin: 0; line-height: 1.6;">
+                <strong>Literature mapping:</strong> AI helps brainstorm query terms or summarize broad fields. <em>Mandatory rule: Every single source suggested by the AI must be manually opened, read, and verified.</em>
+              </p>
+            </div>
+            <div style="background: var(--bg); border: 1px solid var(--bd); border-top: 3px solid var(--def-bd); border-radius: 8px; padding: 16px;">
+              <div style="font-size: 0.7rem; font-weight: 700; color: var(--def-bd);">MODE 3</div>
+              <h4 style="margin: 4px 0 8px; color: var(--tx);">Object of Analysis</h4>
+              <p style="font-size: 0.82rem; color: var(--mt); margin: 0; line-height: 1.6;">
+                <strong>The AI output IS the data:</strong> AI output itself becomes empirical evidence to audit, benchmark, or inspect (e.g., measuring model hallucination frequency or security vulnerabilities).
+              </p>
+            </div>
+          </div>
+
+          <h3>3.4 Non-Negotiable Disclosure: The AI Process Note</h3>
+          <p>
+            For any take-home assessed assignment or technical document where AI usage is permitted, students must append a formal <strong>AI Process Note</strong> at the end of the submission.
+          </p>
+
+          <div class="definition">
+            <div class="callout-label">Definition</div>
+            <strong>AI Process Note:</strong> A transparent, structured technical disclosure documenting how generative AI tools were integrated into the research and drafting workflow. <em>The note is not a confession—it is process evidence demonstrating engineering integrity and verification discipline.</em>
+          </div>
+
+          <h4>The 5 Mandatory Elements of an AI Process Note</h4>
+          <ol>
+            <li><strong>Tool Used:</strong> Exact system and version (e.g., <em>OpenAI ChatGPT-4o, Claude 3.5 Sonnet, Google Gemini 1.5 Pro</em>).</li>
+            <li><strong>Specific Purpose:</strong> The precise engineering task delegated (e.g., <em>"Brainstorming search terms for IEEE Xplore queries"</em> or <em>"Critiquing transition flow between Section 2 and Section 3"</em>).</li>
+            <li><strong>Representative Prompts:</strong> Verbatim quotes of one or more primary prompts entered into the system.</li>
+            <li><strong>Accepted vs. Rejected Outputs:</strong> Clear documentation of which AI suggestions were integrated into your work, which were rejected, and what modifications you made.</li>
+            <li><strong>Verification Methodology:</strong> Concrete steps taken to verify factual assertions, equations, or citations against primary peer-reviewed literature.</li>
+          </ol>
+
+          <div class="example">
+            <div class="callout-label">Model Example</div>
+            <h4>Compliant Student AI Process Note</h4>
+            <pre><code>APPENDIX A: AI PROCESS NOTE
+1. Tool Used: Claude 3.5 Sonnet (Anthropic, October 2024 build).
+2. Purpose: Diagnostic critic for Section 2 (Mode 1) and search query generator (Mode 2).
+3. Representative Prompt:
+   "Act as a peer reviewer for an IEEE Transactions paper on microservices. Critique the
+   following 300-word paragraph for logical gaps and passive voice: [Paragraph Text]"
+4. Accepted / Rejected:
+   - Accepted: Adopted the recommendation to split the 65-word run-on sentence into two distinct claims.
+   - Rejected: Discarded the model's suggested concluding sentence because it introduced an unsubstantiated claim regarding Kubernetes pod auto-scaling.
+5. Verification:
+   The tool suggested that 'Glover &amp; Grant demonstrated a 14% packet drop reduction in 2009.'
+   I manually opened the physical copy of Glover &amp; Grant (3rd ed., 2009) in the campus library
+   and discovered this claim was hallucinated by the model; the sentence was deleted.</code></pre>
+          </div>
+
+          <div class="note-box">
+            <div class="callout-label">Pro Tip: Paraphrasing vs. "Patchwriting"</div>
+            <strong>Patchwriting</strong> is the dangerous habit of taking an original sentence and merely swapping every third word with a synonym from a thesaurus while keeping the identical grammatical skeleton. <em>Patchwriting is classified as plagiarism by academic review boards!</em> To paraphrase correctly: close the original source completely, think through the concept in your own head, explain it aloud in plain English, and write your own sentence from scratch. Then add the numeric citation <code>[#]</code>.
+          </div>
+
+          <div class="warning-box">
+            <div class="callout-label">Common Student Mistake</div>
+            <strong>Citing AI-Hallucinated Sources:</strong> Large Language Models are predictive text engines; they do not search real-time verified indexes unless grounded by specialized retrieval tools. AI models routinely generate fictitious papers with convincing titles, real journal names, and legitimate-sounding author pairings. If you include an AI-hallucinated citation in your bibliography, it is treated as fabrication of data—a severe academic disciplinary offense. Always open and verify the real PDF of every citation!
+          </div>
+
+          <div class="summary-box">
+            <h4>Key Takeaways: Integrity &amp; AI Policies</h4>
+            <ul>
+              <li><strong>Mandatory Citation:</strong> Everything except undisputed common knowledge requires formal citation (direct quotations, paraphrases, summaries, data tables).</li>
+              <li><strong>The Documentation Bridge:</strong> In-text citations <code>[#]</code> pinpoint borrowed claims in real-time, pointing directly to the full References list at the end.</li>
+              <li><strong>The 4 AI Modes:</strong> Mode 0 (Human-Only), Mode 1 (AI as Critic), Mode 2 (Research Assistant with mandatory verification), Mode 3 (AI as Object of Analysis).</li>
+              <li><strong>AI Process Note:</strong> Mandatory disclosure including tool, purpose, prompt, accepted/rejected elements, and verification proof.</li>
+            </ul>
+          </div>
+
+          <div class="practice-section">
+            <div class="practice-section-label">Practice Questions &amp; Exam Scenarios</div>
+
+            <details>
+              <summary>Easy: Identifying Common Knowledge vs. Plagiarism</summary>
+              <p><strong>Question:</strong> A student writes: <em>"Linux is an open-source operating system kernel first released by Linus Torvalds in 1991. In benchmarks conducted by Red Hat, the modern RHEL kernel handled 2.4 million IOPS on NVMe drives, representing a 34% increase over standard LTS builds."</em> Which parts need an IEEE citation, and why?</p>
+              <p><strong>Answer:</strong>
+                <ul>
+                  <li><strong>Part 1 ("Linux is an open-source operating system kernel... in 1991"):</strong> Common knowledge. This is a universally documented, undisputed historical fact within computer science; it does not require a citation.</li>
+                  <li><strong>Part 2 ("In benchmarks conducted by Red Hat, the modern RHEL kernel handled 2.4 million IOPS... representing a 34% increase"):</strong> <strong>Strictly requires an IEEE citation!</strong> This presents specific, proprietary empirical performance figures and comparative percentages from a third-party study. Without a numeric citation `[#]`, this constitutes plagiarism of data.</li>
+                </ul>
+              </p>
+            </details>
+
+            <details>
+              <summary>Medium: Applying the 4 AI Modes</summary>
+              <p><strong>Question:</strong> A software engineering student is writing a technical report on compiler optimization under a course policy that permits Mode 1 (AI as Critic) but prohibits Mode 2. The student copies an AI-generated 200-word explanation of loop unrolling directly into their report, changing five words. Has the student violated the policy? How should Mode 1 have been used instead?</p>
+              <p><strong>Answer:</strong>
+                <ul>
+                  <li><strong>Policy Violation:</strong> Yes, a severe violation. Mode 1 explicitly forbids AI from generating submit-ready prose. The student committed two offenses: (1) violating the Mode 1 restriction against generating report text, and (2) committing <strong>patchwriting/plagiarism</strong> by pasting AI prose with superficial word substitutions.</li>
+                  <li><strong>Proper Mode 1 Application:</strong> The student should have written the loop unrolling explanation completely by themselves. Then, they could prompt the AI: <em>"Critique my draft explanation of loop unrolling: identify any technical inaccuracies regarding register pressure and highlight unclear phrasing."</em> The student would then review the AI's diagnostic critique and personally rewrite their draft.</li>
+                </ul>
+              </p>
+            </details>
+
+            <details>
+              <summary>Hard: Writing an AI Process Note under Exam Audit Conditions</summary>
+              <p><strong>Question:</strong> Imagine you are submitting an assessed research report where you used an LLM to identify potential trade-offs between Monolithic and Microservice software architectures. Draft a complete, 5-element AI Process Note that would satisfy academic audit standards.</p>
+              <p><strong>Answer:</strong>
+                <pre><code>AI PROCESS NOTE
+1. Tool Used: OpenAI ChatGPT-4o (Web interface, build Oct 2024).
+2. Purpose: Ideation and exploratory mapping of architectural trade-offs (Mode 2).
+3. Representative Prompt:
+   "List four operational trade-offs between monolithic and microservice architectures in
+   high-throughput financial payment gateways, focusing specifically on distributed tracing
+   complexity and data consistency under the CAP theorem."
+4. Accepted vs. Rejected:
+   - Accepted: Used the suggestion that distributed tracing requires correlation IDs across RPC calls; I researched this concept and wrote Section 3.2 in my own words.
+   - Rejected: The model claimed microservices always reduce overall infrastructure costs; I rejected this claim because industry benchmarks indicate high container orchestration overhead often increases cloud expenditure for smaller teams.
+5. Verification Method:
+   The tool referenced 'S. Newman's Building Microservices (2021)'. I verified this through the
+   university library catalog, opened Chapter 4 (Integration), and verified that Newman discusses
+   correlation ID propagation on pp. 88–92 before citing Newman [2] in my bibliography.</code></pre>
+              </p>
+            </details>
+          </div>
+        </div>
+        <!-- end topic-3 -->
+
+        <!-- ───────────────────────────────────────────────────
+             TOPIC 4: IEEE IN-TEXT CITATION MECHANICS
+             ─────────────────────────────────────────────────── -->
+        <div class="topic-card" id="topic-4" style="display: none;">
+          <h2><span class="topic-num">4</span>IEEE In-Text Citation Mechanics</h2>
+          <p class="topic-subtitle">The numeric system, bracket placement, punctuation rules, ranges, author naming conventions, and the 3-author vs. 6-author exam rule</p>
+
+          <p>
+            The Institute of Electrical and Electronics Engineers (<strong>IEEE</strong>) referencing style is the globally accepted standard in Electrical Engineering, Computer Science, and Information Technology. Unlike social science styles (such as APA or Harvard) that insert author names and dates into the middle of sentences (e.g., <em>Smith &amp; Jones, 2021</em>), IEEE uses a concise, non-intrusive <strong>numeric system</strong>.
+          </p>
+
+          <div class="definition">
+            <div class="callout-label">Definition</div>
+            <strong>IEEE In-Text Citation:</strong> A numeric marker enclosed in square brackets <code>[#]</code>, appearing directly within the text on the same baseline, corresponding to a single numbered entry in the terminal References list. <em>(Intuitive: A clean numerical footnote tag right inside your paragraph).</em>
+          </div>
+
+          <h3>4.1 Fundamental Rules of IEEE In-Text Formatting</h3>
+          <ul>
+            <li><strong>Square Brackets:</strong> Citations must always be enclosed in square brackets (e.g., <code>[1]</code>). Never use parentheses <code>(1)</code>, angle brackets <code>&lt;1&gt;</code>, or superscripts <code>¹</code>.</li>
+            <li><strong>Order of Appearance:</strong> References are numbered sequentially based on the order in which they first appear in the document. The first source cited is <code>[1]</code>, the second source cited is <code>[2]</code>, and so on.</li>
+            <li><strong>Number Reuse:</strong> Once a source is assigned a number, that exact same number is reused for all subsequent references to that source throughout the entire paper. Never assign a new number to an already-cited source!</li>
+            <li><strong>Baseline Alignment &amp; Spacing:</strong> The bracket sits directly on the text line with a preceding space: <code>...as shown in [2].</code> (Not <code>...as shown in[2].</code>).</li>
+            <li><strong>Punctuation Placement:</strong> The citation bracket is placed <strong>inside</strong> the sentence punctuation (before the period or comma), never outside:
+              <br /><code style="color: var(--def-bd);">&#10004; Correct: ...was first proposed in 1987 [1].</code>
+              <br /><code style="color: var(--crit-bd);">&#10008; Incorrect: ...was first proposed in 1987. [1]</code>
+            </li>
+          </ul>
+
+          <h3>4.2 Syntactic Integration: How to Write Citations in Sentences</h3>
+          <p>
+            In IEEE style, citation numbers can be integrated into the syntax of a sentence in three distinct grammatical ways:
+          </p>
+
+          <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--bd); border-radius: 10px; padding: 18px; margin: 18px 0;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px;">
+              <div>
+                <div style="font-size: 0.75rem; font-weight: 700; color: var(--ac); text-transform: uppercase;">1. Parenthetical Reference</div>
+                <p style="font-size: 0.85rem; color: var(--mt); margin: 4px 0 6px;">The citation supports the claim at the end of the clause:</p>
+                <code style="font-size: 0.82rem; color: var(--tx); display: block; background: var(--bg); padding: 8px; border-radius: 6px;">
+                  "The theory was first put forward in 1987 [1]."
+                </code>
+              </div>
+              <div>
+                <div style="font-size: 0.75rem; font-weight: 700; color: var(--exp-bd); text-transform: uppercase;">2. Direct Grammatical Noun</div>
+                <p style="font-size: 0.85rem; color: var(--mt); margin: 4px 0 6px;">The bracketed number acts as the noun/subject of the sentence:</p>
+                <code style="font-size: 0.82rem; color: var(--tx); display: block; background: var(--bg); padding: 8px; border-radius: 6px;">
+                  "For example, see [7]. Civetta [6] disputed this claim."
+                </code>
+              </div>
+              <div>
+                <div style="font-size: 0.75rem; font-weight: 700; color: var(--def-bd); text-transform: uppercase;">3. Quotation with Page Number</div>
+                <p style="font-size: 0.85rem; color: var(--mt); margin: 4px 0 6px;">Page number is included inside the brackets for direct quotes:</p>
+                <code style="font-size: 0.82rem; color: var(--tx); display: block; background: var(--bg); padding: 8px; border-radius: 6px;">
+                  "The latency dropped by 30%" [1, p. 3].
+                </code>
+              </div>
+            </div>
+          </div>
+
+          <h3>4.3 Multiple Citations: Discrete Sets vs. Consecutive Ranges</h3>
+          <p>
+            When referencing multiple sources simultaneously, format them according to whether the numbers are consecutive or discrete:
+          </p>
+          <table>
+            <thead>
+              <tr>
+                <th>Citation Type</th>
+                <th>Standard IEEE Notation</th>
+                <th>Acceptable Variant</th>
+                <th>Rule / Notes</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Two Discrete Sources</strong></td>
+                <td><code>[1], [2]</code></td>
+                <td><code>[1, 2]</code></td>
+                <td>Separate each bracket with a comma and space.</td>
+              </tr>
+              <tr>
+                <td><strong>Multiple Discrete Sources</strong></td>
+                <td><code>[3], [7], [12]</code></td>
+                <td><code>[3, 7, 12]</code></td>
+                <td>List in ascending numerical order.</td>
+              </tr>
+              <tr>
+                <td><strong>Consecutive Number Range</strong></td>
+                <td><code>[3]–[5]</code></td>
+                <td><code>[3-5]</code></td>
+                <td>Use an en-dash (<code>–</code>) or hyphen; indicates sources 3, 4, and 5.</td>
+              </tr>
+              <tr>
+                <td><strong>Complex Mixed Group</strong></td>
+                <td><code>[8], [10], [13]–[17], [20]</code></td>
+                <td>—</td>
+                <td>Combines discrete items and consecutive sub-ranges seamlessly.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>4.4 Author Attribution Rules: The Critical 3-Author vs. 6-Author Rule</h3>
+          <p>
+            One of the most frequently tested concepts on university exams is how authors are named when citing in-text versus in the reference list:
+          </p>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0;">
+            <div style="background: rgba(217, 119, 87, 0.08); border: 1px solid rgba(217, 119, 87, 0.3); border-radius: 10px; padding: 18px;">
+              <div style="font-size: 0.75rem; font-weight: 700; color: var(--ac); letter-spacing: 1px; text-transform: uppercase;">IN-TEXT CITATION RULE</div>
+              <h4 style="margin: 4px 0 8px; color: var(--tx);">Threshold: Three (3) Authors</h4>
+              <p style="font-size: 0.85rem; color: var(--mt); line-height: 1.6;">
+                When mentioning authors by name in the running text:
+              </p>
+              <ul style="font-size: 0.85rem; padding-left: 18px; color: var(--tx);">
+                <li><strong>1 or 2 Authors:</strong> Name both authors:<br /><code>"As shown by Brown and Davis [4]..."</code></li>
+                <li><strong>3 or More Authors:</strong> Name only the first author followed by <strong>"et al."</strong>:<br /><code>"During their research, Fan, et al. [4] discuss lasers..."</code></li>
+                <li><strong>General Rule:</strong> You do <em>not</em> need to mention author names at all; standard engineering practice prefers the pure numeric citation: <code>"Recent research [4] demonstrated..."</code></li>
+              </ul>
+            </div>
+
+            <div style="background: rgba(79, 163, 227, 0.08); border: 1px solid rgba(79, 163, 227, 0.3); border-radius: 10px; padding: 18px;">
+              <div style="font-size: 0.75rem; font-weight: 700; color: var(--exp-bd); letter-spacing: 1px; text-transform: uppercase;">REFERENCE LIST RULE</div>
+              <h4 style="margin: 4px 0 8px; color: var(--tx);">Threshold: Six (6) Authors</h4>
+              <p style="font-size: 0.85rem; color: var(--mt); line-height: 1.6;">
+                In the full References list at the end of the document:
+              </p>
+              <ul style="font-size: 0.85rem; padding-left: 18px; color: var(--tx);">
+                <li><strong>Up to 5 Authors:</strong> You must list <strong>every single author's name</strong> in full (initials and surname).</li>
+                <li><strong>6 or More Authors:</strong> You may abbreviate using <strong>"et al."</strong> after the first author:<br /><code>[4] F. Yan, Y. Gu, Y. Wang, C. M. Wang, X. Y. Hu, H. X. Peng, et al., ...</code></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="example">
+            <div class="callout-label">Annotated Examples</div>
+            <h4>Examining Correct IEEE In-Text Sentences</h4>
+            <p>Study the following sentences illustrating diverse IEEE citation requirements:</p>
+            <ol>
+              <li><strong>Single Author Mention:</strong> <em>"...as shown by Brown [4], who previously stated..."</em> (Author's surname directly accompanied by bracketed number).</li>
+              <li><strong>Passive / Unattributed:</strong> <em>"Several recent studies [3], [4], [15], [16] have suggested that laser ablation reduces rock tensile strength."</em> (Clean, standard engineering style).</li>
+              <li><strong>Contiguous Range:</strong> <em>"Italian owls are suspicious of outsiders, as noted in [3]–[5]."</em> (Covers sources 3, 4, and 5).</li>
+              <li><strong>Direct Quotation with Exact Page:</strong> <em>"According to Glover, 'channel capacity is fundamentally bounded by thermal noise' [1, p. 104]."</em> (Direct quote in quotation marks with exact page number inside brackets).</li>
+              <li><strong>Three or More Authors in Running Text:</strong> <em>"During their experiments, Fan, et al. [4] investigated rock fracture thresholds."</em> (Uses 'et al.' for 3+ authors in text).</li>
+            </ol>
+          </div>
+
+          <div class="note-box">
+            <div class="callout-label">Pro Tip: Grammatical Flow with IEEE Brackets</div>
+            Treat the bracket <code>[#]</code> as if it were the word or name itself. Notice how naturally these read:
+            <br /><code>&#10004; "[1] demonstrated that encryption overhead is negligible."</code>
+            <br /><code>&#10004; "In [2], the authors establish a new proof."</code>
+            <br />Do not write awkward redundancies such as: <em>"In reference [1], the author in [1] showed..."</em>
+          </div>
+
+          <div class="warning-box">
+            <div class="callout-label">Critical Exam Trap: The Author Threshold Confusion</div>
+            Students frequently fail this question on exams: <strong>Do NOT confuse the in-text threshold (3 authors) with the reference list threshold (6 authors).</strong> If a paper has 4 authors:
+            <ul>
+              <li>In text: Write <code>Smith, et al. [3]</code> (because 4 &ge; 3).</li>
+              <li>In reference list: Write <code>[3] J. Smith, A. Jones, R. Patel, and M. Vance, ...</code> (You CANNOT use <em>et al.</em> in the reference list because it has fewer than 6 authors!).</li>
+            </ul>
+          </div>
+
+          <div class="summary-box">
+            <h4>Key Takeaways: In-Text Citation Rules</h4>
+            <ul>
+              <li><strong>Appearance Order:</strong> Citations are numbered sequentially <code>[1], [2], [3]...</code> based on the order of first appearance.</li>
+              <li><strong>Punctuation Inside:</strong> Citation brackets are placed <em>before</em> the terminal period or comma: <code>...end of claim [1].</code></li>
+              <li><strong>Multiple Sources:</strong> Separate discrete citations with commas <code>[1], [2]</code>; join consecutive spans with an en-dash <code>[3]–[5]</code>.</li>
+              <li><strong>Page Numbers:</strong> For direct quotations, include the page within the bracket: <code>[1, p. 45]</code>.</li>
+              <li><strong>Author Naming Threshold:</strong> Use <em>et al.</em> for <strong>3+ authors</strong> in text, but only for <strong>6+ authors</strong> in the terminal reference list!</li>
+            </ul>
+          </div>
+
+          <div class="practice-section">
+            <div class="practice-section-label">Practice Questions &amp; Exam Scenarios</div>
+
+            <details>
+              <summary>Easy: Spotting IEEE Formatting Errors</summary>
+              <p><strong>Question:</strong> Identify the three formatting errors in the following excerpt: <em>"Quantum key distribution provides unconditional security. (1) Recently, research by Alice, Bob, Charlie and David (2022) [2] proved that photon attenuation can be compensated [3,4,5]."</em></p>
+              <p><strong>Answer:</strong>
+                <ul>
+                  <li><strong>Error 1 (Parentheses instead of brackets, outside period):</strong> <code>.(1)</code> violates IEEE style. It should use square brackets and be placed inside the sentence punctuation: <code>...unconditional security [1].</code></li>
+                  <li><strong>Error 2 (APA-style author naming &amp; date):</strong> In IEEE text, when there are 3 or more authors, you must NOT list all four names nor include the year in parentheses <code>(2022)</code>. It should be formatted as: <code>"Recently, Alice, et al. [2] proved..."</code></li>
+                  <li><strong>Error 3 (Improper range notation):</strong> <code>[3,4,5]</code> is consecutive; standard IEEE style formats consecutive ranges with an en-dash: <code>[3]–[5]</code>.</li>
+                </ul>
+              </p>
+            </details>
+
+            <details>
+              <summary>Medium: In-Text vs. Reference List Author Rules</summary>
+              <p><strong>Question:</strong> A research paper is co-authored by five computer scientists: H. Chen, K. Patel, L. Gomez, M. Rossi, and T. Zhang. (a) How should this paper be cited in the running body text if you choose to mention the authors by name? (b) How should these authors be listed in the terminal References list entry?</p>
+              <p><strong>Answer:</strong>
+                <ul>
+                  <li><strong>(a) In Running Body Text:</strong> Because there are 5 authors (which is 3 or more), abbreviate using <em>et al.</em>: <code>"Chen, et al. [5] demonstrated..."</code></li>
+                  <li><strong>(b) In Terminal Reference List:</strong> In the reference list, <em>et al.</em> is only permitted if there are 6 or more authors. Because there are only 5 authors, <strong>all five authors must be listed</strong>:
+                    <br /><code>[5] H. Chen, K. Patel, L. Gomez, M. Rossi, and T. Zhang, ...</code>
+                  </li>
+                </ul>
+              </p>
+            </details>
+
+            <details>
+              <summary>Hard: Complex Citation Synthesis</summary>
+              <p><strong>Question:</strong> You are writing the related works section of an IEEE paper. You need to cite:
+              (1) Reference 4 (a book by Glover, directly quoting a sentence from page 28),
+              (2) References 8, 9, 10, 11, and 12 (all showing similar benchmark trends),
+              (3) Reference 15 and Reference 18 (showing counter-examples).
+              Write two flawless technical sentences synthesizing these sources using standard IEEE syntax.</p>
+              <p><strong>Answer:</strong>
+                <pre><code>"As rigorously demonstrated by Glover, 'adaptive filtering converges exponentially under Gaussian excitation' [4, p. 28].
+Subsequent experimental benchmarks corroborated this performance improvement across multiple hardware configurations [8]–[12], although anomalous latency spikes were reported in isolated embedded trials [15], [18]."</code></pre>
+              </p>
+            </details>
+          </div>
+        </div>
+        <!-- end topic-4 -->
+
+        <!-- ───────────────────────────────────────────────────
+             TOPIC 5: IEEE REFERENCE TEMPLATES & EXAMPLES
+             ─────────────────────────────────────────────────── -->
+        <div class="topic-card" id="topic-5" style="display: none;">
+          <h2><span class="topic-num">5</span>IEEE Reference List Master Guide: Templates &amp; Media Formats</h2>
+          <p class="topic-subtitle">Layout specifications, hanging indents, capitalization rules, standard abbreviations, and comprehensive templates for 11 document types</p>
+
+          <p>
+            The <strong>References</strong> section at the end of your technical report is the complete index that allows any engineer, researcher, or patent attorney to locate and verify every cited source. IEEE specifies exact capitalization, abbreviation, punctuation, and ordering rules that must be followed without deviation.
+          </p>
+
+          <h3>5.1 Layout &amp; Typographical Rules for the Reference List</h3>
+          <ul>
+            <li><strong>Section Heading:</strong> Centered or flush left: <strong>References</strong>.</li>
+            <li><strong>Numerical Order:</strong> Entries are listed strictly in <strong>numerical order</strong> (<code>[1]</code>, <code>[2]</code>, <code>[3]</code>...) matching the sequence in which they appeared in the body text. <em>Never sort the reference list alphabetically!</em></li>
+            <li><strong>Margin &amp; Alignment:</strong> Align references flush left. The bracketed reference number <code>[1]</code> sits at the left margin.</li>
+            <li><strong>Hanging Indent:</strong> Text lines following the first line of an entry are indented so that the text aligns neatly past the bracketed number.</li>
+            <li><strong>Spacing:</strong> Single-space within each reference entry; insert a double-space (or standard margin line break) between distinct entries.</li>
+            <li><strong>Author Name Format:</strong> Always write the author's <strong>initials first</strong>, followed by a period, space, and their <strong>surname</strong>: e.g., <code>I. A. Glover and P. M. Grant</code>. (Never write <em>Glover, I. A.</em> as in APA).</li>
+          </ul>
+
+          <!-- Native CSS Diagram: Reference Anatomy -->
+          <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--bd); border-radius: 12px; padding: 22px; margin: 24px 0;">
+            <div style="font-size: 0.75rem; font-weight: 700; color: var(--ac); letter-spacing: 1.2px; text-transform: uppercase; margin-bottom: 14px;">Anatomy of an IEEE Journal Reference Entry</div>
+            <div style="background: var(--sb); border: 1px solid var(--bd); border-radius: 8px; padding: 16px; font-family: monospace; font-size: 0.9rem; line-height: 1.8; color: var(--tx);">
+              <span style="color: var(--ac); font-weight: 700;">[4]</span> 
+              <span style="color: var(--exp-bd);">F. Yan, Y. Gu, Y. Wang, C. M. Wang, X. Y. Hu, H. X. Peng, et al.,</span> 
+              <span style="color: var(--def-bd);">"Study on the interaction mechanism between laser and rock during perforation,"</span> 
+              <span style="color: var(--qst-bd); font-style: italic;">Opt. Laser Technol.,</span> 
+              <span style="color: var(--wrn-bd);">vol. 54,</span> 
+              <span style="color: var(--tx);">pp. 303-308,</span> 
+              <span style="color: var(--mt);">Dec. 2013.</span>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; margin-top: 14px; font-size: 0.75rem;">
+              <div><strong style="color: var(--ac);">[4]:</strong> Number in brackets</div>
+              <div><strong style="color: var(--exp-bd);">Authors:</strong> Initials first; 'et al.' for 6+</div>
+              <div><strong style="color: var(--def-bd);">Article Title:</strong> In quotation marks</div>
+              <div><strong style="color: var(--qst-bd);">Journal:</strong> Abbreviated &amp; in Italics</div>
+              <div><strong style="color: var(--wrn-bd);">Volume / Pages:</strong> vol. &amp; pp. labels</div>
+              <div><strong style="color: var(--mt);">Date:</strong> Abbr. Month + Year</div>
+            </div>
+          </div>
+
+          <h3>5.2 Master Reference Templates Across 11 Document Types</h3>
+          <p>
+            Below are the official IEEE templates and authoritative worked examples for every common technical document type:
+          </p>
+
+          <!-- Type 1: Print Book -->
+          <div style="margin: 20px 0; padding: 16px; background: rgba(255,255,255,0.02); border-left: 3px solid var(--ac); border-radius: 6px;">
+            <h4 style="margin: 0 0 6px; color: var(--ac);">1. Print Book</h4>
+            <div style="font-size: 0.8rem; color: var(--mt); margin-bottom: 8px;">Template: <code>[Ref] Author's initials. Author's Surname, Book Title in Italics, edition (if not 1st). Place of publication: Publisher, Year.</code></div>
+            <code style="font-size: 0.84rem; color: var(--tx); display: block; background: var(--bg); padding: 10px; border-radius: 6px;">
+              [1] I. A. Glover and P. M. Grant, Digital Communications, 3rd ed. Harlow: Prentice Hall, 2009.
+            </code>
+          </div>
+
+          <!-- Type 2: Book Chapter -->
+          <div style="margin: 20px 0; padding: 16px; background: rgba(255,255,255,0.02); border-left: 3px solid var(--exp-bd); border-radius: 6px;">
+            <h4 style="margin: 0 0 6px; color: var(--exp-bd);">2. Book Chapter in an Edited Collection</h4>
+            <div style="font-size: 0.8rem; color: var(--mt); margin-bottom: 8px;">Template: <code>[Ref] Author's initials. Surname, "Title of chapter," in Book Title in Italics, edition, Editor's initials. Surname, Ed. Place: Publisher, Year, pp. xxx-xxx.</code></div>
+            <code style="font-size: 0.84rem; color: var(--tx); display: block; background: var(--bg); padding: 10px; border-radius: 6px;">
+              [2] C. W. Li and G. J. Wang, "MEMS manufacturing techniques for tissue scaffolding devices," in Mems for Biomedical Applications, S. Bhansali and A. Vasudev, Eds. Cambridge: Woodhead, 2012, pp. 192-217.
+            </code>
+          </div>
+
+          <!-- Type 3: Electronic Book -->
+          <div style="margin: 20px 0; padding: 16px; background: rgba(255,255,255,0.02); border-left: 3px solid var(--def-bd); border-radius: 6px;">
+            <h4 style="margin: 0 0 6px; color: var(--def-bd);">3. Electronic Book (E-Book)</h4>
+            <div style="font-size: 0.8rem; color: var(--mt); margin-bottom: 8px;">Template: <code>[Ref] Author's initials. Surname. (Year, Month Day). Book Title (edition) [Type of medium]. Available: URL</code></div>
+            <code style="font-size: 0.84rem; color: var(--tx); display: block; background: var(--bg); padding: 10px; border-radius: 6px;">
+              [3] W. Zeng, H. Yu, and C. Lin. (2013, Dec. 19). Multimedia Security Technologies for Digital Rights Management [Online]. Available: http://goo.gl/xQ6doi
+            </code>
+            <p style="font-size: 0.78rem; color: var(--mt); margin: 6px 0 0;"><em>Note: If the e-book is a direct equivalent of a print book (e.g., standard PDF pagination), you may reference it as a normal print book.</em></p>
+          </div>
+
+          <!-- Type 4: Print Journal Article -->
+          <div style="margin: 20px 0; padding: 16px; background: rgba(255,255,255,0.02); border-left: 3px solid var(--qst-bd); border-radius: 6px;">
+            <h4 style="margin: 0 0 6px; color: var(--qst-bd);">4. Print Journal Article</h4>
+            <div style="font-size: 0.8rem; color: var(--mt); margin-bottom: 8px;">Template: <code>[Ref] Author's initials. Surname, "Title of article," Abbrev. Journal Title in Italics, vol. x, issue x, pp. xxx-xxx, Abbrev. Month Year.</code></div>
+            <code style="font-size: 0.84rem; color: var(--tx); display: block; background: var(--bg); padding: 10px; border-radius: 6px;">
+              [4] F. Yan, Y. Gu, Y. Wang, C. M. Wang, X. Y. Hu, H. X. Peng, et al., "Study on the interaction mechanism between laser and rock during perforation," Optics and Laser Technology, vol. 54, pp. 303-308, Dec. 2013.
+            </code>
+            <p style="font-size: 0.78rem; color: var(--mt); margin: 6px 0 0;"><em>Note: The 6 authors above triggered the 'et al.' rule for reference lists. Issue numbers are omitted if the journal numbers sequentially across volumes.</em></p>
+          </div>
+
+          <!-- Type 5: E-Journal Article -->
+          <div style="margin: 20px 0; padding: 16px; background: rgba(255,255,255,0.02); border-left: 3px solid var(--wrn-bd); border-radius: 6px;">
+            <h4 style="margin: 0 0 6px; color: var(--wrn-bd);">5. E-Journal Article (Online Periodical)</h4>
+            <div style="font-size: 0.8rem; color: var(--mt); margin-bottom: 8px;">Template: <code>[Ref] Author's initials. Surname. (Year, Month). "Title of article." Journal Title [Online]. vol. x, issue x, pp. xxx. Available: URL</code></div>
+            <code style="font-size: 0.84rem; color: var(--tx); display: block; background: var(--bg); padding: 10px; border-radius: 6px;">
+              [5] M. Semilof. (1996, July). "Driving commerce to the web-corporate intranets and the internet: lines blur," Communication Week [Online], vol. 6, issue 19. Available: http://www.techweb.com/se/directlinkcgi?CWK19960715S0005
+            </code>
+          </div>
+
+          <!-- Type 6: Conference Papers -->
+          <div style="margin: 20px 0; padding: 16px; background: rgba(255,255,255,0.02); border-left: 3px solid var(--crit-bd); border-radius: 6px;">
+            <h4 style="margin: 0 0 6px; color: var(--crit-bd);">6. Conference Proceedings / Papers</h4>
+            <div style="font-size: 0.8rem; color: var(--mt); margin-bottom: 8px;">Template: <code>[Ref] Author's initials. Surname, "Title of paper," in Name of Conference in Italics, Location, Year, pp. xxx-xxx.</code></div>
+            <code style="font-size: 0.84rem; color: var(--tx); display: block; background: var(--bg); padding: 10px; border-radius: 6px;">
+              [6] S. Adachi, T. Horio, and T. Suzuki, "Intense vacuum-ultraviolet single-order harmonic pulse by a deep-ultraviolet driving laser," in Conf. Lasers and Electro-Optics, San Jose, CA, 2012, pp. 2118-2120.
+            </code>
+          </div>
+
+          <!-- Type 7: Technical Reports -->
+          <div style="margin: 20px 0; padding: 16px; background: rgba(255,255,255,0.02); border-left: 3px solid var(--ac); border-radius: 6px;">
+            <h4 style="margin: 0 0 6px; color: var(--ac);">7. Technical Reports &amp; Whitepapers</h4>
+            <div style="font-size: 0.8rem; color: var(--mt); margin-bottom: 8px;">Template: <code>[Ref] Author's initials. Surname, "Title of report," Abbrev. Company/Inst., City, State, Report number, Year.</code></div>
+            <code style="font-size: 0.84rem; color: var(--tx); display: block; background: var(--bg); padding: 10px; border-radius: 6px;">
+              [7] P. Diament and W. L. Luptakin, "V-line surface-wave radiation and scanning," Dept. Elect. Eng., Columbia Univ., New York, NY, Sci. Rep. 85, 1991.
+            </code>
+          </div>
+
+          <!-- Type 8: Patents -->
+          <div style="margin: 20px 0; padding: 16px; background: rgba(255,255,255,0.02); border-left: 3px solid var(--exp-bd); border-radius: 6px;">
+            <h4 style="margin: 0 0 6px; color: var(--exp-bd);">8. Patents</h4>
+            <div style="font-size: 0.8rem; color: var(--mt); margin-bottom: 8px;">Template: <code>[Ref] Author's initials. Surname, "Title of patent," Country Patent number, Abbrev. Month Day Year.</code></div>
+            <code style="font-size: 0.84rem; color: var(--tx); display: block; background: var(--bg); padding: 10px; border-radius: 6px;">
+              [8] J. P. Wilkinson, "Nonlinear resonant circuit devices," U.S. Patent 3 624 125, July 16, 1990.
+            </code>
+            <p style="font-size: 0.78rem; color: var(--mt); margin: 6px 0 0;"><em>Online Patent Variant:</em> <code>[12] M. R. Brooks, "Musical toothbrush with adjustable neck and mirror," U.S. Patent 326 189 [Online], May 19, 1992. Available: http://goo.gl/VU1WEk</code></p>
+          </div>
+
+          <!-- Type 9: Standards -->
+          <div style="margin: 20px 0; padding: 16px; background: rgba(255,255,255,0.02); border-left: 3px solid var(--def-bd); border-radius: 6px;">
+            <h4 style="margin: 0 0 6px; color: var(--def-bd);">9. Industry Standards</h4>
+            <div style="font-size: 0.8rem; color: var(--mt); margin-bottom: 8px;">Template: <code>[Ref] Title of Standard in Italics, Standard number, Date/Year.</code></div>
+            <code style="font-size: 0.84rem; color: var(--tx); display: block; background: var(--bg); padding: 10px; border-radius: 6px;">
+              [9] Shunt Power Capacitors, IEEE Standard 18-2012, 2013.
+            </code>
+          </div>
+
+          <!-- Type 10: Theses & Dissertations -->
+          <div style="margin: 20px 0; padding: 16px; background: rgba(255,255,255,0.02); border-left: 3px solid var(--qst-bd); border-radius: 6px;">
+            <h4 style="margin: 0 0 6px; color: var(--qst-bd);">10. Theses &amp; Dissertations</h4>
+            <div style="font-size: 0.8rem; color: var(--mt); margin-bottom: 8px;">Template: <code>[Ref] Author's initials. Surname, "Title of thesis," Designation (Ph.D. dissertation or M.S. thesis), Abbrev. Dept., Abbrev. Univ., City, State, Year.</code></div>
+            <code style="font-size: 0.84rem; color: var(--tx); display: block; background: var(--bg); padding: 10px; border-radius: 6px;">
+              [10] J. O. Williams, "Narrow-band analyser," Ph.D. dissertation, Dept. Elect. Eng., Harvard Univ., Cambridge, MA, 1993.
+            </code>
+          </div>
+
+          <!-- Type 11: Datasheets & Websites -->
+          <div style="margin: 20px 0; padding: 16px; background: rgba(255,255,255,0.02); border-left: 3px solid var(--wrn-bd); border-radius: 6px;">
+            <h4 style="margin: 0 0 6px; color: var(--wrn-bd);">11. Datasheets &amp; Websites</h4>
+            <div style="font-size: 0.8rem; color: var(--mt); margin-bottom: 8px;">Datasheet Template: <code>[Ref] Author/Manufacturer, "Title of Datasheet," Part datasheet, Pub. date [Latest revision date].</code></div>
+            <code style="font-size: 0.84rem; color: var(--tx); display: block; background: var(--bg); padding: 10px; border-radius: 6px; margin-bottom: 10px;">
+              [11] Texas Instruments, "High speed CMOS logic analog multiplexers/demultiplexers," 74HC4051 datasheet, Nov. 1997 [Revised Sept. 2002].
+            </code>
+            <div style="font-size: 0.8rem; color: var(--mt); margin-bottom: 8px;">Website Template: <code>[Ref] Author's initials. Surname / Corporate Author. (Year, Month Day). Title of web page [Online]. Available: URL</code></div>
+            <code style="font-size: 0.84rem; color: var(--tx); display: block; background: var(--bg); padding: 10px; border-radius: 6px;">
+              [13] BBC News. (2013, Nov. 11). Microwave signals turned into electrical power [Online]. Available: http://www.bbc.co.uk/news/technology-24897584
+              <br /><br />
+              [14] M. Holland. (2002). Guide to citing internet sources [Online]. Available: http://www.bournemouth.ac.uk/library/using/guide_to_citing_internet_sourc.html
+            </code>
+            <p style="font-size: 0.78rem; color: var(--mt); margin: 6px 0 0;"><em>Website Fallback: If no personal author exists, use a Corporate Author (e.g., BBC News). If unknown, use 'Anon.' or the web page title.</em></p>
+          </div>
+
+          <h3>5.3 Standard Abbreviations in IEEE References</h3>
+          <p>
+            To save physical space in two-column publication layouts, IEEE mandates specific standard abbreviations for months, periodical titles, and engineering terminology:
+          </p>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 16px 0;">
+            <table>
+              <thead>
+                <tr>
+                  <th>Month</th>
+                  <th>IEEE Abbreviation</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>January / February</td><td>Jan. / Feb.</td></tr>
+                <tr><td>March / April</td><td>Mar. / Apr.</td></tr>
+                <tr><td>May / June / July</td><td>May / June / July <em>(no abbrev)</em></td></tr>
+                <tr><td>August / September</td><td>Aug. / Sept.</td></tr>
+                <tr><td>October / November / December</td><td>Oct. / Nov. / Dec.</td></tr>
+              </tbody>
+            </table>
+
+            <table>
+              <thead>
+                <tr>
+                  <th>Word / Term</th>
+                  <th>IEEE Abbreviation</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>Transactions / Journal</td><td>Trans. / J.</td></tr>
+                <tr><td>Conference / Proceedings</td><td>Conf. / Proc.</td></tr>
+                <tr><td>Department / University</td><td>Dept. / Univ.</td></tr>
+                <tr><td>Technical Report</td><td>Tech. Rep. / Sci. Rep.</td></tr>
+                <tr><td>Edition / Editor</td><td>ed. / Ed. (plural: Eds.)</td></tr>
+                <tr><td>Pages / Volume</td><td>pp. / vol.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="note-box">
+            <div class="callout-label">Pro Tip: The Titles Rule (Italics vs. Quotation Marks)</div>
+            Keep this cardinal rule memorized:
+            <ul>
+              <li><strong>Larger / Container Works are ITALICIZED:</strong> Book titles, Journal titles, Conference names, Standard titles.</li>
+              <li><strong>Smaller / Contained Works are in QUOTATION MARKS:</strong> Article titles, Book chapter titles, Conference paper titles, Patent titles, Datasheet titles.</li>
+            </ul>
+          </div>
+
+          <div class="warning-box">
+            <div class="callout-label">Common Student Mistake: Alphabetizing the References</div>
+            <strong>Never sort an IEEE reference list alphabetically by author surname!</strong> Sorting alphabetically is standard in APA and MLA styles, but in IEEE it completely corrupts the numerical indexing. The reference list must be ordered <code>[1], [2], [3], [4]...</code> based strictly on which source appeared first in your writing.
+          </div>
+
+          <div class="summary-box">
+            <h4>Key Takeaways: Master Reference Guide</h4>
+            <ul>
+              <li><strong>Numerical Order:</strong> Strictly sorted 1, 2, 3... matching appearance order in the paper.</li>
+              <li><strong>Initials First:</strong> Authors are always <code>A. B. Surname</code>, never <code>Surname, A. B.</code>.</li>
+              <li><strong>Containers vs Parts:</strong> Journal &amp; Book titles are <em>italicized</em>; Article &amp; Chapter titles are enclosed in <em>"quotation marks"</em>.</li>
+              <li><strong>Online Resources:</strong> Must specify <code>[Online]. Available: URL</code> and date accessed or published.</li>
+              <li><strong>Standard Abbreviations:</strong> Use <code>vol.</code>, <code>no.</code>, <code>pp.</code>, <code>ed.</code>, and IEEE month abbreviations (e.g., <code>Sept.</code>, <code>Dec.</code>).</li>
+            </ul>
+          </div>
+
+          <div class="practice-section">
+            <div class="practice-section-label">Practice Questions &amp; Exam Scenarios</div>
+
+            <details>
+              <summary>Easy: Book vs. Journal Entry Formatting</summary>
+              <p><strong>Question:</strong> State the two key typographical differences between an IEEE reference entry for a Print Book versus an IEEE reference entry for a Journal Article.</p>
+              <p><strong>Answer:</strong>
+                <ul>
+                  <li><strong>1. Title Formatting:</strong> A book's title is the complete standalone container and is written in <em>Italics</em> (e.g., <em>Digital Communications</em>). In contrast, a journal article is a smaller component of a journal; its title is enclosed in <strong>quotation marks</strong> (e.g., <em>"Study on laser interactions"</em>) while the <em>journal name</em> is italicized.</li>
+                  <li><strong>2. Publication Metadata:</strong> A book reference lists the <strong>City of Publication: Publisher, Year</strong> (e.g., <em>Harlow: Prentice Hall, 2009</em>). A journal reference lists the <strong>volume number, issue number, page range, and abbreviated month/year</strong> (e.g., <em>vol. 54, pp. 303–308, Dec. 2013</em>).</li>
+                </ul>
+              </p>
+            </details>
+
+            <details>
+              <summary>Medium: Correcting a Corrupted Reference Entry</summary>
+              <p><strong>Question:</strong> Convert the following raw, incorrectly formatted reference into flawless IEEE format:
+              <br /><code>Tanenbaum, Andrew S. and Wetherall, David J. "Computer Networks", 5th edition, published by Pearson in Boston, year 2011.</code></p>
+              <p><strong>Answer:</strong>
+                <pre><code>[1] A. S. Tanenbaum and D. J. Wetherall, Computer Networks, 5th ed. Boston: Pearson, 2011.</code></pre>
+                <p><em>Corrections made:</em>
+                  1. Added numeric bracket index <code>[1]</code> at margin.
+                  2. Inverted authors from "Surname, Firstname" to "Initials Surname" (<code>A. S. Tanenbaum and D. J. Wetherall</code>).
+                  3. Removed quotation marks from book title and applied <em>Italics</em>.
+                  4. Abbreviated edition to <code>5th ed.</code>.
+                  5. Formatted publication metadata as <code>Location: Publisher, Year.</code>
+                </p>
+              </p>
+            </details>
+
+            <details>
+              <summary>Hard: Comprehensive Exam Reference List Construction</summary>
+              <p><strong>Question:</strong> Given the following two sources cited in a senior design report:
+              Source A: An online conference paper by T. Suzuki, S. Adachi, and T. Horio presented at the Conference on Lasers and Electro-Optics in San Jose, CA in 2012, titled "High harmonic pulse generation", found on pages 2118-2120.
+              Source B: A website published by BBC News on Nov. 11, 2013 titled "Microwave signals turned into electrical power", accessed at <code>http://www.bbc.co.uk/news/technology-24897584</code>.
+              Source B was cited in paragraph 1 of the paper, and Source A was cited in paragraph 4. Write the complete, perfectly formatted References section.</p>
+              <p><strong>Answer:</strong>
+                <pre><code>References
+
+[1] BBC News. (2013, Nov. 11). Microwave signals turned into electrical power [Online]. Available: http://www.bbc.co.uk/news/technology-24897584
+
+[2] T. Suzuki, S. Adachi, and T. Horio, "High harmonic pulse generation," in Conf. Lasers and Electro-Optics, San Jose, CA, 2012, pp. 2118-2120.</code></pre>
+                <p><em>Key Note:</em> Even though Source A is a peer-reviewed academic conference paper and Source B is a news website, Source B <strong>must be numbered [1]</strong> because it appeared first in paragraph 1 of the report text!</p>
+              </p>
+            </details>
+          </div>
+        </div>
+        <!-- end topic-5 -->
+
+      </div>
+      <!-- end module-container -->
+
+      <!-- Bottom Pagination Navigation -->
+      <div class="bottom-nav">
+        <button id="prev-btn" onclick="goPrev()">
+          <div>
+            <span class="btn-label">&larr; Previous</span>
+            <span class="btn-title" id="prev-title">Topic</span>
+          </div>
+        </button>
+        <button id="next-btn" onclick="goNext()">
+          <div>
+            <span class="btn-label">Next &rarr;</span>
+            <span class="btn-title" id="next-title">Topic</span>
+          </div>
+        </button>
+      </div>
+    </div>
+    <!-- end main-content -->
+
+    <button
+      id="back-to-top"
+      onclick="
+        document
+          .getElementById('main-content')
+          .scrollTo({ top: 0, behavior: 'smooth' })
+      "
+    >
+      &uarr;
+    </button>
+
+    <script>
+      // ── List all topic IDs in order ────────────────────────
+      const topics = ["topic-1", "topic-2", "topic-3", "topic-4", "topic-5"];
+      let currentTopicIndex = 0;
+
+      function getTopicTitle(id) {
+        const link = document.querySelector(`.nav-sublist a[onclick*="'${id}'"]`) ||
+                     document.querySelector(`.nav-sublist a[onclick*='"${id}"']`);
+        if (link) {
+          const numEl = link.querySelector('.nav-num');
+          if (numEl) {
+            return link.textContent.replace(numEl.textContent, '').trim();
+          }
+          return link.textContent.replace(/^\d+\s*/, '').trim();
+        }
+        const card = document.getElementById(id);
+        if (card) {
+          const h2 = card.querySelector('h2');
+          if (h2) {
+            const numEl = h2.querySelector('.topic-num');
+            if (numEl) {
+              return h2.textContent.replace(numEl.textContent, '').trim();
+            }
+            return h2.textContent.replace(/^\d+\s*/, '').trim();
+          }
+        }
+        return 'Topic';
+      }
+
+      function toggleSidebar() {
+        const sb = document.getElementById('sidebar');
+        const bd = document.getElementById('sidebar-backdrop');
+        if (sb) sb.classList.toggle('open');
+        if (bd) bd.classList.toggle('active');
+      }
+
+      function showTopic(id) {
+        document
+          .querySelectorAll(".topic-card")
+          .forEach((c) => (c.style.display = "none"));
+        const t = document.getElementById(id);
+        if (t) t.style.display = "block";
+        currentTopicIndex = topics.indexOf(id);
+
+        document
+          .querySelectorAll(".nav-sublist a")
+          .forEach((a) => a.classList.remove("active"));
+        const lk = document.querySelector(`.nav-sublist a[onclick*="'${id}'"]`) ||
+                   document.querySelector(`.nav-sublist a[onclick*='"${id}"']`);
+        if (lk) {
+          lk.classList.add("active");
+          const sublist = lk.closest('.nav-sublist');
+          if (sublist && sublist.style.display === 'none') {
+            sublist.style.display = 'block';
+            const chevron = sublist.previousElementSibling ? sublist.previousElementSibling.querySelector('.chevron') : null;
+            if (chevron) chevron.style.transform = 'rotate(0deg)';
+          }
+        }
+
+        const pb = document.getElementById("prev-btn");
+        const nb = document.getElementById("next-btn");
+        const pt = document.getElementById("prev-title");
+        const nt = document.getElementById("next-title");
+
+        if (currentTopicIndex > 0) {
+          pb.style.display = "flex";
+          if (pt) pt.textContent = getTopicTitle(topics[currentTopicIndex - 1]);
+        } else {
+          pb.style.display = "none";
+        }
+
+        if (currentTopicIndex < topics.length - 1) {
+          nb.style.display = "flex";
+          if (nt) nt.textContent = getTopicTitle(topics[currentTopicIndex + 1]);
+        } else {
+          nb.style.display = "none";
+        }
+
+        if (t) t.scrollIntoView({ behavior: "smooth", block: "start" });
+        if (window.innerWidth <= 768) {
+          const sb = document.getElementById('sidebar');
+          const bd = document.getElementById('sidebar-backdrop');
+          if (sb) sb.classList.remove('open');
+          if (bd) bd.classList.remove('active');
+        }
+      }
+
+      function goPrev() {
+        if (currentTopicIndex > 0) showTopic(topics[currentTopicIndex - 1]);
+      }
+      function goNext() {
+        if (currentTopicIndex < topics.length - 1)
+          showTopic(topics[currentTopicIndex + 1]);
+      }
+
+      function toggleSection(el) {
+        const s = el.nextElementSibling,
+          c = el.querySelector(".chevron");
+        if (s.style.display === "none") {
+          s.style.display = "block";
+          c.style.transform = "rotate(0deg)";
+        } else {
+          s.style.display = "none";
+          c.style.transform = "rotate(-90deg)";
+        }
+      }
+
+      function filterContent() {
+        const q = document.getElementById("search-input").value.toLowerCase();
+        document
+          .querySelectorAll(".nav-sublist li")
+          .forEach(
+            (i) =>
+              (i.style.display = i.textContent.toLowerCase().includes(q)
+                ? ""
+                : "none"),
+          );
+      }
+
+      // Initialise
+      if (topics.length > 0) showTopic(topics[0]);
+      const mc = document.getElementById("main-content");
+      const bb = document.getElementById("back-to-top");
+      mc.addEventListener(
+        "scroll",
+        () => (bb.style.display = mc.scrollTop > 300 ? "flex" : "none"),
+      );
+    </script>
+  </body>
+</html>

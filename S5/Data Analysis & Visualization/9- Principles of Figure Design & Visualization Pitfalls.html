@@ -1,0 +1,2862 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Data Analysis &amp; Visualization — Principles of Figure Design &amp; Visualization Pitfalls</title>
+    <meta
+      name="description"
+      content="Comprehensive, high-yield exam preparation notes for Claus O. Wilke's Fundamentals of Data Visualization (Chapters 18, 19, 20, 23, 24, 25). Overplotting, color pitfalls, redundant coding, data-context balance, axis label sizing, avoiding line drawings, master summary, and interactive MCQ exam quiz."
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../notes.css" />
+    <style>
+      /* ── Enhanced Visual Card & Diagram Styles ── */
+      .citation-header {
+        background: rgba(217, 119, 87, 0.08);
+        border: 1px solid rgba(217, 119, 87, 0.25);
+        border-radius: 8px;
+        padding: 12px 16px;
+        font-size: 0.84rem;
+        color: var(--mt);
+        margin-bottom: 24px;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 12px;
+      }
+      .citation-header strong {
+        color: var(--ac);
+      }
+      .citation-tag {
+        background: rgba(217, 119, 87, 0.15);
+        color: var(--ac);
+        padding: 2px 8px;
+        border-radius: 4px;
+        font-size: 0.72rem;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+
+      .visual-card {
+        background: rgba(24, 24, 27, 0.75);
+        border: 1px solid var(--bd);
+        border-radius: 12px;
+        padding: 20px;
+        margin: 22px 0;
+        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.28);
+      }
+      .visual-card h4 {
+        margin: 0 0 6px;
+        color: var(--tx);
+        font-size: 1rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .visual-card p.visual-caption {
+        font-size: 0.8rem;
+        color: var(--mt);
+        margin-bottom: 16px;
+        line-height: 1.5;
+      }
+
+      /* Diagrams & Strategy Comparisons */
+      .diagram-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 16px;
+        margin: 16px 0;
+      }
+      .diagram-box {
+        background: rgba(0, 0, 0, 0.35);
+        border: 1px solid var(--bd);
+        border-radius: 10px;
+        padding: 16px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        transition: transform 0.2s, border-color 0.2s;
+      }
+      .diagram-box:hover {
+        transform: translateY(-2px);
+        border-color: var(--ac);
+      }
+      .diagram-box-title {
+        font-size: 0.9rem;
+        font-weight: 600;
+        color: var(--tx);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .tag-status {
+        font-size: 0.65rem;
+        font-weight: 700;
+        padding: 2px 7px;
+        border-radius: 4px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      .tag-bad {
+        background: rgba(240, 82, 79, 0.2);
+        color: #f87171;
+        border: 1px solid rgba(240, 82, 79, 0.4);
+      }
+      .tag-good {
+        background: rgba(79, 191, 139, 0.2);
+        color: #34d399;
+        border: 1px solid rgba(79, 191, 139, 0.4);
+      }
+      .tag-warn {
+        background: rgba(240, 169, 78, 0.2);
+        color: #fbbf24;
+        border: 1px solid rgba(240, 169, 78, 0.4);
+      }
+
+      /* SVG Graphic Containers */
+      .svg-canvas-wrap {
+        width: 100%;
+        background: #111114;
+        border: 1px solid var(--bd);
+        border-radius: 8px;
+        padding: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+      }
+      .svg-canvas-wrap svg {
+        max-width: 100%;
+        height: auto;
+      }
+
+      /* Palette Swatches for Colorblindness */
+      .palette-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+        gap: 10px;
+        margin: 16px 0;
+      }
+      .swatch-card {
+        background: rgba(0, 0, 0, 0.3);
+        border: 1px solid var(--bd);
+        border-radius: 8px;
+        overflow: hidden;
+        text-align: center;
+        transition: transform 0.15s;
+      }
+      .swatch-card:hover {
+        transform: translateY(-2px);
+        border-color: var(--tx);
+      }
+      .swatch-color {
+        height: 48px;
+        width: 100%;
+      }
+      .swatch-meta {
+        padding: 8px 6px;
+      }
+      .swatch-name {
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--tx);
+        margin-bottom: 2px;
+      }
+      .swatch-hex {
+        font-size: 0.68rem;
+        color: var(--mt);
+        font-family: monospace;
+      }
+
+      /* Color Scale Bars */
+      .color-scale-bar {
+        height: 28px;
+        border-radius: 6px;
+        width: 100%;
+        margin: 6px 0 12px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .scale-rainbow {
+        background: linear-gradient(to right, #800026, #bd0026, #e31a1c, #fc4e2a, #fd8d3c, #feb24c, #fed976, #ffeda0, #ffffcc, #7fcdbb, #41b6c4, #1d91c0, #225ea8, #0c2c84, #49006a);
+      }
+      .scale-heat {
+        background: linear-gradient(to right, #800026, #bd0026, #e31a1c, #fc4e2a, #fd8d3c, #feb24c, #fed976, #ffffcc);
+      }
+      .scale-piyg {
+        background: linear-gradient(to right, #c51b7d, #de77ae, #f1b6da, #fde0ef, #f7f7f7, #e6f5d0, #b8e186, #7fbc41, #4d9221);
+      }
+
+      /* Comparison Matrices & Tables */
+      .matrix-table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.85rem;
+        margin: 16px 0;
+      }
+      .matrix-table th {
+        background: rgba(255, 255, 255, 0.04);
+        color: var(--tx);
+        text-align: left;
+        padding: 10px 14px;
+        border-bottom: 2px solid var(--bd);
+        font-weight: 600;
+      }
+      .matrix-table td {
+        padding: 10px 14px;
+        border-bottom: 1px solid var(--bd);
+        color: var(--tx);
+      }
+      .matrix-table tr:hover td {
+        background: rgba(255, 255, 255, 0.02);
+      }
+
+      /* ── Interactive Quiz Styles ── */
+      .quiz-header-banner {
+        background: linear-gradient(135deg, rgba(217, 119, 87, 0.14), rgba(139, 92, 246, 0.14));
+        border: 1px solid rgba(217, 119, 87, 0.35);
+        border-radius: 14px;
+        padding: 22px 24px;
+        margin-bottom: 24px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
+        gap: 16px;
+      }
+      .quiz-title-wrap h3 {
+        margin: 0 0 4px;
+        font-size: 1.25rem;
+        color: #fff;
+      }
+      .quiz-title-wrap p {
+        margin: 0;
+        font-size: 0.84rem;
+        color: var(--mt);
+      }
+      .score-board {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .score-pill {
+        background: rgba(0, 0, 0, 0.55);
+        border: 1px solid var(--bd);
+        padding: 7px 16px;
+        border-radius: 20px;
+        font-weight: 700;
+        font-size: 0.95rem;
+        color: var(--ac);
+        letter-spacing: 0.3px;
+        transition: all 0.25s;
+      }
+      .reset-quiz-btn {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid var(--bd);
+        color: var(--tx);
+        padding: 7px 16px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-family: inherit;
+        font-size: 0.8rem;
+        font-weight: 600;
+        transition: all 0.2s;
+      }
+      .reset-quiz-btn:hover {
+        background: var(--hv);
+        border-color: var(--ac);
+        color: var(--ac);
+      }
+
+      /* Quiz Category Filter Buttons */
+      .quiz-filter-wrap {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-bottom: 22px;
+        padding-bottom: 14px;
+        border-bottom: 1px solid var(--bd);
+      }
+      .quiz-filter-btn {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--bd);
+        color: var(--mt);
+        padding: 6px 12px;
+        border-radius: 6px;
+        font-size: 0.75rem;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.18s;
+        font-family: inherit;
+      }
+      .quiz-filter-btn:hover {
+        border-color: var(--ac);
+        color: var(--tx);
+      }
+      .quiz-filter-btn.active {
+        background: rgba(217, 119, 87, 0.18);
+        border-color: var(--ac);
+        color: var(--ac);
+        font-weight: 600;
+      }
+
+      .mcq-card {
+        background: rgba(24, 24, 27, 0.7);
+        border: 1px solid var(--bd);
+        border-radius: 12px;
+        padding: 18px 20px;
+        margin-bottom: 18px;
+        transition: border-color 0.2s, box-shadow 0.2s;
+      }
+      .mcq-card:hover {
+        border-color: rgba(217, 119, 87, 0.35);
+      }
+      .mcq-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+      .mcq-qnum {
+        font-size: 0.7rem;
+        font-weight: 700;
+        background: rgba(217, 119, 87, 0.15);
+        color: var(--ac);
+        padding: 3px 8px;
+        border-radius: 5px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        flex-shrink: 0;
+      }
+      .mcq-category-tag {
+        font-size: 0.68rem;
+        color: var(--mt);
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid var(--bd);
+        padding: 2px 7px;
+        border-radius: 4px;
+        margin-left: 8px;
+      }
+      .mcq-question {
+        font-size: 0.94rem;
+        font-weight: 600;
+        color: var(--tx);
+        line-height: 1.5;
+        flex: 1;
+      }
+      .mcq-options {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        margin: 14px 0 10px;
+      }
+      .mcq-opt {
+        background: rgba(0, 0, 0, 0.35);
+        border: 1px solid var(--bd);
+        border-radius: 8px;
+        padding: 10px 14px;
+        text-align: left;
+        color: var(--tx);
+        font-family: inherit;
+        font-size: 0.85rem;
+        line-height: 1.45;
+        cursor: pointer;
+        display: flex;
+        align-items: flex-start;
+        gap: 10px;
+        transition: all 0.15s ease;
+      }
+      .mcq-opt:hover:not(:disabled) {
+        background: rgba(255, 255, 255, 0.04);
+        border-color: var(--ac);
+      }
+      .opt-letter {
+        font-weight: 700;
+        font-size: 0.78rem;
+        color: var(--mt);
+        background: rgba(255, 255, 255, 0.06);
+        padding: 2px 7px;
+        border-radius: 4px;
+        flex-shrink: 0;
+      }
+      .mcq-opt.selected-correct {
+        background: rgba(16, 185, 129, 0.15);
+        border-color: #10b981;
+        color: #a7f3d0;
+      }
+      .mcq-opt.selected-correct .opt-letter {
+        background: #10b981;
+        color: #064e3b;
+      }
+      .mcq-opt.selected-incorrect {
+        background: rgba(239, 68, 68, 0.15);
+        border-color: #ef4444;
+        color: #fca5a5;
+      }
+      .mcq-opt.selected-incorrect .opt-letter {
+        background: #ef4444;
+        color: #450a0a;
+      }
+      .mcq-opt.show-correct {
+        border-color: #10b981;
+        background: rgba(16, 185, 129, 0.08);
+      }
+      .mcq-feedback {
+        display: none;
+        margin-top: 12px;
+        padding: 12px 14px;
+        border-radius: 8px;
+        font-size: 0.83rem;
+        line-height: 1.55;
+      }
+      .mcq-feedback.visible {
+        display: block;
+      }
+      .mcq-feedback.correct {
+        background: rgba(16, 185, 129, 0.1);
+        border: 1px solid rgba(16, 185, 129, 0.35);
+        color: #a7f3d0;
+      }
+      .mcq-feedback.incorrect {
+        background: rgba(239, 68, 68, 0.1);
+        border: 1px solid rgba(239, 68, 68, 0.35);
+        color: #fca5a5;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="menu-toggle" onclick="toggleSidebar()" aria-label="Toggle navigation">☰</button>
+    <div id="sidebar-backdrop" onclick="toggleSidebar()"></div>
+
+    <!-- ═══════════════════════════════════════════════════════
+     SIDEBAR NAVIGATION
+     ═══════════════════════════════════════════════════════ -->
+    <div id="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-header-text">
+          <div class="sidebar-course-label">Course Notes</div>
+          <div class="sidebar-title">Data Analysis &amp; Visualization</div>
+        </div>
+      </div>
+      <div class="sidebar-search-wrap">
+        <input
+          type="text"
+          id="search-input"
+          placeholder="Search topics…"
+          onkeyup="filterContent()"
+        />
+      </div>
+      <ul class="nav-list" id="nav-list">
+        <!-- Current Module (Active & Expandable) -->
+        <li class="nav-section">
+          <div class="nav-section-title" onclick="toggleSection(this)">
+            <span>Module 9 — Figure Design &amp; Pitfalls</span>
+            <span class="chevron">▼</span>
+          </div>
+          <ul class="nav-sublist">
+            <li>
+              <a href="javascript:void(0)" onclick="showTopic('topic-1')">
+                <span class="nav-num">01</span>Overplotting &amp; Overlap
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" onclick="showTopic('topic-2')">
+                <span class="nav-num">02</span>Pitfalls of Color Use
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" onclick="showTopic('topic-3')">
+                <span class="nav-num">03</span>Redundant Coding &amp; Legends
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" onclick="showTopic('topic-4')">
+                <span class="nav-num">04</span>Balance Data &amp; Context
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" onclick="showTopic('topic-5')">
+                <span class="nav-num">05</span>Typography &amp; Axis Labels
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" onclick="showTopic('topic-6')">
+                <span class="nav-num">06</span>Avoid Line Drawings
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" onclick="showTopic('topic-7')">
+                <span class="nav-num">07</span>📋 Master Exam Summary
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" onclick="showTopic('topic-8')">
+                <span class="nav-num">08</span>🎯 Interactive MCQ Quiz
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <!-- Other Course Modules (Cross-File Links) -->
+        <li>
+          <a class="nav-module-link" href="./1- Introduction to Data Analysis & Visualization.html">
+            <span class="nav-num">01</span>Introduction to DAV
+          </a>
+        </li>
+        <li>
+          <a class="nav-module-link" href="./2- Data Analysis Lifecycle.html">
+            <span class="nav-num">02</span>Data Analysis Lifecycle
+          </a>
+        </li>
+        <li>
+          <a class="nav-module-link" href="./3- Data Preparation.html">
+            <span class="nav-num">03</span>Data Preparation
+          </a>
+        </li>
+        <li>
+          <a class="nav-module-link" href="./4- Exploratory Data Analysis.html">
+            <span class="nav-num">04</span>Exploratory Data Analysis
+          </a>
+        </li>
+        <li>
+          <a class="nav-module-link" href="./5- Evolution of Data Architecture.html">
+            <span class="nav-num">05</span>Evolution of Data Architecture
+          </a>
+        </li>
+        <li>
+          <a class="nav-module-link" href="./6- Distributed Data Processing & Apache Spark.html">
+            <span class="nav-num">06</span>Distributed Processing &amp; Spark
+          </a>
+        </li>
+        <li>
+          <a class="nav-module-link" href="./7- Visualizing Data - Aesthetics & Coordinate Systems.html">
+            <span class="nav-num">07</span>Visualizing Data (Ch 2 &amp; 3)
+          </a>
+        </li>
+        <li>
+          <a class="nav-module-link" href="./8- Lab Midterm Sequential Codes & Exam Guide.html">
+            <span class="nav-num">08</span>Lab Midterm Sequential Codes &amp; Guide
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════
+     MAIN CONTENT WRAPPER
+     ═══════════════════════════════════════════════════════ -->
+    <div id="main-content">
+      <div class="module-container" id="module-9">
+        <div class="module-header">
+          <div class="module-eyebrow">Data Analysis &amp; Visualization • Chapters 18, 19, 20, 23, 24, 25</div>
+          <h1 class="module-title">Principles of Figure Design &amp; Visualization Pitfalls</h1>
+        </div>
+
+        <div class="citation-header">
+          <span class="citation-tag">Textbook Reference</span>
+          <span>Based on <strong>Fundamentals of Data Visualization</strong> by <strong>Claus O. Wilke</strong> (O'Reilly Media). High-yield exam notes tailored for DAV quizzes &amp; MCQs.</span>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════════════
+         TOPIC 1: HANDLING OVERLAPPING POINTS (OVERPLOTTING)
+         ═══════════════════════════════════════════════════════ -->
+        <div class="topic-card" id="topic-1">
+          <h2><span class="topic-num">1</span>Handling Overlapping Points (Overplotting)</h2>
+          <p class="topic-subtitle">Chapter 18 • Overcoming visual occlusion in scatterplots through alpha blending, jittering, 2D histograms, and contour density estimation</p>
+
+          <p>
+            When visualizing data, scatterplots are our primary tool for examining bivariate relationships between two continuous variables. However, standard scatterplots fail dramatically when points lie directly on top of one another. When multiple data marks occupy the identical spatial coordinates, they obscure one another—a phenomenon known as <strong>overplotting</strong>.
+          </p>
+
+          <div class="definition">
+            <div class="callout-label">Definition</div>
+            <strong>Overplotting:</strong> The visual occlusion that occurs when multiple data points in a scatterplot share identical or nearly identical coordinate positions, causing visual marks to overlap and hide the true volume and density distribution of the underlying data.
+            <br /><em>Intuitive One-Liner:</em> A scatterplot illusion where 100 stacked points look exactly like a single point because they sit right on top of each other.
+          </div>
+
+          <h3>1. The Two Root Causes of Overplotting</h3>
+          <p>
+            Many analysts mistakenly assume overplotting only happens with "Big Data." Claus Wilke demonstrates that overplotting stems from two distinct mechanisms:
+          </p>
+          <ul>
+            <li><strong>Large Sample Sizes ($N \gg 1,000$):</strong> When plotting hundreds of thousands of observations (e.g., all 100,000+ flight departures from Newark Airport in 2013), the plot canvas simply runs out of visual pixels. Even if coordinates are continuous, the sheer density turns the plot area into an illegible, solid black smudge.</li>
+            <li><strong>Low Precision or Integer Rounding in Small Datasets:</strong> Even with small or moderate datasets ($N < 300$), if continuous quantities are rounded to discrete steps (e.g., engine displacement rounded to the nearest deciliter, or fuel efficiency rounded to integer miles per gallon), multiple completely distinct records collapse onto identical coordinate pairs.</li>
+          </ul>
+
+          <div class="example">
+            <div class="callout-label">Case Study • The 234 EPA Cars Dataset</div>
+            <h4>Integer Rounding Occlusion (Wilke Figure 18-1)</h4>
+            <p>
+              Wilke analyzes city fuel economy versus engine displacement for <strong>234 popular car models</strong> (1999–2008):
+            </p>
+            <ul>
+              <li><strong>The Rounding Trap:</strong> Fuel economy is recorded in integer mpg; engine displacement is rounded to the nearest 0.1 liter.</li>
+              <li><strong>The Hidden Population:</strong> There are <strong>21 cars</strong> with a 2.0-liter engine. Yet because of rounding, those 21 cars produce only 4 distinct mpg values (19, 20, 21, or 22 mpg). As a result, 21 vehicles are represented by merely <strong>4 visible dots</strong>! The 2.0-liter engine appears deceptively unpopular.</li>
+              <li><strong>Total Data Occlusion:</strong> Two four-wheel drive (4WD) cars with 2.0-liter engines (encoded as black dots) are plotted underneath front-wheel drive (FWD) cars (yellow dots). The black dots are 100% occluded—giving the completely false impression that no 4WD 2.0L cars exist!</li>
+            </ul>
+          </div>
+
+          <div class="visual-card">
+            <h4>Native Visual Demonstration • Overplotting and Mitigation Strategies</h4>
+            <p class="visual-caption">Comparison of how raw overplotting obscures true density versus how alpha blending, jittering, and binning reveal hidden structures.</p>
+            <div class="diagram-grid">
+              <!-- Box A: Severe Overplotting -->
+              <div class="diagram-box">
+                <div class="diagram-box-title">
+                  <span>A. Raw Scatterplot</span>
+                  <span class="tag-status tag-bad">Severe Occlusion</span>
+                </div>
+                <div class="svg-canvas-wrap">
+                  <svg width="240" height="150" viewBox="0 0 240 150">
+                    <rect x="20" y="10" width="200" height="115" fill="#18181b" stroke="#3f3f46" stroke-width="1"/>
+                    <line x1="20" y1="125" x2="220" y2="125" stroke="#71717a" stroke-width="1"/>
+                    <line x1="20" y1="10" x2="20" y2="125" stroke="#71717a" stroke-width="1"/>
+                    <!-- 20 identical points at (80, 70) solid -->
+                    <circle cx="80" cy="70" r="5" fill="#d97757" stroke="#18181b" stroke-width="1"/>
+                    <text x="90" y="66" fill="#a1a1aa" font-size="10">21 cars look like 1 dot!</text>
+                    <!-- other sparse points -->
+                    <circle cx="140" cy="40" r="5" fill="#d97757" stroke="#18181b" stroke-width="1"/>
+                    <circle cx="180" cy="100" r="5" fill="#d97757" stroke="#18181b" stroke-width="1"/>
+                    <circle cx="50" cy="95" r="5" fill="#d97757" stroke="#18181b" stroke-width="1"/>
+                    <text x="120" y="142" fill="#71717a" font-size="10" text-anchor="middle">Engine Displacement</text>
+                  </svg>
+                </div>
+                <p style="font-size:0.75rem; color:var(--mt); margin:0;">Points lying squarely on top of one another completely mask high frequency clusters.</p>
+              </div>
+
+              <!-- Box B: Partial Transparency + Jitter -->
+              <div class="diagram-box">
+                <div class="diagram-box-title">
+                  <span>B. Alpha + Jitter</span>
+                  <span class="tag-status tag-good">Revealed Distribution</span>
+                </div>
+                <div class="svg-canvas-wrap">
+                  <svg width="240" height="150" viewBox="0 0 240 150">
+                    <rect x="20" y="10" width="200" height="115" fill="#18181b" stroke="#3f3f46" stroke-width="1"/>
+                    <line x1="20" y1="125" x2="220" y2="125" stroke="#71717a" stroke-width="1"/>
+                    <line x1="20" y1="10" x2="20" y2="125" stroke="#71717a" stroke-width="1"/>
+                    <!-- Jittered points around (80, 70) -->
+                    <circle cx="78" cy="68" r="4.5" fill="#d97757" fill-opacity="0.45"/>
+                    <circle cx="82" cy="71" r="4.5" fill="#d97757" fill-opacity="0.45"/>
+                    <circle cx="79" cy="74" r="4.5" fill="#d97757" fill-opacity="0.45"/>
+                    <circle cx="83" cy="67" r="4.5" fill="#d97757" fill-opacity="0.45"/>
+                    <circle cx="76" cy="71" r="4.5" fill="#d97757" fill-opacity="0.45"/>
+                    <circle cx="84" cy="73" r="4.5" fill="#d97757" fill-opacity="0.45"/>
+                    <circle cx="80" cy="66" r="4.5" fill="#d97757" fill-opacity="0.45"/>
+                    <circle cx="81" cy="70" r="4.5" fill="#38bdf8" fill-opacity="0.85"/>
+                    <circle cx="79" cy="72" r="4.5" fill="#38bdf8" fill-opacity="0.85"/>
+                    <text x="94" y="68" fill="#38bdf8" font-size="9">Hidden 4WD dots seen!</text>
+                    <!-- sparse points -->
+                    <circle cx="140" cy="40" r="4.5" fill="#d97757" fill-opacity="0.45"/>
+                    <circle cx="180" cy="100" r="4.5" fill="#d97757" fill-opacity="0.45"/>
+                    <circle cx="50" cy="95" r="4.5" fill="#d97757" fill-opacity="0.45"/>
+                    <text x="120" y="142" fill="#71717a" font-size="10" text-anchor="middle">Small random shift (jitter)</text>
+                  </svg>
+                </div>
+                <p style="font-size:0.75rem; color:var(--mt); margin:0;">Small random displacement reveals both the true count and occluded categories.</p>
+              </div>
+
+              <!-- Box C: Hexagonal Binning -->
+              <div class="diagram-box">
+                <div class="diagram-box-title">
+                  <span>C. Hexagonal 2D Binning</span>
+                  <span class="tag-status tag-good">Optimal for N &gt; 10k</span>
+                </div>
+                <div class="svg-canvas-wrap">
+                  <svg width="240" height="150" viewBox="0 0 240 150">
+                    <rect x="20" y="10" width="200" height="115" fill="#18181b" stroke="#3f3f46" stroke-width="1"/>
+                    <polygon points="75,60 85,60 90,69 85,78 75,78 70,69" fill="#ef4444" stroke="#18181b"/>
+                    <polygon points="85,60 95,60 100,69 95,78 85,78 80,69" fill="#f97316" stroke="#18181b"/>
+                    <polygon points="65,60 75,60 80,69 75,78 65,78 60,69" fill="#f59e0b" stroke="#18181b"/>
+                    <polygon points="80,51 90,51 95,60 90,69 80,69 75,60" fill="#fbbf24" stroke="#18181b"/>
+                    <polygon points="70,51 80,51 85,60 80,69 70,69 65,60" fill="#eab308" stroke="#18181b"/>
+                    <polygon points="135,35 145,35 150,44 145,53 135,53 130,44" fill="#3b82f6" stroke="#18181b"/>
+                    <polygon points="175,90 185,90 190,99 185,108 175,108 170,99" fill="#2563eb" stroke="#18181b"/>
+                    <text x="105" y="72" fill="#a1a1aa" font-size="9">Hexagon count color</text>
+                    <text x="120" y="142" fill="#71717a" font-size="10" text-anchor="middle">Carr et al. Hexagons</text>
+                  </svg>
+                </div>
+                <p style="font-size:0.75rem; color:var(--mt); margin:0;">Regular hexagons discretize 2D space with minimal distance-to-centroid error.</p>
+              </div>
+
+              <!-- Box D: Density Contours -->
+              <div class="diagram-box">
+                <div class="diagram-box-title">
+                  <span>D. Density Contours</span>
+                  <span class="tag-status tag-good">Smooth 2D Surfaces</span>
+                </div>
+                <div class="svg-canvas-wrap">
+                  <svg width="240" height="150" viewBox="0 0 240 150">
+                    <rect x="20" y="10" width="200" height="115" fill="#18181b" stroke="#3f3f46" stroke-width="1"/>
+                    <!-- Outer contour -->
+                    <ellipse cx="85" cy="70" rx="35" ry="25" fill="#27272a" stroke="#71717a" stroke-dasharray="2,2"/>
+                    <!-- Middle contour -->
+                    <ellipse cx="83" cy="70" rx="24" ry="16" fill="#3f3f46" stroke="#a1a1aa"/>
+                    <!-- Peak contour -->
+                    <ellipse cx="81" cy="70" rx="12" ry="8" fill="#d97757" stroke="#f97316"/>
+                    <text x="125" y="68" fill="#a1a1aa" font-size="9">Shaded isodensity</text>
+                    <text x="120" y="142" fill="#71717a" font-size="10" text-anchor="middle">KDE Contour Lines</text>
+                  </svg>
+                </div>
+                <p style="font-size:0.75rem; color:var(--mt); margin:0;">Isodensity curves group continuous bivariate probability into topological contours.</p>
+              </div>
+            </div>
+          </div>
+
+          <h3>2. The Four Solutions: Principles, Mechanics &amp; Trade-offs</h3>
+
+          <h4>Strategy 1: Partial Transparency (Alpha Blending)</h4>
+          <p>
+            By setting the alpha opacity of each glyph below 1.0 (e.g., <code>alpha = 0.2</code>), regions with multiple overlapping points build up deeper, darker shades of ink.
+          </p>
+          <div class="warning-box">
+            <div class="callout-label">The Limits of Transparency (Exam Pitfall)</div>
+            <strong>Why Alpha Blending Alone Is Not a Magic Bullet:</strong>
+            <ol>
+              <li><strong>Count Estimation Failure:</strong> While viewers can see that one point is darker than another, the human brain cannot reliably estimate whether a dark cluster represents 5 points, 20 points, or 100 points.</li>
+              <li><strong>Not Self-Explanatory:</strong> Casual readers seeing varying shades will wonder whether a third variable (like brightness or luminance) is being mapped, rather than realizing it represents overlapping dots.</li>
+              <li><strong>Dynamic Range Collapse:</strong> In massive datasets (e.g., Newark flight delays), no single alpha value works. If alpha is low enough to prevent high-density clusters (0–200 min delays) from becoming solid black blobs, the rare extreme outliers (400+ min delays) become completely invisible!</li>
+            </ol>
+          </div>
+
+          <h4>Strategy 2: Jittering</h4>
+          <p>
+            <strong>Jittering</strong> applies a small, randomized numerical perturbation to each point's $x$ and/or $y$ coordinate before rendering.
+          </p>
+          <div class="definition">
+            <div class="callout-label">Definition</div>
+            <strong>Jittering:</strong> The intentional addition of controlled random noise to discrete or rounded continuous coordinates to physically separate identical points and reveal stacking frequency.
+            <br /><em>Intuitive One-Liner:</em> Giving identical points a gentle random shake so they don't cover each other up.
+          </div>
+          <div class="warning-box">
+            <div class="callout-label">Critical Warning • The Danger of Over-Jittering</div>
+            <strong>Jittering alters the underlying data!</strong> If you jitter too aggressively, you displace points far from their true coordinates, artificially blurring genuine boundaries and inventing non-existent relationships. Always keep jitter amplitude significantly smaller than the distance between adjacent measurement grid units.
+          </div>
+
+          <h4>Strategy 3: 2D Histograms (Rectangles vs. Hexagons)</h4>
+          <p>
+            When $N > 10,000$, plotting individual glyphs becomes computationally inefficient and visually futile. Instead, we partition the 2D plane into discrete bins, tally the number of observations falling into each bin, and encode bin counts via color/luminance.
+          </p>
+          <div class="note-box">
+            <div class="callout-label">Exam Pro Tip • Hexagon Binning Advantage (Carr et al. 1987)</div>
+            <strong>Why are hexagons mathematically superior to squares/rectangles in 2D binning?</strong>
+            <br />
+            In a regular hexagon, <em>every point inside the shape is on average closer to the hexagon's centroid</em> than points in an equal-area square are to the square's center! Specifically:
+            <ul>
+              <li>A square has corners that stick far out from the center (ratio of corner distance to side distance is $\sqrt{2} pprox 1.414$).</li>
+              <li>A regular hexagon is much closer to a circle (ratio of vertex distance to apothem is $2/\sqrt{3} pprox 1.155$).</li>
+              <li>Consequently, assigning all points in the bin to the bin's centroid introduces <strong>lower spatial quantization error and less visual distortion</strong> than rectangular binning.</li>
+            </ul>
+          </div>
+
+          <h4>Strategy 4: 2D Density Contours &amp; Small Multiples</h4>
+          <p>
+            Instead of discrete bins, 2D Kernel Density Estimation (KDE) computes a smooth continuous probability surface over $(x, y)$, which is then contoured using topological elevation lines (isodensity curves).
+          </p>
+          <ul>
+            <li><strong>When it works:</strong> When point density varies <em>slowly and smoothly</em> across both the $x$ and $y$ dimensions (e.g., Blue Jays head length vs. body mass).</li>
+            <li><strong>Shading Enhancement:</strong> Filling the areas between contour lines with progressively darker hues creates a powerful, intuitive impression of a rising 3D mountain of data density.</li>
+            <li><strong>The Multi-Group Hairball Failure:</strong> Drawing colored contours for multiple subgroups works <em>only for 2 to 3 clearly separated groups</em> (e.g., male vs. female Blue Jays). In the <strong>diamonds dataset</strong> (53,940 diamonds with 5 cut qualities: Fair, Good, Very Good, Premium, Ideal), plotting 5 sets of contours on one panel produces an incomprehensible, overlapping <strong>"hairball"</strong> of crisscrossing lines.</li>
+            <li><strong>The Faceting Solution:</strong> Split the multi-group contours into <strong>small multiples (facets)</strong>, with one panel per cut grade, sharing an identical background coordinate grid so readers can visually calibrate locations across panels.</li>
+          </ul>
+
+          <div class="example">
+            <div class="callout-label">Real-World Finding • The Diamonds Paradox</div>
+            <h4>Why Faceting Revealed Two Opposing Trends in the Diamonds Dataset</h4>
+            <ol>
+              <li><strong>Cut vs. Carat (Weight):</strong> Better cuts (Ideal, Premium) cluster at <em>lower</em> carat values than poorer cuts (Fair, Good). Why? Because jewelers must cut away and discard more raw diamond rock to achieve ideal facet geometry, yielding lighter stones on average!</li>
+              <li><strong>Cut vs. Price:</strong> Holding carat constant (e.g., looking exactly at 0.5 carats across panels), better cuts command substantially higher market prices.</li>
+            </ol>
+          </div>
+
+          <h3>3. Comprehensive Comparison Table</h3>
+          <table class="matrix-table">
+            <thead>
+              <tr>
+                <th>Technique</th>
+                <th>Sample Size ($N$)</th>
+                <th>Primary Use Case</th>
+                <th>Major Advantage</th>
+                <th>Critical Pitfall / Limitation</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Partial Transparency</strong></td>
+                <td>Moderate ($10^2 - 10^4$)</td>
+                <td>Mild overlapping; continuous variables</td>
+                <td>Retains individual points; simple to implement</td>
+                <td>Cannot determine exact counts; fails with extreme density contrast</td>
+              </tr>
+              <tr>
+                <td><strong>Jittering</strong></td>
+                <td>Small to Moderate ($< 1,000$)</td>
+                <td>Discrete / heavily rounded coordinates</td>
+                <td>Uncovers hidden stacked points &amp; minority categories</td>
+                <td>Modifies true data; excessive jitter distorts relationships</td>
+              </tr>
+              <tr>
+                <td><strong>2D Rectangular Binning</strong></td>
+                <td>Large ($> 10,000$)</td>
+                <td>Big data scatterplots where points saturate</td>
+                <td>Fast computation; straightforward grid layout</td>
+                <td>Corner points are far from bin center (quantization error)</td>
+              </tr>
+              <tr>
+                <td><strong>2D Hexagonal Binning</strong></td>
+                <td>Large ($> 10,000$)</td>
+                <td>Continuous big data; isotropic relationships</td>
+                <td>Minimal distance-to-center distortion; closest to circle</td>
+                <td>Non-standard geometry; harder to align with Cartesian axes</td>
+              </tr>
+              <tr>
+                <td><strong>Contour Density Lines</strong></td>
+                <td>Moderate to Large</td>
+                <td>Smooth density variations across space</td>
+                <td>Shows topographic density landscape cleanly</td>
+                <td>Creates "hairballs" if >2–3 overlapping groups are plotted together</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="practice-section">
+            <div class="practice-section-label">High-Yield Practice Questions (Quiz Prep)</div>
+            <details>
+              <summary><strong>Question 1 (Easy):</strong> In a scatterplot of 234 cars, why did 21 vehicles with 2.0-liter engines appear as only 4 distinct dots?</summary>
+              <p>
+                <strong>Answer:</strong> Due to <em>integer rounding and low measurement precision</em>. Engine displacement was rounded to the nearest deciliter and fuel economy to integer mpg. The 21 cars only took on 4 discrete mpg values (19, 20, 21, and 22 mpg), collapsing 21 data points onto identical spatial coordinates.
+              </p>
+            </details>
+            <details>
+              <summary><strong>Question 2 (Medium):</strong> Why is hexagonal binning mathematically preferable to rectangular binning according to Carr et al. (1987)?</summary>
+              <p>
+                <strong>Answer:</strong> Points inside a regular hexagon are, on average, closer to the hexagon's centroid than points inside an equal-area square/rectangle are to the square's center. This reduces spatial quantization distortion and provides a more accurate representation of local centroid density.
+              </p>
+            </details>
+            <details>
+              <summary><strong>Question 3 (Hard):</strong> When plotting the 53,940 diamonds dataset across 5 cut categories, why did colored contour lines fail, and what was Wilke's solution?</summary>
+              <p>
+                <strong>Answer:</strong> Colored contour lines failed because having 5 overlapping, intermingled groups on a single panel creates a dense "hairball" of crisscrossing lines that obscures all group-specific distributions. Wilke solved this by using <em>faceting (small multiples)</em>, plotting each cut's contours in its own separate panel with a shared background grid for visual calibration.
+              </p>
+            </details>
+          </div>
+
+          <div class="summary-box">
+            <h4>Key Takeaways • Overplotting (Chapter 18)</h4>
+            <ul>
+              <li>Overplotting is caused both by large datasets ($N > 10,000$) and by rounding/low precision in small datasets.</li>
+              <li>Partial transparency highlights density variations but fails when density ranges span multiple orders of magnitude.</li>
+              <li>Jittering exposes hidden stacked points but directly modifies true coordinates; use with extreme restraint.</li>
+              <li>Hexagonal binning provides superior geometric accuracy over square binning because hexagon points are closer to their centroid.</li>
+              <li>When multi-group contour plots turn into "hairballs," split them into faceted small multiples with a shared reference grid.</li>
+            </ul>
+          </div>
+        </div>
+        <!-- end topic-1 -->
+
+        <!-- ═══════════════════════════════════════════════════════
+         TOPIC 2: COMMON PITFALLS OF COLOR USE
+         ═══════════════════════════════════════════════════════ -->
+        <div class="topic-card" id="topic-2">
+          <h2><span class="topic-num">2</span>Common Pitfalls of Color Use</h2>
+          <p class="topic-subtitle">Chapter 19 • Encoding limits, direct labeling, saturation fatigue, nonmonotonic rainbow dangers, and CVD design rules</p>
+
+          <p>
+            Color is one of the most expressive visual aesthetic channels available to a data scientist. When deployed thoughtfully, it directs viewer attention, clarifies grouping, and communicates continuous magnitude. However, poor color choices can instantly destroy an otherwise mathematically sound visualization.
+          </p>
+
+          <div class="definition">
+            <div class="callout-label">Core Design Axiom</div>
+            <strong>The Wilke Principle of Color:</strong> Color must always serve a specific functional purpose, must be unambiguous and perceptually uniform, and must never distract or fatigue the reader.
+            <br /><em>Intuitive One-Liner:</em> If a color doesn't convey vital data or structure, it is visual clutter.
+          </div>
+
+          <h3>1. Pitfall 1 • Encoding Too Much or Irrelevant Information</h3>
+          <p>
+            A frequent error in data presentation is giving color a job that is far too large for human visual cognition to handle.
+          </p>
+          <ul>
+            <li><strong>The 50-State Legend Puzzle (Figure 19-1):</strong> Attempting to assign 50 distinct colors to all 50 US states plus DC creates an infuriating visual puzzle. Many colors end up nearly indistinguishable, forcing the reader into exhausting mental ping-pong between the legend and scatter dots.</li>
+            <li><strong>The Cognitive Limit of Qualitative Color:</strong> As a strict empirical rule of thumb, qualitative color scales work best for <strong>3 to 5 distinct categories</strong>. Once you reach <strong>8 to 10 categories</strong>, matching colors to categories becomes burdensome. Above 10, human color memory and discrimination fail entirely.</li>
+            <li><strong>The Direct Labeling Remedy:</strong> When distinguishing more than about 8 categorical items, <em>abandon color coding and use direct text labeling</em> instead. You do not need to label all 50 items—label a meaningful representative subset (e.g., states with extreme growth or outliers discussed in the text) and provide the full dataset as an accompanying table.</li>
+            <li><strong>Gratuitous Rainbow Coloring (Figure 19-3):</strong> Giving every bar in a bar plot its own distinct color without any data-mapping rationale creates a meaningless "rainbow effect." It adds zero information while actively distracting the reader's eye.</li>
+          </ul>
+
+          <h3>2. Pitfall 2 • Overly Saturated Colors</h3>
+          <p>
+            Large filled areas of pure, highly saturated colors create extreme visual contrast that fatigues the human eye (visual glare).
+          </p>
+          <div class="warning-box">
+            <div class="callout-label">Design Guideline • Avoid High Saturation in Large Fills</div>
+            <strong>Why Over-Saturation Ruins Figures:</strong>
+            <ul>
+              <li>High-saturation blocks dominate the visual field, drawing the reader's eyes aggressively away from text labels and numerical values.</li>
+              <li>Strongly saturated bars make it physically uncomfortable to align bar endpoints with subtle underlying grid lines.</li>
+              <li><em>Best Practice:</em> Use muted, desaturated tones for large fills, reserving vibrant, saturated colors exclusively for small accent marks, outlier dots, or focal lines.</li>
+            </ul>
+          </div>
+
+          <div class="visual-card">
+            <h4>Native Color Gradient Comparison • Rainbow Flaw vs. Perceptually Monotonic Scales</h4>
+            <p class="visual-caption">Demonstration of why the popular rainbow scale is scientifically defective compared to monotonic sequential and diverging scales.</p>
+            
+            <div style="margin-bottom:14px;">
+              <div style="display:flex; justify-content:space-between; font-size:0.82rem; font-weight:600;">
+                <span style="color:#f87171;">✗ Rainbow Scale (Highly Nonmonotonic, Circular &amp; Flawed)</span>
+                <span class="tag-status tag-bad">Bad Default</span>
+              </div>
+              <div class="color-scale-bar scale-rainbow"></div>
+              <p style="font-size:0.75rem; color:var(--mt); margin:0;">
+                Starts and ends with dark red (circular). Wide yellowish plateau occupies ~33% of scale where luminance barely changes, followed by rapid drops in dark blue.
+              </p>
+            </div>
+
+            <div style="margin-bottom:14px;">
+              <div style="display:flex; justify-content:space-between; font-size:0.82rem; font-weight:600;">
+                <span style="color:#34d399;">✓ Sequential Heat Scale (Monotonic Luminance Gradient)</span>
+                <span class="tag-status tag-good">CVD-Safe Sequential</span>
+              </div>
+              <div class="color-scale-bar scale-heat"></div>
+              <p style="font-size:0.75rem; color:var(--mt); margin:0;">
+                Smooth, continuous progression from dark red to light yellow. In grayscale or under any CVD, magnitude correlates directly with perceived brightness.
+              </p>
+            </div>
+
+            <div>
+              <div style="display:flex; justify-content:space-between; font-size:0.82rem; font-weight:600;">
+                <span style="color:#38bdf8;">✓ ColorBrewer PiYG (CVD-Safe Diverging Scale: Pink to Yellow-Green)</span>
+                <span class="tag-status tag-good">CVD-Safe Diverging</span>
+              </div>
+              <div class="color-scale-bar scale-piyg"></div>
+              <p style="font-size:0.75rem; color:var(--mt); margin:0;">
+                Safe alternative to red-green. Pink contains blue (discernible by deutans/protans); yellow-green contains yellow (discernible by tritans).
+              </p>
+            </div>
+          </div>
+
+          <h3>3. Pitfall 3 • Nonmonotonic Color Scales (The Rainbow Trap)</h3>
+          <p>
+            In Chapter 4 and Chapter 19, Wilke highlights the two non-negotiable mathematical requirements for sequential color scales:
+          </p>
+          <ol>
+            <li>Colors must clearly convey which values are <strong>larger or smaller</strong> than others.</li>
+            <li>The <strong>perceptual difference</strong> between two colors must faithfully reflect the numerical difference between the underlying data values.</li>
+          </ol>
+          <p>
+            The ubiquitous <strong>rainbow color scale (jet)</strong> violates both principles:
+          </p>
+          <ul>
+            <li><strong>Circularity:</strong> It spans the entire visible electromagnetic spectrum, starting at dark red and ending near dark red/purple. Two extreme opposite values look nearly identical!</li>
+            <li><strong>Nonmonotonic Luminance:</strong> When converted to grayscale, the rainbow scale goes from medium-dark $ightarrow$ bright $ightarrow$ very dark $ightarrow$ medium-dark. Brightness fluctuates wildly rather than scaling monotonically with data values.</li>
+            <li><strong>Artificial Feature Creation (Figure 19-5):</strong> In the Texas census map, the rainbow scale places intense, sharp visual boundaries around counties with ~75% white population, making an arbitrary continuous threshold look like a dramatic sociological cliff!</li>
+          </ul>
+
+          <h3>4. Pitfall 4 • Not Designing for Color-Vision Deficiency (CVD)</h3>
+          <p>
+            Approximately <strong>8% of males</strong> and <strong>0.5% of females</strong> of Northern European ancestry experience some form of color-vision deficiency. If your visualization relies on fragile color pairs, nearly 1 in 10 male readers will be unable to read it.
+          </p>
+
+          <table class="matrix-table">
+            <thead>
+              <tr>
+                <th>CVD Classification</th>
+                <th>Receptor Defect</th>
+                <th>Affected Cones</th>
+                <th>Prevalence &amp; Clinical Impact</th>
+                <th>Confused Color Pairs</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Deuteranomaly</strong></td>
+                <td>Green-weak (shifted)</td>
+                <td>M-cones (Medium wavelength)</td>
+                <td><strong>Most common CVD form</strong> (~5% of males). Anomaly = partial impairment.</td>
+                <td>Red vs. Green; Blue vs. Purple</td>
+              </tr>
+              <tr>
+                <td><strong>Deuteranopia</strong></td>
+                <td>Green-blind (absent)</td>
+                <td>M-cones completely missing</td>
+                <td>Severe dichromacy (~1% of males). Anopia = complete absence.</td>
+                <td>Red vs. Green; Brown vs. Green</td>
+              </tr>
+              <tr>
+                <td><strong>Protanomaly / Protanopia</strong></td>
+                <td>Red-weak / Red-blind</td>
+                <td>L-cones (Long wavelength)</td>
+                <td>~1% of males. Protanopes also perceive pure reds as much darker.</td>
+                <td>Red vs. Green; Dark Red vs. Black</td>
+              </tr>
+              <tr>
+                <td><strong>Tritanomaly / Tritanopia</strong></td>
+                <td>Blue-weak / Blue-blind</td>
+                <td>S-cones (Short wavelength)</td>
+                <td><strong>Relatively rare</strong> (< 0.1% of population; equal male/female ratio).</td>
+                <td>Blue vs. Green; Yellow vs. Pink</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h4>How Different Scales Behave Under CVD:</h4>
+          <ul>
+            <li><strong>Sequential Scales:</strong> Inherently safe as long as they follow a monotonic lightness gradient (e.g., dark red to pale yellow). Under CVD, colors shift hue but lightness differences remain crystal clear.</li>
+            <li><strong>Diverging Scales:</strong> Traditional red-versus-green contrasts completely fail for 99% of CVD readers. Use <strong>ColorBrewer PiYG (Pink-to-Yellow-Green)</strong> or Blue-to-Orange instead.</li>
+            <li><strong>Qualitative Scales:</strong> The hardest challenge because multiple discrete colors must remain distinguishable under all simulations.</li>
+          </ul>
+
+          <div class="visual-card">
+            <h4>The Okabe and Ito (2008) CVD-Friendly Universal Color Palette</h4>
+            <p class="visual-caption">Wilke's preferred qualitative color palette used throughout the textbook, mathematically optimized for all forms of color vision deficiency.</p>
+            <div class="palette-grid">
+              <div class="swatch-card">
+                <div class="swatch-color" style="background:#E69F00;"></div>
+                <div class="swatch-meta">
+                  <div class="swatch-name">Orange</div>
+                  <div class="swatch-hex">#E69F00</div>
+                </div>
+              </div>
+              <div class="swatch-card">
+                <div class="swatch-color" style="background:#56B4E9;"></div>
+                <div class="swatch-meta">
+                  <div class="swatch-name">Sky Blue</div>
+                  <div class="swatch-hex">#56B4E9</div>
+                </div>
+              </div>
+              <div class="swatch-card">
+                <div class="swatch-color" style="background:#009E73;"></div>
+                <div class="swatch-meta">
+                  <div class="swatch-name">Bluish Green</div>
+                  <div class="swatch-hex">#009E73</div>
+                </div>
+              </div>
+              <div class="swatch-card">
+                <div class="swatch-color" style="background:#F0E442;"></div>
+                <div class="swatch-meta">
+                  <div class="swatch-name">Yellow</div>
+                  <div class="swatch-hex">#F0E442</div>
+                </div>
+              </div>
+              <div class="swatch-card">
+                <div class="swatch-color" style="background:#0072B2;"></div>
+                <div class="swatch-meta">
+                  <div class="swatch-name">Blue</div>
+                  <div class="swatch-hex">#0072B2</div>
+                </div>
+              </div>
+              <div class="swatch-card">
+                <div class="swatch-color" style="background:#D55E00;"></div>
+                <div class="swatch-meta">
+                  <div class="swatch-name">Vermilion</div>
+                  <div class="swatch-hex">#D55E00</div>
+                </div>
+              </div>
+              <div class="swatch-card">
+                <div class="swatch-color" style="background:#CC79A7;"></div>
+                <div class="swatch-meta">
+                  <div class="swatch-name">Reddish Purple</div>
+                  <div class="swatch-hex">#CC79A7</div>
+                </div>
+              </div>
+              <div class="swatch-card">
+                <div class="swatch-color" style="background:#000000; border-bottom:1px solid #3f3f46;"></div>
+                <div class="swatch-meta">
+                  <div class="swatch-name">Black</div>
+                  <div class="swatch-hex">#000000</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="note-box">
+            <div class="callout-label">Crucial Research Finding • Graphical Element Size (Stone et al. 2014)</div>
+            <strong>Why CVD-Safe Palettes Can Still Fail on Small Elements:</strong>
+            <br />
+            Maureen Stone, Danielle Albers Szafir, and Vidya Setlur (2014) demonstrated that human color discrimination is fundamentally dependent on spatial size. Colors are drastically easier to differentiate in large, contiguous regions (e.g., thick bars or polygons) than in tiny scatter dots or razor-thin lines. Under CVD, this degradation is severe.
+            <br />
+            <strong>The Golden Rule:</strong> Never rely on palette formulas alone. Always test your final figure in a <strong>CVD simulator</strong> (or desaturate to grayscale) at its actual printed size!
+          </div>
+
+          <div class="practice-section">
+            <div class="practice-section-label">High-Yield Practice Questions (Quiz Prep)</div>
+            <details>
+              <summary><strong>Question 1 (Easy):</strong> What is the clinical difference between terms ending in "-anomaly" (e.g. deuteranomaly) and "-anopia" (e.g. deuteranopia)?</summary>
+              <p>
+                <strong>Answer:</strong> Terms ending in <strong>"-anomaly"</strong> refer to <em>partial impairment</em> or anomalous trichromacy (the cone pigment is mutated or shifted in spectral sensitivity). Terms ending in <strong>"-anopia"</strong> refer to the <em>complete absence</em> of the respective cone photoreceptor (dichromacy).
+              </p>
+            </details>
+            <details>
+              <summary><strong>Question 2 (Medium):</strong> Why does the ColorBrewer PiYG (pink to yellow-green) scale remain distinguishable to individuals with red-green color-vision deficiency?</summary>
+              <p>
+                <strong>Answer:</strong> Because the reddish end is not a pure red but a <strong>pink</strong> (which contains a significant blue component), while the greenish end is a <strong>yellow-green</strong> (which contains significant yellow/red). People with red-green CVD (deutans and protans) can easily detect the variation in the <em>blue component</em>, while tritans detect the variation in the red component.
+              </p>
+            </details>
+            <details>
+              <summary><strong>Question 3 (Hard):</strong> What are the two fundamental conditions for sequential color scales, and how does the rainbow scale violate them?</summary>
+              <p>
+                <strong>Answer:</strong> (1) The colors must clearly indicate which values are larger or smaller (order); (2) differences between colors must faithfully reflect differences in numerical values. The rainbow scale violates both: it is <em>circular</em> (starts and ends with dark red), has <em>nonmonotonic luminance</em> (brightness rises and dips erratically in grayscale), and exhibits <em>nonuniform rates of change</em> (a huge yellow/green plateau followed by steep blue drops).
+              </p>
+            </details>
+          </div>
+
+          <div class="summary-box">
+            <h4>Key Takeaways • Pitfalls of Color (Chapter 19)</h4>
+            <ul>
+              <li>Qualitative colors should be restricted to 3–5 categories; beyond ~8 categories, use direct text labeling.</li>
+              <li>Avoid large filled regions of overly saturated colors; they produce visual fatigue and overpower data.</li>
+              <li>The rainbow color scale is circular, nonmonotonic in luminance, and introduces false boundaries.</li>
+              <li>Approximately 8% of males have CVD; deuteranomaly (green-weak) is the most prevalent form.</li>
+              <li>The Okabe &amp; Ito 8-color palette provides a mathematically proven CVD-safe standard for categorical data.</li>
+              <li>Color perception degrades rapidly on tiny dots or thin lines (Stone et al. 2014); always verify in a CVD simulator.</li>
+            </ul>
+          </div>
+        </div>
+        <!-- end topic-2 -->
+
+        <!-- ═══════════════════════════════════════════════════════
+         TOPIC 3: REDUNDANT CODING & LEGEND DESIGN
+         ═══════════════════════════════════════════════════════ -->
+        <div class="topic-card" id="topic-3">
+          <h2><span class="topic-num">3</span>Redundant Coding &amp; Legend Design</h2>
+          <p class="topic-subtitle">Chapter 20 • Multichannel aesthetic mapping, visual order matching, direct labeling, the two-shades rule, and axis colorbars</p>
+
+          <p>
+            In Chapter 19, we saw that relying solely on color to convey categorical distinctions frequently fails. When elements are small, when viewers suffer from color-vision deficiency, or when a document is printed in grayscale, color alone is insufficient. The universal antidote to this fragility is <strong>redundant coding</strong>.
+          </p>
+
+          <div class="definition">
+            <div class="callout-label">Definition</div>
+            <strong>Redundant Coding:</strong> The deliberate visualization practice of encoding the same underlying data variable across two or more distinct aesthetic channels simultaneously (such as color <em>plus</em> shape, or color <em>plus</em> line type, or color <em>plus</em> position).
+            <br /><em>Intuitive One-Liner:</em> Giving data a "backup channel" so if color fails, shape or position still delivers the message.
+          </div>
+
+          <h3>1. Designing Legends with Redundant Coding</h3>
+          <p>
+            The canonical failure of single-channel coding is demonstrated in <strong>Fisher's Iris dataset</strong> (Sepal Width vs. Sepal Length for <em>Iris setosa</em>, <em>Iris virginica</em>, and <em>Iris versicolor</em>):
+          </p>
+          <ul>
+            <li><strong>The Single-Channel Failure (Figure 20-1):</strong> When species is encoded <em>only</em> by dot color (yellow, green, blue), the intermingling points of <em>virginica</em> and <em>versicolor</em> are hard to separate. In black-and-white printing or under blue-yellow CVD (tritanomaly), green and blue become indistinguishable. In pure grayscale, all three species merge into an unreadable mess!</li>
+            <li><strong>The Redundant Solution (Figures 20-3 &amp; 20-4):</strong>
+              <ol>
+                <li>Swap color assignments so adjacent/overlapping groups don't use close hues.</li>
+                <li><strong>Assign different geometric shapes:</strong> e.g., solid circles for <em>setosa</em>, solid triangles for <em>virginica</em>, and solid squares for <em>versicolor</em>.</li>
+              </ol>
+              Even when 100% desaturated to pure grayscale, every individual data point remains instantly identifiable by its glyph geometry.
+            </li>
+          </ul>
+
+          <div class="visual-card">
+            <h4>Native Visual Comparison • Default Alphabetical Legend vs. Visual Order Matching vs. Direct Labeling</h4>
+            <p class="visual-caption">How cognitive lookup friction is eliminated by ordering legends to match data curves, or bypassing legends completely through direct labels.</p>
+            <div class="diagram-grid">
+              <!-- Box A: Bad Alphabetical Legend -->
+              <div class="diagram-box">
+                <div class="diagram-box-title">
+                  <span>A. Default Alphabetical Legend</span>
+                  <span class="tag-status tag-bad">High Cognitive Load</span>
+                </div>
+                <div class="svg-canvas-wrap">
+                  <svg width="250" height="150" viewBox="0 0 250 150">
+                    <!-- Axes -->
+                    <line x1="25" y1="125" x2="160" y2="125" stroke="#52525b" stroke-width="1"/>
+                    <line x1="25" y1="20" x2="25" y2="125" stroke="#52525b" stroke-width="1"/>
+                    <!-- Curves -->
+                    <path d="M 30,110 Q 80,95 155,30" fill="none" stroke="#eab308" stroke-width="2"/>
+                    <path d="M 30,110 Q 80,100 155,55" fill="none" stroke="#38bdf8" stroke-width="2"/>
+                    <path d="M 30,110 Q 80,105 155,80" fill="none" stroke="#a855f7" stroke-width="2"/>
+                    <path d="M 30,110 Q 80,110 155,105" fill="none" stroke="#ef4444" stroke-width="2"/>
+                    <!-- Alphabetical Legend Box -->
+                    <rect x="170" y="25" width="75" height="90" fill="#18181b" stroke="#3f3f46" rx="4"/>
+                    <text x="175" y="40" fill="#a1a1aa" font-size="9" font-weight="600">Legend (Alpha)</text>
+                    <circle cx="180" cy="52" r="3" fill="#38bdf8"/><text x="188" y="55" fill="#ededed" font-size="8">Alphabet</text>
+                    <circle cx="180" cy="67" r="3" fill="#ef4444"/><text x="188" y="70" fill="#ededed" font-size="8">Apple</text>
+                    <circle cx="180" cy="82" r="3" fill="#eab308"/><text x="188" y="85" fill="#ededed" font-size="8">Facebook</text>
+                    <circle cx="180" cy="97" r="3" fill="#a855f7"/><text x="188" y="100" fill="#ededed" font-size="8">Microsoft</text>
+                  </svg>
+                </div>
+                <p style="font-size:0.75rem; color:var(--mt); margin:0;">
+                  Alphabetical sorting forces viewer's gaze to jump up and down across legend items to find the matching curve.
+                </p>
+              </div>
+
+              <!-- Box B: Visual Order Matching -->
+              <div class="diagram-box">
+                <div class="diagram-box-title">
+                  <span>B. Matched Visual Order</span>
+                  <span class="tag-status tag-good">Low Mental Effort</span>
+                </div>
+                <div class="svg-canvas-wrap">
+                  <svg width="250" height="150" viewBox="0 0 250 150">
+                    <line x1="25" y1="125" x2="160" y2="125" stroke="#52525b" stroke-width="1"/>
+                    <line x1="25" y1="20" x2="25" y2="125" stroke="#52525b" stroke-width="1"/>
+                    <path d="M 30,110 Q 80,95 155,30" fill="none" stroke="#eab308" stroke-width="2"/>
+                    <path d="M 30,110 Q 80,100 155,55" fill="none" stroke="#38bdf8" stroke-width="2"/>
+                    <path d="M 30,110 Q 80,105 155,80" fill="none" stroke="#a855f7" stroke-width="2"/>
+                    <path d="M 30,110 Q 80,110 155,105" fill="none" stroke="#ef4444" stroke-width="2"/>
+                    <!-- Matched Legend Box -->
+                    <rect x="170" y="25" width="75" height="90" fill="#18181b" stroke="#10b981" stroke-width="1" rx="4"/>
+                    <text x="175" y="40" fill="#10b981" font-size="9" font-weight="600">Legend (Matched)</text>
+                    <circle cx="180" cy="52" r="3" fill="#eab308"/><text x="188" y="55" fill="#ededed" font-size="8">Facebook (#1)</text>
+                    <circle cx="180" cy="67" r="3" fill="#38bdf8"/><text x="188" y="70" fill="#ededed" font-size="8">Alphabet (#2)</text>
+                    <circle cx="180" cy="82" r="3" fill="#a855f7"/><text x="188" y="85" fill="#ededed" font-size="8">Microsoft (#3)</text>
+                    <circle cx="180" cy="97" r="3" fill="#ef4444"/><text x="188" y="100" fill="#ededed" font-size="8">Apple (#4)</text>
+                  </svg>
+                </div>
+                <p style="font-size:0.75rem; color:var(--mt); margin:0;">
+                  Legend order strictly matches vertical line endpoints (Facebook top, Apple bottom). Even in grayscale, positions align.
+                </p>
+              </div>
+
+              <!-- Box C: Direct Labeling -->
+              <div class="diagram-box">
+                <div class="diagram-box-title">
+                  <span>C. Direct Labeling (No Legend)</span>
+                  <span class="tag-status tag-good">Zero Split Attention</span>
+                </div>
+                <div class="svg-canvas-wrap">
+                  <svg width="250" height="150" viewBox="0 0 250 150">
+                    <line x1="25" y1="125" x2="185" y2="125" stroke="#52525b" stroke-width="1"/>
+                    <line x1="25" y1="20" x2="25" y2="125" stroke="#52525b" stroke-width="1"/>
+                    <path d="M 30,110 Q 80,95 180,30" fill="none" stroke="#eab308" stroke-width="2"/>
+                    <path d="M 30,110 Q 80,100 180,55" fill="none" stroke="#38bdf8" stroke-width="2"/>
+                    <path d="M 30,110 Q 80,105 180,80" fill="none" stroke="#a855f7" stroke-width="2"/>
+                    <path d="M 30,110 Q 80,110 180,105" fill="none" stroke="#ef4444" stroke-width="2"/>
+                    <!-- Direct Labels at Endpoints -->
+                    <text x="185" y="33" fill="#eab308" font-size="8.5" font-weight="700">Facebook</text>
+                    <text x="185" y="58" fill="#38bdf8" font-size="8.5" font-weight="700">Alphabet</text>
+                    <text x="185" y="83" fill="#a855f7" font-size="8.5" font-weight="700">Microsoft</text>
+                    <text x="185" y="108" fill="#ef4444" font-size="8.5" font-weight="700">Apple</text>
+                  </svg>
+                </div>
+                <p style="font-size:0.75rem; color:var(--mt); margin:0;">
+                  Labels placed directly adjacent to curve endpoints. Eliminates legend box entirely, freeing canvas space.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <h3>2. The Visual Order Matching Rule</h3>
+          <p>
+            Most modern plotting libraries (e.g., ggplot2, matplotlib, seaborn) generate legends automatically by sorting factor levels alphabetically. Wilke emphasizes that this automated behavior is a subtle yet pervasive flaw:
+          </p>
+          <div class="note-box">
+            <div class="callout-label">The Golden Rule of Legend Ordering (Exam Essential)</div>
+            <strong>If there is a visual ordering in your data, make sure to match it in the legend!</strong>
+            <br />
+            In the 4 major tech stocks plot (Figure 20-5):
+            <ul>
+              <li>The four stock curves end at clearly differentiated vertical heights: Facebook is highest, followed by Alphabet, Microsoft, and Apple at the bottom.</li>
+              <li>The default software legend sorts them alphabetically: <em>Alphabet, Apple, Facebook, Microsoft</em>.</li>
+              <li>To interpret the graph, the viewer must perform an exhausting series of mental saccades, linking top-to-bottom curves with an out-of-order legend.</li>
+              <li>When Wilke reorders the legend to: <em>Facebook, Alphabet, Microsoft, Apple</em>, the cognitive load drops to near zero!</li>
+              <li><strong>CVD &amp; Grayscale Superpower:</strong> Under colorblindness or grayscale printouts where hues look identical, matching the order allows the viewer to reliably match lines to companies based purely on vertical position!</li>
+            </ul>
+          </div>
+
+          <h3>3. Designing Figures Without Legends (Direct Labeling)</h3>
+          <p>
+            Legends always impose an unavoidable cognitive friction called the <strong>Split-Attention Effect</strong>: the reader's working memory must store a color or symbol from one corner of the plot and transport it across the canvas to decode a curve.
+          </p>
+          <div class="definition">
+            <div class="callout-label">Definition</div>
+            <strong>Direct Labeling:</strong> The design technique of placing explanatory text labels directly adjacent to the graphical marks they describe (e.g., at line endpoints or inside clusters), completely eliminating the need for an external legend box.
+            <br /><em>Intuitive One-Liner:</em> Writing the label right where the data lives instead of hiding it in an external lookup box.
+          </div>
+
+          <h4>Three Direct Labeling Techniques:</h4>
+          <ol>
+            <li><strong>Line Curves:</strong> Place the label directly at the rightmost terminal point of each curve (Figure 20-8).</li>
+            <li><strong>Scatterplot Clusters:</strong> Draw faint enclosing ellipses around distinct point clouds and position text labels directly adjacent to the ellipse perimeter (Figure 20-9).</li>
+            <li><strong>Marginal Density Plots:</strong> Place 1D density curves in the upper and right margins of the scatterplot and direct-label those marginal curves (Figure 20-11). This keeps the central scatterplot uncluttered while completely replacing the legend.</li>
+          </ol>
+
+          <div class="example">
+            <div class="callout-label">Wilke's Pro Trick • The "Two Shades" Rule for Colored Text</div>
+            <h4>Why Colored Text Often Looks Faint, and How to Fix It</h4>
+            <p>
+              When applying direct labels, authors often color the text label with the exact same RGB color used for the filled data shapes. However:
+            </p>
+            <ul>
+              <li><strong>The Optical Thin-Line Illusion:</strong> Text glyphs consist of razor-thin strokes. Even if printed in the identical hex code as an adjacent filled circle, the text will appear significantly lighter and washed out to the human eye.</li>
+              <li><strong>The Solution:</strong> Use <strong>two different shades of each color hue</strong>:
+                <ul>
+                  <li>A <strong>lighter shade</strong> for solid filled regions, polygons, or point bodies.</li>
+                  <li>A <strong>darker shade of the same hue</strong> for thin lines, borders, and direct text labels!</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+
+          <h4>4. Integrated Axis Colorbars</h4>
+          <p>
+            When a single continuous variable is mapped onto both a spatial axis position and a color gradient (e.g., daily temperature mapped to $x$-position and point color), you should <strong>never</strong> provide a separate floating legend box.
+            <br />
+            Instead, integrate the reference color bar directly along and into the primary axis (Wilke Figure 20-12). This visually fuses position and color into a single unified scale.
+          </p>
+
+          <div class="practice-section">
+            <div class="practice-section-label">High-Yield Practice Questions (Quiz Prep)</div>
+            <details>
+              <summary><strong>Question 1 (Easy):</strong> What is redundant coding, and why is it recommended for categorical scatterplots?</summary>
+              <p>
+                <strong>Answer:</strong> Redundant coding is mapping a single data variable onto multiple aesthetic dimensions at once (e.g., color + point shape). In categorical scatterplots, it ensures that if color discrimination is impaired (by CVD, washed-out projectors, or grayscale photocopying), distinct symbol shapes allow readers to identify categories without loss of information.
+              </p>
+            </details>
+            <details>
+              <summary><strong>Question 2 (Medium):</strong> In a multi-line time series plot where curves end at different heights, why should the legend NOT be ordered alphabetically?</summary>
+              <p>
+                <strong>Answer:</strong> Because alphabetical ordering ignores the visual hierarchy of the data lines. Forcing the reader to jump back and forth between alphabetical names and vertically ranked curves creates high cognitive friction. Ordering the legend to match the vertical rank of the line endpoints enables immediate mental alignment, even under color vision deficiency.
+              </p>
+            </details>
+            <details>
+              <summary><strong>Question 3 (Hard):</strong> Explain Wilke's "Two Shades" rule for direct-labeled figures. What perceptual problem does it resolve?</summary>
+              <p>
+                <strong>Answer:</strong> Text characters consist of very thin strokes, which human vision perceives as lighter and less saturated than a large filled polygon of the exact same color. To ensure legibility without mismatch, Wilke recommends using a <em>lighter shade</em> for filled shapes and a <em>darker shade of the same hue</em> for thin lines, borders, and text labels.
+              </p>
+            </details>
+          </div>
+
+          <div class="summary-box">
+            <h4>Key Takeaways • Redundant Coding (Chapter 20)</h4>
+            <ul>
+              <li>Always combine color with distinct point shapes in scatterplots to guarantee grayscale and CVD legibility.</li>
+              <li>Match the legend order to the perceived vertical ordering of data lines; never accept default alphabetical sorting.</li>
+              <li>Direct labeling eliminates the cognitive split-attention effect caused by detached legend boxes.</li>
+              <li>Apply the "Two Shades" rule: lighter tints for filled areas, darker shades of the same hue for lines and text.</li>
+              <li>Integrate continuous color legends directly into their corresponding spatial axis instead of using floating boxes.</li>
+            </ul>
+          </div>
+        </div>
+        <!-- end topic-3 -->
+
+        <!-- ═══════════════════════════════════════════════════════
+         TOPIC 4: BALANCE THE DATA AND THE CONTEXT
+         ═══════════════════════════════════════════════════════ -->
+        <div class="topic-card" id="topic-4">
+          <h2><span class="topic-num">4</span>Balance the Data and the Context</h2>
+          <p class="topic-subtitle">Chapter 23 • Non-data ink, background grids, the ggplot2 debate, minimal grid orientation, white gridlines, and paired data reference lines</p>
+
+          <p>
+            A common debate in data visualization centers on <strong>non-data ink</strong>—the visual marks that do not directly represent numerical data, such as axis lines, ticks, background grids, and frames. Edward Tufte famously advocated maximizing the "data-ink ratio" by stripping away non-data marks. However, Claus Wilke shows that <em>over-erasing non-data ink is just as destructive as over-cluttering</em>.
+          </p>
+
+          <div class="definition">
+            <div class="callout-label">The Goldilocks Principle of Context</div>
+            <strong>Data-Context Balance:</strong> Figure design must occupy the optimal middle ground: the actual data must stand out as the undisputed visual hero, but accompanied by just enough contextual scaffolding (grids, tick labels, reference baselines) to anchor values and enable quantitative judgment.
+            <br /><em>Intuitive One-Liner:</em> Too much scaffolding hides the building; too little scaffolding makes the building collapse into thin air.
+          </div>
+
+          <h3>1. The Two Harmful Extremes</h3>
+
+          <div class="visual-card">
+            <h4>Native Visual Comparison • Non-Data Ink Spectrum</h4>
+            <p class="visual-caption">Demonstration of how excessive ink creates visual noise, extreme minimalism creates unanchored floating marks, and balanced design achieves harmony.</p>
+            <div class="diagram-grid">
+              <!-- Box A: Too Much Ink -->
+              <div class="diagram-box">
+                <div class="diagram-box-title">
+                  <span>A. Excessive Ink (Figure 23-1)</span>
+                  <span class="tag-status tag-bad">Heavy Clutter</span>
+                </div>
+                <div class="svg-canvas-wrap">
+                  <svg width="240" height="150" viewBox="0 0 240 150">
+                    <!-- Heavy Outer Frame -->
+                    <rect x="5" y="5" width="230" height="140" fill="none" stroke="#ededed" stroke-width="2"/>
+                    <!-- Heavy Panel Frame -->
+                    <rect x="25" y="20" width="140" height="110" fill="#18181b" stroke="#ededed" stroke-width="2"/>
+                    <!-- Dense Black Grid Lines -->
+                    <line x1="25" y1="45" x2="165" y2="45" stroke="#71717a" stroke-width="1.5"/>
+                    <line x1="25" y1="75" x2="165" y2="75" stroke="#71717a" stroke-width="1.5"/>
+                    <line x1="25" y1="105" x2="165" y2="105" stroke="#71717a" stroke-width="1.5"/>
+                    <line x1="60" y1="20" x2="60" y2="130" stroke="#71717a" stroke-width="1.5"/>
+                    <line x1="95" y1="20" x2="95" y2="130" stroke="#71717a" stroke-width="1.5"/>
+                    <line x1="130" y1="20" x2="130" y2="130" stroke="#71717a" stroke-width="1.5"/>
+                    <!-- Heavy Legend Box -->
+                    <rect x="175" y="35" width="55" height="70" fill="none" stroke="#ededed" stroke-width="2"/>
+                    <text x="180" y="50" fill="#ededed" font-size="8" font-weight="700">Legend</text>
+                    <!-- Points -->
+                    <circle cx="60" cy="85" r="3" fill="#d97757"/>
+                    <circle cx="95" cy="55" r="3" fill="#d97757"/>
+                    <circle cx="130" cy="70" r="3" fill="#d97757"/>
+                  </svg>
+                </div>
+                <p style="font-size:0.75rem; color:var(--mt); margin:0;">
+                  Unnecessary outer frames, nested legend borders, and prominent dark gridlines overpower the data points.
+                </p>
+              </div>
+
+              <!-- Box B: Too Little Ink -->
+              <div class="diagram-box">
+                <div class="diagram-box-title">
+                  <span>B. Over-Erased Ink (Figure 23-3)</span>
+                  <span class="tag-status tag-bad">Floating Marks</span>
+                </div>
+                <div class="svg-canvas-wrap">
+                  <svg width="240" height="150" viewBox="0 0 240 150">
+                    <!-- Faint, almost invisible labels -->
+                    <text x="95" y="142" fill="#3f3f46" font-size="8">Height (cm)</text>
+                    <text x="12" y="75" fill="#3f3f46" font-size="8" transform="rotate(-90 12,75)">Body Fat</text>
+                    <!-- No axes, no ticks, no grid. Points floating -->
+                    <circle cx="60" cy="85" r="3" fill="#d97757"/>
+                    <circle cx="95" cy="55" r="3" fill="#d97757"/>
+                    <circle cx="130" cy="70" r="3" fill="#d97757"/>
+                    <!-- Legend dot with no frame looks like data! -->
+                    <circle cx="190" cy="60" r="3" fill="#d97757"/>
+                    <text x="200" y="63" fill="#3f3f46" font-size="8">Athletes</text>
+                  </svg>
+                </div>
+                <p style="font-size:0.75rem; color:var(--mt); margin:0;">
+                  Points float in empty void without baseline or reference. Faint legend dot is easily mistaken for a data point!
+                </p>
+              </div>
+
+              <!-- Box C: Balanced Context -->
+              <div class="diagram-box">
+                <div class="diagram-box-title">
+                  <span>C. Balanced Context (Figure 23-2)</span>
+                  <span class="tag-status tag-good">Optimal Harmony</span>
+                </div>
+                <div class="svg-canvas-wrap">
+                  <svg width="240" height="150" viewBox="0 0 240 150">
+                    <!-- Clean, light gray major gridlines -->
+                    <line x1="25" y1="45" x2="175" y2="45" stroke="#27272a" stroke-width="1"/>
+                    <line x1="25" y1="75" x2="175" y2="75" stroke="#27272a" stroke-width="1"/>
+                    <line x1="25" y1="105" x2="175" y2="105" stroke="#27272a" stroke-width="1"/>
+                    <!-- Legible Ticks & Labels -->
+                    <text x="100" y="142" fill="#a1a1aa" font-size="9" text-anchor="middle">Height (cm)</text>
+                    <text x="18" y="75" fill="#a1a1aa" font-size="9" text-anchor="middle" transform="rotate(-90 18,75)">% Fat</text>
+                    <!-- Anchored Points Pop Out -->
+                    <circle cx="60" cy="85" r="4" fill="#d97757"/>
+                    <circle cx="95" cy="55" r="4" fill="#d97757"/>
+                    <circle cx="130" cy="70" r="4" fill="#d97757"/>
+                    <!-- Unboxed subtle legend -->
+                    <circle cx="195" cy="60" r="4" fill="#d97757"/>
+                    <text x="205" y="64" fill="#ededed" font-size="9">Male</text>
+                  </svg>
+                </div>
+                <p style="font-size:0.75rem; color:var(--mt); margin:0;">
+                  Light gray major grid anchors points in space. Frames removed, high-contrast labels, data marks are undisputed heroes.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <h3>2. The Background Grid Debate (The ggplot2 Style)</h3>
+          <p>
+            Hadley Wickham popularized the signature <strong>ggplot2 default</strong>: a light gray plot background covered by white major and minor grid lines (Figure 23-7).
+          </p>
+          <div class="note-box">
+            <div class="callout-label">Wickham vs. Wilke • The Scientific Debate</div>
+            <strong>Arguments in Favor (Hadley Wickham):</strong>
+            <ol>
+              <li><strong>Single Visual Entity:</strong> The continuous gray canvas binds the entire plot area together as a unified visual shape.</li>
+              <li><strong>Preventing the "White Box" Illusion:</strong> In dense academic typesetting (e.g., 10-point Times New Roman with tight leading), a bright white plot panel can look like a jarring, hollow white hole punched into dark text. A subtle gray background softens this contrast.</li>
+            </ol>
+            <strong>Wilke's Critique &amp; Cautions:</strong>
+            <ul>
+              <li><strong>Data Attenuation:</strong> The gray background reduces the luminance contrast between the background and data ink, often overpowering delicate lines or light colors.</li>
+              <li><strong>Legend Confusion:</strong> Gray background squares carried over into legend key swatches create unnecessary visual distraction.</li>
+              <li><strong>Typography Relativity:</strong> The darkness of surrounding body text varies wildly between documents (e.g., a 14pt coffee-table book is much lighter than 10pt paper). If the surrounding page is airy, a gray plot background ends up standing out as an intrusive, dark box!</li>
+            </ul>
+          </div>
+
+          <h3>3. Minimal Grid Orientation: The Perpendicular Rule</h3>
+          <p>
+            When designing custom or minimal grid lines, you should not mindlessly draw a 2D checkerboard across both axes. Instead, align your grid lines with human perceptual needs:
+          </p>
+          <div class="definition">
+            <div class="callout-label">The Perpendicular Grid Rule</div>
+            <strong>The Orthogonal Alignment Principle:</strong> Grid lines are most informative when drawn <em>perpendicular (orthogonal) to the primary variable of interest</em> along which numbers vary.
+            <br /><em>Intuitive One-Liner:</em> If the data goes up and down, run grid lines left and right. If the bars go left and right, run grid lines up and down.
+          </div>
+          <ul>
+            <li><strong>Time Series &amp; Trend Curves (Figure 23-10):</strong> The primary quantity of interest is the change in the vertical $y$-variable over time. Therefore, draw <strong>thin horizontal grid lines</strong> at major $y$-axis ticks. Omit vertical grid lines entirely! The evenly spaced horizontal lines simultaneously mark the extent of the panel, eliminating the need for heavy axis lines.</li>
+            <li><strong>Horizontal Bar Charts (Figure 23-11):</strong> Because the bars extend horizontally along $x$, readers compare horizontal bar lengths. Therefore, draw <strong>thin vertical grid lines</strong> to provide precise numerical references across bars. Omit horizontal grid lines!</li>
+          </ul>
+
+          <div class="example">
+            <div class="callout-label">Case Study • Indexed Stock Price Context</div>
+            <h4>The Power of a Single Reference Line (Figure 23-9)</h4>
+            <p>
+              When plotting tech stock prices normalized to 100 in June 2012:
+            </p>
+            <ul>
+              <li>Leaving the plot area completely empty (Figure 23-8) makes it difficult to ascertain whether a curve has deviated from baseline, especially years later at the far right edge.</li>
+              <li>Adding a <strong>single thin horizontal reference line at $y = 100$</strong> provides an instant anchor that establishes baseline parity across the entire 5-year timeline.</li>
+            </ul>
+          </div>
+
+          <h3>4. White Grid Lines on Bars &amp; The Labeling Trap</h3>
+          <p>
+            Edward Tufte (2001) proposed drawing thin white grid lines <em>on top of</em> dark bar graphs instead of drawing dark lines behind them (Figure 23-12).
+          </p>
+          <ul>
+            <li><strong>The Perceptual Benefit:</strong> Empirical studies (Haroz, Kosara, &amp; Franconeri 2015) confirm that segmenting bars into discrete visual units helps human readers judge bar lengths more accurately.</li>
+            <li><strong>The Aesthetic Downside:</strong> White lines can create the optical illusion that the bars are "falling apart" into disjointed blocks rather than forming a solid unit.</li>
+            <li><strong>The Visual Elongation Trap:</strong> If value labels do not fit inside the bar segments, moving labels outside the ends of the bars <em>visually elongates the bars</em>, misleading the reader about their true length. Keep value labels inside the bars or rely on the grid!</li>
+          </ul>
+
+          <h3>5. Paired Data: Why a Diagonal Line ($x = y$) Beats a Background Grid</h3>
+          <p>
+            In scatterplots of paired experimental data (e.g., Gene expression in mutant bacteriophage T7 vs. wild-type bacteriophage, Paff et al. 2018):
+          </p>
+          <div class="warning-box">
+            <div class="callout-label">Exam Trap • Paired Data Visual Reference</div>
+            <strong>Never use a background grid as the primary reference for paired data!</strong>
+            <ul>
+              <li>In paired comparisons, the central research question is whether $y > x$ (upregulated) or $y < x$ (downregulated).</li>
+              <li>When plotted against a standard background grid (Figure 23-14), viewers cannot reliably determine which genes deviate from equality. Specifically, <strong>gene 10A</strong>, which suffered a major expression drop in the mutant virus, completely fails to stand out against a grid!</li>
+              <li>When plotted with a <strong>45-degree diagonal reference line ($x = y$)</strong> and no distracting grid (Figure 23-13), genes 8, 9, and 10A immediately leap out as significant outliers lying far below the diagonal.</li>
+            </ul>
+          </div>
+
+          <div class="practice-section">
+            <div class="practice-section-label">High-Yield Practice Questions (Quiz Prep)</div>
+            <details>
+              <summary><strong>Question 1 (Easy):</strong> What is the Perpendicular Grid Rule, and how does it apply to horizontal bar charts?</summary>
+              <p>
+                <strong>Answer:</strong> The Perpendicular Grid Rule states that grid lines should run orthogonal to the direction along which the variable of interest varies. For horizontal bar charts, bar lengths vary along the horizontal $x$-axis, so grid lines should be drawn <em>vertically</em> to facilitate visual comparison of bar endpoints. Horizontal lines should be omitted.
+              </p>
+            </details>
+            <details>
+              <summary><strong>Question 2 (Medium):</strong> Why does Wilke argue that drawing a 45-degree diagonal line ($x = y$) is superior to a background grid when analyzing paired gene expression data?</summary>
+              <p>
+                <strong>Answer:</strong> Paired comparisons specifically test for deviation from equality ($x = y$). A 45-degree diagonal line immediately separates upregulated genes (above the line) from downregulated genes (below the line). A background grid lacks this angular reference, obscuring critical outliers (such as gene 10A in the bacteriophage T7 dataset).
+              </p>
+            </details>
+            <details>
+              <summary><strong>Question 3 (Hard):</strong> What are the two main arguments in favor of ggplot2's light gray background with white gridlines, and what are Wilke's counter-arguments?</summary>
+              <p>
+                <strong>Answer:</strong> In favor: (1) It unifies the plot area into a single cohesive visual object; (2) it prevents a blinding "white box" illusion when set inside dense, dark body text. Wilke's counter-arguments: The gray background lowers contrast with data marks, clutters legend swatches with gray squares, and if surrounding text is light or airy, the plot stands out as an unwanted dark box.
+              </p>
+            </details>
+          </div>
+
+          <div class="summary-box">
+            <h4>Key Takeaways • Balancing Data &amp; Context (Chapter 23)</h4>
+            <ul>
+              <li>Avoid both extreme ink overload (heavy borders, dark grids) and excessive minimalism (unanchored floating dots).</li>
+              <li>Grid lines should run perpendicular to the primary dimension of interest (horizontal lines for time series; vertical lines for bar charts).</li>
+              <li>A single reference line (such as $y = 100$ for indexed series) often delivers more clarity than an entire checkerboard grid.</li>
+              <li>Placing value labels outside the ends of bars improperly elongates their perceived length.</li>
+              <li>For paired data comparisons, always prioritize a 45-degree diagonal line ($x = y$) over background grids.</li>
+            </ul>
+          </div>
+        </div>
+        <!-- end topic-4 -->
+
+        <!-- ═══════════════════════════════════════════════════════
+         TOPIC 5: TYPOGRAPHY & SIZING (USE LARGER AXIS LABELS)
+         ═══════════════════════════════════════════════════════ -->
+        <div class="topic-card" id="topic-5">
+          <h2><span class="topic-num">5</span>Typography &amp; Sizing: Use Larger Axis Labels</h2>
+          <p class="topic-subtitle">Chapter 24 • The universal default affliction, balanced visual scaling, the Monitor Bias Trap, and the scaling-down rule</p>
+
+          <p>
+            In the opening lines of Chapter 24, Claus Wilke delivers the most emphatic piece of advice in his entire book: <em>"If you take away only one single lesson from this book, make it this one: pay attention to your axis labels, axis tick labels, and other assorted plot annotations. Chances are they are too small!"</em>
+          </p>
+
+          <div class="definition">
+            <div class="callout-label">The Number One Takeaway</div>
+            <strong>The Default Axis Label Affliction:</strong> Nearly all graphing libraries and software platforms (R, Python, Excel, MATLAB) possess universally poor typography defaults. If you accept the default font sizes without manual overrides, your labels will almost certainly be illegible in final publications, presentations, and reports.
+            <br /><em>Intuitive One-Liner:</em> Software defaults are designed for editing on giant screens, not for humans reading final reports.
+          </div>
+
+          <h3>1. The Visual Progression of Label Scaling (Figures 24-1 to 24-5)</h3>
+          <p>
+            Wilke demonstrates the impact of label scaling using the Australian male athletes dataset (Percent Body Fat vs. Height):
+          </p>
+          <ul>
+            <li><strong>Figure 24-1 ("Bad" • Default Size):</strong> Microscopic axis titles, illegible tick marks, and tiny legend text. Viewers must physically zoom in or squint to read variable names.</li>
+            <li><strong>Figure 24-2 ("Ugly" • Slight Increase):</strong> Text is somewhat larger and barely legible, but the overall figure remains visibly unbalanced—the text elements feel frail and disconnected from the plot canvas.</li>
+            <li><strong>Figure 24-3 ("Good" • Full-Page Target):</strong> Harmonious balance between text typography and data marks when reproduced as a full-page figure.</li>
+            <li><strong>Figure 24-4 ("Bad / Unbalanced" • Disproportionate Enlargement):</strong> The author enlarges text labels, but leaves data points as tiny dots. This produces severe visual dissonance: heavy, bold text overpowers frail, tiny data marks.</li>
+            <li><strong>Figure 24-5 ("Good" • Balanced for Scaling Down):</strong> Both text labels and data points are proportionally enlarged. On a massive computer monitor, this figure might feel exaggerated, <em>but when scaled down to a standard 2-to-3-inch journal column or mobile screen, it is the ONLY figure in the chapter that remains crisp, balanced, and readable!</em></li>
+          </ul>
+
+          <div class="visual-card">
+            <h4>Native Visual Demonstration • The Scaling Down Reality</h4>
+            <p class="visual-caption">Why figures that look "just fine" on a 27-inch 4K monitor become unreadable disasters in a 3-inch journal column.</p>
+            <div class="diagram-grid">
+              <!-- Monitor View -->
+              <div class="diagram-box">
+                <div class="diagram-box-title">
+                  <span>A. Designer's Screen (Large Canvas)</span>
+                  <span class="tag-status tag-warn">Deceptive Legibility</span>
+                </div>
+                <div class="svg-canvas-wrap">
+                  <svg width="260" height="140" viewBox="0 0 260 140">
+                    <rect x="10" y="10" width="240" height="120" fill="#18181b" stroke="#3f3f46"/>
+                    <line x1="45" y1="100" x2="230" y2="100" stroke="#71717a"/>
+                    <line x1="45" y1="20" x2="45" y2="100" stroke="#71717a"/>
+                    <!-- Small text looks readable at 20 inches wide -->
+                    <text x="135" y="118" fill="#a1a1aa" font-size="10" text-anchor="middle">Body Mass (kg)</text>
+                    <text x="32" y="60" fill="#a1a1aa" font-size="10" text-anchor="middle" transform="rotate(-90 32,60)">Height (cm)</text>
+                    <circle cx="80" cy="70" r="3.5" fill="#d97757"/>
+                    <circle cx="120" cy="50" r="3.5" fill="#d97757"/>
+                    <circle cx="170" cy="35" r="3.5" fill="#d97757"/>
+                    <text x="137" y="22" fill="#38bdf8" font-size="8" text-anchor="middle">Previewed at full screen</text>
+                  </svg>
+                </div>
+                <p style="font-size:0.75rem; color:var(--mt); margin:0;">
+                  On a 27-inch 4K monitor, tiny 8pt font looks readable because the physical canvas is 15 inches wide.
+                </p>
+              </div>
+
+              <!-- Scaled-Down Print View -->
+              <div class="diagram-box">
+                <div class="diagram-box-title">
+                  <span>B. Print / Slide Reality (Scaled to 3")</span>
+                  <span class="tag-status tag-bad">Illegible Disaster</span>
+                </div>
+                <div class="svg-canvas-wrap">
+                  <svg width="260" height="140" viewBox="0 0 260 140">
+                    <rect x="70" y="15" width="120" height="110" fill="#18181b" stroke="#ef4444" stroke-width="1.5"/>
+                    <line x1="88" y1="95" x2="180" y2="95" stroke="#71717a" stroke-width="0.5"/>
+                    <line x1="88" y1="25" x2="88" y2="95" stroke="#71717a" stroke-width="0.5"/>
+                    <!-- Microscopic illegible smudges -->
+                    <line x1="110" y1="108" x2="160" y2="108" stroke="#ef4444" stroke-dasharray="1,1" stroke-width="1"/>
+                    <text x="135" y="118" fill="#ef4444" font-size="6" text-anchor="middle">Illegible Smudge</text>
+                    <circle cx="105" cy="80" r="1.5" fill="#d97757"/>
+                    <circle cx="125" cy="65" r="1.5" fill="#d97757"/>
+                    <circle cx="150" cy="50" r="1.5" fill="#d97757"/>
+                    <text x="130" y="24" fill="#ef4444" font-size="7" text-anchor="middle">Shrunk to 2.5 inches</text>
+                  </svg>
+                </div>
+                <p style="font-size:0.75rem; color:var(--mt); margin:0;">
+                  Scaled down for print columns, slides, or smartphones, default labels vanish into unreadable scratches.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <h3>2. The Psychological "Monitor Bias Trap"</h3>
+          <p>
+            Why do experienced researchers and engineers consistently generate figures with microscopic text? Wilke identifies a psychological cognitive bias rooted in modern computer hardware:
+          </p>
+          <div class="definition">
+            <div class="callout-label">Psychological Phenomenon</div>
+            <strong>The Monitor Bias Trap:</strong> Analysts design and preview figures on large, high-resolution desktop displays where the graphic occupies 500 to 1,000 square centimeters. In this expanded viewing state, small labels appear sharp and readable, while properly sized labels feel awkward, cartoonish, or oversized.
+            <br /><em>Intuitive One-Liner:</em> You are designing for a billboard while your reader is viewing on a postcard.
+          </div>
+
+          <h3>3. The Golden Rule of Sizing &amp; Verification</h3>
+          <div class="note-box">
+            <div class="callout-label">The Practical Print-Size Verification Test (Exam Rule)</div>
+            <strong>Always look at scaled-down versions of your figures to make sure the axis labels are appropriately sized!</strong>
+            <br />
+            Before finalizing any figure for an exam, thesis, paper, or slide presentation:
+            <ol>
+              <li><strong>The 3-Inch Zoom Test:</strong> Zoom out on your screen until the figure occupies only <strong>3 to 5 inches (7 to 12 cm) in width</strong>. Can you still effortlessly read every tick number, axis title, and legend note without leaning forward?</li>
+              <li><strong>The 6-Foot Step-Back Test:</strong> Step back <strong>6 feet (2 meters)</strong> from your desktop monitor. If the axis titles blur into gray lines, increase the base font size immediately!</li>
+              <li><strong>Proportional Glyph Scaling:</strong> If you increase font size, you <em>must proportionally increase point sizes and line widths</em> to preserve visual balance.</li>
+            </ol>
+          </div>
+
+          <div class="practice-section">
+            <div class="practice-section-label">High-Yield Practice Questions (Quiz Prep)</div>
+            <details>
+              <summary><strong>Question 1 (Easy):</strong> What is Claus Wilke's single most important piece of advice across the entire textbook?</summary>
+              <p>
+                <strong>Answer:</strong> Pay close attention to your axis labels, axis tick labels, and plot annotations—they are almost certainly too small because default software settings are universally poor.
+              </p>
+            </details>
+            <details>
+              <summary><strong>Question 2 (Medium):</strong> What psychological reason does Wilke provide for why data scientists routinely make axis labels too small?</summary>
+              <p>
+                <strong>Answer:</strong> The <em>Monitor Bias Trap</em>: analysts preview graphics at full-screen size on large, high-resolution desktop monitors. At that massive size, small text appears perfectly crisp and readable, whereas appropriately scaled text feels artificially large. When the graphic is later scaled down for publication, the text becomes unreadable.
+              </p>
+            </details>
+            <details>
+              <summary><strong>Question 3 (Hard):</strong> In Wilke Figure 24-4, the author increased the label fonts substantially, yet the figure was still labeled "bad." Why, and how did Figure 24-5 fix it?</summary>
+              <p>
+                <strong>Answer:</strong> Figure 24-4 was bad because it was visually <em>unbalanced</em>: the text was enlarged, but the data points remained tiny dots, creating severe visual dissonance where text overpowered data. Figure 24-5 fixed this by proportionally enlarging both the text elements and the data points, ensuring visual harmony when scaled down.
+              </p>
+            </details>
+          </div>
+
+          <div class="summary-box">
+            <h4>Key Takeaways • Larger Axis Labels (Chapter 24)</h4>
+            <ul>
+              <li>Software defaults for axis labels and annotations are almost always too small.</li>
+              <li>Always scale text elements proportionally with data marks to maintain visual balance.</li>
+              <li>Beware the Monitor Bias Trap: previewing at full-screen hides scaling defects.</li>
+              <li>Always test figures at their final reproduction scale (zoom out to 3 inches or step back 6 feet).</li>
+              <li>A figure that looks slightly oversized on a desktop monitor will look perfect in print.</li>
+            </ul>
+          </div>
+        </div>
+        <!-- end topic-5 -->
+
+        <!-- ═══════════════════════════════════════════════════════
+         TOPIC 6: AVOID LINE DRAWINGS (SOLID SHAPES VS OUTLINES)
+         ═══════════════════════════════════════════════════════ -->
+        <div class="topic-card" id="topic-6">
+          <h2><span class="topic-num">6</span>Avoid Line Drawings: Solid Shapes vs. Outlines</h2>
+          <p class="topic-subtitle">Chapter 25 • Historical relics of manual drafting, perceptual superiority of solid shapes, and 4 classic plot comparisons</p>
+
+          <p>
+            Throughout modern data visualization, a surprising number of plots are still drawn using hollow outlines, empty boxes, dashed curves, and open glyphs. Claus Wilke establishes a firm design rule: <strong>visualize data with solid, colored shapes rather than with lines that merely outline those shapes</strong>.
+          </p>
+
+          <div class="definition">
+            <div class="callout-label">Core Design Principle</div>
+            <strong>The Solid Shape Principle:</strong> Human visual cognition perceives solid filled shapes as coherent physical objects. Solid shapes immediately convey quantitative volume and density, eliminate Moiré optical illusions, and possess superior visual presence compared to empty line drawings.
+            <br /><em>Critical Constraint:</em> This guideline does not supersede the <strong>Principle of Proportional Ink</strong> (the visual area of filled ink must always be proportional to the data values represented).
+          </div>
+
+          <h3>1. Historical Origin: Why Line Drawings Persist</h3>
+          <p>
+            Why do modern software packages still default to hollow lines and empty shapes?
+          </p>
+          <ul>
+            <li><strong>20th-Century Manual Drafting Constraints:</strong> For over a century, scientific figures were drawn by hand using technical pens (Rapidograph) or early mechanical pen plotters. Visualizations had to be reproduced on black-and-white printing presses.</li>
+            <li><strong>The Hatching Workaround:</strong> Because solid fills or continuous grayscale gradients were technically impossible or cost-prohibitive, draftsmen simulated shading by drawing hatch lines, cross-hatching, stippling, and broken/dashed outlines.</li>
+            <li><strong>Software Inertia:</strong> Early plotting libraries written in the 1970s and 1980s mimicked mechanical pen plotters. Today, even though modern displays and digital publishing support millions of colors and alpha transparency, legacy default styles linger.</li>
+          </ul>
+
+          <div class="visual-card">
+            <h4>Native Visual Comparison • Empty Line Drawings vs. Solid Filled Shapes</h4>
+            <p class="visual-caption">Demonstration of how empty outlines create ambiguous boundaries and optical noise, while solid fills create clear, coherent objects.</p>
+            <div class="diagram-grid">
+              <!-- Histograms Comparison -->
+              <div class="diagram-box">
+                <div class="diagram-box-title">
+                  <span>1. Histogram: Empty vs. Filled</span>
+                  <span class="tag-status tag-bad">Empty = Ambiguous</span>
+                </div>
+                <div class="svg-canvas-wrap">
+                  <svg width="240" height="120" viewBox="0 0 240 120">
+                    <!-- Left: Empty Bars -->
+                    <rect x="15" y="60" width="16" height="45" fill="none" stroke="#ededed" stroke-width="1.5"/>
+                    <rect x="35" y="30" width="16" height="75" fill="none" stroke="#ededed" stroke-width="1.5"/>
+                    <rect x="55" y="45" width="16" height="60" fill="none" stroke="#ededed" stroke-width="1.5"/>
+                    <rect x="75" y="70" width="16" height="35" fill="none" stroke="#ededed" stroke-width="1.5"/>
+                    <line x1="10" y1="105" x2="100" y2="105" stroke="#71717a"/>
+                    <text x="55" y="117" fill="#ef4444" font-size="8" text-anchor="middle">Inside or outside?</text>
+                    <!-- Divider -->
+                    <line x1="120" y1="15" x2="120" y2="105" stroke="#27272a" stroke-dasharray="2,2"/>
+                    <!-- Right: Filled Bars -->
+                    <rect x="140" y="60" width="16" height="45" fill="#d97757"/>
+                    <rect x="160" y="30" width="16" height="75" fill="#d97757"/>
+                    <rect x="180" y="45" width="16" height="60" fill="#d97757"/>
+                    <rect x="200" y="70" width="16" height="35" fill="#d97757"/>
+                    <line x1="135" y1="105" x2="225" y2="105" stroke="#71717a"/>
+                    <text x="180" y="117" fill="#10b981" font-size="8" text-anchor="middle">Coherent object</text>
+                  </svg>
+                </div>
+                <p style="font-size:0.75rem; color:var(--mt); margin:0;">
+                  Empty bars leave ambiguity where gaps exist. Filled bars instantly reveal the distribution shape.
+                </p>
+              </div>
+
+              <!-- Density Curves Comparison -->
+              <div class="diagram-box">
+                <div class="diagram-box-title">
+                  <span>2. Density: Dashed vs. Shaded</span>
+                  <span class="tag-status tag-bad">Dashed = Porous</span>
+                </div>
+                <div class="svg-canvas-wrap">
+                  <svg width="240" height="120" viewBox="0 0 240 120">
+                    <!-- Left: Dashed Outlines -->
+                    <path d="M 15,100 Q 45,20 75,100" fill="none" stroke="#ededed" stroke-width="1.5" stroke-dasharray="3,3"/>
+                    <path d="M 35,100 Q 65,40 95,100" fill="none" stroke="#71717a" stroke-width="1.5"/>
+                    <line x1="10" y1="100" x2="105" y2="100" stroke="#52525b"/>
+                    <text x="55" y="115" fill="#ef4444" font-size="8" text-anchor="middle">Porous boundary</text>
+                    <!-- Divider -->
+                    <line x1="120" y1="15" x2="120" y2="105" stroke="#27272a" stroke-dasharray="2,2"/>
+                    <!-- Right: Transparent Shaded Areas -->
+                    <path d="M 135,100 Q 165,20 195,100 Z" fill="#d97757" fill-opacity="0.5"/>
+                    <path d="M 155,100 Q 185,40 215,100 Z" fill="#38bdf8" fill-opacity="0.5"/>
+                    <line x1="130" y1="100" x2="225" y2="100" stroke="#52525b"/>
+                    <text x="175" y="115" fill="#10b981" font-size="8" text-anchor="middle">Clear overlapping areas</text>
+                  </svg>
+                </div>
+                <p style="font-size:0.75rem; color:var(--mt); margin:0;">
+                  Dashed curves look porous and intersect into a messy hairball. Transparent shading clearly bounds density.
+                </p>
+              </div>
+
+              <!-- Scatter Glyphs Comparison -->
+              <div class="diagram-box">
+                <div class="diagram-box-title">
+                  <span>3. Scatter: Open vs. Solid</span>
+                  <span class="tag-status tag-good">Solid Glyphs Win</span>
+                </div>
+                <div class="svg-canvas-wrap">
+                  <svg width="240" height="120" viewBox="0 0 240 120">
+                    <!-- Left: Open glyphs (circle, triangle, plus) -->
+                    <circle cx="30" cy="50" r="5" fill="none" stroke="#ededed" stroke-width="1.5"/>
+                    <polygon points="50,45 56,56 44,56" fill="none" stroke="#ededed" stroke-width="1.5"/>
+                    <line x1="65" y1="50" x2="75" y2="50" stroke="#ededed" stroke-width="1.5"/>
+                    <line x1="70" y1="45" x2="70" y2="55" stroke="#ededed" stroke-width="1.5"/>
+                    <circle cx="50" cy="80" r="5" fill="none" stroke="#ededed" stroke-width="1.5"/>
+                    <text x="55" y="115" fill="#ef4444" font-size="8" text-anchor="middle">Visual clutter / noise</text>
+                    <!-- Divider -->
+                    <line x1="120" y1="15" x2="120" y2="105" stroke="#27272a" stroke-dasharray="2,2"/>
+                    <!-- Right: Solid glyphs -->
+                    <circle cx="150" cy="50" r="5" fill="#d97757"/>
+                    <polygon points="170,44 177,56 163,56" fill="#38bdf8"/>
+                    <rect x="185" y="45" width="10" height="10" fill="#10b981"/>
+                    <circle cx="170" cy="80" r="5" fill="#d97757"/>
+                    <text x="175" y="115" fill="#10b981" font-size="8" text-anchor="middle">Strong visual presence</text>
+                  </svg>
+                </div>
+                <p style="font-size:0.75rem; color:var(--mt); margin:0;">
+                  Open glyphs generate visual noise. Solid glyphs stand out with high visual weight and distinct silhouettes.
+                </p>
+              </div>
+
+              <!-- Boxplots Comparison -->
+              <div class="diagram-box">
+                <div class="diagram-box-title">
+                  <span>4. Boxplot: Empty vs. Shaded</span>
+                  <span class="tag-status tag-good">Anchored IQR</span>
+                </div>
+                <div class="svg-canvas-wrap">
+                  <svg width="240" height="120" viewBox="0 0 240 120">
+                    <!-- Left: Empty Box -->
+                    <line x1="50" y1="20" x2="50" y2="40" stroke="#ededed"/>
+                    <rect x="35" y="40" width="30" height="40" fill="none" stroke="#ededed" stroke-width="1.5"/>
+                    <line x1="35" y1="60" x2="65" y2="60" stroke="#ededed" stroke-width="2"/>
+                    <line x1="50" y1="80" x2="50" y2="100" stroke="#ededed"/>
+                    <text x="50" y="115" fill="#ef4444" font-size="8" text-anchor="middle">Empty box illusion</text>
+                    <!-- Divider -->
+                    <line x1="120" y1="15" x2="120" y2="105" stroke="#27272a" stroke-dasharray="2,2"/>
+                    <!-- Right: Shaded Box -->
+                    <line x1="170" y1="20" x2="170" y2="40" stroke="#ededed"/>
+                    <rect x="155" y="40" width="30" height="40" fill="#27272a" stroke="#a1a1aa" stroke-width="1.5"/>
+                    <line x1="155" y1="60" x2="185" y2="60" stroke="#d97757" stroke-width="2.5"/>
+                    <line x1="170" y1="80" x2="170" y2="100" stroke="#ededed"/>
+                    <text x="170" y="115" fill="#10b981" font-size="8" text-anchor="middle">Anchored IQR</text>
+                  </svg>
+                </div>
+                <p style="font-size:0.75rem; color:var(--mt); margin:0;">
+                  Empty boxes blend into background gaps. Light shading anchors the middle 50% without visual ambiguity.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <h3>2. Four Classic Plot Comparisons (Outlines vs. Solid Shapes)</h3>
+
+          <h4>1. Histograms and Bar Plots (Figures 25-1 &amp; 25-2)</h4>
+          <p>
+            When histogram bars are drawn as empty wireframes, readers experience immediate spatial ambiguity:
+          </p>
+          <ul>
+            <li><strong>The Inside/Outside Dilemma:</strong> In sparse bins or gaps between bars, it is not visually evident which side of a vertical wire is "inside" a bar and which side is empty background.</li>
+            <li><strong>The Remedy:</strong> Fill bars with a solid neutral tint (e.g., light gray, muted blue, or terracotta). The distribution shape becomes instantly readable.</li>
+          </ul>
+
+          <h4>2. Density Estimates (Figures 25-3 to 25-5)</h4>
+          <p>
+            Old-school line density plots (Figure 25-3) exhibit two fatal flaws:
+          </p>
+          <ol>
+            <li><strong>The Porous Boundary Defect:</strong> Dashed or dotted line styles look porous; they fail to form an enclosed visual container between the area under the curve and the empty sky above it.</li>
+            <li><strong>Intersection Hairball:</strong> When multiple density curves overlap, unshaded wireframe lines create confusing topological loops where viewers cannot trace individual species distributions.</li>
+            <li><strong>The Solution:</strong> Partially transparent filled areas (<code>alpha ≈ 0.4</code>) that allow overlapping probability distributions to shine through while perceiving each as a distinct, solid object.</li>
+          </ol>
+
+          <h4>3. Scatterplots: The "Open Point" Fallacy (Figures 25-6 &amp; 25-7)</h4>
+          <p>
+            Many researchers argue that <em>open points (circles, squares, crosses)</em> are superior because their hollow centers allow you to see points underneath. Wilke completely rejects this claim:
+          </p>
+          <div class="warning-box">
+            <div class="callout-label">Exam Trap • The Open Point Myth</div>
+            <strong>Why open points are NOT an acceptable solution for overplotting:</strong>
+            <ul>
+              <li>Open glyphs produce severe visual clutter and optical vibration (noise).</li>
+              <li>They lack visual presence and their boundaries blur into adjacent marks.</li>
+              <li><em>Wilke's Verdict:</em> The minor advantage of seeing underlying marks does NOT justify the huge visual noise penalty. If you have overplotting, use <strong>proper Chapter 18 solutions</strong> (alpha blending, jittering, or 2D binning) and keep your symbols solid!</li>
+            </ul>
+          </div>
+
+          <h4>4. Boxplots: Shading the Middle 50% (Figures 25-8 &amp; 25-9)</h4>
+          <p>
+            Traditional boxplots draw empty white rectangles. In a dense plot of 12 monthly distributions (Lincoln, NE temperatures):
+          </p>
+          <ul>
+            <li>Empty boxes and whisker lines create optical illusions where negative space between boxes is mistaken for boxes.</li>
+            <li>Giving the box a light gray fill sets it off cleanly against the canvas.</li>
+            <li><strong>Refuting the Critique:</strong> Critics sometimes claim that shading the box gives "too much visual weight to the middle 50% of the data." Wilke responds: <em>It is the inherent definition and purpose of a boxplot to highlight the interquartile range (IQR)!</em> If you do not want to emphasize the center 50%, do not use a boxplot—use a violin plot, jittered points, or a sina plot!</li>
+          </ul>
+
+          <div class="practice-section">
+            <div class="practice-section-label">High-Yield Practice Questions (Quiz Prep)</div>
+            <details>
+              <summary><strong>Question 1 (Easy):</strong> What is the historical reason why line drawings and hatched patterns were so widely used in scientific visualization?</summary>
+              <p>
+                <strong>Answer:</strong> Figures were drafted by hand with technical pens or early pen plotters for black-and-white printing presses. Solid fills and grayscale printing were technically impossible or cost-prohibitive, forcing draftsmen to simulate shading through hatching, stippling, and line outlines.
+              </p>
+            </details>
+            <details>
+              <summary><strong>Question 2 (Medium):</strong> Why does Wilke reject the argument that "open points" (hollow circles/crosses) should be used in scatterplots to handle overplotting?</summary>
+              <p>
+                <strong>Answer:</strong> Because the severe visual noise, optical clutter, and lack of visual weight caused by open symbols far outweigh any minor benefit of seeing underlying points. Overplotting should instead be solved using dedicated techniques (such as alpha blending, jittering, or 2D hexagonal binning) while keeping point glyphs solid.
+              </p>
+            </details>
+            <details>
+              <summary><strong>Question 3 (Hard):</strong> How does Wilke rebut the criticism that shading the inside of a boxplot gives "too much visual weight to the center 50% of the data"?</summary>
+              <p>
+                <strong>Answer:</strong> He explains that the fundamental mathematical intent of a boxplot is specifically to highlight the interquartile range (the middle 50%). If a researcher does not wish to emphasize the center 50%, the correct solution is not to draw empty boxes, but rather to use an entirely different visualization geometry—such as a violin plot, a sina plot, or jittered raw data points.
+              </p>
+            </details>
+          </div>
+
+          <div class="summary-box">
+            <h4>Key Takeaways • Avoid Line Drawings (Chapter 25)</h4>
+            <ul>
+              <li>Always visualize data with solid, colored shapes rather than empty outlines.</li>
+              <li>Solid shapes are perceived as coherent objects and convey quantitative volume.</li>
+              <li>Histograms with empty wireframe bars create inside/outside ambiguity; always use filled bars.</li>
+              <li>Dashed density lines look porous; use partially transparent shaded density polygons.</li>
+              <li>Avoid open scatterplot glyphs; their visual noise ruins legibility.</li>
+              <li>Shade the boxes of boxplots with light gray to anchor the interquartile range.</li>
+            </ul>
+          </div>
+        </div>
+        <!-- end topic-6 -->
+
+        <!-- ═══════════════════════════════════════════════════════
+         TOPIC 7: MASTER EXAM REVIEW & HIGH-YIELD SUMMARY
+         ═══════════════════════════════════════════════════════ -->
+        <div class="topic-card" id="topic-7">
+          <h2><span class="topic-num">7</span>📋 Master Exam Review &amp; High-Yield Summary</h2>
+          <p class="topic-subtitle">Chapters 18–25 Quick Reference • Consolidated decision frameworks, author/citation directory, and the Top 10 exam traps</p>
+
+          <p>
+            This master review topic condenses every essential theorem, rule of thumb, author citation, and case study from Chapters 18, 19, 20, 23, 24, and 25 into a razor-sharp cheat sheet optimized for rapid review before your DAV multiple-choice quiz.
+          </p>
+
+          <h3>1. Chapter-by-Chapter Core Rule Matrix</h3>
+          <table class="matrix-table">
+            <thead>
+              <tr>
+                <th>Chapter</th>
+                <th>Core Challenge</th>
+                <th>Golden Principle</th>
+                <th>Key Textbook Case Study</th>
+                <th>Dangerous Exam Trap</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Ch 18: Overplotting</strong></td>
+                <td>Points overlapping and masking true density</td>
+                <td>Match technique to sample size: Alpha/Jitter for small/rounded; Hex-bins for big data; Faceted contours for multi-group</td>
+                <td>EPA 234 Cars (2.0L engine, 4WD occlusion); Newark Flights (100k departures); Diamonds (5 cuts)</td>
+                <td>Believing open points solve overplotting, or assuming overplotting only occurs in massive datasets.</td>
+              </tr>
+              <tr>
+                <td><strong>Ch 19: Color Pitfalls</strong></td>
+                <td>Visual fatigue, unreadable scales, and CVD exclusion</td>
+                <td>Max 3–5 qualitative colors (use direct labels for >8); enforce monotonic lightness gradients; use Okabe-Ito</td>
+                <td>US 50-State population growth (50 colors fail); Texas census white % (rainbow failure); Heat &amp; PiYG scales</td>
+                <td>Using rainbow (jet) color scale; testing colors only on large swatches rather than small dots.</td>
+              </tr>
+              <tr>
+                <td><strong>Ch 20: Redundant Coding</strong></td>
+                <td>Legends creating high cognitive lookup friction</td>
+                <td>Encode data in two aesthetics (color + shape); match legend order to visual data lines; use direct labeling</td>
+                <td>Fisher's Iris dataset (setosa, virginica, versicolor); Tech Stock Prices (FB, Alphabet, MSFT, AAPL)</td>
+                <td>Accepting default alphabetical legend ordering when data curves have an obvious vertical hierarchy.</td>
+              </tr>
+              <tr>
+                <td><strong>Ch 23: Balance Context</strong></td>
+                <td>Cluttering with non-data ink or over-erasing context</td>
+                <td>Run grid lines perpendicular to variable of interest; anchor series with baseline (y=100); use diagonal for paired data</td>
+                <td>Telford &amp; Cunningham Australian athletes; Titanic survival facets; Bacteriophage T7 gene expression</td>
+                <td>Using a background grid instead of a 45-degree diagonal line ($x = y$) when plotting paired comparisons.</td>
+              </tr>
+              <tr>
+                <td><strong>Ch 24: Axis Labels</strong></td>
+                <td>Illegible text when graphics are scaled down</td>
+                <td>#1 Lesson: Axis labels are almost certainly too small. Always scale marks and labels proportionally</td>
+                <td>Australian athletes body fat vs height; 3-inch journal column reproduction</td>
+                <td>The Monitor Bias Trap: assuming that because text is readable on a 27-inch 4K monitor, it will be legible in print.</td>
+              </tr>
+              <tr>
+                <td><strong>Ch 25: Avoid Line Drawings</strong></td>
+                <td>Porous boundaries, visual noise, and spatial ambiguity</td>
+                <td>Visualize data with solid, colored shapes rather than empty line outlines (while respecting proportional ink)</td>
+                <td>Titanic passenger ages (empty vs filled histogram); Lincoln NE temperatures (empty vs shaded boxplot)</td>
+                <td>Claiming that shading a boxplot gives "too much weight" to the middle 50% (that is literally what a boxplot is for).</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>2. The Top 10 "Must-Know" Exam Pitfalls &amp; Traps</h3>
+          <div class="note-box">
+            <div class="callout-label">High-Yield Exam Distractor Alerts</div>
+            <ol>
+              <li><strong>Trap 1 (Overplotting in small data):</strong> Overplotting occurs in small datasets whenever measurements are recorded with low precision or rounded to integers (e.g. 234 cars, 21 with 2.0L engines).</li>
+              <li><strong>Trap 2 (Hexagon mathematical advantage):</strong> Hexagonal binning is superior to square binning because points inside a regular hexagon are, on average, closer to the center than points in an equal-area square (Carr et al. 1987).</li>
+              <li><strong>Trap 3 (Rainbow scale circularity):</strong> The rainbow scale is circular because its start and end colors are both shades of dark red, meaning the two most distant data values look almost identical.</li>
+              <li><strong>Trap 4 (CVD demographics):</strong> Approximately 8% of males and 0.5% of females have CVD. Deuteranomaly (green-weak) is the most common form; tritanomaly (blue-weak) is rare.</li>
+              <li><strong>Trap 5 (Why PiYG is CVD-safe):</strong> ColorBrewer PiYG works because pink contains a strong blue component (distinguished by deutans/protans) and yellow-green contains yellow (distinguished by tritans).</li>
+              <li><strong>Trap 6 (The "Two Shades" Rule):</strong> Text characters are thin lines and appear lighter than solid fills of the same color; fix this by using a lighter shade for fills and a darker shade of the same hue for lines and text labels.</li>
+              <li><strong>Trap 7 (Legend visual order):</strong> Legends should never default to alphabetical order if curves have a clear vertical visual rank; ordering the legend to match the curve endpoints drastically cuts cognitive load and aids CVD readers.</li>
+              <li><strong>Trap 8 (Perpendicular Grid Rule):</strong> For vertical fluctuations (time series), draw horizontal lines; for horizontal bar charts, draw vertical lines. Never draw arbitrary 2D checkerboards when one dimension dominates.</li>
+              <li><strong>Trap 9 (Paired data $x = y$ line):</strong> A 45-degree diagonal line is vastly superior to a background grid for paired data (e.g., mutant vs wild-type virus genes) because it immediately separates $y > x$ from $y < x$.</li>
+              <li><strong>Trap 10 (Open points myth):</strong> Open points (hollow circles/crosses) add visual noise and do NOT solve overplotting; use solid shapes with alpha blending, jittering, or binning.</li>
+            </ol>
+          </div>
+
+          <h3>3. Citation &amp; Key Study Directory</h3>
+          <table class="matrix-table">
+            <thead>
+              <tr>
+                <th>Author &amp; Year</th>
+                <th>Topic / Context</th>
+                <th>Primary Contribution / Textbook Finding</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Carr et al. (1987)</strong></td>
+                <td>Chapter 18 • Hexagonal Binning</td>
+                <td>Demonstrated that hexagonal bins minimize distance-to-centroid error compared to rectangular bins.</td>
+              </tr>
+              <tr>
+                <td><strong>Hadley Wickham (ggplot2)</strong></td>
+                <td>Chapters 18 &amp; 23 • Binning &amp; Grids</td>
+                <td>Authored ggplot2; advocated for gray backgrounds with white gridlines to unify plot areas.</td>
+              </tr>
+              <tr>
+                <td><strong>Okabe &amp; Ito (2008)</strong></td>
+                <td>Chapter 19 • Qualitative Color Scale</td>
+                <td>Designed the definitive 8-color CVD-safe universal qualitative color palette.</td>
+              </tr>
+              <tr>
+                <td><strong>Stone, Albers Szafir, &amp; Setlur (2014)</strong></td>
+                <td>Chapter 19 • Graphical Element Size</td>
+                <td>Proved color discrimination degrades significantly on small dots and thin lines, exacerbated by CVD.</td>
+              </tr>
+              <tr>
+                <td><strong>Ronald Fisher (1936)</strong></td>
+                <td>Chapters 20 &amp; 25 • Iris Dataset</td>
+                <td>Classic botanical dataset of sepal length, sepal width, and petal dimensions across 3 Iris species.</td>
+              </tr>
+              <tr>
+                <td><strong>Edward Tufte (2001)</strong></td>
+                <td>Chapter 23 • Non-Data Ink &amp; Bar Grids</td>
+                <td>Formulated the data-ink ratio; proposed drawing thin white gridlines across dark bars.</td>
+              </tr>
+              <tr>
+                <td><strong>Haroz, Kosara, &amp; Franconeri (2015)</strong></td>
+                <td>Chapter 23 • Bar Segmentation</td>
+                <td>Empirically proved that breaking bars into discrete segments aids human perception of length.</td>
+              </tr>
+              <tr>
+                <td><strong>Paff et al. (2018)</strong></td>
+                <td>Chapter 23 • Paired Data Comparison</td>
+                <td>Measured gene expression levels in wild-type vs mutant bacteriophage T7 (promoter 9 deletion).</td>
+              </tr>
+              <tr>
+                <td><strong>Telford &amp; Cunningham (1991)</strong></td>
+                <td>Chapters 23 &amp; 24 • Australian Athletes</td>
+                <td>Dataset of body fat percentage versus height in male athletes, illustrating ink balance and label sizing.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="summary-box">
+            <h4>Quick Memory Checklist for the Quiz</h4>
+            <ul>
+              <li><strong>Hexagons:</strong> Closer to centroid than square corners $ightarrow$ less quantization error.</li>
+              <li><strong>Color Categories:</strong> Optimal = 3–5; Max = 8; Beyond 8 $ightarrow$ Direct text labeling.</li>
+              <li><strong>Rainbow Scale:</strong> Circular (red at both ends), nonmonotonic luminance, arbitrary artifact bands.</li>
+              <li><strong>CVD Breakdown:</strong> 8% males, 0.5% females; Deuteranomaly = green-weak (most common); Tritanomaly = blue-weak.</li>
+              <li><strong>Two Shades Rule:</strong> Light for fills, dark of same hue for text and lines.</li>
+              <li><strong>Grid Rule:</strong> Always run grid lines perpendicular to the variable of interest.</li>
+              <li><strong>Paired Data:</strong> Always use a 45° diagonal line ($x = y$), never a background grid.</li>
+              <li><strong>Labels:</strong> Previewing full-screen induces Monitor Bias Trap; test at 3 inches wide.</li>
+              <li><strong>Line Drawings:</strong> Avoid empty wireframes; solid shapes convey volume, coherence, and eliminate ambiguity.</li>
+            </ul>
+          </div>
+        </div>
+        <!-- end topic-7 -->
+
+        <!-- ═══════════════════════════════════════════════════════
+         TOPIC 8: INTERACTIVE MCQ EXAM QUIZ
+         ═══════════════════════════════════════════════════════ -->
+        <div class="topic-card" id="topic-8">
+          <h2><span class="topic-num">8</span>🎯 Interactive MCQ Exam Quiz</h2>
+          <p class="topic-subtitle">High-Yield Practice for DAV Quizzes • 32 Authentic Multiple-Choice Questions with Instant Pedagogical Feedback</p>
+
+          <div class="quiz-header-banner">
+            <div class="quiz-title-wrap">
+              <h3>DAV Master Exam Quiz • Fundamentals of Data Visualization</h3>
+              <p>Test your mastery across Chapters 18, 19, 20, 23, 24, and 25. Instant grading, rationale explanations, and score tracking.</p>
+            </div>
+            <div class="score-board">
+              <div class="score-pill" id="score-display">Score: 0 / 32 (0%)</div>
+              <button class="reset-quiz-btn" onclick="resetQuiz()">↻ Reset Quiz</button>
+            </div>
+          </div>
+
+          <div class="quiz-filter-wrap">
+            <button class="quiz-filter-btn active" onclick="filterQuizCategory('All', this)">All Chapters (32)</button>
+            <button class="quiz-filter-btn" onclick="filterQuizCategory('Ch 18: Overplotting', this)">Ch 18: Overplotting</button>
+            <button class="quiz-filter-btn" onclick="filterQuizCategory('Ch 19: Color Pitfalls', this)">Ch 19: Color Pitfalls</button>
+            <button class="quiz-filter-btn" onclick="filterQuizCategory('Ch 20: Redundant Coding', this)">Ch 20: Redundant Coding</button>
+            <button class="quiz-filter-btn" onclick="filterQuizCategory('Ch 23: Balance Context', this)">Ch 23: Balance Context</button>
+            <button class="quiz-filter-btn" onclick="filterQuizCategory('Ch 24: Axis Labels', this)">Ch 24: Axis Labels</button>
+            <button class="quiz-filter-btn" onclick="filterQuizCategory('Ch 25: Line Drawings', this)">Ch 25: Line Drawings</button>
+          </div>
+
+          <!-- Container where JS renders all 32 MCQs dynamically -->
+          <div id="mcq-quiz-container"></div>
+        </div>
+        <!-- end topic-8 -->
+      </div>
+      <!-- end module-container -->
+
+      <div class="bottom-nav">
+        <button id="prev-btn" onclick="goPrev()">
+          <div>
+            <span class="btn-label">← Previous</span>
+            <span class="btn-title" id="prev-title">Topic</span>
+          </div>
+        </button>
+        <button id="next-btn" onclick="goNext()">
+          <div>
+            <span class="btn-label">Next →</span>
+            <span class="btn-title" id="next-title">Topic</span>
+          </div>
+        </button>
+      </div>
+    </div>
+    <!-- end main-content -->
+
+    <button
+      id="back-to-top"
+      onclick="
+        document
+          .getElementById('main-content')
+          .scrollTo({ top: 0, behavior: 'smooth' })
+      "
+    >
+      ↑
+    </button>
+
+    <!-- ═══════════════════════════════════════════════════════
+     JAVASCRIPT LOGIC & INTERACTIVE QUIZ ENGINE
+     ═══════════════════════════════════════════════════════ -->
+    <script>
+      const topics = [
+        "topic-1",
+        "topic-2",
+        "topic-3",
+        "topic-4",
+        "topic-5",
+        "topic-6",
+        "topic-7",
+        "topic-8"
+      ];
+      let currentTopicIndex = 0;
+      let userAnswers = {};
+      let currentCategory = "All";
+
+      const quizData = [
+        {
+          id: 1,
+          category: "Ch 18: Overplotting",
+          question: "In Claus Wilke's analysis of the 234 EPA cars dataset (Figure 18-1), what caused 21 vehicles with 2.0-liter engines to be represented by only 4 distinct dots?",
+          options: [
+            "A software rendering glitch in ggplot2 that suppressed points with odd-numbered IDs.",
+            "Severe data rounding of engine displacement to deciliters and city fuel economy to integer mpg.",
+            "The author applied a high alpha transparency filter that erased 17 data points.",
+            "Vehicles with identical engine sizes were mathematically averaged prior to visualization."
+          ],
+          answer: 1,
+          explanation: "Because fuel economy was rounded to integer mpg and displacement to deciliters, the 21 cars with 2.0L engines took on only four discrete mpg values (19, 20, 21, or 22 mpg). Rounding collapsed 21 records into 4 coordinate pairs."
+        },
+        {
+          id: 2,
+          category: "Ch 18: Overplotting",
+          question: "What is the primary failure mode of relying ONLY on partial transparency (alpha blending) when plotting massive datasets (e.g. 100,000+ Newark flight departures in Figure 18-5)?",
+          options: [
+            "Alpha transparency causes web browsers and PDF readers to crash due to GPU memory limits.",
+            "It turns categorical colors into random grayscale patterns.",
+            "No single transparency setting works: high-density areas merge into a solid black smudge while rare extreme outliers become invisible.",
+            "Alpha blending can only be computed if coordinates are strictly non-negative integers."
+          ],
+          answer: 2,
+          explanation: "In massive datasets with wide density ranges, if alpha is set low enough to reveal density variations in the dense core (0–200 min delays), the sparse extreme delays (400+ min) vanish. Conversely, if alpha is high enough to see outliers, the core becomes a solid black blob."
+        },
+        {
+          id: 3,
+          category: "Ch 18: Overplotting",
+          question: "Why does Claus Wilke issue a strict warning that 'jittering has to be performed with care'?",
+          options: [
+            "Jittering permanently alters the underlying coordinate data, and excessive jitter creates misleading, fabricated patterns.",
+            "Jittering converts Cartesian coordinate systems into non-Euclidean polar coordinates.",
+            "Applying jitter violates the principle of proportional ink in bar charts.",
+            "Jittering makes it impossible to apply color-vision deficiency simulations."
+          ],
+          answer: 0,
+          explanation: "Jittering adds artificial random noise to coordinate positions. If jitter amplitude is too large, points are displaced to locations unrepresentative of the data, fabricating non-existent trends and misleading the reader."
+        },
+        {
+          id: 4,
+          category: "Ch 18: Overplotting",
+          question: "According to Carr et al. (1987), why is hexagonal 2D binning mathematically superior to rectangular/square binning?",
+          options: [
+            "Hexagons can be shaded with RGB colors whereas squares require CMYK colors.",
+            "Hexagonal tiling reduces the total number of bins required by exactly 50%.",
+            "Points inside a regular hexagon are, on average, closer to the hexagon's centroid than points inside an equal-area square are to the square's center.",
+            "Hexagonal bins align natively with the polar coordinate system."
+          ],
+          answer: 2,
+          explanation: "A regular hexagon is more compact and closer to a circle than a square (whose corners extend far from the center). Points in a hexagon are on average closer to the centroid, minimizing spatial quantization distortion."
+        },
+        {
+          id: 5,
+          category: "Ch 18: Overplotting",
+          question: "Under what specific data condition do 2D density contour lines (KDE topological contours) perform best?",
+          options: [
+            "When the dataset consists strictly of discrete integer counts.",
+            "When point density varies slowly and smoothly across both the x and y dimensions.",
+            "When the scatterplot contains at least 10 strongly intermingling categorical groups.",
+            "When the coordinate axes are logarithmically transformed."
+          ],
+          answer: 1,
+          explanation: "Contour lines delineate continuous elevation levels of point density. They work cleanly only when point density changes smoothly and slowly across both dimensions, avoiding erratic, ragged boundaries."
+        },
+        {
+          id: 6,
+          category: "Ch 18: Overplotting",
+          question: "In the 53,940 diamonds dataset with 5 cut categories (Fair to Ideal, Figure 18-12), why did drawing 5 colored sets of contour lines on a single plot fail?",
+          options: [
+            "The contour lines strongly overlapped, creating an incomprehensible 'hairball' of crisscrossing lines.",
+            "Plotting libraries cannot compute more than 3 density estimates simultaneously.",
+            "The carat variable was recorded on a circular polar scale.",
+            "Diamonds cannot be visualized with continuous density estimates."
+          ],
+          answer: 0,
+          explanation: "Multi-group contour plots only work when groups are few (2–3) and clearly separated (like male vs. female blue jays). With 5 heavily overlapping groups, the lines form an undecipherable 'hairball'."
+        },
+        {
+          id: 7,
+          category: "Ch 18: Overplotting",
+          question: "When Wilke separated the diamond cuts into faceted small multiples (Figure 18-13), what counter-intuitive trend was revealed regarding diamond cuts and carat weight?",
+          options: [
+            "Better cuts (Ideal, Premium) tend to have lower carat values than poorer cuts (Fair, Good) because more raw diamond is removed during cutting.",
+            "Ideal cuts are twice as heavy as fair cuts on average.",
+            "Carat weight has no correlation with price for premium diamonds.",
+            "Fair cut diamonds are exclusively manufactured synthetically."
+          ],
+          answer: 0,
+          explanation: "Achieving an Ideal or Premium cut requires jewelers to remove more raw material to create optimal light-reflecting facets, resulting in lighter diamonds on average. However, at any given carat weight, better cuts command higher prices."
+        },
+        {
+          id: 8,
+          category: "Ch 19: Color Pitfalls",
+          question: "What is Claus Wilke's empirical rule of thumb regarding the maximum number of distinct categories that should be encoded using a qualitative color scale?",
+          options: [
+            "Qualitative colors work best for 3 to 5 categories; beyond 8 to 10 categories, cognitive matching breaks down completely.",
+            "Qualitative color scales can effortlessly accommodate up to 50 distinct items if a legend is provided.",
+            "Exactly 2 categories maximum, after which scatterplots must be converted to pie charts.",
+            "As many categories as there are distinct colors in the rainbow spectrum (typically 12 to 16)."
+          ],
+          answer: 0,
+          explanation: "Human color discrimination and short-term visual memory degrade rapidly beyond 5 items. At 8 to 10 categories, matching plot marks to legend keys becomes an exhausting cognitive burden."
+        },
+        {
+          id: 9,
+          category: "Ch 19: Color Pitfalls",
+          question: "When distinguishing more than about 8 categorical items (such as the 50 US states in Figure 19-2), what is the recommended design solution?",
+          options: [
+            "Use the rainbow color scale so all 50 states receive a unique spectral wavelength.",
+            "Use direct text labeling for a representative subset of data points and provide full data in an accompanying table.",
+            "Convert the scatterplot into a stacked 3D bar chart with hatching.",
+            "Encode 25 states with color and the remaining 25 states with point size."
+          ],
+          answer: 1,
+          explanation: "Direct labeling bypasses the color lookup puzzle entirely. Labeling a representative subset highlights the key story without visual crowding, while tables supply complete reference data."
+        },
+        {
+          id: 10,
+          category: "Ch 19: Color Pitfalls",
+          question: "Why does Wilke strongly discourage using large filled areas of overly saturated, intense colors (Figure 19-3)?",
+          options: [
+            "They deplete printer toner cartridges at an unsustainable rate.",
+            "Saturated colors cannot be rendered accurately on mobile OLED screens.",
+            "They create visual glare/fatigue, distract the eye from labels, and make it hard to align bar ends with gridlines.",
+            "High saturation causes the human retina to invert the perceived direction of bar graphs."
+          ],
+          answer: 2,
+          explanation: "Large areas of maximum saturation produce visual glare, draw attention away from typography, and visually vibrate against subtle reference gridlines."
+        },
+        {
+          id: 11,
+          category: "Ch 19: Color Pitfalls",
+          question: "What two critical conditions must be satisfied by any sequential color scale used to encode continuous data values?",
+          options: [
+            "It must use only primary colors, and it must contain at least one shade of green.",
+            "It must clearly show which values are larger/smaller, and perceptual color differences must reflect data differences.",
+            "It must be non-linear in RGB space, and it must start at pure black (0,0,0).",
+            "It must be invertible using polar trigonometry, and it must avoid yellow."
+          ],
+          answer: 1,
+          explanation: "Sequential scales represent ordered magnitude: (1) perceived color progression must be monotonic so viewers know which values are larger, and (2) perceived visual steps must faithfully mirror numerical intervals."
+        },
+        {
+          id: 12,
+          category: "Ch 19: Color Pitfalls",
+          question: "Why is the popular rainbow (jet) color scale described as being 'effectively circular'?",
+          options: [
+            "It was originally designed exclusively for circular polar pie charts.",
+            "Its mathematical formula uses sine and cosine functions.",
+            "Its beginning and ending colors are both shades of dark red, making extreme opposite values appear almost identical.",
+            "It rotates 360 degrees in the HSL color cylinder every 10 data units."
+          ],
+          answer: 2,
+          explanation: "The rainbow scale spans the full spectrum, ending near where it began (dark red). When the lowest and highest values in a plot share nearly the same color, the scale is effectively circular and misleading."
+        },
+        {
+          id: 13,
+          category: "Ch 19: Color Pitfalls",
+          question: "When the rainbow color scale is desaturated to grayscale (Figure 19-4), what fatal perceptual defect is exposed?",
+          options: [
+            "It becomes completely invisible because all colors convert to 50% gray.",
+            "It is highly nonmonotonic: lightness rises from medium-dark to bright, plummets to very dark, and rises again.",
+            "The scale is perfectly monotonic, proving that the critique only applies to color vision.",
+            "The gray values invert completely, making high numbers look lighter than low numbers."
+          ],
+          answer: 1,
+          explanation: "In grayscale, the rainbow scale fluctuates wildly: moderately dark (red) -> bright (yellow/cyan) -> very dark (blue) -> moderately dark. Luminance has no monotonic relationship with numerical value."
+        },
+        {
+          id: 14,
+          category: "Ch 19: Color Pitfalls",
+          question: "In the Texas county demographics map (Figure 19-5), what misleading visual artifact was generated by the rainbow color scale?",
+          options: [
+            "It inverted the county boundaries, making rural counties appear larger than urban counties.",
+            "It introduced an artificial visual cliff, arbitrarily highlighting counties with ~75% white population.",
+            "It rendered all counties with zero population as bright yellow.",
+            "It completely erased Hispanic demographic statistics from the census."
+          ],
+          answer: 1,
+          explanation: "Because rainbow transitions between yellow, green, and cyan are non-uniform, the scale produced sharp, artificial visual boundaries that highlighted counties around 75% white as if an abrupt demographic transition occurred there."
+        },
+        {
+          id: 15,
+          category: "Ch 19: Color Pitfalls",
+          question: "What is the approximate prevalence of color-vision deficiency (CVD) among males and females of Northern European ancestry?",
+          options: [
+            "Approximately 25% of males and 10% of females.",
+            "Approximately 8% of males and 0.5% of females.",
+            "Approximately 1% of males and 1% of females.",
+            "Approximately 50% of males and 25% of females."
+          ],
+          answer: 1,
+          explanation: "CVD is sex-linked (carried on the X chromosome). Roughly 8% of males and about 0.5% of females experience color vision deficiency."
+        },
+        {
+          id: 16,
+          category: "Ch 19: Color Pitfalls",
+          question: "Which form of color-vision deficiency is clinically the most prevalent in human populations?",
+          options: [
+            "Deuteranomaly (green-weak vision; mutated M-cone pigment).",
+            "Tritanopia (complete absence of S-cones).",
+            "Achromatopsia (total color blindness / rod monochromacy).",
+            "Protanopia (complete absence of L-cones)."
+          ],
+          answer: 0,
+          explanation: "Deuteranomaly accounts for over half of all CVD cases (roughly 5% of all males). Tritanomaly/tritanopia is rare (<0.1%)."
+        },
+        {
+          id: 17,
+          category: "Ch 19: Color Pitfalls",
+          question: "In medical vision terminology, what is the exact difference between the suffix '-anomaly' and the suffix '-anopia'?",
+          options: [
+            "'-anomaly' means congenital; '-anopia' means acquired later in life.",
+            "'-anomaly' denotes partial impairment (anomalous trichromacy); '-anopia' denotes complete absence of the receptor (dichromacy).",
+            "'-anomaly' applies only to males; '-anopia' applies only to females.",
+            "'-anomaly' affects rod photoreceptors; '-anopia' affects cone photoreceptors."
+          ],
+          answer: 1,
+          explanation: "'-anomaly' (e.g. deuteranomaly) means all 3 cone types exist but one is mutated/shifted (partial impairment). '-anopia' (e.g. deuteranopia) means that cone class is completely missing."
+        },
+        {
+          id: 18,
+          category: "Ch 19: Color Pitfalls",
+          question: "Why does the ColorBrewer PiYG (pink to yellow-green) diverging color scale remain distinguishable to individuals with red-green CVD (Figure 19-9)?",
+          options: [
+            "PiYG contains infrared fluorescent dye visible under low light.",
+            "Pink contains blue (which deutans and protans can see), and yellow-green contains yellow (which tritans can see).",
+            "The scale uses distinct geometric hatching patterns underneath the colors.",
+            "Red-green colorblind individuals are completely immune to pink hues."
+          ],
+          answer: 1,
+          explanation: "Pink is a mixture of red and blue; yellow-green is a mixture of green and yellow. Red-green CVD viewers easily detect the variation in blue content between the two ends."
+        },
+        {
+          id: 19,
+          category: "Ch 19: Color Pitfalls",
+          question: "How many distinct colors are defined in the Okabe and Ito (2008) CVD-friendly universal qualitative color palette?",
+          options: [
+            "3 colors (Red, Green, Blue).",
+            "5 colors (the primary hues of the CMYK model).",
+            "8 colors (Orange, Sky Blue, Bluish Green, Yellow, Blue, Vermilion, Reddish Purple, Black).",
+            "16 colors matching standard HTML web-safe color codes."
+          ],
+          answer: 2,
+          explanation: "Okabe and Ito engineered an 8-color palette (7 chromatic hues plus black) mathematically tested to remain distinguishable under deuteranopia, protanopia, and tritanopia."
+        },
+        {
+          id: 20,
+          category: "Ch 19: Color Pitfalls",
+          question: "According to research by Stone, Albers Szafir, and Setlur (2014), how does graphical element size affect color perception?",
+          options: [
+            "Element size has no effect because color perception is entirely independent of spatial frequency.",
+            "Colors are drastically harder to distinguish when applied to small dots or thin lines than to large filled areas, an effect amplified under CVD.",
+            "Small dots make colors appear significantly more saturated and intense than large areas.",
+            "Thin lines automatically convert all RGB colors into grayscale in the human retina."
+          ],
+          answer: 1,
+          explanation: "Human color discrimination degrades rapidly at high spatial frequencies (small dots, thin lines). A palette that is distinguishable in large swatches can completely fail on scatterplot points."
+        },
+        {
+          id: 21,
+          category: "Ch 20: Redundant Coding",
+          question: "What is the formal definition of 'redundant coding' in data visualization?",
+          options: [
+            "Writing the same Python code twice in different script modules for backup redundancy.",
+            "Encoding the same data variable across two or more distinct aesthetic channels simultaneously (e.g., color + point shape).",
+            "Providing two completely duplicate legend boxes on opposite sides of a figure.",
+            "Mapping two independent data variables onto the exact same aesthetic channel."
+          ],
+          answer: 1,
+          explanation: "Redundant coding reinforces data communication by binding one variable to multiple aesthetics (e.g. shape + color). If one channel fails (e.g. grayscale photocopying), the other preserves the information."
+        },
+        {
+          id: 22,
+          category: "Ch 20: Redundant Coding",
+          question: "In Fisher's Iris scatterplot (Figure 20-1), which two species intermingle and become impossible to differentiate in grayscale when encoded solely by color?",
+          options: [
+            "Iris setosa and Iris virginica.",
+            "Iris virginica and Iris versicolor.",
+            "Iris setosa and Iris versicolor.",
+            "All three species separate cleanly in grayscale."
+          ],
+          answer: 1,
+          explanation: "Iris virginica (green) and Iris versicolor (blue) overlap in the scatterplot. In grayscale desaturation or blue-yellow CVD (tritanomaly), their green and blue dots become identical shades."
+        },
+        {
+          id: 23,
+          category: "Ch 20: Redundant Coding",
+          question: "In a multi-line time series plot (e.g., tech stock prices in Figure 20-5), what is Claus Wilke's golden rule for ordering legend items?",
+          options: [
+            "Always sort legend items alphabetically to ensure neutral presentation.",
+            "Match the order of legend entries to the perceived visual vertical order of the data lines at the end of the interval.",
+            "Sort legend items strictly by the market capitalization of the companies.",
+            "Place the legend items in a randomized order to prevent order bias."
+          ],
+          answer: 1,
+          explanation: "Alphabetical legends force viewers into exhausting visual ping-pong. Reordering the legend to match the physical vertical order of curves (Facebook top, Apple bottom) cuts cognitive load to zero."
+        },
+        {
+          id: 24,
+          category: "Ch 20: Redundant Coding",
+          question: "What cognitive psychological phenomenon is eliminated when a figure uses direct labeling instead of a separate external legend?",
+          options: [
+            "The Stroop effect.",
+            "The Split-Attention Effect (visual ping-pong across separated elements).",
+            "The Confirmation Bias loop.",
+            "The Weber-Fechner non-linear response."
+          ],
+          answer: 1,
+          explanation: "The Split-Attention Effect occurs when working memory must hold information from an external legend while scanning back to the plot. Direct labeling puts the text right where the eye is already looking."
+        },
+        {
+          id: 25,
+          category: "Ch 20: Redundant Coding",
+          question: "What is Claus Wilke's 'Two Shades' rule for direct text labeling (Figures 20-9 & 20-10)?",
+          options: [
+            "Use light gray text for primary variables and dark black text for secondary variables.",
+            "Use a lighter shade for filled shapes/regions, and a darker shade of the same hue for thin lines, borders, and text labels.",
+            "Always invert the text color: use complementary colors on the color wheel for text labels.",
+            "Print text with a 50% opacity shadow underneath."
+          ],
+          answer: 1,
+          explanation: "Text consists of razor-thin strokes that appear perceptually lighter than solid filled polygons of the same color. Wilke uses a light tint for fills and a darker shade of the same hue for lines and text."
+        },
+        {
+          id: 26,
+          category: "Ch 20: Redundant Coding",
+          question: "When a single continuous variable is mapped to both an axis position and color (e.g., daily temperature in Figure 20-12), how should the color scale be presented?",
+          options: [
+            "As a floating pie chart in the top-right corner of the canvas.",
+            "Integrated directly along and into the primary coordinate axis representing that variable.",
+            "As a separate lookup table in an appendix at the end of the document.",
+            "Color bars should never be shown if position is already used."
+          ],
+          answer: 1,
+          explanation: "When a variable maps redundantly to position and color, integrating the color gradient bar directly into that axis fuses both aesthetics into a single intuitive reference."
+        },
+        {
+          id: 27,
+          category: "Ch 23: Balance Context",
+          question: "What visual failure occurs when an author takes Edward Tufte's advice to erase non-data ink to an extreme (Figure 23-3)?",
+          options: [
+            "The plot becomes so ink-heavy that points cannot be seen.",
+            "Axis titles and tick labels become invisible, data points appear to float in an unanchored void, and legend marks look like data.",
+            "The computer screen burns out due to excess white pixel illumination.",
+            "Points automatically cluster into false Gaussian distributions."
+          ],
+          answer: 1,
+          explanation: "Over-erasing non-data ink removes essential scaffolding: axis titles become too faint to read, points float without baseline references, and unboxed legend marks are mistaken for real observations."
+        },
+        {
+          id: 28,
+          category: "Ch 23: Balance Context",
+          question: "According to the Perpendicular Grid Rule, what is the correct orientation of grid lines in a horizontal bar chart (Figure 23-11)?",
+          options: [
+            "Horizontal grid lines only, running parallel to the bars.",
+            "A dense 2D checkerboard of both vertical and horizontal lines.",
+            "Thin vertical grid lines only, running perpendicular to the horizontal bar lengths.",
+            "Diagonal grid lines angled at 45 degrees."
+          ],
+          answer: 2,
+          explanation: "Grid lines should run perpendicular (orthogonal) to the dimension of interest. In horizontal bar charts, lengths vary horizontally along x, so vertical grid lines provide precise reference across bars."
+        },
+        {
+          id: 29,
+          category: "Ch 23: Balance Context",
+          question: "In indexed time-series charts (e.g. stock prices normalized to 100 in June 2012, Figure 23-9), what single minimal element provides the most vital context?",
+          options: [
+            "A dark frame around the entire canvas.",
+            "A single thin horizontal reference line at the index baseline value of y = 100.",
+            "A vertical line at every leap year.",
+            "A drop shadow underneath each company's curve."
+          ],
+          answer: 1,
+          explanation: "A single horizontal reference line at y = 100 provides an unambiguous visual anchor across the entire timeline, showing instantly whether a stock is above or below its starting value."
+        },
+        {
+          id: 30,
+          category: "Ch 23: Balance Context",
+          question: "When analyzing paired experimental data (e.g. mutant vs wild-type virus gene expression in Figure 23-13), why is a 45-degree diagonal line (x = y) superior to a background grid?",
+          options: [
+            "A diagonal line consumes 50% less printer ink than a rectangular grid.",
+            "It provides an immediate perceptual boundary separating upregulated genes (above the line) from downregulated genes (below the line), whereas a grid obscures deviations.",
+            "Background grids cannot be computed for paired biological data.",
+            "A diagonal line rotates the Cartesian axes into polar space."
+          ],
+          answer: 1,
+          explanation: "In paired comparisons, equality is represented by the line y = x. A diagonal line makes deviation from equality immediately apparent (e.g. gene 10A leaping out as downregulated), whereas a background grid obscures it."
+        },
+        {
+          id: 31,
+          category: "Ch 24: Axis Labels",
+          question: "What psychological explanation does Claus Wilke provide for the 'Monitor Bias Trap' (why analysts consistently make axis labels too small)?",
+          options: [
+            "Designers have superior visual acuity compared to average readers.",
+            "Graphics are previewed at full-screen size on large desktop monitors where tiny text looks readable, but it shrinks into illegible smudges when scaled down for publication.",
+            "Plotting software intentionally halves font sizes during PDF export.",
+            "Academic journals require 6-point font sizes for peer review."
+          ],
+          answer: 1,
+          explanation: "On a 27-inch desktop monitor, a full-screen figure is 15–20 inches wide, making 8pt font appear crisp. When scaled down to a 3-inch journal column or phone screen, that text shrinks into an unreadable smudge."
+        },
+        {
+          id: 32,
+          category: "Ch 25: Line Drawings",
+          question: "Why does Claus Wilke strongly advise against drawing histogram bars as empty wireframe outlines (Figure 25-1)?",
+          options: [
+            "Outline bars violate the Nyquist sampling theorem.",
+            "It is visually ambiguous which side of a wireframe line is inside a bar and which side is empty space, especially where gaps occur.",
+            "Wireframe bars cannot be converted into PDF vector formats.",
+            "Empty bars make the histogram look like a scatterplot."
+          ],
+          answer: 1,
+          explanation: "With empty wireframes, gaps between bars create optical illusions where viewers struggle to determine whether a line bounds a bar's interior or the empty space outside. Filling bars with solid color completely resolves this."
+        }
+      ];
+
+      function renderQuiz(filter = "All") {
+        const container = document.getElementById("mcq-quiz-container");
+        if (!container) return;
+        container.innerHTML = "";
+
+        const filtered = filter === "All" ? quizData : quizData.filter(q => q.category === filter);
+
+        filtered.forEach((q) => {
+          const card = document.createElement("div");
+          card.className = "mcq-card";
+          card.id = `mcq-card-${q.id}`;
+
+          const header = document.createElement("div");
+          header.className = "mcq-header";
+          header.innerHTML = `
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span class="mcq-qnum">Q${q.id}</span>
+              <span class="mcq-category-tag">${q.category}</span>
+            </div>
+            <div class="mcq-question">${q.question}</div>
+          `;
+          card.appendChild(header);
+
+          const optionsWrap = document.createElement("div");
+          optionsWrap.className = "mcq-options";
+
+          const letters = ["A", "B", "C", "D"];
+          q.options.forEach((optText, optIdx) => {
+            const btn = document.createElement("button");
+            btn.className = "mcq-opt";
+            btn.id = `opt-${q.id}-${optIdx}`;
+            btn.innerHTML = `<span class="opt-letter">${letters[optIdx]}</span> <span>${optText}</span>`;
+            btn.onclick = () => selectOption(q.id, optIdx);
+
+            // Restore state if answered previously
+            if (userAnswers[q.id] !== undefined) {
+              btn.disabled = true;
+              if (optIdx === q.answer) {
+                btn.classList.add(userAnswers[q.id] === q.answer ? "selected-correct" : "show-correct");
+              } else if (optIdx === userAnswers[q.id]) {
+                btn.classList.add("selected-incorrect");
+              }
+            }
+
+            optionsWrap.appendChild(btn);
+          });
+          card.appendChild(optionsWrap);
+
+          const feedback = document.createElement("div");
+          feedback.className = "mcq-feedback";
+          feedback.id = `feedback-${q.id}`;
+
+          if (userAnswers[q.id] !== undefined) {
+            feedback.classList.add("visible");
+            const isCorr = userAnswers[q.id] === q.answer;
+            if (isCorr) {
+              feedback.classList.add("correct");
+              feedback.innerHTML = `<strong>✓ Correct!</strong> ${q.explanation}`;
+            } else {
+              feedback.classList.add("incorrect");
+              feedback.innerHTML = `<strong>✗ Incorrect.</strong> Correct answer is <strong>Option ${["A","B","C","D"][q.answer]}: ${q.options[q.answer]}</strong>.<br />${q.explanation}`;
+            }
+          }
+
+          card.appendChild(feedback);
+          container.appendChild(card);
+        });
+      }
+
+      function selectOption(qId, selectedIdx) {
+        if (userAnswers[qId] !== undefined) return;
+
+        userAnswers[qId] = selectedIdx;
+        const q = quizData.find((item) => item.id === qId);
+        const isCorrect = selectedIdx === q.answer;
+
+        q.options.forEach((_, idx) => {
+          const btn = document.getElementById(`opt-${qId}-${idx}`);
+          if (btn) {
+            btn.disabled = true;
+            if (idx === q.answer) {
+              btn.classList.add(isCorrect ? "selected-correct" : "show-correct");
+            } else if (idx === selectedIdx && !isCorrect) {
+              btn.classList.add("selected-incorrect");
+            }
+          }
+        });
+
+        const fb = document.getElementById(`feedback-${qId}`);
+        if (fb) {
+          fb.classList.add("visible");
+          if (isCorrect) {
+            fb.classList.add("correct");
+            fb.innerHTML = `<strong>✓ Correct!</strong> ${q.explanation}`;
+          } else {
+            fb.classList.add("incorrect");
+            fb.innerHTML = `<strong>✗ Incorrect.</strong> Correct answer is <strong>Option ${["A","B","C","D"][q.answer]}: ${q.options[q.answer]}</strong>.<br />${q.explanation}`;
+          }
+        }
+
+        updateScore();
+      }
+
+      function updateScore() {
+        let correctCount = 0;
+        let answeredCount = Object.keys(userAnswers).length;
+
+        quizData.forEach((q) => {
+          if (userAnswers[q.id] === q.answer) {
+            correctCount++;
+          }
+        });
+
+        const pct = answeredCount > 0 ? Math.round((correctCount / answeredCount) * 100) : 0;
+        const scoreEl = document.getElementById("score-display");
+        if (scoreEl) {
+          scoreEl.textContent = `Score: ${correctCount} / ${quizData.length} (${pct}%) • Answered: ${answeredCount}/${quizData.length}`;
+          if (pct >= 85 && answeredCount >= 10) {
+            scoreEl.style.borderColor = "var(--def-bd)";
+            scoreEl.style.color = "var(--def-bd)";
+          } else if (pct < 60 && answeredCount >= 5) {
+            scoreEl.style.borderColor = "#ef4444";
+            scoreEl.style.color = "#ef4444";
+          }
+        }
+      }
+
+      function resetQuiz() {
+        userAnswers = {};
+        renderQuiz(currentCategory);
+        const scoreEl = document.getElementById("score-display");
+        if (scoreEl) {
+          scoreEl.textContent = `Score: 0 / ${quizData.length} (0%)`;
+          scoreEl.style.borderColor = "var(--bd)";
+          scoreEl.style.color = "var(--ac)";
+        }
+      }
+
+      function filterQuizCategory(cat, btn) {
+        currentCategory = cat;
+        document.querySelectorAll(".quiz-filter-btn").forEach(b => b.classList.remove("active"));
+        if (btn) btn.classList.add("active");
+        renderQuiz(cat);
+      }
+
+      // ── Pagination and Topic Switching ─────────────────────
+      function getTopicTitle(id) {
+        const link = document.querySelector(`.nav-sublist a[onclick*="'${id}'"]`) ||
+                     document.querySelector(`.nav-sublist a[onclick*='"${id}"']`);
+        if (link) {
+          const numEl = link.querySelector(".nav-num");
+          if (numEl) return link.textContent.replace(numEl.textContent, "").trim();
+          return link.textContent.replace(/^\d+\s*/, "").trim();
+        }
+        return "Topic";
+      }
+
+      function toggleSidebar() {
+        const sb = document.getElementById("sidebar");
+        const bd = document.getElementById("sidebar-backdrop");
+        if (sb) sb.classList.toggle("open");
+        if (bd) bd.classList.toggle("active");
+      }
+
+      function toggleSection(headerEl) {
+        const sublist = headerEl.nextElementSibling;
+        const chevron = headerEl.querySelector(".chevron");
+        if (!sublist) return;
+        if (sublist.style.display === "none") {
+          sublist.style.display = "block";
+          if (chevron) chevron.style.transform = "rotate(0deg)";
+        } else {
+          sublist.style.display = "none";
+          if (chevron) chevron.style.transform = "rotate(-90deg)";
+        }
+      }
+
+      function showTopic(id) {
+        document.querySelectorAll(".topic-card").forEach((c) => (c.style.display = "none"));
+        const t = document.getElementById(id);
+        if (t) t.style.display = "block";
+        currentTopicIndex = topics.indexOf(id);
+
+        document.querySelectorAll(".nav-sublist a").forEach((a) => a.classList.remove("active"));
+        const lk = document.querySelector(`.nav-sublist a[onclick*="'${id}'"]`) ||
+                   document.querySelector(`.nav-sublist a[onclick*='"${id}"']`);
+        if (lk) {
+          lk.classList.add("active");
+          const sublist = lk.closest(".nav-sublist");
+          if (sublist && sublist.style.display === "none") {
+            sublist.style.display = "block";
+            const chevron = sublist.previousElementSibling ? sublist.previousElementSibling.querySelector(".chevron") : null;
+            if (chevron) chevron.style.transform = "rotate(0deg)";
+          }
+        }
+
+        const pb = document.getElementById("prev-btn");
+        const nb = document.getElementById("next-btn");
+        const pt = document.getElementById("prev-title");
+        const nt = document.getElementById("next-title");
+
+        if (pb && pt) {
+          if (currentTopicIndex > 0) {
+            pb.disabled = false;
+            pb.style.opacity = "1";
+            pb.style.pointerEvents = "auto";
+            pt.textContent = getTopicTitle(topics[currentTopicIndex - 1]);
+          } else {
+            pb.disabled = true;
+            pb.style.opacity = "0.3";
+            pb.style.pointerEvents = "none";
+            pt.textContent = "Start";
+          }
+        }
+
+        if (nb && nt) {
+          if (currentTopicIndex < topics.length - 1) {
+            nb.disabled = false;
+            nb.style.opacity = "1";
+            nb.style.pointerEvents = "auto";
+            nt.textContent = getTopicTitle(topics[currentTopicIndex + 1]);
+          } else {
+            nb.disabled = true;
+            nb.style.opacity = "0.3";
+            nb.style.pointerEvents = "none";
+            nt.textContent = "End";
+          }
+        }
+
+        const mc = document.getElementById("main-content");
+        if (mc) mc.scrollTo({ top: 0, behavior: "smooth" });
+
+        const sb = document.getElementById("sidebar");
+        const bd = document.getElementById("sidebar-backdrop");
+        if (window.innerWidth <= 900 && sb && sb.classList.contains("open")) {
+          sb.classList.remove("open");
+          if (bd) bd.classList.remove("active");
+        }
+      }
+
+      function goPrev() {
+        if (currentTopicIndex > 0) showTopic(topics[currentTopicIndex - 1]);
+      }
+
+      function goNext() {
+        if (currentTopicIndex < topics.length - 1) showTopic(topics[currentTopicIndex + 1]);
+      }
+
+      // Keyboard arrow navigation
+      document.addEventListener("keydown", (e) => {
+        if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA") return;
+        if (e.key === "ArrowLeft") goPrev();
+        else if (e.key === "ArrowRight") goNext();
+      });
+
+      // Filter content in sidebar
+      function filterContent() {
+        const query = document.getElementById("search-input").value.toLowerCase();
+        document.querySelectorAll(".nav-sublist li").forEach((li) => {
+          const text = li.textContent.toLowerCase();
+          li.style.display = text.includes(query) ? "block" : "none";
+        });
+      }
+
+      // ── Initialize ────────────────────────────────────────
+      renderQuiz();
+      if (topics.length > 0) showTopic(topics[0]);
+      const mc = document.getElementById("main-content");
+      const bb = document.getElementById("back-to-top");
+      if (mc && bb) {
+        mc.addEventListener("scroll", () => {
+          bb.style.display = mc.scrollTop > 300 ? "flex" : "none";
+        });
+      }
+    </script>
+  </body>
+</html>

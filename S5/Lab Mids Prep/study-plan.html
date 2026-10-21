@@ -1,0 +1,1337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Lab Mids War Room 🔥 | Oct 10–16, 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --bg:        #0d0f14;
+    --bg2:       #13161e;
+    --bg3:       #1a1d28;
+    --glass:     rgba(255,255,255,0.04);
+    --border:    rgba(255,255,255,0.08);
+    --text:      #e2e8f0;
+    --muted:     #64748b;
+    --dav:       #38bdf8;
+    --dav-bg:    rgba(56,189,248,0.08);
+    --dw:        #a78bfa;
+    --dw-bg:     rgba(167,139,250,0.08);
+    --ai:        #34d399;
+    --ai-bg:     rgba(52,211,153,0.08);
+    --warn:      #fbbf24;
+    --warn-bg:   rgba(251,191,36,0.10);
+    --danger:    #f87171;
+    --danger-bg: rgba(248,113,113,0.10);
+    --ac:        #d97757;
+    --radius:    14px;
+    --shadow:    0 8px 32px rgba(0,0,0,0.5);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    line-height: 1.7;
+    min-height: 100vh;
+    padding-bottom: 80px;
+  }
+  header {
+    background: linear-gradient(135deg, #0d0f14 0%, #1a1025 50%, #0d1420 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 40px 48px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 80% at 70% 50%, rgba(167,139,250,0.12), transparent),
+                radial-gradient(ellipse 40% 60% at 10% 20%, rgba(56,189,248,0.08), transparent);
+    pointer-events: none;
+  }
+  .header-inner { position: relative; max-width: 1200px; margin: auto; }
+  .badge-row { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px; }
+  .badge {
+    font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 4px 12px; border-radius: 99px; border: 1px solid;
+  }
+  .badge.dav { color: var(--dav); border-color: var(--dav); background: var(--dav-bg); }
+  .badge.dw  { color: var(--dw);  border-color: var(--dw);  background: var(--dw-bg); }
+  .badge.ai  { color: var(--ai);  border-color: var(--ai);  background: var(--ai-bg); }
+  .badge.urgent { color: var(--danger); border-color: var(--danger); background: var(--danger-bg); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{ opacity:1 } 50%{ opacity:.6 } }
+  h1 { font-size: clamp(26px, 4vw, 40px); font-weight: 800; line-height: 1.15; }
+  h1 span { color: var(--ac); }
+  .subtitle { color: var(--muted); margin-top: 6px; font-size: 14px; font-weight: 300; }
+  .countdown-row { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 28px; }
+  .countdown-card {
+    background: var(--glass); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 16px 20px; min-width: 190px;
+    backdrop-filter: blur(10px); transition: transform 0.2s;
+  }
+  .countdown-card:hover { transform: translateY(-2px); }
+  .countdown-card .label { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; }
+  .countdown-card .time-val { font-family: 'JetBrains Mono', monospace; font-size: 22px; font-weight: 500; }
+  .countdown-card.dav .label, .countdown-card.dav .time-val { color: var(--dav); }
+  .countdown-card.dw  .label, .countdown-card.dw  .time-val { color: var(--dw); }
+  .countdown-card.ai  .label, .countdown-card.ai  .time-val { color: var(--ai); }
+  .countdown-card .exam-name { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .overview {
+    max-width: 1200px; margin: 32px auto; padding: 0 48px;
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px;
+  }
+  .prog-card {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 20px 24px; transition: box-shadow 0.25s;
+  }
+  .prog-card:hover { box-shadow: var(--shadow); }
+  .prog-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+  .prog-title { font-weight: 700; font-size: 15px; }
+  .prog-pct { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 500; }
+  .prog-bar-wrap { background: var(--bg3); border-radius: 99px; height: 8px; overflow: hidden; }
+  .prog-bar { height: 100%; border-radius: 99px; transition: width 0.5s ease; }
+  .prog-sub { font-size: 12px; color: var(--muted); margin-top: 6px; }
+  .prog-card.dav .prog-title, .prog-card.dav .prog-pct { color: var(--dav); }
+  .prog-card.dav .prog-bar { background: linear-gradient(90deg, var(--dav), #0ea5e9); }
+  .prog-card.dw  .prog-title, .prog-card.dw  .prog-pct  { color: var(--dw); }
+  .prog-card.dw  .prog-bar { background: linear-gradient(90deg, var(--dw), #7c3aed); }
+  .prog-card.ai  .prog-title, .prog-card.ai  .prog-pct  { color: var(--ai); }
+  .prog-card.ai  .prog-bar { background: linear-gradient(90deg, var(--ai), #059669); }
+  .main { max-width: 1200px; margin: 0 auto; padding: 0 48px; }
+  .day-block {
+    margin-bottom: 28px;
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: var(--radius); overflow: hidden;
+    transition: box-shadow 0.25s;
+    animation: fadeIn 0.3s ease both;
+  }
+  .day-block:hover { box-shadow: var(--shadow); }
+  .day-header {
+    display: flex; align-items: center; gap: 14px;
+    padding: 16px 24px; cursor: pointer; user-select: none;
+    background: var(--bg3); border-bottom: 1px solid var(--border);
+    transition: background 0.2s;
+  }
+  .day-header:hover { background: rgba(255,255,255,0.04); }
+  .day-num {
+    width: 48px; height: 48px; border-radius: 12px; display: flex;
+    align-items: center; justify-content: center; font-weight: 800; font-size: 18px;
+    flex-shrink: 0;
+  }
+  .day-num.dav  { background: var(--dav-bg);  color: var(--dav);  border: 1px solid rgba(56,189,248,0.3); }
+  .day-num.dw   { background: var(--dw-bg);   color: var(--dw);   border: 1px solid rgba(167,139,250,0.3); }
+  .day-num.ai   { background: var(--ai-bg);   color: var(--ai);   border: 1px solid rgba(52,211,153,0.3); }
+  .day-num.exam { background: rgba(248,113,113,0.15); color: var(--danger); border: 1px solid rgba(248,113,113,0.3); }
+  .day-info { flex: 1; }
+  .day-title { font-weight: 700; font-size: 16px; }
+  .day-sub { font-size: 12px; color: var(--muted); }
+  .day-tags { display: flex; gap: 6px; flex-wrap: wrap; margin-left: auto; }
+  .tag {
+    font-size: 11px; font-weight: 600; padding: 3px 10px;
+    border-radius: 99px; letter-spacing: 0.05em;
+  }
+  .tag.dav { background: var(--dav-bg); color: var(--dav); }
+  .tag.dw  { background: var(--dw-bg);  color: var(--dw); }
+  .tag.ai  { background: var(--ai-bg);  color: var(--ai); }
+  .tag.exam{ background: var(--danger-bg); color: var(--danger); }
+  .tag.rest{ background: var(--warn-bg); color: var(--warn); }
+  .chevron { margin-left: 8px; transition: transform 0.3s; color: var(--muted); font-size: 18px; flex-shrink: 0; }
+  .day-block.open .chevron { transform: rotate(180deg); }
+  .day-body { display: none; padding: 0; }
+  .day-block.open .day-body { display: block; }
+  .session { padding: 20px 24px; border-bottom: 1px solid var(--border); }
+  .session:last-child { border-bottom: none; }
+  .session-header { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+  .session-icon { font-size: 20px; }
+  .session-title { font-weight: 600; font-size: 14px; }
+  .session-time {
+    margin-left: auto; font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; color: var(--muted);
+    background: var(--bg3); padding: 2px 10px; border-radius: 99px;
+    border: 1px solid var(--border);
+  }
+  .task-list { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .task-item {
+    display: flex; align-items: flex-start; gap: 12px;
+    padding: 10px 14px; border-radius: 10px;
+    border: 1px solid transparent; cursor: pointer;
+    transition: all 0.2s; background: var(--bg3);
+  }
+  .task-item:hover { border-color: var(--border); }
+  .task-item.done { opacity: 0.5; }
+  .task-item.done .task-text { text-decoration: line-through; color: var(--muted); }
+  .task-cb {
+    width: 20px; height: 20px; border-radius: 6px; flex-shrink: 0;
+    border: 2px solid var(--muted); display: flex; align-items: center;
+    justify-content: center; margin-top: 1px; transition: all 0.2s; font-size: 12px;
+  }
+  .task-item.done .task-cb { background: var(--ai); border-color: var(--ai); color: #0d0f14; }
+  .task-text { font-size: 13.5px; line-height: 1.5; flex: 1; }
+  .task-text .sub { display: block; font-size: 11.5px; color: var(--muted); margin-top: 2px; font-weight: 300; }
+  .task-text a { color: var(--ac); text-decoration: none; }
+  .task-text a:hover { text-decoration: underline; }
+  .callout {
+    margin-top: 12px; padding: 12px 16px; border-radius: 10px;
+    border-left: 3px solid; font-size: 13px; line-height: 1.6;
+  }
+  .callout.tip   { background: rgba(52,211,153,0.07); border-color: var(--ai); color: #a7f3d0; }
+  .callout.warn  { background: var(--warn-bg); border-color: var(--warn); color: #fde68a; }
+  .callout.crit  { background: var(--danger-bg); border-color: var(--danger); color: #fca5a5; }
+  .callout.info  { background: rgba(56,189,248,0.07); border-color: var(--dav); color: #bae6fd; }
+  .callout strong { font-weight: 600; }
+  .exam-banner {
+    margin: 16px 24px; padding: 16px 20px; border-radius: 12px;
+    background: linear-gradient(135deg, rgba(248,113,113,0.12), rgba(248,113,113,0.06));
+    border: 1px solid rgba(248,113,113,0.3);
+    display: flex; align-items: center; gap: 14px;
+  }
+  .exam-banner .icon { font-size: 28px; }
+  .exam-banner .text .t1 { font-weight: 700; font-size: 15px; color: var(--danger); }
+  .exam-banner .text .t2 { font-size: 12px; color: var(--muted); margin-top: 2px; }
+  .res-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 10px; margin-top: 12px;
+  }
+  .res-card {
+    background: var(--bg3); border: 1px solid var(--border); border-radius: 10px;
+    padding: 12px 14px; transition: all 0.2s; text-decoration: none; color: inherit; display: block;
+  }
+  .res-card:hover { border-color: var(--ac); transform: translateY(-2px); box-shadow: 0 4px 20px rgba(217,119,87,0.15); }
+  .res-card .r-platform { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; font-weight: 600; color: var(--muted); }
+  .res-card .r-title { font-size: 13px; font-weight: 600; margin-top: 3px; line-height: 1.4; }
+  .res-card .r-desc { font-size: 11px; color: var(--muted); margin-top: 4px; }
+  .qr-section { margin-top: 32px; }
+  .qr-section h2 { font-size: 18px; font-weight: 700; margin-bottom: 16px; }
+  .qr-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 16px;
+  }
+  .qr-card {
+    background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 20px 24px;
+  }
+  .qr-card h3 { font-size: 14px; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+  .qr-card pre {
+    background: var(--bg); border: 1px solid var(--border); border-radius: 8px;
+    padding: 12px 14px; font-family: 'JetBrains Mono', monospace; font-size: 12px;
+    color: #c0caf5; overflow-x: auto; line-height: 1.6; white-space: pre-wrap;
+  }
+  .qr-card .kw { color: #bb9af7; }
+  .qr-card .fn { color: #7dcfff; }
+  .qr-card .st { color: #9ece6a; }
+  .qr-card .cm { color: var(--muted); }
+  .qr-card .nm { color: #ff9e64; }
+  .sticky-nav {
+    position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+    background: rgba(26,29,40,0.9); backdrop-filter: blur(20px);
+    border: 1px solid var(--border); border-radius: 99px;
+    padding: 10px 20px; display: flex; gap: 6px; z-index: 100;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  }
+  .nav-btn {
+    padding: 6px 14px; border-radius: 99px; border: 1px solid var(--border);
+    background: none; color: var(--text); font-family: 'Poppins', sans-serif;
+    font-size: 12px; font-weight: 500; cursor: pointer; transition: all 0.2s;
+  }
+  .nav-btn:hover { background: var(--glass); }
+  .nav-btn.dav { color: var(--dav); border-color: rgba(56,189,248,0.4); }
+  .nav-btn.dw  { color: var(--dw);  border-color: rgba(167,139,250,0.4); }
+  .nav-btn.ai  { color: var(--ai);  border-color: rgba(52,211,153,0.4); }
+  .nav-btn.dav:hover { background: var(--dav-bg); }
+  .nav-btn.dw:hover  { background: var(--dw-bg); }
+  .nav-btn.ai:hover  { background: var(--ai-bg); }
+  .section-label {
+    display: flex; align-items: center; gap: 12px;
+    font-size: 12px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.12em; color: var(--muted); margin: 28px 0 14px;
+  }
+  .section-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  @media (max-width: 768px) {
+    header { padding: 24px 20px; }
+    .overview, .main { padding: 0 20px; }
+    .day-tags { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="badge-row">
+      <span class="badge urgent">⚡ Crunch Mode</span>
+      <span class="badge dav">DAV — Mon 8:30 AM</span>
+      <span class="badge dw">DW&amp;BI — Wed 8:30 AM</span>
+      <span class="badge ai">AI — Fri 8:30 AM</span>
+    </div>
+    <h1>Lab Mids <span>War Room</span> 🔥</h1>
+    <p class="subtitle">Oct 10 – Oct 16, 2026 &nbsp;·&nbsp; 3 exams, 7 days, zero chill</p>
+    <div class="countdown-row">
+      <div class="countdown-card dav">
+        <div class="label">DAV Lab</div>
+        <div class="time-val" id="cd-dav">--:--:--</div>
+        <div class="exam-name">Monday · 8:30 AM</div>
+      </div>
+      <div class="countdown-card dw">
+        <div class="label">DW &amp; BI Lab</div>
+        <div class="time-val" id="cd-dw">--:--:--</div>
+        <div class="exam-name">Wednesday · 8:30 AM</div>
+      </div>
+      <div class="countdown-card ai">
+        <div class="label">AI Lab</div>
+        <div class="time-val" id="cd-ai">--:--:--</div>
+        <div class="exam-name">Friday · 8:30 AM</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="overview">
+  <div class="prog-card dav">
+    <div class="prog-header">
+      <span class="prog-title">🌊 DAV Lab</span>
+      <span class="prog-pct" id="pct-dav">0%</span>
+    </div>
+    <div class="prog-bar-wrap"><div class="prog-bar" id="bar-dav" style="width:0%"></div></div>
+    <div class="prog-sub" id="sub-dav">0 / 0 tasks done</div>
+  </div>
+  <div class="prog-card dw">
+    <div class="prog-header">
+      <span class="prog-title">🗄️ DW &amp; BI Lab</span>
+      <span class="prog-pct" id="pct-dw">0%</span>
+    </div>
+    <div class="prog-bar-wrap"><div class="prog-bar" id="bar-dw" style="width:0%"></div></div>
+    <div class="prog-sub" id="sub-dw">0 / 0 tasks done</div>
+  </div>
+  <div class="prog-card ai">
+    <div class="prog-header">
+      <span class="prog-title">🤖 AI Lab</span>
+      <span class="prog-pct" id="pct-ai">0%</span>
+    </div>
+    <div class="prog-bar-wrap"><div class="prog-bar" id="bar-ai" style="width:0%"></div></div>
+    <div class="prog-sub" id="sub-ai">0 / 0 tasks done</div>
+  </div>
+</div>
+
+<div class="main" id="schedule">
+
+  <!-- DAY 1 -->
+  <div class="day-block open" id="day1">
+    <div class="day-header" onclick="toggleDay('day1')">
+      <div class="day-num dav">Sat</div>
+      <div class="day-info">
+        <div class="day-title">Day 1 — Saturday, Oct 10</div>
+        <div class="day-sub">Today · DAV Lab blitz begins</div>
+      </div>
+      <div class="day-tags"><span class="tag dav">DAV Focus</span></div>
+      <span class="chevron">⌄</span>
+    </div>
+    <div class="day-body">
+      <div class="session">
+        <div class="session-header">
+          <span class="session-icon">🌅</span>
+          <span class="session-title">Morning — Power BI Crash Course</span>
+          <span class="session-time">8:00 AM – 12:00 PM (4h)</span>
+        </div>
+        <div class="callout warn"><strong>Why start here?</strong> Power BI is pure UI — no coding. Fastest marks to grab. Download &amp; install first.</div>
+        <ul class="task-list">
+          <li class="task-item" data-group="dav" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Download &amp; install Power BI Desktop (free)
+              <span class="sub">powerbi.microsoft.com → Download → Desktop. Takes ~5 min.</span>
+            </div>
+          </li>
+          <li class="task-item" data-group="dav" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Watch: Power BI full crash course (Kevin Stratvert — covers exactly your syllabus)
+              <span class="sub"><a href="https://www.youtube.com/watch?v=TmhQCQr_PCA" target="_blank">▶ youtube.com/watch?v=TmhQCQr_PCA</a> — Interface, Import, Clean, Model, Visualize</span>
+            </div>
+          </li>
+          <li class="task-item" data-group="dav" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Do it hands-on while watching: Import a CSV, build bar + line + matrix + card visuals, add a slicer
+              <span class="sub">Use any CSV from <a href="https://www.kaggle.com/datasets" target="_blank">kaggle.com/datasets</a> (e.g. a sales dataset)</span>
+            </div>
+          </li>
+          <li class="task-item" data-group="dav" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Power Query: Remove Duplicates, Replace Values, Change Column Type, Filter Rows
+              <span class="sub">These are the bread-and-butter exam questions for "Data Cleaning"</span>
+            </div>
+          </li>
+          <li class="task-item" data-group="dav" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Create relationships between 2 tables (star schema style) in Model View
+              <span class="sub">Drag and drop — know how to do this in under 1 minute</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="session">
+        <div class="session-header">
+          <span class="session-icon">☀️</span>
+          <span class="session-title">Afternoon — Web Scraping &amp; REST APIs (Colab)</span>
+          <span class="session-time">1:00 PM – 5:00 PM (4h)</span>
+        </div>
+        <div class="callout info"><strong>Tools:</strong> Open Colab (colab.research.google.com) — everything runs there, no install needed.</div>
+        <ul class="task-list">
+          <li class="task-item" data-group="dav" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Watch: Python requests library crash course
+              <span class="sub"><a href="https://www.youtube.com/watch?v=tb8gHvYlCFs" target="_blank">▶ Tech With Tim — Python requests tutorial</a></span>
+            </div>
+          </li>
+          <li class="task-item" data-group="dav" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Practice: Fetch JSON from JSONPlaceholder public API
+              <span class="sub">import requests; r = requests.get('https://jsonplaceholder.typicode.com/users'); print(r.json())</span>
+            </div>
+          </li>
+          <li class="task-item" data-group="dav" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Traverse nested JSON: access keys like data['address']['city'], loop through list of dicts</div>
+          </li>
+          <li class="task-item" data-group="dav" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Use pandas.json_normalize() to flatten nested JSON into a DataFrame
+              <span class="sub">Know: pd.json_normalize(data, record_path=['nested_key'], meta=['top_field'])</span>
+            </div>
+          </li>
+          <li class="task-item" data-group="dav" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Write a recursive function to traverse unknown-depth nested JSON (print all keys at all levels)
+              <span class="sub">This is a likely exam question — practice until it's second nature</span>
+            </div>
+          </li>
+        </ul>
+      </div>
+      <div class="session">
+        <div class="session-header">
+          <span class="session-icon">🌙</span>
+          <span class="session-title">Evening — Pandas Advanced + Multi-indexing</span>
+          <span class="session-time">7:00 PM – 10:00 PM (3h)</span>
+        </div>
+        <ul class="task-list">
+          <li class="task-item" data-group="dav" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Watch: Advanced Pandas — groupby, merge, pivot, apply
+              <span class="sub"><a href="https://www.youtube.com/watch?v=vmEHCJofslg" target="_blank">▶ Keith Galli — Pandas Tutorial (comprehensive)</a></span>
+            </div>
+          </li>
+          <li class="task-item" data-group="dav" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Multi-indexing: df.set_index(['col1','col2']), df.loc[('A','B')], df.xs()
+              <span class="sub">Create a MultiIndex df with 2 levels and slice it — understand it visually</span>
+            </div>
+          </li>
+          <li class="task-item" data-group="dav" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Practice: groupby + agg, pivot_table, merge (inner/left), apply with lambda</div>
+          </li>
+        </ul>
+        <div class="callout tip">🛌 Sleep by 11 PM. Your brain consolidates memory during sleep — don't skip this.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 2 -->
+  <div class="day-block" id="day2">
+    <div class="day-header" onclick="toggleDay('day2')">
+      <div class="day-num dav">Sun</div>
+      <div class="day-info">
+        <div class="day-title">Day 2 — Sunday, Oct 11</div>
+        <div class="day-sub">DAV wrap-up + Databricks + DW preview</div>
+      </div>
+      <div class="day-tags"><span class="tag dav">DAV</span><span class="tag dw">DW Preview</span></div>
+      <span class="chevron">⌄</span>
+    </div>
+    <div class="day-body">
+      <div class="session">
+        <div class="session-header">
+          <span class="session-icon">🌅</span>
+          <span class="session-title">Morning — Databricks Medallion Architecture</span>
+          <span class="session-time">8:00 AM – 11:30 AM (3.5h)</span>
+        </div>
+        <div class="callout info"><strong>Key concept:</strong> Medallion = Bronze (raw) → Silver (cleaned) → Gold (aggregated). This is the whole point.</div>
+        <ul class="task-list">
+          <li class="task-item" data-group="dav" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Sign up for Databricks Community Edition (free)
+              <span class="sub"><a href="https://community.cloud.databricks.com" target="_blank">community.cloud.databricks.com</a> → "Try Databricks Free" → Community Edition</span>
+            </div>
+          </li>
+          <li class="task-item" data-group="dav" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Watch: Medallion Architecture explained (15 min concept video)
+              <span class="sub"><a href="https://www.youtube.com/watch?v=ocd3l8Uq2aQ" target="_blank">▶ Advancing Analytics — Medallion Architecture</a></span>
+            </div>
+          </li>
+          <li class="task-item" data-group="dav" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Navigate Databricks: create a notebook, attach to cluster, run a basic PySpark cell</div>
+          </li>
+          <li class="task-item" data-group="dav" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Bronze layer: spark.read.json() then .write.format("delta").mode("overwrite").save()
+              <span class="sub">Know 3 write modes: overwrite (full reload), append (incremental), merge (upsert)</span>
+            </div>
+          </li>
+          <li class="task-item" data-group="dav" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Silver layer: .withColumn(), handle nulls, cast types, from_json() for stringified JSON</div>
+          </li>
+          <li class="task-item" data-group="dav" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Gold layer: .groupBy().agg() for business metrics, .join() across Silver tables</div>
+          </li>
+          <li class="task-item" data-group="dav" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Schema drift: understand mergeSchema vs overwriteSchema, explicit StructType definition</div>
+          </li>
+        </ul>
+      </div>
+      <div class="session">
+        <div class="session-header">
+          <span class="session-icon">☀️</span>
+          <span class="session-title">Afternoon — Lab Manual Activities + Review</span>
+          <span class="session-time">12:30 PM – 4:00 PM (3.5h)</span>
+        </div>
+        <div class="callout warn"><strong>Do your lab manual activities now.</strong> The exam will likely be based directly on them.</div>
+        <ul class="task-list">
+          <li class="task-item" data-group="dav" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Complete DAV Lab Manual: Web Scraping / API activity</div>
+          </li>
+          <li class="task-item" data-group="dav" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Complete DAV Lab Manual: Databricks Medallion activity</div>
+          </li>
+          <li class="task-item" data-group="dav" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Complete DAV Lab Manual: Power BI dashboard activity</div>
+          </li>
+          <li class="task-item" data-group="dav" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Write down top 5 things you're uncertain about — re-read those sections only</div>
+          </li>
+        </ul>
+      </div>
+      <div class="session">
+        <div class="session-header">
+          <span class="session-icon">🌆</span>
+          <span class="session-title">Late Afternoon — DW&amp;BI Head Start</span>
+          <span class="session-time">5:00 PM – 7:30 PM (2.5h)</span>
+        </div>
+        <div class="callout tip">Use this buffer time to get ahead on Wednesday's exam. Every hour counts.</div>
+        <ul class="task-list">
+          <li class="task-item" data-group="dw" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Watch: What is a Data Warehouse? (DW vs OLTP, OLAP concepts — 20 min)
+              <span class="sub"><a href="https://www.youtube.com/watch?v=AHR_P60y3mw" target="_blank">▶ Alex the Analyst — Data Warehouse Explained</a></span>
+            </div>
+          </li>
+          <li class="task-item" data-group="dw" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Watch: PostgreSQL crash course — first 40 min
+              <span class="sub"><a href="https://www.youtube.com/watch?v=qw--VYLpxG4" target="_blank">▶ freeCodeCamp — PostgreSQL full course</a></span>
+            </div>
+          </li>
+          <li class="task-item" data-group="dw" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">In PGAdmin: Create a DB, create a table, insert 5 rows, run SELECT with WHERE, GROUP BY, SUM/COUNT/AVG</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 3 — EXAM -->
+  <div class="day-block" id="day3">
+    <div class="day-header" onclick="toggleDay('day3')">
+      <div class="day-num exam">MON</div>
+      <div class="day-info">
+        <div class="day-title">Day 3 — Monday, Oct 12 🎯 DAV EXAM</div>
+        <div class="day-sub">DAV Lab Midterm 8:30 AM · DW&amp;BI intensive begins after</div>
+      </div>
+      <div class="day-tags"><span class="tag exam">EXAM DAY</span><span class="tag dw">DW After</span></div>
+      <span class="chevron">⌄</span>
+    </div>
+    <div class="day-body">
+      <div class="exam-banner">
+        <div class="icon">🎯</div>
+        <div class="text">
+          <div class="t1">DAV Lab Midterm — 8:30 AM</div>
+          <div class="t2">Data Analysis &amp; Visualization Lab · Arrive 10 min early with laptop charged</div>
+        </div>
+      </div>
+      <div class="session">
+        <div class="session-header">
+          <span class="session-icon">⚡</span>
+          <span class="session-title">Pre-Exam Refresh (6:00 – 8:00 AM)</span>
+          <span class="session-time">6:00 AM – 8:00 AM</span>
+        </div>
+        <div class="callout info" style="margin-bottom:12px;">
+          <strong>🎯 Complete Midterm Prep:</strong> Read the new <a href="../Data Analysis &amp; Visualization/8- Lab Midterm Sequential Codes &amp; Exam Guide.html" style="color:var(--dav); font-weight:700; text-decoration:underline;">DAV Lab Midterm Sequential Guide &amp; Master Cheatsheet</a> to master the exact sequential code from Labs 2–7.
+        </div>
+        <ul class="task-list">
+          <li class="task-item" data-group="dav" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Re-read notes on requests.get(), json_normalize(), Power BI steps, Medallion layers</div>
+          </li>
+          <li class="task-item" data-group="dav" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Open Colab, Databricks, and Power BI Desktop — make sure everything is loaded and ready</div>
+          </li>
+        </ul>
+      </div>
+      <div class="session">
+        <div class="session-header">
+          <span class="session-icon">🗄️</span>
+          <span class="session-title">Post-Exam — DW&amp;BI Deep Dive</span>
+          <span class="session-time">11:00 AM – 9:00 PM (with breaks)</span>
+        </div>
+        <div class="callout warn">Exam is done — immediately switch modes. You have under 42 hours until Wednesday 8:30 AM.</div>
+        <ul class="task-list">
+          <li class="task-item" data-group="dw" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Watch: Star Schema explained + OLAP concepts (30 min)
+              <span class="sub"><a href="https://www.youtube.com/watch?v=hQvCOBv_-LE" target="_blank">▶ Kahan Data Solutions — Star Schema Tutorial</a></span>
+            </div>
+          </li>
+          <li class="task-item" data-group="dw" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Learn DW vs OLTP differences cold: write 5 differences from memory, then check yourself</div>
+          </li>
+          <li class="task-item" data-group="dw" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">PGAdmin: GROUP BY, HAVING, ORDER BY, LIMIT (Top-N queries)</div>
+          </li>
+          <li class="task-item" data-group="dw" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">PGAdmin: Window functions — SUM() OVER(PARTITION BY...ORDER BY...) for trend analysis</div>
+          </li>
+          <li class="task-item" data-group="dw" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Design a Star Schema on paper: online store sales scenario. Identify Facts, Dimensions, Grain, Measures, Surrogate vs Natural Keys</div>
+          </li>
+          <li class="task-item" data-group="dw" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Watch: Dimensional Modeling — Kimball approach (30 min)
+              <span class="sub"><a href="https://www.youtube.com/watch?v=lWPiSZf7-uQ" target="_blank">▶ Kahan Data Solutions — Dimensional Modeling</a></span>
+            </div>
+          </li>
+          <li class="task-item" data-group="dw" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">ROLLUP vs CUBE in PostgreSQL — practice running both queries
+              <span class="sub">SELECT region, product, SUM(sales) FROM t GROUP BY ROLLUP(region, product);</span>
+            </div>
+          </li>
+          <li class="task-item" data-group="dw" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">ROLAP / MOLAP / HOLAP / DOLAP — know each as a one-liner definition</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 4 -->
+  <div class="day-block" id="day4">
+    <div class="day-header" onclick="toggleDay('day4')">
+      <div class="day-num dw">Tue</div>
+      <div class="day-info">
+        <div class="day-title">Day 4 — Tuesday, Oct 13</div>
+        <div class="day-sub">DW&amp;BI final push + Power BI (exam tomorrow)</div>
+      </div>
+      <div class="day-tags"><span class="tag dw">DW&amp;BI Focus</span></div>
+      <span class="chevron">⌄</span>
+    </div>
+    <div class="day-body">
+      <div class="session">
+        <div class="session-header">
+          <span class="session-icon">🌅</span>
+          <span class="session-title">Morning — Physical Implementation in PostgreSQL</span>
+          <span class="session-time">8:00 AM – 12:00 PM (4h)</span>
+        </div>
+        <div class="callout tip" style="margin:10px 0 14px; background:rgba(167,139,250,0.1); border-left:4px solid var(--dw); padding:10px 14px; border-radius:0 6px 6px 0; font-size:0.85rem;">
+          <strong>🎯 Complete Midterm Prep:</strong> Read the new <a href="../Data Warehousing &amp; Business Intelligence/11- Lab Midterm Sequential Codes &amp; Exam Guide.html" style="color:var(--dw); font-weight:700; text-decoration:underline;">Sequential Query Guide &amp; Master Cheatsheet</a> to master the exact query order from Lab 6 &amp; Lab 4.
+        </div>
+        <ul class="task-list">
+          <li class="task-item" data-group="dw" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Create staging schema in PGAdmin: CREATE SCHEMA staging;</div>
+          </li>
+          <li class="task-item" data-group="dw" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Create dimension tables with SERIAL PRIMARY KEY (surrogate key) and natural key column</div>
+          </li>
+          <li class="task-item" data-group="dw" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Create fact table with FK references to dimensions + define appropriate numeric measures</div>
+          </li>
+          <li class="task-item" data-group="dw" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Surrogate key mapping: INSERT INTO dim SELECT ... WHERE NOT EXISTS pattern</div>
+          </li>
+          <li class="task-item" data-group="dw" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Normalization vs denormalization: write one concrete example of each. Know when to use each for analytics.</div>
+          </li>
+          <li class="task-item" data-group="dw" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Data quality validation: count NULLs, check duplicate PKs, verify FK integrity</div>
+          </li>
+        </ul>
+      </div>
+      <div class="session">
+        <div class="session-header">
+          <span class="session-icon">☀️</span>
+          <span class="session-title">Afternoon — Power BI for DW + Lab Manual</span>
+          <span class="session-time">1:00 PM – 5:00 PM (4h)</span>
+        </div>
+        <ul class="task-list">
+          <li class="task-item" data-group="dw" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Connect Power BI to PostgreSQL: Get Data → PostgreSQL database → enter host and DB name</div>
+          </li>
+          <li class="task-item" data-group="dw" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Build a full analytical dashboard in Power BI from your Star Schema data</div>
+          </li>
+          <li class="task-item" data-group="dw" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Complete all DW Lab Manual activities (Labs 1–6 practice tasks)</div>
+          </li>
+        </ul>
+      </div>
+      <div class="session">
+        <div class="session-header">
+          <span class="session-icon">🌙</span>
+          <span class="session-title">Evening — Review + AI Preview</span>
+          <span class="session-time">6:00 PM – 9:30 PM (3.5h)</span>
+        </div>
+        <ul class="task-list">
+          <li class="task-item" data-group="dw" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Summarize all 6 DW Lab topics in one paragraph each from memory — check gaps</div>
+          </li>
+          <li class="task-item" data-group="ai" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">AI Lab Preview: Python basics blitz (30 min video for quick recall)
+              <span class="sub"><a href="https://www.youtube.com/watch?v=kqtD5dpn9C8" target="_blank">▶ Programming with Mosh — Python for Beginners (1h)</a></span>
+            </div>
+          </li>
+        </ul>
+        <div class="callout tip">🛌 Sleep by 10:30 PM. You have an 8:30 AM exam tomorrow.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 5 — EXAM -->
+  <div class="day-block" id="day5">
+    <div class="day-header" onclick="toggleDay('day5')">
+      <div class="day-num exam">WED</div>
+      <div class="day-info">
+        <div class="day-title">Day 5 — Wednesday, Oct 14 🎯 DW&amp;BI EXAM</div>
+        <div class="day-sub">DW&amp;BI Lab Midterm 8:30 AM · AI Lab blitz begins after</div>
+      </div>
+      <div class="day-tags"><span class="tag exam">EXAM DAY</span><span class="tag ai">AI After</span></div>
+      <span class="chevron">⌄</span>
+    </div>
+    <div class="day-body">
+      <div class="exam-banner">
+        <div class="icon">🗄️</div>
+        <div class="text">
+          <div class="t1">DW &amp; BI Lab Midterm — 8:30 AM</div>
+          <div class="t2">Data Warehousing &amp; Business Intelligence Lab · PostgreSQL + Power BI</div>
+        </div>
+      </div>
+      <div class="session">
+        <div class="session-header">
+          <span class="session-icon">⚡</span>
+          <span class="session-title">Pre-Exam Refresh (6:00 – 8:00 AM)</span>
+          <span class="session-time">6:00 AM – 8:00 AM</span>
+        </div>
+        <ul class="task-list">
+          <li class="task-item" data-group="dw" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Review ROLLUP/CUBE syntax, Star Schema design steps, surrogate key mapping pattern</div>
+          </li>
+          <li class="task-item" data-group="dw" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Open PGAdmin and Power BI — make sure both run cleanly before heading out</div>
+          </li>
+        </ul>
+      </div>
+      <div class="session">
+        <div class="session-header">
+          <span class="session-icon">🤖</span>
+          <span class="session-title">Post-Exam — AI Lab Full Blitz</span>
+          <span class="session-time">11:00 AM – 9:00 PM</span>
+        </div>
+        <div class="callout crit">You have exactly 46 hours until your AI exam. Most content-heavy lab. Go hard.</div>
+        <ul class="task-list">
+          <li class="task-item" data-group="ai" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Python fundamentals in Colab: data types, operators, I/O, if/elif/else, for/while, functions
+              <span class="sub"><a href="https://www.youtube.com/watch?v=rfscVS0vtbw" target="_blank">▶ freeCodeCamp — Python full course (jump to needed sections at 2x speed)</a></span>
+            </div>
+          </li>
+          <li class="task-item" data-group="ai" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Lists, Tuples, Dicts, Sets — create, access, slice, common methods (append, pop, keys, values, add, discard)</div>
+          </li>
+          <li class="task-item" data-group="ai" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">File Handling: read/write/append text files, read CSV with csv module, read JSON with json module
+              <span class="sub">Know all 3 modes: 'r', 'w', 'a'. Know with open() context manager.</span>
+            </div>
+          </li>
+          <li class="task-item" data-group="ai" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Exception Handling: try/except/finally, raise, common exception types</div>
+          </li>
+          <li class="task-item" data-group="ai" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">OOP: class, __init__, instance vars vs class vars, instance / class / static methods, inheritance</div>
+          </li>
+          <li class="task-item" data-group="ai" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">OOP Part 2: Polymorphism (method overriding), Encapsulation (__private), Abstraction (ABC), Modules &amp; Packages</div>
+          </li>
+          <li class="task-item" data-group="ai" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">NumPy: array creation, shape/reshape, slicing, broadcasting, basic math ops</div>
+          </li>
+          <li class="task-item" data-group="ai" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Pandas: DataFrame, read_csv, head/info, filter, groupby, sort, merge</div>
+          </li>
+          <li class="task-item" data-group="ai" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Matplotlib: line plot, bar chart, scatter plot, histogram — the plt.plot() family</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 6 -->
+  <div class="day-block" id="day6">
+    <div class="day-header" onclick="toggleDay('day6')">
+      <div class="day-num ai">Thu</div>
+      <div class="day-info">
+        <div class="day-title">Day 6 — Thursday, Oct 15</div>
+        <div class="day-sub">AI Lab — Search Algorithms + OOP + Past Papers</div>
+      </div>
+      <div class="day-tags"><span class="tag ai">AI Focus</span></div>
+      <span class="chevron">⌄</span>
+    </div>
+    <div class="day-body">
+      <div class="session">
+        <div class="session-header">
+          <span class="session-icon">🌅</span>
+          <span class="session-title">Morning — Blind Search Algorithms</span>
+          <span class="session-time">8:00 AM – 12:00 PM (4h)</span>
+        </div>
+        <div class="callout warn"><strong>Heavily exam-tested.</strong> Know BFS vs DFS cold. Trace through a graph by hand before coding.</div>
+        <ul class="task-list">
+          <li class="task-item" data-group="ai" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Watch: BFS &amp; DFS explained with animation
+              <span class="sub"><a href="https://www.youtube.com/watch?v=pcKY4hjDrxk" target="_blank">▶ MIT OpenCourseWare — BFS/DFS</a></span>
+            </div>
+          </li>
+          <li class="task-item" data-group="ai" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Code BFS from scratch in Colab: use collections.deque as the frontier queue</div>
+          </li>
+          <li class="task-item" data-group="ai" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Code DFS from scratch: recursive version + iterative using a stack (list)</div>
+          </li>
+          <li class="task-item" data-group="ai" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">UCS: like BFS but uses a priority queue sorted by path cost — implement with heapq</div>
+          </li>
+          <li class="task-item" data-group="ai" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">IDS: DFS with increasing depth limit — combines DFS space efficiency with BFS completeness</div>
+          </li>
+          <li class="task-item" data-group="ai" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Memorize comparison: BFS (complete, optimal for unit cost), DFS (not optimal), UCS (optimal), IDS (complete + optimal)</div>
+          </li>
+        </ul>
+      </div>
+      <div class="session">
+        <div class="session-header">
+          <span class="session-icon">☀️</span>
+          <span class="session-title">Afternoon — Informed Search + Minimax + Hill Climbing</span>
+          <span class="session-time">1:00 PM – 5:30 PM (4.5h)</span>
+        </div>
+        <ul class="task-list">
+          <li class="task-item" data-group="ai" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Watch: A* Search Algorithm explained visually
+              <span class="sub"><a href="https://www.youtube.com/watch?v=ySN5Wnu88nE" target="_blank">▶ Sebastian Lague — A* Pathfinding (best visual explanation)</a></span>
+            </div>
+          </li>
+          <li class="task-item" data-group="ai" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Know f(n) = g(n) + h(n) cold. g = cost so far, h = heuristic estimate. Know what admissible means.</div>
+          </li>
+          <li class="task-item" data-group="ai" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">GBFS: uses only h(n) — greedy, fast, but not always optimal. Code + trace an example.</div>
+          </li>
+          <li class="task-item" data-group="ai" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Minimax: trace through a game tree by hand. Know MAX nodes pick highest, MIN pick lowest.
+              <span class="sub"><a href="https://www.youtube.com/watch?v=l-hh51ncgDI" target="_blank">▶ Sebastian Lague — Minimax &amp; Alpha-Beta Pruning</a></span>
+            </div>
+          </li>
+          <li class="task-item" data-group="ai" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Alpha-Beta Pruning: trace which branches get pruned. Know alpha (MAX's best) and beta (MIN's best).</div>
+          </li>
+          <li class="task-item" data-group="ai" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Hill Climbing: understand the algorithm for optimization, know its failure modes (local maxima, plateaus, ridges)</div>
+          </li>
+          <li class="task-item" data-group="ai" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Complete AI Lab Manual activities (all search algorithm implementations)</div>
+          </li>
+        </ul>
+      </div>
+      <div class="session">
+        <div class="session-header">
+          <span class="session-icon">📄</span>
+          <span class="session-title">Evening — Past Paper Practice</span>
+          <span class="session-time">6:30 PM – 9:30 PM (3h)</span>
+        </div>
+        <div class="callout tip"><strong>You have 2 past papers</strong> in Lab Mids Prep/AI/. These are gold. Do them timed and without notes.</div>
+        <ul class="task-list">
+          <li class="task-item" data-group="ai" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Attempt AI Midterm Exams F24 VF.pdf under exam conditions (timed, no notes)</div>
+          </li>
+          <li class="task-item" data-group="ai" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Attempt AI Lab Mid Spring 2026.pdf under exam conditions</div>
+          </li>
+          <li class="task-item" data-group="ai" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">For every wrong or unsure answer: code the solution in Colab until it clicks. Don't move on until you get it.</div>
+          </li>
+        </ul>
+        <div class="callout tip">🛌 Sleep no later than 11 PM. Big exam tomorrow.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DAY 7 — FINAL EXAM -->
+  <div class="day-block" id="day7">
+    <div class="day-header" onclick="toggleDay('day7')">
+      <div class="day-num exam">FRI</div>
+      <div class="day-info">
+        <div class="day-title">Day 7 — Friday, Oct 16 🎯 AI EXAM</div>
+        <div class="day-sub">AI Lab Midterm 8:30 AM · You've got this 🔥</div>
+      </div>
+      <div class="day-tags"><span class="tag exam">EXAM DAY</span><span class="tag rest">Then Rest!</span></div>
+      <span class="chevron">⌄</span>
+    </div>
+    <div class="day-body">
+      <div class="exam-banner">
+        <div class="icon">🤖</div>
+        <div class="text">
+          <div class="t1">AI Lab Midterm — 8:30 AM</div>
+          <div class="t2">Artificial Intelligence Lab · Google Colab · Python</div>
+        </div>
+      </div>
+      <div class="session">
+        <div class="session-header">
+          <span class="session-icon">⚡</span>
+          <span class="session-title">Pre-Exam Refresh (6:00 – 8:00 AM)</span>
+          <span class="session-time">6:00 AM – 8:00 AM</span>
+        </div>
+        <ul class="task-list">
+          <li class="task-item" data-group="ai" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Quick re-trace BFS, DFS, A* by hand on paper (5 min each)</div>
+          </li>
+          <li class="task-item" data-group="ai" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Re-read OOP cheat sheet: class → __init__ → methods → inheritance → polymorphism</div>
+          </li>
+          <li class="task-item" data-group="ai" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Open Colab, run a test cell — confirm your runtime is working before leaving</div>
+          </li>
+          <li class="task-item" data-group="ai" onclick="toggleTask(this)">
+            <div class="task-cb">✓</div>
+            <div class="task-text">Review past paper patterns — note the question types they love to ask</div>
+          </li>
+        </ul>
+        <div class="callout tip">🍳 Eat a proper breakfast. Your brain needs glucose. Don't skip.</div>
+      </div>
+      <div class="session">
+        <div class="session-header">
+          <span class="session-icon">🎉</span>
+          <span class="session-title">Post-Exam — All 3 Done. Rest.</span>
+          <span class="session-time">After 8:30 AM</span>
+        </div>
+        <div class="callout tip">All 3 exams done. Take the rest of the day completely off. You earned it. 🏆</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CHEAT SHEETS -->
+  <div class="qr-section">
+    <div class="section-label">⚡ Quick Reference Cheat Sheets</div>
+    <div class="qr-grid">
+
+      <div class="qr-card">
+        <h3><span style="color:var(--ai)">🐍</span> Python OOP Template</h3>
+        <pre><span class="kw">class</span> <span class="fn">Animal</span>:
+    species = <span class="st">"Unknown"</span>  <span class="cm"># class var</span>
+
+    <span class="kw">def</span> <span class="fn">__init__</span>(self, name):
+        self.name = name  <span class="cm"># instance var</span>
+
+    <span class="kw">def</span> <span class="fn">speak</span>(self):  <span class="cm"># instance method</span>
+        <span class="kw">return</span> <span class="st">f"I am {self.name}"</span>
+
+    <span class="kw">@classmethod</span>
+    <span class="kw">def</span> <span class="fn">info</span>(cls):    <span class="cm"># class method</span>
+        <span class="kw">return</span> cls.species
+
+    <span class="kw">@staticmethod</span>
+    <span class="kw">def</span> <span class="fn">breathe</span>():   <span class="cm"># static method</span>
+        <span class="kw">return</span> <span class="st">"inhale"</span>
+
+<span class="kw">class</span> <span class="fn">Dog</span>(<span class="fn">Animal</span>):  <span class="cm"># inheritance</span>
+    <span class="kw">def</span> <span class="fn">speak</span>(self):  <span class="cm"># override = polymorphism</span>
+        <span class="kw">return</span> <span class="st">"Woof!"</span></pre>
+      </div>
+
+      <div class="qr-card">
+        <h3><span style="color:var(--ai)">🔍</span> BFS vs DFS in Python</h3>
+        <pre><span class="kw">from</span> collections <span class="kw">import</span> deque
+
+<span class="kw">def</span> <span class="fn">bfs</span>(graph, start):
+    visited = <span class="fn">set</span>()
+    queue = <span class="fn">deque</span>([start])
+    <span class="kw">while</span> queue:
+        node = queue.<span class="fn">popleft</span>()  <span class="cm"># FIFO</span>
+        <span class="kw">if</span> node <span class="kw">not in</span> visited:
+            visited.<span class="fn">add</span>(node)
+            queue.<span class="fn">extend</span>(graph[node])
+    <span class="kw">return</span> visited
+
+<span class="kw">def</span> <span class="fn">dfs</span>(graph, start, visited=<span class="kw">None</span>):
+    <span class="kw">if</span> visited <span class="kw">is None</span>: visited = <span class="fn">set</span>()
+    visited.<span class="fn">add</span>(start)
+    <span class="kw">for</span> nb <span class="kw">in</span> graph[start]:
+        <span class="kw">if</span> nb <span class="kw">not in</span> visited:
+            <span class="fn">dfs</span>(graph, nb, visited)
+    <span class="kw">return</span> visited</pre>
+      </div>
+
+      <div class="qr-card">
+        <h3><span style="color:var(--ai)">⭐</span> A* Search Template</h3>
+        <pre><span class="kw">import</span> heapq
+
+<span class="kw">def</span> <span class="fn">astar</span>(graph, start, goal, h):
+    pq = [(<span class="nm">0</span>, start)]  <span class="cm"># (f, node)</span>
+    g = {start: <span class="nm">0</span>}
+    <span class="kw">while</span> pq:
+        f, node = heapq.<span class="fn">heappop</span>(pq)
+        <span class="kw">if</span> node == goal:
+            <span class="kw">return</span> g[goal]
+        <span class="kw">for</span> nb, cost <span class="kw">in</span> graph[node]:
+            ng = g[node] + cost
+            <span class="kw">if</span> nb <span class="kw">not in</span> g <span class="kw">or</span> ng &lt; g[nb]:
+                g[nb] = ng
+                heapq.<span class="fn">heappush</span>(pq,
+                    (ng + h[nb], nb))
+
+<span class="cm"># f(n) = g(n) + h(n)
+# g = cost so far
+# h = heuristic estimate to goal</span></pre>
+      </div>
+
+      <div class="qr-card">
+        <h3><span style="color:var(--dw)">🗄️</span> Star Schema SQL Pattern</h3>
+        <pre><span class="cm">-- Dimension with surrogate key</span>
+<span class="kw">CREATE TABLE</span> dim_product (
+    product_sk   <span class="fn">SERIAL PRIMARY KEY</span>,
+    product_nk   <span class="fn">VARCHAR</span>(<span class="nm">50</span>),
+    product_name <span class="fn">VARCHAR</span>(<span class="nm">100</span>)
+);
+<span class="cm">-- Fact with FK to dimension</span>
+<span class="kw">CREATE TABLE</span> fact_sales (
+    sale_id    <span class="fn">SERIAL PRIMARY KEY</span>,
+    product_sk <span class="fn">INT REFERENCES</span> dim_product,
+    amount     <span class="fn">NUMERIC</span>(<span class="nm">10,2</span>),
+    sale_date  <span class="fn">DATE</span>
+);
+<span class="cm">-- ROLLUP / CUBE</span>
+<span class="kw">SELECT</span> region, <span class="fn">SUM</span>(amount)
+<span class="kw">FROM</span> fact_sales f
+<span class="kw">JOIN</span> dim_product p <span class="kw">ON</span>
+  f.product_sk = p.product_sk
+<span class="kw">GROUP BY ROLLUP</span>(region);</pre>
+      </div>
+
+      <div class="qr-card">
+        <h3><span style="color:var(--dav)">🌊</span> JSON API → Pandas Pattern</h3>
+        <pre><span class="kw">import</span> requests, pandas <span class="kw">as</span> pd
+
+<span class="cm"># Fetch</span>
+r = requests.<span class="fn">get</span>(<span class="st">'https://api.example.com'</span>)
+data = r.<span class="fn">json</span>()
+
+<span class="cm"># Inspect structure</span>
+<span class="fn">print</span>(type(data), data.keys())
+
+<span class="cm"># Flatten nested JSON</span>
+df = pd.<span class="fn">json_normalize</span>(
+    data[<span class="st">'results'</span>],
+    record_path=[<span class="st">'items'</span>],
+    meta=[<span class="st">'id'</span>, <span class="st">'name'</span>]
+)
+
+<span class="cm"># Recursive key traversal</span>
+<span class="kw">def</span> <span class="fn">print_keys</span>(obj, depth=<span class="nm">0</span>):
+    <span class="kw">if isinstance</span>(obj, dict):
+        <span class="kw">for</span> k,v <span class="kw">in</span> obj.<span class="fn">items</span>():
+            <span class="fn">print</span>(<span class="st">"  "</span>*depth + k)
+            <span class="fn">print_keys</span>(v, depth+<span class="nm">1</span>)</pre>
+      </div>
+
+      <div class="qr-card">
+        <h3><span style="color:var(--dav)">🔷</span> Databricks Medallion Pattern</h3>
+        <pre><span class="cm"># BRONZE — raw ingest</span>
+df = spark.read.<span class="fn">json</span>(<span class="st">"/data/raw/*.json"</span>)
+df.write.<span class="fn">format</span>(<span class="st">"delta"</span>) \
+    .<span class="fn">mode</span>(<span class="st">"overwrite"</span>) \
+    .<span class="fn">save</span>(<span class="st">"/delta/bronze"</span>)
+
+<span class="cm"># SILVER — cleaned &amp; typed</span>
+df_s = df.<span class="fn">dropna</span>() \
+    .<span class="fn">withColumn</span>(<span class="st">"ts"</span>,
+        <span class="fn">col</span>(<span class="st">"ts"</span>).<span class="fn">cast</span>(<span class="st">"timestamp"</span>))
+df_s.write.<span class="fn">format</span>(<span class="st">"delta"</span>) \
+    .<span class="fn">mode</span>(<span class="st">"append"</span>).<span class="fn">save</span>(<span class="st">"/delta/silver"</span>)
+
+<span class="cm"># GOLD — business aggregation</span>
+df_g = df_s.<span class="fn">groupBy</span>(<span class="st">"user_id"</span>) \
+    .<span class="fn">agg</span>(<span class="fn">count</span>(<span class="st">"*"</span>).<span class="fn">alias</span>(<span class="st">"events"</span>))
+df_g.write.<span class="fn">format</span>(<span class="st">"delta"</span>) \
+    .<span class="fn">mode</span>(<span class="st">"overwrite"</span>).<span class="fn">save</span>(<span class="st">"/delta/gold"</span>)</pre>
+      </div>
+
+      <div class="qr-card">
+        <h3><span style="color:var(--ai)">🧠</span> Search Algorithm Comparison</h3>
+        <pre><span class="cm">Algorithm | Complete | Optimal | Space
+----------|----------|---------|-------
+BFS       |   Yes    |  Yes*   | O(b^d)
+DFS       |   No†    |  No     | O(bm)
+UCS       |   Yes    |  Yes    | O(b^d)
+IDS       |   Yes    |  Yes*   | O(bd)
+GBFS      |   No     |  No     | O(b^m)
+A*        |   Yes    |  Yes**  | O(b^d)
+
+* = unit step costs only
+** = admissible heuristic
+† = loops on cyclic graphs
+
+Minimax: MAX picks max, MIN picks min
+Alpha-Beta: prune when alpha >= beta
+Hill Climbing: always go up — fails
+  at local maxima, plateaus, ridges</span></pre>
+      </div>
+
+      <div class="qr-card">
+        <h3><span style="color:var(--dw)">📊</span> Key DW Concepts</h3>
+        <pre><span class="cm">OLTP vs DW:
+  OLTP: current data, normalized,
+        row-store, INSERT/UPDATE heavy
+  DW:   historical, denormalized,
+        column-store, SELECT/analytics
+
+Grain: most atomic row in fact table
+  e.g. "one row per sale line item"
+
+Surrogate Key: system INT PK (SERIAL)
+Natural Key: real-world ID (e.g. SKU)
+
+ROLAP:  SQL on relational DB (flexible)
+MOLAP:  pre-aggregated cubes (fastest)
+HOLAP:  hybrid (detail ROLAP + agg MOLAP)
+DOLAP:  download cube to desktop
+
+Normalization: remove redundancy (3NF)
+Denormalization: pre-join for speed</span></pre>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- RESOURCES -->
+  <div class="qr-section" style="margin-top:40px">
+    <div class="section-label">📺 Essential YouTube Resources</div>
+    <div class="res-grid">
+      <a class="res-card" href="https://www.youtube.com/watch?v=TmhQCQr_PCA" target="_blank">
+        <div class="r-platform">YouTube · DAV</div>
+        <div class="r-title">Power BI Full Course</div>
+        <div class="r-desc">Kevin Stratvert · Interface to Dashboard</div>
+      </a>
+      <a class="res-card" href="https://www.youtube.com/watch?v=vmEHCJofslg" target="_blank">
+        <div class="r-platform">YouTube · DAV</div>
+        <div class="r-title">Pandas Complete Tutorial</div>
+        <div class="r-desc">Keith Galli · groupby, merge, pivot, apply</div>
+      </a>
+      <a class="res-card" href="https://www.youtube.com/watch?v=tb8gHvYlCFs" target="_blank">
+        <div class="r-platform">YouTube · DAV</div>
+        <div class="r-title">Python Requests Library</div>
+        <div class="r-desc">Tech With Tim · APIs &amp; JSON in Python</div>
+      </a>
+      <a class="res-card" href="https://www.youtube.com/watch?v=ocd3l8Uq2aQ" target="_blank">
+        <div class="r-platform">YouTube · DAV</div>
+        <div class="r-title">Medallion Architecture</div>
+        <div class="r-desc">Advancing Analytics · Bronze/Silver/Gold</div>
+      </a>
+      <a class="res-card" href="https://www.youtube.com/watch?v=AHR_P60y3mw" target="_blank">
+        <div class="r-platform">YouTube · DW</div>
+        <div class="r-title">Data Warehouse Explained</div>
+        <div class="r-desc">Alex the Analyst · DW vs OLTP, OLAP</div>
+      </a>
+      <a class="res-card" href="https://www.youtube.com/watch?v=hQvCOBv_-LE" target="_blank">
+        <div class="r-platform">YouTube · DW</div>
+        <div class="r-title">Star Schema Tutorial</div>
+        <div class="r-desc">Kahan Data Solutions · Facts &amp; Dimensions</div>
+      </a>
+      <a class="res-card" href="https://www.youtube.com/watch?v=lWPiSZf7-uQ" target="_blank">
+        <div class="r-platform">YouTube · DW</div>
+        <div class="r-title">Dimensional Modeling</div>
+        <div class="r-desc">Kahan Data Solutions · Kimball approach</div>
+      </a>
+      <a class="res-card" href="https://www.youtube.com/watch?v=qw--VYLpxG4" target="_blank">
+        <div class="r-platform">YouTube · DW</div>
+        <div class="r-title">PostgreSQL Full Course</div>
+        <div class="r-desc">freeCodeCamp · SQL from zero to hero</div>
+      </a>
+      <a class="res-card" href="https://www.youtube.com/watch?v=rfscVS0vtbw" target="_blank">
+        <div class="r-platform">YouTube · AI</div>
+        <div class="r-title">Python Full Course</div>
+        <div class="r-desc">freeCodeCamp · Complete Python coverage</div>
+      </a>
+      <a class="res-card" href="https://www.youtube.com/watch?v=kqtD5dpn9C8" target="_blank">
+        <div class="r-platform">YouTube · AI</div>
+        <div class="r-title">Python for Beginners</div>
+        <div class="r-desc">Mosh Hamedani · Fast, no-nonsense intro</div>
+      </a>
+      <a class="res-card" href="https://www.youtube.com/watch?v=l-hh51ncgDI" target="_blank">
+        <div class="r-platform">YouTube · AI</div>
+        <div class="r-title">Minimax &amp; Alpha-Beta</div>
+        <div class="r-desc">Sebastian Lague · Visual perfection</div>
+      </a>
+      <a class="res-card" href="https://www.youtube.com/watch?v=ySN5Wnu88nE" target="_blank">
+        <div class="r-platform">YouTube · AI</div>
+        <div class="r-title">A* Search Algorithm</div>
+        <div class="r-desc">Sebastian Lague · Best visual explainer</div>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<nav class="sticky-nav">
+  <button class="nav-btn" onclick="scrollToDay('day1')">Sat</button>
+  <button class="nav-btn" onclick="scrollToDay('day2')">Sun</button>
+  <button class="nav-btn dav" onclick="scrollToDay('day3')">Mon 🎯</button>
+  <button class="nav-btn dw" onclick="scrollToDay('day4')">Tue</button>
+  <button class="nav-btn dw" onclick="scrollToDay('day5')">Wed 🎯</button>
+  <button class="nav-btn ai" onclick="scrollToDay('day6')">Thu</button>
+  <button class="nav-btn ai" onclick="scrollToDay('day7')">Fri 🎯</button>
+</nav>
+
+<script>
+function toggleDay(id) {
+  document.getElementById(id).classList.toggle('open');
+}
+function scrollToDay(id) {
+  const el = document.getElementById(id);
+  el.classList.add('open');
+  el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+function toggleTask(el) {
+  el.classList.toggle('done');
+  saveState();
+  updateProgress();
+}
+function updateProgress() {
+  ['dav', 'dw', 'ai'].forEach(group => {
+    const all  = document.querySelectorAll('[data-group="' + group + '"]');
+    const done = document.querySelectorAll('[data-group="' + group + '"].done');
+    const pct  = all.length ? Math.round(done.length / all.length * 100) : 0;
+    document.getElementById('bar-' + group).style.width = pct + '%';
+    document.getElementById('pct-' + group).textContent = pct + '%';
+    document.getElementById('sub-' + group).textContent = done.length + ' / ' + all.length + ' tasks done';
+  });
+}
+function saveState() {
+  const items = document.querySelectorAll('.task-item');
+  const state = [];
+  items.forEach(el => state.push(el.classList.contains('done')));
+  localStorage.setItem('lab_mids_war_room', JSON.stringify(state));
+}
+function loadState() {
+  const saved = localStorage.getItem('lab_mids_war_room');
+  if (!saved) return;
+  const state = JSON.parse(saved);
+  const items = document.querySelectorAll('.task-item');
+  items.forEach((el, i) => { if (state[i]) el.classList.add('done'); });
+  updateProgress();
+}
+function updateCountdowns() {
+  const now = new Date();
+  const exams = {
+    dav: new Date('2026-10-12T08:30:00'),
+    dw:  new Date('2026-10-14T08:30:00'),
+    ai:  new Date('2026-10-16T08:30:00')
+  };
+  for (const key in exams) {
+    const el = document.getElementById('cd-' + key);
+    const diff = exams[key] - now;
+    if (diff <= 0) {
+      el.textContent = 'EXAM NOW';
+      el.style.color = '#f87171';
+      continue;
+    }
+    const h = Math.floor(diff / 3600000);
+    const m = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+    el.textContent = String(h).padStart(2,'0') + ':' + String(m).padStart(2,'0') + ':' + String(s).padStart(2,'0');
+  }
+}
+document.addEventListener('DOMContentLoaded', function() {
+  loadState();
+  updateCountdowns();
+  setInterval(updateCountdowns, 1000);
+  const map = { 6:'day1', 0:'day2', 1:'day3', 2:'day4', 3:'day5', 4:'day6', 5:'day7' };
+  const todayId = map[new Date().getDay()];
+  if (todayId) {
+    const el = document.getElementById(todayId);
+    if (el && !el.classList.contains('open')) el.classList.add('open');
+  }
+});
+</script>
+</body>
+</html>

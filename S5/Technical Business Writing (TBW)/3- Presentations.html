@@ -1,42 +1,34 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <title>Technical &amp; Business Writing — Module 3: Presentations</title>
-    <meta
-      name="description"
-      content="Comprehensive, high-yield lecture notes for TBW Module 3 (Pfeiffer Chapter 15): Presentation Skills, 3 Ps, 10 Presentation Guidelines, 11 Graphics Guidelines, Overcoming Stage Fright, 4 Delivery Modes, Q&A Mastery, and Case Studies."
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="../notes.css" />
-  </head>
-  <body>
-    <button id="menu-toggle" onclick="toggleSidebar()" aria-label="Toggle navigation">☰</button>
-    <div id="sidebar-backdrop" onclick="toggleSidebar()"></div>
 
-    <!-- ═══════════════════════════════════════════════════════
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+  <title>Technical &amp; Business Writing — Module 3: Presentations</title>
+  <meta name="description"
+    content="Comprehensive, high-yield lecture notes for TBW Module 3 (Pfeiffer Chapter 15): Presentation Skills, 3 Ps, 10 Presentation Guidelines, 11 Graphics Guidelines, Overcoming Stage Fright, 4 Delivery Modes, Q&A Mastery, and Case Studies." />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="../notes.css" />
+</head>
+
+<body>
+  <button id="menu-toggle" onclick="toggleSidebar()" aria-label="Toggle navigation">☰</button>
+  <div id="sidebar-backdrop" onclick="toggleSidebar()"></div>
+
+  <!-- ═══════════════════════════════════════════════════════
          SIDEBAR
          ═══════════════════════════════════════════════════════ -->
-    <div id="sidebar">
-      <div class="sidebar-header">
-        <div class="sidebar-header-text">
-          <div class="sidebar-course-label">Course Notes</div>
-          <div class="sidebar-title">Technical Business Writing</div>
-        </div>
+  <div id="sidebar">
+    <div class="sidebar-header">
+      <div class="sidebar-header-text">
+        <div class="sidebar-course-label">Course Notes</div>
+        <div class="sidebar-title">Technical Business Writing</div>
       </div>
-      <div class="sidebar-search-wrap">
-        <input
-          type="text"
-          id="search-input"
-          placeholder="Search topics…"
-          onkeyup="filterContent()"
-        />
-      </div>
-
+    </div>
+    <div class="sidebar-search-wrap">
+      <input type="text" id="search-input" placeholder="Search topics…" onkeyup="filterContent()" />
+    </div>
       <ul class="nav-list" id="nav-list">
         <li>
           <a class="nav-module-link" href="./1- Technical Communication in the Workplace.html">
@@ -86,700 +78,860 @@
             <span class="nav-num">04</span>Exam Prep: Midterm I
           </a>
         </li>
+        <li>
+          <a class="nav-module-link" href="./5- Technical Research.html">
+            <span class="nav-num">05</span>Technical Research &amp; IEEE
+          </a>
+        </li>
       </ul>
     </div>
 
-    <!-- ═══════════════════════════════════════════════════════
+  <!-- ═══════════════════════════════════════════════════════
          MAIN CONTENT
          ═══════════════════════════════════════════════════════ -->
-    <div id="main-content">
-      <div class="module-container">
-        <div class="module-header">
-          <div class="module-eyebrow">Technical &amp; Business Writing (TBW) — Module 3</div>
-          <h1 class="module-title">Oral Presentations &amp; Technical Delivery</h1>
-          <p style="color: var(--mt); font-size: 0.9rem; margin-top: 6px;">
-            <strong>Primary Textbooks:</strong> William S. Pfeiffer, <em>Technical Communication: A Practical Approach</em> (8th Ed.), Chapter 15 &bull; <em>Coping with Stagefright</em> (Harvard Management Communication Letter)
-          </p>
-        </div>
-
-        <!-- ═════════════════════════════════════════════════════
-             TOPIC 1: The 3 Ps & Presentation Planning
-             ═════════════════════════════════════════════════════ -->
-        <div class="topic-card" id="topic-1">
-          <h2><span class="topic-num">1</span>The 3 Ps &amp; Presentation Planning</h2>
-          <p class="topic-subtitle">Career stakes of speaking, audience analysis, and ABC presentation architecture</p>
-
-          <p>
-            In the modern workplace, technical excellence alone will not guarantee career advancement. Whether pitching an architecture proposal to executives, demoing a software sprint to clients, or explaining a security vulnerability to team leads, <strong>oral communication</strong> directly determines your professional credibility and leadership potential.
-          </p>
-
-          <h3>1. The 3 Ps of Successful Speaking (Pfeiffer)</h3>
-          <p>Pfeiffer emphasizes that successful public speaking does not rely on natural charisma or inborn talent; it is an acquired technical skill built on three deliberate phases:</p>
-
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin: 16px 0;">
-            <div style="background: var(--sb); padding: 16px; border: 1px solid var(--bd); border-top: 4px solid var(--def-bd); border-radius: 8px;">
-              <h4 style="color: var(--def-bd); margin-bottom: 6px;">Step 1: Prepare Carefully</h4>
-              <p style="font-size: 0.86rem; color: var(--mt);">Analyze your audience, define a singular core purpose, research verified evidence, outline your ideas using the ABC format, and design clean, supportive visual aids.</p>
-            </div>
-            <div style="background: var(--sb); padding: 16px; border: 1px solid var(--bd); border-top: 4px solid var(--exp-bd); border-radius: 8px;">
-              <h4 style="color: var(--exp-bd); margin-bottom: 6px;">Step 2: Practice Often</h4>
-              <p style="font-size: 0.86rem; color: var(--mt);">Rehearse out loud using speaker notes rather than a script. Time your speech with a stopwatch, practice slide transitions, and test your delivery before friendly peers.</p>
-            </div>
-            <div style="background: var(--sb); padding: 16px; border: 1px solid var(--bd); border-top: 4px solid var(--ac); border-radius: 8px;">
-              <h4 style="color: var(--ac); margin-bottom: 6px;">Step 3: Perform with Enthusiasm</h4>
-              <p style="font-size: 0.86rem; color: var(--mt);">Engage your listeners with genuine energy, maintain eye contact across the room, use open posture, eliminate filler words, and guide the audience through a structured Q&amp;A.</p>
-            </div>
-          </div>
-
-          <h3>2. Audience Analysis &amp; The "WIIFM" Rule</h3>
-          <p>
-            Before drafting a single slide, an effective presenter analyzes their listeners:
-          </p>
-          <ul>
-            <li><strong>Knowledge Baseline:</strong> Are your listeners technical experts (who demand architectural data) or non-technical executives (who care only about cost, timelines, and business ROI)?</li>
-            <li><strong>Attitude &amp; Expectations:</strong> Are they supportive, neutral, or skeptical? Skeptical audiences require more objective evidence upfront.</li>
-            <li><strong>The "WIIFM" Principle:</strong> Every audience silently asks: <em>"What's in it for me?"</em> Frame your content around the benefits, cost savings, or efficiency gains that matter to <strong>them</strong>.</li>
-            <li><strong>Room &amp; Logistics:</strong> Check room dimensions, lighting controls, microphone setup, projector aspect ratio, and internet connectivity beforehand.</li>
-          </ul>
-
-          <h3>3. Structuring Presentations with the ABC Format</h3>
-          <p>Just like written reports, oral presentations follow Pfeiffer's <strong>ABC Format</strong>:</p>
-
-          <div class="definition">
-            <div class="callout-label">The ABC Presentation Architecture</div>
-            <ul>
-              <li><strong>Abstract (Introduction - 10-15% of time):</strong>
-                <ul>
-                  <li><em>Attention Grabber (Hook):</em> A striking statistic, thought-provoking question, or brief case story.</li>
-                  <li><em>Relevance / WIIFM:</em> Explain why this topic matters to the listeners today.</li>
-                  <li><em>Agenda / Roadmap:</em> State your 3 to 5 main talking points explicitly.</li>
-                </ul>
-              </li>
-              <li><strong>Body (Discussion - 70-80% of time):</strong>
-                <ul>
-                  <li>Organized into <strong>3 to 5 core points</strong> (sticking to few points prevents cognitive overload).</li>
-                  <li>Provide clear verbal signposts and smooth transitions between sections (e.g., <em>"Now that we have reviewed system architecture, let us turn to cost projections..."</em>).</li>
-                  <li>Support every claim with concrete evidence, customer quotes, or clean visuals.</li>
-                </ul>
-              </li>
-              <li><strong>Conclusion (Wrap-Up - 10-15% of time):</strong>
-                <ul>
-                  <li><em>Summary:</em> Restate your key findings or recommendations concisely.</li>
-                  <li><em>Memorable Clincher:</em> A compelling final sentence that reinforces your vision.</li>
-                  <li><em>Call to Action / Next Steps:</em> Tell listeners exactly what action to take.</li>
-                  <li><em>Q&amp;A Transition:</em> Formally invite questions from the audience.</li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-
-          <div class="note-box">
-            <div class="callout-label">The Preacher's Maxim</div>
-            Pfeiffer highlights an ancient, bulletproof speaking rule:
-            <br />
-            <strong>"Tell them what you are going to tell them; tell them; tell them what you told them."</strong>
-            <br />
-            Because listeners cannot "flip back a page" like readers can, verbal repetition and clear roadmaps are essential for retention.
-          </div>
-
-          <div class="summary-box">
-            <h4>Key Takeaways</h4>
-            <ul>
-              <li>Great technical presentations rely on the <strong>3 Ps</strong>: Prepare carefully, Practice often, Perform with enthusiasm.</li>
-              <li>Always answer the audience's internal question: <em>"What's in it for me?"</em></li>
-              <li>Structure your talk with the <strong>ABC format</strong> and reinforce it using the <strong>Preacher's Maxim</strong>.</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- ═════════════════════════════════════════════════════
-             TOPIC 2: The 10 Guidelines & 4 Delivery Modes
-             ═════════════════════════════════════════════════════ -->
-        <div class="topic-card" id="topic-2" style="display:none;">
-          <h2><span class="topic-num">2</span>The 10 Presentation Guidelines &amp; 4 Delivery Modes</h2>
-          <p class="topic-subtitle">Pfeiffer's rules of delivery, vocal dynamics, and delivery methods</p>
-
-          <p>
-            Effective delivery is about connection, not perfection. Pfeiffer outlines <strong>10 foundational guidelines</strong> to ensure maximum impact and engagement.
-          </p>
-
-          <h3>1. Pfeiffer's 10 Presentation Guidelines</h3>
-          <table style="width:100%; margin: 16px 0; border-collapse: collapse;">
-            <thead>
-              <tr style="border-bottom: 2px solid var(--bd); text-align: left;">
-                <th style="padding: 10px 12px; color: var(--ac); width: 25%;">Guideline</th>
-                <th style="padding: 10px 12px; color: var(--exp-bd); width: 45%;">Rule &amp; Rationale</th>
-                <th style="padding: 10px 12px; color: var(--def-bd); width: 30%;">Exam / Practical Tip</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr style="border-bottom: 1px solid var(--bd);">
-                <td style="padding: 10px 12px; font-weight: 600;">1. Know Your Listeners</td>
-                <td style="padding: 10px 12px;">Tailor technical depth to audience roles. Never talk down to experts or bury executives under lines of code.</td>
-                <td style="padding: 10px 12px;">Focus on decisions for executives; focus on mechanisms for engineers.</td>
-              </tr>
-              <tr style="border-bottom: 1px solid var(--bd);">
-                <td style="padding: 10px 12px; font-weight: 600;">2. Use the Preacher's Maxim</td>
-                <td style="padding: 10px 12px;">Provide a clear preview in the introduction, body details, and a solid recap in the conclusion.</td>
-                <td style="padding: 10px 12px;">Roadmap &rarr; Content &rarr; Recap.</td>
-              </tr>
-              <tr style="border-bottom: 1px solid var(--bd);">
-                <td style="padding: 10px 12px; font-weight: 600;">3. Stick to a Few Main Points</td>
-                <td style="padding: 10px 12px;">Audiences cannot remember 10 separate topics. Limit your core presentation to <strong>3 to 5 main points</strong>.</td>
-                <td style="padding: 10px 12px;">Group complex data under 3 overarching thematic headers.</td>
-              </tr>
-              <tr style="border-bottom: 1px solid var(--bd);">
-                <td style="padding: 10px 12px; font-weight: 600;">4. Put Outline on Cards / Paper</td>
-                <td style="padding: 10px 12px;">Use bulleted cue cards or presenter notes. <strong>Never read a full manuscript or read slides!</strong></td>
-                <td style="padding: 10px 12px;">Keywords act as memory triggers, maintaining natural eye contact.</td>
-              </tr>
-              <tr style="border-bottom: 1px solid var(--bd);">
-                <td style="padding: 10px 12px; font-weight: 600;">5. Practice, Practice, Practice</td>
-                <td style="padding: 10px 12px;">Rehearse aloud multiple times with a stopwatch. Dry runs reveal awkward transitions and pacing bottlenecks.</td>
-                <td style="padding: 10px 12px;">Aim to finish 10-15% under your allotted time limit.</td>
-              </tr>
-              <tr style="border-bottom: 1px solid var(--bd);">
-                <td style="padding: 10px 12px; font-weight: 600;">6. Speak Vigorously &amp; Deliberately</td>
-                <td style="padding: 10px 12px;">Vary your pitch, volume, and pace. Avoid monotone speech. Project your voice to the farthest person in the back row.</td>
-                <td style="padding: 10px 12px;">Use strategic 2-second pauses before and after key insights.</td>
-              </tr>
-              <tr style="border-bottom: 1px solid var(--bd);">
-                <td style="padding: 10px 12px; font-weight: 600;">7. Avoid Filler Words</td>
-                <td style="padding: 10px 12px;">Eliminate verbal tics (<em>"um", "uh", "like", "you know", "basically", "so"</em>). Replace fillers with intentional silent pauses.</td>
-                <td style="padding: 10px 12px;">Silence shows confidence; filler words signal nervous hesitation.</td>
-              </tr>
-              <tr style="border-bottom: 1px solid var(--bd);">
-                <td style="padding: 10px 12px; font-weight: 600;">8. Use Rhetorical Questions</td>
-                <td style="padding: 10px 12px;">Ask questions to prompt listeners to reflect and re-engage, not to demand an immediate spoken response.</td>
-                <td style="padding: 10px 12px;">Example: <em>"How much downtime can our servers tolerate before customer trust breaks?"</em></td>
-              </tr>
-              <tr style="border-bottom: 1px solid var(--bd);">
-                <td style="padding: 10px 12px; font-weight: 600;">9. Maintain Eye Contact</td>
-                <td style="padding: 10px 12px;">Look directly at individuals in different sections of the room for 3 to 5 seconds. Avoid staring at the floor, ceiling, or laptop screen.</td>
-                <td style="padding: 10px 12px;">Connect with friendly faces in all corners of the room.</td>
-              </tr>
-              <tr style="border-bottom: 1px solid var(--bd);">
-                <td style="padding: 10px 12px; font-weight: 600;">10. Use Appropriate Gestures &amp; Posture</td>
-                <td style="padding: 10px 12px;">Stand tall with open posture. Avoid pacing, gripping the lectern with white knuckles, or fidgeting with pens/pockets.</td>
-                <td style="padding: 10px 12px;">Use natural, open-palm hand gestures to emphasize points.</td>
-              </tr>
-            </tbody>
-          </table>
-
-          <h3>2. The 4 Modes of Presentation Delivery</h3>
-          <p>How you deliver your speech dictates your tone, flexibility, and audience connection:</p>
-
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin: 16px 0;">
-            <!-- Extemporaneous -->
-            <div style="background: var(--sb); border: 1px solid var(--bd); border-top: 4px solid var(--def-bd); border-radius: 8px; padding: 16px;">
-              <h4 style="color: var(--def-bd); margin-bottom: 6px;">1. Extemporaneous Speaking</h4>
-              <p style="font-size: 0.85rem; color: var(--mt);"><strong>The Gold Standard of Workplace Delivery.</strong></p>
-              <ul style="font-size: 0.88rem; margin: 8px 0; padding-left: 18px;">
-                <li><strong>Method:</strong> Thoroughly researched, planned, and practiced, but delivered from an outline or brief cue cards without reading word-for-word.</li>
-                <li><strong>Advantages:</strong> Sounds natural, conversational, and authoritative; allows immediate adaptation to audience reactions.</li>
-                <li><strong>Verdict:</strong> Strongly recommended by Pfeiffer for virtually all business presentations.</li>
-              </ul>
-            </div>
-
-            <!-- Impromptu -->
-            <div style="background: var(--sb); border: 1px solid var(--bd); border-top: 4px solid var(--exp-bd); border-radius: 8px; padding: 16px;">
-              <h4 style="color: var(--exp-bd); margin-bottom: 6px;">2. Impromptu Speaking</h4>
-              <p style="font-size: 0.85rem; color: var(--mt);"><strong>Delivered Without Advance Preparation.</strong></p>
-              <ul style="font-size: 0.88rem; margin: 8px 0; padding-left: 18px;">
-                <li><strong>Method:</strong> Speaking when called upon unexpectedly in a meeting (e.g., <em>"Ali, what is your take on this database bug?"</em>).</li>
-                <li><strong>Strategy:</strong> Quickly organize your response in your head: State your conclusion &rarr; Give 2 reasons/facts &rarr; Restate your recommendation.</li>
-                <li><strong>Pitfall:</strong> High risk of rambling if you do not focus on a single core point.</li>
-              </ul>
-            </div>
-
-            <!-- Manuscript -->
-            <div style="background: var(--sb); border: 1px solid var(--bd); border-top: 4px solid var(--wrn-bd); border-radius: 8px; padding: 16px;">
-              <h4 style="color: var(--wrn-bd); margin-bottom: 6px;">3. Manuscript Reading</h4>
-              <p style="font-size: 0.85rem; color: var(--mt);"><strong>Reading Every Word from a Prepared Script.</strong></p>
-              <ul style="font-size: 0.88rem; margin: 8px 0; padding-left: 18px;">
-                <li><strong>Use Case:</strong> High-stakes diplomatic statements, press conferences, or legal testimony where exact phrasing is legally binding.</li>
-                <li><strong>Pitfalls:</strong> Sounds robotic and monotone; destroys eye contact and connection with listeners.</li>
-                <li><strong>Rule:</strong> Avoid in routine workplace presentations!</li>
-              </ul>
-            </div>
-
-            <!-- Memorized -->
-            <div style="background: var(--sb); border: 1px solid var(--bd); border-top: 4px solid var(--crit-bd); border-radius: 8px; padding: 16px;">
-              <h4 style="color: var(--crit-bd); margin-bottom: 6px;">4. Memorized Delivery</h4>
-              <p style="font-size: 0.85rem; color: var(--mt);"><strong>Reciting Word-for-Word from Memory.</strong></p>
-              <ul style="font-size: 0.88rem; margin: 8px 0; padding-left: 18px;">
-                <li><strong>Method:</strong> Writing out the entire speech and memorizing it like an actor.</li>
-                <li><strong>Fatal Flaw:</strong> If you forget a single sentence or get interrupted by a question, you risk freezing in panic! Also sounds mechanical.</li>
-                <li><strong>Pfeiffer's Rule:</strong> Memorize <strong>only your first 60 seconds</strong> (the takeoff) and your final closing line. Never memorize the entire body!</li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="summary-box">
-            <h4>Key Takeaways</h4>
-            <ul>
-              <li>Always choose <strong>extemporaneous delivery</strong> over manuscript reading or memorization.</li>
-              <li>Limit core content to <strong>3 to 5 main points</strong>.</li>
-              <li>Silence is your friend: replace filler words with deliberate pauses.</li>
-              <li>Eye contact and open gestures establish authority and build trust.</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- ═════════════════════════════════════════════════════
-             TOPIC 3: Visual Aids & 11 Graphics Guidelines
-             ═════════════════════════════════════════════════════ -->
-        <div class="topic-card" id="topic-3" style="display:none;">
-          <h2><span class="topic-num">3</span>Visual Aids &amp; 11 Graphics Guidelines</h2>
-          <p class="topic-subtitle">Slide design rules, the 6x6 guideline, Edward Tufte chartjunk critique, and screen aesthetics</p>
-
-          <p>
-            Visual aids exist to <strong>support and illuminate the speaker</strong>, not to replace the speaker. When used correctly, graphics dramatically increase retention; when abused, they create boredom, confusion, and cognitive overload.
-          </p>
-
-          <h3>1. Pfeiffer's 11 Presentation Graphics Guidelines</h3>
-          <ul>
-            <li><strong>1. Discover Listener Preferences:</strong> Ask in advance what format your audience prefers (simple summary charts vs. detailed technical diagrams).</li>
-            <li><strong>2. Match Graphics to Content:</strong> Ensure every image, graph, or schematic directly reinforces the spoken word. Never use graphics as arbitrary decoration.</li>
-            <li><strong>3. Keep the Message Simple (Edward Tufte's Chartjunk Critique):</strong> Eliminate visual clutter, excessive 3D effects, gratuitous borders, and irrelevant animations that distract from data.</li>
-            <li><strong>4. Consider Alternatives to Bulleted Lists:</strong> Bulleted lists often induce "PowerPoint stupor." Use full-sentence headline assertions paired with visual evidence (charts, schematics, photos).</li>
-            <li><strong>5. Use Colors Carefully:</strong>
-              <ul>
-                <li>Have a clear functional reason for every color.</li>
-                <li>Ensure high contrast: dark text on light background or light text on dark background.</li>
-                <li><strong>Avoid color vibration:</strong> Never place red text on a blue background (causes optical eye strain and illegibility).</li>
-                <li>Limit your palette to <strong>3 or 4 harmonious colors</strong> per visual.</li>
-              </ul>
-            </li>
-            <li><strong>6. Learn the Presentation Tools:</strong> Master slide masters, layout grids, and templates so formatting remains uniform across all slides.</li>
-            <li><strong>7. Leave Graphics Up Long Enough:</strong> Reveal a graphic precisely when you speak about it, pause to let the audience absorb it, and advance when moving to the next topic.</li>
-            <li><strong>8. Avoid Handouts During the Presentation:</strong> Passing out papers during your talk causes listeners to flip through the handout at their own pace, destroying their attention on you. Distribute handouts <strong>after</strong> your speech or during Q&amp;A.</li>
-            <li><strong>9. Maintain Eye Contact While Using Graphics:</strong> Never talk to the projection screen with your back to the audience! Glance at the visual briefly, then turn your face back to your listeners. Point using the <strong>hand closest to the screen</strong> so you do not cross your torso.</li>
-            <li><strong>10. Include All Graphics in Practice Sessions:</strong> Rehearse every slide click and visual transition during dry runs to prevent timing hiccups.</li>
-            <li><strong>11. Plan for Technology to Fail (Murphy's Law):</strong> Whatever can go wrong will go wrong. Always carry a USB backup, save a PDF copy in the cloud, bring your own HDMI adapter, and keep printed speaker notes in case the projector dies.</li>
-          </ul>
-
-          <h3>2. The Golden 6x6 Slide Rule</h3>
-          <div class="definition">
-            <div class="callout-label">The 6x6 Design Rule</div>
-            <strong>No more than 6 bullet points per slide, and no more than 6 words per line.</strong>
-            <br />
-            Slides must provide <em>scannable talking points</em>, not paragraphs. If your audience is reading your slides, they have stopped listening to you!
-          </div>
-
-          <h3>3. Typography &amp; Font Sizing Standards</h3>
-          <table style="width:100%; margin: 16px 0; border-collapse: collapse;">
-            <thead>
-              <tr style="border-bottom: 2px solid var(--bd); text-align: left;">
-                <th style="padding: 10px 12px; color: var(--ac);">Slide Element</th>
-                <th style="padding: 10px 12px; color: var(--exp-bd);">Font Family</th>
-                <th style="padding: 10px 12px; color: var(--def-bd);">Minimum Font Size</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr style="border-bottom: 1px solid var(--bd);">
-                <td style="padding: 10px 12px; font-weight: 600;">Slide Titles / Headings</td>
-                <td style="padding: 10px 12px;">Sans-serif (Calibri, Arial, Helvetica, Trebuchet)</td>
-                <td style="padding: 10px 12px;"><strong>36 to 44 pt</strong> (Bold)</td>
-              </tr>
-              <tr style="border-bottom: 1px solid var(--bd);">
-                <td style="padding: 10px 12px; font-weight: 600;">Main Bullet Points</td>
-                <td style="padding: 10px 12px;">Sans-serif (High legibility on projection screens)</td>
-                <td style="padding: 10px 12px;"><strong>24 to 28 pt</strong></td>
-              </tr>
-              <tr style="border-bottom: 1px solid var(--bd);">
-                <td style="padding: 10px 12px; font-weight: 600;">Sub-bullets &amp; Data Captions</td>
-                <td style="padding: 10px 12px;">Sans-serif</td>
-                <td style="padding: 10px 12px;"><strong>18 to 20 pt</strong> (Never go below 18 pt!)</td>
-              </tr>
-            </tbody>
-          </table>
-
-          <div class="summary-box">
-            <h4>Key Takeaways</h4>
-            <ul>
-              <li>Respect the <strong>6x6 rule</strong>: maximum 6 bullets, maximum 6 words per line.</li>
-              <li>Use clean <strong>sans-serif fonts</strong> with a minimum body size of 24 pt.</li>
-              <li>Eliminate chartjunk and vibrating color combinations (never red on blue).</li>
-              <li>Never turn your back on the audience to read your slides; point with your near hand.</li>
-              <li>Hand out supporting documents <strong>after</strong> the presentation to avoid distraction.</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- ═════════════════════════════════════════════════════
-             TOPIC 4: Overcoming Stage Fright & Q&A Mastery
-             ═════════════════════════════════════════════════════ -->
-        <div class="topic-card" id="topic-4" style="display:none;">
-          <h2><span class="topic-num">4</span>Overcoming Stage Fright &amp; Q&amp;A Mastery</h2>
-          <p class="topic-subtitle">The science of speech anxiety, physiological &amp; cognitive coping tools, and managing Q&amp;A sessions</p>
-
-          <p>
-            Surveys consistently reveal that <strong>public speaking is the number-one fear</strong> for professionals, frequently ranking higher than fear of heights, spiders, or financial ruin. Understanding the science of stage fright allows you to transform nervous dread into dynamic speaking energy.
-          </p>
-
-          <h3>1. The Physiology of Stage Fright (Harvard &amp; Pfeiffer)</h3>
-          <p>
-            When you step in front of an audience, your brain perceives social vulnerability as a threat, triggering the primitive <strong>fight-or-flight autonomic response</strong>. Adrenaline and cortisol flood your bloodstream, causing:
-          </p>
-          <ul>
-            <li>Rapid pulse and shallow breathing (oxygen deprivation).</li>
-            <li>Trembling hands, knees, or quivering voice (excess muscle tension).</li>
-            <li>Dry mouth and sticky throat (digestion shuts down to divert blood to muscles).</li>
-            <li>Tunnel vision and memory blanking (cognitive overload).</li>
-          </ul>
-
-          <h3>2. The Two-Pronged Coping Strategy</h3>
-
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin: 16px 0;">
-            <!-- Physiological Remedies -->
-            <div style="background: var(--sb); border: 1px solid var(--bd); border-top: 4px solid var(--exp-bd); border-radius: 8px; padding: 16px;">
-              <h4 style="color: var(--exp-bd); margin-bottom: 6px;">1. Physiological Interventions (Calming the Body)</h4>
-              <ul style="font-size: 0.88rem; margin: 8px 0; padding-left: 18px;">
-                <li><strong>Diaphragmatic Deep Breathing:</strong> Take 4 to 5 slow, deep breaths from your abdomen (in for 4 counts, hold for 4, out for 6). This activates the <em>parasympathetic nervous system</em>, slowing your heart rate.</li>
-                <li><strong>Isometric Muscle Release:</strong> Clench your fists or push your feet firmly into the floor for 5 seconds, then release. This burns off excess adrenaline.</li>
-                <li><strong>Sip Room-Temperature Water:</strong> Keep a glass of water nearby. Sipping room-temperature water relieves dry throat and provides a natural 3-second pause to collect your thoughts.</li>
-                <li><strong>Take a Brisk Walk:</strong> Walking briskly down the hallway 10 minutes before your talk channels nervous energy productively.</li>
-              </ul>
-            </div>
-
-            <!-- Cognitive Remedies -->
-            <div style="background: var(--sb); border: 1px solid var(--bd); border-top: 4px solid var(--def-bd); border-radius: 8px; padding: 16px;">
-              <h4 style="color: var(--def-bd); margin-bottom: 6px;">2. Cognitive Reframing (Rewiring the Mind)</h4>
-              <ul style="font-size: 0.88rem; margin: 8px 0; padding-left: 18px;">
-                <li><strong>Reframe Anxiety as Enthusiasm:</strong> Tell yourself: <em>"I am not terrified; my body is pumped with energy to deliver a high-impact presentation!"</em> Physiologically, excitement and anxiety are identical.</li>
-                <li><strong>Adopt an "Outward Focus":</strong> Stop obsessing over your appearance or accent. Shift your attention entirely to helping the audience solve their problem. You are a service provider sharing valuable technical insights.</li>
-                <li><strong>Memorize Your First 60 Seconds:</strong> Learn your opening two sentences word-for-word. A flawless, confident takeoff breaks initial tension and builds immediate momentum.</li>
-                <li><strong>Remember the "Illusion of Transparency":</strong> Audiences cannot see your pounding heart or racing pulse unless you announce it. <strong>Never apologize for being nervous!</strong></li>
-              </ul>
-            </div>
-          </div>
-
-          <h3>3. Mastering the Question-and-Answer (Q&amp;A) Session</h3>
-          <p>The Q&amp;A session is where executive trust is won or lost. Pfeiffer recommends the <strong>4-Step Q&amp;A Framework</strong>:</p>
-
-          <div class="definition">
-            <div class="callout-label">The 4-Step Q&amp;A Method</div>
-            <ol>
-              <li><strong>Listen Actively:</strong> Look directly at the questioner and listen without interrupting. Let them finish their entire thought.</li>
-              <li><strong>Rephrase &amp; Repeat:</strong> Paraphrase the question aloud for the entire room (e.g., <em>"The question is whether our database architecture will scale past 10,000 concurrent users."</em>). This ensures everyone heard the question and gives you 5 seconds to structure your thoughts.</li>
-              <li><strong>Answer Concisely:</strong> Deliver a focused, direct answer in 30 to 60 seconds. Avoid launching into a secondary 10-minute lecture.</li>
-              <li><strong>Verify Satisfaction:</strong> Check back briefly with the questioner: <em>"Does that address your concern?"</em> before moving to the next person.</li>
-            </ol>
-          </div>
-
-          <div class="warning-box">
-            <div class="callout-label">What to Do When You Don't Know the Answer</div>
-            <strong>Never bluff, fabricate data, or guess!</strong> Technical audiences will immediately detect dishonesty, destroying your credibility.
-            <br /><br />
-            Use the professional 3-part response:
-            <br />
-            <strong>1. Acknowledge:</strong> <em>"That is an excellent architectural question."</em>
-            <br />
-            <strong>2. Admit:</strong> <em>"I don't have the exact benchmark figures with me today."</em>
-            <br />
-            <strong>3. Commit:</strong> <em>"I will verify the latency metrics with our database team and email you the exact report by tomorrow morning."</em>
-          </div>
-
-          <div class="summary-box">
-            <h4>Key Takeaways</h4>
-            <ul>
-              <li>Stage fright is a natural physiological reaction; channel it through deep diaphragmatic breathing and muscle release.</li>
-              <li>Reframe anxiety into excitement, and memorize only your first 60 seconds.</li>
-              <li>Never apologize for nervousness—the audience cannot see your racing heart.</li>
-              <li>Master the 4-step Q&amp;A framework: Listen &rarr; Rephrase &rarr; Answer &rarr; Verify.</li>
-              <li>If you do not know an answer, admit it honestly and commit to a specific follow-up deadline.</li>
-            </ul>
-          </div>
-        </div>
-
-        <!-- ═════════════════════════════════════════════════════
-             TOPIC 5: Exam Case Studies & Solved Scenarios
-             ═════════════════════════════════════════════════════ -->
-        <div class="topic-card" id="topic-5" style="display:none;">
-          <h2><span class="topic-num">5</span>Exam Case Studies &amp; Solved Scenarios</h2>
-          <p class="topic-subtitle">The Hashim presentation disaster analysis, poster guidelines, and exam question bank</p>
-
-          <p>
-            FAST Midterm I exams frequently test presentation skills via detailed case studies highlighting poor design and disastrous delivery. Below is the complete forensic critique of the recurring <strong>"Hashim Presentation Disaster"</strong>.
-          </p>
-
-          <div class="practice-section">
-            <div class="practice-section-label">Case Study: The Hashim Presentation Disaster (FAST Exam Favorite)</div>
-
-            <details>
-              <summary><strong>Case Study Prompt:</strong> Read Hashim's Presentation Experience</summary>
-              <p>
-                <em>Hashim was going to have his first presentation of the product he and his team were planning to develop and worked hard to prepare for it. He found some information on Wikipedia that looked interesting, so he made PowerPoint slides copying all the content. Hashim also found an elaborate font style and decided to use that on his slides. Selecting images was difficult, so he used all the ones he liked, finalizing his PowerPoint by adding his favorite color and fun images to the slides. He had very little time for practice, so he memorized his speech.<br><br>
-                As soon as he began his presentation, an audience member said that the blue background and strange red text on slides was difficult to read. Hashim graciously told them that he would be reading them and proceeded to do so, while looking up at the screen most of the time. Each of his slides was filled with the entire text of his speech. He realized he had to cover a lot of information, so he jumped from here to there and back again talking about everything on the slides. The audience was unable to follow the thread of the presentation and became disinterested. He went overtime and had to stop his presentation with half the slides still left to explain.<br><br>
-                At the end of the presentation when someone asked a question, Hashim panicked! All he knew about the topic was written on the slides and he had already read that. The feedback he received from his teammates and other colleagues was not very encouraging, making him wonder where he went wrong.</em>
-              </p>
-            </details>
-
-            <details>
-              <summary><strong>Forensic Analysis:</strong> Identify Any Three Errors &amp; Corrective Measures</summary>
-              <p>
-                <strong>Error 1: Unreadable Visual Design &amp; Color Vibration</strong><br>
-                &bull; <em>Mistake:</em> Hashim used an elaborate decorative font, random "fun" images, and combined a blue background with red text.<br>
-                &bull; <em>Why it failed:</em> Red text on a blue background creates severe chromatic vibration, causing instant eye strain. Decorative fonts are illegible on projector screens.<br>
-                &bull; <em>Corrective Measure:</em> Use a clean, sans-serif font (e.g., Calibri or Arial) at 36-44 pt for titles and 24-28 pt for body text. Enforce high contrast (dark text on light background or white text on dark blue). Only include graphics that provide functional evidence.
-                <br><br>
-                <strong>Error 2: Wall of Text &amp; Reading from the Screen</strong><br>
-                &bull; <em>Mistake:</em> Hashim copied entire paragraphs from Wikipedia onto slides and spent the speech staring up at the screen, reading verbatim.<br>
-                &bull; <em>Why it failed:</em> Violates the 6x6 rule. Turning his back broke eye contact and ruined audience engagement. Audiences read faster than speakers talk, rendering him redundant.<br>
-                &bull; <em>Corrective Measure:</em> Apply the <strong>6x6 rule</strong> (maximum 6 bullet points, maximum 6 words per line). Use bulleted cue cards or presenter view for speaker notes, and maintain continuous eye contact across the room.
-                <br><br>
-                <strong>Error 3: Lack of Rehearsal, Memorization &amp; Time Management Failure</strong><br>
-                &bull; <em>Mistake:</em> Hashim tried to memorize his speech, had no clear ABC structure (jumped back and forth), ran out of time, and panicked during Q&amp;A.<br>
-                &bull; <em>Why it failed:</em> Memorization sounds robotic and collapses during interruptions. Disorganized content loses audience interest. Lacking deep background knowledge left him unable to handle Q&amp;A.<br>
-                &bull; <em>Corrective Measure:</em> Adopt <strong>extemporaneous delivery</strong> from bulleted outlines. Use the ABC format (Abstract roadmap &rarr; 3-5 main body points &rarr; Conclusion). Rehearse aloud with a stopwatch to stay within time limits. Research the topic thoroughly so you know 5 times more than what is shown on the slides.
-              </p>
-            </details>
-          </div>
-
-          <h3>2. Research Poster Presentations (Pfeiffer Guidelines)</h3>
-          <p>
-            Poster sessions allow researchers to discuss technical findings one-on-one with attendees in an exhibition setting:
-          </p>
-          <ul>
-            <li><strong>ABC Poster Layout:</strong>
-              <ul>
-                <li><em>Abstract (Top):</em> Prominent project title, author names, affiliations, and a 100-word overview.</li>
-                <li><em>Body (Center):</em> Visual-heavy presentation of research methodology, architecture diagrams, charts, and key data. Text must be readable from 4 to 6 feet away (titles &ge; 72 pt, body &ge; 24 pt).</li>
-                <li><em>Conclusion (Bottom Right):</em> Key outcomes, practical implications, and author contact information.</li>
-              </ul>
-            </li>
-            <li><strong>The 3-Minute Elevator Pitch:</strong> Prepare a crisp, 2-to-3 minute verbal walkthrough for passersby who stop at your poster booth.</li>
-          </ul>
-
-          <h3>Interactive Practice: Exam Questions Bank</h3>
-          <div class="practice-section">
-            <div class="practice-section-label">Practice Questions &amp; Flashcards</div>
-
-            <!-- Q1 -->
-            <details>
-              <summary><strong>Q1:</strong> Why does Pfeiffer advise speakers to avoid distributing handouts during a presentation?</summary>
-              <p>
-                <strong>Answer:</strong><br />
-                Distributing handouts during a presentation divides audience attention. Listeners immediately look down, flip through pages, and read ahead at their own pace rather than listening to the speaker. This destroys eye contact and rapport. Handouts should only be distributed <strong>after</strong> the speech or during the Q&amp;A session, unless listeners specifically need them to follow along with complex calculations.
-              </p>
-            </details>
-
-            <!-- Q2 -->
-            <details>
-              <summary><strong>Q2:</strong> Contrast Extemporaneous delivery with Manuscript delivery across three criteria.</summary>
-              <p>
-                <strong>Answer:</strong><br />
-                1. <strong>Preparation:</strong> Extemporaneous uses bulleted cue cards/outlines; Manuscript requires writing out every single word in advance.<br />
-                2. <strong>Audience Connection:</strong> Extemporaneous allows continuous eye contact and natural adaptability; Manuscript forces the speaker to look down at the page, creating a disconnected, robotic barrier.<br />
-                3. <strong>Vocal Delivery:</strong> Extemporaneous produces natural conversational inflection; Manuscript often results in flat, monotone reading.
-              </p>
-            </details>
-
-            <!-- Q3 -->
-            <details>
-              <summary><strong>Q3:</strong> Explain how diaphragmatic breathing helps control the physical symptoms of stage fright.</summary>
-              <p>
-                <strong>Answer:</strong><br />
-                Stage fright triggers the fight-or-flight autonomic response, causing shallow chest breathing, rapid heart rate, and trembling. Slow, deep <strong>diaphragmatic breathing</strong> (inhaling from the abdomen) oxygenates the blood and stimulates the vagus nerve, which activates the body's <em>parasympathetic nervous system</em>. This physiologically lowers the heart rate, relaxes tense muscles, and restores cognitive clarity.
-              </p>
-            </details>
-
-            <!-- Q4 -->
-            <details>
-              <summary><strong>Q4:</strong> What are the four steps in managing a Q&amp;A session professionally?</summary>
-              <p>
-                <strong>Answer:</strong><br />
-                1. <strong>Listen Actively:</strong> Pay full attention to the questioner without interrupting.<br />
-                2. <strong>Rephrase &amp; Repeat:</strong> State the question clearly for the benefit of the entire audience.<br />
-                3. <strong>Answer Concisely:</strong> Provide a direct, focused response in 30-60 seconds.<br />
-                4. <strong>Verify:</strong> Confirm that the answer satisfied the questioner before moving on.
-              </p>
-            </details>
-          </div>
-
-          <div class="summary-box">
-            <h4>Module Summary Checklist</h4>
-            <ul>
-              <li>Always execute the <strong>3 Ps</strong>: Prepare, Practice, Perform.</li>
-              <li>Organize presentations with the <strong>ABC format</strong> and the <strong>Preacher's Maxim</strong>.</li>
-              <li>Deliver <strong>extemporaneously</strong> using bulleted cue cards—never read full scripts or slides!</li>
-              <li>Enforce the <strong>6x6 rule</strong>, sans-serif fonts, and high contrast (avoid red on blue).</li>
-              <li>Control stage fright through <strong>diaphragmatic breathing</strong> and <strong>cognitive reframing</strong>.</li>
-              <li>Handle Q&amp;A sessions with the 4-step framework (Listen, Rephrase, Answer, Verify).</li>
-            </ul>
-          </div>
-        </div>
-
+  <div id="main-content">
+    <div class="module-container">
+      <div class="module-header">
+        <div class="module-eyebrow">Technical &amp; Business Writing (TBW) — Module 3</div>
+        <h1 class="module-title">Oral Presentations &amp; Technical Delivery</h1>
+        <p style="color: var(--mt); font-size: 0.9rem; margin-top: 6px;">
+          <strong>Primary Textbooks:</strong> William S. Pfeiffer, <em>Technical Communication: A Practical
+            Approach</em> (8th Ed.), Chapter 15 &bull; <em>Coping with Stagefright</em> (Harvard Management
+          Communication Letter)
+        </p>
       </div>
-      <!-- end module-container -->
 
       <!-- ═════════════════════════════════════════════════════
-           BOTTOM NAVIGATION
-           ═════════════════════════════════════════════════════ -->
-      <div class="bottom-nav">
-        <button id="prev-btn" onclick="goPrev()">
-          <div>
-            <span class="btn-label">&larr; Previous</span>
-            <span class="btn-title" id="prev-title">Topic</span>
-          </div>
-        </button>
-        <button id="next-btn" onclick="goNext()">
-          <div>
-            <span class="btn-label">Next &rarr;</span>
-            <span class="btn-title" id="next-title">Topic</span>
-          </div>
-        </button>
-      </div>
-    </div>
-    <!-- end main-content -->
+             TOPIC 1: The 3 Ps & Presentation Planning
+             ═════════════════════════════════════════════════════ -->
+      <div class="topic-card" id="topic-1">
+        <h2><span class="topic-num">1</span>The 3 Ps &amp; Presentation Planning</h2>
+        <p class="topic-subtitle">Career stakes of speaking, audience analysis, and ABC presentation architecture</p>
 
-    <button
-      id="back-to-top"
-      onclick="document.getElementById('main-content').scrollTo({ top: 0, behavior: 'smooth' })"
-    >
-      &uarr;
-    </button>
+        <p>
+          In the modern workplace, technical excellence alone will not guarantee career advancement. Whether pitching an
+          architecture proposal to executives, demoing a software sprint to clients, or explaining a security
+          vulnerability to team leads, <strong>oral communication</strong> directly determines your professional
+          credibility and leadership potential.
+        </p>
+
+        <h3>1. The 3 Ps of Successful Speaking (Pfeiffer)</h3>
+        <p>Pfeiffer emphasizes that successful public speaking does not rely on natural charisma or inborn talent; it is
+          an acquired technical skill built on three deliberate phases:</p>
+
+        <div
+          style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin: 16px 0;">
+          <div
+            style="background: var(--sb); padding: 16px; border: 1px solid var(--bd); border-top: 4px solid var(--def-bd); border-radius: 8px;">
+            <h4 style="color: var(--def-bd); margin-bottom: 6px;">Step 1: Prepare Carefully</h4>
+            <p style="font-size: 0.86rem; color: var(--mt);">Analyze your audience, define a singular core purpose,
+              research verified evidence, outline your ideas using the ABC format, and design clean, supportive visual
+              aids.</p>
+          </div>
+          <div
+            style="background: var(--sb); padding: 16px; border: 1px solid var(--bd); border-top: 4px solid var(--exp-bd); border-radius: 8px;">
+            <h4 style="color: var(--exp-bd); margin-bottom: 6px;">Step 2: Practice Often</h4>
+            <p style="font-size: 0.86rem; color: var(--mt);">Rehearse out loud using speaker notes rather than a script.
+              Time your speech with a stopwatch, practice slide transitions, and test your delivery before friendly
+              peers.</p>
+          </div>
+          <div
+            style="background: var(--sb); padding: 16px; border: 1px solid var(--bd); border-top: 4px solid var(--ac); border-radius: 8px;">
+            <h4 style="color: var(--ac); margin-bottom: 6px;">Step 3: Perform with Enthusiasm</h4>
+            <p style="font-size: 0.86rem; color: var(--mt);">Engage your listeners with genuine energy, maintain eye
+              contact across the room, use open posture, eliminate filler words, and guide the audience through a
+              structured Q&amp;A.</p>
+          </div>
+        </div>
+
+        <h3>2. Audience Analysis &amp; The "WIIFM" Rule</h3>
+        <p>
+          Before drafting a single slide, an effective presenter analyzes their listeners:
+        </p>
+        <ul>
+          <li><strong>Knowledge Baseline:</strong> Are your listeners technical experts (who demand architectural data)
+            or non-technical executives (who care only about cost, timelines, and business ROI)?</li>
+          <li><strong>Attitude &amp; Expectations:</strong> Are they supportive, neutral, or skeptical? Skeptical
+            audiences require more objective evidence upfront.</li>
+          <li><strong>The "WIIFM" Principle:</strong> Every audience silently asks: <em>"What's in it for me?"</em>
+            Frame your content around the benefits, cost savings, or efficiency gains that matter to
+            <strong>them</strong>.</li>
+          <li><strong>Room &amp; Logistics:</strong> Check room dimensions, lighting controls, microphone setup,
+            projector aspect ratio, and internet connectivity beforehand.</li>
+        </ul>
+
+        <h3>3. Structuring Presentations with the ABC Format</h3>
+        <p>Just like written reports, oral presentations follow Pfeiffer's <strong>ABC Format</strong>:</p>
+
+        <div class="definition">
+          <div class="callout-label">The ABC Presentation Architecture</div>
+          <ul>
+            <li><strong>Abstract (Introduction - 10-15% of time):</strong>
+              <ul>
+                <li><em>Attention Grabber (Hook):</em> A striking statistic, thought-provoking question, or brief case
+                  story.</li>
+                <li><em>Relevance / WIIFM:</em> Explain why this topic matters to the listeners today.</li>
+                <li><em>Agenda / Roadmap:</em> State your 3 to 5 main talking points explicitly.</li>
+              </ul>
+            </li>
+            <li><strong>Body (Discussion - 70-80% of time):</strong>
+              <ul>
+                <li>Organized into <strong>3 to 5 core points</strong> (sticking to few points prevents cognitive
+                  overload).</li>
+                <li>Provide clear verbal signposts and smooth transitions between sections (e.g., <em>"Now that we have
+                    reviewed system architecture, let us turn to cost projections..."</em>).</li>
+                <li>Support every claim with concrete evidence, customer quotes, or clean visuals.</li>
+              </ul>
+            </li>
+            <li><strong>Conclusion (Wrap-Up - 10-15% of time):</strong>
+              <ul>
+                <li><em>Summary:</em> Restate your key findings or recommendations concisely.</li>
+                <li><em>Memorable Clincher:</em> A compelling final sentence that reinforces your vision.</li>
+                <li><em>Call to Action / Next Steps:</em> Tell listeners exactly what action to take.</li>
+                <li><em>Q&amp;A Transition:</em> Formally invite questions from the audience.</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+
+        <div class="note-box">
+          <div class="callout-label">The Preacher's Maxim</div>
+          Pfeiffer highlights an ancient, bulletproof speaking rule:
+          <br />
+          <strong>"Tell them what you are going to tell them; tell them; tell them what you told them."</strong>
+          <br />
+          Because listeners cannot "flip back a page" like readers can, verbal repetition and clear roadmaps are
+          essential for retention.
+        </div>
+
+        <div class="summary-box">
+          <h4>Key Takeaways</h4>
+          <ul>
+            <li>Great technical presentations rely on the <strong>3 Ps</strong>: Prepare carefully, Practice often,
+              Perform with enthusiasm.</li>
+            <li>Always answer the audience's internal question: <em>"What's in it for me?"</em></li>
+            <li>Structure your talk with the <strong>ABC format</strong> and reinforce it using the <strong>Preacher's
+                Maxim</strong>.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ═════════════════════════════════════════════════════
+             TOPIC 2: The 10 Guidelines & 4 Delivery Modes
+             ═════════════════════════════════════════════════════ -->
+      <div class="topic-card" id="topic-2" style="display:none;">
+        <h2><span class="topic-num">2</span>The 10 Presentation Guidelines &amp; 4 Delivery Modes</h2>
+        <p class="topic-subtitle">Pfeiffer's rules of delivery, vocal dynamics, and delivery methods</p>
+
+        <p>
+          Effective delivery is about connection, not perfection. Pfeiffer outlines <strong>10 foundational
+            guidelines</strong> to ensure maximum impact and engagement.
+        </p>
+
+        <h3>1. Pfeiffer's 10 Presentation Guidelines</h3>
+        <table style="width:100%; margin: 16px 0; border-collapse: collapse;">
+          <thead>
+            <tr style="border-bottom: 2px solid var(--bd); text-align: left;">
+              <th style="padding: 10px 12px; color: var(--ac); width: 25%;">Guideline</th>
+              <th style="padding: 10px 12px; color: var(--exp-bd); width: 45%;">Rule &amp; Rationale</th>
+              <th style="padding: 10px 12px; color: var(--def-bd); width: 30%;">Exam / Practical Tip</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid var(--bd);">
+              <td style="padding: 10px 12px; font-weight: 600;">1. Know Your Listeners</td>
+              <td style="padding: 10px 12px;">Tailor technical depth to audience roles. Never talk down to experts or
+                bury executives under lines of code.</td>
+              <td style="padding: 10px 12px;">Focus on decisions for executives; focus on mechanisms for engineers.</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--bd);">
+              <td style="padding: 10px 12px; font-weight: 600;">2. Use the Preacher's Maxim</td>
+              <td style="padding: 10px 12px;">Provide a clear preview in the introduction, body details, and a solid
+                recap in the conclusion.</td>
+              <td style="padding: 10px 12px;">Roadmap &rarr; Content &rarr; Recap.</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--bd);">
+              <td style="padding: 10px 12px; font-weight: 600;">3. Stick to a Few Main Points</td>
+              <td style="padding: 10px 12px;">Audiences cannot remember 10 separate topics. Limit your core presentation
+                to <strong>3 to 5 main points</strong>.</td>
+              <td style="padding: 10px 12px;">Group complex data under 3 overarching thematic headers.</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--bd);">
+              <td style="padding: 10px 12px; font-weight: 600;">4. Put Outline on Cards / Paper</td>
+              <td style="padding: 10px 12px;">Use bulleted cue cards or presenter notes. <strong>Never read a full
+                  manuscript or read slides!</strong></td>
+              <td style="padding: 10px 12px;">Keywords act as memory triggers, maintaining natural eye contact.</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--bd);">
+              <td style="padding: 10px 12px; font-weight: 600;">5. Practice, Practice, Practice</td>
+              <td style="padding: 10px 12px;">Rehearse aloud multiple times with a stopwatch. Dry runs reveal awkward
+                transitions and pacing bottlenecks.</td>
+              <td style="padding: 10px 12px;">Aim to finish 10-15% under your allotted time limit.</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--bd);">
+              <td style="padding: 10px 12px; font-weight: 600;">6. Speak Vigorously &amp; Deliberately</td>
+              <td style="padding: 10px 12px;">Vary your pitch, volume, and pace. Avoid monotone speech. Project your
+                voice to the farthest person in the back row.</td>
+              <td style="padding: 10px 12px;">Use strategic 2-second pauses before and after key insights.</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--bd);">
+              <td style="padding: 10px 12px; font-weight: 600;">7. Avoid Filler Words</td>
+              <td style="padding: 10px 12px;">Eliminate verbal tics (<em>"um", "uh", "like", "you know", "basically",
+                  "so"</em>). Replace fillers with intentional silent pauses.</td>
+              <td style="padding: 10px 12px;">Silence shows confidence; filler words signal nervous hesitation.</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--bd);">
+              <td style="padding: 10px 12px; font-weight: 600;">8. Use Rhetorical Questions</td>
+              <td style="padding: 10px 12px;">Ask questions to prompt listeners to reflect and re-engage, not to demand
+                an immediate spoken response.</td>
+              <td style="padding: 10px 12px;">Example: <em>"How much downtime can our servers tolerate before customer
+                  trust breaks?"</em></td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--bd);">
+              <td style="padding: 10px 12px; font-weight: 600;">9. Maintain Eye Contact</td>
+              <td style="padding: 10px 12px;">Look directly at individuals in different sections of the room for 3 to 5
+                seconds. Avoid staring at the floor, ceiling, or laptop screen.</td>
+              <td style="padding: 10px 12px;">Connect with friendly faces in all corners of the room.</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--bd);">
+              <td style="padding: 10px 12px; font-weight: 600;">10. Use Appropriate Gestures &amp; Posture</td>
+              <td style="padding: 10px 12px;">Stand tall with open posture. Avoid pacing, gripping the lectern with
+                white knuckles, or fidgeting with pens/pockets.</td>
+              <td style="padding: 10px 12px;">Use natural, open-palm hand gestures to emphasize points.</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3>2. The 4 Modes of Presentation Delivery</h3>
+        <p>How you deliver your speech dictates your tone, flexibility, and audience connection:</p>
+
+        <div
+          style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; margin: 16px 0;">
+          <!-- Extemporaneous -->
+          <div
+            style="background: var(--sb); border: 1px solid var(--bd); border-top: 4px solid var(--def-bd); border-radius: 8px; padding: 16px;">
+            <h4 style="color: var(--def-bd); margin-bottom: 6px;">1. Extemporaneous Speaking</h4>
+            <p style="font-size: 0.85rem; color: var(--mt);"><strong>The Gold Standard of Workplace Delivery.</strong>
+            </p>
+            <ul style="font-size: 0.88rem; margin: 8px 0; padding-left: 18px;">
+              <li><strong>Method:</strong> Thoroughly researched, planned, and practiced, but delivered from an outline
+                or brief cue cards without reading word-for-word.</li>
+              <li><strong>Advantages:</strong> Sounds natural, conversational, and authoritative; allows immediate
+                adaptation to audience reactions.</li>
+              <li><strong>Verdict:</strong> Strongly recommended by Pfeiffer for virtually all business presentations.
+              </li>
+            </ul>
+          </div>
+
+          <!-- Impromptu -->
+          <div
+            style="background: var(--sb); border: 1px solid var(--bd); border-top: 4px solid var(--exp-bd); border-radius: 8px; padding: 16px;">
+            <h4 style="color: var(--exp-bd); margin-bottom: 6px;">2. Impromptu Speaking</h4>
+            <p style="font-size: 0.85rem; color: var(--mt);"><strong>Delivered Without Advance Preparation.</strong></p>
+            <ul style="font-size: 0.88rem; margin: 8px 0; padding-left: 18px;">
+              <li><strong>Method:</strong> Speaking when called upon unexpectedly in a meeting (e.g., <em>"Ali, what is
+                  your take on this database bug?"</em>).</li>
+              <li><strong>Strategy:</strong> Quickly organize your response in your head: State your conclusion &rarr;
+                Give 2 reasons/facts &rarr; Restate your recommendation.</li>
+              <li><strong>Pitfall:</strong> High risk of rambling if you do not focus on a single core point.</li>
+            </ul>
+          </div>
+
+          <!-- Manuscript -->
+          <div
+            style="background: var(--sb); border: 1px solid var(--bd); border-top: 4px solid var(--wrn-bd); border-radius: 8px; padding: 16px;">
+            <h4 style="color: var(--wrn-bd); margin-bottom: 6px;">3. Manuscript Reading</h4>
+            <p style="font-size: 0.85rem; color: var(--mt);"><strong>Reading Every Word from a Prepared Script.</strong>
+            </p>
+            <ul style="font-size: 0.88rem; margin: 8px 0; padding-left: 18px;">
+              <li><strong>Use Case:</strong> High-stakes diplomatic statements, press conferences, or legal testimony
+                where exact phrasing is legally binding.</li>
+              <li><strong>Pitfalls:</strong> Sounds robotic and monotone; destroys eye contact and connection with
+                listeners.</li>
+              <li><strong>Rule:</strong> Avoid in routine workplace presentations!</li>
+            </ul>
+          </div>
+
+          <!-- Memorized -->
+          <div
+            style="background: var(--sb); border: 1px solid var(--bd); border-top: 4px solid var(--crit-bd); border-radius: 8px; padding: 16px;">
+            <h4 style="color: var(--crit-bd); margin-bottom: 6px;">4. Memorized Delivery</h4>
+            <p style="font-size: 0.85rem; color: var(--mt);"><strong>Reciting Word-for-Word from Memory.</strong></p>
+            <ul style="font-size: 0.88rem; margin: 8px 0; padding-left: 18px;">
+              <li><strong>Method:</strong> Writing out the entire speech and memorizing it like an actor.</li>
+              <li><strong>Fatal Flaw:</strong> If you forget a single sentence or get interrupted by a question, you
+                risk freezing in panic! Also sounds mechanical.</li>
+              <li><strong>Pfeiffer's Rule:</strong> Memorize <strong>only your first 60 seconds</strong> (the takeoff)
+                and your final closing line. Never memorize the entire body!</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="summary-box">
+          <h4>Key Takeaways</h4>
+          <ul>
+            <li>Always choose <strong>extemporaneous delivery</strong> over manuscript reading or memorization.</li>
+            <li>Limit core content to <strong>3 to 5 main points</strong>.</li>
+            <li>Silence is your friend: replace filler words with deliberate pauses.</li>
+            <li>Eye contact and open gestures establish authority and build trust.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ═════════════════════════════════════════════════════
+             TOPIC 3: Visual Aids & 11 Graphics Guidelines
+             ═════════════════════════════════════════════════════ -->
+      <div class="topic-card" id="topic-3" style="display:none;">
+        <h2><span class="topic-num">3</span>Visual Aids &amp; 11 Graphics Guidelines</h2>
+        <p class="topic-subtitle">Slide design rules, the 6x6 guideline, Edward Tufte chartjunk critique, and screen
+          aesthetics</p>
+
+        <p>
+          Visual aids exist to <strong>support and illuminate the speaker</strong>, not to replace the speaker. When
+          used correctly, graphics dramatically increase retention; when abused, they create boredom, confusion, and
+          cognitive overload.
+        </p>
+
+        <h3>1. Pfeiffer's 11 Presentation Graphics Guidelines</h3>
+        <ul>
+          <li><strong>1. Discover Listener Preferences:</strong> Ask in advance what format your audience prefers
+            (simple summary charts vs. detailed technical diagrams).</li>
+          <li><strong>2. Match Graphics to Content:</strong> Ensure every image, graph, or schematic directly reinforces
+            the spoken word. Never use graphics as arbitrary decoration.</li>
+          <li><strong>3. Keep the Message Simple (Edward Tufte's Chartjunk Critique):</strong> Eliminate visual clutter,
+            excessive 3D effects, gratuitous borders, and irrelevant animations that distract from data.</li>
+          <li><strong>4. Consider Alternatives to Bulleted Lists:</strong> Bulleted lists often induce "PowerPoint
+            stupor." Use full-sentence headline assertions paired with visual evidence (charts, schematics, photos).
+          </li>
+          <li><strong>5. Use Colors Carefully:</strong>
+            <ul>
+              <li>Have a clear functional reason for every color.</li>
+              <li>Ensure high contrast: dark text on light background or light text on dark background.</li>
+              <li><strong>Avoid color vibration:</strong> Never place red text on a blue background (causes optical eye
+                strain and illegibility).</li>
+              <li>Limit your palette to <strong>3 or 4 harmonious colors</strong> per visual.</li>
+            </ul>
+          </li>
+          <li><strong>6. Learn the Presentation Tools:</strong> Master slide masters, layout grids, and templates so
+            formatting remains uniform across all slides.</li>
+          <li><strong>7. Leave Graphics Up Long Enough:</strong> Reveal a graphic precisely when you speak about it,
+            pause to let the audience absorb it, and advance when moving to the next topic.</li>
+          <li><strong>8. Avoid Handouts During the Presentation:</strong> Passing out papers during your talk causes
+            listeners to flip through the handout at their own pace, destroying their attention on you. Distribute
+            handouts <strong>after</strong> your speech or during Q&amp;A.</li>
+          <li><strong>9. Maintain Eye Contact While Using Graphics:</strong> Never talk to the projection screen with
+            your back to the audience! Glance at the visual briefly, then turn your face back to your listeners. Point
+            using the <strong>hand closest to the screen</strong> so you do not cross your torso.</li>
+          <li><strong>10. Include All Graphics in Practice Sessions:</strong> Rehearse every slide click and visual
+            transition during dry runs to prevent timing hiccups.</li>
+          <li><strong>11. Plan for Technology to Fail (Murphy's Law):</strong> Whatever can go wrong will go wrong.
+            Always carry a USB backup, save a PDF copy in the cloud, bring your own HDMI adapter, and keep printed
+            speaker notes in case the projector dies.</li>
+        </ul>
+
+        <h3>2. The Golden 6x6 Slide Rule</h3>
+        <div class="definition">
+          <div class="callout-label">The 6x6 Design Rule</div>
+          <strong>No more than 6 bullet points per slide, and no more than 6 words per line.</strong>
+          <br />
+          Slides must provide <em>scannable talking points</em>, not paragraphs. If your audience is reading your
+          slides, they have stopped listening to you!
+        </div>
+
+        <h3>3. Typography &amp; Font Sizing Standards</h3>
+        <table style="width:100%; margin: 16px 0; border-collapse: collapse;">
+          <thead>
+            <tr style="border-bottom: 2px solid var(--bd); text-align: left;">
+              <th style="padding: 10px 12px; color: var(--ac);">Slide Element</th>
+              <th style="padding: 10px 12px; color: var(--exp-bd);">Font Family</th>
+              <th style="padding: 10px 12px; color: var(--def-bd);">Minimum Font Size</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom: 1px solid var(--bd);">
+              <td style="padding: 10px 12px; font-weight: 600;">Slide Titles / Headings</td>
+              <td style="padding: 10px 12px;">Sans-serif (Calibri, Arial, Helvetica, Trebuchet)</td>
+              <td style="padding: 10px 12px;"><strong>36 to 44 pt</strong> (Bold)</td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--bd);">
+              <td style="padding: 10px 12px; font-weight: 600;">Main Bullet Points</td>
+              <td style="padding: 10px 12px;">Sans-serif (High legibility on projection screens)</td>
+              <td style="padding: 10px 12px;"><strong>24 to 28 pt</strong></td>
+            </tr>
+            <tr style="border-bottom: 1px solid var(--bd);">
+              <td style="padding: 10px 12px; font-weight: 600;">Sub-bullets &amp; Data Captions</td>
+              <td style="padding: 10px 12px;">Sans-serif</td>
+              <td style="padding: 10px 12px;"><strong>18 to 20 pt</strong> (Never go below 18 pt!)</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="summary-box">
+          <h4>Key Takeaways</h4>
+          <ul>
+            <li>Respect the <strong>6x6 rule</strong>: maximum 6 bullets, maximum 6 words per line.</li>
+            <li>Use clean <strong>sans-serif fonts</strong> with a minimum body size of 24 pt.</li>
+            <li>Eliminate chartjunk and vibrating color combinations (never red on blue).</li>
+            <li>Never turn your back on the audience to read your slides; point with your near hand.</li>
+            <li>Hand out supporting documents <strong>after</strong> the presentation to avoid distraction.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ═════════════════════════════════════════════════════
+             TOPIC 4: Overcoming Stage Fright & Q&A Mastery
+             ═════════════════════════════════════════════════════ -->
+      <div class="topic-card" id="topic-4" style="display:none;">
+        <h2><span class="topic-num">4</span>Overcoming Stage Fright &amp; Q&amp;A Mastery</h2>
+        <p class="topic-subtitle">The science of speech anxiety, physiological &amp; cognitive coping tools, and
+          managing Q&amp;A sessions</p>
+
+        <p>
+          Surveys consistently reveal that <strong>public speaking is the number-one fear</strong> for professionals,
+          frequently ranking higher than fear of heights, spiders, or financial ruin. Understanding the science of stage
+          fright allows you to transform nervous dread into dynamic speaking energy.
+        </p>
+
+        <h3>1. The Physiology of Stage Fright (Harvard &amp; Pfeiffer)</h3>
+        <p>
+          When you step in front of an audience, your brain perceives social vulnerability as a threat, triggering the
+          primitive <strong>fight-or-flight autonomic response</strong>. Adrenaline and cortisol flood your bloodstream,
+          causing:
+        </p>
+        <ul>
+          <li>Rapid pulse and shallow breathing (oxygen deprivation).</li>
+          <li>Trembling hands, knees, or quivering voice (excess muscle tension).</li>
+          <li>Dry mouth and sticky throat (digestion shuts down to divert blood to muscles).</li>
+          <li>Tunnel vision and memory blanking (cognitive overload).</li>
+        </ul>
+
+        <h3>2. The Two-Pronged Coping Strategy</h3>
+
+        <div
+          style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 14px; margin: 16px 0;">
+          <!-- Physiological Remedies -->
+          <div
+            style="background: var(--sb); border: 1px solid var(--bd); border-top: 4px solid var(--exp-bd); border-radius: 8px; padding: 16px;">
+            <h4 style="color: var(--exp-bd); margin-bottom: 6px;">1. Physiological Interventions (Calming the Body)</h4>
+            <ul style="font-size: 0.88rem; margin: 8px 0; padding-left: 18px;">
+              <li><strong>Diaphragmatic Deep Breathing:</strong> Take 4 to 5 slow, deep breaths from your abdomen (in
+                for 4 counts, hold for 4, out for 6). This activates the <em>parasympathetic nervous system</em>,
+                slowing your heart rate.</li>
+              <li><strong>Isometric Muscle Release:</strong> Clench your fists or push your feet firmly into the floor
+                for 5 seconds, then release. This burns off excess adrenaline.</li>
+              <li><strong>Sip Room-Temperature Water:</strong> Keep a glass of water nearby. Sipping room-temperature
+                water relieves dry throat and provides a natural 3-second pause to collect your thoughts.</li>
+              <li><strong>Take a Brisk Walk:</strong> Walking briskly down the hallway 10 minutes before your talk
+                channels nervous energy productively.</li>
+            </ul>
+          </div>
+
+          <!-- Cognitive Remedies -->
+          <div
+            style="background: var(--sb); border: 1px solid var(--bd); border-top: 4px solid var(--def-bd); border-radius: 8px; padding: 16px;">
+            <h4 style="color: var(--def-bd); margin-bottom: 6px;">2. Cognitive Reframing (Rewiring the Mind)</h4>
+            <ul style="font-size: 0.88rem; margin: 8px 0; padding-left: 18px;">
+              <li><strong>Reframe Anxiety as Enthusiasm:</strong> Tell yourself: <em>"I am not terrified; my body is
+                  pumped with energy to deliver a high-impact presentation!"</em> Physiologically, excitement and
+                anxiety are identical.</li>
+              <li><strong>Adopt an "Outward Focus":</strong> Stop obsessing over your appearance or accent. Shift your
+                attention entirely to helping the audience solve their problem. You are a service provider sharing
+                valuable technical insights.</li>
+              <li><strong>Memorize Your First 60 Seconds:</strong> Learn your opening two sentences word-for-word. A
+                flawless, confident takeoff breaks initial tension and builds immediate momentum.</li>
+              <li><strong>Remember the "Illusion of Transparency":</strong> Audiences cannot see your pounding heart or
+                racing pulse unless you announce it. <strong>Never apologize for being nervous!</strong></li>
+            </ul>
+          </div>
+        </div>
+
+        <h3>3. Mastering the Question-and-Answer (Q&amp;A) Session</h3>
+        <p>The Q&amp;A session is where executive trust is won or lost. Pfeiffer recommends the <strong>4-Step Q&amp;A
+            Framework</strong>:</p>
+
+        <div class="definition">
+          <div class="callout-label">The 4-Step Q&amp;A Method</div>
+          <ol>
+            <li><strong>Listen Actively:</strong> Look directly at the questioner and listen without interrupting. Let
+              them finish their entire thought.</li>
+            <li><strong>Rephrase &amp; Repeat:</strong> Paraphrase the question aloud for the entire room (e.g.,
+              <em>"The question is whether our database architecture will scale past 10,000 concurrent users."</em>).
+              This ensures everyone heard the question and gives you 5 seconds to structure your thoughts.</li>
+            <li><strong>Answer Concisely:</strong> Deliver a focused, direct answer in 30 to 60 seconds. Avoid launching
+              into a secondary 10-minute lecture.</li>
+            <li><strong>Verify Satisfaction:</strong> Check back briefly with the questioner: <em>"Does that address
+                your concern?"</em> before moving to the next person.</li>
+          </ol>
+        </div>
+
+        <div class="warning-box">
+          <div class="callout-label">What to Do When You Don't Know the Answer</div>
+          <strong>Never bluff, fabricate data, or guess!</strong> Technical audiences will immediately detect
+          dishonesty, destroying your credibility.
+          <br /><br />
+          Use the professional 3-part response:
+          <br />
+          <strong>1. Acknowledge:</strong> <em>"That is an excellent architectural question."</em>
+          <br />
+          <strong>2. Admit:</strong> <em>"I don't have the exact benchmark figures with me today."</em>
+          <br />
+          <strong>3. Commit:</strong> <em>"I will verify the latency metrics with our database team and email you the
+            exact report by tomorrow morning."</em>
+        </div>
+
+        <div class="summary-box">
+          <h4>Key Takeaways</h4>
+          <ul>
+            <li>Stage fright is a natural physiological reaction; channel it through deep diaphragmatic breathing and
+              muscle release.</li>
+            <li>Reframe anxiety into excitement, and memorize only your first 60 seconds.</li>
+            <li>Never apologize for nervousness—the audience cannot see your racing heart.</li>
+            <li>Master the 4-step Q&amp;A framework: Listen &rarr; Rephrase &rarr; Answer &rarr; Verify.</li>
+            <li>If you do not know an answer, admit it honestly and commit to a specific follow-up deadline.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- ═════════════════════════════════════════════════════
+             TOPIC 5: Exam Case Studies & Solved Scenarios
+             ═════════════════════════════════════════════════════ -->
+      <div class="topic-card" id="topic-5" style="display:none;">
+        <h2><span class="topic-num">5</span>Exam Case Studies &amp; Solved Scenarios</h2>
+        <p class="topic-subtitle">The Hashim presentation disaster analysis, poster guidelines, and exam question bank
+        </p>
+
+        <p>
+          FAST Midterm I exams frequently test presentation skills via detailed case studies highlighting poor design
+          and disastrous delivery. Below is the complete forensic critique of the recurring <strong>"Hashim Presentation
+            Disaster"</strong>.
+        </p>
+
+        <div class="practice-section">
+          <div class="practice-section-label">Case Study: The Hashim Presentation Disaster (FAST Exam Favorite)</div>
+
+          <details>
+            <summary><strong>Case Study Prompt:</strong> Read Hashim's Presentation Experience</summary>
+            <p>
+              <em>Hashim was going to have his first presentation of the product he and his team were planning to
+                develop and worked hard to prepare for it. He found some information on Wikipedia that looked
+                interesting, so he made PowerPoint slides copying all the content. Hashim also found an elaborate font
+                style and decided to use that on his slides. Selecting images was difficult, so he used all the ones he
+                liked, finalizing his PowerPoint by adding his favorite color and fun images to the slides. He had very
+                little time for practice, so he memorized his speech.<br><br>
+                As soon as he began his presentation, an audience member said that the blue background and strange red
+                text on slides was difficult to read. Hashim graciously told them that he would be reading them and
+                proceeded to do so, while looking up at the screen most of the time. Each of his slides was filled with
+                the entire text of his speech. He realized he had to cover a lot of information, so he jumped from here
+                to there and back again talking about everything on the slides. The audience was unable to follow the
+                thread of the presentation and became disinterested. He went overtime and had to stop his presentation
+                with half the slides still left to explain.<br><br>
+                At the end of the presentation when someone asked a question, Hashim panicked! All he knew about the
+                topic was written on the slides and he had already read that. The feedback he received from his
+                teammates and other colleagues was not very encouraging, making him wonder where he went wrong.</em>
+            </p>
+          </details>
+
+          <details>
+            <summary><strong>Forensic Analysis:</strong> Identify Any Three Errors &amp; Corrective Measures</summary>
+            <p>
+              <strong>Error 1: Unreadable Visual Design &amp; Color Vibration</strong><br>
+              &bull; <em>Mistake:</em> Hashim used an elaborate decorative font, random "fun" images, and combined a
+              blue background with red text.<br>
+              &bull; <em>Why it failed:</em> Red text on a blue background creates severe chromatic vibration, causing
+              instant eye strain. Decorative fonts are illegible on projector screens.<br>
+              &bull; <em>Corrective Measure:</em> Use a clean, sans-serif font (e.g., Calibri or Arial) at 36-44 pt for
+              titles and 24-28 pt for body text. Enforce high contrast (dark text on light background or white text on
+              dark blue). Only include graphics that provide functional evidence.
+              <br><br>
+              <strong>Error 2: Wall of Text &amp; Reading from the Screen</strong><br>
+              &bull; <em>Mistake:</em> Hashim copied entire paragraphs from Wikipedia onto slides and spent the speech
+              staring up at the screen, reading verbatim.<br>
+              &bull; <em>Why it failed:</em> Violates the 6x6 rule. Turning his back broke eye contact and ruined
+              audience engagement. Audiences read faster than speakers talk, rendering him redundant.<br>
+              &bull; <em>Corrective Measure:</em> Apply the <strong>6x6 rule</strong> (maximum 6 bullet points, maximum
+              6 words per line). Use bulleted cue cards or presenter view for speaker notes, and maintain continuous eye
+              contact across the room.
+              <br><br>
+              <strong>Error 3: Lack of Rehearsal, Memorization &amp; Time Management Failure</strong><br>
+              &bull; <em>Mistake:</em> Hashim tried to memorize his speech, had no clear ABC structure (jumped back and
+              forth), ran out of time, and panicked during Q&amp;A.<br>
+              &bull; <em>Why it failed:</em> Memorization sounds robotic and collapses during interruptions.
+              Disorganized content loses audience interest. Lacking deep background knowledge left him unable to handle
+              Q&amp;A.<br>
+              &bull; <em>Corrective Measure:</em> Adopt <strong>extemporaneous delivery</strong> from bulleted outlines.
+              Use the ABC format (Abstract roadmap &rarr; 3-5 main body points &rarr; Conclusion). Rehearse aloud with a
+              stopwatch to stay within time limits. Research the topic thoroughly so you know 5 times more than what is
+              shown on the slides.
+            </p>
+          </details>
+        </div>
+
+        <h3>2. Research Poster Presentations (Pfeiffer Guidelines)</h3>
+        <p>
+          Poster sessions allow researchers to discuss technical findings one-on-one with attendees in an exhibition
+          setting:
+        </p>
+        <ul>
+          <li><strong>ABC Poster Layout:</strong>
+            <ul>
+              <li><em>Abstract (Top):</em> Prominent project title, author names, affiliations, and a 100-word overview.
+              </li>
+              <li><em>Body (Center):</em> Visual-heavy presentation of research methodology, architecture diagrams,
+                charts, and key data. Text must be readable from 4 to 6 feet away (titles &ge; 72 pt, body &ge; 24 pt).
+              </li>
+              <li><em>Conclusion (Bottom Right):</em> Key outcomes, practical implications, and author contact
+                information.</li>
+            </ul>
+          </li>
+          <li><strong>The 3-Minute Elevator Pitch:</strong> Prepare a crisp, 2-to-3 minute verbal walkthrough for
+            passersby who stop at your poster booth.</li>
+        </ul>
+
+        <h3>Interactive Practice: Exam Questions Bank</h3>
+        <div class="practice-section">
+          <div class="practice-section-label">Practice Questions &amp; Flashcards</div>
+
+          <!-- Q1 -->
+          <details>
+            <summary><strong>Q1:</strong> Why does Pfeiffer advise speakers to avoid distributing handouts during a
+              presentation?</summary>
+            <p>
+              <strong>Answer:</strong><br />
+              Distributing handouts during a presentation divides audience attention. Listeners immediately look down,
+              flip through pages, and read ahead at their own pace rather than listening to the speaker. This destroys
+              eye contact and rapport. Handouts should only be distributed <strong>after</strong> the speech or during
+              the Q&amp;A session, unless listeners specifically need them to follow along with complex calculations.
+            </p>
+          </details>
+
+          <!-- Q2 -->
+          <details>
+            <summary><strong>Q2:</strong> Contrast Extemporaneous delivery with Manuscript delivery across three
+              criteria.</summary>
+            <p>
+              <strong>Answer:</strong><br />
+              1. <strong>Preparation:</strong> Extemporaneous uses bulleted cue cards/outlines; Manuscript requires
+              writing out every single word in advance.<br />
+              2. <strong>Audience Connection:</strong> Extemporaneous allows continuous eye contact and natural
+              adaptability; Manuscript forces the speaker to look down at the page, creating a disconnected, robotic
+              barrier.<br />
+              3. <strong>Vocal Delivery:</strong> Extemporaneous produces natural conversational inflection; Manuscript
+              often results in flat, monotone reading.
+            </p>
+          </details>
+
+          <!-- Q3 -->
+          <details>
+            <summary><strong>Q3:</strong> Explain how diaphragmatic breathing helps control the physical symptoms of
+              stage fright.</summary>
+            <p>
+              <strong>Answer:</strong><br />
+              Stage fright triggers the fight-or-flight autonomic response, causing shallow chest breathing, rapid heart
+              rate, and trembling. Slow, deep <strong>diaphragmatic breathing</strong> (inhaling from the abdomen)
+              oxygenates the blood and stimulates the vagus nerve, which activates the body's <em>parasympathetic
+                nervous system</em>. This physiologically lowers the heart rate, relaxes tense muscles, and restores
+              cognitive clarity.
+            </p>
+          </details>
+
+          <!-- Q4 -->
+          <details>
+            <summary><strong>Q4:</strong> What are the four steps in managing a Q&amp;A session professionally?
+            </summary>
+            <p>
+              <strong>Answer:</strong><br />
+              1. <strong>Listen Actively:</strong> Pay full attention to the questioner without interrupting.<br />
+              2. <strong>Rephrase &amp; Repeat:</strong> State the question clearly for the benefit of the entire
+              audience.<br />
+              3. <strong>Answer Concisely:</strong> Provide a direct, focused response in 30-60 seconds.<br />
+              4. <strong>Verify:</strong> Confirm that the answer satisfied the questioner before moving on.
+            </p>
+          </details>
+        </div>
+
+        <div class="summary-box">
+          <h4>Module Summary Checklist</h4>
+          <ul>
+            <li>Always execute the <strong>3 Ps</strong>: Prepare, Practice, Perform.</li>
+            <li>Organize presentations with the <strong>ABC format</strong> and the <strong>Preacher's Maxim</strong>.
+            </li>
+            <li>Deliver <strong>extemporaneously</strong> using bulleted cue cards—never read full scripts or slides!
+            </li>
+            <li>Enforce the <strong>6x6 rule</strong>, sans-serif fonts, and high contrast (avoid red on blue).</li>
+            <li>Control stage fright through <strong>diaphragmatic breathing</strong> and <strong>cognitive
+                reframing</strong>.</li>
+            <li>Handle Q&amp;A sessions with the 4-step framework (Listen, Rephrase, Answer, Verify).</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+    <!-- end module-container -->
 
     <!-- ═════════════════════════════════════════════════════
+           BOTTOM NAVIGATION
+           ═════════════════════════════════════════════════════ -->
+    <div class="bottom-nav">
+      <button id="prev-btn" onclick="goPrev()">
+        <div>
+          <span class="btn-label">&larr; Previous</span>
+          <span class="btn-title" id="prev-title">Topic</span>
+        </div>
+      </button>
+      <button id="next-btn" onclick="goNext()">
+        <div>
+          <span class="btn-label">Next &rarr;</span>
+          <span class="btn-title" id="next-title">Topic</span>
+        </div>
+      </button>
+    </div>
+  </div>
+  <!-- end main-content -->
+
+  <button id="back-to-top" onclick="document.getElementById('main-content').scrollTo({ top: 0, behavior: 'smooth' })">
+    &uarr;
+  </button>
+
+  <!-- ═════════════════════════════════════════════════════
          SCRIPTS
          ═════════════════════════════════════════════════════ -->
-    <script>
-      const topics = [
-        "topic-1",
-        "topic-2",
-        "topic-3",
-        "topic-4",
-        "topic-5"
-      ];
-      let currentTopicIndex = 0;
+  <script>
+    const topics = [
+      "topic-1",
+      "topic-2",
+      "topic-3",
+      "topic-4",
+      "topic-5"
+    ];
+    let currentTopicIndex = 0;
 
-      function getTopicTitle(id) {
-        const link =
-          document.querySelector(`.nav-sublist a[onclick*="'${id}'"]`) ||
-          document.querySelector(`.nav-sublist a[onclick*='"${id}"']`);
-        if (link) {
-          const numEl = link.querySelector(".nav-num");
+    function getTopicTitle(id) {
+      const link =
+        document.querySelector(`.nav-sublist a[onclick*="'${id}'"]`) ||
+        document.querySelector(`.nav-sublist a[onclick*='"${id}"']`);
+      if (link) {
+        const numEl = link.querySelector(".nav-num");
+        if (numEl) {
+          return link.textContent.replace(numEl.textContent, "").trim();
+        }
+        return link.textContent.replace(/^\d+\s*/, "").trim();
+      }
+      const card = document.getElementById(id);
+      if (card) {
+        const h2 = card.querySelector("h2");
+        if (h2) {
+          const numEl = h2.querySelector(".topic-num");
           if (numEl) {
-            return link.textContent.replace(numEl.textContent, "").trim();
+            return h2.textContent.replace(numEl.textContent, "").trim();
           }
-          return link.textContent.replace(/^\d+\s*/, "").trim();
+          return h2.textContent.replace(/^\d+\s*/, "").trim();
         }
-        const card = document.getElementById(id);
-        if (card) {
-          const h2 = card.querySelector("h2");
-          if (h2) {
-            const numEl = h2.querySelector(".topic-num");
-            if (numEl) {
-              return h2.textContent.replace(numEl.textContent, "").trim();
-            }
-            return h2.textContent.replace(/^\d+\s*/, "").trim();
-          }
+      }
+      return "Topic";
+    }
+
+    function toggleSidebar() {
+      const sb = document.getElementById("sidebar");
+      const bd = document.getElementById("sidebar-backdrop");
+      if (sb) sb.classList.toggle("open");
+      if (bd) bd.classList.toggle("active");
+    }
+
+    function showTopic(id) {
+      document
+        .querySelectorAll(".topic-card")
+        .forEach((c) => (c.style.display = "none"));
+      const t = document.getElementById(id);
+      if (t) t.style.display = "block";
+      currentTopicIndex = topics.indexOf(id);
+
+      document
+        .querySelectorAll(".nav-sublist a")
+        .forEach((a) => a.classList.remove("active"));
+      const lk =
+        document.querySelector(`.nav-sublist a[onclick*="'${id}'"]`) ||
+        document.querySelector(`.nav-sublist a[onclick*='"${id}"']`);
+      if (lk) {
+        lk.classList.add("active");
+        const sublist = lk.closest(".nav-sublist");
+        if (sublist && sublist.style.display === "none") {
+          sublist.style.display = "block";
+          const chevron = sublist.previousElementSibling
+            ? sublist.previousElementSibling.querySelector(".chevron")
+            : null;
+          if (chevron) chevron.style.transform = "rotate(0deg)";
         }
-        return "Topic";
       }
 
-      function toggleSidebar() {
+      const pb = document.getElementById("prev-btn");
+      const nb = document.getElementById("next-btn");
+      const pt = document.getElementById("prev-title");
+      const nt = document.getElementById("next-title");
+
+      if (currentTopicIndex > 0) {
+        pb.style.display = "flex";
+        if (pt) pt.textContent = getTopicTitle(topics[currentTopicIndex - 1]);
+      } else {
+        pb.style.display = "none";
+      }
+
+      if (currentTopicIndex < topics.length - 1) {
+        nb.style.display = "flex";
+        if (nt) nt.textContent = getTopicTitle(topics[currentTopicIndex + 1]);
+      } else {
+        nb.style.display = "none";
+      }
+
+      if (t) t.scrollIntoView({ behavior: "smooth", block: "start" });
+      if (window.innerWidth <= 768) {
         const sb = document.getElementById("sidebar");
         const bd = document.getElementById("sidebar-backdrop");
-        if (sb) sb.classList.toggle("open");
-        if (bd) bd.classList.toggle("active");
+        if (sb) sb.classList.remove("open");
+        if (bd) bd.classList.remove("active");
       }
+    }
 
-      function showTopic(id) {
-        document
-          .querySelectorAll(".topic-card")
-          .forEach((c) => (c.style.display = "none"));
-        const t = document.getElementById(id);
-        if (t) t.style.display = "block";
-        currentTopicIndex = topics.indexOf(id);
+    function goPrev() {
+      if (currentTopicIndex > 0) showTopic(topics[currentTopicIndex - 1]);
+    }
 
-        document
-          .querySelectorAll(".nav-sublist a")
-          .forEach((a) => a.classList.remove("active"));
-        const lk =
-          document.querySelector(`.nav-sublist a[onclick*="'${id}'"]`) ||
-          document.querySelector(`.nav-sublist a[onclick*='"${id}"']`);
-        if (lk) {
-          lk.classList.add("active");
-          const sublist = lk.closest(".nav-sublist");
-          if (sublist && sublist.style.display === "none") {
-            sublist.style.display = "block";
-            const chevron = sublist.previousElementSibling
-              ? sublist.previousElementSibling.querySelector(".chevron")
-              : null;
-            if (chevron) chevron.style.transform = "rotate(0deg)";
-          }
-        }
+    function goNext() {
+      if (currentTopicIndex < topics.length - 1)
+        showTopic(topics[currentTopicIndex + 1]);
+    }
 
-        const pb = document.getElementById("prev-btn");
-        const nb = document.getElementById("next-btn");
-        const pt = document.getElementById("prev-title");
-        const nt = document.getElementById("next-title");
-
-        if (currentTopicIndex > 0) {
-          pb.style.display = "flex";
-          if (pt) pt.textContent = getTopicTitle(topics[currentTopicIndex - 1]);
-        } else {
-          pb.style.display = "none";
-        }
-
-        if (currentTopicIndex < topics.length - 1) {
-          nb.style.display = "flex";
-          if (nt) nt.textContent = getTopicTitle(topics[currentTopicIndex + 1]);
-        } else {
-          nb.style.display = "none";
-        }
-
-        if (t) t.scrollIntoView({ behavior: "smooth", block: "start" });
-        if (window.innerWidth <= 768) {
-          const sb = document.getElementById("sidebar");
-          const bd = document.getElementById("sidebar-backdrop");
-          if (sb) sb.classList.remove("open");
-          if (bd) bd.classList.remove("active");
-        }
+    function toggleSection(el) {
+      const s = el.nextElementSibling,
+        c = el.querySelector(".chevron");
+      if (s.style.display === "none") {
+        s.style.display = "block";
+        c.style.transform = "rotate(0deg)";
+      } else {
+        s.style.display = "none";
+        c.style.transform = "rotate(-90deg)";
       }
+    }
 
-      function goPrev() {
-        if (currentTopicIndex > 0) showTopic(topics[currentTopicIndex - 1]);
-      }
+    function filterContent() {
+      const q = document.getElementById("search-input").value.toLowerCase();
+      document
+        .querySelectorAll(".nav-sublist li")
+        .forEach((i) => {
+          i.style.display = i.textContent.toLowerCase().includes(q)
+            ? ""
+            : "none";
+        });
+    }
 
-      function goNext() {
-        if (currentTopicIndex < topics.length - 1)
-          showTopic(topics[currentTopicIndex + 1]);
-      }
+    // Initialise
+    if (topics.length > 0) showTopic(topics[0]);
+    const mc = document.getElementById("main-content");
+    const bb = document.getElementById("back-to-top");
+    mc.addEventListener(
+      "scroll",
+      () => (bb.style.display = mc.scrollTop > 300 ? "flex" : "none"),
+    );
+  </script>
+</body>
 
-      function toggleSection(el) {
-        const s = el.nextElementSibling,
-          c = el.querySelector(".chevron");
-        if (s.style.display === "none") {
-          s.style.display = "block";
-          c.style.transform = "rotate(0deg)";
-        } else {
-          s.style.display = "none";
-          c.style.transform = "rotate(-90deg)";
-        }
-      }
-
-      function filterContent() {
-        const q = document.getElementById("search-input").value.toLowerCase();
-        document
-          .querySelectorAll(".nav-sublist li")
-          .forEach((i) => {
-            i.style.display = i.textContent.toLowerCase().includes(q)
-              ? ""
-              : "none";
-          });
-      }
-
-      // Initialise
-      if (topics.length > 0) showTopic(topics[0]);
-      const mc = document.getElementById("main-content");
-      const bb = document.getElementById("back-to-top");
-      mc.addEventListener(
-        "scroll",
-        () => (bb.style.display = mc.scrollTop > 300 ? "flex" : "none"),
-      );
-    </script>
-  </body>
 </html>
