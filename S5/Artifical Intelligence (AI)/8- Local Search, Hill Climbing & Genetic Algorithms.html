@@ -281,10 +281,10 @@
           </div>
 
           <div class="def-box">
-            <p><strong>Jargon Demystified — Local Search:</strong> An algorithm that operates by making small, iterative changes to a single complete candidate solution, keeping only the current state in memory ($O(1)$ space).</p>
+            <p><strong>Jargon Demystified — Local Search:</strong> An algorithm that operates by making small, iterative changes to a single complete candidate solution, keeping only the current state in memory (O(1) space).</p>
             <p><strong>Jargon Demystified — State-Space Landscape:</strong> A topological surface where horizontal coordinates represent complete problem configurations and vertical elevation represents solution quality.</p>
             <p><strong>Jargon Demystified — Objective Function:</strong> A scoring function where higher elevation equals better quality (used in maximization problems).</p>
-            <p><strong>Jargon Demystified — Cost / Heuristic Function ($h$):</strong> A penalty function where lower elevation equals better quality (used in minimization problems).</p>
+            <p><strong>Jargon Demystified — Cost / Heuristic Function (h):</strong> A penalty function where lower elevation equals better quality (used in minimization problems).</p>
           </div>
 
           <h3>Systematic Search vs. Local Search Comparison</h3>
@@ -299,8 +299,8 @@
             <tbody>
               <tr>
                 <td><strong>Memory Requirement</strong></td>
-                <td>Exponential ($O(b^d)$) — keeps entire search frontier.</td>
-                <td>Constant ($O(1)$) — keeps only current state or small population.</td>
+                <td>Exponential (O(b^d)) — keeps entire search frontier.</td>
+                <td>Constant (O(1)) — keeps only current state or small population.</td>
               </tr>
               <tr>
                 <td><strong>Solution Definition</strong></td>
@@ -358,14 +358,14 @@ Elevation
 
           <h3>Detailed Solved Example: 8-Queens via Hill Climbing</h3>
           <p>
-            <strong>Problem:</strong> Place 8 queens on an $8 \times 8$ board such that no two queens attack each other along any row, column, or diagonal.
+            <strong>Problem:</strong> Place 8 queens on an 8 x 8 board such that no two queens attack each other along any row, column, or diagonal.
           </p>
           <p>
             <strong>State Representation:</strong> An array of length 8 where <code>Index = Column</code> and <code>Value = Row</code>. Exactly one queen per column.
           </p>
           <p>
-            <strong>Heuristic Cost Function ($h$):</strong> The number of pairs of queens attacking each other directly or indirectly. The goal is $h = 0$.
-            Total possible pairs of queens = $\binom{8}{2} = \frac{8 \times 7}{2} = 28$.
+            <strong>Heuristic Cost Function (h):</strong> The number of pairs of queens attacking each other directly or indirectly. The goal is h = 0.
+            Total possible pairs of queens = Combination(8, 2) = (8 * 7) / 2 = 28.
           </p>
 
           <div class="exam-card">
@@ -391,8 +391,8 @@ Row
             <ul>
               <li><strong>Queen 1 (Col 1, Row 3):</strong> Attacked diagonally by Queen 2. Non-attacking with Queens 3, 4, 5, 6, 7, 8 &rarr; <strong>6 pairs</strong>.</li>
               <li><strong>Queen 2 (Col 2, Row 2):</strong> Attacked horizontally by Queen 5 (Row 2). Non-attacking with Queens 3, 4, 6, 7, 8 &rarr; <strong>5 pairs</strong>.</li>
-              <li><strong>Queen 3 (Col 3, Row 7):</strong> Attacked diagonally by Queen 6 ($|7-4| = |3-6| = 3$). Non-attacking with 4, 5, 7, 8 &rarr; <strong>4 pairs</strong>.</li>
-              <li><strong>Queen 4 (Col 4, Row 5):</strong> Attacked diagonally by Queen 5 ($|5-2| = |4-5| = 1$). Non-attacking with 6, 7, 8 &rarr; <strong>3 pairs</strong>.</li>
+              <li><strong>Queen 3 (Col 3, Row 7):</strong> Attacked diagonally by Queen 6 (|7 - 4| = |3 - 6| = 3). Non-attacking with 4, 5, 7, 8 &rarr; <strong>4 pairs</strong>.</li>
+              <li><strong>Queen 4 (Col 4, Row 5):</strong> Attacked diagonally by Queen 5 (|5 - 2| = |4 - 5| = 1). Non-attacking with 6, 7, 8 &rarr; <strong>3 pairs</strong>.</li>
               <li><strong>Queen 5 (Col 5, Row 2):</strong> Non-attacking with 6, 7, 8 &rarr; <strong>3 pairs</strong>.</li>
               <li><strong>Queen 6 (Col 6, Row 4):</strong> Non-attacking with 7, 8 &rarr; <strong>2 pairs</strong>.</li>
               <li><strong>Queen 7 (Col 7, Row 1):</strong> Attacked horizontally by Queen 8 (Row 1) &rarr; <strong>0 pairs</strong>.</li>
@@ -403,7 +403,7 @@ Total Non-Attacking Pairs = 6 + 5 + 4 + 3 + 3 + 2 + 0 + 0 = 23
 Attacking Pairs Heuristic h = 28 - 23 = 5
             </div>
             <p>
-              In Steepest Ascent, all $8 \times 7 = 56$ single-queen column moves are evaluated. The move yielding the greatest reduction in $h$ is chosen. Within 5 moves, it reaches $h=1$.
+              In Steepest Ascent, all 8 * 7 = 56 single-queen column moves are evaluated. The move yielding the greatest reduction in h is chosen. Within 5 moves, it reaches h = 1.
             </p>
           </div>
 
@@ -469,7 +469,7 @@ Attacking Pairs Heuristic h = 28 - 23 = 5
           <div class="protip-box">
             <h4>Exam Fact: Sideways Moves &amp; Massive Scaling</h4>
             <p>
-              A <strong>sideways move</strong> is an escape step to a neighbor with identical heuristic value ($h_{\text{neighbor}} = h_{\text{current}}$). To prevent infinite loops, a limit (usually 100 consecutive sideways moves) is enforced.
+              A <strong>sideways move</strong> is an escape step to a neighbor with identical heuristic value (h_neighbor = h_current). To prevent infinite loops, a limit (usually 100 consecutive sideways moves) is enforced.
             </p>
             <p>
               With sideways moves and random restarts, hill climbing can solve <strong>3 million queens in under 1 minute</strong>!
@@ -533,7 +533,7 @@ Attacking Pairs Heuristic h = 28 - 23 = 5
           <h3>The 8 Basic Attributes of a Genetic Algorithm</h3>
           <ol>
             <li><strong>Genetic Representation (Encoding):</strong> Binary strings, real-valued vectors, or permutations.</li>
-            <li><strong>Population Size ($P$):</strong>
+            <li><strong>Population Size (P):</strong>
               <ul>
                 <li><em>Too large:</em> Excessive CPU evaluation time; slow convergence.</li>
                 <li><em>Too small:</em> Lack of genetic diversity; triggers <strong>Premature Convergence</strong> where the entire population collapses into identical suboptimal clones.</li>
@@ -555,11 +555,11 @@ Attacking Pairs Heuristic h = 28 - 23 = 5
               <span class="exam-badge cyan">Real-Valued Encoding</span>
             </div>
             <p>
-              <strong>Parameters:</strong> Sugar ($0 \le x_1 \le 9$ kg) and Flour ($0 \le x_2 \le 9$ kg).<br>
+              <strong>Parameters:</strong> Sugar (0 <= x1 <= 9 kg) and Flour (0 <= x2 <= 9 kg).<br>
               <strong>Chromosome:</strong> 2 real-valued genes: <code>[Sugar, Flour]</code>.<br>
-              <strong>Sample Chromosomes:</strong> $C_1 = [5, 1]$, $C_2 = [2, 4]$.<br>
+              <strong>Sample Chromosomes:</strong> C1 = [5, 1], C2 = [2, 4].<br>
               <strong>Fitness Function:</strong> Taste test score from 1 to 100.<br>
-              <strong>Crossover:</strong> Swapping flour amounts: $C_1' = [5, 4]$ and $C_2' = [2, 1]$.
+              <strong>Crossover:</strong> Swapping flour amounts: C1' = [5, 4] and C2' = [2, 1].
             </p>
           </div>
 
@@ -573,9 +573,9 @@ Attacking Pairs Heuristic h = 28 - 23 = 5
 F = (¬a ∨ c) ∧ (¬a ∨ c ∨ ¬e) ∧ (¬b ∨ c ∨ d ∨ ¬e) ∧ (a ∨ ¬b ∨ c) ∧ (¬e ∨ f)
             </div>
             <p>
-              <strong>Literals:</strong> $a, b, c, d, e, f$ (6 variables).<br>
+              <strong>Literals:</strong> a, b, c, d, e, f (6 variables).<br>
               <strong>Chromosome:</strong> 6-bit string: <span class="bit-string">a b c d e f</span>.<br>
-              <strong>Example:</strong> Chromosome <span class="bit-string">1 0 1 0 1 0</span> represents $a=1, b=0, c=1, d=0, e=1, f=0$.<br>
+              <strong>Example:</strong> Chromosome <span class="bit-string">1 0 1 0 1 0</span> represents a = 1, b = 0, c = 1, d = 0, e = 1, f = 0.<br>
               <strong>Fitness Metric:</strong> Number of clauses satisfied (out of 5).
             </p>
           </div>
@@ -587,11 +587,11 @@ F = (¬a ∨ c) ∧ (¬a ∨ c ∨ ¬e) ∧ (¬b ∨ c ∨ d ∨ ¬e) ∧ (a ∨
             </div>
             <p><strong>Problem Constraints:</strong></p>
             <ul>
-              <li>Courses = 16 ($C_1 \dots C_{16}$)</li>
-              <li>Teachers = 8 ($T_1 \dots T_8$) &rarr; $\lceil\log_2 8\rceil = \mathbf{3\text{ bits}}$</li>
-              <li>Days = 5 (Mon&ndash;Fri) &rarr; $\lceil\log_2 5\rceil = \mathbf{3\text{ bits}}$ ($000$ to $100$)</li>
-              <li>Time Slots = 5 &rarr; $\lceil\log_2 5\rceil = \mathbf{3\text{ bits}}$</li>
-              <li>Classrooms = 4 ($R_1 \dots R_4$) &rarr; $\lceil\log_2 4\rceil = \mathbf{2\text{ bits}}$</li>
+              <li>Courses = 16 (C1 to C16)</li>
+              <li>Teachers = 8 (T1 to T8) &rarr; ceil(log2(8)) = 3 bits</li>
+              <li>Days = 5 (Mon&ndash;Fri) &rarr; ceil(log2(5)) = 3 bits (000 to 100)</li>
+              <li>Time Slots = 5 &rarr; ceil(log2(5)) = 3 bits</li>
+              <li>Classrooms = 4 (R1 to R4) &rarr; ceil(log2(4)) = 2 bits</li>
             </ul>
             <div class="math-box">
 Bits per course = 3 (Teacher) + 3 (Day) + 3 (Slot) + 2 (Room) = 11 bits
@@ -640,7 +640,7 @@ Mutated:   1  0  0  1  0  0  1
 
           <h3>Complete Solved Trace: "Find Target = 001010"</h3>
           <p>
-            Target string is $001010$ (Search space $2^6 = 64$). Fitness = number of correctly guessed bit positions.
+            Target string is 001010 (Search space 2^6 = 64). Fitness = number of correctly guessed bit positions.
           </p>
           <table class="comparison-table">
             <thead>
@@ -711,21 +711,21 @@ Mutated:   1  0  0  1  0  0  1
 
           <div class="def-box">
             <p><strong>Jargon Demystified — Selective Pressure:</strong> The rate at which above-average individuals are selected as parents over below-average ones.</p>
-            <p><strong>Jargon Demystified — Generation Gap ($G$):</strong> The fraction of the current population that is replaced by new offspring in each generation.</p>
-            <p><strong>Jargon Demystified — Elitism:</strong> The strategy of copying the top $k$ fittest chromosomes directly into the next generation without modification, guaranteeing that the best solution never regresses.</p>
+            <p><strong>Jargon Demystified — Generation Gap (G):</strong> The fraction of the current population that is replaced by new offspring in each generation.</p>
+            <p><strong>Jargon Demystified — Elitism:</strong> The strategy of copying the top k fittest chromosomes directly into the next generation without modification, guaranteeing that the best solution never regresses.</p>
           </div>
 
           <h3>The 4 Parent Selection Algorithms</h3>
           <div class="ascii-diagram">
 1. Random Selection        2. Roulette Wheel (Proportionate)       3. Tournament Selection
 ┌────────────────────────┐         ┌───────────────────┐                 ┌───┐    ┌───┐
-│ Chromosome A (25%)     │         │ Chromosome 1: 50% │                 │ A │ vs │ B │
+│ Chromosome A (25 pct)  │         │ Chromosome 1: 50 pct│                 │ A │ vs │ B │
 ├────────────────────────┤         ├──────────────┬────┤                 └───┘    └───┘
-│ Chromosome B (25%)     │         │ Chrom 2: 28% │C3  │                   │
+│ Chromosome B (25 pct)  │         │ Chrom 2: 28 pct│C3  │                   │
 ├────────────────────────┤         ├──────────────┼────┤                   ▼
-│ Chromosome C (25%)     │         │ Chrom 3: 14% │C4  │               Winner: B
+│ Chromosome C (25 pct)  │         │ Chrom 3: 14 pct│C4  │               Winner: B
 ├────────────────────────┤         └──────────────┴────┘             (Higher Fitness)
-│ Chromosome D (25%)     │          [Slot area = Fitness]            [b = Tournament Size]
+│ Chromosome D (25 pct)  │          [Slot area = Fitness]            [b = Tournament Size]
 └────────────────────────┘
           </div>
 
@@ -734,14 +734,14 @@ Mutated:   1  0  0  1  0  0  1
             Selection probability is directly proportional to fitness:
           </p>
           <div class="math-box">
-p_i = \frac{f_i}{\sum_{j=1}^P f_j}
+p_i = f_i / (Sum of f_j from j=1 to P)
           </div>
           <table class="comparison-table">
             <thead>
               <tr>
-                <th>Chromosome ($i$)</th>
-                <th>Fitness ($f_i$)</th>
-                <th>Selection Probability ($p_i$)</th>
+                <th>Chromosome (i)</th>
+                <th>Fitness (f_i)</th>
+                <th>Selection Probability (p_i)</th>
                 <th>Roulette Wheel Arc (Degrees)</th>
               </tr>
             </thead>
@@ -749,32 +749,32 @@ p_i = \frac{f_i}{\sum_{j=1}^P f_j}
               <tr>
                 <td>1</td>
                 <td>7</td>
-                <td>$7 / 14 = 0.500$ ($50.0\%$)</td>
-                <td>$180.0^\circ$</td>
+                <td>7 / 14 = 0.500 (50.0 percent)</td>
+                <td>180.0 deg</td>
               </tr>
               <tr>
                 <td>2</td>
                 <td>4</td>
-                <td>$4 / 14 = 0.286$ ($28.6\%$)</td>
-                <td>$102.9^\circ$</td>
+                <td>4 / 14 = 0.286 (28.6 percent)</td>
+                <td>102.9 deg</td>
               </tr>
               <tr>
                 <td>3</td>
                 <td>2</td>
-                <td>$2 / 14 = 0.143$ ($14.3\%$)</td>
-                <td>$51.4^\circ$</td>
+                <td>2 / 14 = 0.143 (14.3 percent)</td>
+                <td>51.4 deg</td>
               </tr>
               <tr>
                 <td>4</td>
                 <td>1</td>
-                <td>$1 / 14 = 0.071$ ($7.1\%$)</td>
-                <td>$25.7^\circ$</td>
+                <td>1 / 14 = 0.071 (7.1 percent)</td>
+                <td>25.7 deg</td>
               </tr>
               <tr>
                 <td><strong>Total</strong></td>
                 <td><strong>14</strong></td>
-                <td><strong>1.000 ($100\%$)</strong></td>
-                <td><strong>$360.0^\circ$</strong></td>
+                <td><strong>1.000 (100 percent)</strong></td>
+                <td><strong>360.0 deg</strong></td>
               </tr>
             </tbody>
           </table>
@@ -783,13 +783,13 @@ p_i = \frac{f_i}{\sum_{j=1}^P f_j}
             <h4>Roulette Wheel Weaknesses</h4>
             <ul>
               <li><strong>Early Stage:</strong> If one chromosome has fitness 10x higher than others, it takes over the entire population in 2 generations (premature convergence).</li>
-              <li><strong>Late Stage:</strong> When all chromosomes have close fitness (e.g. 995, 996, 998), the probabilities become almost identical ($25\%$ each). Selective pressure drops to zero precisely when fine-grained optimization is needed.</li>
+              <li><strong>Late Stage:</strong> When all chromosomes have close fitness (e.g. 995, 996, 998), the probabilities become almost identical (25 percent each). Selective pressure drops to zero precisely when fine-grained optimization is needed.</li>
             </ul>
           </div>
 
           <h3>2. Linear Rank Selection</h3>
           <p>
-            Sorts the population from worst ($r = P$) to best ($r = 1$). Reassigns fitness based strictly on rank, completely immunizing the search against raw fitness scaling!
+            Sorts the population from worst (r = P) to best (r = 1). Reassigns fitness based strictly on rank, completely immunizing the search against raw fitness scaling!
           </p>
           <div class="math-box">
 <strong>Formula 1 (Standard Rank):</strong>
@@ -799,16 +799,16 @@ New Fitness(r) = (P - r) + 1
 New Fitness(r) = (P - r) * [(max - min) / (P - 1)] + min
           </div>
           <p>
-            <em>Example with $P = 11, \max = 8, \min = 3$:</em><br>
-            Slope $= (8 - 3) / (11 - 1) = 5 / 10 = 0.5$.<br>
-            &bull; Rank 1 (Best): $(11 - 1) \times 0.5 + 3 = \mathbf{8.0}$<br>
-            &bull; Rank 6 (Median): $(11 - 6) \times 0.5 + 3 = \mathbf{5.5}$<br>
-            &bull; Rank 11 (Worst): $(11 - 11) \times 0.5 + 3 = \mathbf{3.0}$
+            <em>Example with P = 11, max = 8, min = 3:</em><br>
+            Slope = (8 - 3) / (11 - 1) = 5 / 10 = 0.5.<br>
+            &bull; Rank 1 (Best): (11 - 1) * 0.5 + 3 = 8.0<br>
+            &bull; Rank 6 (Median): (11 - 6) * 0.5 + 3 = 5.5<br>
+            &bull; Rank 11 (Worst): (11 - 11) * 0.5 + 3 = 3.0
           </p>
 
           <h3>3. Tournament Selection</h3>
           <p>
-            Pulls a random subset of $b$ individuals from the population. The individual with the highest fitness in that subset wins. Setting $b = 2$ (Binary Tournament) is standard in production.
+            Pulls a random subset of b individuals from the population. The individual with the highest fitness in that subset wins. Setting b = 2 (Binary Tournament) is standard in production.
           </p>
 
           <h3>4. The Diversity Principle: Survival of the Most Diverse</h3>
@@ -816,7 +816,7 @@ New Fitness(r) = (P - r) * [(max - min) / (P - 1)] + min
             In many fitness landscapes, an individual with slightly lower fitness that explores an entirely new, unvisited region is far more valuable than a high-fitness individual clustered next to existing solutions.
           </p>
           <div class="math-box">
-Diversity_i = \sum_{j \in \text{Selected}} \text{Distance}(i, j)^2
+Diversity_i = Sum of Distance(i, j)^2 for all j in Selected
 Combined Rank = Rank_Quality + Rank_Diversity
           </div>
 
@@ -832,18 +832,18 @@ Combined Rank = Rank_Quality + Rank_Diversity
               <h5>Step-by-Step Formal Solution</h5>
               <ol>
                 <li>
-                  <strong>Elitism Value ($E$):</strong>
+                  <strong>Elitism Value (E):</strong>
                   Elitism is the proportion of top-tier individuals guaranteed survival without competition.
-                  $$E = \frac{\text{Guaranteed Elite Individuals}}{P} = \frac{5}{50} = \mathbf{0.10 \ (10\%)}$$
+                  <div class="math-box">E = Guaranteed Elite Individuals / P = 5 / 50 = 0.10 (10 percent)</div>
                 </li>
                 <li>
-                  <strong>Generation Gap ($G$):</strong>
+                  <strong>Generation Gap (G):</strong>
                   The generation gap is the fraction of the population that is replaced by offspring in the next generation.
-                  $$G = \frac{\text{Offspring entering Next Generation}}{P} = \frac{30}{50} = \mathbf{0.60 \ (60\%)}$$
+                  <div class="math-box">G = Offspring entering Next Generation / P = 30 / 50 = 0.60 (60 percent)</div>
                 </li>
                 <li>
                   <strong>Population Verification:</strong>
-                  Elite Parents = $5$ | Non-elite Surviving Parents = $15$ | Offspring = $30$ &rarr; Total = $50$!
+                  Elite Parents = 5 | Non-elite Surviving Parents = 15 | Offspring = 30 &rarr; Total = 50!
                 </li>
               </ol>
             </div>
@@ -855,10 +855,10 @@ Combined Rank = Rank_Quality + Rank_Diversity
           </p>
           <div class="ascii-diagram">
 Initial Population:
-A: [3 2 7 5 2 4 1 1]  &rarr;  Fitness = 23 (29%)
-B: [2 4 7 4 8 5 5 2]  &rarr;  Fitness = 24 (31%)
-C: [3 2 5 4 3 2 1 3]  &rarr;  Fitness = 11 (14%)
-D: [2 4 4 1 5 1 2 4]  &rarr;  Fitness = 20 (26%)
+A: [3 2 7 5 2 4 1 1]  &rarr;  Fitness = 23 (29 percent)
+B: [2 4 7 4 8 5 5 2]  &rarr;  Fitness = 24 (31 percent)
+C: [3 2 5 4 3 2 1 3]  &rarr;  Fitness = 11 (14 percent)
+D: [2 4 4 1 5 1 2 4]  &rarr;  Fitness = 20 (26 percent)
 Total Fitness = 78
 
 Roulette Wheel Selection selects: B and D for Crossover!
@@ -874,13 +874,13 @@ Offspring E mutates pos 3 (4 &rarr; 7):  G = [2, 4, 7, 4, 8, 5, 5, 2]
 Offspring F mutates pos 7 (2 &rarr; 6):  H = [2, 4, 7, 1, 5, 1, 6, 4]
           </div>
 
-          <h3>Complete Solved Knapsack Problem ($W_{\max} = 12$ kg)</h3>
+          <h3>Complete Solved Knapsack Problem (Max Weight = 12 kg)</h3>
           <table class="comparison-table">
             <thead>
               <tr>
                 <th>Item</th>
                 <th>Weight (kg)</th>
-                <th>Value ($)</th>
+                <th>Value (Coins)</th>
               </tr>
             </thead>
             <tbody>
@@ -890,12 +890,12 @@ Offspring F mutates pos 7 (2 &rarr; 6):  H = [2, 4, 7, 1, 5, 1, 6, 4]
               <tr><td>D</td><td>2</td><td>8</td></tr>
             </tbody>
           </table>
-          <p>Chromosome: 4 bits $[x_A, x_B, x_C, x_D]$.</p>
+          <p>Chromosome: 4 bits [x_A, x_B, x_C, x_D].</p>
           <ul>
-            <li>$C_1 = [0, 1, 1, 0] \implies \text{Weight} = 3+7 = 10\text{ kg} \le 12 \implies \text{Value} = 5+9 = \mathbf{14}$</li>
-            <li>$C_2 = [0, 0, 1, 1] \implies \text{Weight} = 7+2 = 9\text{ kg} \le 12 \implies \text{Value} = 9+8 = \mathbf{17}$</li>
-            <li>$C_3 = [0, 1, 1, 1] \implies \text{Weight} = 3+7+2 = 12\text{ kg} \le 12 \implies \text{Value} = 5+9+8 = \mathbf{22}$ (Fittest)</li>
-            <li>$C_4 = [1, 0, 1, 0] \implies \text{Weight} = 5+7 = 12\text{ kg} \le 12 \implies \text{Value} = 10+9 = \mathbf{19}$</li>
+            <li>C1 = [0, 1, 1, 0] &rArr; Weight = 3 + 7 = 10 kg &le; 12 &rArr; Value = 5 + 9 = <strong>14</strong></li>
+            <li>C2 = [0, 0, 1, 1] &rArr; Weight = 7 + 2 = 9 kg &le; 12 &rArr; Value = 9 + 8 = <strong>17</strong></li>
+            <li>C3 = [0, 1, 1, 1] &rArr; Weight = 3 + 7 + 2 = 12 kg &le; 12 &rArr; Value = 5 + 9 + 8 = <strong>22</strong> (Fittest)</li>
+            <li>C4 = [1, 0, 1, 0] &rArr; Weight = 5 + 7 = 12 kg &le; 12 &rArr; Value = 10 + 9 = <strong>19</strong></li>
           </ul>
 
           <h3>Permutation Problems: Traveling Salesperson Problem (TSP)</h3>
@@ -912,7 +912,7 @@ Child:     (1  2  3 │ 1  2)  ◄── ILLEGAL! Cities 1 & 2 duplicated; 4 & 5
             <li><strong>Partially Mapped Crossover (PMX):</strong> Copies an intermediate swath from Parent 1 to Child 1, creates a positional mapping between parent swaths, and fills remaining slots from Parent 2 using the mapping to resolve duplicates.</li>
             <li><strong>Order Crossover (OX):</strong> Copies an intermediate swath from Parent 1, then fills the remaining slots using the unused cities in the exact sequential order they appear in Parent 2.</li>
             <li><strong>Cycle Crossover (CX):</strong> Preserves the exact absolute city index positions by identifying alternating cycles between the two parents.</li>
-            <li><strong>Inversion Mutation:</strong> Reverses a sub-sequence of cities between two randomly chosen points in the tour (e.g., $(1, 2 \mid 3, 4, 5 \mid 6, 7) \to (1, 2 \mid 5, 4, 3 \mid 6, 7)$), removing path crossing loops in Euclidean space!</li>
+            <li><strong>Inversion Mutation:</strong> Reverses a sub-sequence of cities between two randomly chosen points in the tour (e.g., (1, 2 | 3, 4, 5 | 6, 7) &rarr; (1, 2 | 5, 4, 3 | 6, 7)), removing path crossing loops in Euclidean space!</li>
           </ul>
         </div>
 
@@ -926,28 +926,28 @@ Child:     (1  2  3 │ 1  2)  ◄── ILLEGAL! Cities 1 & 2 duplicated; 4 & 5
           <div class="intuition-box">
             <h4>Real-World Intuition: Implicit Parallelism</h4>
             <p>
-              How can a Genetic Algorithm evaluate only 50 candidate chromosomes in a generation, yet effectively search an astronomically huge search space of $2^{100}$ possible states?
+              How can a Genetic Algorithm evaluate only 50 candidate chromosomes in a generation, yet effectively search an astronomically huge search space of 2^100 possible states?
             </p>
             <p>
-              John Holland proved that when you evaluate a single chromosome, you are not just evaluating one solution. You are simultaneously sampling every single sub-pattern contained inside that chromosome! A single string of length $L$ contains $2^L$ sub-patterns. Evaluating $P$ chromosomes processes between $P^3$ and $O(P \cdot 2^L)$ sub-templates concurrently with zero extra compute. This miracle is called <strong>Implicit Parallelism</strong>.
+              John Holland proved that when you evaluate a single chromosome, you are not just evaluating one solution. You are simultaneously sampling every single sub-pattern contained inside that chromosome! A single string of length L contains 2^L sub-patterns. Evaluating P chromosomes processes between P^3 and O(P * 2^L) sub-templates concurrently with zero extra compute. This miracle is called <strong>Implicit Parallelism</strong>.
             </p>
           </div>
 
           <div class="def-box">
-            <p><strong>Jargon Demystified — Schema (plural: Schemata):</strong> A pattern template describing a subset of bit strings, constructed over the ternary alphabet $\{0, 1, *\}$, where $*$ represents a wildcard ("don't care").</p>
-            <p><strong>Jargon Demystified — Order $o(H)$:</strong> The number of fixed (defined) positions (0 or 1) in schema $H$.</p>
-            <p><strong>Jargon Demystified — Defining Length $\delta(H)$:</strong> The distance between the first fixed bit and the last fixed bit in schema $H$.</p>
+            <p><strong>Jargon Demystified — Schema (plural: Schemata):</strong> A pattern template describing a subset of bit strings, constructed over the ternary alphabet {0, 1, *}, where * represents a wildcard ("don't care").</p>
+            <p><strong>Jargon Demystified — Order o(H):</strong> The number of fixed (defined) positions (0 or 1) in schema H.</p>
+            <p><strong>Jargon Demystified — Defining Length delta(H):</strong> The distance between the first fixed bit and the last fixed bit in schema H.</p>
           </div>
 
           <h3>Order vs. Defining Length Examples</h3>
           <table class="comparison-table">
             <thead>
               <tr>
-                <th>Schema ($H$)</th>
-                <th>Order $o(H)$</th>
+                <th>Schema (H)</th>
+                <th>Order o(H)</th>
                 <th>First Fixed Index</th>
                 <th>Last Fixed Index</th>
-                <th>Defining Length $\delta(H)$</th>
+                <th>Defining Length delta(H)</th>
                 <th>Resistance to Crossover</th>
               </tr>
             </thead>
@@ -957,7 +957,7 @@ Child:     (1  2  3 │ 1  2)  ◄── ILLEGAL! Cities 1 & 2 duplicated; 4 & 5
                 <td>2</td>
                 <td>2</td>
                 <td>5</td>
-                <td>$5 - 2 = \mathbf{3}$</td>
+                <td>5 - 2 = <strong>3</strong></td>
                 <td>High (Short length)</td>
               </tr>
               <tr>
@@ -965,7 +965,7 @@ Child:     (1  2  3 │ 1  2)  ◄── ILLEGAL! Cities 1 & 2 duplicated; 4 & 5
                 <td>5</td>
                 <td>1</td>
                 <td>6</td>
-                <td>$6 - 1 = \mathbf{5}$</td>
+                <td>6 - 1 = <strong>5</strong></td>
                 <td>Very Low (Vulnerable)</td>
               </tr>
               <tr>
@@ -973,7 +973,7 @@ Child:     (1  2  3 │ 1  2)  ◄── ILLEGAL! Cities 1 & 2 duplicated; 4 & 5
                 <td>2</td>
                 <td>4</td>
                 <td>5</td>
-                <td>$5 - 4 = \mathbf{1}$</td>
+                <td>5 - 4 = <strong>1</strong></td>
                 <td><strong>Extremely High</strong></td>
               </tr>
               <tr>
@@ -981,7 +981,7 @@ Child:     (1  2  3 │ 1  2)  ◄── ILLEGAL! Cities 1 & 2 duplicated; 4 & 5
                 <td>2</td>
                 <td>1</td>
                 <td>6</td>
-                <td>$6 - 1 = \mathbf{5}$</td>
+                <td>6 - 1 = <strong>5</strong></td>
                 <td>Extremely Low</td>
               </tr>
             </tbody>
@@ -994,44 +994,44 @@ Child:     (1  2  3 │ 1  2)  ◄── ILLEGAL! Cities 1 & 2 duplicated; 4 & 5
               <span class="exam-title">Holland's Schema Theorem Step-by-Step Derivation</span>
               <span class="exam-badge gold">Core Theoretical Proof</span>
             </div>
-            <p>Let $m(H, t)$ be the expected number of instances of schema $H$ at generation $t$. Let $f(H)$ be the average fitness of instances of $H$, and $\bar{f}$ be average population fitness.</p>
+            <p>Let m(H, t) be the expected number of instances of schema H at generation t. Let f(H) be the average fitness of instances of H, and avg_f be the average population fitness.</p>
             
             <h4>Step 1: Effect of Fitness-Proportionate Selection</h4>
-            <p>The probability that an instance of $H$ is chosen in roulette wheel selection is:</p>
+            <p>The probability that an instance of H is chosen in roulette wheel selection is:</p>
             <div class="math-box">
-P(\text{selection}) = \frac{f(H)}{\sum f_j} = \frac{f(H)}{P \cdot \bar{f}}
+P(selection) = f(H) / (Sum of f_j) = f(H) / (P * avg_f)
             </div>
-            <p>Across $P$ independent parent selection trials, the expected count becomes:</p>
+            <p>Across P independent parent selection trials, the expected count becomes:</p>
             <div class="math-box">
-m(H, t)_{\text{selected}} = P \cdot \left[ m(H, t) \cdot \frac{f(H)}{P \cdot \bar{f}} \right] = m(H, t) \cdot \frac{f(H)}{\bar{f}}
+m(H, t)_selected = P * [ m(H, t) * (f(H) / (P * avg_f)) ] = m(H, t) * (f(H) / avg_f)
             </div>
-            <p><em>Conclusion:</em> If a schema has above-average fitness ($f(H) > \bar{f}$), its representation grows exponentially!</p>
+            <p><em>Conclusion:</em> If a schema has above-average fitness (f(H) > avg_f), its representation grows exponentially!</p>
 
             <h4>Step 2: Effect of Single-Point Crossover Disruption</h4>
             <p>
-              A chromosome has $L - 1$ possible cut points. Crossover disrupts schema $H$ only if the cut point falls <em>between</em> the first and last fixed bits.
+              A chromosome has L - 1 possible cut points. Crossover disrupts schema H only if the cut point falls <em>between</em> the first and last fixed bits.
             </p>
             <div class="math-box">
-P(\text{cut falls inside } H) = \frac{\delta(H)}{L - 1}
+P(cut falls inside H) = delta(H) / (L - 1)
             </div>
-            <p>Accounting for the crossover probability $p_c$, the lower bound on schema survival is:</p>
+            <p>Accounting for the crossover probability p_c, the lower bound on schema survival is:</p>
             <div class="math-box">
-S_c \ge 1 - p_c \frac{\delta(H)}{L - 1}
+S_c >= 1 - p_c * [delta(H) / (L - 1)]
             </div>
-            <p><em>Conclusion:</em> Schemata with small defining length $\delta(H)$ have near-zero chance of being sliced apart by crossover!</p>
+            <p><em>Conclusion:</em> Schemata with small defining length delta(H) have near-zero chance of being sliced apart by crossover!</p>
 
             <h4>Step 3: Effect of Point Mutation Disruption</h4>
             <p>
-              For schema $H$ to survive mutation, all $o(H)$ of its fixed bits must avoid being flipped. Since each bit survives mutation with probability $(1 - p_m)$:
+              For schema H to survive mutation, all o(H) of its fixed bits must avoid being flipped. Since each bit survives mutation with probability (1 - p_m):
             </p>
             <div class="math-box">
-S_m = (1 - p_m)^{o(H)} \approx 1 - o(H) \cdot p_m \quad (\text{for small } p_m)
+S_m = (1 - p_m)^o(H) approx 1 - o(H) * p_m    (for small p_m)
             </div>
-            <p><em>Conclusion:</em> Schemata with low order $o(H)$ (few defined bits) have maximum survival probability!</p>
+            <p><em>Conclusion:</em> Schemata with low order o(H) (few defined bits) have maximum survival probability!</p>
 
             <h4>The Fundamental Schema Theorem:</h4>
             <div class="math-box">
-m(H, t+1) \ge m(H, t) \cdot \left[ \frac{f(H, t)}{\bar{f}(t)} \right] \cdot \left[ 1 - p_c \frac{\delta(H)}{L - 1} \right] \cdot \left[ 1 - o(H) \cdot p_m \right]
+m(H, t+1) >= m(H, t) * [ f(H, t) / avg_f(t) ] * [ 1 - p_c * (delta(H) / (L - 1)) ] * [ 1 - o(H) * p_m ]
             </div>
           </div>
 
@@ -1059,7 +1059,7 @@ Isolated Peak: (1 1 1 1) [Global Max] has zero partial reward &rarr; Missed comp
           <div class="intuition-box">
             <h4>Real-World Intuition: Credit Assignment in a Free Market</h4>
             <p>
-              Imagine an assembly line manufacturing luxury cars. The final worker attaches the hood ornament, and the customer pays \$100,000. Should that final worker receive the entire \$100,000? 
+              Imagine an assembly line manufacturing luxury cars. The final worker attaches the hood ornament, and the customer pays 100,000 dollars. Should that final worker receive the entire 100,000 dollars? 
             </p>
             <p>
               Of course not! If they did, the workers who forged the engine and welded the chassis would starve and quit, and no more cars could ever be built.
@@ -1087,10 +1087,10 @@ Isolated Peak: (1 1 1 1) [Global Max] has zero partial reward &rarr; Missed comp
    [Pays Bid to Precursor]            [Takes Action / Receives Env Payoff]
           </div>
           <ul>
-            <li><strong>Classifiers:</strong> Production rules of the form <code>Condition &rarr; Action</code> using alphabet $\{0, 1, \#\}$.</li>
-            <li><strong>Bidding Mechanism:</strong> Active classifier $C_i$ makes a bid $B_i = c \cdot S_i \cdot \text{Specificity}_i$, where $c$ is a constant, $S_i$ is strength, and specificity is the fraction of non-# bits.</li>
-            <li><strong>Payment:</strong> The winning rule pays its bid $B_i$ to the precursor rule that posted the message that activated it.</li>
-            <li><strong>Payoff:</strong> If the action satisfies the external environment, a massive reward $R$ is added directly to the winning rule's strength. Over time, wealth flows backward along successful reasoning chains!</li>
+            <li><strong>Classifiers:</strong> Production rules of the form <code>Condition &rarr; Action</code> using alphabet {0, 1, #}.</li>
+            <li><strong>Bidding Mechanism:</strong> Active classifier C_i makes a bid B_i = c * S_i * Specificity_i, where c is a constant, S_i is strength, and specificity is the fraction of non-# bits.</li>
+            <li><strong>Payment:</strong> The winning rule pays its bid B_i to the precursor rule that posted the message that activated it.</li>
+            <li><strong>Payoff:</strong> If the action satisfies the external environment, a massive reward R is added directly to the winning rule's strength. Over time, wealth flows backward along successful reasoning chains!</li>
             <li><strong>Analogy to Neural Networks:</strong> The Bucket Brigade algorithm propagates credit backwards through temporal rule sequences exactly like <strong>Backpropagation</strong> propagates error backwards through neural layer weights!</li>
           </ul>
 
@@ -1121,7 +1121,7 @@ Parent 1: (+ X (* 2 Y))                  Parent 2: (- (/ A B) (COS X))
 Child 1:  (+ X (COS X))                  Child 2: (- (/ A B) (* 2 Y))
           </div>
           <p>
-            <strong>Classic Application (Kepler's Third Law):</strong> Koza used GP to rediscover Kepler's Third Law ($T^2 = c \cdot R^3$) directly from planetary orbital periods and solar distances with zero prior physics knowledge!
+            <strong>Classic Application (Kepler's Third Law):</strong> Koza used GP to rediscover Kepler's Third Law (T^2 = c * R^3) directly from planetary orbital periods and solar distances with zero prior physics knowledge!
           </p>
 
           <h3>3. Artificial Life &amp; Conway's "Game of Life"</h3>
@@ -1145,12 +1145,12 @@ Child 1:  (+ X (COS X))                  Child 2: (- (/ A B) (* 2 Y))
 
           <h3>4. Crutchfield &amp; Mitchell: Emergent Particle Computation</h3>
           <p>
-            Crutchfield and Mitchell (1995) evolved 1D Cellular Automata (CA) using genetic algorithms to solve the <strong>Density Classification Task</strong> ($\rho_c = 1/2$):
+            Crutchfield and Mitchell (1995) evolved 1D Cellular Automata (CA) using genetic algorithms to solve the <strong>Density Classification Task</strong> (rho_c = 1/2):
           </p>
           <ul>
-            <li><strong>Task:</strong> If initial lattice has $>50\%$ ones, entire lattice must synchronize to all ones; if $<50\%$ ones, synchronize to all zeros.</li>
-            <li><strong>Constraint:</strong> Each cell has radius $r=3$ (can only communicate with its 7 immediate neighbors; no central coordinator exists).</li>
-            <li><strong>Emergent Phenomenon:</strong> The GA discovered local rules that generated coherent spatio-temporal domains. The boundaries between domains acted as physical <strong>particles ($\alpha, \beta, \gamma, \delta$)</strong>. These particles collided and performed logic computations across space, proving that global computation emerges from simple local rules!</li>
+            <li><strong>Task:</strong> If initial lattice has > 50 percent ones, entire lattice must synchronize to all ones; if < 50 percent ones, synchronize to all zeros.</li>
+            <li><strong>Constraint:</strong> Each cell has radius r = 3 (can only communicate with its 7 immediate neighbors; no central coordinator exists).</li>
+            <li><strong>Emergent Phenomenon:</strong> The GA discovered local rules that generated coherent spatio-temporal domains. The boundaries between domains acted as physical <strong>particles (alpha, beta, gamma, delta)</strong>. These particles collided and performed logic computations across space, proving that global computation emerges from simple local rules!</li>
           </ul>
         </div>
 
@@ -1189,7 +1189,7 @@ Child 1:  (+ X (COS X))                  Child 2: (- (/ A B) (* 2 Y))
                 <strong>Inductive Bias</strong> is the set of fundamental assumptions an algorithm makes about the target concept before seeing the data. In Genetic Algorithms, the inductive bias is established almost entirely by the <strong>chromosome representation</strong>:
               </p>
               <ul>
-                <li><strong>Linear Adjacency Bias:</strong> Standard crossover assumes that genes positioned close to each other on the chromosome string belong to the same functional building block (low defining length $\delta(H)$). If two interdependent genes are placed at opposite ends of a string, standard crossover will continuously tear them apart.</li>
+                <li><strong>Linear Adjacency Bias:</strong> Standard crossover assumes that genes positioned close to each other on the chromosome string belong to the same functional building block (low defining length delta(H)). If two interdependent genes are placed at opposite ends of a string, standard crossover will continuously tear them apart.</li>
                 <li><strong>Domain Legality Bias:</strong> In permutation problems (like TSP), a binary integer representation exhibits a catastrophic bias because standard crossover yields illegal states. An order-based representation (OX, PMX) biases the search toward valid permutation neighborhoods.</li>
               </ul>
             </div>
@@ -1205,12 +1205,12 @@ Child 1:  (+ X (COS X))                  Child 2: (- (/ A B) (* 2 Y))
               <h5>Step-by-Step Solution</h5>
               <ol>
                 <li>
-                  <strong>Disjunct Count Bias:</strong> In CNF, each clause is a disjunction ($A \lor B \lor C$). A clause with 10 literals is satisfied by almost any random assignment ($1 - 2^{-10} = 99.9\%$ satisfaction probability). A clause with only 1 literal (a unit clause) is satisfied with only $50\%$ probability. Therefore, clauses with few literals exert an enormous inductive constraint on the search space.
+                  <strong>Disjunct Count Bias:</strong> In CNF, each clause is a disjunction (A or B or C). A clause with 10 literals is satisfied by almost any random assignment (1 - 2^(-10) = 99.9 percent satisfaction probability). A clause with only 1 literal (a unit clause) is satisfied with only 50 percent probability. Therefore, clauses with few literals exert an enormous inductive constraint on the search space.
                 </li>
                 <li>
                   <strong>Alternative Continuous Fitness Measure:</strong>
-                  Instead of a coarse integer count of satisfied clauses ($0, 1, 2, 3, 4, 5$), award partial credit inside unsatisfied clauses:
-                  $$f(\text{chromosome}) = \sum_{j \in \text{Clauses}} \left[ \text{if clause } j \text{ satisfied then } 1.0 \text{ else } \max_{l \in j} (\text{partial credit of literal } l) \right]$$
+                  Instead of a coarse integer count of satisfied clauses (0, 1, 2, 3, 4, 5), award partial credit inside unsatisfied clauses:
+                  <div class="math-box">f(chromosome) = Sum of [ if clause j satisfied then 1.0 else max literal credit in clause j ] for all clauses j in Clauses</div>
                   This creates a smooth gradient landscape that prevents flat plateaus!
                 </li>
               </ol>
@@ -1226,12 +1226,12 @@ Child 1:  (+ X (COS X))                  Child 2: (- (/ A B) (* 2 Y))
             <div class="solution-box">
               <h5>Step-by-Step Solution</h5>
               <p>
-                In standard binary encoding, adjacent numbers often require flipping multiple bits. Moving from $7$ to $8$ requires flipping 4 bits:
-                $$7 = 0111_2 \longleftrightarrow 8 = 1000_2 \quad (\text{Hamming Distance} = 4)$$
-                This is a <strong>Hamming Cliff</strong>. For a mutation operator with $p_m = 0.01$, the probability of taking this single step is $10^{-8}$, turning a tiny numerical step into an insurmountable chasm.
+                In standard binary encoding, adjacent numbers often require flipping multiple bits. Moving from 7 to 8 requires flipping 4 bits:
+                <div class="math-box">7 = 0111 (binary) &lt;---&gt; 8 = 1000 (binary)    (Hamming Distance = 4)</div>
+                This is a <strong>Hamming Cliff</strong>. For a mutation operator with p_m = 0.01, the probability of taking this single step is 10^(-8), turning a tiny numerical step into an insurmountable chasm.
               </p>
               <p>
-                <strong>Gray Coding</strong> ensures that any two consecutive integers differ by exactly <strong>one single bit</strong> ($7 = 0100_{\text{gray}}, 8 = 1100_{\text{gray}}$, Hamming distance = 1).
+                <strong>Gray Coding</strong> ensures that any two consecutive integers differ by exactly <strong>one single bit</strong> (7 = 0100 in gray code, 8 = 1100 in gray code, Hamming distance = 1).
               </p>
               <p><strong>Two Other Areas Where Gray Coding is Vital:</strong></p>
               <ol>
@@ -1261,12 +1261,12 @@ Child 1:  (+ X (COS X))                  Child 2: (- (/ A B) (* 2 Y))
                   <tr>
                     <td><strong>Architecture</strong></td>
                     <td>Continuous, differentiable layers of artificial neurons.</td>
-                    <td>Discrete, rule-based production memory ($0, 1, \#$).</td>
+                    <td>Discrete, rule-based production memory (0, 1, #).</td>
                   </tr>
                   <tr>
                     <td><strong>Credit Flow</strong></td>
-                    <td>Gradient error vector ($\delta$) propagates backwards through spatial layer weights.</td>
-                    <td>Monetary bid currency ($B_i$) propagates backwards along temporal activation chains.</td>
+                    <td>Gradient error vector delta propagates backwards through spatial layer weights.</td>
+                    <td>Monetary bid currency B_i propagates backwards along temporal activation chains.</td>
                   </tr>
                   <tr>
                     <td><strong>Supervision</strong></td>
@@ -1292,9 +1292,9 @@ Child 1:  (+ X (COS X))                  Child 2: (- (/ A B) (* 2 Y))
             <div class="solution-box">
               <h5>Step-by-Step Solution</h5>
               <ol>
-                <li><strong>Closure Constraint:</strong> Every function in the function set must accept as arguments any data type that can be returned by any other function or terminal. Division must be protected ($\text{div}(x, 0) = 1$) to prevent runtime crashes.</li>
+                <li><strong>Closure Constraint:</strong> Every function in the function set must accept as arguments any data type that can be returned by any other function or terminal. Division must be protected (div(x, 0) = 1) to prevent runtime crashes.</li>
                 <li><strong>Sufficiency Constraint:</strong> If the primitive function and terminal sets do not contain the fundamental mathematical operators needed to model the system (e.g., trying to model periodicity without trigonometric operators), GP can never evolve the solution.</li>
-                <li><strong>Code Bloat:</strong> As generations advance, parse trees expand aggressively with redundant neutral code (e.g., $(+ \ X \ (- \ Y \ Y))$), consuming exponential RAM without improving fitness.</li>
+                <li><strong>Code Bloat:</strong> As generations advance, parse trees expand aggressively with redundant neutral code (e.g., (+ X (- Y Y))), consuming exponential RAM without improving fitness.</li>
               </ol>
             </div>
           </div>
