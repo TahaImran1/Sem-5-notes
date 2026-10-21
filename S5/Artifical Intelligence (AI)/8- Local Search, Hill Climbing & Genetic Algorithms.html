@@ -1,0 +1,1459 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Artificial Intelligence — Local Search, Hill Climbing &amp; Genetic Algorithms</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../notes.css" />
+    <style>
+      .comparison-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 18px 0;
+        font-size: 0.92rem;
+      }
+      .comparison-table th, .comparison-table td {
+        border: 1px solid var(--bd);
+        padding: 10px 14px;
+        text-align: left;
+      }
+      .comparison-table th {
+        background: rgba(255,255,255,0.03);
+        color: var(--ac);
+        font-weight: 600;
+      }
+      .comparison-table tr:hover {
+        background: rgba(255,255,255,0.02);
+      }
+      .math-box {
+        font-family: "Courier New", Courier, monospace;
+        background: rgba(255, 255, 255, 0.04);
+        padding: 14px 18px;
+        border-radius: 8px;
+        border-left: 3px solid #facc15;
+        margin: 14px 0;
+        color: #facc15;
+        line-height: 1.6;
+        overflow-x: auto;
+      }
+      .ascii-diagram {
+        font-family: "Courier New", Courier, monospace;
+        background: #0d0d11;
+        border: 1px solid var(--bd);
+        border-radius: 8px;
+        padding: 16px 18px;
+        margin: 16px 0;
+        color: #4fa3e3;
+        white-space: pre;
+        overflow-x: auto;
+        font-size: 0.88rem;
+        line-height: 1.45;
+      }
+      .exam-card {
+        background: #18181b;
+        border: 1px solid var(--bd);
+        border-radius: 12px;
+        padding: 22px;
+        margin: 22px 0;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+      }
+      .exam-card:hover {
+        border-color: rgba(217, 119, 87, 0.45);
+      }
+      .exam-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        flex-wrap: wrap;
+        gap: 12px;
+        margin-bottom: 14px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      .exam-title {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: #fff;
+        margin: 0;
+      }
+      .exam-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 3px 9px;
+        border-radius: 6px;
+        font-size: 0.72rem;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        text-transform: uppercase;
+        font-family: monospace;
+      }
+      .exam-badge.gold {
+        background: rgba(240, 169, 78, 0.15);
+        color: #f0a94e;
+        border: 1px solid rgba(240, 169, 78, 0.35);
+      }
+      .exam-badge.cyan {
+        background: rgba(79, 163, 227, 0.15);
+        color: #4fa3e3;
+        border: 1px solid rgba(79, 163, 227, 0.35);
+      }
+      .exam-badge.green {
+        background: rgba(79, 191, 139, 0.15);
+        color: #4fbf8b;
+        border: 1px solid rgba(79, 191, 139, 0.35);
+      }
+      .solution-box {
+        background: #141c24;
+        border: 1px solid #234563;
+        border-left: 4px solid #4fa3e3;
+        border-radius: 8px;
+        padding: 16px 18px;
+        margin: 14px 0;
+      }
+      .solution-box h5 {
+        color: #4fa3e3;
+        font-size: 0.92rem;
+        font-weight: 700;
+        margin: 0 0 8px;
+        text-transform: uppercase;
+      }
+      .def-box {
+        background: var(--def-bg);
+        border: 1px solid var(--def-bd);
+        border-left: 4px solid var(--def-bd);
+        padding: 14px 18px;
+        border-radius: 8px;
+        margin: 16px 0;
+      }
+      .def-box strong {
+        color: #4fbf8b;
+      }
+      .intuition-box {
+        background: rgba(217, 119, 87, 0.08);
+        border: 1px solid rgba(217, 119, 87, 0.3);
+        border-left: 4px solid var(--ac);
+        border-radius: 8px;
+        padding: 16px 20px;
+        margin: 18px 0;
+      }
+      .intuition-box h4 {
+        color: var(--ac);
+        margin: 0 0 8px;
+        font-size: 0.95rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+      .protip-box {
+        background: var(--wrn-bg);
+        border: 1px solid var(--wrn-bd);
+        border-left: 4px solid var(--wrn-bd);
+        border-radius: 8px;
+        padding: 14px 18px;
+        margin: 18px 0;
+      }
+      .protip-box h4 {
+        color: #f0a94e;
+        margin: 0 0 8px;
+        font-size: 0.92rem;
+        text-transform: uppercase;
+      }
+      .bit-string {
+        font-family: monospace;
+        letter-spacing: 2px;
+        background: #27272a;
+        padding: 3px 8px;
+        border-radius: 4px;
+        color: #38bdf8;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+  <body>
+    <button id="menu-toggle" onclick="toggleSidebar()" aria-label="Toggle navigation">☰</button>
+    <div id="sidebar-backdrop" onclick="toggleSidebar()"></div>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SIDEBAR
+         ═══════════════════════════════════════════════════════ -->
+    <div id="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-header-text">
+          <div class="sidebar-course-label">Course Notes</div>
+          <div class="sidebar-title">Artificial Intelligence</div>
+        </div>
+      </div>
+      <div class="sidebar-search-wrap">
+        <input
+          type="text"
+          id="search-input"
+          placeholder="Search topics…"
+          onkeyup="filterContent()"
+        />
+      </div>
+      <ul class="nav-list" id="nav-list">
+        <li>
+          <a class="nav-module-link" href="./1- Introduction to AI.html">
+            <span class="nav-num">01</span>Intro to AI
+          </a>
+        </li>
+        <li>
+          <a class="nav-module-link" href="./2- State Space Search.html">
+            <span class="nav-num">02</span>State Space Search
+          </a>
+        </li>
+        <li>
+          <a class="nav-module-link" href="./3- Uninformed Search Algorithms.html">
+            <span class="nav-num">03</span>Uninformed Search (UCS)
+          </a>
+        </li>
+        <li>
+          <a class="nav-module-link" href="./4- Informed & Heuristic Search.html">
+            <span class="nav-num">04</span>Informed Search &amp; Hill Climbing
+          </a>
+        </li>
+        <li>
+          <a class="nav-module-link" href="./5- A-Star Search & Properties.html">
+            <span class="nav-num">05</span>A* Search &amp; Properties
+          </a>
+        </li>
+        <li>
+          <a class="nav-module-link" href="./6- Adversarial Search & Game Playing.html">
+            <span class="nav-num">06</span>Adversarial Search (Minimax)
+          </a>
+        </li>
+        <li>
+          <a class="nav-module-link" href="./7- Exam & Quiz Prep (Lectures 1-9).html">
+            <span class="nav-num">07</span>Exam &amp; Quiz Prep
+          </a>
+        </li>
+        <li class="nav-section">
+          <div class="nav-section-title" onclick="toggleSection(this)">
+            <span>08. Local Search &amp; Genetic Algorithms</span><span class="chevron">▼</span>
+          </div>
+          <ul class="nav-sublist">
+            <li><a href="javascript:void(0)" onclick="showTopic('topic-1')" class="active"><span class="nav-num">01</span>Local Search &amp; Hill Climbing</a></li>
+            <li><a href="javascript:void(0)" onclick="showTopic('topic-2')"><span class="nav-num">02</span>Genetic Algorithms I: Representation</a></li>
+            <li><a href="javascript:void(0)" onclick="showTopic('topic-3')"><span class="nav-num">03</span>Genetic Algorithms II: Selection</a></li>
+            <li><a href="javascript:void(0)" onclick="showTopic('topic-4')"><span class="nav-num">04</span>Holland's Schema Theorem</a></li>
+            <li><a href="javascript:void(0)" onclick="showTopic('topic-5')"><span class="nav-num">05</span>Classifiers, GP &amp; Artificial Life</a></li>
+            <li><a href="javascript:void(0)" onclick="showTopic('topic-6')"><span class="nav-num">06</span>Luger Ch 12 Solved Exercises</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════
+         MAIN CONTENT
+         ═══════════════════════════════════════════════════════ -->
+    <div id="main-content">
+      <div class="module-container">
+        <div class="module-header">
+          <div class="module-eyebrow">Artificial Intelligence — Module 08</div>
+          <h1 class="module-title">Local Search, Hill Climbing &amp; Genetic Algorithms</h1>
+          <p style="color: var(--mt); font-size: 0.95rem; margin-top: 6px;">
+            <strong>Comprehensive Coverage:</strong> FAST-NU Lectures 11, 12, 13, 14, 15 &bull; George F. Luger (Chapter 12, pp. 532–567) &bull; Holland's Schema Theorem &bull; Patrick Winston Food Allergy &bull; Complete Step-by-Step Solved Proofs &amp; Exercises
+          </p>
+        </div>
+
+        <!-- ═════════════════════════════════════════════════════
+             TOPIC 1: Local Search & Hill Climbing Foundations
+             ═════════════════════════════════════════════════════ -->
+        <div class="topic-card" id="topic-1">
+          <h2><span class="topic-num">1</span>Local Search &amp; Hill Climbing Foundations</h2>
+          <p class="topic-subtitle">Lecture 11: Beyond classical path-based search, landscape topography, greediness, and escaping failure modes</p>
+
+          <div class="intuition-box">
+            <h4>Real-World Intuition: Why Throw Away the Path?</h4>
+            <p>
+              Imagine planning a road trip from Lahore to Islamabad. Every turn, toll booth, and highway exit matters. That is <strong>Classical Search</strong> (BFS, DFS, A*). The solution is the <em>path itself</em>.
+            </p>
+            <p>
+              Now imagine designing the layout of an integrated circuit chip with 5 billion transistors, or assigning classrooms to 500 university courses. Does anyone care in what sequence you placed the rooms on your scratchpad? No. The sequence of steps is completely irrelevant. The <strong>final configuration alone is the solution</strong>.
+            </p>
+            <p>
+              <strong>Critical Thinking:</strong> Classical search requires storing every path in an <code>OpenList</code>. On massive problems, your computer's RAM crashes within seconds. <strong>Local Search</strong> solves this by keeping only <em>one state</em> in memory at any time. It asks: <em>"Can I make a small tweak to my current guess to make it slightly better?"</em>
+            </p>
+          </div>
+
+          <div class="def-box">
+            <p><strong>Jargon Demystified — Local Search:</strong> An algorithm that operates by making small, iterative changes to a single complete candidate solution, keeping only the current state in memory ($O(1)$ space).</p>
+            <p><strong>Jargon Demystified — State-Space Landscape:</strong> A topological surface where horizontal coordinates represent complete problem configurations and vertical elevation represents solution quality.</p>
+            <p><strong>Jargon Demystified — Objective Function:</strong> A scoring function where higher elevation equals better quality (used in maximization problems).</p>
+            <p><strong>Jargon Demystified — Cost / Heuristic Function ($h$):</strong> A penalty function where lower elevation equals better quality (used in minimization problems).</p>
+          </div>
+
+          <h3>Systematic Search vs. Local Search Comparison</h3>
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Feature</th>
+                <th>Systematic Search (BFS, DFS, A*)</th>
+                <th>Local Search (Hill Climbing, GA)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Memory Requirement</strong></td>
+                <td>Exponential ($O(b^d)$) — keeps entire search frontier.</td>
+                <td>Constant ($O(1)$) — keeps only current state or small population.</td>
+              </tr>
+              <tr>
+                <td><strong>Solution Definition</strong></td>
+                <td>The <em>path</em> from start state to goal.</td>
+                <td>The <em>goal state configuration</em> itself (path is discarded).</td>
+              </tr>
+              <tr>
+                <td><strong>Search Space Suitability</strong></td>
+                <td>Finite, discrete state graphs.</td>
+                <td>Massive, continuous, or infinite state spaces.</td>
+              </tr>
+              <tr>
+                <td><strong>Typical Problems</strong></td>
+                <td>Routing, GPS Navigation, 8-Puzzle, Maze Solving.</td>
+                <td>N-Queens, VLSI Chip Layout, Job Scheduling, ML Parameter Tuning.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>The State-Space Landscape Anatomy</h3>
+          <div class="ascii-diagram">
+Elevation 
+ (Objective)
+    ▲
+    │                  Global Maximum (Highest Peak)
+    │                       ▲
+    │                      / \
+    │      Local Max      /   \            Shoulder
+    │         ▲          /     \          ┌──────────┐
+    │        / \        /       \        /            \
+    │       /   \______/         \______/              \
+    │      /     Flat Plateau                           \
+    │     /                                              \
+    └────┴────────────────────────────────────────────────┴──► State Space (Configurations)
+          </div>
+
+          <h3>The Hill-Climbing Algorithm (Steepest Ascent)</h3>
+          <p>
+            Hill climbing is famously described as: <strong>"Like climbing Mount Everest in thick fog with amnesia."</strong>
+          </p>
+          <ul>
+            <li><strong>Thick Fog:</strong> The algorithm cannot look ahead to see the distant summit; it can only feel the gradient of immediate neighbors.</li>
+            <li><strong>Amnesia:</strong> It keeps no search history; it cannot remember where it came from or backtrack when trapped.</li>
+          </ul>
+
+          <div class="math-box">
+<strong>Algorithm: Steepest-Ascent Hill Climbing</strong>
+1. current = INITIAL-STATE(problem)
+2. loop do:
+     neighbor = highest-valued successor of current
+     if neighbor.VALUE &lt;= current.VALUE then:
+         return current.STATE (Peak reached; terminate)
+     current = neighbor
+          </div>
+
+          <h3>Detailed Solved Example: 8-Queens via Hill Climbing</h3>
+          <p>
+            <strong>Problem:</strong> Place 8 queens on an $8 \times 8$ board such that no two queens attack each other along any row, column, or diagonal.
+          </p>
+          <p>
+            <strong>State Representation:</strong> An array of length 8 where <code>Index = Column</code> and <code>Value = Row</code>. Exactly one queen per column.
+          </p>
+          <p>
+            <strong>Heuristic Cost Function ($h$):</strong> The number of pairs of queens attacking each other directly or indirectly. The goal is $h = 0$.
+            Total possible pairs of queens = $\binom{8}{2} = \frac{8 \times 7}{2} = 28$.
+          </p>
+
+          <div class="exam-card">
+            <div class="exam-header">
+              <span class="exam-title">Step-by-Step Attacking Pair Calculation</span>
+              <span class="exam-badge cyan">Worked Example</span>
+            </div>
+            <p>Consider initial configuration: <code>State A = [3, 2, 7, 5, 2, 4, 1, 1]</code></p>
+            <div class="ascii-diagram">
+Row
+ 8 | .  .  .  .  .  .  .  .
+ 7 | .  .  Q  .  .  .  .  .   (Col 3, Row 7)
+ 6 | .  .  .  .  .  .  .  .
+ 5 | .  .  .  Q  .  .  .  .   (Col 4, Row 5)
+ 4 | .  .  .  .  .  Q  .  .   (Col 6, Row 4)
+ 3 | Q  .  .  .  .  .  .  .   (Col 1, Row 3)
+ 2 | .  Q  .  .  Q  .  .  .   (Col 2, Row 2; Col 5, Row 2)
+ 1 | .  .  .  .  .  .  Q  Q   (Col 7, Row 1; Col 8, Row 1)
+   +------------------------
+     1  2  3  4  5  6  7  8   Col
+            </div>
+            <p>Counting non-attacking pairs for each queen moving left to right:</p>
+            <ul>
+              <li><strong>Queen 1 (Col 1, Row 3):</strong> Attacked diagonally by Queen 2. Non-attacking with Queens 3, 4, 5, 6, 7, 8 &rarr; <strong>6 pairs</strong>.</li>
+              <li><strong>Queen 2 (Col 2, Row 2):</strong> Attacked horizontally by Queen 5 (Row 2). Non-attacking with Queens 3, 4, 6, 7, 8 &rarr; <strong>5 pairs</strong>.</li>
+              <li><strong>Queen 3 (Col 3, Row 7):</strong> Attacked diagonally by Queen 6 ($|7-4| = |3-6| = 3$). Non-attacking with 4, 5, 7, 8 &rarr; <strong>4 pairs</strong>.</li>
+              <li><strong>Queen 4 (Col 4, Row 5):</strong> Attacked diagonally by Queen 5 ($|5-2| = |4-5| = 1$). Non-attacking with 6, 7, 8 &rarr; <strong>3 pairs</strong>.</li>
+              <li><strong>Queen 5 (Col 5, Row 2):</strong> Non-attacking with 6, 7, 8 &rarr; <strong>3 pairs</strong>.</li>
+              <li><strong>Queen 6 (Col 6, Row 4):</strong> Non-attacking with 7, 8 &rarr; <strong>2 pairs</strong>.</li>
+              <li><strong>Queen 7 (Col 7, Row 1):</strong> Attacked horizontally by Queen 8 (Row 1) &rarr; <strong>0 pairs</strong>.</li>
+              <li><strong>Queen 8 (Col 8, Row 1):</strong> Out of remaining pairs to right &rarr; <strong>0 pairs</strong>.</li>
+            </ul>
+            <div class="math-box">
+Total Non-Attacking Pairs = 6 + 5 + 4 + 3 + 3 + 2 + 0 + 0 = 23
+Attacking Pairs Heuristic h = 28 - 23 = 5
+            </div>
+            <p>
+              In Steepest Ascent, all $8 \times 7 = 56$ single-queen column moves are evaluated. The move yielding the greatest reduction in $h$ is chosen. Within 5 moves, it reaches $h=1$.
+            </p>
+          </div>
+
+          <h3>The 4 Classical Pathologies of Hill Climbing</h3>
+          <div class="ascii-diagram">
+1. LOCAL MAXIMUM            2. FLAT PLATEAU               3. RIDGE
+      ▲                        ┌────────────┐               / \
+     / \                      /              \             /   \  ◄── Crest slopes up
+    /   \                    /                \           /     \
+ [All neighbors worse]     [All neighbors equal]     [Orthogonal steps fall off]
+          </div>
+          <ul>
+            <li><strong>Local Maximum:</strong> A peak that is higher than all its neighbors, but lower than the global maximum. The algorithm sees only downward moves and freezes prematurely.</li>
+            <li><strong>Flat Plateau:</strong> A flat region of the state space where all neighboring states have the exact same value. The algorithm has no gradient to guide it and wanders aimlessly.</li>
+            <li><strong>Shoulder:</strong> A flat plateau that actually adjoins an upward slope. Terminating too early causes the algorithm to miss the ascending terrain.</li>
+            <li><strong>Ridge:</strong> A sequence of local maxima joined together. The crest slopes gently uphill, but the sides drop steeply. Because standard hill climbing only adjusts one variable at a time (moving along orthogonal grid axes), every single neighboring move drops downhill, trapping the search.</li>
+          </ul>
+
+          <h3>Hill Climbing Variants</h3>
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Variant</th>
+                <th>Neighbor Selection Rule</th>
+                <th>Convergence Speed</th>
+                <th>Completeness</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Simple Hill Climbing</strong></td>
+                <td>Evaluates neighbors sequentially; accepts the <em>first</em> neighbor that is better than the current state.</td>
+                <td>Very Fast per step</td>
+                <td>Incomplete (easily stuck)</td>
+              </tr>
+              <tr>
+                <td><strong>Steepest Ascent</strong></td>
+                <td>Evaluates <em>all</em> neighbors; selects the neighbor with the <em>maximum</em> improvement.</td>
+                <td>Moderate</td>
+                <td>Incomplete</td>
+              </tr>
+              <tr>
+                <td><strong>First-Choice</strong></td>
+                <td>Generates neighbors at random; accepts the first one that is strictly better. Essential when branching factor is huge.</td>
+                <td>Fast</td>
+                <td>Incomplete</td>
+              </tr>
+              <tr>
+                <td><strong>Stochastic</strong></td>
+                <td>Chooses randomly among uphill moves; probability of selection is proportional to steepness.</td>
+                <td>Slow</td>
+                <td>Incomplete</td>
+              </tr>
+              <tr>
+                <td><strong>Random-Restart</strong></td>
+                <td>Runs repeated independent hill-climbing searches from randomly generated starting states. Keeps the best result found.</td>
+                <td>Variable</td>
+                <td><strong>Complete with probability &rarr; 1</strong></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="protip-box">
+            <h4>Exam Fact: Sideways Moves &amp; Massive Scaling</h4>
+            <p>
+              A <strong>sideways move</strong> is an escape step to a neighbor with identical heuristic value ($h_{\text{neighbor}} = h_{\text{current}}$). To prevent infinite loops, a limit (usually 100 consecutive sideways moves) is enforced.
+            </p>
+            <p>
+              With sideways moves and random restarts, hill climbing can solve <strong>3 million queens in under 1 minute</strong>!
+            </p>
+          </div>
+        </div>
+
+        <!-- ═════════════════════════════════════════════════════
+             TOPIC 2: Genetic Algorithms I: Representation
+             ═════════════════════════════════════════════════════ -->
+        <div class="topic-card" id="topic-2">
+          <h2><span class="topic-num">2</span>Genetic Algorithms I: Biologically Inspired Computing &amp; Representation</h2>
+          <p class="topic-subtitle">Lectures 12 &amp; 13, Luger 12.0–12.1.2: Darwinian foundations, chromosome encoding, genetic operators, and worked traces</p>
+
+          <div class="intuition-box">
+            <h4>Real-World Intuition: The Power of Sexual Recombination</h4>
+            <p>
+              Why did sexual reproduction evolve in nature instead of just asexual cloning?
+            </p>
+            <p>
+              Imagine an organism that develops a brilliant immune defense against virus X, but has poor eyesight. In a different part of the forest, another organism has razor-sharp eyesight, but is vulnerable to virus X. With asexual cloning (like hill climbing mutation), combining those two superpowers takes millennia of lucky mutations. 
+            </p>
+            <p>
+              With <strong>Crossover (Sex)</strong>, they mate, and their offspring immediately inherits <em>both</em> the razor-sharp vision and the virus immunity in a single generation! <strong>Genetic Algorithms</strong> mimic this exact principle to combine partial solutions from different regions of the search space.
+            </p>
+          </div>
+
+          <div class="def-box">
+            <p><strong>Jargon Demystified — Gene:</strong> The basic unit of heredity representing a single parameter or feature of a candidate solution.</p>
+            <p><strong>Jargon Demystified — Allele:</strong> The specific setting or value assigned to a gene (e.g., bit `1` or `0`, or real number `4.5`).</p>
+            <p><strong>Jargon Demystified — Chromosome:</strong> An ordered string of genes representing a complete candidate solution point in the search space.</p>
+            <p><strong>Jargon Demystified — Genotype vs. Phenotype:</strong> The <em>genotype</em> is the internal encoded string (e.g., bit string `1010`). The <em>phenotype</em> is the decoded real-world physical behavior (e.g., a cookie recipe with 10g sugar, 0g flour).</p>
+            <p><strong>Jargon Demystified — Epistasis:</strong> Non-linear interaction between genes where the fitness contribution of one gene depends entirely on the value of another gene.</p>
+          </div>
+
+          <h3>The Canonical Genetic Algorithm Loop</h3>
+          <div class="ascii-diagram">
+[Start: t = 0] ──► [Initialize Random Population P(t)]
+                          │
+                          ▼
+            ┌──► [Evaluate Fitness of each member]
+            │             │
+            │             ▼
+            │    [Check Termination Condition] ──(Yes)──► [Return Best Solution]
+            │             │ (No)
+            │             ▼
+            │    [Select Parents based on Fitness]
+            │             │
+            │             ▼
+            │    [Perform Crossover (Offspring)]
+            │             │
+            │             ▼
+            │    [Apply Mutation with rate p_mu]
+            │             │
+            │             ▼
+            │    [Replace population: P(t+1)]
+            │             │
+            └─────────────┘
+          </div>
+
+          <h3>The 8 Basic Attributes of a Genetic Algorithm</h3>
+          <ol>
+            <li><strong>Genetic Representation (Encoding):</strong> Binary strings, real-valued vectors, or permutations.</li>
+            <li><strong>Population Size ($P$):</strong>
+              <ul>
+                <li><em>Too large:</em> Excessive CPU evaluation time; slow convergence.</li>
+                <li><em>Too small:</em> Lack of genetic diversity; triggers <strong>Premature Convergence</strong> where the entire population collapses into identical suboptimal clones.</li>
+              </ul>
+            </li>
+            <li><strong>Fitness (Evaluation) Function:</strong> A mathematical metric evaluating how well a chromosome solves the problem.</li>
+            <li><strong>Genetic Operators:</strong> Crossover (recombination) and Mutation (random variation).</li>
+            <li><strong>Selection Algorithm:</strong> Strategy for choosing parents based on fitness.</li>
+            <li><strong>Generation Gap:</strong> Fraction of current population replaced in each generation.</li>
+            <li><strong>Amount of Elitism:</strong> Fraction of top-tier individuals guaranteed to survive unmodified.</li>
+            <li><strong>Number of Duplicates Allowed:</strong> Policy on permitting identical chromosomes.</li>
+          </ol>
+
+          <h3>Chromosome Encoding Paradigms &amp; Solved Case Studies</h3>
+
+          <div class="exam-card">
+            <div class="exam-header">
+              <span class="exam-title">Case Study 1: The Cookie Baking Problem</span>
+              <span class="exam-badge cyan">Real-Valued Encoding</span>
+            </div>
+            <p>
+              <strong>Parameters:</strong> Sugar ($0 \le x_1 \le 9$ kg) and Flour ($0 \le x_2 \le 9$ kg).<br>
+              <strong>Chromosome:</strong> 2 real-valued genes: <code>[Sugar, Flour]</code>.<br>
+              <strong>Sample Chromosomes:</strong> $C_1 = [5, 1]$, $C_2 = [2, 4]$.<br>
+              <strong>Fitness Function:</strong> Taste test score from 1 to 100.<br>
+              <strong>Crossover:</strong> Swapping flour amounts: $C_1' = [5, 4]$ and $C_2' = [2, 1]$.
+            </p>
+          </div>
+
+          <div class="exam-card">
+            <div class="exam-header">
+              <span class="exam-title">Case Study 2: CNF Satisfiability (Luger 12.1.3)</span>
+              <span class="exam-badge green">Binary Encoding</span>
+            </div>
+            <p>Consider the Boolean CNF formula:</p>
+            <div class="math-box">
+F = (¬a ∨ c) ∧ (¬a ∨ c ∨ ¬e) ∧ (¬b ∨ c ∨ d ∨ ¬e) ∧ (a ∨ ¬b ∨ c) ∧ (¬e ∨ f)
+            </div>
+            <p>
+              <strong>Literals:</strong> $a, b, c, d, e, f$ (6 variables).<br>
+              <strong>Chromosome:</strong> 6-bit string: <span class="bit-string">a b c d e f</span>.<br>
+              <strong>Example:</strong> Chromosome <span class="bit-string">1 0 1 0 1 0</span> represents $a=1, b=0, c=1, d=0, e=1, f=0$.<br>
+              <strong>Fitness Metric:</strong> Number of clauses satisfied (out of 5).
+            </p>
+          </div>
+
+          <div class="exam-card">
+            <div class="exam-header">
+              <span class="exam-title">Case Study 3: Academic Timetable Encoding (Fast-NU Class Problem)</span>
+              <span class="exam-badge gold">Bit Budgeting</span>
+            </div>
+            <p><strong>Problem Constraints:</strong></p>
+            <ul>
+              <li>Courses = 16 ($C_1 \dots C_{16}$)</li>
+              <li>Teachers = 8 ($T_1 \dots T_8$) &rarr; $\lceil\log_2 8\rceil = \mathbf{3\text{ bits}}$</li>
+              <li>Days = 5 (Mon&ndash;Fri) &rarr; $\lceil\log_2 5\rceil = \mathbf{3\text{ bits}}$ ($000$ to $100$)</li>
+              <li>Time Slots = 5 &rarr; $\lceil\log_2 5\rceil = \mathbf{3\text{ bits}}$</li>
+              <li>Classrooms = 4 ($R_1 \dots R_4$) &rarr; $\lceil\log_2 4\rceil = \mathbf{2\text{ bits}}$</li>
+            </ul>
+            <div class="math-box">
+Bits per course = 3 (Teacher) + 3 (Day) + 3 (Slot) + 2 (Room) = 11 bits
+Total Chromosome Size = 16 courses × 11 bits = 176 bits
+            </div>
+          </div>
+
+          <div class="exam-card">
+            <div class="exam-header">
+              <span class="exam-title">Case Study 4: Rule Set &amp; Variable-Length Encoding</span>
+              <span class="exam-badge cyan">Expert System Rules</span>
+            </div>
+            <p>Encoding rules for playing tennis based on Outlook, Wind, and PlayTennis:</p>
+            <ul>
+              <li><strong>Outlook:</strong> Sunny (100), Overcast (010), Rain (001), Sunny or Overcast (110), Don't Care (111).</li>
+              <li><strong>Wind:</strong> Strong (10), Weak (01), Don't Care (11).</li>
+              <li><strong>PlayTennis:</strong> Yes (10), No (01).</li>
+            </ul>
+            <p>Rule: <code>IF (Outlook = Overcast OR Rain) AND (Wind = Strong) THEN PlayTennis = No</code></p>
+            <div class="math-box">
+Encoded Gene: [011][10][01] = 0111001
+Multi-rule Hypothesis: Concatenate individual rule bit strings!
+            </div>
+          </div>
+
+          <h3>Crossover vs. Mutation Mechanics</h3>
+          <div class="ascii-diagram">
+SINGLE POINT CROSSOVER:
+Parent 1:  1  1  0  0 │ 1  0  1  0
+Parent 2:  0  0  1  1 │ 0  1  0  1
+                      ▲ Cut Point = 4
+Child 1:   1  1  0  0 │ 0  1  0  1
+Child 2:   0  0  1  1 │ 1  0  1  0
+
+UNIFORM CROSSOVER:
+Mask:      1  0  1  1   0  0  1  0   (1 = Parent 1, 0 = Parent 2)
+Parent 1:  A  B  C  D   E  F  G  H
+Parent 2:  a  b  c  d   e  f  g  h
+Child:     A  b  C  D   e  f  G  h
+
+MUTATION:
+Original:  1  0  1  1  0  0  1
+Mutated:   1  0  0  1  0  0  1
+                 ▲ Bit flip at rate p_mu
+          </div>
+
+          <h3>Complete Solved Trace: "Find Target = 001010"</h3>
+          <p>
+            Target string is $001010$ (Search space $2^6 = 64$). Fitness = number of correctly guessed bit positions.
+          </p>
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Gen</th>
+                <th>Operation</th>
+                <th>Chromosomes</th>
+                <th>Fitness</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>0</strong></td>
+                <td>Random Init</td>
+                <td>A: 010101<br>B: 111101<br>C: 011011<br>D: 101100</td>
+                <td>1<br>1<br><strong>4</strong><br><strong>3</strong></td>
+                <td>Select C &amp; D as parents.</td>
+              </tr>
+              <tr>
+                <td><strong>1</strong></td>
+                <td>Crossover C &amp; D (cut at 2 &amp; 4)</td>
+                <td>E: 011100<br>F: 101011<br>G: 011000<br>H: 101111</td>
+                <td>3<br><strong>4</strong><br><strong>4</strong><br>3</td>
+                <td>Select F &amp; G as parents.</td>
+              </tr>
+              <tr>
+                <td><strong>2</strong></td>
+                <td>Crossover F &amp; G (cut at 1 &amp; 3)</td>
+                <td>H': 111000<br>I: 001011<br>J: 101000<br>K: 011011</td>
+                <td>3<br><strong>5</strong><br><strong>4</strong><br>4</td>
+                <td>Select I &amp; J as parents.</td>
+              </tr>
+              <tr>
+                <td><strong>3</strong></td>
+                <td>Crossover I &amp; J (cut at 5)</td>
+                <td>L: 001000<br>M: 101011<br><strong>N: 001010</strong><br>O: 101001</td>
+                <td>5<br>4<br><strong>6 (SUCCESS!)</strong><br>3</td>
+                <td><strong>Target 001010 reached in 16 evaluations! (4x faster than exhaustive search).</strong></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- ═════════════════════════════════════════════════════
+             TOPIC 3: Genetic Algorithms II: Selection Mechanics
+             ═════════════════════════════════════════════════════ -->
+        <div class="topic-card" id="topic-3">
+          <h2><span class="topic-num">3</span>Genetic Algorithms II: Selection Mechanics &amp; Population Dynamics</h2>
+          <p class="topic-subtitle">Lectures 14 &amp; 15, Luger 12.1.3: Selective pressure, rank selection, diversity, generation gap, and 8-queens/knapsack traces</p>
+
+          <div class="intuition-box">
+            <h4>Real-World Intuition: The Selective Pressure Dilemma</h4>
+            <p>
+              Imagine a school that gives all scholarships exclusively to the single student who scores highest on day one, immediately expelling all others. The school collapses into a monoculture with zero intellectual diversity. If someone gets sick, the school fails.
+            </p>
+            <p>
+              Now imagine a school that hands out grades completely at random. Students have no incentive to study, and no knowledge is accumulated.
+            </p>
+            <p>
+              <strong>Selective Pressure</strong> is the degree to which better fitness is favored:
+            </p>
+            <ul>
+              <li><strong>Too High:</strong> One decent candidate dominates immediately. The population rapidly converges to a clone army stuck at a mediocre local peak.</li>
+              <li><strong>Too Low:</strong> Evolution degrades into a random, blind search.</li>
+            </ul>
+          </div>
+
+          <div class="def-box">
+            <p><strong>Jargon Demystified — Selective Pressure:</strong> The rate at which above-average individuals are selected as parents over below-average ones.</p>
+            <p><strong>Jargon Demystified — Generation Gap ($G$):</strong> The fraction of the current population that is replaced by new offspring in each generation.</p>
+            <p><strong>Jargon Demystified — Elitism:</strong> The strategy of copying the top $k$ fittest chromosomes directly into the next generation without modification, guaranteeing that the best solution never regresses.</p>
+          </div>
+
+          <h3>The 4 Parent Selection Algorithms</h3>
+          <div class="ascii-diagram">
+1. Random Selection        2. Roulette Wheel (Proportionate)       3. Tournament Selection
+┌────────────────────────┐         ┌───────────────────┐                 ┌───┐    ┌───┐
+│ Chromosome A (25%)     │         │ Chromosome 1: 50% │                 │ A │ vs │ B │
+├────────────────────────┤         ├──────────────┬────┤                 └───┘    └───┘
+│ Chromosome B (25%)     │         │ Chrom 2: 28% │C3  │                   │
+├────────────────────────┤         ├──────────────┼────┤                   ▼
+│ Chromosome C (25%)     │         │ Chrom 3: 14% │C4  │               Winner: B
+├────────────────────────┤         └──────────────┴────┘             (Higher Fitness)
+│ Chromosome D (25%)     │          [Slot area = Fitness]            [b = Tournament Size]
+└────────────────────────┘
+          </div>
+
+          <h3>1. Roulette Wheel (Fitness-Proportionate Selection)</h3>
+          <p>
+            Selection probability is directly proportional to fitness:
+          </p>
+          <div class="math-box">
+p_i = \frac{f_i}{\sum_{j=1}^P f_j}
+          </div>
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Chromosome ($i$)</th>
+                <th>Fitness ($f_i$)</th>
+                <th>Selection Probability ($p_i$)</th>
+                <th>Roulette Wheel Arc (Degrees)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>7</td>
+                <td>$7 / 14 = 0.500$ ($50.0\%$)</td>
+                <td>$180.0^\circ$</td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>4</td>
+                <td>$4 / 14 = 0.286$ ($28.6\%$)</td>
+                <td>$102.9^\circ$</td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>2</td>
+                <td>$2 / 14 = 0.143$ ($14.3\%$)</td>
+                <td>$51.4^\circ$</td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>1</td>
+                <td>$1 / 14 = 0.071$ ($7.1\%$)</td>
+                <td>$25.7^\circ$</td>
+              </tr>
+              <tr>
+                <td><strong>Total</strong></td>
+                <td><strong>14</strong></td>
+                <td><strong>1.000 ($100\%$)</strong></td>
+                <td><strong>$360.0^\circ$</strong></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="protip-box">
+            <h4>Roulette Wheel Weaknesses</h4>
+            <ul>
+              <li><strong>Early Stage:</strong> If one chromosome has fitness 10x higher than others, it takes over the entire population in 2 generations (premature convergence).</li>
+              <li><strong>Late Stage:</strong> When all chromosomes have close fitness (e.g. 995, 996, 998), the probabilities become almost identical ($25\%$ each). Selective pressure drops to zero precisely when fine-grained optimization is needed.</li>
+            </ul>
+          </div>
+
+          <h3>2. Linear Rank Selection</h3>
+          <p>
+            Sorts the population from worst ($r = P$) to best ($r = 1$). Reassigns fitness based strictly on rank, completely immunizing the search against raw fitness scaling!
+          </p>
+          <div class="math-box">
+<strong>Formula 1 (Standard Rank):</strong>
+New Fitness(r) = (P - r) + 1
+
+<strong>Formula 2 (User-Controlled Slope with min and max):</strong>
+New Fitness(r) = (P - r) * [(max - min) / (P - 1)] + min
+          </div>
+          <p>
+            <em>Example with $P = 11, \max = 8, \min = 3$:</em><br>
+            Slope $= (8 - 3) / (11 - 1) = 5 / 10 = 0.5$.<br>
+            &bull; Rank 1 (Best): $(11 - 1) \times 0.5 + 3 = \mathbf{8.0}$<br>
+            &bull; Rank 6 (Median): $(11 - 6) \times 0.5 + 3 = \mathbf{5.5}$<br>
+            &bull; Rank 11 (Worst): $(11 - 11) \times 0.5 + 3 = \mathbf{3.0}$
+          </p>
+
+          <h3>3. Tournament Selection</h3>
+          <p>
+            Pulls a random subset of $b$ individuals from the population. The individual with the highest fitness in that subset wins. Setting $b = 2$ (Binary Tournament) is standard in production.
+          </p>
+
+          <h3>4. The Diversity Principle: Survival of the Most Diverse</h3>
+          <p>
+            In many fitness landscapes, an individual with slightly lower fitness that explores an entirely new, unvisited region is far more valuable than a high-fitness individual clustered next to existing solutions.
+          </p>
+          <div class="math-box">
+Diversity_i = \sum_{j \in \text{Selected}} \text{Distance}(i, j)^2
+Combined Rank = Rank_Quality + Rank_Diversity
+          </div>
+
+          <div class="exam-card">
+            <div class="exam-header">
+              <span class="exam-title">Solved Exam Problem: Generation Gap &amp; Elitism</span>
+              <span class="exam-badge gold">FAST-NU Exam Trap</span>
+            </div>
+            <p>
+              <strong>Exam Problem:</strong> <em>"In a Genetic Algorithm, a generation has 50 chromosomes, out of which the 5 fittest ones are placed in the next generation without any competition from the offspring. The rest of the 45 chromosomes of the next generation are chosen from the pool of parents and offspring. Suppose 30 chromosomes of the offspring make it to the new generation. What is the generation gap and what is the elitism value? Duplicates are not allowed."</em>
+            </p>
+            <div class="solution-box">
+              <h5>Step-by-Step Formal Solution</h5>
+              <ol>
+                <li>
+                  <strong>Elitism Value ($E$):</strong>
+                  Elitism is the proportion of top-tier individuals guaranteed survival without competition.
+                  $$E = \frac{\text{Guaranteed Elite Individuals}}{P} = \frac{5}{50} = \mathbf{0.10 \ (10\%)}$$
+                </li>
+                <li>
+                  <strong>Generation Gap ($G$):</strong>
+                  The generation gap is the fraction of the population that is replaced by offspring in the next generation.
+                  $$G = \frac{\text{Offspring entering Next Generation}}{P} = \frac{30}{50} = \mathbf{0.60 \ (60\%)}$$
+                </li>
+                <li>
+                  <strong>Population Verification:</strong>
+                  Elite Parents = $5$ | Non-elite Surviving Parents = $15$ | Offspring = $30$ &rarr; Total = $50$!
+                </li>
+              </ol>
+            </div>
+          </div>
+
+          <h3>Complete 8-Queens Genetic Algorithm Trace</h3>
+          <p>
+            Array representation: Index = column, Value = row. Fitness = non-attacking pairs (Maximum = 28).
+          </p>
+          <div class="ascii-diagram">
+Initial Population:
+A: [3 2 7 5 2 4 1 1]  &rarr;  Fitness = 23 (29%)
+B: [2 4 7 4 8 5 5 2]  &rarr;  Fitness = 24 (31%)
+C: [3 2 5 4 3 2 1 3]  &rarr;  Fitness = 11 (14%)
+D: [2 4 4 1 5 1 2 4]  &rarr;  Fitness = 20 (26%)
+Total Fitness = 78
+
+Roulette Wheel Selection selects: B and D for Crossover!
+Crossover at position 3:
+Parent B:  2  4  7 │ 4  8  5  5  2
+Parent D:  2  4  4 │ 1  5  1  2  4
+                   ▲ Cut = 3
+Offspring E: 2  4  4 │ 4  8  5  5  2
+Offspring F: 2  4  7 │ 1  5  1  2  4
+
+Mutation Applied:
+Offspring E mutates pos 3 (4 &rarr; 7):  G = [2, 4, 7, 4, 8, 5, 5, 2]
+Offspring F mutates pos 7 (2 &rarr; 6):  H = [2, 4, 7, 1, 5, 1, 6, 4]
+          </div>
+
+          <h3>Complete Solved Knapsack Problem ($W_{\max} = 12$ kg)</h3>
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Weight (kg)</th>
+                <th>Value ($)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr><td>A</td><td>5</td><td>10</td></tr>
+              <tr><td>B</td><td>3</td><td>5</td></tr>
+              <tr><td>C</td><td>7</td><td>9</td></tr>
+              <tr><td>D</td><td>2</td><td>8</td></tr>
+            </tbody>
+          </table>
+          <p>Chromosome: 4 bits $[x_A, x_B, x_C, x_D]$.</p>
+          <ul>
+            <li>$C_1 = [0, 1, 1, 0] \implies \text{Weight} = 3+7 = 10\text{ kg} \le 12 \implies \text{Value} = 5+9 = \mathbf{14}$</li>
+            <li>$C_2 = [0, 0, 1, 1] \implies \text{Weight} = 7+2 = 9\text{ kg} \le 12 \implies \text{Value} = 9+8 = \mathbf{17}$</li>
+            <li>$C_3 = [0, 1, 1, 1] \implies \text{Weight} = 3+7+2 = 12\text{ kg} \le 12 \implies \text{Value} = 5+9+8 = \mathbf{22}$ (Fittest)</li>
+            <li>$C_4 = [1, 0, 1, 0] \implies \text{Weight} = 5+7 = 12\text{ kg} \le 12 \implies \text{Value} = 10+9 = \mathbf{19}$</li>
+          </ul>
+
+          <h3>Permutation Problems: Traveling Salesperson Problem (TSP)</h3>
+          <p>
+            Standard single-point crossover fails on permutation problems because it generates illegal tours (duplicate and omitted cities):
+          </p>
+          <div class="ascii-diagram">
+Parent 1:  (1  2  3 │ 4  5)
+Parent 2:  (3  5  4 │ 1  2)
+Child:     (1  2  3 │ 1  2)  ◄── ILLEGAL! Cities 1 & 2 duplicated; 4 & 5 missing!
+          </div>
+          <h4>Specialized Permutation Crossover Operators:</h4>
+          <ul>
+            <li><strong>Partially Mapped Crossover (PMX):</strong> Copies an intermediate swath from Parent 1 to Child 1, creates a positional mapping between parent swaths, and fills remaining slots from Parent 2 using the mapping to resolve duplicates.</li>
+            <li><strong>Order Crossover (OX):</strong> Copies an intermediate swath from Parent 1, then fills the remaining slots using the unused cities in the exact sequential order they appear in Parent 2.</li>
+            <li><strong>Cycle Crossover (CX):</strong> Preserves the exact absolute city index positions by identifying alternating cycles between the two parents.</li>
+            <li><strong>Inversion Mutation:</strong> Reverses a sub-sequence of cities between two randomly chosen points in the tour (e.g., $(1, 2 \mid 3, 4, 5 \mid 6, 7) \to (1, 2 \mid 5, 4, 3 \mid 6, 7)$), removing path crossing loops in Euclidean space!</li>
+          </ul>
+        </div>
+
+        <!-- ═════════════════════════════════════════════════════
+             TOPIC 4: Holland's Schema Theorem
+             ═════════════════════════════════════════════════════ -->
+        <div class="topic-card" id="topic-4">
+          <h2><span class="topic-num">4</span>Theoretical Foundations: Holland's Schema Theorem</h2>
+          <p class="topic-subtitle">Luger 12.1.4: Implicit parallelism, schema anatomy, mathematical derivation, and the Building Block Hypothesis</p>
+
+          <div class="intuition-box">
+            <h4>Real-World Intuition: Implicit Parallelism</h4>
+            <p>
+              How can a Genetic Algorithm evaluate only 50 candidate chromosomes in a generation, yet effectively search an astronomically huge search space of $2^{100}$ possible states?
+            </p>
+            <p>
+              John Holland proved that when you evaluate a single chromosome, you are not just evaluating one solution. You are simultaneously sampling every single sub-pattern contained inside that chromosome! A single string of length $L$ contains $2^L$ sub-patterns. Evaluating $P$ chromosomes processes between $P^3$ and $O(P \cdot 2^L)$ sub-templates concurrently with zero extra compute. This miracle is called <strong>Implicit Parallelism</strong>.
+            </p>
+          </div>
+
+          <div class="def-box">
+            <p><strong>Jargon Demystified — Schema (plural: Schemata):</strong> A pattern template describing a subset of bit strings, constructed over the ternary alphabet $\{0, 1, *\}$, where $*$ represents a wildcard ("don't care").</p>
+            <p><strong>Jargon Demystified — Order $o(H)$:</strong> The number of fixed (defined) positions (0 or 1) in schema $H$.</p>
+            <p><strong>Jargon Demystified — Defining Length $\delta(H)$:</strong> The distance between the first fixed bit and the last fixed bit in schema $H$.</p>
+          </div>
+
+          <h3>Order vs. Defining Length Examples</h3>
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Schema ($H$)</th>
+                <th>Order $o(H)$</th>
+                <th>First Fixed Index</th>
+                <th>Last Fixed Index</th>
+                <th>Defining Length $\delta(H)$</th>
+                <th>Resistance to Crossover</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>[* 1 * * 0 *]</code></td>
+                <td>2</td>
+                <td>2</td>
+                <td>5</td>
+                <td>$5 - 2 = \mathbf{3}$</td>
+                <td>High (Short length)</td>
+              </tr>
+              <tr>
+                <td><code>[1 1 0 * 0 1]</code></td>
+                <td>5</td>
+                <td>1</td>
+                <td>6</td>
+                <td>$6 - 1 = \mathbf{5}$</td>
+                <td>Very Low (Vulnerable)</td>
+              </tr>
+              <tr>
+                <td><code>[* * * 1 0 *]</code></td>
+                <td>2</td>
+                <td>4</td>
+                <td>5</td>
+                <td>$5 - 4 = \mathbf{1}$</td>
+                <td><strong>Extremely High</strong></td>
+              </tr>
+              <tr>
+                <td><code>[0 * * * * 1]</code></td>
+                <td>2</td>
+                <td>1</td>
+                <td>6</td>
+                <td>$6 - 1 = \mathbf{5}$</td>
+                <td>Extremely Low</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>Rigorous Mathematical Derivation of the Schema Theorem</h3>
+
+          <div class="exam-card">
+            <div class="exam-header">
+              <span class="exam-title">Holland's Schema Theorem Step-by-Step Derivation</span>
+              <span class="exam-badge gold">Core Theoretical Proof</span>
+            </div>
+            <p>Let $m(H, t)$ be the expected number of instances of schema $H$ at generation $t$. Let $f(H)$ be the average fitness of instances of $H$, and $\bar{f}$ be average population fitness.</p>
+            
+            <h4>Step 1: Effect of Fitness-Proportionate Selection</h4>
+            <p>The probability that an instance of $H$ is chosen in roulette wheel selection is:</p>
+            <div class="math-box">
+P(\text{selection}) = \frac{f(H)}{\sum f_j} = \frac{f(H)}{P \cdot \bar{f}}
+            </div>
+            <p>Across $P$ independent parent selection trials, the expected count becomes:</p>
+            <div class="math-box">
+m(H, t)_{\text{selected}} = P \cdot \left[ m(H, t) \cdot \frac{f(H)}{P \cdot \bar{f}} \right] = m(H, t) \cdot \frac{f(H)}{\bar{f}}
+            </div>
+            <p><em>Conclusion:</em> If a schema has above-average fitness ($f(H) > \bar{f}$), its representation grows exponentially!</p>
+
+            <h4>Step 2: Effect of Single-Point Crossover Disruption</h4>
+            <p>
+              A chromosome has $L - 1$ possible cut points. Crossover disrupts schema $H$ only if the cut point falls <em>between</em> the first and last fixed bits.
+            </p>
+            <div class="math-box">
+P(\text{cut falls inside } H) = \frac{\delta(H)}{L - 1}
+            </div>
+            <p>Accounting for the crossover probability $p_c$, the lower bound on schema survival is:</p>
+            <div class="math-box">
+S_c \ge 1 - p_c \frac{\delta(H)}{L - 1}
+            </div>
+            <p><em>Conclusion:</em> Schemata with small defining length $\delta(H)$ have near-zero chance of being sliced apart by crossover!</p>
+
+            <h4>Step 3: Effect of Point Mutation Disruption</h4>
+            <p>
+              For schema $H$ to survive mutation, all $o(H)$ of its fixed bits must avoid being flipped. Since each bit survives mutation with probability $(1 - p_m)$:
+            </p>
+            <div class="math-box">
+S_m = (1 - p_m)^{o(H)} \approx 1 - o(H) \cdot p_m \quad (\text{for small } p_m)
+            </div>
+            <p><em>Conclusion:</em> Schemata with low order $o(H)$ (few defined bits) have maximum survival probability!</p>
+
+            <h4>The Fundamental Schema Theorem:</h4>
+            <div class="math-box">
+m(H, t+1) \ge m(H, t) \cdot \left[ \frac{f(H, t)}{\bar{f}(t)} \right] \cdot \left[ 1 - p_c \frac{\delta(H)}{L - 1} \right] \cdot \left[ 1 - o(H) \cdot p_m \right]
+            </div>
+          </div>
+
+          <h3>The Building Block Hypothesis &amp; Deceptive Problems</h3>
+          <p>
+            <strong>The Building Block Hypothesis:</strong> Genetic algorithms perform search by identifying short, low-order, above-average schemata (called <em>Building Blocks</em>), exponentially amplifying them, and recombining them through crossover into globally optimal solutions.
+          </p>
+          <p>
+            <strong>Deceptive Problems:</strong> Problems where short, low-order building blocks lead evolution toward a local maximum that is completely isolated from the global optimum.
+          </p>
+          <div class="ascii-diagram">
+Deceptive Trap:
+Schema (0 * * *) has high average fitness &rarr; Population converges to (0 0 0 0) [Local Max]
+Isolated Peak: (1 1 1 1) [Global Max] has zero partial reward &rarr; Missed completely!
+          </div>
+        </div>
+
+        <!-- ═════════════════════════════════════════════════════
+             TOPIC 5: Classifiers, GP & Artificial Life
+             ═════════════════════════════════════════════════════ -->
+        <div class="topic-card" id="topic-5">
+          <h2><span class="topic-num">5</span>Classifier Systems, Genetic Programming &amp; Artificial Life</h2>
+          <p class="topic-subtitle">Luger 12.2–12.3: Holland's Learning Classifier Systems, Bucket Brigade credit assignment, Koza's GP trees, Conway's Life, and Cellular Automata</p>
+
+          <div class="intuition-box">
+            <h4>Real-World Intuition: Credit Assignment in a Free Market</h4>
+            <p>
+              Imagine an assembly line manufacturing luxury cars. The final worker attaches the hood ornament, and the customer pays \$100,000. Should that final worker receive the entire \$100,000? 
+            </p>
+            <p>
+              Of course not! If they did, the workers who forged the engine and welded the chassis would starve and quit, and no more cars could ever be built.
+            </p>
+            <p>
+              In complex multi-step AI problems (like playing chess or navigating a maze), hundreds of actions occur before a reward is received. <strong>Holland's Bucket Brigade Algorithm</strong> solves this credit assignment dilemma by treating rules like merchants in an economy: every rule pays a bid to the earlier rule that set up its opportunity, and receives payment from the rule that follows it!
+            </p>
+          </div>
+
+          <h3>1. Learning Classifier Systems (LCS) &amp; The Bucket Brigade Algorithm</h3>
+          <div class="ascii-diagram">
+   [Sensory Inputs] ──► [Message List] ◄── [Classifiers Post Messages]
+                              │
+                              ▼
+               ┌───────────────────────────────┐
+               │ Classifiers Match Conditions  │
+               │ Make Bids based on Strength   │
+               └──────────────┬────────────────┘
+                              │
+                              ▼
+                    [Highest Bidder Wins]
+                              │
+             ┌────────────────┴────────────────┐
+             ▼                                 ▼
+   [Pays Bid to Precursor]            [Takes Action / Receives Env Payoff]
+          </div>
+          <ul>
+            <li><strong>Classifiers:</strong> Production rules of the form <code>Condition &rarr; Action</code> using alphabet $\{0, 1, \#\}$.</li>
+            <li><strong>Bidding Mechanism:</strong> Active classifier $C_i$ makes a bid $B_i = c \cdot S_i \cdot \text{Specificity}_i$, where $c$ is a constant, $S_i$ is strength, and specificity is the fraction of non-# bits.</li>
+            <li><strong>Payment:</strong> The winning rule pays its bid $B_i$ to the precursor rule that posted the message that activated it.</li>
+            <li><strong>Payoff:</strong> If the action satisfies the external environment, a massive reward $R$ is added directly to the winning rule's strength. Over time, wealth flows backward along successful reasoning chains!</li>
+            <li><strong>Analogy to Neural Networks:</strong> The Bucket Brigade algorithm propagates credit backwards through temporal rule sequences exactly like <strong>Backpropagation</strong> propagates error backwards through neural layer weights!</li>
+          </ul>
+
+          <h3>2. Genetic Programming (John Koza)</h3>
+          <p>
+            Instead of evolving fixed-length bit strings, <strong>Genetic Programming (GP)</strong> directly evolves executable computer programs, represented as LISP syntax parse trees!
+          </p>
+          <div class="ascii-diagram">
+LISP Program Parse Tree: (* (+ X 3) (SIN X))
+
+        [*]
+       /   \
+     [+]   [SIN]
+    /   \    |
+   [X]  [3] [X]
+
+Terminal Set: {X, 3, Y, Constant}
+Function Set: {+, -, *, /, SIN, COS, SQRT}
+          </div>
+          <h4>Subtree Crossover in Genetic Programming:</h4>
+          <p>
+            Pick a random node in Parent 1 and a random node in Parent 2. Swap the entire subtrees rooted at those nodes!
+          </p>
+          <div class="ascii-diagram">
+Parent 1: (+ X (* 2 Y))                  Parent 2: (- (/ A B) (COS X))
+               ▲ Swap Subtree (* 2 Y)                     ▲ Swap Subtree (COS X)
+
+Child 1:  (+ X (COS X))                  Child 2: (- (/ A B) (* 2 Y))
+          </div>
+          <p>
+            <strong>Classic Application (Kepler's Third Law):</strong> Koza used GP to rediscover Kepler's Third Law ($T^2 = c \cdot R^3$) directly from planetary orbital periods and solar distances with zero prior physics knowledge!
+          </p>
+
+          <h3>3. Artificial Life &amp; Conway's "Game of Life"</h3>
+          <p>
+            A 2D infinite grid of binary cells (Live = 1, Dead = 0). Time advances in discrete ticks governed by 4 simple rules:
+          </p>
+          <ol>
+            <li><strong>Survival:</strong> A live cell with 2 or 3 live neighbors lives to the next generation.</li>
+            <li><strong>Death by Underpopulation:</strong> A live cell with fewer than 2 live neighbors dies.</li>
+            <li><strong>Death by Overpopulation:</strong> A live cell with more than 3 live neighbors dies.</li>
+            <li><strong>Birth:</strong> A dead cell with exactly 3 live neighbors becomes a live cell.</li>
+          </ol>
+          <h4>Emergent Structures in the Game of Life:</h4>
+          <div class="ascii-diagram">
+1. STILL LIFE (Block):          2. OSCILLATOR (Blinker, Period 2):    3. SPACESHIP (Glider):
+      ■ ■                             ■ ■ ■   &lt;---&gt;   ■                    ■
+      ■ ■                                             ■                  ■   ■
+                                                      ■                    ■ ■
+                                                                         [Moves diagonally!]
+          </div>
+
+          <h3>4. Crutchfield &amp; Mitchell: Emergent Particle Computation</h3>
+          <p>
+            Crutchfield and Mitchell (1995) evolved 1D Cellular Automata (CA) using genetic algorithms to solve the <strong>Density Classification Task</strong> ($\rho_c = 1/2$):
+          </p>
+          <ul>
+            <li><strong>Task:</strong> If initial lattice has $>50\%$ ones, entire lattice must synchronize to all ones; if $<50\%$ ones, synchronize to all zeros.</li>
+            <li><strong>Constraint:</strong> Each cell has radius $r=3$ (can only communicate with its 7 immediate neighbors; no central coordinator exists).</li>
+            <li><strong>Emergent Phenomenon:</strong> The GA discovered local rules that generated coherent spatio-temporal domains. The boundaries between domains acted as physical <strong>particles ($\alpha, \beta, \gamma, \delta$)</strong>. These particles collided and performed logic computations across space, proving that global computation emerges from simple local rules!</li>
+          </ul>
+        </div>
+
+        <!-- ═════════════════════════════════════════════════════
+             TOPIC 6: Luger Ch 12 Solved Exercises
+             ═════════════════════════════════════════════════════ -->
+        <div class="topic-card" id="topic-6">
+          <h2><span class="topic-num">6</span>George F. Luger Chapter 12 Solved Exercises</h2>
+          <p class="topic-subtitle">Complete, rigorous step-by-step solutions to official textbook problems (Luger Chapter 12, pp. 542–543)</p>
+
+          <div class="exam-card">
+            <div class="exam-header">
+              <span class="exam-title">Luger Exercise 1: Balancing Diversity &amp; Skill Preservation</span>
+              <span class="exam-badge gold">Theoretical Analysis</span>
+            </div>
+            <p><strong>Problem:</strong> <em>"The genetic algorithm is intended to support the search for genetic diversity along with the survival of important skills for a problem domain. Describe how different genetic operators simultaneously support both these goals."</em></p>
+            <div class="solution-box">
+              <h5>Step-by-Step Solution</h5>
+              <ul>
+                <li><strong>Crossover (Exploitation / Skill Preservation):</strong> Crossover acts as the primary builder. It preserves high-fitness genetic schemata (skills) discovered by separate parents and juxtaposes them into offspring. By operating at low to moderate disruption, it amplifies successful building blocks.</li>
+                <li><strong>Mutation (Exploration / Diversity Maintenance):</strong> Mutation acts as an insurance policy. It injects fresh genetic alleles that were either never present in the initial population or lost due to selection. It prevents premature convergence by continually nudging the search away from local optima.</li>
+                <li><strong>Selection Pressure &amp; Elitism:</strong> Elitism guarantees the retention of the best skills (zero loss of the champion), while linear rank or tournament selection preserves diversity by assigning non-zero survival probabilities to lower-fitness exploratory candidates.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="exam-card">
+            <div class="exam-header">
+              <span class="exam-title">Luger Exercise 2: Inductive Bias in Representation Design</span>
+              <span class="exam-badge cyan">Search Space Topology</span>
+            </div>
+            <p><strong>Problem:</strong> <em>"Discuss the problem of designing representations for genetic operators to search for solutions in different domains. What is the role of inductive bias here?"</em></p>
+            <div class="solution-box">
+              <h5>Step-by-Step Solution</h5>
+              <p>
+                <strong>Inductive Bias</strong> is the set of fundamental assumptions an algorithm makes about the target concept before seeing the data. In Genetic Algorithms, the inductive bias is established almost entirely by the <strong>chromosome representation</strong>:
+              </p>
+              <ul>
+                <li><strong>Linear Adjacency Bias:</strong> Standard crossover assumes that genes positioned close to each other on the chromosome string belong to the same functional building block (low defining length $\delta(H)$). If two interdependent genes are placed at opposite ends of a string, standard crossover will continuously tear them apart.</li>
+                <li><strong>Domain Legality Bias:</strong> In permutation problems (like TSP), a binary integer representation exhibits a catastrophic bias because standard crossover yields illegal states. An order-based representation (OX, PMX) biases the search toward valid permutation neighborhoods.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="exam-card">
+            <div class="exam-header">
+              <span class="exam-title">Luger Exercise 3: CNF Disjunct Bias &amp; Alternative Fitness Metrics</span>
+              <span class="exam-badge green">Constraint Satisfaction</span>
+            </div>
+            <p><strong>Problem:</strong> <em>"Consider the CNF-satisfaction problem of Section 12.1.3. How does the number of disjuncts in the CNF expression bias the solution space? Can you design another fitness measure?"</em></p>
+            <div class="solution-box">
+              <h5>Step-by-Step Solution</h5>
+              <ol>
+                <li>
+                  <strong>Disjunct Count Bias:</strong> In CNF, each clause is a disjunction ($A \lor B \lor C$). A clause with 10 literals is satisfied by almost any random assignment ($1 - 2^{-10} = 99.9\%$ satisfaction probability). A clause with only 1 literal (a unit clause) is satisfied with only $50\%$ probability. Therefore, clauses with few literals exert an enormous inductive constraint on the search space.
+                </li>
+                <li>
+                  <strong>Alternative Continuous Fitness Measure:</strong>
+                  Instead of a coarse integer count of satisfied clauses ($0, 1, 2, 3, 4, 5$), award partial credit inside unsatisfied clauses:
+                  $$f(\text{chromosome}) = \sum_{j \in \text{Clauses}} \left[ \text{if clause } j \text{ satisfied then } 1.0 \text{ else } \max_{l \in j} (\text{partial credit of literal } l) \right]$$
+                  This creates a smooth gradient landscape that prevents flat plateaus!
+                </li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="exam-card">
+            <div class="exam-header">
+              <span class="exam-title">Luger Exercise 7: Gray Coding &amp; Hamming Cliffs</span>
+              <span class="exam-badge gold">Binary Encoding Pitfalls</span>
+            </div>
+            <p><strong>Problem:</strong> <em>"Discuss the role of techniques such as Gray coding for shaping the search space of the genetic algorithm. Describe two other areas where similar techniques are important."</em></p>
+            <div class="solution-box">
+              <h5>Step-by-Step Solution</h5>
+              <p>
+                In standard binary encoding, adjacent numbers often require flipping multiple bits. Moving from $7$ to $8$ requires flipping 4 bits:
+                $$7 = 0111_2 \longleftrightarrow 8 = 1000_2 \quad (\text{Hamming Distance} = 4)$$
+                This is a <strong>Hamming Cliff</strong>. For a mutation operator with $p_m = 0.01$, the probability of taking this single step is $10^{-8}$, turning a tiny numerical step into an insurmountable chasm.
+              </p>
+              <p>
+                <strong>Gray Coding</strong> ensures that any two consecutive integers differ by exactly <strong>one single bit</strong> ($7 = 0100_{\text{gray}}, 8 = 1100_{\text{gray}}$, Hamming distance = 1).
+              </p>
+              <p><strong>Two Other Areas Where Gray Coding is Vital:</strong></p>
+              <ol>
+                <li><strong>Rotary Optical Encoders:</strong> Used in robotics and aircraft instrumentation to measure shaft angles without digital glitch errors.</li>
+                <li><strong>Digital Communications &amp; QAM:</strong> In Quadrature Amplitude Modulation, mapping constellation symbols using Gray code ensures that a single-level noise burst causes only a single-bit demodulation error.</li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="exam-card">
+            <div class="exam-header">
+              <span class="exam-title">Luger Exercise 9: Bucket Brigade vs. Neural Backpropagation</span>
+              <span class="exam-badge cyan">Credit Assignment Mapping</span>
+            </div>
+            <p><strong>Problem:</strong> <em>"How does the Bucket Brigade Algorithm relate to the backpropagation algorithm?"</em></p>
+            <div class="solution-box">
+              <h5>Step-by-Step Comparative Solution</h5>
+              <table class="comparison-table">
+                <thead>
+                  <tr>
+                    <th>Dimension</th>
+                    <th>Neural Network Backpropagation</th>
+                    <th>Classifier Bucket Brigade</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Architecture</strong></td>
+                    <td>Continuous, differentiable layers of artificial neurons.</td>
+                    <td>Discrete, rule-based production memory ($0, 1, \#$).</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Credit Flow</strong></td>
+                    <td>Gradient error vector ($\delta$) propagates backwards through spatial layer weights.</td>
+                    <td>Monetary bid currency ($B_i$) propagates backwards along temporal activation chains.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Supervision</strong></td>
+                    <td>Direct supervised gradient derived from target output difference.</td>
+                    <td>Reinforcement payoff from external environment at the end of a sequence.</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Core Objective</strong></td>
+                    <td>Solves spatial credit assignment across hidden layers.</td>
+                    <td>Solves temporal credit assignment across historical reasoning steps.</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="exam-card">
+            <div class="exam-header">
+              <span class="exam-title">Luger Exercise 11: Constraints of Genetic Programming</span>
+              <span class="exam-badge green">GP Limits</span>
+            </div>
+            <p><strong>Problem:</strong> <em>"Discuss the constraints on using genetic programming techniques. For example, what components of a solution cannot be evolved within the genetic programming paradigm?"</em></p>
+            <div class="solution-box">
+              <h5>Step-by-Step Solution</h5>
+              <ol>
+                <li><strong>Closure Constraint:</strong> Every function in the function set must accept as arguments any data type that can be returned by any other function or terminal. Division must be protected ($\text{div}(x, 0) = 1$) to prevent runtime crashes.</li>
+                <li><strong>Sufficiency Constraint:</strong> If the primitive function and terminal sets do not contain the fundamental mathematical operators needed to model the system (e.g., trying to model periodicity without trigonometric operators), GP can never evolve the solution.</li>
+                <li><strong>Code Bloat:</strong> As generations advance, parse trees expand aggressively with redundant neutral code (e.g., $(+ \ X \ (- \ Y \ Y))$), consuming exponential RAM without improving fitness.</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═════════════════════════════════════════════════════
+             BOTTOM NAVIGATION
+             ═════════════════════════════════════════════════════ -->
+        <div class="nav-footer">
+          <a class="nav-footer-btn" id="prev-btn" href="javascript:void(0)" onclick="goPrev()">
+            &larr; <span id="prev-title">Previous</span>
+          </a>
+          <a class="nav-footer-btn" id="next-btn" href="javascript:void(0)" onclick="goNext()">
+            <span id="next-title">Next</span> &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Back to top button -->
+    <button id="back-to-top" onclick="document.getElementById('main-content').scrollTo({top:0,behavior:'smooth'})">▲</button>
+
+    <script>
+      const topics = [
+        "topic-1",
+        "topic-2",
+        "topic-3",
+        "topic-4",
+        "topic-5",
+        "topic-6"
+      ];
+      let currentTopicIndex = 0;
+
+      function getTopicTitle(id) {
+        const link =
+          document.querySelector(`.nav-sublist a[onclick*="'${id}'"]`) ||
+          document.querySelector(`.nav-sublist a[onclick*='"${id}"']`);
+        if (link) {
+          const numEl = link.querySelector(".nav-num");
+          if (numEl) {
+            return link.textContent.replace(numEl.textContent, "").trim();
+          }
+          return link.textContent.replace(/^\\d+\\s*/, "").trim();
+        }
+        const card = document.getElementById(id);
+        if (card) {
+          const h2 = card.querySelector("h2");
+          if (h2) {
+            const numEl = h2.querySelector(".topic-num");
+            if (numEl) {
+              return h2.textContent.replace(numEl.textContent, "").trim();
+            }
+            return h2.textContent.replace(/^\\d+\\s*/, "").trim();
+          }
+        }
+        return "Topic";
+      }
+
+      function toggleSidebar() {
+        const sb = document.getElementById("sidebar");
+        const bd = document.getElementById("sidebar-backdrop");
+        if (sb) sb.classList.toggle("open");
+        if (bd) bd.classList.toggle("active");
+      }
+
+      function showTopic(id) {
+        document
+          .querySelectorAll(".topic-card")
+          .forEach((c) => (c.style.display = "none"));
+        const t = document.getElementById(id);
+        if (t) t.style.display = "block";
+        currentTopicIndex = topics.indexOf(id);
+
+        document
+          .querySelectorAll(".nav-sublist a")
+          .forEach((a) => a.classList.remove("active"));
+        const lk =
+          document.querySelector(`.nav-sublist a[onclick*="'${id}'"]`) ||
+          document.querySelector(`.nav-sublist a[onclick*='"${id}"']`);
+        if (lk) {
+          lk.classList.add("active");
+          const sublist = lk.closest(".nav-sublist");
+          if (sublist && sublist.style.display === "none") {
+            sublist.style.display = "block";
+            const chevron = sublist.previousElementSibling
+              ? sublist.previousElementSibling.querySelector(".chevron")
+              : null;
+            if (chevron) chevron.style.transform = "rotate(0deg)";
+          }
+        }
+
+        const pb = document.getElementById("prev-btn");
+        const nb = document.getElementById("next-btn");
+        const pt = document.getElementById("prev-title");
+        const nt = document.getElementById("next-title");
+
+        if (currentTopicIndex > 0) {
+          pb.style.display = "flex";
+          if (pt) pt.textContent = getTopicTitle(topics[currentTopicIndex - 1]);
+        } else {
+          pb.style.display = "none";
+        }
+
+        if (currentTopicIndex < topics.length - 1) {
+          nb.style.display = "flex";
+          if (nt) nt.textContent = getTopicTitle(topics[currentTopicIndex + 1]);
+        } else {
+          nb.style.display = "none";
+        }
+
+        if (t) t.scrollIntoView({ behavior: "smooth", block: "start" });
+        if (window.innerWidth <= 768) {
+          const sb = document.getElementById("sidebar");
+          const bd = document.getElementById("sidebar-backdrop");
+          if (sb) sb.classList.remove("open");
+          if (bd) bd.classList.remove("active");
+        }
+      }
+
+      function goPrev() {
+        if (currentTopicIndex > 0) showTopic(topics[currentTopicIndex - 1]);
+      }
+
+      function goNext() {
+        if (currentTopicIndex < topics.length - 1)
+          showTopic(topics[currentTopicIndex + 1]);
+      }
+
+      function toggleSection(el) {
+        const s = el.nextElementSibling,
+          c = el.querySelector(".chevron");
+        if (s.style.display === "none") {
+          s.style.display = "block";
+          c.style.transform = "rotate(0deg)";
+        } else {
+          s.style.display = "none";
+          c.style.transform = "rotate(-90deg)";
+        }
+      }
+
+      function filterContent() {
+        const q = document.getElementById("search-input").value.toLowerCase();
+        document
+          .querySelectorAll(".nav-sublist li")
+          .forEach((i) => {
+            i.style.display = i.textContent.toLowerCase().includes(q)
+              ? ""
+              : "none";
+          });
+      }
+
+      // Initialise
+      if (topics.length > 0) showTopic(topics[0]);
+      const mc = document.getElementById("main-content");
+      const bb = document.getElementById("back-to-top");
+      mc.addEventListener(
+        "scroll",
+        () => (bb.style.display = mc.scrollTop > 300 ? "flex" : "none"),
+      );
+    </script>
+  </body>
+</html>
