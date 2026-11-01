@@ -1,0 +1,794 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>TBW — Reports for Information and Analysis (Chapter 11)</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../notes.css" />
+  </head>
+  <body>
+    <button id="menu-toggle" onclick="toggleSidebar()" aria-label="Toggle navigation">☰</button>
+    <div id="sidebar-backdrop" onclick="toggleSidebar()"></div>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SIDEBAR
+         ═══════════════════════════════════════════════════════ -->
+    <div id="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-header-text">
+          <div class="sidebar-course-label">Course Notes</div>
+          <div class="sidebar-title">Technical &amp; Business Writing</div>
+        </div>
+      </div>
+      <div class="sidebar-search-wrap">
+        <input
+          type="text"
+          id="search-input"
+          placeholder="Search topics…"
+          onkeyup="filterContent()"
+        />
+      </div>
+
+      <ul class="nav-list" id="nav-list">
+        <li>
+          <a class="nav-module-link" href="./1- Technical Communication in the Workplace.html">
+            <span class="nav-num">01</span>Technical Communication in the Workplace
+          </a>
+        </li>
+        <li>
+          <a class="nav-module-link" href="./2- Correspondence.html">
+            <span class="nav-num">02</span>Correspondence
+          </a>
+        </li>
+        <li>
+          <a class="nav-module-link" href="./3- Presentations.html">
+            <span class="nav-num">03</span>Presentations &amp; Delivery
+          </a>
+        </li>
+        <li>
+          <a class="nav-module-link" href="./4- Exam Prep Midterm I.html">
+            <span class="nav-num">04</span>Exam Prep: Midterm I
+          </a>
+        </li>
+        <li>
+          <a class="nav-module-link" href="./5- Technical Research.html">
+            <span class="nav-num">05</span>Technical Research &amp; IEEE Documentation
+          </a>
+        </li>
+        <li>
+          <a class="nav-module-link" href="./6- Formatting Reports and Proposals.html">
+            <span class="nav-num">06</span>Formatting Reports &amp; Proposals
+          </a>
+        </li>
+        <li class="nav-section">
+          <div class="nav-section-title" onclick="toggleSection(this)">
+            <span>7. Reports for Info &amp; Analysis</span>
+            <span class="chevron">▼</span>
+          </div>
+          <ul class="nav-sublist">
+            <li>
+              <a href="javascript:void(0)" onclick="showTopic('topic-1')" class="active">
+                <span class="nav-num">01</span>The ABC Format Architecture
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" onclick="showTopic('topic-2')">
+                <span class="nav-num">02</span>Activity Reports (Periodic)
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" onclick="showTopic('topic-3')">
+                <span class="nav-num">03</span>Progress Reports (Milestones)
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" onclick="showTopic('topic-4')">
+                <span class="nav-num">04</span>Problem Analysis Reports
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" onclick="showTopic('topic-5')">
+                <span class="nav-num">05</span>Equipment Evaluation Reports
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" onclick="showTopic('topic-6')">
+                <span class="nav-num">06</span>Master Distinguishing Matrix
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a class="nav-module-link" href="./8- Midterm 2 Grand Exam Prep &amp; Solved Past Papers.html">
+            <span class="nav-num">08</span>Midterm 2 Grand Exam Vault
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════
+         MAIN CONTENT
+         ═══════════════════════════════════════════════════════ -->
+    <div id="main-content">
+      <div class="module-container" id="module-tbw-7">
+        <div class="module-header">
+          <div class="module-eyebrow">Technical &amp; Business Writing (TBW) — Module 07</div>
+          <h1 class="module-title">Reports for Information and Analysis</h1>
+          <p style="color: var(--mt); font-size: 0.95rem; margin-top: 6px;">
+            Complete textbook coverage of William S. Pfeiffer (8th ed., Chapter 11) &bull; The ABC Format &bull; The 4 Required Writing Documents: Activity Report, Progress Report, Problem Analysis Report, and Equipment Evaluation Report &bull; Full model exam templates for 20-mark questions.
+          </p>
+        </div>
+
+        <!-- ───────────────────────────────────────────────────
+             TOPIC 1: THE ABC FORMAT ARCHITECTURE
+             ─────────────────────────────────────────────────── -->
+        <div class="topic-card" id="topic-1">
+          <h2><span class="topic-num">1</span>The ABC Format: Universal Technical Report Architecture</h2>
+          <p class="topic-subtitle">Pfeiffer's three-part structural formula: Abstract, Body, and Conclusion</p>
+
+          <div class="callout callout-info">
+            <div class="callout-label">Real-World Intuition: Why Mystery Novels Fail in Engineering</div>
+            <p>
+              In a mystery novel, the author conceals the killer's identity until the very final chapter to create suspense. In professional engineering and technical management, <strong>suspense is fatal</strong>.
+            </p>
+            <p>
+              If a director has to read through 15 pages of testing procedures just to find out whether the multimillion-rupee server passed the benchmark, they will be furious. Technical readers want the "bottom line" immediately! <strong>The ABC Format guarantees that the primary finding is front-loaded on page one.</strong>
+            </p>
+          </div>
+
+          <div class="definition">
+            <div class="callout-label">Definition</div>
+            <strong>The ABC Format:</strong> An organizational strategy developed by William Sanborn Pfeiffer that structures technical documents into three sequential functional sections:
+            <ol>
+              <li><strong>Abstract (A):</strong> The introductory overview giving the big picture, purpose, scope, and key conclusions upfront.</li>
+              <li><strong>Body (B):</strong> The granular discussion presenting factual data, test methodologies, logistics, and analysis grouped by logical criteria.</li>
+              <li><strong>Conclusion (C):</strong> The forward-looking wrap-up stating what the data means, providing actionable recommendations, and requesting authorization.</li>
+            </ol>
+          </div>
+
+          <h3>The ABC Triad Detailed Breakdown</h3>
+          <div class="table-container">
+            <table class="comparison-table">
+              <thead>
+                <tr>
+                  <th>Section</th>
+                  <th>Core Purpose</th>
+                  <th>What to Include</th>
+                  <th>Reader Psychology</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>A &mdash; Abstract</strong><br><em>(The Big Picture)</em></td>
+                  <td>Orient the reader and deliver the core finding immediately.</td>
+                  <td>
+                    &bull; Purpose statement: Why was the report written?<br>
+                    &bull; Problem context: What triggered the study?<br>
+                    &bull; Technical scope: What was examined and what was omitted?<br>
+                    &bull; Executive takeaway: High-level bottom-line verdict or recommendation.
+                  </td>
+                  <td>Enables executive readers to understand the entire situation in 30 seconds without reading further.</td>
+                </tr>
+                <tr>
+                  <td><strong>B &mdash; Body</strong><br><em>(The Evidence &amp; Details)</em></td>
+                  <td>Provide objective proof, factual data, and thorough analysis.</td>
+                  <td>
+                    &bull; Background investigation and operational constraints.<br>
+                    &bull; Testing procedures, equipment specs, and survey methods.<br>
+                    &bull; Factual data tables, comparative matrices, and figures.<br>
+                    &bull; Objective analysis grouped by criteria (cost, usability, reliability).
+                  </td>
+                  <td>Satisfies technical specialists and financial auditors that the recommendations are scientifically defensible.</td>
+                </tr>
+                <tr>
+                  <td><strong>C &mdash; Conclusion</strong><br><em>(The Actionable Future)</em></td>
+                  <td>Synthesize data into decisions and outline concrete next steps.</td>
+                  <td>
+                    &bull; Factual conclusions: Summary of what the body evidence proved.<br>
+                    &bull; Recommendations: Specific, prioritized action items.<br>
+                    &bull; Budget and timeline summary.<br>
+                    &bull; Call to action: Direct request for executive authorization or meeting.
+                  </td>
+                  <td>Answers the manager's ultimate question: <em>"What do you want me to do next, how much will it cost, and by when?"</em></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>Informative vs. Analytical Reports</h3>
+          <p>
+            Chapter 11 divides all technical reports into two great families based on their analytical depth:
+          </p>
+          <ul>
+            <li><strong>Informative Reports (Descriptive):</strong> Focus on recording and sharing factual information. They document activities, progress, regulations, and lab tests. The writer acts as an objective recorder; they do <em>not</em> recommend major policy changes or analyze corporate strategy.</li>
+            <li><strong>Analytical Reports (Decision-Guiding):</strong> Go beyond presenting facts to evaluate problems, compare alternatives, test equipment, and prescribe decisions. The writer acts as an evaluator and advisor, providing conclusions and actionable recommendations.</li>
+          </ul>
+        </div>
+
+        <!-- ───────────────────────────────────────────────────
+             TOPIC 2: ACTIVITY REPORTS
+             ─────────────────────────────────────────────────── -->
+        <div class="topic-card" id="topic-2">
+          <h2><span class="topic-num">2</span>Writing Document 1: Activity Report (Periodic)</h2>
+          <p class="topic-subtitle">Documenting regular ongoing work over fixed calendar intervals (weekly, monthly, quarterly)</p>
+
+          <div class="definition">
+            <div class="callout-label">Definition</div>
+            <strong>Activity Report (Periodic Report):</strong> An informative report written at regular calendar intervals (weekly, bi-weekly, monthly, or quarterly) to document the ongoing activities, operations, and status of an individual employee, project team, or entire department.
+          </div>
+
+          <h3>Key Architectural Guidelines</h3>
+          <ul>
+            <li><strong>Timing:</strong> Triggered strictly by the calendar (e.g., end of month, Friday afternoon), regardless of whether major milestones were hit.</li>
+            <li><strong>Audience:</strong> Immediate supervisor, department head, or client account manager.</li>
+            <li><strong>Primary Purpose:</strong> Accountability, organizational record-keeping, resource tracking, and early detection of operational bottlenecks.</li>
+            <li><strong>Structural Organization Options:</strong>
+              <ul>
+                <li><em>By Project:</em> Grouping accomplishments under specific client or system accounts (Project Alpha, Project Beta).</li>
+                <li><em>By Function:</em> Grouping accomplishments under operational domains (Software Development, Quality Assurance, User Training, Infrastructure).</li>
+              </ul>
+            </li>
+          </ul>
+
+          <h3>Complete Model Exam Blueprint: Monthly Activity Report</h3>
+          <div class="code-block">
+MEMORANDUM
+
+TO:       Ms. Ayesha Siddiqui, Director of Software Engineering
+FROM:     Hamza Tariq, Lead Full-Stack Development Team
+DATE:     November 1, 2026
+SUBJECT:  Monthly Activity Report — October 2026: Mobile Banking Modernization
+
+────────────────────────────────────────────────────────────────────────────────────────
+A. ABSTRACT
+This activity report summarizes the technical and operational tasks completed by the Mobile 
+Banking Development Team during October 2026. During this period, our four-member team 
+finalized the biometric authentication API, resolved 14 high-priority security backlog tickets, 
+and commenced automated load testing for the upcoming v3.2 release. All core deliverables 
+remain aligned with the department's Q4 productivity benchmarks.
+
+B. BODY (Summary of Activities by Functional Domain)
+1. Core Feature Development:
+   • Completed integration of FIDO2-compliant biometric fingerprint and facial recognition modules.
+   • Refactored the inter-bank fund transfer (IBFT) endpoint, reducing payload latency by 28%.
+   • Completed UI localization for Urdu-language navigation screens across Android and iOS builds.
+
+2. Quality Assurance &amp; Bug Remediation:
+   • Conducted static code analysis across 42,000 lines of Flutter codebase; resolved 8 critical vulnerabilities.
+   • Closed 14 Jira sprint defect tickets related to token expiration crashes during low-network handoffs.
+   • Automated 35 end-to-end regression test scripts utilizing Appium.
+
+3. Departmental Meetings &amp; Professional Collaboration:
+   • Hosted weekly cross-functional synchronization meetings with the Information Security Audit Group.
+   • Conducted a 4-hour onboarding workshop for two newly hired junior backend developers.
+
+4. Challenges Encountered &amp; Corrective Actions:
+   • Challenge: Third-party SMS gateway provider experienced intermittent downtime on October 14, 
+     delaying OTP verification tests.
+   • Action: Implemented an automated fallback routing mechanism switching dynamically to our backup 
+     Telco API gateway.
+
+C. CONCLUSION &amp; OBJECTIVES FOR NOVEMBER 2026
+1. Objectives for Upcoming Month:
+   • Complete stress testing simulating 100,000 concurrent active users.
+   • Submit the v3.2 production release candidate to Google Play Store and Apple App Store for compliance review.
+   • Finalize developer API documentation for internal customer support teams.
+
+2. Resource Requirements:
+   • Requesting approval for two additional Android test devices (running Android 14) to verify biometric edge cases.
+          </div>
+        </div>
+
+        <!-- ───────────────────────────────────────────────────
+             TOPIC 3: PROGRESS REPORTS
+             ─────────────────────────────────────────────────── -->
+        <div class="topic-card" id="topic-3">
+          <h2><span class="topic-num">3</span>Writing Document 2: Progress Report (Milestones)</h2>
+          <p class="topic-subtitle">Tracking project milestones, schedule variances, task completion, and budget health</p>
+
+          <div class="definition">
+            <div class="callout-label">Definition</div>
+            <strong>Progress Report:</strong> An informative report that monitors the progress of a *specific, finite project* with an established beginning, middle, and end. It compares actual work completed against the planned project schedule, milestone deadlines, and budget baseline.
+          </div>
+
+          <div class="callout callout-warning">
+            <div class="callout-label">High-Yield Distinction: Activity Report vs. Progress Report</div>
+            <table class="comparison-table">
+              <thead>
+                <tr>
+                  <th>Feature</th>
+                  <th>Activity Report (Periodic)</th>
+                  <th>Progress Report (Milestone-Driven)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Scope</strong></td>
+                  <td>Covers an ongoing operational unit (e.g., IT Support desk, HR department).</td>
+                  <td>Covers a single, specific project with a defined end-date (e.g., Campus Fiber-Optic Installation).</td>
+                </tr>
+                <tr>
+                  <td><strong>Baseline</strong></td>
+                  <td>Compares output against monthly quotas or time intervals.</td>
+                  <td>Compares actual deliverables against a master Project Charter, Gantt schedule, and budget.</td>
+                </tr>
+                <tr>
+                  <td><strong>Life Span</strong></td>
+                  <td>Permanent and recurring indefinitely.</td>
+                  <td>Temporary; ceases as soon as the project is delivered and signed off.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>Standard Structural Framework for Progress Reports</h3>
+          <p>
+            Pfeiffer specifies that the Body of a Progress Report must be chronologically segregated into three explicit temporal divisions:
+          </p>
+          <ol>
+            <li><strong>Work Completed During Current Period:</strong> Explicit, verifiable deliverables finished since the last progress update.</li>
+            <li><strong>Work Currently in Progress:</strong> Tasks actively being executed right now, noting percentage completion and expected finish date.</li>
+            <li><strong>Work Scheduled for Next Period:</strong> The upcoming milestone sprint tasks.</li>
+            <li><strong>Schedule &amp; Budget Variance Analysis:</strong> Explicitly state whether the project is <em>Ahead of Schedule, On Schedule, or Behind Schedule</em>, and whether costs are <em>Under Budget, On Budget, or Over Budget</em>. Explain causes of any variance and detail corrective measures.</li>
+          </ol>
+
+          <h3>Complete Model Exam Blueprint: Infrastructure Progress Report</h3>
+          <div class="code-block">
+MEMORANDUM
+
+TO:       Dr. Hammad Naveed, Director, FAST-NUCES Lahore
+FROM:     Bilal Ahmed, Project Manager, Campus IT Infrastructure Modernization
+DATE:     November 3, 2026
+SUBJECT:  Progress Report #3 — Campus-Wide Wi-Fi 6 Upgrade Project (Sprint Phase 2)
+
+────────────────────────────────────────────────────────────────────────────────────────
+A. ABSTRACT
+This third progress report documents milestone achievements on the Campus-Wide Wi-Fi 6 Upgrade 
+Project for the period of October 15 to November 1, 2026. During this interval, Phase 2 (Access 
+Point Deployment in the CS Academic Block) was completed on schedule. Overall project completion 
+now stands at 65 percent against our target milestone of 60 percent. Expenditures remain within 
+the approved capital budget with an overall positive variance of 45,000 PKR.
+
+B. BODY (Task Status &amp; Variance Analysis)
+1. Work Completed (October 15 – November 1, 2026):
+   • Installed and provisioned 36 enterprise-grade Cisco Catalyst Wi-Fi 6 Access Points across 
+     all three floors of CS Academic Block A and B.
+   • Terminated and certified 1,400 meters of Cat6A shielded twisted-pair cabling to server racks.
+   • Configured central cloud dashboard controllers and implemented WPA3 Enterprise authentication.
+   • Conducted RF signal propagation heat-mapping; achieved 100% dead-zone elimination in lecture halls.
+
+2. Work Currently in Progress:
+   • Fiber-optic backbone splicing between Main Data Center and the Electrical Engineering Block (40% complete).
+   • Stress-testing captive portal guest network bandwidth throttle rules.
+
+3. Work Scheduled for Next Period (November 2 – November 18, 2026):
+   • Deploy 28 outdoor weather-resistant access points covering central grounds and cafeteria.
+   • Finalize integration with student LDAP/Active Directory database for single sign-on credentials.
+
+4. Schedule &amp; Budget Health Assessment:
+   • Schedule Status: On schedule. Final project commissioning remains set for December 15, 2026.
+   • Budget Status: Under budget.
+     - Approved Phase 2 Budget: 1,800,000 PKR
+     - Actual Phase 2 Expenditure: 1,755,000 PKR (Variance: +45,000 PKR saved via bulk cable procurement).
+
+C. CONCLUSION
+The Wi-Fi 6 infrastructure upgrade continues to progress smoothly without disruption to academic 
+classes. No management intervention is required at this stage. Our next progress report will be 
+submitted on November 19 upon completion of the outdoor wireless deployment.
+          </div>
+        </div>
+
+        <!-- ───────────────────────────────────────────────────
+             TOPIC 4: PROBLEM ANALYSIS REPORTS
+             ─────────────────────────────────────────────────── -->
+        <div class="topic-card" id="topic-4">
+          <h2><span class="topic-num">4</span>Writing Document 3: Problem Analysis Reports (Analytical)</h2>
+          <p class="topic-subtitle">Investigating technical breakdowns, isolating root causes, and prescribing objective solutions</p>
+
+          <div class="definition">
+            <div class="callout-label">Definition</div>
+            <strong>Problem Analysis Report:</strong> An analytical report that provides an objective, detailed investigation of a failure or breakdown in personnel, hardware, software, products, or services. Its primary objective is to present unbiased factual data so decision-makers can select the appropriate remedy.
+          </div>
+
+          <div class="callout callout-info">
+            <div class="callout-label">The Principle of Unbiased Objectivity</div>
+            <p>
+              When something breaks, human nature wants to point fingers: <em>"The students abuse the equipment"</em> or <em>"The vendor sold us junk."</em>
+            </p>
+            <p>
+              In professional technical writing, emotional opinions and blame are strictly forbidden. You must establish:
+              <br>1. <strong>The Exact Observable Facts</strong> (what failed, when, and how often?).
+              <br>2. <strong>The Systematic Data Collection</strong> (hardware diagnostics, error logs, user surveys).
+              <br>3. <strong>The True Root Cause</strong> (electrical surge, thermal throttling, outdated driver, memory leak).
+              <br>4. <strong>The Multiple Actionable Solutions</strong> evaluated objectively by cost and viability.
+            </p>
+          </div>
+
+          <h3>Complete Model Exam Blueprint: Computer Lab Breakdown (Spring 2025 Past Paper)</h3>
+          <div class="code-block">
+MEMORANDUM
+
+TO:       Dr. Zeeshan Ali, Head of Department of Computer Science, NICS Lahore
+FROM:     Zainab Fatima, Students Affairs Officer
+DATE:     April 9, 2025
+SUBJECT:  Problem Analysis Report — Technical Breakdown and Deterioration in Lab 3 Facilities
+
+────────────────────────────────────────────────────────────────────────────────────────
+A. ABSTRACT
+Following widespread student and faculty complaints regarding frequent system crashes and severe 
+computational bottlenecks in Lab 3, an intensive two-week technical investigation was conducted from 
+March 22 to April 5, 2025. Analysis reveals that 65% of desktop systems experience random thermal 
+shutdowns and network dropouts during operating systems and compiler lab sessions. The root causes 
+are degraded CPU cooling infrastructure, failing mechanical hard drives (HDDs), and outdated 100 Mbps 
+switch hardware. This report analyzes the failure data and recommends a three-phase hardware 
+modernization plan totaling 850,000 PKR to restore full academic utility.
+
+B. BODY (Factual Findings, Data Analysis &amp; Root Cause Investigation)
+1. Problem Statement &amp; Operational Impact:
+   • Lab 3 houses 50 desktop workstations utilized by over 450 undergraduate students weekly.
+   • During peak hours, an average of 18 machines freeze or crash per 3-hour lab session, causing 
+     students to lose programming test progress and delaying course pacing by up to 25%.
+
+2. Empirical Data Collection &amp; Diagnostic Findings:
+   • Diagnostic Hardware Audit: Automated hardware diagnostic scripts run across all 50 units revealed:
+     - 32 units (64%) exceed safe thermal limits (CPU temperatures consistently &gt; 92°C under 50% load).
+     - 28 mechanical hard drives (56%) exhibit S.M.A.R.T. bad-sector warnings and excessive read latencies.
+     - 45 network cables suffer from broken locking clips, causing intermittent physical disconnects.
+   • Student Survey Feedback: A survey of 120 enrolled students showed that 88% identify boot-up times 
+     (averaging 7 to 9 minutes) as their primary productivity obstacle.
+
+3. Root Cause Analysis:
+   • Primary Cause 1 (Thermal Degradation): Heatsink thermal paste has completely crystallized over 
+     four years of continuous operation without preventive maintenance, triggering thermal throttling.
+   • Primary Cause 2 (Storage Bottleneck): Aging 5400 RPM mechanical HDDs cannot sustain concurrent 
+     Docker containerization and IDE compiling demands of modern semester courses.
+   • Primary Cause 3 (Network Switch Saturation): The lab relies on two legacy 100 Mbps unmanaged switches 
+     that saturate and drop packets whenever students pull virtual machine images from the local server.
+
+4. Evaluation of Potential Solutions:
+   • Alternative 1 (Complete System Replacement): Procuring 50 brand-new desktop workstations.
+     - Cost: ~6,500,000 PKR. Verdict: Financially unfeasible under current mid-year departmental budget.
+   • Alternative 2 (Surgical Hardware Modernization): Retaining current Core i5 processors and motherboards 
+     while replacing HDDs with 512GB NVMe SSDs, applying thermal paste, and upgrading to a Gigabit switch.
+     - Cost: 850,000 PKR. Verdict: Highly cost-effective; delivers an estimated 800% I/O performance boost.
+
+C. CONCLUSION &amp; RECOMMENDATIONS
+1. Factual Conclusion:
+   The current workstations possess adequate CPU power (Core i5 10th Gen), but are crippled by storage 
+   I/O bottlenecks, thermal degradation, and network saturation. Total machine replacement is unnecessary.
+
+2. Prioritized Action Recommendations:
+   • Recommendation 1: Approve the procurement of 50 units of 512GB NVMe SSDs (550,000 PKR) to replace 
+     all failing mechanical hard drives during the upcoming semester break.
+   • Recommendation 2: Authorize lab technician overtime to clean heatsinks and reapply arctic thermal 
+     compound across all 50 processors (estimated cost: 25,000 PKR).
+   • Recommendation 3: Replace the two legacy 100 Mbps switches with one 48-port Managed Gigabit PoE 
+     Switch and recable workstation patch cords (275,000 PKR).
+   • Recommendation 4: Requesting a 15-minute budget review meeting on Thursday at 11:00 AM to finalize 
+     vendor purchase requisition forms before inventory procurement closes.
+          </div>
+        </div>
+
+        <!-- ───────────────────────────────────────────────────
+             TOPIC 5: EQUIPMENT EVALUATION REPORTS
+             ─────────────────────────────────────────────────── -->
+        <div class="topic-card" id="topic-5">
+          <h2><span class="topic-num">5</span>Writing Document 4: Equipment Evaluation Reports (Analytical)</h2>
+          <p class="topic-subtitle">Testing hardware, software, or machinery against explicit criteria to decide: retain, repair, or replace</p>
+
+          <div class="definition">
+            <div class="callout-label">Definition</div>
+            <strong>Equipment Evaluation Report:</strong> A specialized analytical report that systematically assesses the operational performance, reliability, usability, and cost-effectiveness of specific equipment, machinery, or software systems. Its definitive goal is to provide management with a concrete decision: **RETAIN**, **REPAIR**, or **REPLACE**.
+          </div>
+
+          <h3>The 5 Standard Evaluation Criteria (FAST-NUCES Grading Rubric)</h3>
+          <p>
+            When drafting an Equipment Evaluation Report on your exam, always evaluate the target equipment across these five explicit parameters:
+          </p>
+          <ol>
+            <li><strong>Performance &amp; Technical Capability:</strong> Does the equipment perform its core function fast, accurately, and without operational glitches under peak load?</li>
+            <li><strong>User-Friendliness &amp; Interface:</strong> Is it intuitive for non-technical users to operate without requiring extensive manuals or technical support?</li>
+            <li><strong>Reliability &amp; Breakdown Frequency:</strong> How often does it fail, overheat, jam, or crash during standard operational hours?</li>
+            <li><strong>Maintenance, Warranty &amp; Proximity to Service Centers:</strong> Are replacement spare parts readily accessible locally? Does the manufacturer offer active warranty support and local certified technicians?</li>
+            <li><strong>Total Cost of Ownership (TCO):</strong> What are the initial purchase, repair, power consumption, consumable, and maintenance contract costs?</li>
+          </ol>
+
+          <h3>Complete Model Exam Blueprint: Classroom Multimedia Audio-Visual System (Fall 2025 Past Paper)</h3>
+          <div class="code-block">
+MEMORANDUM
+
+TO:       Mr. Usama Zafar, Academic Manager, FAST-NUCES Lahore
+FROM:     Ali Raza, Senior Teaching Assistant &amp; Multimedia Evaluation Committee Lead
+DATE:     November 1, 2025
+SUBJECT:  Equipment Evaluation Report — Classroom Multimedia Audio-Visual Systems
+
+────────────────────────────────────────────────────────────────────────────────────────
+A. ABSTRACT
+Pursuant to the Academic Office directive, an intensive one-month hands-on operational evaluation 
+of the multimedia audio-visual equipment (Epson PowerLite projectors and companion soundbars) 
+installed across 30 campus classrooms was conducted throughout October 2025. System performance 
+was evaluated in both large lecture halls (120-seat capacity) and seminar rooms (40-seat capacity) 
+across five core criteria: display quality, audio clarity, interface connectivity, maintenance 
+frequency, and repair cost. Based on empirical testing, this report recommends a bifurcated strategy: 
+RETAIN the projector units following an HDMI adapter retrofit, but REPLACE the failing soundbar units 
+with commercial wall-mounted powered PA speakers before the Spring 2026 semester begins.
+
+B. BODY (Criteria-Based Technical Evaluation)
+1. Evaluation Methodology &amp; Testing Scope:
+   • Testing Period: October 1 to October 31, 2025.
+   • Sample Size: 30 classrooms across Computer Science and Engineering academic blocks.
+   • Evaluators: 18 faculty members, 12 teaching assistants, and 3 campus IT technicians.
+
+2. Criterion 1 — Display Quality &amp; Projector Lumens:
+   • Large Lecture Halls: Projectors exhibit 3,200 ANSI lumens, which provides sharp readability 
+     when ambient room lighting is fully dimmed, but text wash-out occurs when blinds are open.
+   • Lamp Life: Bulb runtime logs indicate that 26 of 30 projector lamps have utilized less than 
+     40 percent of their rated 6,000-hour operational lifespan.
+   • Verdict on Projectors: Optics and bulb health remain strong; replacement is unwarranted.
+
+3. Criterion 2 — Laptop Interface &amp; HDMI Connectivity:
+   • Observed Glitch: 42% of faculty using modern laptops (USB-C and DisplayPort only) experienced 
+     screen flickering or connection failures when using legacy VGA/HDMI wall sockets.
+   • Technical Diagnosis: Faulty, worn passive wall-plates and absent digital handshake adapters. 
+     The problem resides entirely in the cabling interface, not the projector hardware.
+
+4. Criterion 3 — Audio Projection &amp; Sound Clarity:
+   • Seminar Rooms: Integrated soundbar volume and vocal intelligibility are satisfactory.
+   • Large Lecture Halls: Sound projection is completely inadequate. Instructors at the podium 
+     must strain their voices, and students in rows 8 to 15 report severe distortion during recorded 
+     video demonstrations. The current 20W domestic soundbars lack acoustic dispersion power.
+
+5. Criterion 4 — Maintenance Reliability &amp; Service Proximity:
+   • Epson official authorized service center is located within 6 km of campus (Gulberg, Lahore), 
+     ensuring fast 48-hour turnaround for genuine replacement filters and lamps.
+   • Soundbar units are non-serviceable domestic consumer units with zero local board repair support.
+
+6. Evaluation Matrix &amp; Comparative Summary Table:
+   ┌──────────────────────┬─────────────────────────────┬─────────────────────────────┐
+   │ Evaluation Criterion │ Epson Projectors            │ Domestic Soundbars          │
+   ├──────────────────────┼─────────────────────────────┼─────────────────────────────┤
+   │ 1. Performance       │ Good (High lamp life left)  │ Unacceptable in large halls │
+   │ 2. Usability         │ Poor (Interface cable wear) │ Moderate                    │
+   │ 3. Reliability       │ High (0 hardware shutdowns) │ Low (Frequent hum/buzzing)  │
+   │ 4. Service Support   │ Excellent (Local Center)    │ Non-existent (Sealed units) │
+   │ 5. Decision Verdict  │ RETAIN (With Cable Fix)     │ REPLACE (Commercial Grade)  │
+   └──────────────────────┴─────────────────────────────┴─────────────────────────────┘
+
+C. CONCLUSION &amp; ACTIONABLE RECOMMENDATIONS
+1. Final Verdict:
+   The classroom audio-visual infrastructure does not require an expensive complete overhaul. The 
+   projector display engines are robust and should be **RETAINED**. However, the audio amplification 
+   is acoustically defective and must be **REPLACED**.
+
+2. Actionable Implementation Steps:
+   • Step 1 (Projector Cabling Retrofit): Procure and install 30 high-durability active USB-C to 
+     HDMI 2.1 cable harnesses and replace worn wall faceplates (Estimated budget: 75,000 PKR).
+   • Step 2 (Audio System Replacement): Replace the 12 large lecture hall domestic soundbars with 
+     commercial-grade 60W wall-mounted powered public address speakers featuring balanced XLR inputs 
+     (Estimated budget: 360,000 PKR).
+   • Step 3 (Preventive Maintenance Schedule): Institute mandatory bi-monthly air filter cleaning 
+     by campus lab staff to prolong projector engine life.
+   • Total Proposed Capital Expenditure: 435,000 PKR (saving over 3,000,000 PKR compared to buying 
+     new multimedia sets).
+
+3. Call to Action:
+   Authorization is requested by November 15, 2025, to allow IT procurement to issue vendor purchase 
+   orders in time for installation during the winter academic break.
+          </div>
+        </div>
+
+        <!-- ───────────────────────────────────────────────────
+             TOPIC 6: MASTER DISTINGUISHING MATRIX
+             ─────────────────────────────────────────────────── -->
+        <div class="topic-card" id="topic-6">
+          <h2><span class="topic-num">6</span>Master Distinguishing Matrix: The 4 Informal Report Types</h2>
+          <p class="topic-subtitle">The rapid-decision guide to eliminate exam hesitation across report types</p>
+
+          <div class="table-container">
+            <table class="comparison-table">
+              <thead>
+                <tr>
+                  <th>Report Type</th>
+                  <th>Core Question It Answers</th>
+                  <th>Timing Trigger</th>
+                  <th>Primary Analytical Task</th>
+                  <th>Decisive Output</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>1. Activity Report</strong><br>(Informational)</td>
+                  <td><em>"What did our department accomplish during this past week/month?"</em></td>
+                  <td>Strictly periodic calendar interval (weekly, monthly).</td>
+                  <td>Summarizes and categorizes ongoing departmental work by project or function.</td>
+                  <td>Historical record of work completed, active hours, and upcoming month's operational goals.</td>
+                </tr>
+                <tr>
+                  <td><strong>2. Progress Report</strong><br>(Informational)</td>
+                  <td><em>"Where does this specific project stand against its schedule and budget deadline?"</em></td>
+                  <td>Milestone intervals or regular project check-ins.</td>
+                  <td>Compares actual deliverables against baseline Gantt schedule and budget allocation.</td>
+                  <td>Clear variance statement (Ahead/Behind Schedule, Under/Over Budget) and completion forecast.</td>
+                </tr>
+                <tr>
+                  <td><strong>3. Problem Analysis Report</strong><br>(Analytical)</td>
+                  <td><em>"Why did this system/machine fail, and how do we prevent it from recurring?"</em></td>
+                  <td>Immediate response to an unexpected operational breakdown or failure incident.</td>
+                  <td>Rigorous, unbiased empirical root-cause analysis backed by diagnostic testing and surveys.</td>
+                  <td>Isolation of root cause and numbered corrective recommendations with cost-benefit analysis.</td>
+                </tr>
+                <tr>
+                  <td><strong>4. Equipment Evaluation Report</strong><br>(Analytical)</td>
+                  <td><em>"Should management retain, repair, or replace this piece of equipment?"</em></td>
+                  <td>Prior to capital budget decisions or at end of equipment trial evaluation period.</td>
+                  <td>Benchmarks equipment performance across 5 explicit criteria (Performance, Usability, Reliability, Maintenance, TCO).</td>
+                  <td>Definitive three-way verdict: <strong>RETAIN</strong>, <strong>REPAIR</strong>, or <strong>REPLACE</strong>.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="callout callout-tip">
+            <div class="callout-label">The FAST Exam "Cheat Code" for Report Prompts</div>
+            <p>
+              When you read the 20-mark question prompt on your exam paper, scan for these exact trigger keywords:
+            </p>
+            <ul>
+              <li>If the prompt mentions <em>"monthly tasks", "department status", "ongoing duties"</em> &rarr; <strong>Activity Report</strong>.</li>
+              <li>If the prompt mentions <em>"project phase", "milestone deadline", "ahead or behind schedule", "budget variance"</em> &rarr; <strong>Progress Report</strong>.</li>
+              <li>If the prompt mentions <em>"frequent crashes", "operational breakdown", "complaints from users", "identify root cause"</em> &rarr; <strong>Problem Analysis Report</strong>.</li>
+              <li>If the prompt mentions <em>"testing hardware", "projector/appliances", "suitability for campus", "retain, repair, or replace"</em> &rarr; <strong>Equipment Evaluation Report</strong>.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- ───────────────────────────────────────────────────
+             NAVIGATION FOOTER
+             ─────────────────────────────────────────────────── -->
+        <div class="nav-footer">
+          <a class="nav-footer-btn" id="prev-btn" href="javascript:void(0)" onclick="goPrev()">
+            &larr; <span id="prev-title">Previous</span>
+          </a>
+          <a class="nav-footer-btn" id="next-btn" href="javascript:void(0)" onclick="goNext()">
+            <span id="next-title">Next</span> &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Back to top button -->
+    <button id="back-to-top" onclick="document.getElementById('main-content').scrollTo({top:0,behavior:'smooth'})">▲</button>
+
+    <script>
+      const topics = [
+        "topic-1",
+        "topic-2",
+        "topic-3",
+        "topic-4",
+        "topic-5",
+        "topic-6"
+      ];
+      let currentTopicIndex = 0;
+
+      function getTopicTitle(id) {
+        const link =
+          document.querySelector(`.nav-sublist a[onclick*="'${id}'"]`) ||
+          document.querySelector(`.nav-sublist a[onclick*='"${id}"']`);
+        if (link) {
+          const numEl = link.querySelector(".nav-num");
+          if (numEl) {
+            return link.textContent.replace(numEl.textContent, "").trim();
+          }
+          return link.textContent.replace(/^\\d+\\s*/, "").trim();
+        }
+        return "Topic";
+      }
+
+      function toggleSidebar() {
+        const sb = document.getElementById("sidebar");
+        const bd = document.getElementById("sidebar-backdrop");
+        if (sb) sb.classList.toggle("open");
+        if (bd) bd.classList.toggle("active");
+      }
+
+      function showTopic(id) {
+        document
+          .querySelectorAll(".topic-card")
+          .forEach((c) => (c.style.display = "none"));
+        const t = document.getElementById(id);
+        if (t) t.style.display = "block";
+        currentTopicIndex = topics.indexOf(id);
+
+        document
+          .querySelectorAll(".nav-sublist a")
+          .forEach((a) => a.classList.remove("active"));
+        const lk =
+          document.querySelector(`.nav-sublist a[onclick*="'${id}'"]`) ||
+          document.querySelector(`.nav-sublist a[onclick*='"${id}"']`);
+        if (lk) {
+          lk.classList.add("active");
+          const sublist = lk.closest(".nav-sublist");
+          if (sublist && sublist.style.display === "none") {
+            sublist.style.display = "block";
+            const chevron = sublist.previousElementSibling
+              ? sublist.previousElementSibling.querySelector(".chevron")
+              : null;
+            if (chevron) chevron.style.transform = "rotate(0deg)";
+          }
+        }
+
+        const pb = document.getElementById("prev-btn");
+        const nb = document.getElementById("next-btn");
+        const pt = document.getElementById("prev-title");
+        const nt = document.getElementById("next-title");
+
+        if (currentTopicIndex > 0) {
+          pb.style.display = "flex";
+          if (pt) pt.textContent = getTopicTitle(topics[currentTopicIndex - 1]);
+        } else {
+          pb.style.display = "none";
+        }
+
+        if (currentTopicIndex < topics.length - 1) {
+          nb.style.display = "flex";
+          if (nt) nt.textContent = getTopicTitle(topics[currentTopicIndex + 1]);
+        } else {
+          nb.style.display = "none";
+        }
+
+        if (t) t.scrollIntoView({ behavior: "smooth", block: "start" });
+        if (window.innerWidth <= 768) {
+          const sb = document.getElementById("sidebar");
+          const bd = document.getElementById("sidebar-backdrop");
+          if (sb) sb.classList.remove("open");
+          if (bd) bd.classList.remove("active");
+        }
+      }
+
+      function goPrev() {
+        if (currentTopicIndex > 0) showTopic(topics[currentTopicIndex - 1]);
+      }
+
+      function goNext() {
+        if (currentTopicIndex < topics.length - 1)
+          showTopic(topics[currentTopicIndex + 1]);
+      }
+
+      function toggleSection(el) {
+        const s = el.nextElementSibling,
+          c = el.querySelector(".chevron");
+        if (s.style.display === "none") {
+          s.style.display = "block";
+          c.style.transform = "rotate(0deg)";
+        } else {
+          s.style.display = "none";
+          c.style.transform = "rotate(-90deg)";
+        }
+      }
+
+      function filterContent() {
+        const q = document.getElementById("search-input").value.toLowerCase();
+        document
+          .querySelectorAll(".nav-sublist li")
+          .forEach((i) => {
+            i.style.display = i.textContent.toLowerCase().includes(q)
+              ? ""
+              : "none";
+          });
+      }
+
+      // Initialise
+      if (topics.length > 0) showTopic(topics[0]);
+      const mc = document.getElementById("main-content");
+      const bb = document.getElementById("back-to-top");
+      mc.addEventListener(
+        "scroll",
+        () => (bb.style.display = mc.scrollTop > 300 ? "flex" : "none"),
+      );
+    </script>
+  </body>
+</html>

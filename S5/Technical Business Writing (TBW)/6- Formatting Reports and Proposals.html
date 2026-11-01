@@ -1,0 +1,763 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>TBW — Formatting Reports and Proposals (Chapter 10 &amp; 12)</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../notes.css" />
+  </head>
+  <body>
+    <button id="menu-toggle" onclick="toggleSidebar()" aria-label="Toggle navigation">☰</button>
+    <div id="sidebar-backdrop" onclick="toggleSidebar()"></div>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SIDEBAR
+         ═══════════════════════════════════════════════════════ -->
+    <div id="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-header-text">
+          <div class="sidebar-course-label">Course Notes</div>
+          <div class="sidebar-title">Technical &amp; Business Writing</div>
+        </div>
+      </div>
+      <div class="sidebar-search-wrap">
+        <input
+          type="text"
+          id="search-input"
+          placeholder="Search topics…"
+          onkeyup="filterContent()"
+        />
+      </div>
+
+      <ul class="nav-list" id="nav-list">
+        <li>
+          <a class="nav-module-link" href="./1- Technical Communication in the Workplace.html">
+            <span class="nav-num">01</span>Technical Communication in the Workplace
+          </a>
+        </li>
+        <li>
+          <a class="nav-module-link" href="./2- Correspondence.html">
+            <span class="nav-num">02</span>Correspondence
+          </a>
+        </li>
+        <li>
+          <a class="nav-module-link" href="./3- Presentations.html">
+            <span class="nav-num">03</span>Presentations &amp; Delivery
+          </a>
+        </li>
+        <li>
+          <a class="nav-module-link" href="./4- Exam Prep Midterm I.html">
+            <span class="nav-num">04</span>Exam Prep: Midterm I
+          </a>
+        </li>
+        <li>
+          <a class="nav-module-link" href="./5- Technical Research.html">
+            <span class="nav-num">05</span>Technical Research &amp; IEEE Documentation
+          </a>
+        </li>
+        <li class="nav-section">
+          <div class="nav-section-title" onclick="toggleSection(this)">
+            <span>6. Formatting Reports &amp; Proposals</span>
+            <span class="chevron">▼</span>
+          </div>
+          <ul class="nav-sublist">
+            <li>
+              <a href="javascript:void(0)" onclick="showTopic('topic-1')" class="active">
+                <span class="nav-num">01</span>Informal vs. Formal Formats
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" onclick="showTopic('topic-2')">
+                <span class="nav-num">02</span>Document Design &amp; Headings
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" onclick="showTopic('topic-3')">
+                <span class="nav-num">03</span>The 9 Parts of Formal Documents
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" onclick="showTopic('topic-4')">
+                <span class="nav-num">04</span>Proposal Types &amp; Persuasion
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" onclick="showTopic('topic-5')">
+                <span class="nav-num">05</span>Exam Practice &amp; Decision Drills
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <a class="nav-module-link" href="./7- Reports for Information and Analysis.html">
+            <span class="nav-num">07</span>Reports for Information &amp; Analysis
+          </a>
+        </li>
+        <li>
+          <a class="nav-module-link" href="./8- Midterm 2 Grand Exam Prep &amp; Solved Past Papers.html">
+            <span class="nav-num">08</span>Midterm 2 Grand Exam Vault
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════
+         MAIN CONTENT
+         ═══════════════════════════════════════════════════════ -->
+    <div id="main-content">
+      <div class="module-container" id="module-tbw-6">
+        <div class="module-header">
+          <div class="module-eyebrow">Technical &amp; Business Writing (TBW) — Module 06</div>
+          <h1 class="module-title">Formatting Reports and Proposals</h1>
+          <p style="color: var(--mt); font-size: 0.95rem; margin-top: 6px;">
+            Complete textbook coverage of William S. Pfeiffer (8th ed., Chapter 10 &amp; 12) &bull; Informal vs. Formal document architecture &bull; The 9 Canonical Parts of a Formal Report &bull; Document design and typography &bull; Solicited, Unsolicited, and Grant proposals.
+          </p>
+        </div>
+
+        <!-- ───────────────────────────────────────────────────
+             TOPIC 1: INFORMAL VS. FORMAL FORMATS
+             ─────────────────────────────────────────────────── -->
+        <div class="topic-card" id="topic-1">
+          <h2><span class="topic-num">1</span>Informal vs. Formal Formats: The Fundamental Dividing Line</h2>
+          <p class="topic-subtitle">How document length, reader diversity, topic complexity, and decision stakes dictate format selection</p>
+
+          <div class="callout callout-info">
+            <div class="callout-label">Real-World Intuition: Why Format Dictates Credibility</div>
+            <p>
+              Imagine asking your company CEO for 15 million PKR to replace an enterprise data center. If you write this request on a 1-page casual sticky memo, it will be rejected instantly regardless of how solid your arguments are. A multi-million-rupee capital allocation requires a bound, multi-page <strong>Formal Report</strong> with an Executive Summary, financial appendices, and transmittal letters.
+            </p>
+            <p>
+              Conversely, imagine writing a 25-page bound booklet with a Table of Contents just to tell your team that the Friday meeting is moved to 3 PM. You would waste hours of productive work. <strong>Format is not mere decoration; format signals the seriousness, scope, and target readership of a document.</strong>
+            </p>
+          </div>
+
+          <div class="definition">
+            <div class="callout-label">Definition</div>
+            <strong>Informal Document:</strong> A short (typically 1 to 5 pages), routine document addressed to a focused, homogenous audience—usually colleagues or an immediate supervisor. It uses simplified structures (Memo format for internal, Letter format for external) and dispenses with prefatory elements like tables of contents.
+          </div>
+
+          <div class="definition">
+            <div class="callout-label">Definition</div>
+            <strong>Formal Document:</strong> An extensive (typically 6 to 50+ pages), self-contained publication designed for complex projects. It addresses multiple, diverse stakeholder groups (technical staff, managers, legal counsel, external investors) and incorporates standardized prefatory and supplemental components to allow selective navigation.
+          </div>
+
+          <h3>The 4 Decisive Criteria: Informal vs. Formal</h3>
+          <p>
+            According to Pfeiffer (Chapter 10), technical writers evaluate four operational dimensions before selecting a document format:
+          </p>
+
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Evaluation Dimension</th>
+                <th>Informal Document (Memo / Letter)</th>
+                <th>Formal Document (Report / Proposal)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>1. Project Complexity</strong></td>
+                <td>Routine, single-issue tasks (e.g., weekly status, simple equipment repair, minor departmental policy change).</td>
+                <td>Multi-variable, long-term, high-risk endeavors (e.g., enterprise software migration, corporate restructuring, multimillion-dollar procurement).</td>
+              </tr>
+              <tr>
+                <td><strong>2. Document Length</strong></td>
+                <td>Short: 1 to 5 pages. Rarely exceeds 5 pages without becoming unwieldy.</td>
+                <td>Long: 6 to 100+ pages. Requires formal navigational apparatus so readers can skip sections.</td>
+              </tr>
+              <tr>
+                <td><strong>3. Audience Diversity</strong></td>
+                <td>Homogenous and known: immediate colleagues, direct manager, or a single external vendor.</td>
+                <td>Heterogeneous and wide: mixed readers including executive decision-makers, financial auditors, legal counsel, and technical specialists.</td>
+              </tr>
+              <tr>
+                <td><strong>4. Organizational Impact</strong></td>
+                <td>Informational or operational record-keeping; low to moderate financial liability.</td>
+                <td>Strategic decision-making; major financial commitments, legal compliance, or permanent policy changes.</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>The 3 Informal Formatting Styles</h3>
+          <p>
+            When an informal format is chosen, writers format the document in one of three standard industry presentations:
+          </p>
+
+          <div class="table-container">
+            <table class="comparison-table">
+              <thead>
+                <tr>
+                  <th>Informal Format</th>
+                  <th>Primary Context</th>
+                  <th>Visual Packaging &amp; Structure</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Memo Format (Internal)</strong></td>
+                  <td>Sent exclusively to readers <em>inside</em> your own organization.</td>
+                  <td>Features standard memo header (<code>TO:</code>, <code>FROM:</code>, <code>DATE:</code>, <code>SUBJECT:</code>). Uses bold headings and bulleted lists. No inside address, salutation, or complimentary closing.</td>
+                </tr>
+                <tr>
+                  <td><strong>Letter Format (External)</strong></td>
+                  <td>Sent to readers <em>outside</em> your organization (clients, government agencies, suppliers).</td>
+                  <td>Printed on official company letterhead. Features full inside address, formal salutation, body paragraphs, complimentary close, handwritten signature, and typed name/title block.</td>
+                </tr>
+                <tr>
+                  <td><strong>Booklet / Stapled Packet</strong></td>
+                  <td>Short reports (3 to 6 pages) requiring slightly elevated presentation.</td>
+                  <td>Printed with a clean cover sheet, stapled at top-left corner or bound with a lightweight plastic strip. Combines memo-style brevity with report-style visual organization.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="callout callout-warning">
+            <div class="callout-label">FAST Exam Trap: "Format" vs. "Content Type"</div>
+            <p>
+              Do not confuse the <strong>format</strong> of a report with its <strong>content category</strong>!
+            </p>
+            <ul>
+              <li><strong>Content Categories (Chapter 11):</strong> Problem Analysis, Equipment Evaluation, Progress Report, Feasibility Study.</li>
+              <li><strong>Formats (Chapter 10):</strong> Memo format, Letter format, Formal booklet format.</li>
+            </ul>
+            <p>
+              <em>Exam Rule:</em> An Equipment Evaluation report can be written in <strong>Memo format</strong> (if 2 pages to your campus director) OR in <strong>Formal format</strong> (if a 30-page university-wide evaluation of 500 computers across 4 campuses).
+            </p>
+          </div>
+        </div>
+
+        <!-- ───────────────────────────────────────────────────
+             TOPIC 2: DOCUMENT DESIGN & HEADINGS
+             ─────────────────────────────────────────────────── -->
+        <div class="topic-card" id="topic-2">
+          <h2><span class="topic-num">2</span>Document Design, Typography &amp; Heading Hierarchy</h2>
+          <p class="topic-subtitle">Pfeiffer's guidelines for executive scanability, typography, white space, and visual aids integration</p>
+
+          <div class="callout callout-info">
+            <div class="callout-label">Real-World Intuition: The 30-Second Executive Scan</div>
+            <p>
+              Busy executives almost never read technical reports word-for-word from page 1 to the end. They scan! They glance at the title, read the Executive Summary, jump to the Conclusions &amp; Recommendations, and scan the headings in between to locate sections relevant to their budget.
+            </p>
+            <p>
+              If your document looks like an intimidating "gray wall" of dense, unbroken text with no clear visual hierarchy, your report will be set aside unread. <strong>Document design is the visual roadmap that guides the executive reader's eye.</strong>
+            </p>
+          </div>
+
+          <h3>The 3-Level Heading Hierarchy (Pfeiffer Standard)</h3>
+          <p>
+            Headings function as visual milestones. They indicate the logical structure of your thought and allow readers to locate specific information instantly. Pfeiffer outlines three distinct typographic levels:
+          </p>
+
+          <div class="table-container">
+            <table class="comparison-table">
+              <thead>
+                <tr>
+                  <th>Heading Level</th>
+                  <th>Structural Role</th>
+                  <th>Typographic Specifications</th>
+                  <th>Visual Example</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>First-Level Heading</strong></td>
+                  <td>Major chapter or division title (e.g., Introduction, Methodology, Cost Analysis).</td>
+                  <td>ALL CAPITAL LETTERS, bold typeface, 14–16 pt font, centered or left-aligned. Requires 2 line spaces above and 1 line space below.</td>
+                  <td><code>4. COST AND FINANCIAL ANALYSIS</code></td>
+                </tr>
+                <tr>
+                  <td><strong>Second-Level Heading</strong></td>
+                  <td>Main subdivisions within a major chapter (e.g., Hardware Costs, Software Licensing).</td>
+                  <td>Title Case (Capitalize First Letter of Each Word), bold typeface, 12–14 pt font, left-aligned. Requires 1.5 line spaces above and 1 line space below.</td>
+                  <td><code>4.2 Software Licensing and Cloud Storage</code></td>
+                </tr>
+                <tr>
+                  <td><strong>Third-Level Heading</strong></td>
+                  <td>Specific subsections or sub-topics within a second-level division.</td>
+                  <td>Run-in heading: Indented or flush-left, bold or italicized, Title Case, followed immediately by a period. The paragraph text continues on the exact same line!</td>
+                  <td><code>Annual Subscription Fees. Enterprise tier licenses require...</code></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>The 5 Cardinal Rules of Heading Design</h3>
+          <ol>
+            <li><strong>Parallel Grammatical Structure:</strong> All headings at the same level must share the exact same grammatical pattern (e.g., all gerund phrases: <em>Upgrading Hardware, Training Personnel, Testing Performance</em>; OR all noun phrases: <em>Hardware Upgrades, Personnel Training, Performance Testing</em>). Never mix verb phrases with questions or adjectives!</li>
+            <li><strong>No "Orphan" Headings:</strong> A heading must never appear isolated at the very bottom of a page without at least two lines of text beneath it. Always push the heading to the top of the next page.</li>
+            <li><strong>Never Follow a Heading Directly with Another Heading:</strong> Always insert at least one brief transitional or overview sentence between a first-level heading and an immediate second-level heading.</li>
+            <li><strong>Avoid Pronoun Reference:</strong> The first sentence under a heading must never refer to the heading as a noun (e.g., under the heading <em>Multimedia Projector Specs</em>, never start with: <em>"These are very expensive."</em> Instead, write: <em>"Multimedia projectors with 4K resolution require..."</em>).</li>
+            <li><strong>At Least Two Headings per Division:</strong> Just as in an outline, you cannot divide a topic into only one sub-part. If you have section <code>2.1</code>, you must also have section <code>2.2</code>. If there is only one sub-point, keep it under the main heading.</li>
+          </ol>
+
+          <h3>White Space, Margins &amp; Pagination Standards</h3>
+          <ul>
+            <li><strong>Page Margins:</strong> 1 inch (2.54 cm) on top, bottom, and right. Left margin must be <strong>1.25 to 1.5 inches</strong> to accommodate binding (staples, spiral, or binder ring space) without obscuring text.</li>
+            <li><strong>The "Chunking" Principle:</strong> Break long paragraphs into bite-sized units of 4 to 8 lines. A paragraph exceeding 10 lines creates cognitive fatigue.</li>
+            <li><strong>Pagination Convention (Two-Numbering System):</strong>
+              <ul>
+                <li><em>Prefatory Pages (Title Page through Executive Summary):</em> Numbered using <strong>lowercase Roman numerals</strong> (e.g., <code>i, ii, iii, iv, v</code>). The title page is page <code>i</code>, but its page number is customarily suppressed (not printed).</li>
+                <li><em>Body &amp; Supplemental Pages (Introduction through Appendices):</em> Numbered using <strong>Arabic numerals</strong> (e.g., <code>1, 2, 3, 4...</code>) starting at page 1 on the very first page of the Introduction.</li>
+              </ul>
+            </li>
+          </ul>
+
+          <h3>Visual Aids Integration: Tables vs. Figures</h3>
+          <p>
+            In technical communication, visual aids are divided strictly into two classifications:
+          </p>
+          <ul>
+            <li><strong>Tables:</strong> Any presentation of data arranged in systematic rows and columns of text or numbers. Labeled at the top: <code>Table 1: Hardware Benchmark Comparison</code>.</li>
+            <li><strong>Figures:</strong> Everything that is <em>not</em> a table—graphs, bar charts, pie charts, flowcharts, block diagrams, photographs, schematics, and maps. Labeled at the bottom: <code>Figure 3: System Network Architecture</code>.</li>
+          </ul>
+
+          <div class="callout callout-info">
+            <div class="callout-label">The 3-Step Integration Rule for Visuals</div>
+            <ol>
+              <li><strong>Introduce (Lead-in):</strong> Mention the visual in the body text <em>before</em> the reader encounters it (e.g., <em>"As shown in Table 2 below, the response times vary significantly..."</em>).</li>
+              <li><strong>Present:</strong> Position the visual immediately after the introductory text, centered, with clear labels and units.</li>
+              <li><strong>Interpret:</strong> Immediately explain the key takeaway of the visual in the text following it. Never leave a visual unexplained!</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- ───────────────────────────────────────────────────
+             TOPIC 3: THE 9 PARTS OF FORMAL DOCUMENTS
+             ─────────────────────────────────────────────────── -->
+        <div class="topic-card" id="topic-3">
+          <h2><span class="topic-num">3</span>The 9 Essential Parts of Formal Documents (A-to-Z Anatomy)</h2>
+          <p class="topic-subtitle">The standard formal report framework required by industry and tested in FAST-NUCES past papers</p>
+
+          <div class="callout callout-info">
+            <div class="callout-label">Real-World Intuition: Modular Engineering</div>
+            <p>
+              A formal report is engineered like an airplane: each component has a specific aerodynamic function. The CEO only reads the <strong>Executive Summary</strong>; the CFO scrutinizes the <strong>Cost Discussion and Appendices</strong>; the engineering team lives in the <strong>Technical Body</strong>; the purchasing officer relies on the <strong>Recommendations</strong>.
+            </p>
+            <p>
+              The 9 standardized parts ensure that every stakeholder can navigate directly to the data they need to make decisions without being forced to read irrelevant sections.
+            </p>
+          </div>
+
+          <div class="callout callout-warning">
+            <div class="callout-label">Memory Key: The 3 Structural Divisions</div>
+            <p>
+              To memorize all 9 parts without thinking twice, divide the report into three operational zones:
+            </p>
+            <ol>
+              <li><strong>Prefatory Elements (Front Matter):</strong> Parts 1 to 5 (Cover, Transmittal, Title Page, TOC/Illustrations, Executive Summary).</li>
+              <li><strong>Body Elements (Core Document):</strong> Parts 6 &amp; 7 (Introduction/Discussion, Conclusions &amp; Recommendations).</li>
+              <li><strong>Supplemental Elements (Back Matter):</strong> Parts 8 &amp; 9 (Appendices, References/Bibliography).</li>
+            </ol>
+          </div>
+
+          <h3>Exhaustive Walkthrough of All 9 Parts</h3>
+
+          <div class="table-container">
+            <table class="comparison-table">
+              <thead>
+                <tr>
+                  <th>Part # &amp; Component Name</th>
+                  <th>Primary Function &amp; Audience</th>
+                  <th>Mandatory Contents &amp; Formatting Rules</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Part 1: Cover / Cover Page</strong></td>
+                  <td>Protective outer packaging; provides initial professional impression.</td>
+                  <td>Heavy cardstock or durable binder. Displays document title, author, recipient organization, and release date. Clean and uncluttered.</td>
+                </tr>
+                <tr>
+                  <td><strong>Part 2: Title Page</strong></td>
+                  <td>Official cataloging page; establishes legal and administrative record.</td>
+                  <td>Must contain the <strong>5 Mandatory Elements</strong>:<br>
+                    1. Complete, descriptive Document Title and Subtitle.<br>
+                    2. Prepared For: Name, title, and organization of recipient.<br>
+                    3. Prepared By: Name, title, and organization of author/team.<br>
+                    4. Sponsoring Organization or Department.<br>
+                    5. Full Submission Date (e.g., November 8, 2026).<br>
+                    <em>Note:</em> Counts as page <code>i</code>, but the page number is unprinted.
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Part 3: Letter or Memo of Transmittal</strong></td>
+                  <td>The formal "greeting handshake" transferring the report from writer to client.</td>
+                  <td>
+                    <strong>Internal Report:</strong> Uses Memo of Transmittal (<code>TO: / FROM: / DATE: / SUBJECT:</code>).<br>
+                    <strong>External Report:</strong> Uses Letter of Transmittal on official letterhead.<br>
+                    <strong>The 4 Standard Paragraphs:</strong><br>
+                    &bull; <em>Paragraph 1 (Statement of Transmittal):</em> Explicitly presents the report and cites project authorization/date.<br>
+                    &bull; <em>Paragraph 2 (Scope &amp; Purpose):</em> Summarizes why the study was undertaken and key objectives.<br>
+                    &bull; <em>Paragraph 3 (Key Findings / Acknowledgment):</em> Highlights central conclusion and thanks contributors.<br>
+                    &bull; <em>Paragraph 4 (Forward Action):</em> Offers follow-up assistance or personal contact details.
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Part 4: Table of Contents &amp; List of Illustrations</strong></td>
+                  <td>The master navigational index of the entire document.</td>
+                  <td>
+                    &bull; <strong>Table of Contents (TOC):</strong> Lists all 1st and 2nd level headings with exact wording, correct indentation, dot leaders (<code>......</code>), and right-aligned page numbers.<br>
+                    &bull; <strong>List of Illustrations:</strong> Separated into two distinct subsections: <em>List of Tables</em> (Table 1, Table 2...) and <em>List of Figures</em> (Figure 1, Figure 2...).
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Part 5: Executive Summary / Abstract</strong></td>
+                  <td>The high-impact synthesis read by decision-makers who do not read the full report.</td>
+                  <td>
+                    Typically 1 page (rarely exceeds 5 percent of total report length). Condenses the entire document: Problem, Methodology, Key Findings, Conclusions, and Core Recommendations.<br>
+                    <em>Distinction:</em> An <strong>Abstract</strong> is descriptive and academic; an <strong>Executive Summary</strong> is analytical, results-oriented, and focused on operational/financial impact.
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Part 6: Introduction &amp; Body (Discussion)</strong></td>
+                  <td>The technical core containing data, methodology, and systematic analysis.</td>
+                  <td>
+                    &bull; <strong>Introduction:</strong> Problem statement, background history, purpose, technical scope, limitations, and authorization.<br>
+                    &bull; <strong>Body (Discussion):</strong> The largest section. Systematically organized by logical criteria (never by chronology!). Presents objective factual data, benchmarks, field observations, and mathematical evaluations. Uses visuals extensively.
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Part 7: Conclusions &amp; Recommendations</strong></td>
+                  <td>Translates raw technical findings into executive meaning and actionable strategy.</td>
+                  <td>
+                    &bull; <strong>Conclusions:</strong> Objective deductions and factual interpretations derived strictly from data presented in the body. (Zero new data introduced!).<br>
+                    &bull; <strong>Recommendations:</strong> Actionable, forward-looking prescriptions. Tells management exactly what to do, who should do it, by when, and at what cost. Often numbered in priority order.
+                  </td>
+                </tr>
+                <tr>
+                  <td><strong>Part 8: Appendices</strong></td>
+                  <td>Archive of supplementary material that would clutter the main narrative.</td>
+                  <td>Includes survey questionnaires, interview transcripts, massive raw statistical tables, complex circuit diagrams, code listings, and vendor specification sheets. Labeled with capital letters: <code>Appendix A: Survey Instrument</code>, <code>Appendix B: Raw Pricing Sheets</code>.</td>
+                </tr>
+                <tr>
+                  <td><strong>Part 9: Bibliography / References List</strong></td>
+                  <td>Formal academic and legal attribution of all secondary sources cited.</td>
+                  <td>In technical fields (FAST-NUCES standard), formatted according to the <strong>IEEE Citation Style</strong>: numbered sequentially in square brackets <code>[1]</code>, <code>[2]</code> in order of appearance in text.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="callout callout-tip">
+            <div class="callout-label">Exam Tip: Transmittal Letter vs. Executive Summary</div>
+            <p>
+              FAST exams frequently ask students to contrast the <strong>Transmittal Letter</strong> with the <strong>Executive Summary</strong>:
+            </p>
+            <ul>
+              <li><strong>Transmittal Letter:</strong> A personal, conversational communication between writer and primary recipient. It discusses the <em>process of writing</em> the report (e.g., challenges faced, budget constraints, personal acknowledgments).</li>
+              <li><strong>Executive Summary:</strong> An impersonal, highly objective, professional synthesis of the <em>subject matter itself</em>. It focuses strictly on problem, findings, and recommendations for executive action.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- ───────────────────────────────────────────────────
+             TOPIC 4: PROPOSALS & PERSUASION
+             ─────────────────────────────────────────────────── -->
+        <div class="topic-card" id="topic-4">
+          <h2><span class="topic-num">4</span>Proposal Architecture &amp; Persuasive Tasks (Ch 10 &amp; 12)</h2>
+          <p class="topic-subtitle">Solicited, unsolicited, and grant proposals, the persuasive pyramid, and the ABC informal proposal blueprint</p>
+
+          <div class="callout callout-info">
+            <div class="callout-label">Real-World Intuition: Proposals as Commercial Bids</div>
+            <p>
+              A report says: <em>"Here is what happened, here is our analysis, and here is what we discovered."</em><br>
+              A proposal says: <em>"Here is a serious problem, here is our plan to fix it, here is what it will cost, and here is why you should hire us / authorize this budget."</em>
+            </p>
+            <p>
+              <strong>A proposal is a specialized, legally binding sales pitch.</strong> It competes directly with proposals from other firms or other departments for scarce capital resources.
+            </p>
+          </div>
+
+          <h3>The 3 Proposal Classifications (High-Yield Exam Focus)</h3>
+          <p>
+            Pfeiffer divides proposals into three distinct operational categories based on their initiation context:
+          </p>
+
+          <div class="table-container">
+            <table class="comparison-table">
+              <thead>
+                <tr>
+                  <th>Proposal Type</th>
+                  <th>Initiation Trigger &amp; Context</th>
+                  <th>Key Persuasive Challenge</th>
+                  <th>Real-World Example</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>1. Solicited Proposal</strong></td>
+                  <td>The client or management recognizes a problem and formally invites proposals by issuing an <strong>RFP (Request for Proposal)</strong>, IFB (Invitation for Bid), or verbal request.</td>
+                  <td><strong>Direct Compliance:</strong> You do not need to convince them that a problem exists; they already know! The challenge is proving that your solution is superior, cheaper, faster, and more qualified than rival bidding firms.</td>
+                  <td>The Punjab Government issues an RFP for an AI traffic violation monitoring system; IT firms submit bids adhering strictly to the government's specifications.</td>
+                </tr>
+                <tr>
+                  <td><strong>2. Unsolicited Proposal</strong></td>
+                  <td>The writer independently identifies a problem, inefficiency, or opportunity that management/client is completely unaware of, and initiates a proposal "cold".</td>
+                  <td><strong>Problem Convincing:</strong> You must first convince a skeptical audience that a genuine problem exists, demonstrate that the problem has significant financial or operational cost, and prove your solution is worth allocating unbudgeted funds.</td>
+                  <td>An engineer notices that server room cooling costs are 40% too high and submits an unsolicited proposal to management to install smart AI temperature thermostats.</td>
+                </tr>
+                <tr>
+                  <td><strong>3. Grant Proposal</strong></td>
+                  <td>Submitted to funding organizations (Higher Education Commission, National Science Foundation, philanthropic trusts) seeking financial sponsorship for non-profit research, public health, or educational projects.</td>
+                  <td><strong>Civic &amp; Social Value:</strong> Demonstrates public benefit, academic rigor, ethical compliance, and detailed accountability for every dollar spent.</td>
+                  <td>A FAST university faculty member submits a proposal to the HEC National Technology Fund for 5 million PKR to research bilingual Urdu-English speech recognition.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>The 5 Persuasive Tasks of Every Proposal</h3>
+          <p>
+            To win approval or funding, Pfeiffer establishes that a proposal must accomplish five specific persuasive objectives:
+          </p>
+          <ol>
+            <li><strong>Spell out the Problem Clearly:</strong> Prove that the problem is urgent, impactful, and costly. Use quantified data (e.g., hours lost, dollars wasted, error rates).</li>
+            <li><strong>Point out the Benefits of Solving It:</strong> Show the tangible return on investment (ROI). How will the client be better off after implementation?</li>
+            <li><strong>Present a Rigorous Technical Plan:</strong> Detail the methodology, hardware/software stack, architectural steps, and logistics. Show that your approach is realistic and robust.</li>
+            <li><strong>Establish Unquestioned Qualifications:</strong> Prove that you and your team possess the expertise, credentials, past successful case studies, and facilities to execute the plan without failure.</li>
+            <li><strong>Provide a Defensible Schedule &amp; Budget:</strong> Break the project into phases with clear milestone dates (Gantt chart) and itemized costs (labor, equipment, overhead, contingency).</li>
+          </ol>
+
+          <h3>The ABC Format for Informal Proposals (20-Mark Exam Blueprint)</h3>
+          <p>
+            When FAST exams ask for an <strong>Informal Proposal in Memo Format</strong> (as in Fall 2024 and Fall 2021), follow this exact structural blueprint:
+          </p>
+
+          <div class="code-block">
+MEMORANDUM
+
+TO:       Dr. Amir Masood, Director of Student Affairs
+FROM:     Muhammad Ali, Student Affairs Council Representative
+DATE:     November 2, 2026
+SUBJECT:  Proposal for Establishing a Student-Led Peer Tutoring Program at FAST Lahore
+
+────────────────────────────────────────────────────────────────────────────────────────
+A. ABSTRACT (Introductory Overview &amp; Core Request)
+   • 1-2 concise paragraphs stating the exact purpose of the proposal.
+   • Statement of the core problem: Rising failure rates in gateway CS courses (Data Structures, OOP).
+   • Proposed Solution: Launching a structured, zero-salary peer tutoring network for Spring 2027.
+   • Explicit benefit summary: Improved student retention, reduced probation rates, zero faculty overhead.
+
+B. BODY (Detailed Plan, Logistics, Personnel, Schedule &amp; Budget)
+   1. Needs Analysis &amp; Empirical Justification:
+      - Cite survey data (e.g., 68% of sophomore students expressed need for after-hours tutoring).
+      - Contrast existing academic support with high student-to-teacher ratios.
+   2. Operational Plan &amp; Logistics:
+      - Selection criteria for peer tutors (CGPA >= 3.5, grade 'A' in subject, interview).
+      - Venue and scheduling: Reserved smart classrooms in CS block, 4 PM to 7 PM weekdays.
+      - Academic oversight: Faculty liaison from the Department of Computer Science.
+   3. Schedule &amp; Milestone Implementation:
+      - Phase 1 (Weeks 1-2): Tutor recruitment, screening, and orientation workshop.
+      - Phase 2 (Weeks 3-12): Active tutoring sessions and weekly logbook maintenance.
+      - Phase 3 (Weeks 13-14): Midterm feedback surveys and performance audit.
+   4. Budget &amp; Resource Requirements:
+      - Itemized ledger: Room booking (zero cost), printing/study materials (15,000 PKR), 
+        volunteer recognition certificates and semester-end appreciation shields (25,000 PKR).
+      - Total Proposed Budget: 40,000 PKR.
+
+C. CONCLUSION (Anticipated Impact, Next Steps &amp; Call to Action)
+   • Reiterate strategic benefits: Fosters peer collaboration and reduces academic attrition.
+   • Direct Request for Authorization: "If you approve this proposed framework, we request a brief 15-minute meeting on Friday to finalize tutor selection criteria and sign off on room reservations."
+   • Professional closing and signature block.
+          </div>
+        </div>
+
+        <!-- ───────────────────────────────────────────────────
+             TOPIC 5: EXAM PRACTICE & DECISION DRILLS
+             ─────────────────────────────────────────────────── -->
+        <div class="topic-card" id="topic-5">
+          <h2><span class="topic-num">5</span>Exam Practice &amp; Decision Drills (Chapter 10 Review)</h2>
+          <p class="topic-subtitle">Past paper classification questions, short-answer drills, and high-frequency exam traps</p>
+
+          <div class="exam-card">
+            <div class="exam-header">
+              <span class="exam-title">Exam Drill 1: Identifying Proposal Classifications (Fall 2023 Past Paper)</span>
+              <span class="exam-badge gold">6 Marks</span>
+            </div>
+            <p><strong>Prompt:</strong> Read the following three cases and identify whether each is an example of a <strong>Solicited, Unsolicited, or Grant Proposal</strong>. Justify your answer in one sentence.</p>
+
+            <div class="solution-box">
+              <h5>Case 1 Analysis:</h5>
+              <p><em>"A county health department wants to improve health literacy among its clients. A doctor in the department reads that a medical technology company offers grants for community health literacy programs. He works with administrators and health education experts to develop a specific plan and write a proposal that meets the requirements of the health technology company’s program."</em></p>
+              <p><strong>Classification:</strong> <strong>Grant Proposal.</strong></p>
+              <p><strong>Justification:</strong> The proposal is submitted to a third-party funding sponsor (a medical technology company) seeking financial endowment for a community public-health initiative rather than delivering commercial services to a buyer.</p>
+            </div>
+
+            <div class="solution-box">
+              <h5>Case 2 Analysis:</h5>
+              <p><em>"Hassan, Chief Financial Officer, has received the results of an internal audit that found problems in the way the client has stored information. Since he is not satisfied with it, he asks his manager to write a proposal to propose changes that will improve IS security and training of all affected employees."</em></p>
+              <p><strong>Classification:</strong> <strong>Solicited Proposal.</strong></p>
+              <p><strong>Justification:</strong> The proposal was directly requested and commissioned by upper management (the CFO) following an identified audit defect, meaning the author is responding to an explicit internal invitation.</p>
+            </div>
+
+            <div class="solution-box">
+              <h5>Case 3 Analysis:</h5>
+              <p><em>"Ali has recently found out that the equipment the client’s company is using is not up to safety standards. He has not discussed the issue with any of the other colleagues but decides to write a proposal to offer changes in the way company procures equipment. He has done his research and found out many possibilities from where the company can buy safe Equipment."</em></p>
+              <p><strong>Classification:</strong> <strong>Unsolicited Proposal.</strong></p>
+              <p><strong>Justification:</strong> Ali initiated the proposal entirely on his own without any prompt, invitation, or prior request from management, requiring him to first prove that a safety violation exists.</p>
+            </div>
+          </div>
+
+          <div class="exam-card">
+            <div class="exam-header">
+              <span class="exam-title">Exam Drill 2: Formal Report Organization Strategies (Fall 2021 Past Paper)</span>
+              <span class="exam-badge cyan">5 Marks</span>
+            </div>
+            <p><strong>Prompt:</strong> <em>"RBM Software is preparing to release a new product, and it will need documentation to support its new software. Alveena Majid, a documentation specialist, is working on a Formal Report. What are the basic strategies to organize a formal document that she needs to consider while writing the report?"</em></p>
+            <div class="solution-box">
+              <h5>Model Solution:</h5>
+              <p>Alveena must incorporate the following four fundamental formal report organizational strategies:</p>
+              <ol>
+                <li><strong>Deploy the 3-Tier Macro Structure:</strong> Separate the document into <em>Prefatory Elements</em> (Cover, Transmittal, Title Page, TOC, Executive Summary), <em>Body Elements</em> (Introduction, Technical Modules, Conclusions/Recommendations), and <em>Supplemental Elements</em> (Appendices, Glossary, References) to accommodate multi-level stakeholders.</li>
+                <li><strong>Order Content by Reader Need (Criterion-Based Partitioning):</strong> Organize technical topics by logical user workflow or system criteria (e.g., Installation &rarr; Architecture &rarr; API Integration &rarr; Security Protocols) rather than chronological development history.</li>
+                <li><strong>Establish Visual Hierarchy through Standardized Headings:</strong> Utilize a consistent 3-level heading convention with parallel grammatical phrasing and distinct typographic weights so users can scan to specific technical procedures.</li>
+                <li><strong>Front-Load Critical Insights with an Executive Summary:</strong> Place high-impact business outcomes, system requirements, and core benefits upfront on a single executive page before delving into granular technical specifications.</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+        <!-- ───────────────────────────────────────────────────
+             NAVIGATION FOOTER
+             ─────────────────────────────────────────────────── -->
+        <div class="nav-footer">
+          <a class="nav-footer-btn" id="prev-btn" href="javascript:void(0)" onclick="goPrev()">
+            &larr; <span id="prev-title">Previous</span>
+          </a>
+          <a class="nav-footer-btn" id="next-btn" href="javascript:void(0)" onclick="goNext()">
+            <span id="next-title">Next</span> &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Back to top button -->
+    <button id="back-to-top" onclick="document.getElementById('main-content').scrollTo({top:0,behavior:'smooth'})">▲</button>
+
+    <script>
+      const topics = ["topic-1", "topic-2", "topic-3", "topic-4", "topic-5"];
+      let currentTopicIndex = 0;
+
+      function getTopicTitle(id) {
+        const link =
+          document.querySelector(`.nav-sublist a[onclick*="'${id}'"]`) ||
+          document.querySelector(`.nav-sublist a[onclick*='"${id}"']`);
+        if (link) {
+          const numEl = link.querySelector(".nav-num");
+          if (numEl) {
+            return link.textContent.replace(numEl.textContent, "").trim();
+          }
+          return link.textContent.replace(/^\\d+\\s*/, "").trim();
+        }
+        return "Topic";
+      }
+
+      function toggleSidebar() {
+        const sb = document.getElementById("sidebar");
+        const bd = document.getElementById("sidebar-backdrop");
+        if (sb) sb.classList.toggle("open");
+        if (bd) bd.classList.toggle("active");
+      }
+
+      function showTopic(id) {
+        document
+          .querySelectorAll(".topic-card")
+          .forEach((c) => (c.style.display = "none"));
+        const t = document.getElementById(id);
+        if (t) t.style.display = "block";
+        currentTopicIndex = topics.indexOf(id);
+
+        document
+          .querySelectorAll(".nav-sublist a")
+          .forEach((a) => a.classList.remove("active"));
+        const lk =
+          document.querySelector(`.nav-sublist a[onclick*="'${id}'"]`) ||
+          document.querySelector(`.nav-sublist a[onclick*='"${id}"']`);
+        if (lk) {
+          lk.classList.add("active");
+          const sublist = lk.closest(".nav-sublist");
+          if (sublist && sublist.style.display === "none") {
+            sublist.style.display = "block";
+            const chevron = sublist.previousElementSibling
+              ? sublist.previousElementSibling.querySelector(".chevron")
+              : null;
+            if (chevron) chevron.style.transform = "rotate(0deg)";
+          }
+        }
+
+        const pb = document.getElementById("prev-btn");
+        const nb = document.getElementById("next-btn");
+        const pt = document.getElementById("prev-title");
+        const nt = document.getElementById("next-title");
+
+        if (currentTopicIndex > 0) {
+          pb.style.display = "flex";
+          if (pt) pt.textContent = getTopicTitle(topics[currentTopicIndex - 1]);
+        } else {
+          pb.style.display = "none";
+        }
+
+        if (currentTopicIndex < topics.length - 1) {
+          nb.style.display = "flex";
+          if (nt) nt.textContent = getTopicTitle(topics[currentTopicIndex + 1]);
+        } else {
+          nb.style.display = "none";
+        }
+
+        if (t) t.scrollIntoView({ behavior: "smooth", block: "start" });
+        if (window.innerWidth <= 768) {
+          const sb = document.getElementById("sidebar");
+          const bd = document.getElementById("sidebar-backdrop");
+          if (sb) sb.classList.remove("open");
+          if (bd) bd.classList.remove("active");
+        }
+      }
+
+      function goPrev() {
+        if (currentTopicIndex > 0) showTopic(topics[currentTopicIndex - 1]);
+      }
+
+      function goNext() {
+        if (currentTopicIndex < topics.length - 1)
+          showTopic(topics[currentTopicIndex + 1]);
+      }
+
+      function toggleSection(el) {
+        const s = el.nextElementSibling,
+          c = el.querySelector(".chevron");
+        if (s.style.display === "none") {
+          s.style.display = "block";
+          c.style.transform = "rotate(0deg)";
+        } else {
+          s.style.display = "none";
+          c.style.transform = "rotate(-90deg)";
+        }
+      }
+
+      function filterContent() {
+        const q = document.getElementById("search-input").value.toLowerCase();
+        document
+          .querySelectorAll(".nav-sublist li")
+          .forEach((i) => {
+            i.style.display = i.textContent.toLowerCase().includes(q)
+              ? ""
+              : "none";
+          });
+      }
+
+      // Initialise
+      if (topics.length > 0) showTopic(topics[0]);
+      const mc = document.getElementById("main-content");
+      const bb = document.getElementById("back-to-top");
+      mc.addEventListener(
+        "scroll",
+        () => (bb.style.display = mc.scrollTop > 300 ? "flex" : "none"),
+      );
+    </script>
+  </body>
+</html>

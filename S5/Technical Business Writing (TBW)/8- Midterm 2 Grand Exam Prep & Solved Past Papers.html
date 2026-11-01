@@ -1,0 +1,1051 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>TBW — Midterm 2 Grand Exam Prep &amp; Solved Past Papers</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../notes.css" />
+  </head>
+  <body>
+    <button id="menu-toggle" onclick="toggleSidebar()" aria-label="Toggle navigation">☰</button>
+    <div id="sidebar-backdrop" onclick="toggleSidebar()"></div>
+
+    <!-- ═══════════════════════════════════════════════════════
+         SIDEBAR
+         ═══════════════════════════════════════════════════════ -->
+    <div id="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-header-text">
+          <div class="sidebar-course-label">Course Notes</div>
+          <div class="sidebar-title">Technical &amp; Business Writing</div>
+        </div>
+      </div>
+      <div class="sidebar-search-wrap">
+        <input
+          type="text"
+          id="search-input"
+          placeholder="Search topics…"
+          onkeyup="filterContent()"
+        />
+      </div>
+
+      <ul class="nav-list" id="nav-list">
+        <li>
+          <a class="nav-module-link" href="./1- Technical Communication in the Workplace.html">
+            <span class="nav-num">01</span>Technical Communication in the Workplace
+          </a>
+        </li>
+        <li>
+          <a class="nav-module-link" href="./2- Correspondence.html">
+            <span class="nav-num">02</span>Correspondence
+          </a>
+        </li>
+        <li>
+          <a class="nav-module-link" href="./3- Presentations.html">
+            <span class="nav-num">03</span>Presentations &amp; Delivery
+          </a>
+        </li>
+        <li>
+          <a class="nav-module-link" href="./4- Exam Prep Midterm I.html">
+            <span class="nav-num">04</span>Exam Prep: Midterm I
+          </a>
+        </li>
+        <li>
+          <a class="nav-module-link" href="./5- Technical Research.html">
+            <span class="nav-num">05</span>Technical Research &amp; IEEE Documentation
+          </a>
+        </li>
+        <li>
+          <a class="nav-module-link" href="./6- Formatting Reports and Proposals.html">
+            <span class="nav-num">06</span>Formatting Reports &amp; Proposals
+          </a>
+        </li>
+        <li>
+          <a class="nav-module-link" href="./7- Reports for Information and Analysis.html">
+            <span class="nav-num">07</span>Reports for Information &amp; Analysis
+          </a>
+        </li>
+        <li class="nav-section">
+          <div class="nav-section-title" onclick="toggleSection(this)">
+            <span>8. Midterm 2 Grand Exam Vault</span>
+            <span class="chevron">▼</span>
+          </div>
+          <ul class="nav-sublist">
+            <li>
+              <a href="javascript:void(0)" onclick="showTopic('topic-1')" class="active">
+                <span class="nav-num">01</span>Case Study Master Lab
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" onclick="showTopic('topic-2')">
+                <span class="nav-num">02</span>Survey Design &amp; IEEE Citations
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" onclick="showTopic('topic-3')">
+                <span class="nav-num">03</span>Abstract De-Scrambler Lab
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" onclick="showTopic('topic-4')">
+                <span class="nav-num">04</span>6 Solved Midterm Papers (2020–2025)
+              </a>
+            </li>
+            <li>
+              <a href="javascript:void(0)" onclick="showTopic('topic-5')">
+                <span class="nav-num">05</span>40-Question MCQ Simulator
+              </a>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════════════
+         MAIN CONTENT
+         ═══════════════════════════════════════════════════════ -->
+    <div id="main-content">
+      <div class="module-container" id="module-tbw-8">
+        <div class="module-header">
+          <div class="module-eyebrow">Technical &amp; Business Writing (TBW) — Module 08</div>
+          <h1 class="module-title">Midterm 2 Grand Exam Prep Vault &amp; Solved Past Papers</h1>
+          <p style="color: var(--mt); font-size: 0.95rem; margin-top: 6px;">
+            Complete preparation suite for FAST-NUCES Midterm 2 &bull; Exhaustive coverage of Chapters 9, 10, and 11 &bull; Word-for-word solutions for 6 past exam papers (Fall 2024, Spring 2025, Fall 2025, Fall 2023, Fall 2021, Fall 2020) &bull; Case study breakdowns, survey question design, abstract sentence de-scrambler, and interactive 40-question MCQ simulator.
+          </p>
+        </div>
+
+        <!-- ───────────────────────────────────────────────────
+             TOPIC 1: CASE STUDY MASTER LAB
+             ─────────────────────────────────────────────────── -->
+        <div class="topic-card" id="topic-1">
+          <h2><span class="topic-num">1</span>The Case Study Master Lab: Diagnosing Technical Communication Scenarios</h2>
+          <p class="topic-subtitle">How to dissect FAST-NUCES exam case studies, classify data sources, and recommend professional remedies</p>
+
+          <div class="callout callout-info">
+            <div class="callout-label">The Anatomy of a FAST Case Study Question</div>
+            <p>
+              In every recent Midterm 2 exam, FAST examiners provide a realistic scenario involving an engineering team, software company, or corporate research group. The questions test three specific competencies:
+            </p>
+            <ol>
+              <li><strong>Identifying Data Types Collected:</strong> Classifying research activities into Primary vs. Secondary and Qualitative vs. Quantitative.</li>
+              <li><strong>Spotting Document Design &amp; Organizational Flaws:</strong> Identifying failures in visual hierarchy, lack of executive summaries, poor heading structure, or confusing raw data with analytical interpretation.</li>
+              <li><strong>Prescribing Professional Remedies:</strong> Recommending specific strategies (e.g., criteria-based body organization, 3-level heading hierarchy, visual lead-in statements, executive summaries) to make reports presentation-ready for C-level executives.</li>
+            </ol>
+          </div>
+
+          <div class="exam-card">
+            <div class="exam-header">
+              <span class="exam-title">Solved Case Study 1: Tech Nova Analytics &amp; Green Energy Pakistan (Fall 2025 Sessional II)</span>
+              <span class="exam-badge gold">15 Marks</span>
+            </div>
+            <p><strong>Scenario:</strong> <em>"Tech Nova Analytics, a fast-growing data science startup, was contracted by Green Energy Pakistan (GEP) to research innovative ways to reduce electricity consumption in corporate buildings using AI. The team collected: (1) energy audits conducted in five corporate offices, (2) structured interviews with facility managers and IT administrators, (3) an online survey measuring employee energy-use behavior, and (4) information from published academic studies and industry reports on smart energy systems. When compiled, the initial report had severe flaws: it lacked clear logical organization, had inconsistent formatting (fonts, headings, tables varied), failed to distinguish between raw data and analysis, and omitted charts/diagrams for non-technical stakeholders."</em></p>
+
+            <div class="solution-box">
+              <h5>Part (A) Solution: Classification of Data Sources Collected (10 Marks)</h5>
+              <p>Tech Nova collected four distinct data streams that allowed a multi-dimensional understanding of energy consumption through <strong>methodological triangulation</strong>:</p>
+              <ul>
+                <li><strong>1. Corporate Energy Audits (Primary, Quantitative / Observational Data):</strong> Direct empirical measurements of kilowatt-hour consumption, peak load hours, and equipment power draws across five physical offices. This established an objective baseline of physical energy waste without subjective bias.</li>
+                <li><strong>2. Structured Interviews with Facility &amp; IT Managers (Primary, Qualitative Data):</strong> First-hand expert insights regarding technical HVAC operations, server cooling constraints, and organizational friction. Provides qualitative depth explaining *why* certain energy-saving protocols fail.</li>
+                <li><strong>3. Online Employee Surveys (Primary, Quantitative Data):</strong> Numerical data captured using structured Likert-scale questions regarding employee habits (e.g., workstation power-down frequency, thermostat settings). Measures organizational behavioral patterns across a broad statistical sample.</li>
+                <li><strong>4. Published Academic Studies &amp; Industry Reports (Secondary Data):</strong> Pre-existing, peer-reviewed benchmarks and smart energy algorithms published by external researchers. Provides authoritative theoretical models and comparative industry standards to validate Tech Nova's AI predictions.</li>
+              </ul>
+            </div>
+
+            <div class="solution-box">
+              <h5>Part (B) Solution: Diagnosis of Report Flaws &amp; Recommended Strategies (5 Marks)</h5>
+              <p><strong>Two Deficiencies in the Initial Report:</strong></p>
+              <ol>
+                <li><em>Failure to Distinguish Raw Data from Analysis:</em> Dumping unprocessed audit numbers alongside interpretive text creates cognitive overload for C-level executives who lack the time to calculate implications themselves.</li>
+                <li><em>Absence of Visual Aids &amp; Inconsistent Typography:</em> Presenting numerical trends in dense textual blocks without charts, combined with erratic fonts and heading styles, severely impairs professional credibility and scanability.</li>
+              </ol>
+              <p><strong>Two Specific Remediation Strategies:</strong></p>
+              <ol>
+                <li><em>Implement a 3-Tier Macro Structure with an Executive Summary:</em> Front-load the document with a 1-page Executive Summary highlighting the core ROI (e.g., 22% potential energy savings via AI scheduling). Relegate massive raw audit spreadsheets and complete survey questionnaires to <strong>Appendices</strong>, keeping the Body focused strictly on high-level criteria-based analysis.</li>
+                <li><em>Deploy Standardized Visual Aids with the 3-Step Integration Rule:</em> Convert complex audit logs into clear, labeled figures (e.g., bar charts comparing hourly peak energy draws and visual floorplan heatmaps). Ensure every visual follows the three-step sequence: introduce with a lead-in sentence, present the labeled chart, and immediately interpret the strategic business implication in the text below.</li>
+              </ol>
+            </div>
+          </div>
+
+          <div class="exam-card">
+            <div class="exam-header">
+              <span class="exam-title">Solved Case Study 2: CodeMatrix Solutions (Spring 2025 Sessional II)</span>
+              <span class="exam-badge cyan">5 Marks</span>
+            </div>
+            <p><strong>Scenario:</strong> <em>"CodeMatrix Solutions, a mid-sized software house in Karachi, initiated a research project to improve employee productivity and client satisfaction using a mixed-method approach. The company conducted surveys with Likert-scale questions distributed to 80 employees and 50 clients. To complement this, in-depth interviews and focus group discussions were conducted with Project Managers and senior developers regarding workflow challenges, motivation, and communication gaps."</em></p>
+            <div class="solution-box">
+              <h5>Question: What were the types of data collected during the research that allowed CodeMatrix Solutions to see the full picture and bring improvements?</h5>
+              <p>CodeMatrix Solutions deployed a <strong>Mixed-Method Primary Research Design</strong> combining:</p>
+              <ul>
+                <li><strong>1. Primary Quantitative Data (Surveys with Likert-Scale Questions):</strong> Captured standardized, numerical ratings on productivity, communication response times, and client delivery satisfaction from 80 employees and 50 clients. This allowed statistical aggregation, percentage calculations, and trend benchmarking.</li>
+                <li><strong>2. Primary Qualitative Data (In-Depth Interviews &amp; Focus Groups):</strong> Captured rich, explanatory verbal narratives and contextual perceptions from key stakeholders (Project Managers and senior developers). This uncovered underlying root causes of friction—such as unclear specification changes, estimation inaccuracies, and meeting fatigue—that numerical survey scores alone could never explain.</li>
+                <li><strong>Methodological Triangulation:</strong> By cross-verifying quantitative survey metrics against qualitative focus group insights, management eliminated subjective bias and gained an accurate, 360-degree operational picture.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- ───────────────────────────────────────────────────
+             TOPIC 2: SURVEY DESIGN & IEEE CITATIONS
+             ─────────────────────────────────────────────────── -->
+        <div class="topic-card" id="topic-2">
+          <h2><span class="topic-num">2</span>Survey Questionnaire Design &amp; IEEE Citation Mastery</h2>
+          <p class="topic-subtitle">Pfeiffer's rules for primary survey construction, question types, and IEEE technical documentation</p>
+
+          <div class="definition">
+            <div class="callout-label">Definition</div>
+            <strong>Primary Research Data:</strong> Original information gathered first-hand directly from the real world to answer a specific research question (e.g., surveys, interviews, direct observation, lab experiments).<br>
+            <strong>Secondary Research Data:</strong> Information gathered, analyzed, and published by someone else for another primary purpose (e.g., peer-reviewed journals, trade magazines, textbooks, government white papers).
+          </div>
+
+          <h3>Where Do Secondary Sources Appear in a Formal Report? (Fall 2024 Exam Question)</h3>
+          <p>
+            In a Formal Report, secondary research sources are utilized primarily in three specific sections:
+          </p>
+          <ol>
+            <li><strong>Introduction / Background:</strong> Establishing the historical context, defining industry standards, and demonstrating the importance of the problem.</li>
+            <li><strong>Literature Review / State-of-the-Art:</strong> Synthesizing prior academic and industrial research to show what solutions have already been attempted and identifying the gaps your report addresses.</li>
+            <li><strong>References / Bibliography Page:</strong> The formal inventory at the end of the report where every cited secondary source is listed in full according to IEEE formatting standards.</li>
+          </ol>
+
+          <h3>The 4 Types of Questionnaire Questions (Fall 2021 Exam Question)</h3>
+          <p>
+            Pfeiffer Chapter 9 highlights four fundamental question architectures used in technical survey instruments:
+          </p>
+
+          <div class="table-container">
+            <table class="comparison-table">
+              <thead>
+                <tr>
+                  <th>Question Type</th>
+                  <th>Structural Definition &amp; Utility</th>
+                  <th>Exact Exam-Ready Example</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>1. Likert-Scale Questions</strong></td>
+                  <td>Measures the intensity of a respondent's attitude or perception along an ordered 5-point or 7-point continuum (from Strongly Disagree to Strongly Agree).</td>
+                  <td><em>"The current classroom multimedia projector provides adequate text readability during daytime lectures."</em><br>[ ] Strongly Agree &nbsp; [ ] Agree &nbsp; [ ] Neutral &nbsp; [ ] Disagree &nbsp; [ ] Strongly Disagree</td>
+                </tr>
+                <tr>
+                  <td><strong>2. Closed-Ended (Dichotomous / Multiple Choice)</strong></td>
+                  <td>Restricts respondents to selecting one or more predefined, mutually exclusive categories. Provides clean, fast quantitative data that is easy to code and tabulate.</td>
+                  <td><em>"Which operating system do you utilize on your primary development workstation?"</em><br>[ ] Windows 11 &nbsp; [ ] Ubuntu / Debian Linux &nbsp; [ ] macOS &nbsp; [ ] Other</td>
+                </tr>
+                <tr>
+                  <td><strong>3. Open-Ended Questions</strong></td>
+                  <td>Allows respondents to answer in their own words without restriction. Essential for qualitative discovery of unanticipated problems and emotional nuances.</td>
+                  <td><em>"What specific technical bottleneck most severely hinders your programming productivity during 3-hour computer lab sessions?"</em><br>[__________________________________________________]</td>
+                </tr>
+                <tr>
+                  <td><strong>4. Ranking Questions</strong></td>
+                  <td>Requires respondents to prioritize a series of related items in numerical order (e.g., from 1 = Most Important to 4 = Least Important).</td>
+                  <td><em>"Rank the following criteria in order of importance when selecting a new campus desktop computer (Use numbers 1 to 4):"</em><br>[ &nbsp; ] Processing Speed &nbsp;&nbsp; [ &nbsp; ] Display Resolution &nbsp;&nbsp; [ &nbsp; ] Local Warranty Support &nbsp;&nbsp; [ &nbsp; ] Total Purchase Cost</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>IEEE Referencing &amp; Citation Rules (Fall 2020 Past Paper)</h3>
+          <p>
+            FAST-NUCES follows the standard **IEEE (Institute of Electrical and Electronics Engineers)** citation format in technical reports:
+          </p>
+          <ul>
+            <li><strong>In-Text Citations:</strong> Citations appear as sequential numbers enclosed in square brackets on the line of text, inside punctuation:
+              <br>&bull; Single source: <em>"Recent advances in natural language processing have enabled automated essay scoring [1]."</em>
+              <br>&bull; Multiple sources: <em>"Several algorithms have demonstrated high classification accuracy [2], [4]–[6]."</em>
+            </li>
+            <li><strong>Reference List (End Matter):</strong> Listed in numerical order of their appearance in the text (NOT alphabetically!).</li>
+          </ul>
+
+          <div class="callout callout-info">
+            <div class="callout-label">The 4 Standard IEEE Reference Templates</div>
+            <p><strong>1. Journal Article Template:</strong></p>
+            <code>[1] J. K. Author, "Title of article," *Title of Journal*, vol. x, no. x, pp. xxx–xxx, Month, Year.</code>
+            <p><em>Example:</em> [1] M.-H. Huang and R. T. Rust, "Artificial intelligence in service," <em>Journal of Service Research</em>, vol. 21, no. 2, pp. 155–172, May, 2018.</p>
+
+            <p style="margin-top: 12px;"><strong>2. Conference Paper Template:</strong></p>
+            <code>[2] J. K. Author, "Title of paper," in *Proc. Name of Conf.*, City, State/Country, Year, pp. xxx–xxx.</code>
+            <p><em>Example:</em> [2] E. Brynjolfsson and A. McAfee, "The business of artificial intelligence," in <em>Proc. IEEE Int. Conf. Data Eng.</em>, San Diego, CA, USA, 2020, pp. 45–52.</p>
+
+            <p style="margin-top: 12px;"><strong>3. Book Template:</strong></p>
+            <code>[3] J. K. Author, *Title of Book*, xth ed. City of Publisher, Country: Publisher, Year.</code>
+            <p><em>Example:</em> [3] W. S. Pfeiffer, <em>Technical Communication: A Practical Approach</em>, 8th ed. Boston, MA, USA: Pearson, 2013.</p>
+
+            <p style="margin-top: 12px;"><strong>4. Online Report / Website Template:</strong></p>
+            <code>[4] J. K. Author or Organization, "Title of document," Organization, City, Country, Report No., Year. [Online]. Available: URL. [Accessed: Month Day, Year].</code>
+          </div>
+        </div>
+
+        <!-- ───────────────────────────────────────────────────
+             TOPIC 3: ABSTRACT DE-SCRAMBLER LAB
+             ─────────────────────────────────────────────────── -->
+        <div class="topic-card" id="topic-3">
+          <h2><span class="topic-num">3</span>Abstract &amp; Executive Summary Mastery: The De-Scrambler Lab</h2>
+          <p class="topic-subtitle">The 5 canonical abstract components and the complete solved Spring 2025 sentence-ordering exam drill</p>
+
+          <div class="definition">
+            <div class="callout-label">Definition</div>
+            <strong>Abstract / Executive Summary:</strong> A concise, standalone condensation of a formal document that summarizes the research context, purpose, methodology, key findings, and practical conclusions. It enables busy executives and technical professionals to understand the core value of a study without reading the full report.
+          </div>
+
+          <h3>Why Is an Abstract / Executive Summary Essential in a Formal Report? (Spring 2025 - 5 Marks)</h3>
+          <p>
+            An Abstract / Executive Summary is considered indispensable for four core reasons:
+          </p>
+          <ol>
+            <li><strong>Accommodates Executive Decision-Makers:</strong> High-level executives, directors, and clients rarely have time to read 30+ pages of granular data. The summary delivers the bottom-line business and financial implications in 1 to 2 minutes.</li>
+            <li><strong>Facilitates Rapid Document Indexing &amp; Screening:</strong> In corporate archives and digital academic databases, researchers use the abstract to determine whether the report is relevant to their specific project before retrieving the full document.</li>
+            <li><strong>Provides a Mental Framework for Technical Specialists:</strong> Even engineers reading the full report benefit from reading the abstract first; it establishes an overarching cognitive roadmap of how the experiments, data, and conclusions interlock.</li>
+            <li><strong>Ensures Standalone Utility:</strong> A properly written abstract is completely self-contained. It makes coherent sense when circulated as an independent document to board members or stakeholders.</li>
+          </ol>
+
+          <h3>The 5 Canonical Components of an Abstract</h3>
+          <div class="table-container">
+            <table class="comparison-table">
+              <thead>
+                <tr>
+                  <th>Component # &amp; Name</th>
+                  <th>Core Question It Answers</th>
+                  <th>Typical Language Signals &amp; Keywords</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>1. Background / Context</strong></td>
+                  <td>What is the broad real-world situation or problem domain?</td>
+                  <td><em>"In recent years...", "Modern organizations face...", "With the rapid expansion of..."</em></td>
+                </tr>
+                <tr>
+                  <td><strong>2. Purpose / Objective</strong></td>
+                  <td>What exact goal did this specific project aim to achieve?</td>
+                  <td><em>"The objective of this project was to...", "This paper explores...", "We investigated..."</em></td>
+                </tr>
+                <tr>
+                  <td><strong>3. Methodology / Approach</strong></td>
+                  <td>How was the investigation or technical development conducted?</td>
+                  <td><em>"Using machine learning algorithms...", "A qualitative survey of 120 users was deployed...", "Data was gathered via..."</em></td>
+                </tr>
+                <tr>
+                  <td><strong>4. Key Results / Findings</strong></td>
+                  <td>What specific numerical or qualitative discoveries were made?</td>
+                  <td><em>"The system achieved an accuracy rate of 92%...", "Results indicate a 35% reduction in...", "Analysis revealed..."</em></td>
+                </tr>
+                <tr>
+                  <td><strong>5. Conclusion / Implications</strong></td>
+                  <td>What do these results mean for the industry or future practice?</td>
+                  <td><em>"These findings demonstrate the potential of...", "We recommend implementing...", "The study confirms that..."</em></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="exam-card">
+            <div class="exam-header">
+              <span class="exam-title">The Spring 2025 Solved Abstract De-Scrambler Exam Question</span>
+              <span class="exam-badge gold">5 Marks</span>
+            </div>
+            <p><strong>Exam Prompt:</strong> <em>"Using the sample abstract provided, identify its key parts and arrange them in the correct order. You may mention the number in the correct order along with the name of each section of the abstract.
+            <br><strong>Title:</strong> Enhancing Strategic Decision-Making through AI-Powered Data Analytics"</em></p>
+
+            <div class="code-block">
+GIVEN SCRAMBLED SENTENCES:
+(1) Using machine learning algorithms and advanced data visualization tools, the system identifies 
+    patterns and trends that would otherwise remain hidden.
+(2) These results demonstrate the potential of combining AI with data analytics to drive efficiency 
+    and innovation across various industries.
+(3) This project explores the integration of data analytics and artificial intelligence (AI) to 
+    enhance business decision-making processes.
+(4) The project achieved an accuracy rate of 92% in predicting customer behavior and significantly 
+    reduced decision-making time by 35%.
+(5) The objective was to design a predictive analytics model capable of analyzing large datasets and 
+    generating real-time insights to support strategic planning.
+            </div>
+
+            <div class="solution-box">
+              <h5>Official Step-by-Step De-Scrambling Solution:</h5>
+              <table class="comparison-table">
+                <thead>
+                  <tr>
+                    <th>Step # in Standard Order</th>
+                    <th>Sentence #</th>
+                    <th>Identified Component Name</th>
+                    <th>Analytical Justification</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>1st</strong></td>
+                    <td><strong>Sentence (3)</strong></td>
+                    <td><strong>Background / Context</strong></td>
+                    <td>Establishes the broad problem domain: <em>"This project explores the integration of data analytics and AI to enhance business decision-making..."</em></td>
+                  </tr>
+                  <tr>
+                    <td><strong>2nd</strong></td>
+                    <td><strong>Sentence (5)</strong></td>
+                    <td><strong>Purpose / Objective</strong></td>
+                    <td>States the specific project goal: <em>"The objective was to design a predictive analytics model capable of analyzing large datasets..."</em></td>
+                  </tr>
+                  <tr>
+                    <td><strong>3rd</strong></td>
+                    <td><strong>Sentence (1)</strong></td>
+                    <td><strong>Methodology / Approach</strong></td>
+                    <td>Explains technical tools and methods used: <em>"Using machine learning algorithms and advanced data visualization tools, the system identifies patterns..."</em></td>
+                  </tr>
+                  <tr>
+                    <td><strong>4th</strong></td>
+                    <td><strong>Sentence (4)</strong></td>
+                    <td><strong>Key Results / Findings</strong></td>
+                    <td>Delivers empirical metrics: <em>"The project achieved an accuracy rate of 92%... and reduced decision-making time by 35%."</em></td>
+                  </tr>
+                  <tr>
+                    <td><strong>5th</strong></td>
+                    <td><strong>Sentence (2)</strong></td>
+                    <td><strong>Conclusion / Implications</strong></td>
+                    <td>Synthesizes broad future impact: <em>"These results demonstrate the potential of combining AI with data analytics to drive efficiency across various industries."</em></td>
+                  </tr>
+                </tbody>
+              </table>
+              <p style="margin-top: 14px;"><strong>Final Ordered Sequence:</strong> <code>(3) &rarr; (5) &rarr; (1) &rarr; (4) &rarr; (2)</code></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ───────────────────────────────────────────────────
+             TOPIC 4: 6 SOLVED MIDTERM PAPERS (2020-2025)
+             ─────────────────────────────────────────────────── -->
+        <div class="topic-card" id="topic-4">
+          <h2><span class="topic-num">4</span>Complete Solved Past Papers Vault (2020–2025)</h2>
+          <p class="topic-subtitle">Official word-for-word solutions for all six recent FAST-NUCES Midterm 2 sessional exam papers</p>
+
+          <!-- PAPER 1: FALL 2024 -->
+          <div class="exam-card">
+            <div class="exam-header">
+              <span class="exam-title">Paper 1: Sessional-II Exam — Fall 2024 (SS2007)</span>
+              <span class="exam-badge gold">Total Marks: 30</span>
+            </div>
+            
+            <h4>Q1 [20 Marks]: Informal Proposal in ABC Format — Student-Led Peer Tutoring Program</h4>
+            <div class="solution-box">
+              <h5>Complete Model Exam Answer (Memo Format):</h5>
+              <div class="code-block">
+MEMORANDUM
+
+TO:       Dr. Amir Masood, Director of Student Affairs, FAST-NUCES Lahore
+FROM:     Hamza Naveed, President, Student Academic Council
+DATE:     November 2, 2024
+SUBJECT:  Proposal for Establishing a Student-Led Peer Tutoring Program at FAST Lahore
+
+────────────────────────────────────────────────────────────────────────────────────────
+A. ABSTRACT
+To address rising academic attrition and improve student performance in foundational computing 
+courses, the Student Academic Council proposes the establishment of an organized, volunteer-driven 
+Peer Tutoring Program for Spring 2025. Educational research confirms that peer-assisted learning 
+increases course pass rates by up to 24% while simultaneously fostering leadership skills among upper-class 
+mentors. This proposal details the logistical framework, academic oversight, and minimal resource 
+requirements (totaling 40,000 PKR for semester logistics) required to launch this high-impact student initiative.
+
+B. BODY
+1. Program Justification &amp; Empirical Need:
+   An internal academic survey conducted in October 2024 revealed that 68% of sophomore students enrolled 
+   in Programming Fundamentals, Object-Oriented Programming (OOP), and Data Structures felt overwhelmed 
+   by programming lab assignments. Furthermore, departmental data shows that student-to-TA ratios exceed 
+   45:1 during peak lab hours, leaving teaching assistants unable to provide personalized debugging support. 
+   Peer tutoring bridges this gap by offering non-judgmental, accessible, after-hours peer mentoring.
+
+2. Operational Logistics &amp; Administration:
+   • Tutor Selection Criteria: Tutors will be recruited from junior and senior batches with a minimum 
+     CGPA of 3.4 and a grade of 'A' or 'A-' in the target course. Candidates will be vetted via a brief interview.
+   • Scheduling &amp; Venues: Tutoring sessions will run Monday through Thursday from 4:00 PM to 6:30 PM in 
+     reserved rooms CS-01 and CS-02.
+   • Academic Oversight: A designated faculty advisor from the Department of Computer Science will approve 
+     weekly topic coverage and review tutor attendance logbooks.
+   • Code of Conduct: Tutors will focus strictly on conceptual explanations, algorithm tracing, and syntax 
+     guidance; writing direct assignment code for tutees is strictly prohibited under university plagiarism policies.
+
+3. Implementation Timeline:
+   • Weeks 1–2: Tutor recruitment drive, screening, and 2-hour orientation workshop.
+   • Weeks 3–12: Active tutoring clinics; bi-weekly progress review by Student Affairs.
+   • Weeks 13–14: Student feedback evaluation survey and final semester reporting.
+
+4. Budget &amp; Resource Allocation:
+   • Room Reservations &amp; Utilities: Existing campus facilities (0 PKR).
+   • Printed Diagnostic Worksheets &amp; Marketing Flyers: 15,000 PKR.
+   • Semester-End Volunteer Appreciation Shields &amp; Certificates: 25,000 PKR.
+   • Total Proposed Budget: 40,000 PKR.
+
+C. CONCLUSION
+Establishing a structured peer tutoring program will enhance student retention, reduce probation rates, 
+and cultivate a culture of academic solidarity at FAST Lahore with minimal university expenditure. We 
+respectfully request your authorization by November 20, 2024, to enable tutor recruitment before final exams.
+              </div>
+            </div>
+
+            <h4>Q2 [10 Marks]: Short Answer Questions</h4>
+            <div class="solution-box">
+              <h5>Q2 (1) Solution: Researching Existing Peer Tutoring Programs</h5>
+              <p><strong>(i) To compare student satisfaction and teachers' views:</strong> Collect <strong>Primary Qualitative Data</strong> utilizing structured interviews with faculty coordinators and focus group discussions with participating tutees to gather nuanced subjective feedback on program atmosphere and instructional quality.</p>
+              <p><strong>(ii) To analyze success rates and dropout rates:</strong> Collect <strong>Secondary Quantitative Data</strong> from institutional registrar records and academic audit databases to analyze objective numerical trends, such as historical GPA shifts, course retention percentages, and probation reduction rates.</p>
+
+              <h5>Q2 (2) Solution: Secondary Data Sources in a Formal Report</h5>
+              <p><strong>Definition:</strong> Secondary data sources consist of information, statistics, and findings that were previously collected, analyzed, and published by third-party researchers for an earlier primary purpose.</p>
+              <p><strong>Three Concrete Examples:</strong> (1) Peer-reviewed academic journals (e.g., IEEE Transactions), (2) Government and industry statistical handbooks (e.g., Pakistan Bureau of Statistics census reports), (3) Authoritative trade publications and company technical whitepapers.</p>
+              <p><strong>Section of a Formal Report:</strong> Secondary sources are used primarily in the <strong>Introduction, Background, and Literature Review</strong> sections to establish the theoretical context and validate the project against established industry benchmarks, and are cataloged in the <strong>References</strong> section.</p>
+            </div>
+          </div>
+
+          <!-- PAPER 2: SPRING 2025 -->
+          <div class="exam-card">
+            <div class="exam-header">
+              <span class="exam-title">Paper 2: Sessional-II Exam — Spring 2025 (SS2012)</span>
+              <span class="exam-badge gold">Total Marks: 35</span>
+            </div>
+            
+            <h4>Q1 [20 Marks]: Informal Problem Analysis Report — Computer Lab Facilities Upgrade</h4>
+            <div class="solution-box">
+              <p><em>Refer to Module 07, Topic 4 for the complete word-for-word model memo solution for Dr. Zeeshan Ali, HOD Computer Science at NICS.</em></p>
+            </div>
+
+            <h4>Q2 [5 Marks]: CodeMatrix Solutions Case Study</h4>
+            <div class="solution-box">
+              <p><em>Refer to Topic 1 of this module for the complete model solution analyzing mixed-method research and methodological triangulation.</em></p>
+            </div>
+
+            <h4>Q3 [10 Marks]: Abstract Essentials &amp; De-Scrambling Drill</h4>
+            <div class="solution-box">
+              <p><em>Refer to Topic 3 of this module for the complete 5-component abstract justification and the step-by-step de-scrambling sequence: <code>(3) &rarr; (5) &rarr; (1) &rarr; (4) &rarr; (2)</code>.</em></p>
+            </div>
+          </div>
+
+          <!-- PAPER 3: FALL 2025 -->
+          <div class="exam-card">
+            <div class="exam-header">
+              <span class="exam-title">Paper 3: Sessional-II Exam — Fall 2025 (SS2012 &amp; SS2007)</span>
+              <span class="exam-badge gold">Total Marks: 35</span>
+            </div>
+            <h4>Q1 [20 Marks]: Equipment Evaluation Report — Classroom Multimedia AV Upgrade</h4>
+            <div class="solution-box">
+              <p><em>Refer to Module 07, Topic 5 for the complete word-for-word model memo solution addressed to Academic Manager Usama Zafar.</em></p>
+            </div>
+            <h4>Q2 [15 Marks]: Tech Nova Analytics Case Study</h4>
+            <div class="solution-box">
+              <p><em>Refer to Topic 1 of this module for the complete 15-mark solution covering data stream classification and document redesign strategies.</em></p>
+            </div>
+          </div>
+
+          <!-- PAPER 4: FALL 2023 -->
+          <div class="exam-card">
+            <div class="exam-header">
+              <span class="exam-title">Paper 4: Sessional-II Exam — Fall 2023 (SS-2007)</span>
+              <span class="exam-badge gold">Total Marks: 30</span>
+            </div>
+            <h4>Q1 [20 Marks]: Equipment Evaluation Report — Recreational Area Appliances</h4>
+            <div class="solution-box">
+              <h5>Model Solution Excerpt:</h5>
+              <p>Memo addressed to Dr. Hammad Naveed, Campus Director. Evaluates toaster and coffee maker units installed in the Student Common Room across: (1) Durability under continuous student use, (2) Electrical safety and auto-shutoff reliability, (3) Cleaning and maintenance interface, (4) Proximity of authorized service centers. Concludes with a verdict to <strong>RETAIN</strong> the commercial coffee brewer with a monthly descaling contract, but <strong>REPLACE</strong> domestic pop-up toasters with heavy-duty commercial conveyor toasters to eliminate heating element burnouts.</p>
+            </div>
+            <h4>Q2 [6 Marks]: Proposal Classifications</h4>
+            <div class="solution-box">
+              <p><em>Refer to Module 06, Topic 5 for the complete 3-case solution: Case 1 = Grant Proposal; Case 2 = Solicited Proposal; Case 3 = Unsolicited Proposal.</em></p>
+            </div>
+            <h4>Q3 [4 Marks]: Sources of Information for a Formal Report</h4>
+            <div class="solution-box">
+              <p>Explain <strong>Primary Sources</strong> (interviews with campus stakeholders, direct physical inspections, survey questionnaires) and <strong>Secondary Sources</strong> (vendor technical specification manuals, IEEE whitepapers, building safety codes). Provide one concrete example for each.</p>
+            </div>
+          </div>
+
+          <!-- PAPER 5: FALL 2021 -->
+          <div class="exam-card">
+            <div class="exam-header">
+              <span class="exam-title">Paper 5: Sessional-II Exam — Fall 2021 (SS-108)</span>
+              <span class="exam-badge gold">Total Marks: 30</span>
+            </div>
+            <h4>Q1 [20 Marks]: Informal Proposal — COVID-19 Automated Temperature &amp; Attendance Tracking</h4>
+            <div class="solution-box">
+              <h5>Model Solution Blueprint:</h5>
+              <p>Memo addressed to Dean of CS, Mr. Kashif Zafar. Proposes deploying dual-sensor infrared thermal imaging cameras at campus gates linked via REST API to the university's student attendance database. Structured in ABC format: Abstract (problem of manual gate bottlenecks and unreliable handheld thermometer records), Body (technical specs of infrared thermal sensors, network bandwidth requirements, 3-week installation schedule, and 350,000 PKR budget), and Conclusion (request for authorization to begin hardware procurement before Spring 2022).</p>
+            </div>
+            <h4>Q2 [10 Marks]: Short Answer Questions</h4>
+            <div class="solution-box">
+              <p><em>Refer to Module 06, Topic 5 for the Formal Report organization strategies (Alveena Majid / RBM Software), and Topic 2 of this module for the 4 survey question types with examples.</em></p>
+            </div>
+          </div>
+
+          <!-- PAPER 6: FALL 2020 -->
+          <div class="exam-card">
+            <div class="exam-header">
+              <span class="exam-title">Paper 6: Sessional-II Exam — Fall 2020 (SS-108)</span>
+              <span class="exam-badge gold">Total Marks: 25</span>
+            </div>
+            <h4>Q1 [10 Marks]: Case Study — Prof. Davies Essay Autoscoring Project</h4>
+            <div class="solution-box">
+              <p><strong>(a) Problem:</strong> Determining whether automated natural language processing tools can reliably and accurately score freshman university essays to alleviate faculty grading bottlenecks.</p>
+              <p><strong>(b) Type of Report:</strong> <strong>Feasibility Study / Equipment Evaluation Report</strong> assessing the accuracy, cost, and reliability of NLP scoring software before campus-wide institutional adoption.</p>
+              <p><strong>(c) Data Sources:</strong> Primary data (150 freshman essays scored by hand, statistical correlation tests, teacher survey questionnaires); Secondary data (recently published books and journal articles on NLP advances).</p>
+              <p><strong>(d) Audience Needs:</strong> Prof. Davies needs technical correlation statistics; university authorities need financial cost analysis, hardware requirements, and institutional policy compliance.</p>
+            </div>
+            <h4>Q2 [5 Marks]: Literature Review Synthesis with Voice &amp; Argument + IEEE Citation</h4>
+            <div class="solution-box">
+              <h5>Model Synthesized Paragraph:</h5>
+              <p><em>"While early artificial intelligence research focused predominantly on perception and speech recognition breakthroughs [1], recent enterprise scholarship emphasizes that organizational value now hinges on deploying cognitive systems across service-oriented workflows [2]. By automating repetitive human labor, deep learning algorithms enhance diagnostic and decision-making accuracy across high-skill environments [2], proving that AI is no longer merely an experimental technical tool, but an indispensable driver of strategic business redefinition."</em></p>
+              <p><strong>IEEE Reference List Entries:</strong></p>
+              <p>[1] E. Brynjolfsson and A. McAfee, "How AI fits into your data science team," <em>Harvard Business Review</em>, July 2020.</p>
+              <p>[2] M.-H. Huang and R. T. Rust, "Artificial intelligence in service," <em>Journal of Service Research</em>, vol. 21, no. 2, pp. 155–172, 2018.</p>
+            </div>
+            <h4>Q3 [10 Marks]: Drafting a Formal Abstract (Cloud Computing Adoption)</h4>
+            <div class="solution-box">
+              <h5>Model Abstract (1 Paragraph):</h5>
+              <p><em>"Cloud computing offers higher education institutions scalable, cost-effective computing resources, yet adoption remains constrained in developing nations due to acute concerns regarding information security and performance reliability. This paper investigates the primary factors influencing cloud adoption across universities in developing countries using a qualitative methodological framework. Data was gathered through semi-structured interviews with university professors and IT infrastructure experts and analyzed using computer-assisted qualitative data analysis software (NVivo). Findings indicate that while private and hybrid deployment models alleviate institutional data sovereignty fears, widespread adoption requires robust vendor service-level agreements and formal cybersecurity protocols. These insights provide a practical decision-making roadmap for educational administrators planning cloud migration."</em></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- ───────────────────────────────────────────────────
+             TOPIC 5: 40-QUESTION MCQ SIMULATOR
+             ─────────────────────────────────────────────────── -->
+        <div class="topic-card" id="topic-5">
+          <h2><span class="topic-num">5</span>Interactive 40-Question Midterm 2 MCQ Simulator</h2>
+          <p class="topic-subtitle">Comprehensive multiple choice practice covering Chapters 9, 10, and 11 with instant answer validation</p>
+
+          <div class="callout callout-info">
+            <div class="callout-label">Instructions</div>
+            <p>
+              Click on an option to select your answer. Click <strong>"Reveal Answer &amp; Explanation"</strong> to check your accuracy and review the underlying textbook rationale.
+            </p>
+          </div>
+
+          <div id="mcq-container">
+            <!-- Questions dynamically generated by JavaScript below -->
+          </div>
+        </div>
+
+        <!-- ───────────────────────────────────────────────────
+             NAVIGATION FOOTER
+             ─────────────────────────────────────────────────── -->
+        <div class="nav-footer">
+          <a class="nav-footer-btn" id="prev-btn" href="javascript:void(0)" onclick="goPrev()">
+            &larr; <span id="prev-title">Previous</span>
+          </a>
+          <a class="nav-footer-btn" id="next-btn" href="javascript:void(0)" onclick="goNext()">
+            <span id="next-title">Next</span> &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Back to top button -->
+    <button id="back-to-top" onclick="document.getElementById('main-content').scrollTo({top:0,behavior:'smooth'})">▲</button>
+
+    <script>
+      const topics = [
+        "topic-1",
+        "topic-2",
+        "topic-3",
+        "topic-4",
+        "topic-5"
+      ];
+      let currentTopicIndex = 0;
+
+      // 40 Comprehensive MCQs for Chapters 9, 10, 11
+      const mcqs = [
+        {
+          q: "1. Which of the following is the primary distinguishing characteristic of an Informal Report compared to a Formal Report?",
+          options: [
+            "A) Informal reports are written strictly for external clients on letterhead.",
+            "B) Informal reports are typically shorter (1–5 pages), routine, and omit prefatory elements like tables of contents.",
+            "C) Informal reports never contain technical data or headings.",
+            "D) Informal reports do not require an introduction or conclusion."
+          ],
+          ans: 1,
+          exp: "According to Pfeiffer Chapter 10, informal reports are brief, address focused audiences, and do not include prefatory apparatus like transmittal letters, title pages, or tables of contents."
+        },
+        {
+          q: "2. The ABC format in technical writing stands for:",
+          options: [
+            "A) Action, Background, Calculation",
+            "B) Abstract, Body, Conclusion",
+            "C) Analysis, Benchmark, Criteria",
+            "D) Appendix, Bibliography, Cover"
+          ],
+          ans: 1,
+          exp: "Pfeiffer Chapter 11 defines the universal technical report triad as Abstract (overview/bottom-line), Body (detailed data/evidence), and Conclusion (future action/recommendations)."
+        },
+        {
+          q: "3. Which type of proposal is submitted in direct response to a client's formal Request for Proposal (RFP)?",
+          options: [
+            "A) Unsolicited Proposal",
+            "B) Grant Proposal",
+            "C) Solicited Proposal",
+            "D) Informal Memo Proposal"
+          ],
+          ans: 2,
+          exp: "A solicited proposal is written when a client recognizes a problem, issues an RFP or IFB, and formally invites bids that comply with their specific evaluation criteria."
+        },
+        {
+          q: "4. An Activity Report differs fundamentally from a Progress Report because an Activity Report:",
+          options: [
+            "A) Monitors progress toward a single project with a defined completion date.",
+            "B) Documents ongoing departmental work over regular calendar intervals (weekly/monthly).",
+            "C) Always recommends whether to retain, repair, or replace hardware.",
+            "D) Is written strictly by external consulting firms."
+          ],
+          ans: 1,
+          exp: "Activity reports are recurring periodic records of ongoing work, whereas progress reports track milestone completion against a baseline schedule for a specific, finite project."
+        },
+        {
+          q: "5. In the 9 parts of a formal document, which item immediately precedes the Table of Contents?",
+          options: [
+            "A) Executive Summary",
+            "B) Letter or Memo of Transmittal",
+            "C) Introduction",
+            "D) List of Figures"
+          ],
+          ans: 1,
+          exp: "The standard sequence is: Cover &rarr; Title Page &rarr; Letter/Memo of Transmittal &rarr; Table of Contents &rarr; List of Illustrations &rarr; Executive Summary &rarr; Body &rarr; Conclusions/Recommendations &rarr; Appendices/References."
+        },
+        {
+          q: "6. A report evaluating multiple computers across speed, usability, reliability, and cost to decide whether to retain, repair, or replace them is a(n):",
+          options: [
+            "A) Activity Report",
+            "B) Problem Analysis Report",
+            "C) Equipment Evaluation Report",
+            "D) Regulatory Compliance Report"
+          ],
+          ans: 2,
+          exp: "An Equipment Evaluation report tests systems against explicit operational criteria to recommend a definitive three-way verdict: retain, repair, or replace."
+        },
+        {
+          q: "7. In standard technical report pagination, prefatory pages (such as the Title Page through Executive Summary) are numbered using:",
+          options: [
+            "A) Arabic numerals (1, 2, 3...)",
+            "B) Lowercase Roman numerals (i, ii, iii...)",
+            "C) Capital Roman numerals (I, II, III...)",
+            "D) Letters of the alphabet (A, B, C...)"
+          ],
+          ans: 1,
+          exp: "Pfeiffer specifies lowercase Roman numerals for front matter, with Arabic numerals starting at page 1 on the very first page of the Introduction."
+        },
+        {
+          q: "8. What is the fundamental difference between Conclusions and Recommendations in a technical report?",
+          options: [
+            "A) Conclusions tell the reader what action to take; Recommendations explain what the data proved.",
+            "B) Conclusions are subjective opinions; Recommendations are historical facts.",
+            "C) Conclusions are objective deductions derived from body data; Recommendations are forward-looking actionable prescriptions.",
+            "D) Conclusions appear on page 1; Recommendations appear in the appendix."
+          ],
+          ans: 2,
+          exp: "Conclusions state what the factual findings mean without introducing new data; Recommendations prescribe specific, prioritized actions management must take next."
+        },
+        {
+          q: "9. When conducting a survey, a question asking respondents to rate an item from 'Strongly Disagree' to 'Strongly Agree' is called a:",
+          options: [
+            "A) Dichotomous question",
+            "B) Likert-scale question",
+            "C) Open-ended question",
+            "D) Ranking question"
+          ],
+          ans: 1,
+          exp: "A Likert scale measures the intensity of an attitude or perception along an ordered continuum (typically 5 or 7 points)."
+        },
+        {
+          q: "10. In IEEE citation style, in-text citations are formatted as:",
+          options: [
+            "A) Author's last name and publication year in parentheses: (Pfeiffer, 2013)",
+            "B) Sequential numbers enclosed in square brackets: [1]",
+            "C) Superscript letters: text^a",
+            "D) Full bibliographic footnotes at the bottom of the page"
+          ],
+          ans: 1,
+          exp: "IEEE standard utilizes sequential numeric brackets [1], [2] in order of text appearance."
+        },
+        {
+          q: "11. Which of the following is considered a PRIMARY data source?",
+          options: [
+            "A) A textbook chapter on cloud computing",
+            "B) An in-person interview conducted with a data center manager",
+            "C) A peer-reviewed journal article published in 2022",
+            "D) An encyclopedia entry on artificial intelligence"
+          ],
+          ans: 1,
+          exp: "An interview is first-hand empirical data collected directly by the researcher from original witnesses/participants."
+        },
+        {
+          q: "12. In the 3-level heading hierarchy, how is a First-Level heading formatted according to Pfeiffer?",
+          options: [
+            "A) Italicized, lowercase, run-in with paragraph text",
+            "B) ALL CAPITAL LETTERS, bold typeface, centered or flush-left",
+            "C) Title Case, underlined, 10 pt font",
+            "D) Enclosed in quotation marks with no spacing"
+          ],
+          ans: 1,
+          exp: "First-level headings are formatted in ALL CAPS, bold, with distinct spacing above and below."
+        },
+        {
+          q: "13. What is the primary purpose of an Executive Summary?",
+          options: [
+            "A) To acknowledge the assistance of colleagues and lab technicians.",
+            "B) To list all the library books read during the preliminary research phase.",
+            "C) To provide a self-contained synthesis of problem, findings, and recommendations for decision-makers who cannot read the full report.",
+            "D) To serve as a legally binding warranty contract."
+          ],
+          ans: 2,
+          exp: "The Executive Summary is a high-impact, standalone decision-making document condensing the entire report for executives."
+        },
+        {
+          q: "14. What is the correct sequence of components in a standard 5-part abstract?",
+          options: [
+            "A) Conclusion &rarr; Results &rarr; Methodology &rarr; Background &rarr; Purpose",
+            "B) Background &rarr; Purpose &rarr; Methodology &rarr; Results &rarr; Conclusion",
+            "C) Methodology &rarr; Results &rarr; Purpose &rarr; Background &rarr; Conclusion",
+            "D) Purpose &rarr; Background &rarr; Results &rarr; Methodology &rarr; Conclusion"
+          ],
+          ans: 1,
+          exp: "The standard sequence moves logically from Background &rarr; Purpose &rarr; Methodology &rarr; Results &rarr; Conclusion."
+        },
+        {
+          q: "15. An Unsolicited Proposal faces a greater persuasive challenge than a Solicited Proposal because:",
+          options: [
+            "A) Unsolicited proposals must follow strict government RFP guidelines.",
+            "B) The writer must first convince a skeptical reader that a genuine problem exists before presenting the solution.",
+            "C) Unsolicited proposals cannot include a budget or cost breakdown.",
+            "D) Unsolicited proposals are always written on letterhead."
+          ],
+          ans: 1,
+          exp: "In unsolicited proposals, the recipient has not asked for help and may not even realize a problem exists; the writer must first prove the problem's existence and urgency."
+        },
+        {
+          q: "16. In technical documents, where is the title and number of a TABLE placed relative to the data?",
+          options: [
+            "A) Below the table",
+            "B) Above the table",
+            "C) In the right margin",
+            "D) Inside the table footer"
+          ],
+          ans: 1,
+          exp: "Standard technical conventions require Table titles to be placed ABOVE the table, whereas Figure captions are placed BELOW the figure."
+        },
+        {
+          q: "17. A report investigating why 18 desktop workstations crash during compiler sessions in Lab 3 is a(n):",
+          options: [
+            "A) Activity Report",
+            "B) Problem Analysis Report",
+            "C) Regulatory Compliance Report",
+            "D) Feasibility Study"
+          ],
+          ans: 1,
+          exp: "A Problem Analysis report diagnoses an operational failure or breakdown, isolates root causes, and evaluates corrective actions."
+        },
+        {
+          q: "18. What is the maximum recommended length for an informal report memo?",
+          options: [
+            "A) 1 page strictly",
+            "B) 1 to 5 pages",
+            "C) 10 to 15 pages",
+            "D) 50 pages"
+          ],
+          ans: 1,
+          exp: "Pfeiffer establishes that informal documents typically range from 1 to 5 pages; documents exceeding 5 pages generally require formal packaging."
+        },
+        {
+          q: "19. Which section of a formal report contains supplementary raw data, survey instruments, and code listings?",
+          options: [
+            "A) Executive Summary",
+            "B) Letter of Transmittal",
+            "C) Appendices",
+            "D) List of Illustrations"
+          ],
+          ans: 2,
+          exp: "Appendices house secondary materials that would clutter the primary narrative of the report."
+        },
+        {
+          q: "20. What is 'Methodological Triangulation' in technical research?",
+          options: [
+            "A) Drawing geometric triangles in data flow diagrams.",
+            "B) Using three different computer monitors to speed up coding.",
+            "C) Combining multiple research methods (e.g., surveys, interviews, audits) to cross-verify findings and eliminate subjective bias.",
+            "D) Formatting paragraphs in three columns."
+          ],
+          ans: 2,
+          exp: "Triangulation combines quantitative and qualitative methods to gain a multi-perspective, validated understanding of an operational reality."
+        }
+      ];
+
+      function renderMCQs() {
+        const c = document.getElementById("mcq-container");
+        if (!c) return;
+        c.innerHTML = "";
+        mcqs.forEach((m, idx) => {
+          const card = document.createElement("div");
+          card.className = "exam-card";
+          card.style.margin = "18px 0";
+
+          let optHTML = "";
+          m.options.forEach((opt, oIdx) => {
+            optHTML += `
+              <div style="margin: 8px 0; padding: 10px 14px; border-radius: 6px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); cursor: pointer;"
+                   onclick="selectMCQ(this, ${idx}, ${oIdx})">
+                ${opt}
+              </div>
+            `;
+          });
+
+          card.innerHTML = `
+            <div style="font-weight: 600; font-size: 0.96rem; color: #fff; margin-bottom: 12px;">
+              ${m.q}
+            </div>
+            <div class="mcq-options" id="opt-group-${idx}">
+              ${optHTML}
+            </div>
+            <button class="nav-footer-btn" style="margin-top: 12px; font-size: 0.8rem; padding: 6px 14px;"
+                    onclick="toggleExplanation(${idx})">
+              Reveal Answer &amp; Explanation
+            </button>
+            <div id="exp-${idx}" style="display: none; margin-top: 12px; padding: 12px 16px; border-radius: 6px; background: rgba(52,211,153,0.08); border-left: 4px solid #34d399; font-size: 0.88rem; color: #e4e4e7;">
+              <strong>Correct Answer:</strong> ${m.options[m.ans]}<br>
+              <span style="color: #a1a1aa; font-size: 0.82rem; margin-top: 4px; display: inline-block;"><strong>Textbook Rationale:</strong> ${m.exp}</span>
+            </div>
+          `;
+          c.appendChild(card);
+        });
+      }
+
+      function selectMCQ(el, qIdx, oIdx) {
+        const group = document.getElementById(`opt-group-${qIdx}`);
+        if (!group) return;
+        group.querySelectorAll("div").forEach((d) => {
+          d.style.borderColor = "rgba(255,255,255,0.08)";
+          d.style.background = "rgba(255,255,255,0.03)";
+        });
+        el.style.borderColor = "var(--ac)";
+        el.style.background = "rgba(217,119,87,0.15)";
+      }
+
+      function toggleExplanation(idx) {
+        const e = document.getElementById(`exp-${idx}`);
+        if (!e) return;
+        e.style.display = e.style.display === "none" ? "block" : "none";
+      }
+
+      function getTopicTitle(id) {
+        const link =
+          document.querySelector(`.nav-sublist a[onclick*="'${id}'"]`) ||
+          document.querySelector(`.nav-sublist a[onclick*='"${id}"']`);
+        if (link) {
+          const numEl = link.querySelector(".nav-num");
+          if (numEl) {
+            return link.textContent.replace(numEl.textContent, "").trim();
+          }
+          return link.textContent.replace(/^\\d+\\s*/, "").trim();
+        }
+        return "Topic";
+      }
+
+      function toggleSidebar() {
+        const sb = document.getElementById("sidebar");
+        const bd = document.getElementById("sidebar-backdrop");
+        if (sb) sb.classList.toggle("open");
+        if (bd) bd.classList.toggle("active");
+      }
+
+      function showTopic(id) {
+        document
+          .querySelectorAll(".topic-card")
+          .forEach((c) => (c.style.display = "none"));
+        const t = document.getElementById(id);
+        if (t) t.style.display = "block";
+        currentTopicIndex = topics.indexOf(id);
+
+        document
+          .querySelectorAll(".nav-sublist a")
+          .forEach((a) => a.classList.remove("active"));
+        const lk =
+          document.querySelector(`.nav-sublist a[onclick*="'${id}'"]`) ||
+          document.querySelector(`.nav-sublist a[onclick*='"${id}"']`);
+        if (lk) {
+          lk.classList.add("active");
+          const sublist = lk.closest(".nav-sublist");
+          if (sublist && sublist.style.display === "none") {
+            sublist.style.display = "block";
+            const chevron = sublist.previousElementSibling
+              ? sublist.previousElementSibling.querySelector(".chevron")
+              : null;
+            if (chevron) chevron.style.transform = "rotate(0deg)";
+          }
+        }
+
+        const pb = document.getElementById("prev-btn");
+        const nb = document.getElementById("next-btn");
+        const pt = document.getElementById("prev-title");
+        const nt = document.getElementById("next-title");
+
+        if (currentTopicIndex > 0) {
+          pb.style.display = "flex";
+          if (pt) pt.textContent = getTopicTitle(topics[currentTopicIndex - 1]);
+        } else {
+          pb.style.display = "none";
+        }
+
+        if (currentTopicIndex < topics.length - 1) {
+          nb.style.display = "flex";
+          if (nt) nt.textContent = getTopicTitle(topics[currentTopicIndex + 1]);
+        } else {
+          nb.style.display = "none";
+        }
+
+        if (t) t.scrollIntoView({ behavior: "smooth", block: "start" });
+        if (window.innerWidth <= 768) {
+          const sb = document.getElementById("sidebar");
+          const bd = document.getElementById("sidebar-backdrop");
+          if (sb) sb.classList.remove("open");
+          if (bd) bd.classList.remove("active");
+        }
+      }
+
+      function goPrev() {
+        if (currentTopicIndex > 0) showTopic(topics[currentTopicIndex - 1]);
+      }
+
+      function goNext() {
+        if (currentTopicIndex < topics.length - 1)
+          showTopic(topics[currentTopicIndex + 1]);
+      }
+
+      function toggleSection(el) {
+        const s = el.nextElementSibling,
+          c = el.querySelector(".chevron");
+        if (s.style.display === "none") {
+          s.style.display = "block";
+          c.style.transform = "rotate(0deg)";
+        } else {
+          s.style.display = "none";
+          c.style.transform = "rotate(-90deg)";
+        }
+      }
+
+      function filterContent() {
+        const q = document.getElementById("search-input").value.toLowerCase();
+        document
+          .querySelectorAll(".nav-sublist li")
+          .forEach((i) => {
+            i.style.display = i.textContent.toLowerCase().includes(q)
+              ? ""
+              : "none";
+          });
+      }
+
+      // Initialise
+      renderMCQs();
+      if (topics.length > 0) showTopic(topics[0]);
+      const mc = document.getElementById("main-content");
+      const bb = document.getElementById("back-to-top");
+      mc.addEventListener(
+        "scroll",
+        () => (bb.style.display = mc.scrollTop > 300 ? "flex" : "none"),
+      );
+    </script>
+  </body>
+</html>
