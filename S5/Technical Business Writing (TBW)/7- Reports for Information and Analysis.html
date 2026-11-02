@@ -212,378 +212,833 @@
         <!-- ───────────────────────────────────────────────────
              TOPIC 2: ACTIVITY REPORTS
              ─────────────────────────────────────────────────── -->
+        
+        <!-- ───────────────────────────────────────────────────
+             TOPIC 2: WRITING DOCUMENT 1 — ACTIVITY REPORT
+             ─────────────────────────────────────────────────── -->
         <div class="topic-card" id="topic-2">
           <h2><span class="topic-num">2</span>Writing Document 1: Activity Report (Periodic)</h2>
-          <p class="topic-subtitle">Documenting regular ongoing work over fixed calendar intervals (weekly, monthly, quarterly)</p>
+          <p class="topic-subtitle">Pfeiffer Chapter 11 Model 11-1 &bull; Documenting recurring activities and ongoing operational responsibilities</p>
 
           <div class="definition">
-            <div class="callout-label">Definition</div>
-            <strong>Activity Report (Periodic Report):</strong> An informative report written at regular calendar intervals (weekly, bi-weekly, monthly, or quarterly) to document the ongoing activities, operations, and status of an individual employee, project team, or entire department.
+            <div class="callout-label">Definition: Activity Report (Periodic Report)</div>
+            An informal report written at set intervals (weekly, bi-weekly, monthly, quarterly) to document the ongoing activities, routine tasks, and administrative accomplishments of an individual, technical team, or department. It serves as an institutional operational record and a performance management instrument.
           </div>
 
-          <h3>Key Architectural Guidelines</h3>
-          <ul>
-            <li><strong>Timing:</strong> Triggered strictly by the calendar (e.g., end of month, Friday afternoon), regardless of whether major milestones were hit.</li>
-            <li><strong>Audience:</strong> Immediate supervisor, department head, or client account manager.</li>
-            <li><strong>Primary Purpose:</strong> Accountability, organizational record-keeping, resource tracking, and early detection of operational bottlenecks.</li>
-            <li><strong>Structural Organization Options:</strong>
-              <ul>
-                <li><em>By Project:</em> Grouping accomplishments under specific client or system accounts (Project Alpha, Project Beta).</li>
-                <li><em>By Function:</em> Grouping accomplishments under operational domains (Software Development, Quality Assurance, User Training, Infrastructure).</li>
-              </ul>
-            </li>
+          <h3>Key Architectural Guidelines (Pfeiffer Ch 11)</h3>
+          <ul class="styled-list">
+            <li><strong>Classify and Label Rigorously:</strong> The greatest challenge in activity reports is organizing heterogeneous tasks so management can scan them quickly. Group tasks into substantive headings (e.g., <em>"Client Projects," "Internal R&amp;D," "Administrative Tasks"</em>).</li>
+            <li><strong>Highlight Quantifiable Accomplishments:</strong> State concrete metrics (e.g., <em>"Closed 14 Jira tickets," "Met with 8 prospective clients," "Completed 9 small surveys within budget"</em>).</li>
+            <li><strong>Document Schedule Delays and Justifications:</strong> If an ongoing project slipped, explain the exact operational cause (e.g., severe weather, client scope change) objectively without defensive excuses.</li>
+            <li><strong>Look Forward in the Conclusion:</strong> Conclude by stating high-priority operational targets and deadlines for the upcoming period.</li>
           </ul>
 
-          <h3>Complete Model Exam Blueprint: Monthly Activity Report</h3>
-          <div class="code-block">
-MEMORANDUM
+          <!-- Model 1: Textbook Model 11-1 -->
+          <h3>Reference Model 1: Pfeiffer Textbook Model 11-1 (Nancy Fairbanks)</h3>
+          <p>
+            This is the foundational model from William S. Pfeiffer's <em>Technical Communication: A Practical Approach</em> (8th ed., Chapter 11, pp. 374–375). Note the substantive headings, bullet indentations, and multi-page continuation header:
+          </p>
 
-TO:       Ms. Ayesha Siddiqui, Director of Software Engineering
-FROM:     Hamza Tariq, Lead Full-Stack Development Team
-DATE:     November 1, 2026
-SUBJECT:  Monthly Activity Report — October 2026: Mobile Banking Modernization
+          <div class="memo-sheet">
+            <div class="memo-paper-header">
+              <div class="memo-brand-title">
+                <span>M-GLOBAL INC. &bull; TECHNICAL SERVICES MEMORANDUM</span>
+                <span class="memo-badge-type">Pfeiffer Model 11-1: Activity Report</span>
+              </div>
+              <div class="memo-header-fields">
+                <div class="memo-field-label">TO:</div>
+                <div class="memo-field-val">Ralph Buzby, Manager of Engineering</div>
+                <div class="memo-field-label">FROM:</div>
+                <div class="memo-field-val">Nancy Fairbanks, Project Manager <span class="memo-initials">NF</span></div>
+                <div class="memo-field-label">DATE:</div>
+                <div class="memo-field-val">August 1, 2026</div>
+                <div class="memo-field-label">SUBJECT:</div>
+                <div class="memo-field-val">Activity Report for July 2026</div>
+              </div>
+            </div>
 
-────────────────────────────────────────────────────────────────────────────────────────
-A. ABSTRACT
-This activity report summarizes the technical and operational tasks completed by the Mobile 
-Banking Development Team during October 2026. During this period, our four-member team 
-finalized the biometric authentication API, resolved 14 high-priority security backlog tickets, 
-and commenced automated load testing for the upcoming v3.2 release. All core deliverables 
-remain aligned with the department's Q4 productivity benchmarks.
+            <div class="memo-paper-body">
+              <div class="memo-section-title">INTRODUCTORY SUMMARY</div>
+              <p class="memo-p">
+                July has been a busy month in our group. Besides starting and finishing many smaller jobs, we completed the Jones Fill project. Also, the John Lewis Dam borings began just a week ago. Finally, I did some marketing work and several performance reviews.
+              </p>
 
-B. BODY (Summary of Activities by Functional Domain)
-1. Core Feature Development:
-   • Completed integration of FIDO2-compliant biometric fingerprint and facial recognition modules.
-   • Refactored the inter-bank fund transfer (IBFT) endpoint, reducing payload latency by 28%.
-   • Completed UI localization for Urdu-language navigation screens across Android and iOS builds.
+              <div class="memo-section-title">SMALL PROJECTS</div>
+              <p class="memo-p">
+                Last month, my group completed nine small projects, each with a budget under 20,000 dollars and each lasting only a few days. These jobs were in three main areas:
+              </p>
+              <ol class="memo-list">
+                <li><strong>Surveying subdivisions:</strong> five jobs completed.</li>
+                <li><strong>Taking samples from toxic sites:</strong> two jobs completed.</li>
+                <li><strong>Doing nearby soil borings:</strong> two jobs completed.</li>
+              </ol>
+              <p class="memo-p">
+                All nine were completed within budget. Eight of the nine projects were completed on time. The Campbell County survey, however, was delayed for a day because of severe storms on July 10.
+              </p>
 
-2. Quality Assurance &amp; Bug Remediation:
-   • Conducted static code analysis across 42,000 lines of Flutter codebase; resolved 8 critical vulnerabilities.
-   • Closed 14 Jira sprint defect tickets related to token expiration crashes during low-network handoffs.
-   • Automated 35 end-to-end regression test scripts utilizing Appium.
+              <div class="memo-section-title">JONES FILL PROJECT</div>
+              <p class="memo-p">
+                Our written report on this 12-month job was finally submitted to Trunk Engineering, Inc., on July 23. The delay was caused by Trunk's decision to change the scope of the project again. The firm wanted another soil boring, which we completed on July 22.
+              </p>
 
-3. Departmental Meetings &amp; Professional Collaboration:
-   • Hosted weekly cross-functional synchronization meetings with the Information Security Audit Group.
-   • Conducted a 4-hour onboarding workshop for two newly hired junior backend developers.
+              <div class="memo-section-title">JOHN LEWIS DAM PROJECT</div>
+              <p class="memo-p">
+                As you know, we had hoped to start work at the dam site last month. However, the client decided to make many design changes that had to be approved by subcontractors. The final approval to start came just last week; thus our first day on-site was July 28.
+              </p>
 
-4. Challenges Encountered &amp; Corrective Actions:
-   • Challenge: Third-party SMS gateway provider experienced intermittent downtime on October 14, 
-     delaying OTP verification tests.
-   • Action: Implemented an automated fallback routing mechanism switching dynamically to our backup 
-     Telco API gateway.
+              <div class="memo-section-title">MARKETING EFFORTS</div>
+              <p class="memo-p">
+                During July, my main marketing effort was to meet with previous clients, acquainting them with some of our new services. I met with eight different clients at their offices, with two meetings occurring on each of these dates: July 15, 16, 22, and 23. There is a strong probability that several of these meetings will lead to additional waste-management contracts in the next few months.
+              </p>
 
-C. CONCLUSION &amp; OBJECTIVES FOR NOVEMBER 2026
-1. Objectives for Upcoming Month:
-   • Complete stress testing simulating 100,000 concurrent active users.
-   • Submit the v3.2 production release candidate to Google Play Store and Apple App Store for compliance review.
-   • Finalize developer API documentation for internal customer support teams.
+              <!-- Page 2 Continuation Header -->
+              <div class="memo-page-break">
+                <span>Ralph Buzby &bull; Manager of Engineering</span>
+                <span>August 1, 2026</span>
+                <span>Page 2</span>
+              </div>
 
-2. Resource Requirements:
-   • Requesting approval for two additional Android test devices (running Android 14) to verify biometric edge cases.
+              <div class="memo-section-title">PERFORMANCE REVIEWS</div>
+              <p class="memo-p">
+                As we discussed last month, I fell behind on my staff's performance reviews in June. In July, I completed the three delayed reviews, as well as the four that were due in July. Copies of the paperwork were sent to your office and to the Personnel Department on July 18. This brings us completely up-to-date on all staff evaluations.
+              </p>
+
+              <div class="memo-section-title">CONCLUSION &amp; TARGETS FOR AUGUST 2026</div>
+              <p class="memo-p">
+                During August, our group will focus on three primary operational targets:
+              </p>
+              <ul class="memo-list">
+                <li>Complete on-site drilling and initial soil classifications for the John Lewis Dam site by August 15.</li>
+                <li>Prepare and submit formal proposals for three prospective environmental consulting jobs identified during July marketing visits.</li>
+                <li>Conduct safety refresher certifications for all eight field survey technicians.</li>
+              </ul>
+              <p class="memo-p">
+                Please contact me at extension 412 if you require additional cost breakdowns for any July expenditures.
+              </p>
+            </div>
+          </div>
+
+          <!-- Model 2: Exam Blueprint Model -->
+          <h3>Complete Model Exam Blueprint: Software Engineering Monthly Activity Report</h3>
+          <p>
+            Use this full blueprint when responding to a 20-mark periodic/activity report scenario on your exam:
+          </p>
+
+          <div class="memo-sheet">
+            <div class="memo-paper-header">
+              <div class="memo-brand-title">
+                <span>TECHNOVA SOLUTIONS &bull; ENGINEERING DIVISION MEMORANDUM</span>
+                <span class="memo-badge-type">20-Mark Exam Model: Activity Report</span>
+              </div>
+              <div class="memo-header-fields">
+                <div class="memo-field-label">TO:</div>
+                <div class="memo-field-val">Ms. Ayesha Siddiqui, Director of Software Engineering</div>
+                <div class="memo-field-label">FROM:</div>
+                <div class="memo-field-val">Hamza Tariq, Lead Full-Stack Development Team <span class="memo-initials">HT</span></div>
+                <div class="memo-field-label">DATE:</div>
+                <div class="memo-field-val">November 1, 2026</div>
+                <div class="memo-field-label">SUBJECT:</div>
+                <div class="memo-field-val">Monthly Activity Report — October 2026: Mobile Banking Modernization</div>
+              </div>
+            </div>
+
+            <div class="memo-paper-body">
+              <div class="memo-section-title">A. ABSTRACT (INTRODUCTORY SUMMARY)</div>
+              <p class="memo-p">
+                This activity report summarizes the operational and technical deliverables completed by the Mobile Banking Development Team during October 2026. Over this reporting period, our four-developer team finalized biometric authentication APIs, resolved 14 critical security tickets, localized UI navigation into Urdu, and initiated stress testing for the v3.2 release candidate. All milestones remain compliant with Q4 engineering benchmarks.
+              </p>
+
+              <div class="memo-section-title">B. BODY (OPERATIONAL ACTIVITIES BY FUNCTIONAL DOMAIN)</div>
+              
+              <div class="memo-subsection-title">1. Feature Engineering &amp; Development</div>
+              <ul class="memo-list">
+                <li>Integrated FIDO2-compliant biometric fingerprint and facial recognition modules for both iOS and Android builds.</li>
+                <li>Refactored inter-bank fund transfer (IBFT) endpoints, reducing network payload latency by 28 percent.</li>
+                <li>Completed complete UI localization for Urdu-language screens, verified by internal QA on October 22.</li>
+              </ul>
+
+              <div class="memo-subsection-title">2. Quality Assurance &amp; Vulnerability Remediation</div>
+              <ul class="memo-list">
+                <li>Executed static code analysis across 42,000 lines of Dart/Flutter code; resolved 8 critical OWASP Top 10 vulnerabilities.</li>
+                <li>Closed 14 Jira sprint defects related to session token expiration crashes during low-bandwidth cellular handoffs.</li>
+                <li>Constructed 35 automated end-to-end regression test scripts utilizing Appium and GitHub Actions CI pipelines.</li>
+              </ul>
+
+              <div class="memo-subsection-title">3. Operational Challenges Encountered &amp; Corrective Measures</div>
+              <ul class="memo-list">
+                <li><strong>Challenge:</strong> The primary third-party SMS OTP gateway suffered an unplanned four-hour outage on October 14, temporarily halting user registration end-to-end testing.</li>
+                <li><strong>Corrective Action:</strong> Engineered an automated dynamic failover router that switches to our secondary telco API gateway within 500 milliseconds of packet loss.</li>
+              </ul>
+
+              <div class="memo-section-title">C. CONCLUSION &amp; OBJECTIVES FOR NOVEMBER 2026</div>
+              <p class="memo-p">
+                Our primary targets for the upcoming operational cycle include:
+              </p>
+              <ol class="memo-list">
+                <li>Execute distributed cloud stress tests simulating 100,000 concurrent active banking sessions by November 10.</li>
+                <li>Submit the finalized v3.2 release candidate to Apple App Store and Google Play Store for compliance certification by November 18.</li>
+                <li>Deliver developer API documentation and host training sessions for internal customer support engineers.</li>
+              </ol>
+              <p class="memo-p">
+                I am available at extension 304 to discuss this report or provide additional sprint velocity metrics.
+              </p>
+            </div>
           </div>
         </div>
 
+
         <!-- ───────────────────────────────────────────────────
-             TOPIC 3: PROGRESS REPORTS
+             TOPIC 3: WRITING DOCUMENT 2 — PROGRESS REPORT
              ─────────────────────────────────────────────────── -->
         <div class="topic-card" id="topic-3">
           <h2><span class="topic-num">3</span>Writing Document 2: Progress Report (Milestones)</h2>
-          <p class="topic-subtitle">Tracking project milestones, schedule variances, task completion, and budget health</p>
+          <p class="topic-subtitle">Pfeiffer Chapter 11 Model 11-2 &bull; Tracking multi-phase project milestones, budget burn, and delivery forecasts</p>
 
           <div class="definition">
-            <div class="callout-label">Definition</div>
-            <strong>Progress Report:</strong> An informative report that monitors the progress of a *specific, finite project* with an established beginning, middle, and end. It compares actual work completed against the planned project schedule, milestone deadlines, and budget baseline.
+            <div class="callout-label">Definition: Progress Report</div>
+            An informal report written during an ongoing project to update a supervisor, sponsor, or external client on project status. It answers three vital questions: <em>(1) What work has been completed? (2) What work remains in progress or planned? (3) Is the project on schedule and within budget?</em>
           </div>
 
-          <div class="callout callout-warning">
-            <div class="callout-label">High-Yield Distinction: Activity Report vs. Progress Report</div>
+          <h3>Standard Structural Framework for Progress Reports (ABC Architecture)</h3>
+          <ul class="styled-list">
+            <li><strong>Introductory Summary:</strong> Restates project objectives, project start date, overall projected timeline, and total phases. Delivers a direct bottom-line statement on current overall health.</li>
+            <li><strong>Work Completed (Past Period):</strong> Organized either chronologically or by task/functional sub-systems. Cites specific dates, interviews, tests, and deliverables finalized.</li>
+            <li><strong>Work Planned (Next Period):</strong> Clear schedule of upcoming tasks, assigned resources, and target milestones.</li>
+            <li><strong>Schedule &amp; Budget Status:</strong> Explicit variance tracking comparing baseline planned dates/costs against actual expenditure and timeline.</li>
+            <li><strong>Conclusion / Evaluation:</strong> An objective assessment of whether the project will conclude successfully, accompanied by requests for needed approvals.</li>
+          </ul>
+
+          <!-- Model 1: Textbook Model 11-2 -->
+          <h3>Reference Model 1: Pfeiffer Textbook Model 11-2 (Scott Sampson)</h3>
+          <p>
+            This model from William S. Pfeiffer (8th ed., Chapter 11, pp. 376–377) illustrates a progress report organized by task, adopting an objective yet persuasive internal tone:
+          </p>
+
+          <div class="memo-sheet">
+            <div class="memo-paper-header">
+              <div class="memo-brand-title">
+                <span>M-GLOBAL INC. &bull; MEMO REPORT</span>
+                <span class="memo-badge-type">Pfeiffer Model 11-2: Progress Report</span>
+              </div>
+              <div class="memo-header-fields">
+                <div class="memo-field-label">TO:</div>
+                <div class="memo-field-val">Jeannie McDuff, Vice President of Domestic Operations</div>
+                <div class="memo-field-label">FROM:</div>
+                <div class="memo-field-val">Scott Sampson, Manager of Personnel <span class="memo-initials">SS</span></div>
+                <div class="memo-field-label">DATE:</div>
+                <div class="memo-field-val">June 11, 2026</div>
+                <div class="memo-field-label">SUBJECT:</div>
+                <div class="memo-field-val">Progress Report on Training Project</div>
+              </div>
+            </div>
+
+            <div class="memo-paper-body">
+              <div class="memo-section-title">INTRODUCTORY SUMMARY</div>
+              <p class="memo-p">
+                On May 21, you asked that I study ways our firm can improve training for technical employees in all domestic offices. We agreed that the project would take about six or seven weeks and involve three distinct phases:
+              </p>
+              <ul class="memo-list">
+                <li><strong>Phase 1:</strong> Make phone inquiries to competing firms.</li>
+                <li><strong>Phase 2:</strong> Send a survey to our technical personnel.</li>
+                <li><strong>Phase 3:</strong> Interview a cross-section of our technical employees.</li>
+              </ul>
+              <p class="memo-p">
+                I have now completed Phase 1 and part of Phase 2. My observation thus far is that the project will offer many valuable new directions to consider for our technical training program.
+              </p>
+
+              <div class="memo-section-title">WORK COMPLETED</div>
+              <p class="memo-p">
+                In the first week of the project, I had extensive phone conversations with people at three competing firms about their training programs. Then, in the second week, I wrote and distributed a training survey to all technical employees across M-Global's domestic offices.
+              </p>
+
+              <div class="memo-subsection-title">Phone Interviews with Competitors</div>
+              <p class="memo-p">
+                I contacted three firms for whom we have done similar professional favors in the past: Simkins Consultants, Judd &amp; Associates, and ABG Engineering. Here is a summary of those conversations:
+              </p>
+              <ol class="memo-list">
+                <li>
+                  <strong>Simkins Consultants:</strong> Talked with Harry Roland, Training Director, on May 22. Harry noted that his firm finds the greatest success with internal training seminars. Each technical staff member completes several one- or two-day seminars annually, led by in-house experts or external consultants.
+                </li>
+                <li>
+                  <strong>Judd &amp; Associates:</strong> Talked with Jan Tyler, Manager of Engineering, on May 23. Jan stated that Judd depends mostly on internal seminars, but spreads them over one or two weeks rather than teaching intensive full-day sessions. Judd also offers bi-weekly lunchtime "technical awareness" sessions where staff give informal presentations.
+                </li>
+                <li>
+                  <strong>ABG Engineering:</strong> Talked with Dave Newcomb, Vice President of Personnel, on May 24. Dave shared that ABG relies on tuition reimbursement for university courses, supplemented by short off-site vendor seminars.
+                </li>
+              </ol>
+
+              <div class="memo-subsection-title">Training Survey</div>
+              <p class="memo-p">
+                After the phone interviews, I drafted a two-page survey for our 340 technical employees. The instrument was distributed via internal email on June 1. To date, 212 completed surveys (62.3 percent response rate) have been returned, providing rich data on employee training preferences.
+              </p>
+
+              <!-- Page 2 Continuation Header -->
+              <div class="memo-page-break">
+                <span>Jeannie McDuff &bull; Vice President</span>
+                <span>June 11, 2026</span>
+                <span>Page 2</span>
+              </div>
+
+              <div class="memo-section-title">WORK PLANNED</div>
+              <p class="memo-p">
+                During the next three weeks, I plan to accomplish the following project milestones:
+              </p>
+              <ul class="memo-list">
+                <li><strong>Tabulate Survey Data:</strong> Finalize statistical aggregation of survey responses by June 18.</li>
+                <li><strong>Conduct Phase 3 Interviews:</strong> Interview 15 technical staff members across five regional branches between June 19 and June 28.</li>
+                <li><strong>Synthesize Formal Report:</strong> Draft and deliver the final comprehensive recommendation report by July 9.</li>
+              </ul>
+
+              <div class="memo-section-title">SCHEDULE &amp; BUDGET STATUS</div>
+              <p class="memo-p">
+                The project remains exactly on schedule. Expenditures to date total 1,420 dollars (primarily long-distance calls, survey software licensing, and administrative time), well within our allocated 3,500 dollar preliminary budget.
+              </p>
+
+              <div class="memo-section-title">CONCLUSION</div>
+              <p class="memo-p">
+                The strong response to the survey demonstrates that our employees are eager for upgraded technical instruction. I look forward to presenting the final recommendations on July 9.
+              </p>
+            </div>
+          </div>
+
+          <!-- Model 2: Exam Blueprint Model -->
+          <h3>Complete Model Exam Blueprint: Campus Infrastructure Progress Report</h3>
+          <p>
+            Use this blueprint for infrastructure, networking, or engineering project progress questions:
+          </p>
+
+          <div class="memo-sheet">
+            <div class="memo-paper-header">
+              <div class="memo-brand-title">
+                <span>FAST-NUCES LAHORE &bull; IT INFRASTRUCTURE MODERNIZATION</span>
+                <span class="memo-badge-type">20-Mark Exam Model: Progress Report</span>
+              </div>
+              <div class="memo-header-fields">
+                <div class="memo-field-label">TO:</div>
+                <div class="memo-field-val">Dr. Hammad Naveed, Director, FAST-NUCES Lahore</div>
+                <div class="memo-field-label">FROM:</div>
+                <div class="memo-field-val">Bilal Ahmed, Project Lead, Campus Infrastructure Upgrade <span class="memo-initials">BA</span></div>
+                <div class="memo-field-label">DATE:</div>
+                <div class="memo-field-val">November 3, 2026</div>
+                <div class="memo-field-label">SUBJECT:</div>
+                <div class="memo-field-val">Progress Report #3 — Campus-Wide Wi-Fi 6 Upgrade Project (Phase 2 Milestones)</div>
+              </div>
+            </div>
+
+            <div class="memo-paper-body">
+              <div class="memo-section-title">1.0 INTRODUCTORY SUMMARY &amp; PROJECT OVERVIEW</div>
+              <p class="memo-p">
+                On September 15, 2026, the Academic Council commissioned the Campus-Wide Wi-Fi 6 Modernization Project to replace aging legacy 802.11n hardware across three academic blocks. The 10-week project is divided into four sequential milestones:
+              </p>
+              <ul class="memo-list">
+                <li><strong>Milestone 1:</strong> Site survey and structured fiber-optic cabling (Weeks 1–3).</li>
+                <li><strong>Milestone 2:</strong> Core switch deployment and Access Point (AP) installation in CS Block (Weeks 4–6).</li>
+                <li><strong>Milestone 3:</strong> AP deployment in EE &amp; Civil Engineering Blocks (Weeks 7–8).</li>
+                <li><strong>Milestone 4:</strong> Network stress testing, captive portal integration, and commissioning (Weeks 9–10).</li>
+              </ul>
+              <p class="memo-p">
+                As of November 3, 2026, Milestone 1 and Milestone 2 are 100 percent complete. Overall project progress stands at 65 percent completion, remaining on schedule for final handover on November 28.
+              </p>
+
+              <div class="memo-section-title">2.0 WORK COMPLETED TO DATE (OCTOBER 15 &ndash; NOVEMBER 2, 2026)</div>
+              <p class="memo-p">
+                During the past reporting sprint, our engineering team finalized the following deliverables:
+              </p>
+              <ul class="memo-list">
+                <li><strong>Access Point Mounting:</strong> Deployed 48 enterprise-grade Cisco Catalyst 9120 Wi-Fi 6 APs throughout the CS Academic Block, covering 24 classrooms and 6 laboratory wings.</li>
+                <li><strong>Core Infrastructure Configuration:</strong> Installed and commissioned two redundant 10 Gbps multi-gigabit PoE+ distribution switches in the central server room.</li>
+                <li><strong>Radio Frequency Optimization:</strong> Conducted signal heatmap analysis; eliminated four dead zones in the 3rd-floor postgraduate computing cluster.</li>
+              </ul>
+
+              <div class="memo-section-title">3.0 WORK SCHEDULED FOR NEXT REPORTING CYCLE (NOVEMBER 4 &ndash; NOVEMBER 17, 2026)</div>
+              <p class="memo-p">
+                Over the upcoming two weeks, our installation team will execute Milestone 3:
+              </p>
+              <ul class="memo-list">
+                <li>Deploy 36 Wi-Fi 6 Access Points across the Electrical Engineering and Civil Engineering auditoriums and lab rooms.</li>
+                <li>Terminate fiber-optic backbone uplinks connecting the EE server rack to the main university data center.</li>
+                <li>Conduct preliminary channel interference calibration on the 5 GHz and 6 GHz spectrum bands.</li>
+              </ul>
+
+              <div class="memo-section-title">4.0 SCHEDULE &amp; BUDGET VARIANCE ANALYSIS</div>
+              <p class="memo-p">
+                The milestone schedule and budget burn rates are summarized below:
+              </p>
+              <table class="memo-table">
+                <thead>
+                  <tr>
+                    <th>Milestone Task</th>
+                    <th>Scheduled Finish</th>
+                    <th>Actual / Forecast Finish</th>
+                    <th>Allocated Budget</th>
+                    <th>Actual Cost</th>
+                    <th>Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>M1: Structured Cabling</td>
+                    <td>Oct 05, 2026</td>
+                    <td>Oct 04, 2026</td>
+                    <td>450,000 PKR</td>
+                    <td>435,000 PKR</td>
+                    <td>Completed (Ahead)</td>
+                  </tr>
+                  <tr>
+                    <td>M2: CS Block Deployment</td>
+                    <td>Nov 02, 2026</td>
+                    <td>Nov 01, 2026</td>
+                    <td>1,200,000 PKR</td>
+                    <td>1,180,000 PKR</td>
+                    <td>Completed (On Time)</td>
+                  </tr>
+                  <tr>
+                    <td>M3: EE &amp; Civil Block APs</td>
+                    <td>Nov 16, 2026</td>
+                    <td>Nov 17, 2026</td>
+                    <td>900,000 PKR</td>
+                    <td>890,000 PKR (Est)</td>
+                    <td>In Progress (On Schedule)</td>
+                  </tr>
+                  <tr>
+                    <td>M4: Testing &amp; Commissioning</td>
+                    <td>Nov 28, 2026</td>
+                    <td>Nov 28, 2026</td>
+                    <td>350,000 PKR</td>
+                    <td>350,000 PKR (Est)</td>
+                    <td>Pending</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <div class="memo-section-title">5.0 CONCLUSION &amp; ACTION REQUEST</div>
+              <p class="memo-p">
+                The project remains in sound operational health with zero safety incidents and a net budget surplus of 35,000 PKR to date. To facilitate cabling across the EE auditorium ceiling without interrupting classes, I request administrative approval for after-hours building access from 6:00 PM to 10:00 PM on November 6 and 7.
+              </p>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ───────────────────────────────────────────────────
+             TOPIC 4: WRITING DOCUMENT 3 — PROBLEM ANALYSIS REPORT
+             ─────────────────────────────────────────────────── -->
+        <div class="topic-card" id="topic-4">
+          <h2><span class="topic-num">4</span>Writing Document 3: Problem Analysis Reports (Analytical)</h2>
+          <p class="topic-subtitle">Pfeiffer Chapter 11 Model 11-5 &bull; Forensic root-cause diagnosis, operational impact assessment, and corrective action</p>
+
+          <div class="definition">
+            <div class="callout-label">Definition: Problem Analysis Report</div>
+            An analytical report written to investigate a failure, operational bottleneck, breakdown, safety hazard, or customer dissatisfaction incident. Its purpose is to present objective facts, diagnose root causes (technical, procedural, human), evaluate financial/operational impacts, and recommend immediate containment and long-term preventive solutions.
+          </div>
+
+          <h3>Architectural Rules for High Exam Scores</h3>
+          <ul class="styled-list">
+            <li><strong>Separate Objective Facts from Opinion:</strong> Present observable, verified evidence first before diagnosing cause. Avoid emotional or blaming language.</li>
+            <li><strong>Adopt a Logical Diagnostic Framework:</strong> Organize the body by physical component, functional sub-system, or timeline of failure.</li>
+            <li><strong>Two-Tiered Recommendations:</strong> Always separate recommendations into <em>(a) Immediate Containment</em> (stopping current bleeding) and <em>(b) Long-Term Prevention</em> (engineering fixes, policy updates).</li>
+          </ul>
+
+          <!-- Model 1: Textbook Model 11-5 -->
+          <h3>Reference Model 1: Pfeiffer Textbook Model 11-5 (Harold Marshal)</h3>
+          <p>
+            This model from William S. Pfeiffer (8th ed., Chapter 11, pp. 384–385) illustrates an employee persuasively documenting technical deficiencies on a leased vessel using substantive headings and objective evidence:
+          </p>
+
+          <div class="memo-sheet">
+            <div class="memo-paper-header">
+              <div class="memo-brand-title">
+                <span>M-GLOBAL INC. &bull; TECHNICAL MEMORANDUM</span>
+                <span class="memo-badge-type">Pfeiffer Model 11-5: Problem Analysis</span>
+              </div>
+              <div class="memo-header-fields">
+                <div class="memo-field-label">TO:</div>
+                <div class="memo-field-val">Jan Stillwright, Vice President of Research and Training</div>
+                <div class="memo-field-label">FROM:</div>
+                <div class="memo-field-val">Harold Marshal, Technical Supervisor <span class="memo-initials">HM</span></div>
+                <div class="memo-field-label">DATE:</div>
+                <div class="memo-field-val">October 15, 2026</div>
+                <div class="memo-field-label">SUBJECT:</div>
+                <div class="memo-field-val">Boat Problems Aboard Leased Vessel Seeker II During Summer Season</div>
+              </div>
+            </div>
+
+            <div class="memo-paper-body">
+              <div class="memo-section-title">INTRODUCTORY SUMMARY</div>
+              <p class="memo-p">
+                We have just completed a one-month project aboard the leased ship, Seeker II. The crew collected 40 ocean-floor soil samples with very few delays caused by weather or equipment failure. However, there were significant vessel problems that must be resolved before we consider leasing Seeker II again next season. This report highlights these deficiencies so that management can negotiate repairs or seek another vessel. Comments focus on four key areas: drill rig, engineering lab, main engine, and crew quarters.
+              </p>
+
+              <div class="memo-section-title">DRILL RIG HAZARDS</div>
+              <p class="memo-p">
+                Thus far, the rig has operated without a major accident. Yet on one occasion, I observed that the elevator for lifting pipe up the derrick swung dangerously close to the derrick structure itself. Sudden sea swells caused this lateral shift. If the elevator struck the derrick and the latch released, heavy pipe sections would fall directly to the deck below.
+              </p>
+              <p class="memo-p">
+                The entire rig assembly must be inspected by a certified maritime structural engineer. Before putting crew members near that rig again, we require certified assurance that pipe fall hazards are eliminated.
+              </p>
+
+              <div class="memo-section-title">ENGINEERING LAB DEFICIENCIES</div>
+              <p class="memo-p">
+                It is a tribute to our technicians that they completed all lab tests given the ship's inadequate facilities. Several weeks into the voyage, four recurring problems emerged:
+              </p>
+              <ol class="memo-list">
+                <li><strong>Overhead Ceiling Leaks:</strong> Water dripped directly above electronic test benches during heavy swells.</li>
+                <li><strong>Inadequate Water Pressure:</strong> Pressure in the chemical cleanup sink was insufficient for decontamination.</li>
+                <li><strong>Window Frame Leakage:</strong> Saltwater seeped around the frame in the primary electronics corner.</li>
+                <li><strong>Electrical Faults:</strong> Two 120V outlet plugs failed completely due to internal wiring corrosion.</li>
+              </ol>
+
+              <!-- Page 2 Continuation Header -->
+              <div class="memo-page-break">
+                <span>Jan Stillwright &bull; Vice President</span>
+                <span>October 15, 2026</span>
+                <span>Page 2</span>
+              </div>
+
+              <div class="memo-section-title">MAIN ENGINE VULNERABILITIES</div>
+              <p class="memo-p">
+                On this voyage, the ship suffered three distinct valve failures across three separate cylinder heads. From our past maritime experience, it is highly abnormal to experience one valve failure, let alone three. Fortunately, these incidents occurred during transit between sampling sites, preventing loss of client testing time. Nevertheless, this breakdown pattern points to inadequate preventive maintenance by the vessel owner.
+              </p>
+
+              <div class="memo-section-title">CREW QUARTERS &amp; SANITATION</div>
+              <p class="memo-p">
+                Air conditioning in the sleeping quarters failed twice during high-humidity operations. Furthermore, the freshwater evaporator operated at only 60 percent rated capacity, forcing mandatory rationing of drinking and bathing water among the 14 crew members.
+              </p>
+
+              <div class="memo-section-title">CONCLUSION &amp; RECOMMENDATIONS</div>
+              <p class="memo-p">
+                While Seeker II successfully completed the sample quota, its mechanical unreliability creates unacceptable safety and operational liabilities. I recommend the following executive actions:
+              </p>
+              <ol class="memo-list">
+                <li>Present this itemized deficiency list to the ship owner, requiring written certification of engine overhaul, rig inspection, and lab waterproofing prior to contract renewal.</li>
+                <li>Instruct our marine logistics coordinator to solicit competitive bids for alternative research vessels for the 2027 summer expedition.</li>
+              </ol>
+            </div>
+          </div>
+
+          <!-- Model 2: Exam Blueprint Model -->
+          <h3>Complete Model Exam Blueprint: Computer Lab Breakdown (Spring 2025 Past Paper)</h3>
+          <p>
+            Use this blueprint for campus, IT infrastructure, or corporate hardware breakdown scenarios:
+          </p>
+
+          <div class="memo-sheet">
+            <div class="memo-paper-header">
+              <div class="memo-brand-title">
+                <span>NICS LAHORE &bull; DEPARTMENT OF COMPUTER SCIENCE MEMORANDUM</span>
+                <span class="memo-badge-type">Spring 2025 Solved Past Paper (20 Marks)</span>
+              </div>
+              <div class="memo-header-fields">
+                <div class="memo-field-label">TO:</div>
+                <div class="memo-field-val">Dr. Zeeshan Ali, Head of Department of Computer Science</div>
+                <div class="memo-field-label">FROM:</div>
+                <div class="memo-field-val">Zainab Fatima, Student Affairs &amp; Lab Review Officer <span class="memo-initials">ZF</span></div>
+                <div class="memo-field-label">DATE:</div>
+                <div class="memo-field-val">April 9, 2025</div>
+                <div class="memo-field-label">SUBJECT:</div>
+                <div class="memo-field-val">Problem Analysis Report — Hardware Deterioration and Cooling Breakdown in Lab 3</div>
+              </div>
+            </div>
+
+            <div class="memo-paper-body">
+              <div class="memo-section-title">1.0 ABSTRACT (EXECUTIVE SUMMARY)</div>
+              <p class="memo-p">
+                Following repeated student complaints during Spring 2025 midterm programming exams, an on-site technical inspection of Computer Lab 3 was conducted on April 7, 2025. The investigation confirmed that 22 out of 50 desktop workstations (44 percent failure rate) suffer from thermal throttling and random rebooting caused by failure of the central HVAC unit and accumulated heat-sink dust. This report identifies root causes, calculates academic impact, and proposes immediate cooling containment and a permanent maintenance schedule.
+              </p>
+
+              <div class="memo-section-title">2.0 ON-SITE INVESTIGATION &amp; FINDINGS</div>
+              <p class="memo-p">
+                Inspection across hardware, environmental, and network systems revealed four major operational defects:
+              </p>
+              <ol class="memo-list">
+                <li>
+                  <strong>Environmental HVAC Breakdown:</strong> The primary 4-ton split air conditioning unit suffered compressor motor burnout on March 28. Ambient lab temperatures routinely reach 36 degrees Celsius during afternoon exam sessions, far exceeding the 24 degree threshold for electronic equipment.
+                </li>
+                <li>
+                  <strong>Hardware Thermal Throttling:</strong> Diagnostic stress tests on 22 Core i7 workstations revealed CPU temperatures spiking to 94 degrees Celsius under Visual Studio build loads. Workstations automatically shut down to prevent permanent processor damage, resulting in students losing unsaved exam code.
+                </li>
+                <li>
+                  <strong>Peripheral &amp; Input Device Wear:</strong> Nineteen keyboards have missing or sticking keycaps (particularly semicolon and bracket keys essential for coding), and 12 optical mice exhibit erratic sensor tracking due to degraded USB connectors.
+                </li>
+                <li>
+                  <strong>Network Cabling Hazards:</strong> Six workstations in Row 4 experience intermittent packet drops due to crushed RJ-45 cable clips exposed in floor walkways without protective raceways.
+                </li>
+              </ol>
+
+              <div class="memo-section-title">3.0 ROOT CAUSE DIAGNOSIS</div>
+              <p class="memo-p">
+                The technical failure in Lab 3 is driven by two interrelated institutional shortcomings:
+              </p>
+              <ul class="memo-list">
+                <li><strong>Deferred Preventive HVAC Maintenance:</strong> The air conditioning compressors have not received scheduled refrigerant or coil servicing since June 2023, causing compressor seizure under continuous load.</li>
+                <li><strong>Absence of Daily Lab Technician Audits:</strong> Lab attendants recorded hardware faults casually on paper logs without escalating service tickets to central IT engineering.</li>
+              </ul>
+
+              <div class="memo-section-title">4.0 CORRECTIVE RECOMMENDATIONS</div>
+              <p class="memo-p">
+                To restore Lab 3 ahead of final examinations, the following two-tier plan is recommended:
+              </p>
+
+              <div class="memo-subsection-title">Immediate Containment (Within 72 Hours):</div>
+              <ul class="memo-list">
+                <li>Contract emergency commercial HVAC repair to replace the burned compressor and install two temporary 2-ton floor-standing portable AC units.</li>
+                <li>Deploy IT student interns to perform thermal paste re-application and compressed-air dust cleaning on all 50 workstation heat-sinks.</li>
+                <li>Replace 20 damaged keyboards and mice from central inventory stock immediately.</li>
+              </ul>
+
+              <div class="memo-subsection-title">Long-Term Preventive Measures (Within 30 Days):</div>
+              <ul class="memo-list">
+                <li>Institute an automated digital ticketing portal where lab demonstrators log hardware anomalies daily.</li>
+                <li>Enclose all network cables in high-impact floor raceways to eliminate physical trampling.</li>
+              </ul>
+              <p class="memo-p">
+                I am prepared to oversee immediate repair execution upon administrative authorization.
+              </p>
+            </div>
+          </div>
+        </div>
+
+
+        <!-- ───────────────────────────────────────────────────
+             TOPIC 5: WRITING DOCUMENT 4 — EQUIPMENT EVALUATION REPORT
+             ─────────────────────────────────────────────────── -->
+        <div class="topic-card" id="topic-5">
+          <h2><span class="topic-num">5</span>Writing Document 4: Equipment Evaluation Reports (Analytical)</h2>
+          <p class="topic-subtitle">Pfeiffer Chapter 11 Model 11-8 &bull; Multi-criteria evaluation matrices to decide: Retain, Repair, or Replace</p>
+
+          <div class="definition">
+            <div class="callout-label">Definition: Equipment Evaluation Report</div>
+            An analytical document that provides objective, criteria-based data regarding how hardware, software, machinery, or office systems have performed during operational trials or long-term field use. It systematically compares performance against operational benchmarks to recommend whether to <strong>retain, overhaul, or procure a replacement</strong>.
+          </div>
+
+          <h3>The 5 Standard Evaluation Criteria (FAST-NUCES Grading Rubric)</h3>
+          <p>
+            Every equipment evaluation report must evaluate the target system against five objective criteria:
+          </p>
+          <div class="table-container">
             <table class="comparison-table">
               <thead>
                 <tr>
-                  <th>Feature</th>
-                  <th>Activity Report (Periodic)</th>
-                  <th>Progress Report (Milestone-Driven)</th>
+                  <th>Criteria</th>
+                  <th>Core Engineering / Business Question</th>
+                  <th>Specific Metrics to Document</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td><strong>Scope</strong></td>
-                  <td>Covers an ongoing operational unit (e.g., IT Support desk, HR department).</td>
-                  <td>Covers a single, specific project with a defined end-date (e.g., Campus Fiber-Optic Installation).</td>
+                  <td><strong>1. Technical Performance</strong></td>
+                  <td>Does the equipment perform its core function reliably?</td>
+                  <td>Display resolution, lumen output, processor latency, throughput capacity, error rates.</td>
                 </tr>
                 <tr>
-                  <td><strong>Baseline</strong></td>
-                  <td>Compares output against monthly quotas or time intervals.</td>
-                  <td>Compares actual deliverables against a master Project Charter, Gantt schedule, and budget.</td>
+                  <td><strong>2. Reliability &amp; Downtime</strong></td>
+                  <td>How frequently does the equipment break or malfunction?</td>
+                  <td>Mean Time Between Failures (MTBF), weekly breakdown hours, reboot requirements.</td>
                 </tr>
                 <tr>
-                  <td><strong>Life Span</strong></td>
-                  <td>Permanent and recurring indefinitely.</td>
-                  <td>Temporary; ceases as soon as the project is delivered and signed off.</td>
+                  <td><strong>3. Maintenance &amp; Upkeep Costs</strong></td>
+                  <td>How expensive is it to keep operating in-house?</td>
+                  <td>Spare parts pricing, lamp replacement costs, vendor service contracts, consumables.</td>
+                </tr>
+                <tr>
+                  <td><strong>4. Usability &amp; Ergonomics</strong></td>
+                  <td>Can non-technical end users operate it without friction?</td>
+                  <td>Setup time, intuitive controls, software compatibility, user complaints, onboarding ease.</td>
+                </tr>
+                <tr>
+                  <td><strong>5. Replacement vs. Repair ROI</strong></td>
+                  <td>Does fixing the old system make financial sense?</td>
+                  <td>Capital procurement cost vs. cumulative repair bills over 12–24 months.</td>
                 </tr>
               </tbody>
             </table>
           </div>
 
-          <h3>Standard Structural Framework for Progress Reports</h3>
+          <!-- Model 1: Textbook Model 11-8 -->
+          <h3>Reference Model 1: Pfeiffer Textbook Model 11-8 (Melanie Frank)</h3>
           <p>
-            Pfeiffer specifies that the Body of a Progress Report must be chronologically segregated into three explicit temporal divisions:
+            This model from William S. Pfeiffer (8th ed., Chapter 11, pp. 396–397) evaluates a newly trialed word-processing software package across five functional criteria before delivering a definitive procurement recommendation:
           </p>
-          <ol>
-            <li><strong>Work Completed During Current Period:</strong> Explicit, verifiable deliverables finished since the last progress update.</li>
-            <li><strong>Work Currently in Progress:</strong> Tasks actively being executed right now, noting percentage completion and expected finish date.</li>
-            <li><strong>Work Scheduled for Next Period:</strong> The upcoming milestone sprint tasks.</li>
-            <li><strong>Schedule &amp; Budget Variance Analysis:</strong> Explicitly state whether the project is <em>Ahead of Schedule, On Schedule, or Behind Schedule</em>, and whether costs are <em>Under Budget, On Budget, or Over Budget</em>. Explain causes of any variance and detail corrective measures.</li>
-          </ol>
 
-          <h3>Complete Model Exam Blueprint: Infrastructure Progress Report</h3>
-          <div class="code-block">
-MEMORANDUM
+          <div class="memo-sheet">
+            <div class="memo-paper-header">
+              <div class="memo-brand-title">
+                <span>M-GLOBAL INC. &bull; OFFICE SYSTEMS MEMORANDUM</span>
+                <span class="memo-badge-type">Pfeiffer Model 11-8: Equipment Evaluation</span>
+              </div>
+              <div class="memo-header-fields">
+                <div class="memo-field-label">TO:</div>
+                <div class="memo-field-val">Hank Worley, San Francisco Branch Manager</div>
+                <div class="memo-field-val">FROM:</div>
+                <div class="memo-field-val">Melanie Frank, Office Administration Manager <span class="memo-initials">MF</span></div>
+                <div class="memo-field-label">DATE:</div>
+                <div class="memo-field-val">November 12, 2026</div>
+                <div class="memo-field-label">SUBJECT:</div>
+                <div class="memo-field-val">Evaluation of Best Choice Word-Processing Package (Trial Period)</div>
+              </div>
+            </div>
 
-TO:       Dr. Hammad Naveed, Director, FAST-NUCES Lahore
-FROM:     Bilal Ahmed, Project Manager, Campus IT Infrastructure Modernization
-DATE:     November 3, 2026
-SUBJECT:  Progress Report #3 — Campus-Wide Wi-Fi 6 Upgrade Project (Sprint Phase 2)
+            <div class="memo-paper-body">
+              <div class="memo-section-title">INTRODUCTORY SUMMARY</div>
+              <p class="memo-p">
+                During October, our 12-person administrative and technical staff tested the Best Choice word-processing package on a 30-day corporate trial license. We evaluated the software's performance across five core features: text editing, file management, formatting versatility, user support documentation, and system speed. Based on staff feedback and time-efficiency gains, I recommend that our branch purchase full multi-user site licenses to replace our outdated TypeRight software.
+              </p>
 
-────────────────────────────────────────────────────────────────────────────────────────
-A. ABSTRACT
-This third progress report documents milestone achievements on the Campus-Wide Wi-Fi 6 Upgrade 
-Project for the period of October 15 to November 1, 2026. During this interval, Phase 2 (Access 
-Point Deployment in the CS Academic Block) was completed on schedule. Overall project completion 
-now stands at 65 percent against our target milestone of 60 percent. Expenditures remain within 
-the approved capital budget with an overall positive variance of 45,000 PKR.
+              <div class="memo-section-title">EVALUATION OF SYSTEM FEATURES</div>
 
-B. BODY (Task Status &amp; Variance Analysis)
-1. Work Completed (October 15 – November 1, 2026):
-   • Installed and provisioned 36 enterprise-grade Cisco Catalyst Wi-Fi 6 Access Points across 
-     all three floors of CS Academic Block A and B.
-   • Terminated and certified 1,400 meters of Cat6A shielded twisted-pair cabling to server racks.
-   • Configured central cloud dashboard controllers and implemented WPA3 Enterprise authentication.
-   • Conducted RF signal propagation heat-mapping; achieved 100% dead-zone elimination in lecture halls.
+              <div class="memo-subsection-title">1. Text Editing Capabilities</div>
+              <p class="memo-p">
+                Best Choice excels in rapid text manipulation. The search-and-replace engine operates globally across multiple open documents in seconds. Spell-checking and custom technical glossaries allowed our report writers to flag engineering acronyms accurately, reducing editing time by approximately 20 percent.
+              </p>
 
-2. Work Currently in Progress:
-   • Fiber-optic backbone splicing between Main Data Center and the Electrical Engineering Block (40% complete).
-   • Stress-testing captive portal guest network bandwidth throttle rules.
+              <div class="memo-subsection-title">2. File Management &amp; Cross-Platform Portability</div>
+              <p class="memo-p">
+                The software stores files in an open XML structure, completely eliminating file corruption during transfers to our Baltimore headquarters. Field engineers trialing the software on portable laptops uploaded 45 soil inspection summaries to the central server without a single formatting conflict.
+              </p>
 
-3. Work Scheduled for Next Period (November 2 – November 18, 2026):
-   • Deploy 28 outdoor weather-resistant access points covering central grounds and cafeteria.
-   • Finalize integration with student LDAP/Active Directory database for single sign-on credentials.
+              <div class="memo-subsection-title">3. Document Formatting &amp; Typography</div>
+              <p class="memo-p">
+                Creating formal two-column layouts, tables of contents, and numbered headings requires half the keystrokes needed under our legacy software. The built-in table editor automatically formats financial appendices cleanly.
+              </p>
 
-4. Schedule &amp; Budget Health Assessment:
-   • Schedule Status: On schedule. Final project commissioning remains set for December 15, 2026.
-   • Budget Status: Under budget.
-     - Approved Phase 2 Budget: 1,800,000 PKR
-     - Actual Phase 2 Expenditure: 1,755,000 PKR (Variance: +45,000 PKR saved via bulk cable procurement).
+              <!-- Page 2 Continuation Header -->
+              <div class="memo-page-break">
+                <span>Hank Worley &bull; Branch Manager</span>
+                <span>November 12, 2026</span>
+                <span>Page 2</span>
+              </div>
 
-C. CONCLUSION
-The Wi-Fi 6 infrastructure upgrade continues to progress smoothly without disruption to academic 
-classes. No management intervention is required at this stage. Our next progress report will be 
-submitted on November 19 upon completion of the outdoor wireless deployment.
-          </div>
-        </div>
+              <div class="memo-subsection-title">4. User Documentation &amp; Technical Support</div>
+              <p class="memo-p">
+                The user manual is clear and logically indexed. During the 30-day trial, our office staff placed only three calls to the vendor's toll-free help desk; in all instances, technicians resolved questions within five minutes.
+              </p>
 
-        <!-- ───────────────────────────────────────────────────
-             TOPIC 4: PROBLEM ANALYSIS REPORTS
-             ─────────────────────────────────────────────────── -->
-        <div class="topic-card" id="topic-4">
-          <h2><span class="topic-num">4</span>Writing Document 3: Problem Analysis Reports (Analytical)</h2>
-          <p class="topic-subtitle">Investigating technical breakdowns, isolating root causes, and prescribing objective solutions</p>
+              <div class="memo-subsection-title">5. Processing Speed &amp; Hardware Compatibility</div>
+              <p class="memo-p">
+                Even on our older desktop computers, Best Choice loads 50-page reports in under three seconds with zero system freezes. It requires 40 percent less RAM overhead than competing commercial suites.
+              </p>
 
-          <div class="definition">
-            <div class="callout-label">Definition</div>
-            <strong>Problem Analysis Report:</strong> An analytical report that provides an objective, detailed investigation of a failure or breakdown in personnel, hardware, software, products, or services. Its primary objective is to present unbiased factual data so decision-makers can select the appropriate remedy.
-          </div>
-
-          <div class="callout callout-info">
-            <div class="callout-label">The Principle of Unbiased Objectivity</div>
-            <p>
-              When something breaks, human nature wants to point fingers: <em>"The students abuse the equipment"</em> or <em>"The vendor sold us junk."</em>
-            </p>
-            <p>
-              In professional technical writing, emotional opinions and blame are strictly forbidden. You must establish:
-              <br>1. <strong>The Exact Observable Facts</strong> (what failed, when, and how often?).
-              <br>2. <strong>The Systematic Data Collection</strong> (hardware diagnostics, error logs, user surveys).
-              <br>3. <strong>The True Root Cause</strong> (electrical surge, thermal throttling, outdated driver, memory leak).
-              <br>4. <strong>The Multiple Actionable Solutions</strong> evaluated objectively by cost and viability.
-            </p>
+              <div class="memo-section-title">RECOMMENDATIONS &amp; COST PROJECTION</div>
+              <p class="memo-p">
+                Upgrading to Best Choice will significantly improve report generation speed and document presentation across the branch. I recommend the following procurement steps:
+              </p>
+              <ol class="memo-list">
+                <li>Procure 15 commercial licenses at the discounted corporate rate of 195 dollars per seat (total: 2,925 dollars).</li>
+                <li>Schedule a two-hour lunchtime training session led by internal power users on November 20 to ensure seamless transition.</li>
+                <li>Phase out TypeRight maintenance support effective December 1, yielding an annual savings of 1,200 dollars in renewal fees.</li>
+              </ol>
+            </div>
           </div>
 
-          <h3>Complete Model Exam Blueprint: Computer Lab Breakdown (Spring 2025 Past Paper)</h3>
-          <div class="code-block">
-MEMORANDUM
-
-TO:       Dr. Zeeshan Ali, Head of Department of Computer Science, NICS Lahore
-FROM:     Zainab Fatima, Students Affairs Officer
-DATE:     April 9, 2025
-SUBJECT:  Problem Analysis Report — Technical Breakdown and Deterioration in Lab 3 Facilities
-
-────────────────────────────────────────────────────────────────────────────────────────
-A. ABSTRACT
-Following widespread student and faculty complaints regarding frequent system crashes and severe 
-computational bottlenecks in Lab 3, an intensive two-week technical investigation was conducted from 
-March 22 to April 5, 2025. Analysis reveals that 65% of desktop systems experience random thermal 
-shutdowns and network dropouts during operating systems and compiler lab sessions. The root causes 
-are degraded CPU cooling infrastructure, failing mechanical hard drives (HDDs), and outdated 100 Mbps 
-switch hardware. This report analyzes the failure data and recommends a three-phase hardware 
-modernization plan totaling 850,000 PKR to restore full academic utility.
-
-B. BODY (Factual Findings, Data Analysis &amp; Root Cause Investigation)
-1. Problem Statement &amp; Operational Impact:
-   • Lab 3 houses 50 desktop workstations utilized by over 450 undergraduate students weekly.
-   • During peak hours, an average of 18 machines freeze or crash per 3-hour lab session, causing 
-     students to lose programming test progress and delaying course pacing by up to 25%.
-
-2. Empirical Data Collection &amp; Diagnostic Findings:
-   • Diagnostic Hardware Audit: Automated hardware diagnostic scripts run across all 50 units revealed:
-     - 32 units (64%) exceed safe thermal limits (CPU temperatures consistently &gt; 92°C under 50% load).
-     - 28 mechanical hard drives (56%) exhibit S.M.A.R.T. bad-sector warnings and excessive read latencies.
-     - 45 network cables suffer from broken locking clips, causing intermittent physical disconnects.
-   • Student Survey Feedback: A survey of 120 enrolled students showed that 88% identify boot-up times 
-     (averaging 7 to 9 minutes) as their primary productivity obstacle.
-
-3. Root Cause Analysis:
-   • Primary Cause 1 (Thermal Degradation): Heatsink thermal paste has completely crystallized over 
-     four years of continuous operation without preventive maintenance, triggering thermal throttling.
-   • Primary Cause 2 (Storage Bottleneck): Aging 5400 RPM mechanical HDDs cannot sustain concurrent 
-     Docker containerization and IDE compiling demands of modern semester courses.
-   • Primary Cause 3 (Network Switch Saturation): The lab relies on two legacy 100 Mbps unmanaged switches 
-     that saturate and drop packets whenever students pull virtual machine images from the local server.
-
-4. Evaluation of Potential Solutions:
-   • Alternative 1 (Complete System Replacement): Procuring 50 brand-new desktop workstations.
-     - Cost: ~6,500,000 PKR. Verdict: Financially unfeasible under current mid-year departmental budget.
-   • Alternative 2 (Surgical Hardware Modernization): Retaining current Core i5 processors and motherboards 
-     while replacing HDDs with 512GB NVMe SSDs, applying thermal paste, and upgrading to a Gigabit switch.
-     - Cost: 850,000 PKR. Verdict: Highly cost-effective; delivers an estimated 800% I/O performance boost.
-
-C. CONCLUSION &amp; RECOMMENDATIONS
-1. Factual Conclusion:
-   The current workstations possess adequate CPU power (Core i5 10th Gen), but are crippled by storage 
-   I/O bottlenecks, thermal degradation, and network saturation. Total machine replacement is unnecessary.
-
-2. Prioritized Action Recommendations:
-   • Recommendation 1: Approve the procurement of 50 units of 512GB NVMe SSDs (550,000 PKR) to replace 
-     all failing mechanical hard drives during the upcoming semester break.
-   • Recommendation 2: Authorize lab technician overtime to clean heatsinks and reapply arctic thermal 
-     compound across all 50 processors (estimated cost: 25,000 PKR).
-   • Recommendation 3: Replace the two legacy 100 Mbps switches with one 48-port Managed Gigabit PoE 
-     Switch and recable workstation patch cords (275,000 PKR).
-   • Recommendation 4: Requesting a 15-minute budget review meeting on Thursday at 11:00 AM to finalize 
-     vendor purchase requisition forms before inventory procurement closes.
-          </div>
-        </div>
-
-        <!-- ───────────────────────────────────────────────────
-             TOPIC 5: EQUIPMENT EVALUATION REPORTS
-             ─────────────────────────────────────────────────── -->
-        <div class="topic-card" id="topic-5">
-          <h2><span class="topic-num">5</span>Writing Document 4: Equipment Evaluation Reports (Analytical)</h2>
-          <p class="topic-subtitle">Testing hardware, software, or machinery against explicit criteria to decide: retain, repair, or replace</p>
-
-          <div class="definition">
-            <div class="callout-label">Definition</div>
-            <strong>Equipment Evaluation Report:</strong> A specialized analytical report that systematically assesses the operational performance, reliability, usability, and cost-effectiveness of specific equipment, machinery, or software systems. Its definitive goal is to provide management with a concrete decision: **RETAIN**, **REPAIR**, or **REPLACE**.
-          </div>
-
-          <h3>The 5 Standard Evaluation Criteria (FAST-NUCES Grading Rubric)</h3>
+          <!-- Model 2: Exam Blueprint Model -->
+          <h3>Complete Model Exam Blueprint: Smart Classroom Multimedia AV System (Fall 2025 Past Paper)</h3>
           <p>
-            When drafting an Equipment Evaluation Report on your exam, always evaluate the target equipment across these five explicit parameters:
+            Use this complete blueprint when responding to a 20-mark equipment evaluation question:
           </p>
-          <ol>
-            <li><strong>Performance &amp; Technical Capability:</strong> Does the equipment perform its core function fast, accurately, and without operational glitches under peak load?</li>
-            <li><strong>User-Friendliness &amp; Interface:</strong> Is it intuitive for non-technical users to operate without requiring extensive manuals or technical support?</li>
-            <li><strong>Reliability &amp; Breakdown Frequency:</strong> How often does it fail, overheat, jam, or crash during standard operational hours?</li>
-            <li><strong>Maintenance, Warranty &amp; Proximity to Service Centers:</strong> Are replacement spare parts readily accessible locally? Does the manufacturer offer active warranty support and local certified technicians?</li>
-            <li><strong>Total Cost of Ownership (TCO):</strong> What are the initial purchase, repair, power consumption, consumable, and maintenance contract costs?</li>
-          </ol>
 
-          <h3>Complete Model Exam Blueprint: Classroom Multimedia Audio-Visual System (Fall 2025 Past Paper)</h3>
-          <div class="code-block">
-MEMORANDUM
+          <div class="memo-sheet">
+            <div class="memo-paper-header">
+              <div class="memo-brand-title">
+                <span>FAST-NUCES LAHORE &bull; ACADEMIC OPERATIONS MEMORANDUM</span>
+                <span class="memo-badge-type">Fall 2025 Solved Past Paper (20 Marks)</span>
+              </div>
+              <div class="memo-header-fields">
+                <div class="memo-field-label">TO:</div>
+                <div class="memo-field-val">Mr. Usama Zafar, Academic Facility Manager, FAST-NUCES Lahore</div>
+                <div class="memo-field-label">FROM:</div>
+                <div class="memo-field-val">Ali Raza, Senior Lab Engineer &amp; Multimedia Evaluation Committee Lead <span class="memo-initials">AR</span></div>
+                <div class="memo-field-label">DATE:</div>
+                <div class="memo-field-val">November 1, 2025</div>
+                <div class="memo-field-label">SUBJECT:</div>
+                <div class="memo-field-val">Equipment Evaluation Report — Smart Classroom Multimedia Audio-Visual Systems</div>
+              </div>
+            </div>
 
-TO:       Mr. Usama Zafar, Academic Manager, FAST-NUCES Lahore
-FROM:     Ali Raza, Senior Teaching Assistant &amp; Multimedia Evaluation Committee Lead
-DATE:     November 1, 2025
-SUBJECT:  Equipment Evaluation Report — Classroom Multimedia Audio-Visual Systems
+            <div class="memo-paper-body">
+              <div class="memo-section-title">A. ABSTRACT (INTRODUCTORY SUMMARY)</div>
+              <p class="memo-p">
+                This evaluation report investigates persistent technical failures in the multimedia projection and audio systems installed across 18 classrooms in the CS Academic Block. Over an eight-week audit (September 1 to October 26, 2025), our committee logged operating metrics, surveyed 40 faculty members, and evaluated maintenance expenses. Based on high bulb failure rates and substantial lecture downtime, we definitively recommend <strong>replacing aging legacy lamp projectors with solid-state Laser Smart Projection Systems</strong>.
+              </p>
 
-────────────────────────────────────────────────────────────────────────────────────────
-A. ABSTRACT
-Pursuant to the Academic Office directive, an intensive one-month hands-on operational evaluation 
-of the multimedia audio-visual equipment (Epson PowerLite projectors and companion soundbars) 
-installed across 30 campus classrooms was conducted throughout October 2025. System performance 
-was evaluated in both large lecture halls (120-seat capacity) and seminar rooms (40-seat capacity) 
-across five core criteria: display quality, audio clarity, interface connectivity, maintenance 
-frequency, and repair cost. Based on empirical testing, this report recommends a bifurcated strategy: 
-RETAIN the projector units following an HDMI adapter retrofit, but REPLACE the failing soundbar units 
-with commercial wall-mounted powered PA speakers before the Spring 2026 semester begins.
+              <div class="memo-section-title">B. BODY (FIVE-POINT CRITERIA EVALUATION)</div>
+              <p class="memo-p">
+                The multimedia systems were evaluated across the university's five canonical procurement benchmarks:
+              </p>
 
-B. BODY (Criteria-Based Technical Evaluation)
-1. Evaluation Methodology &amp; Testing Scope:
-   • Testing Period: October 1 to October 31, 2025.
-   • Sample Size: 30 classrooms across Computer Science and Engineering academic blocks.
-   • Evaluators: 18 faculty members, 12 teaching assistants, and 3 campus IT technicians.
+              <div class="memo-subsection-title">1. Technical Performance (Lumen Output &amp; Color Legibility)</div>
+              <p class="memo-p">
+                The existing halogen-bulb projectors emit an average of 1,850 lumens, far below the manufacturer's 3,500 lumen factory rating due to phosphor degradation. In daytime lecture halls with natural light, students past Row 4 cannot clearly read programming code or mathematical proofs on whiteboard screens.
+              </p>
 
-2. Criterion 1 — Display Quality &amp; Projector Lumens:
-   • Large Lecture Halls: Projectors exhibit 3,200 ANSI lumens, which provides sharp readability 
-     when ambient room lighting is fully dimmed, but text wash-out occurs when blinds are open.
-   • Lamp Life: Bulb runtime logs indicate that 26 of 30 projector lamps have utilized less than 
-     40 percent of their rated 6,000-hour operational lifespan.
-   • Verdict on Projectors: Optics and bulb health remain strong; replacement is unwarranted.
+              <div class="memo-subsection-title">2. Operational Reliability &amp; Instructional Downtime</div>
+              <p class="memo-p">
+                The 18 projectors suffered 34 documented classroom breakdowns during the audit period. Faculty members spent an average of 11.4 minutes per lecture troubleshooting input connectivity and thermal shutdown errors, resulting in approximately 6.5 instructional hours lost per week.
+              </p>
 
-3. Criterion 2 — Laptop Interface &amp; HDMI Connectivity:
-   • Observed Glitch: 42% of faculty using modern laptops (USB-C and DisplayPort only) experienced 
-     screen flickering or connection failures when using legacy VGA/HDMI wall sockets.
-   • Technical Diagnosis: Faulty, worn passive wall-plates and absent digital handshake adapters. 
-     The problem resides entirely in the cabling interface, not the projector hardware.
+              <div class="memo-subsection-title">3. Maintenance Costs &amp; Parts Availability</div>
+              <p class="memo-p">
+                Over the past 12 months, the facility spent 480,000 PKR purchasing replacement halogen bulbs (each bulb costs 28,000 PKR and lasts only 1,500 hours) and contracting outside technicians to rebuild burned power supplies.
+              </p>
 
-4. Criterion 3 — Audio Projection &amp; Sound Clarity:
-   • Seminar Rooms: Integrated soundbar volume and vocal intelligibility are satisfactory.
-   • Large Lecture Halls: Sound projection is completely inadequate. Instructors at the podium 
-     must strain their voices, and students in rows 8 to 15 report severe distortion during recorded 
-     video demonstrations. The current 20W domestic soundbars lack acoustic dispersion power.
+              <div class="memo-subsection-title">4. Usability &amp; Faculty Satisfaction Survey</div>
+              <p class="memo-p">
+                A Likert-scale survey administered to 40 teaching faculty revealed that 82 percent rated the current audio-visual equipment as <em>"unsatisfactory"</em> or <em>"disruptive to instruction,"</em> citing lack of HDMI-CEC auto-detection and defective analog ceiling microphones.
+              </p>
 
-5. Criterion 4 — Maintenance Reliability &amp; Service Proximity:
-   • Epson official authorized service center is located within 6 km of campus (Gulberg, Lahore), 
-     ensuring fast 48-hour turnaround for genuine replacement filters and lamps.
-   • Soundbar units are non-serviceable domestic consumer units with zero local board repair support.
+              <div class="memo-subsection-title">5. Comparative Equipment Decision Matrix</div>
+              <p class="memo-p">
+                A quantitative comparison of available management options is detailed below:
+              </p>
+              <table class="memo-table">
+                <thead>
+                  <tr>
+                    <th>Evaluation Criteria</th>
+                    <th>Option 1: Retain &amp; Repair Current Units</th>
+                    <th>Option 2: Procure Laser Smart AV Systems (Recommended)</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Capital Outlay</strong></td>
+                    <td>0 PKR upfront</td>
+                    <td>1,950,000 PKR (18 laser units with multi-year warranty)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Annual Maintenance</strong></td>
+                    <td>500,000 PKR (recurring bulb &amp; ballast repairs)</td>
+                    <td>35,000 PKR (filter-free solid-state laser; 20,000 hr lifespan)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Display Quality</strong></td>
+                    <td>1,850 Lumens (faded, dim in daylight)</td>
+                    <td>4,500 Lumens (crystal-clear 4K HDR projection)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Instructional Downtime</strong></td>
+                    <td>11.4 minutes per lecture</td>
+                    <td>0 minutes (instant-on / instant-off wireless casting)</td>
+                  </tr>
+                  <tr>
+                    <td><strong>3-Year Total Cost of Ownership</strong></td>
+                    <td>1,500,000 PKR (pure maintenance with no asset value)</td>
+                    <td>2,055,000 PKR (high-value asset with 5-year operational lifespan)</td>
+                  </tr>
+                </tbody>
+              </table>
 
-6. Evaluation Matrix &amp; Comparative Summary Table:
-   ┌──────────────────────┬─────────────────────────────┬─────────────────────────────┐
-   │ Evaluation Criterion │ Epson Projectors            │ Domestic Soundbars          │
-   ├──────────────────────┼─────────────────────────────┼─────────────────────────────┤
-   │ 1. Performance       │ Good (High lamp life left)  │ Unacceptable in large halls │
-   │ 2. Usability         │ Poor (Interface cable wear) │ Moderate                    │
-   │ 3. Reliability       │ High (0 hardware shutdowns) │ Low (Frequent hum/buzzing)  │
-   │ 4. Service Support   │ Excellent (Local Center)    │ Non-existent (Sealed units) │
-   │ 5. Decision Verdict  │ RETAIN (With Cable Fix)     │ REPLACE (Commercial Grade)  │
-   └──────────────────────┴─────────────────────────────┴─────────────────────────────┘
-
-C. CONCLUSION &amp; ACTIONABLE RECOMMENDATIONS
-1. Final Verdict:
-   The classroom audio-visual infrastructure does not require an expensive complete overhaul. The 
-   projector display engines are robust and should be **RETAINED**. However, the audio amplification 
-   is acoustically defective and must be **REPLACED**.
-
-2. Actionable Implementation Steps:
-   • Step 1 (Projector Cabling Retrofit): Procure and install 30 high-durability active USB-C to 
-     HDMI 2.1 cable harnesses and replace worn wall faceplates (Estimated budget: 75,000 PKR).
-   • Step 2 (Audio System Replacement): Replace the 12 large lecture hall domestic soundbars with 
-     commercial-grade 60W wall-mounted powered public address speakers featuring balanced XLR inputs 
-     (Estimated budget: 360,000 PKR).
-   • Step 3 (Preventive Maintenance Schedule): Institute mandatory bi-monthly air filter cleaning 
-     by campus lab staff to prolong projector engine life.
-   • Total Proposed Capital Expenditure: 435,000 PKR (saving over 3,000,000 PKR compared to buying 
-     new multimedia sets).
-
-3. Call to Action:
-   Authorization is requested by November 15, 2025, to allow IT procurement to issue vendor purchase 
-   orders in time for installation during the winter academic break.
+              <div class="memo-section-title">C. CONCLUSION &amp; DECISIVE RECOMMENDATIONS</div>
+              <p class="memo-p">
+                Retaining the legacy equipment is financially unsound and academically unacceptable. We recommend the following three-step implementation plan:
+              </p>
+              <ol class="memo-list">
+                <li><strong>Retire Old Units:</strong> Decommission all 18 halogen projectors at the end of the Fall 2025 semester.</li>
+                <li><strong>Procure Laser Units:</strong> Issue an open competitive tender for 18 solid-state 4,500-lumen laser projectors before December 15, 2025.</li>
+                <li><strong>Installation Window:</strong> Complete installation, ceiling mounting, and teacher orientation during the winter break (January 2–10, 2026) to guarantee zero disruption to Spring 2026 classes.</li>
+              </ol>
+            </div>
           </div>
         </div>
 
-        <!-- ───────────────────────────────────────────────────
-             TOPIC 6: MASTER DISTINGUISHING MATRIX
-             ─────────────────────────────────────────────────── -->
         <div class="topic-card" id="topic-6">
           <h2><span class="topic-num">6</span>Master Distinguishing Matrix: The 4 Informal Report Types</h2>
           <p class="topic-subtitle">The rapid-decision guide to eliminate exam hesitation across report types</p>

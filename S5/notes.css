@@ -914,3 +914,231 @@ details strong {
     text-align: center !important;
   }
 }
+
+
+/* ═══════════════════════════════════════════════════════════
+   CODE BLOCK & MEMO DOCUMENT FORMATTING STYLES
+   (Pfeiffer 8th Ed & FAST-NUCES Technical Writing Standards)
+   ═══════════════════════════════════════════════════════════ */
+
+.code-block {
+  font-family: 'Consolas', 'Courier New', Courier, monospace;
+  font-size: 0.88rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 18px 22px;
+  margin: 18px 0;
+  overflow-x: auto;
+  color: var(--tx);
+  tab-size: 4;
+}
+
+.memo-sheet {
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.07);
+  padding: 32px 36px;
+  margin: 24px 0 28px;
+  color: #1e293b;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.65;
+}
+
+[data-theme="dark"] .memo-sheet {
+  background: #0f172a;
+  border-color: #334155;
+  color: #e2e8f0;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
+}
+
+.memo-paper-header {
+  border-bottom: 2px solid #0284c7;
+  padding-bottom: 16px;
+  margin-bottom: 22px;
+}
+
+.memo-brand-title {
+  font-size: 1.12rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #0369a1;
+  margin-bottom: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+[data-theme="dark"] .memo-brand-title {
+  color: #38bdf8;
+}
+
+.memo-badge-type {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 12px;
+  background: rgba(2, 132, 199, 0.12);
+  color: #0284c7;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+[data-theme="dark"] .memo-badge-type {
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+}
+
+.memo-header-fields {
+  display: grid;
+  grid-template-columns: 85px 1fr;
+  row-gap: 8px;
+  column-gap: 12px;
+  font-size: 0.95rem;
+}
+
+.memo-field-label {
+  font-weight: 700;
+  color: #475569;
+  letter-spacing: 0.04em;
+}
+
+[data-theme="dark"] .memo-field-label {
+  color: #94a3b8;
+}
+
+.memo-field-val {
+  color: #0f172a;
+  font-weight: 500;
+}
+
+[data-theme="dark"] .memo-field-val {
+  color: #f1f5f9;
+}
+
+.memo-initials {
+  display: inline-block;
+  margin-left: 6px;
+  font-weight: 700;
+  color: #0369a1;
+  border: 1px solid rgba(3, 105, 161, 0.35);
+  border-radius: 4px;
+  padding: 0 4px;
+  font-size: 0.8rem;
+}
+
+[data-theme="dark"] .memo-initials {
+  color: #38bdf8;
+  border-color: rgba(56, 189, 248, 0.35);
+}
+
+.memo-paper-body {
+  font-size: 0.95rem;
+}
+
+.memo-section-title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #0f172a;
+  margin: 24px 0 12px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+[data-theme="dark"] .memo-section-title {
+  color: #f8fafc;
+  border-color: #334155;
+}
+
+.memo-subsection-title {
+  font-size: 0.96rem;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 18px 0 8px;
+}
+
+[data-theme="dark"] .memo-subsection-title {
+  color: #cbd5e1;
+}
+
+.memo-p {
+  margin: 0 0 14px;
+  line-height: 1.65;
+}
+
+.memo-list {
+  margin: 0 0 16px;
+  padding-left: 28px;
+}
+
+.memo-list li {
+  margin-bottom: 8px;
+  line-height: 1.6;
+}
+
+.memo-sublist {
+  margin: 8px 0 12px;
+  padding-left: 24px;
+  list-style-type: lower-alpha;
+}
+
+.memo-sublist li {
+  margin-bottom: 6px;
+  line-height: 1.55;
+}
+
+.memo-page-break {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px dashed #cbd5e1;
+  border-bottom: 1px dashed #cbd5e1;
+  padding: 8px 14px;
+  margin: 28px 0 20px;
+  font-size: 0.82rem;
+  color: #64748b;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: rgba(241, 245, 249, 0.65);
+}
+
+[data-theme="dark"] .memo-page-break {
+  border-color: #475569;
+  background: rgba(30, 41, 59, 0.5);
+  color: #94a3b8;
+}
+
+.memo-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 16px 0 20px;
+  font-size: 0.9rem;
+}
+
+.memo-table th, .memo-table td {
+  border: 1px solid #cbd5e1;
+  padding: 9px 12px;
+  text-align: left;
+}
+
+[data-theme="dark"] .memo-table th, [data-theme="dark"] .memo-table td {
+  border-color: #334155;
+}
+
+.memo-table th {
+  background: #f1f5f9;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+[data-theme="dark"] .memo-table th {
+  background: #1e293b;
+  color: #f1f5f9;
+}
